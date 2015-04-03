@@ -1,0 +1,152 @@
+<%= f.simple_fields_for :victima do |victima| %>
+  <% if !victima.object.persona.nil?  && 
+    victima.object.persona.id == @caso.casosjr.contacto.id 
+  %>
+    <%= victima.simple_fields_for :persona do |p| %>
+      <%= render 'sip/casos/persona_fields', :f => p %>
+    <% end %>
+
+    <%= s.input :direccion, label: "Dirección actual" %>
+    <%= s.input :telefono, label: 'Teléfono' %>
+    <%= s.association :comosupo,
+      collection: Cor440Gen::Comosupo.habilitados,
+      include_blank: false,
+      label: "Como supo del SJR",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+  
+    <%= victima.association :rangoedad,
+      collection: Sip::Rangoedad.habilitados,
+      include_blank: false,
+      label: "Rango de Edad",
+      label_method: :rango, 
+      value_method: :id 
+    %>
+    <%= victima.association :filiacion,
+      collection: Sip::Filiacion.habilitados,
+      include_blank: false,
+      label: "Filiación",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= victima.association :iglesia,
+      collection: Sip::Iglesia.habilitados,
+      include_blank: false,
+      label: "Religión/Iglesia",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= victima.association :organizacion,
+      collection: Sip::Organizacion.habilitados,
+      include_blank: false,
+      label: "Organización",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= victima.association :vinculoestado,
+      collection: Sip::Vinculoestado.habilitados,
+      include_blank: false,
+      label: "Vínculo con el Estado",
+      label_method: :nombre, 
+      value_method: :id
+    %>
+    <%= victima.association :etnia,
+      collection: Sip::Etnia.habilitados,
+      include_blank: false,
+      label: "Etnia",
+      label_method: :nombre, 
+      value_method: :id 
+    %>
+    <%= victima.input(:orientacionsexual, collection: [
+                [:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
+                [:BISEXUAL, :B], [:TRANSEXUAL, :T] 
+    ], 
+      label: "Orientación Sexual",
+      include_blank: false ) 
+    %>
+  
+    <%= victima.input :anotaciones %>
+  
+    <%= victima.input :id, as: :hidden %>
+  
+    <%= victima.simple_fields_for :victimasjr do |vs| %>
+      <%= vs.association :actividadoficio,
+        collection: Sip::Actividadoficio.habilitados,
+        include_blank: false,
+        label: "Actividad/Oficio actual",
+        label_method: :nombre, 
+        value_method: :id,
+        wrapper_html: { style: "padding-bottom: 18px;" }
+      %>
+  
+      <%= victima.association :profesion,
+        collection: Sip::Profesion.habilitados,
+        include_blank: false,
+        label: "Profesión Universitaria",
+        label_method: :nombre, 
+        value_method: :id 
+      %>
+  
+      <%= vs.association :estadocivil,
+        collection: Sip::Estadocivil.habilitados,
+        include_blank: false,
+        label: "Estado Civil",
+        label_method: :nombre, 
+        value_method: :id 
+      %>
+      <%= vs.association :rolfamilia,
+        collection: Cor440Gen::Rolfamilia.habilitados,
+        include_blank: false,
+        label: "Rol en Familia",
+        label_method: :nombre, 
+        value_method: :id 
+      %>
+  
+      <%= vs.input :sindocumento, 
+        boolean_style: :nested, 
+        inline_label: "Sin Doc. Identidad" 
+      %>
+      <%= vs.input :cabezafamilia, 
+        boolean_style: :nested, 
+        inline_label: "Cabeza de Familia"
+      %>
+      <%= vs.association :maternidad,
+        collection: Sip::Maternidad.habilitados,
+        label: "Maternidad",
+        label_method: :nombre, 
+        value_method: :id 
+      %>	
+      <%= vs.input(:ndiscapacidad, collection: [
+                  ['FÍSICA', 'FÍSICA'], 
+                  ['PSÍQUICA', 'PSÍQUICA'], 
+                  ['SENSORIAL', 'SENSORIAL'] 
+      ], 
+        label: "Discapacidad") 
+      %>
+      <%= vs.input :enfermedad %>
+      <%= vs.association :escolaridad,
+        collection: Sip::Escolaridad.habilitados,
+        include_blank: false,
+        label: "Nivel Escolar",
+        label_method: :nombre, 
+        value_method: :id
+      %>
+      <%= vs.input :asisteescuela, 
+        inline_label: "Asiste a Escuela",
+        boolean_style: :nested
+      %>
+  
+      <%= vs.input :id_victima, as: :hidden %>
+    <% end %> <!-- simple_fields_for :victimasjr -->
+  
+    <%= s.input :concentimientosjr, 
+      boolean_style: :nested,
+      inline_label: "Consentimiento Informado compartir SJR"
+    %>
+    <%= s.input :concentimientobd, 
+      boolean_style: :nested,
+      inline_label: "Consentimiento Informado compartir BD CINEP"
+    %>
+  <% end %>  <!-- if -->
+<% end %> <!-- simple_fields_for :victima -->

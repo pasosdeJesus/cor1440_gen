@@ -1,0 +1,74 @@
+<%- model_class = Sip::Caso -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<table width="100%">
+  <tr>
+    <td width="33%">
+      <% if @conscaso.size > 0 %>
+        <%= link_to t('.new', :default => t("helpers.links.new")),
+          cor440_gen.new_caso_path,
+          :class => 'btn btn-primary' 
+        %>
+      <% end %>
+    </td>
+    <td style="width=33%;text-align: center">
+      Casos: <%= @numconscaso %>
+    </td>
+    <td style="text-align: right">
+      <%= form_tag(cor440_gen.casos_path, method: "get") do %>
+        <%= text_field_tag(:q) %>
+        <%= submit_tag("Filtrar") %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= Sip::Caso.human_attribute_name(:id) %></th>
+      <th><%= Cor440Gen::Casosjr.human_attribute_name(:contacto) %></th>
+      <th><%= Cor440Gen::Casosjr.human_attribute_name(:fecharec) %></th>
+      <th><%= Cor440Gen::Casosjr.human_attribute_name(:regionsjr) %></th>
+      <th><%= Cor440Gen::Casosjr.human_attribute_name(:asesor) %></th>
+      <th><%= Sip::Caso.human_attribute_name(:fecha) %></th>
+      <th><%= Cor440Gen::Casosjr.human_attribute_name(:statusmigratorio) %></th>
+      <th><%= "Ult. Atencion" %></th>
+      <th><%= Sip::Caso.human_attribute_name(:memo) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @conscaso.try(:each) do |casosjr| %>
+      <tr>
+        <td><%= link_to casosjr.caso_id, cor440_gen.caso_path(casosjr.caso_id)  %></td>
+        <td><%= casosjr.contacto_nombre %></td>
+        <td><%= casosjr.fecharec %></td>
+        <td><%= casosjr.regionsjr_nombre %></td>
+        <td><%= casosjr.nusuario %></td>
+        <td><%= casosjr.caso_fecha %></td>
+        <td><%= casosjr.statusmigratorio_nombre %></td>
+	      <td><%= casosjr.respuesta_ultimafechaatencion %></td>
+        <td><%= casosjr.caso_memo %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+            cor440_gen.edit_caso_path(casosjr.caso_id), :class => 'btn btn-xs' 
+          %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            cor440_gen.caso_path(casosjr.caso),
+            :method => :delete,
+            :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+            :class => 'btn btn-xs btn-danger' 
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @conscaso, { param_name: :pagina }  %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+  cor440_gen.new_caso_path,
+  :class => 'btn btn-primary' 
+%>

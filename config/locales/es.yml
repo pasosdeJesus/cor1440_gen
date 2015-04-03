@@ -1,0 +1,62 @@
+es:
+  attributes:
+    fechacreacion: Creación
+    fechadeshabilitacion: Deshabilitación 
+  activerecord:
+    attributes:
+      "sivel2_sjr/acto":
+        presponsable: Agente de Persecución
+      "sivel2_sjr/aslegal":
+        Aslegal: Asistencia Legal
+        Aslegales: Asistencias Legales
+      "sivel2_sjr/ayudaestado": 
+        Ayudaestado: Ayuda del Estado
+        Ayudasestado: Ayudas del Estado
+      "sivel2_sjr/ayudasjr": 
+        Ayudasjr: Ayuda del SJR
+        Ayudassjr: Ayudas del SJR
+      "sivel2_sjr/casosjr":
+        fecharec: F. Recepción
+        regionsjr: Oficina
+        contacto: Solicitante Principal
+        statusmigratorio: Estatus Migratorio
+        proteccion: Necesidad de Protección Internacional
+      "sivel2_sjr/comosupo":
+        Comosupo: Como Supo del SJR
+        Comosupos: Como Supo del SJR
+      "sivel2_sjr/emprendimiento":
+        Emprendimiento: Emprendimiento
+        Emprendimientos: Emprendimientos
+      "sivel2_sjr/estadocivil":
+        Estadocivil: Estado Civil
+        Estadosciviles: Estado Civil
+      "sivel2_sjr/idioma":
+        Idioma: Idioma
+        Idiomas: Idiomas
+      "sivel2_sjr/maternidad":
+        Maternidad: Estado Maternidad
+        Maternidades: Estados Maternidad
+      "sivel2_sjr/motivosjr":
+        Motivosjr: Servicio/Asesoría del SJR
+        Motivossjr: Servicios y Asesorías del SJR
+      "sivel2_sjr/progestado":
+        Progestado: Programa del Estado
+        Progsestado: Programas del Estado
+      "sivel2_sjr/proteccion":
+        Proteccion: Necesidad de Protección Internacional
+        Protecciones: Necesidades de Protección Internacional
+      "sivel2_sjr/presponsable":
+        Presponsable: Agente de Persecución
+        Presponsables: Agentes de Persecución
+      "sivel2_sjr/regimensalud":
+        Regimensalud: Régimen Salud
+        Regimenessalud: Régimenes Salud
+      "sivel2_sjr/rolfamilia":
+        Rolfamilia: Rol en Familia
+        Rolesfamilia: Roles en Familia
+      "sivel2_sjr/statusmigratorio":
+        Statusmigratorio: Estatus Migratorio
+        Statusmigratorios: Estatus Migratorio
+      "sivel2_sjr/ubicacion":
+        Ubicacion: Sitio Geográfico
+
