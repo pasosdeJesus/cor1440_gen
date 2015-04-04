@@ -1,11 +1,15 @@
-require 'sip/version'
+require 'sivel2_gen/version'
 
-Sip.setup do |config|
-      config.ruta_anexos = "/var/www/htdocs/cor440/anexos"
-      config.ruta_volcados = "/var/www/htdocs/cor440/db"
+Sivel2Gen.setup do |config|
+      config.ruta_anexos = "/var/www/resbase/anexos-sjr"
+      config.ruta_volcados = "/var/www/resbase/sivel2_sjr/"
       # En heroku los anexos son super-temporales
-      if ENV["HEROKU_POSTGRESQL_MAUVE_URL"]
+      if !ENV["HEROKU_POSTGRESQL_GREEN_URL"].nil?
         config.ruta_anexos = "#{Rails.root}/tmp/"
       end
-      config.titulo = "SIVeL " + Sip::VERSION
+      config.titulo = "SIVeL - SJR " + Sivel2Gen::VERSION
+      config.actividadg1 = "Mujeres Nacionales"
+      config.actividadg2 = "Mujeres Extranjeras"
+      config.actividadg3 = "Hombres Nacionales"
+      config.actividadg4 = "Hombres Extranjeros"
 end

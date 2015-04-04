@@ -1,0 +1,13 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <% if f.object.persona.nil?
+        f.object.persona = Sip::Persona.new(nombres: '')
+        f.object.victimasjr = Cor1440Gen::Victimasjr.new
+       end %>
+       
+    <%= render 'contacto_fields', :f => f %>
+
+    <%= link_to_remove_association "Eliminar Víctima", f, 
+      {:class => 'btn-danger', :'data-existing' => 'true'} %> 
+  </div>
+</div>

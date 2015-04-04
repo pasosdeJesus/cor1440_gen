@@ -7,7 +7,7 @@ class Usuario < ActiveRecord::Base
   # :recoverable :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :lockable
 
-	has_many :etiqueta_usuario, class_name: 'Cor440Gen::EtiquetaUsuario',
+	has_many :etiqueta_usuario, class_name: 'Cor1440Gen::EtiquetaUsuario',
     dependent: :delete_all
 	has_many :etiqueta, class_name: 'Sip::Etiqueta',
     through: :etiqueta_usuario

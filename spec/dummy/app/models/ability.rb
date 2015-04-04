@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class Ability  < Cor440Gen::Ability
+class Ability  < Cor1440Gen::Ability
 
 end
 

@@ -1,4 +1,4 @@
-Cor440Gen::Engine.routes.draw do
+Cor1440Gen::Engine.routes.draw do
   get '/desplazamientos/nuevo' => 'desplazamientos#nuevo'
   get '/respuestas/nuevo' => 'respuestas#nuevo'
 
@@ -12,7 +12,7 @@ Cor440Gen::Engine.routes.draw do
 
   namespace :admin do
     Ability.tablasbasicas.each do |t|
-      if (t[0] == "Cor440Gen") 
+      if (t[0] == "Cor1440Gen") 
         c = t[1].pluralize
         resources c.to_sym, 
           path_names: { new: 'nueva', edit: 'edita' }

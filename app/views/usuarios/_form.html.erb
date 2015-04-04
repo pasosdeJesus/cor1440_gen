@@ -3,7 +3,7 @@
   <%= render 'usuario', :f => f %>
 
   <%= f.association :oficina, 
-		collection: Cor440Gen::Oficina.habilitados.where("id<>'1'"),
+		collection: Cor1440Gen::Oficina.habilitados.where("id<>'1'"),
     label: "Oficina",
     label_method: :nombre,
     value_method: :id,

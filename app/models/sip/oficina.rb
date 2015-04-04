@@ -1,8 +1,8 @@
 # encoding: UTF-8
 
-require 'cor440_gen/concerns/models/oficina'
+require 'cor1440_gen/concerns/models/oficina'
 
 class Sip::Oficina < ActiveRecord::Base
-  include Cor440Gen::Concerns::Models::Oficina
+  include Cor1440Gen::Concerns::Models::Oficina
 end
 
