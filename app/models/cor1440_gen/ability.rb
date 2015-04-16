@@ -10,8 +10,8 @@ module Cor1440Gen
       ['Sip', 'etiqueta'], 
       ['Sip', 'municipio'], 
       ['Sip', 'pais'],
-      ['Cor44Gen', 'rangoedadac'], 
-      ['Cor44Gen', 'oficina'],
+      ['Cor1440Gen', 'rangoedadac'], 
+      ['Sip', 'oficina'],
       ['Sip', 'tclase'], 
       ['Sip', 'tdocumento'], 
       ['Sip', 'tsitio']
@@ -20,12 +20,13 @@ module Cor1440Gen
 
     # Tablas basicas cuya secuencia es de la forma tabla_id_seq 
     @@basicas_seq_con_id = [ 
-      ['Cor1440Gen', 'actividadarea']
+      ['Cor1440Gen', 'actividadarea'],
       ['Cor1440Gen', 'rangoedadac'], 
       ['Sip', 'clase'], 
       ['Sip', 'departamento'], 
       ['Sip', 'etiqueta'], 
       ['Sip', 'municipio'], 
+      ['Sip', 'oficina'],
       ['Sip', 'pais'],
       ['Sip', 'tdocumento'], 
       ['Sip', 'tsitio']

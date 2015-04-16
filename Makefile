@@ -1,3 +1,3 @@
 
 valida:
-	coffee -o /tmp/ app/assets/javascripts/sivel2_sjr/casos.js.coffee
+	coffee -o /tmp/ `find . -name "*coffee"`

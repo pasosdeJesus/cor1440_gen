@@ -2,25 +2,29 @@
 
 connection = ActiveRecord::Base.connection();
 
-# Básicas de motor SIVeL genérico
+# Básicas de motor sip
 l = File.readlines(
   Gem.loaded_specs['sip'].full_gem_path + "/db/datos-basicas.sql"
 )
 connection.execute(l.join("\n"))
 
-# Cambios a básicas de SIVel genérico
-l = File.readlines("../../db/cambios-basicas.sql")
-connection.execute(l.join("\n"))
+# Cambios a básicas existentes
+if File.exists?("../../db/cambios-basicas.sql") then
+	l = File.readlines("../../db/cambios-basicas.sql")
+	connection.execute(l.join("\n"))
+end
 
-# Nuevas basicas de motor SIVeL SJR
-l = File.readlines("../../db/datos-basicasn.sql")
-connection.execute(l.join("\n"));
+# Nuevas basicas de este motor 
+if File.exists?("../../db/datos-basicas.sql") then
+	l = File.readlines("../../db/datos-basicas.sql")
+	connection.execute(l.join("\n"));
+end
 
-# Usuario para primer ingreso
+# cor1440, sivel2
 connection.execute("INSERT INTO usuario 
 	(nusuario, email, encrypted_password, password, 
   fechacreacion, created_at, updated_at, rol) 
-	VALUES ('sivel2core', 'sivel2core@localhost', 
-	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
+	VALUES ('cor1440', 'cor1440@localhost', 
+	'$2a$10$V2zgaN1ED44UyLy0ubey/.1erdjHYJusmPZnXLyIaHUpJKIATC1nG', 
 	'', '2014-08-14', '2014-08-14', '2014-08-14', 1);")
 
