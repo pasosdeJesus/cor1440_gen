@@ -34,4 +34,21 @@ module Cor1440Gen
       end
     end
   end
+
+  class << self
+    mattr_accessor :titulo
+    mattr_accessor :actividadg1
+    mattr_accessor :actividadg2
+    mattr_accessor :actividadg3
+    mattr_accessor :actividadg4
+    self.titulo = "Motor para planeación y seguimiento de actividades e informes en una ONG"
+    self.actividadg1 = "Mujeres organización"
+    self.actividadg2 = "Mujeres externas"
+    self.actividadg3 = "Hombres organización"
+    self.actividadg4 = "Hombres externos"
+  end
+
+  def self.setup(&block)
+    yield self
+  end
 end

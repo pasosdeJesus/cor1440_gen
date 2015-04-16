@@ -1,5 +1,5 @@
 # encoding: UTF-8
-require_dependency "cor1440_gen/application_controller"
+#require_dependency "application_controller"
 
 module Cor1440Gen
   class ActividadesController < ApplicationController

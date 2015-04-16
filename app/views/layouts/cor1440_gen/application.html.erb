@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Sivel 2.0 - SJR Colombia" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : Sivel2Gen.titulo %></title>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -38,51 +38,24 @@
   </head>
   <body>
 
-    <%= nav_bar :fixed => :top, :brand => "SIVeL 2 - SJR Venezuela: 2.0p0.9", 
-      brand_link: sip.root_url, :responsive => true do 
+    <%= nav_bar :fixed => :top, 
+      :brand => content_for?(:title) ? yield(:title) : Sivel2Gen.titulo,
+      brand_link: '/',
+      :responsive => true do 
     %>
-      <%= menu_group do %>
-        <% if !current_usuario.nil? %>
-          <%= menu_item "Casos", casos_path %>
-          <%= menu_item "Actividades", actividades_path %>
-        <% end %>
-      <% end %>
-      <%= menu_group :pull => :right do %>
-        <%= menu_item "Documentacion", "/doc/html/index.html"%>
-        <% if !current_usuario.nil? %>
-					<%= drop_down "Administrar" do %>
-            <%= menu_item "Clave", editar_registro_usuario_path %>
-						<% if current_usuario.rol == Ability::ROLADMIN || 
-							current_usuario.rol == Ability::ROLCOOR ||
-							current_usuario.rol == Ability::ROLDIR %>
-							<%= menu_item "Usuarios", usuarios_path %>
-						<% end %>
-						<% if current_usuario.rol == Ability::ROLADMIN || 
-							current_usuario.rol == Ability::ROLDIR %>
-              <%= menu_item "Tablas Básicas", tablasbasicas_path %>
-              <!-- %= #menu_item "Casos", admin_casos_path % -->
-				    <% end %>
-          <% end %>
-					<%= menu_item "Salir #{current_usuario.nusuario}", sign_out_path %>
-        <% else %>
-          <%= menu_item "Acerca de", acercade_path %>
-					<%= menu_item "Iniciar Sesión", new_usuario_session_path %> 
-        <% end %>
-      <% end %>
+      <%= yield :menu %>
     <% end %>
 
     <div class="container master-container">
 	    <ul class="breadcrumb">
-		    <%= yield :breadcrumb %>
+        <%= yield :breadcrumb %>
 	    </ul>
 	    <%= bootstrap_flash %>
 	    <%= yield %>
     </div>
 
     <footer align='right'>
-    <p><span class='derechos'>Dominio Público de acuerdo a Legislación Colombiana<br/>
-      Desarrollado para <a href="http://www.sjrlac.org" target="_blank">SJR LAC</a> por <a href="http://www.pasosdeJesus.org" target="_blank">Pasos de Jesús</a>. 2014. 
-    </span></p>
+      <%= yield :footer %>
     </footer>
 
     </div> <!-- /container -->

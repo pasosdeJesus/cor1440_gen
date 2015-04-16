@@ -63,7 +63,7 @@ module Cor1440Gen
       can :nuevo, Sip::Ubicacion
       if !usuario.nil? && !usuario.rol.nil? then
         case usuario.rol 
-        when Ability::ROLSIST
+        when Ability::ROLSISTACT
           can :read, Cor1440Gen::Actividad
           can :new, Cor1440Gen::Actividad
           can [:update, :create, :destroy], Cor1440Gen::Actividad, 

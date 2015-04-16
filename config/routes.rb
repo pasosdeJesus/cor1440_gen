@@ -1,14 +1,21 @@
 Cor1440Gen::Engine.routes.draw do
-  get '/desplazamientos/nuevo' => 'desplazamientos#nuevo'
-  get '/respuestas/nuevo' => 'respuestas#nuevo'
 
-  get '/casos/lista' => 'casos#lista'
-  get '/casos/nuevaubicacion' => 'casos#nueva_ubicacion'
-  get '/casos/nuevavictima' => 'casos#nueva_victima'
-  get '/casos/nuevopresponsable' => 'casos#nuevo_presponsable'
-  get "/casos/busca" => 'casos#busca'
+  get '/anexoactividades/descarga_anexoactividad/:id' => 
+    'anexoactividades#descarga_anexoactividad'
 
-  resources :casos, path_names: { new: 'nuevo', edit: 'edita' }
+  resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
+
+  devise_scope :usuario do
+    get 'sign_out' => 'devise/sessions#destroy'
+  end
+  devise_for :usuarios, :skip => [:registrations], module: :devise
+  as :usuario do
+    get 'usuarios/edit' => 'devise/registrations#edit', 
+      :as => 'editar_registro_usuario'    
+    put 'usuarios/:id' => 'devise/registrations#update', 
+      :as => 'registro_usuario'            
+  end
+  resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
   namespace :admin do
     Ability.tablasbasicas.each do |t|
@@ -19,6 +26,5 @@ Cor1440Gen::Engine.routes.draw do
       end
     end
   end
-
 
 end
