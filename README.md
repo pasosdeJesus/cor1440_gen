@@ -1,204 +1,145 @@
-# Cor1440
+# cor1440_gen : Motor para planeación y seguimiento de actividades e informes en una ONG
 [![Estado Construcción](https://api.travis-ci.org/pasosdeJesus/cor1440_gen.svg?branch=master)](https://travis-ci.org/pasosdeJesus/cor1440_gen) [![Clima del Código](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/gpa.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen) [![Cobertura de Pruebas](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/coverage.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen) [![security](https://hakiri.io/github/pasosdeJesus/cor1440_gen/master.svg)](https://hakiri.io/github/pasosdeJesus/cor1440_gen/master) [![Dependencias](https://gemnasium.com/pasosdeJesus/cor1440_gen.svg)](https://gemnasium.com/pasosdeJesus/cor1440_gen) 
 
 
-Motor para planeación y seguimiento de actividades e informes en una ONG.
+## Tabla de Contenido
+* [Diseño](#diseño)
+* [Uso](#uso)
+* [Pruebas](#pruebas)
+* [Desarrollo](#pruebas)
 
+Este es un motor para un sistema de información que facilite la planeación y el seguimiento de actividades en una ONG, que opera sobre Ruby on Rails 4.2 y
+PostgreSQL (preferiblemente cifrado como en adJ).
+
+Este motor incluye 
+* Uso del motor sip (que a su vez maneja devise, cancancan, rspec, tablas básicas con datos geográficos para varios paises, manejo de anexos con paperclip, facilidades de configuracion como puede ver en https://github.com/pasosdeJesus/sip)
+* 
+* Roles con cancancan, 
+* Pruebas con rspec y factory girl,
+* Propuesta para manejar tablas básicas (parámetros de la aplicación) y esqueletos 
+  para: paises, departamentos/estados, municipios, centros poblados, tipos de 
+  centros poblados, tipos de sitios, ubicaciones, tipos de relaciones entre 
+  personas, tipos de documentos de identificación, oficinas.  Faciles de 
+  modificar en aplicaciones que usen el motor vía ActiveSupport::Cocern.
+* Datos geográficos completos para Colombia y Venezuela.
+* Propuesta de estructura para otros modelos típicos persona, anexo, también 
+  modificables en aplicación que use el motor via ActiveSupport::Concern.
+* Manejo de anexos con paperclip 
+* Facilidades de configuración en lib/sip/engine.rb, como inclusión automática 
+  de sus migraciones en las aplicaciones que usen el motor y variables típicas 
+  de configuración.
+* Tareas rake para actualizar indices, sacar copia de respaldo de base de datos
+* Generador de nuevas tablas básicas
+* Aplicación de prueba completa en spec/dummy con diseño adaptable (responsive) 
+  usando bootstrap, simple_form y jquery que permite modificar las tablas 
+  básicas paginando con will_paginate
+
+## Diseño
+
+Se ha extraido de las partes comunes de diversos sistemas de información,
+particularmente de SIVeL 2, Cor440 y Sal7711.
+
+Roles: administrador y usuario
+
+## Uso
 
 ### Requerimientos
 * Ruby version >= 2.1
 * PostgreSQL >= 9.3 con extensión unaccent disponible
-* Recomendado sobre adJ 5.5p2 (que incluye todos los componentes mencionados).  
+* Recomendado sobre adJ 5.6 (que incluye todos los componentes mencionados).  
   Las siguientes instrucciones suponen que opera en este ambiente.
 
 
-### Arquitectura
+## Pruebas
+Se han implementado algunas pruebas con RSpec a modelos y pruebas de regresión.
 
-Es una aplicación que emplea el motor genérico estilo Pasos de Jesús ```sip```
-Ver https://github.com/pasosdeJesus/sip
-
-
-### Configuración y uso de servidor de desarrollo
-* Ubique fuentes por ejemplo en ```/var/www/htdocs/cor1440/```
 * Instale gemas requeridas (como Rails 4.2) con:
-```sh
-  NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle install
-```
-o emplee el script ```bin/gc.sh```, que además ejecutará pruebas de regresión, 
-con:
-```sh
-SINAC=1 bin/gc.sh
-```
-* Copie y modifique las plantillas:
-```sh
-  cp app/views/hogar/_local.html.erb.plantilla app/views/hogar/_local.html.erb
-  cp config/database.yml.plantilla config/database.yml
-  vim app/views/hogar/_local.html.erb config/database.yml
-```
-* Establezca una ruta para anexos en ```config/initializers/sip.rb```.  
-  Debe existir y poder ser escrita por el dueño del proceso con el que corra 
-  el servidor.
-* Cree un superusuario para PostgreSQL, configure datos para este en
-  ```config/database.yml``` e inicialice:
-```sh
-  sudo su - _postgresql
-  createuser -h/var/www/tmp -Upostgres -s cor1440
-  exit
-  vim config/database.yml
-  rake db:setup
-  rake sip:indices
-```
-* Lance la aplicación en modo de desarrollo con:
-```sh
-  rails s
-```
-* Examine con un navegador el puerto 3000: http://127.0.0.1:3000
-* Cuando requiera detener basta que de Control-C o que busque el
-  proceso con ruby que corre en el puerto 3000 y lo elimine con ```kill```:
-```sh
-ps ax | grep "ruby.*3000"
-kill 32..22
-```
-* En este modo es recomendable borrar recursos precompilados 
-```sh
-rm -rf public/assets/*
-```
-
-### Pruebas
-
-Dado que se hacen pruebas a modelos, rutas, controladores y vistas en 
-```sip```, en ```cor1440``` sólo se implementan algunas pruebas 
-de regresión con capybara-webkit.  Ejecutelas con:
-
-```sh
-RAILS_ENV=test rake db:reset
-RAILS_ENV=test rake sip:indices
-rspec
-```
-
-### Despliegue de prueba en Heroku
-
-[![heroku](https://www.herokucdn.com/deploy/button.svg)](http://cor1440.herokuapp.com) http://cor1440.herokuapp.com
-
-Para tener menos de 10000 registros en base de datos se han eliminado ciudades 
-de Colombia y Venezuela. Podrá ver departamentos/estados y municipios.
-
-Los anexos son volatiles pues tuvieron que ubicarse en /tmp/ (que se 
-borra con periodicidad).
-
-En tiempo de ejecución el uso de heroku se detecta en 
-```config/initializers/sip``` usando una variable de entorno 
---que cambia de un despliegue a otro y que debe examinarse con 
-```sh
-	heroku config
-```
-Para que heroku solo instale las gemas de producción:
-```sh
-	heroku config:set BUNDLE_WITHOUT="development:test"
-```
-
-Otras labores tipicas son:
-* Para iniciar interfaz Postgresql: ```heroku pg:psql```
-* Para ejecutar migraciones faltantes: ```heroku run rake db:migrate```
-* Para examinar configuración ```heroku config``` que entre otras mostrará URL 
-  y nombre de la pase de datos.
-* Heroku usa base de datos de manera diferente, para volver a inicializar base 
-  de datos (cuyo nombre se ve con ```heroku config```):  
-  ```heroku pg:reset nombrebase```
-
-### Despliegue en sitio de producción con unicorn:
-
-* Se recomienda que deje fuentes en ```/var/www/htdocs/cor1440```
-* Siga los mismos pasos para configurar un servidor de desarrollo, pero
-  preceda cada rake con ```RAILS_ENV=production```
-* Como servidor web recomendamos nginx, en la sección http agregue:
-```
-  upstream unicorns2 {
-	  server 127.0.0.1:2009 fail_timeout=0;
-  }
-```
-* Y agregue también un dominio virtual (digamos `cor1440.pasosdeJesus.org`) con:
-```
-  server {
-    listen 443;
-    ssl on;
-    ssl_certificate /etc/ssl/server.crt;
-    ssl_certificate_key /etc/ssl/private/server.key;
-    ssl_session_timeout  5m;
-    ssl_protocols  SSLv3 TLSv1;
-    ssl_ciphers  HIGH:!aNULL:!MD5;
-    root /var/www/htdocs/cor1440/;
-    server_name cor1440.pasosdeJesus.org
-    error_log logs/s2error.log;
-
-    location ^~ /assets/ {
-        gzip_static on;
-        expires max;
-        add_header Cache-Control public;
-        root /var/www/htdocs/cor1440/public/;
-    }
-
-    try_files $uri/index.html $uri @unicorn;
-    location @unicorn {
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_set_header Host $http_host;
-            proxy_redirect off;
-            proxy_pass http://unicorn;
-            error_page 500 502 503 504 /500.html;
-            client_max_body_size 4G;
-            keepalive_timeout 10;
-    }
-
-  }
-```
-* Precompile los recursos 
-```sh 
-rake assets:precompile
-```
-* Tras reiniciar nginx, inicie unicorn desde directorio con fuentes con:
-```sh 
-./bin/u.sh
-```
-* Para iniciar en cada arranque, por ejemplo en adJ cree /etc/rc.d/cor1440
-```sh
-servicio="/var/www/htdocs/cor1440/bin/u.sh"
-
-. /etc/rc.d/rc.subr
-
-rc_cmd $1
-```
-  E incluya ```cor1440``` en la variable ```pkg_scripts``` de ```/etc/rc.conf.local```
-
-### Actualización de servidor de desarrollo
-
-* Detenga el servidor de desarrollo (teclas Control-C)
-* Actualice fuentes: ```git pull```
-* Instale nuevas versiones de gemas requeridas: 
 ``` sh
-  bundle update
+  cd spec/dummy
   bundle install
 ```
-* Aplique cambios a base de datos: ```rake db:migrate```
-* Actualice tablas básicas: ```rake sip:actbasicas```
-* Actualice índices: ```rake sip:indices```
-* Lance nuevamente el servidor de desarrollo: ```rails s```
+Aunque para minimizar descargas vale la pena instalar como gemas del
+sistema la mayoría de estas, en adJ con:
+```sh
+  grep "^ *gem" Gemfile | sed -e "s/gem [\"']//g;s/[\"'].*//g" | xargs sudo NOKOGIRI_USE_SYSTEM_LIBRARIES=1 make=gmake gem install
+```
+* Cree usuario para PostgreSQL (recomendado sipdes o el que especifique en 
+  config/database.yml) y pongale una clave, por ejemplo en adJ
+```sh
+sudo su - _postgresql
+$ createuser -Upostgres -h/var/www/tmp -s sipdes
+$ psql -h/var/www/tmp -Upostgres
+psql (9.3.5)
+Type "help" for help.
 
-### Actualización de servidor de producción
-
-Son practicamente los mismos pasos que emplea para actualizar servidor 
-de desarrollo, excepto que unicorn se detiene con ```pkill``` y se inica
-como se describió en Despliegue y que debe preceder cada rake con 
-	RAILS_ENV=production
-
-### Respaldos
-
-En el sitio de producción se recomienda agregar una tarea cron con:
-
+postgres=# ALTER USER sipdes WITH password 'miclave';
+ALTER ROLE
+postgres=# \q
+$ exit
+```
+* Prepare spec/dummy/config/database.yml con los datos de la base que creo:
+```sh
+  cp spec/dummy/config/database.yml.plantilla spec/dummy/config/database.yml
+  vim spec/dummy/config/database.yml
+```
+* Prepare base de prueba con:
 ``` sh
-cd /var/www/htdocs/cor1440/; RAILS_ENV=production bin/rake sip:vuelca 
+  cd spec/dummy
+  RAILS_ENV=test rake db:drop
+  RAILS_ENV=test rake db:setup
+  RAILS_ENV=test rake sip:indices
+```
+* Ejecute las pruebas desde el directorio del motor con:
+```sh
+  rspec
+```
+
+## Aplicación de prueba
+
+Si ya configuró usuario paa la base de datos, puede iniciar la 
+aplicación de prueba con:
+```sh
+  cd spec/dummy
+  rake db:drop db:setup sip:indices
+  rails s -b 127.0.0.1 -p 3000
+```
+y examinar desde el mismo computador con un navegador en: 
+http://127.0.0.1:3000 
+
+Puede ingresar con usuario sip y clave sip123 para
+interactuar con el manejo de usuarios y 
+
+## Desarrollo
+
+Si tiene instalado coffescript, podrá verificar sintaxis de archivos del 
+directorio app/assets/javascript/ con:
+```sh
+  make
 ```
 
 ### Convenciones
 
-Las mismas de ```sip```.  Ver https://github.com/pasosdeJesus/sip
+2 espacios de indentación.
+
+Para configurarlo en vim, agregue al final de ```~/.vim/ftplugin/ruby.vim```:
+``` vim
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set autoindent
+```
+
+http://betterspecs.org/
+http://www.caliban.org/ruby/rubyguide.shtml
+https://hakiri.io/blog/ruby-security-tools-and-resources
+
+### Generación de datos de tablas básicas
+
+Una vez estén bien los datos de tablas básicas en base de datos de la
+la aplicación de  prueba spec/dummy:
+```sh
+cd spec/dummy
+RAILS_ENV=test rake sip:vuelcabasicas
+cp db/datos-basicas.sql ../../db/datos-basicas.sql
+```
+
