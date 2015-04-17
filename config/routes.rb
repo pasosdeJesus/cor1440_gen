@@ -1,8 +1,5 @@
 Cor1440Gen::Engine.routes.draw do
 
-  get '/anexoactividades/descarga_anexoactividad/:id' => 
-    'anexoactividades#descarga_anexoactividad'
-
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
 
   namespace :admin do
