@@ -1,4 +1,4 @@
-class RenombraCor1440Gen < ActiveRecord::Migration
+class RenombraOficina < ActiveRecord::Migration
   def up
 	  execute <<-SQL 
 			ALTER SEQUENCE regionsjr_seq RENAME TO sip_oficina_id_seq;  
