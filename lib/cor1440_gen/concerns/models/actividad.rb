@@ -14,6 +14,11 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::ActividadareasActividad'
           has_many :actividadareas, through: :actividadareas_actividad,
             class_name: 'Cor1440Gen::Actividadarea'
+          has_many :actividadtipo_actividad, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadtipoActividad'
+          has_many :actividadtipo, through: :actividadtipo_actividad,
+            class_name: 'Cor1440Gen::Actividadtipo'
+ 
           has_many :actividad_rangoedadac, foreign_key: "actividad_id", 
             dependent: :delete_all, class_name: 'Cor1440Gen::ActividadRangoedadac'
           has_many :rangoedadac, through: :actividad_rangoedadac,
