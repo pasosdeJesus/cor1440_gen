@@ -1,5 +1,5 @@
 # encoding: UTF-8
-#require_dependency "application_controller"
+require_dependency "sip/application_controller"
 
 module Cor1440Gen
   class ActividadesController < ApplicationController
@@ -24,8 +24,8 @@ module Cor1440Gen
     def new
       @actividad = Actividad.new
       @actividad.current_usuario = current_usuario
-      @actividad.regionsjr_id = current_usuario.regionsjr_id.nil? ?  
-        1 : current_usuario.regionsjr_id
+      #@actividad.oficina_id = current_usuario.oficina_id ?  current_usuario.oficina_id : 1
+      @actividad.oficina_id = 1
       render layout: "application"
     end
 
@@ -87,7 +87,7 @@ module Cor1440Gen
 
     def set_actividad
       @actividad = Actividad.find(
-        Cor1440Gen::Actividad.connection.quote_string(params[:id]).to_i
+        Actividad.connection.quote_string(params[:id]).to_i
       )
       @actividad.current_usuario = current_usuario
     end
@@ -95,15 +95,18 @@ module Cor1440Gen
     # No confiar parametros a Internet, sólo permitir lista blanca
     def actividad_params
       params.require(:actividad).permit(
-        :regionsjr_id, :minutos, :nombre, 
+        :oficina_id, :minutos, :nombre, 
         :objetivo, :proyecto, :resultado,
         :fecha, :actividad, :observaciones, 
         :actividadarea_ids => [],
         :actividad_rangoedadac_attributes => [
           :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
         ],
-        :anexoactividad_attributes => [
-          :id, :descripcion, :adjunto, :_destroy
+        :actividad_sip_anexo_attributes => [
+          :_destroy,
+          :sip_anexo_attributes => [
+             :descripcion, :adjunto, :id
+          ],
         ]
       )
     end

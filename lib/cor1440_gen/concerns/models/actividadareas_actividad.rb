@@ -7,8 +7,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          belongs_to :actividad, class_name: "Sivel2Gen::Actividad"
-          belongs_to :actividadarea, class_name: "Sivel2Gen::Actividadarea"
+          belongs_to :actividad, class_name: "Cor1440Gen::Actividad"
+          belongs_to :actividadarea, class_name: "Cor1440Gen::Actividadarea"
         end
       end
     end

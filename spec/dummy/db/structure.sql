@@ -238,8 +238,8 @@ ALTER SEQUENCE cor1440_gen_actividad_rangoedadac_id_seq OWNED BY cor1440_gen_act
 --
 
 CREATE TABLE cor1440_gen_actividad_sip_anexo (
-    cor1440_gen_actividad_id integer NOT NULL,
-    sip_anexo_id integer NOT NULL
+    actividad_id integer NOT NULL,
+    anexo_id integer NOT NULL
 );
 
 
@@ -802,6 +802,7 @@ CREATE TABLE usuario (
     failed_attempts integer DEFAULT 0,
     unlock_token character varying(255),
     locked_at timestamp without time zone,
+    oficina_id integer,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 6)))
 );
@@ -1083,7 +1084,7 @@ ALTER TABLE ONLY usuario
 -- Name: index_cor1440_gen_actividad_sip_anexo_on_sip_anexo_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_cor1440_gen_actividad_sip_anexo_on_sip_anexo_id ON cor1440_gen_actividad_sip_anexo USING btree (sip_anexo_id);
+CREATE INDEX index_cor1440_gen_actividad_sip_anexo_on_sip_anexo_id ON cor1440_gen_actividad_sip_anexo USING btree (anexo_id);
 
 
 --
@@ -1457,4 +1458,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150416090140');
 INSERT INTO schema_migrations (version) VALUES ('20150416095646');
 
 INSERT INTO schema_migrations (version) VALUES ('20150416101228');
+
+INSERT INTO schema_migrations (version) VALUES ('20150417071153');
 

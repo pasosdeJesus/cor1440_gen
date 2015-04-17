@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: d572cf87f5d08f7f83cfe25ad9a5bfaf86de92d6
+  revision: 228d68f0a3d73ad97ddbb50326c1591cab80c4de
   specs:
     sip (2.0.a4)
       devise
@@ -177,7 +177,6 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
     rdoc (4.2.0)
-      json (~> 1.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rspec-core (3.2.3)

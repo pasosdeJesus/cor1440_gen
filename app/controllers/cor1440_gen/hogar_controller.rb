@@ -4,7 +4,7 @@ module Cor1440Gen
 
     def index
       if current_usuario
-        authorize! :contar, Cor1440Gen::Actividad
+        authorize! :nuevo, Cor1440Gen::Actividad
       end
       render layout: 'application'
     end
