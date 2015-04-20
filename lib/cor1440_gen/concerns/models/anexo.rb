@@ -11,7 +11,9 @@ module Cor1440Gen
 
         included do
           has_many :actividad_sip_anexo, foreign_key: "anexo_id", 
-            dependent: :destroy, class_name: 'Cor1440Gen::ActividadSipAnexo'
+            validate: true, class_name: 'Cor1440Gen::ActividadSipAnexo'
+          has_many :actividad, class_name: 'Cor1440Gen::Actividad',
+            through: :actividad_sip_anexo
         end
 
         module ClassMethods

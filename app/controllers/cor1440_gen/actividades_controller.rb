@@ -106,10 +106,12 @@ module Cor1440Gen
           :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
         ],
         :actividad_sip_anexo_attributes => [
+          :id,
+          :id_actividad, 
           :_destroy,
           :sip_anexo_attributes => [
-             :descripcion, :adjunto, :id
-          ],
+             :id, :descripcion, :adjunto, :_destroy
+          ]
         ]
       )
     end

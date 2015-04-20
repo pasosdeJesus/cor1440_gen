@@ -274,12 +274,25 @@ ALTER SEQUENCE cor1440_gen_actividad_rangoedadac_id_seq OWNED BY cor1440_gen_act
 
 
 --
+-- Name: cor1440_gen_actividad_sip_anexo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cor1440_gen_actividad_sip_anexo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: cor1440_gen_actividad_sip_anexo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE cor1440_gen_actividad_sip_anexo (
     actividad_id integer NOT NULL,
-    anexo_id integer NOT NULL
+    anexo_id integer NOT NULL,
+    id integer DEFAULT nextval('cor1440_gen_actividad_sip_anexo_id_seq'::regclass) NOT NULL
 );
 
 
@@ -1132,6 +1145,22 @@ ALTER TABLE ONLY cor1440_gen_actividad_proyecto
 
 
 --
+-- Name: cor1440_gen_actividad_sip_anexo_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cor1440_gen_actividad_sip_anexo
+    ADD CONSTRAINT cor1440_gen_actividad_sip_anexo_id_key UNIQUE (id);
+
+
+--
+-- Name: cor1440_gen_actividad_sip_anexo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cor1440_gen_actividad_sip_anexo
+    ADD CONSTRAINT cor1440_gen_actividad_sip_anexo_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cor1440_gen_actividadtipo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1810,4 +1839,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150420110000');
 INSERT INTO schema_migrations (version) VALUES ('20150420125522');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420153835');
+
+INSERT INTO schema_migrations (version) VALUES ('20150420200255');
 

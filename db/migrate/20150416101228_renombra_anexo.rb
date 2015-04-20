@@ -27,10 +27,18 @@ class RenombraAnexo < ActiveRecord::Migration
 
     remove_column :sip_anexo, :actividad_id
 
+    add_foreign_key :cor1440_gen_actividad_sip_anexo, :sip_anexo, 
+      column: :anexo_id
+    add_foreign_key :cor1440_gen_actividad_sip_anexo, :cor1440_gen_actividad,
+      column: :actividad_id
   end
 
   def down
 
+    remove_foreign_key :cor1440_gen_actividad_sip_anexo, :sip_anexo, 
+      column: :anexo_id
+    remove_foreign_key :cor1440_gen_actividad_sip_anexo, :cor1440_gen_actividad,
+      column: :actividad_id
     add_column :sip_anexo, :actividad_id, :integer
 
     execute <<-SQL
