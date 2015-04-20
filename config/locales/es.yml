@@ -19,4 +19,7 @@ es:
       "cor1440_gen/financiador":
         Financiador: Financiador
         Financiadores: Financiadores
+      "cor1440_gen/proyectofinanciero":
+        Proyectofinanciero: Proyecto Financiero
+        Proyectosfinancieros: Proyectos Financieros
 
