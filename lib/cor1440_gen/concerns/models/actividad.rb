@@ -15,9 +15,9 @@ module Cor1440Gen
           has_many :actividadareas, through: :actividadareas_actividad,
             class_name: 'Cor1440Gen::Actividadarea'
 
-          has_many :actividadtipo_actividad, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadtipoActividad'
-          has_many :actividadtipo, through: :actividadtipo_actividad,
+          has_many :actividad_actividadtipo, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadActividadtipo'
+          has_many :actividadtipo, through: :actividad_actividadtipo,
             class_name: 'Cor1440Gen::Actividadtipo'
  
           has_many :actividad_proyecto, dependent: :delete_all,

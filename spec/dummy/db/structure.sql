@@ -179,6 +179,16 @@ CREATE TABLE cor1440_gen_actividad (
 
 
 --
+-- Name: cor1440_gen_actividad_actividadtipo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cor1440_gen_actividad_actividadtipo (
+    actividadtipo_id integer,
+    actividad_id integer
+);
+
+
+--
 -- Name: cor1440_gen_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -351,16 +361,6 @@ CREATE TABLE cor1440_gen_actividadtipo (
     fechadeshabilitacion date,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
-);
-
-
---
--- Name: cor1440_gen_actividadtipo_actividad; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE cor1440_gen_actividadtipo_actividad (
-    actividadtipo_id integer,
-    actividad_id integer
 );
 
 
@@ -1429,7 +1429,7 @@ ALTER TABLE ONLY sip_clase
 -- Name: cor1440_gen_actividadtipo_actividad_actividad_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY cor1440_gen_actividadtipo_actividad
+ALTER TABLE ONLY cor1440_gen_actividad_actividadtipo
     ADD CONSTRAINT cor1440_gen_actividadtipo_actividad_actividad_id_fkey FOREIGN KEY (actividad_id) REFERENCES cor1440_gen_actividad(id);
 
 
@@ -1437,7 +1437,7 @@ ALTER TABLE ONLY cor1440_gen_actividadtipo_actividad
 -- Name: cor1440_gen_actividadtipo_actividad_actividadtipo_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY cor1440_gen_actividadtipo_actividad
+ALTER TABLE ONLY cor1440_gen_actividad_actividadtipo
     ADD CONSTRAINT cor1440_gen_actividadtipo_actividad_actividadtipo_id_fkey FOREIGN KEY (actividadtipo_id) REFERENCES cor1440_gen_actividadtipo(id);
 
 
