@@ -3,16 +3,10 @@
 module Cor1440Gen
   module Concerns
     module Models
-      module Actividadarea
+      module Financiador
         extend ActiveSupport::Concern
 
-        include Sip::Basica
         included do
-          has_many :actividadareas_actividad, :dependent => :delete_all,
-            class_name: 'Cor1440Gen::ActividadareasActividad'
-          has_many :actividad, :through => :actividadareas_activid,
-            class_name: 'Cor1440Gen::Actividad'
-
           validates :nombre, presence: true, allow_blank: false
           validates :fechacreacion, presence: true, allow_blank: false
         end
@@ -20,4 +14,5 @@ module Cor1440Gen
     end
   end
 end
+
 

@@ -5,9 +5,11 @@ module Cor1440Gen
     # Tablas básicas
     @@tablasbasicas = [
       ['Cor1440Gen', 'actividadarea'], 
+      ['Cor1440Gen', 'actividadtipo'], 
       ['Sip', 'clase'], 
       ['Sip', 'departamento'], 
       ['Sip', 'etiqueta'], 
+      ['Cor1440Gen', 'financiador'], 
       ['Sip', 'municipio'], 
       ['Sip', 'pais'],
       ['Cor1440Gen', 'rangoedadac'], 
@@ -21,7 +23,9 @@ module Cor1440Gen
     # Tablas basicas cuya secuencia es de la forma tabla_id_seq 
     @@basicas_seq_con_id = [ 
       ['Cor1440Gen', 'actividadarea'],
+      ['Cor1440Gen', 'actividadtipo'],
       ['Cor1440Gen', 'rangoedadac'], 
+      ['Cor1440Gen', 'financiador'], 
       ['Sip', 'clase'], 
       ['Sip', 'departamento'], 
       ['Sip', 'etiqueta'], 

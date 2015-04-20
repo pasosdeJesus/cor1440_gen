@@ -2,12 +2,21 @@ es:
   attributes:
     fechacreacion: Creación
     fechadeshabilitacion: Deshabilitación 
+    actividadarea: Área de Actividad
+    actividadareas: Áreas de Actividad
+    actividadtipo: Tipo de Actividad
   activerecord:
     attributes:
       "cor1440_gen/actividadarea":
-        Actividadarea: Area de Actividad
-        Actividadareas: Areas de Actividad
+        Actividadarea: Área de Actividad
+        Actividadareas: Áreas de Actividad
+      "cor1440_gen/actividadtipo":
+        Actividadtipo: Tipo de Actividad
+        Actividadtipos: Tipos de Actividad
       "cor1440_gen/rangoedadac":
         Rangoedadac: Rango de edad en Actividades
         Rangosedadac: Rangos de edad en Actividades
+      "cor1440_gen/financiador":
+        Financiador: Financiador
+        Financiadores: Financiadores
 

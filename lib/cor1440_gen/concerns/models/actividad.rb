@@ -38,6 +38,10 @@ module Cor1440Gen
           belongs_to :oficina, class_name: 'Sip::Oficina', 
             foreign_key: 'oficina_id', validate: true
 
+          belongs_to :responsable, 
+            class_name: '::Usuario', 
+            foreign_key: 'usuario_id', validate: true
+
           validates_presence_of :oficina
           validates_presence_of :nombre
           validates_presence_of :fecha

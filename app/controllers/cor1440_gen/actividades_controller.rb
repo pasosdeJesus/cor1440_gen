@@ -99,6 +99,7 @@ module Cor1440Gen
         :objetivo, :proyecto, :resultado,
         :fecha, :actividad, :observaciones, 
         :actividadarea_ids => [],
+        :actividadtipo_ids => [],
         :actividad_rangoedadac_attributes => [
           :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
         ],
