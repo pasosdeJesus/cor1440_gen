@@ -14,11 +14,17 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::ActividadareasActividad'
           has_many :actividadareas, through: :actividadareas_actividad,
             class_name: 'Cor1440Gen::Actividadarea'
+
           has_many :actividadtipo_actividad, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadtipoActividad'
           has_many :actividadtipo, through: :actividadtipo_actividad,
             class_name: 'Cor1440Gen::Actividadtipo'
  
+          has_many :actividad_proyecto, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadProyecto'
+          has_many :proyecto, through: :actividad_proyecto,
+            class_name: 'Cor1440Gen::Proyecto'
+
           has_many :actividad_rangoedadac, foreign_key: "actividad_id", 
             dependent: :delete_all, class_name: 'Cor1440Gen::ActividadRangoedadac'
           has_many :rangoedadac, through: :actividad_rangoedadac,
@@ -26,6 +32,7 @@ module Cor1440Gen
           accepts_nested_attributes_for :rangoedadac,  reject_if: :all_blank
           accepts_nested_attributes_for :actividad_rangoedadac, 
             allow_destroy: true, reject_if: :all_blank
+
           has_many :actividad_sip_anexo, foreign_key: "actividad_id", 
             validate: true, dependent: :destroy, 
             class_name: 'Cor1440Gen::ActividadSipAnexo'

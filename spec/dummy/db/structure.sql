@@ -167,7 +167,6 @@ CREATE TABLE cor1440_gen_actividad (
     minutos integer,
     nombre character varying(500),
     objetivo character varying(500),
-    proyecto character varying(500),
     resultado character varying(500),
     fecha date,
     observaciones character varying(5000),
@@ -196,6 +195,36 @@ CREATE SEQUENCE cor1440_gen_actividad_id_seq
 --
 
 ALTER SEQUENCE cor1440_gen_actividad_id_seq OWNED BY cor1440_gen_actividad.id;
+
+
+--
+-- Name: cor1440_gen_actividad_proyecto; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cor1440_gen_actividad_proyecto (
+    id integer NOT NULL,
+    actividad_id integer,
+    proyecto_id integer
+);
+
+
+--
+-- Name: cor1440_gen_actividad_proyecto_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cor1440_gen_actividad_proyecto_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_actividad_proyecto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cor1440_gen_actividad_proyecto_id_seq OWNED BY cor1440_gen_actividad_proyecto.id;
 
 
 --
@@ -974,6 +1003,13 @@ ALTER TABLE ONLY cor1440_gen_actividad ALTER COLUMN id SET DEFAULT nextval('cor1
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY cor1440_gen_actividad_proyecto ALTER COLUMN id SET DEFAULT nextval('cor1440_gen_actividad_proyecto_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY cor1440_gen_actividad_rangoedadac ALTER COLUMN id SET DEFAULT nextval('cor1440_gen_actividad_rangoedadac_id_seq'::regclass);
 
 
@@ -1085,6 +1121,14 @@ ALTER TABLE ONLY cor1440_gen_actividadareas_actividad
 
 ALTER TABLE ONLY sip_anexo
     ADD CONSTRAINT anexoactividad_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cor1440_gen_actividad_proyecto_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY cor1440_gen_actividad_proyecto
+    ADD CONSTRAINT cor1440_gen_actividad_proyecto_pkey PRIMARY KEY (id);
 
 
 --
@@ -1406,11 +1450,27 @@ ALTER TABLE ONLY sip_departamento
 
 
 --
+-- Name: fk_rails_395faa0882; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_actividad_proyecto
+    ADD CONSTRAINT fk_rails_395faa0882 FOREIGN KEY (actividad_id) REFERENCES cor1440_gen_actividad(id);
+
+
+--
 -- Name: fk_rails_4426fc905e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cor1440_gen_actividad
     ADD CONSTRAINT fk_rails_4426fc905e FOREIGN KEY (usuario_id) REFERENCES usuario(id);
+
+
+--
+-- Name: fk_rails_cf5d592625; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_actividad_proyecto
+    ADD CONSTRAINT fk_rails_cf5d592625 FOREIGN KEY (proyecto_id) REFERENCES cor1440_gen_proyecto(id);
 
 
 --
@@ -1748,4 +1808,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150420104520');
 INSERT INTO schema_migrations (version) VALUES ('20150420110000');
 
 INSERT INTO schema_migrations (version) VALUES ('20150420125522');
+
+INSERT INTO schema_migrations (version) VALUES ('20150420153835');
 

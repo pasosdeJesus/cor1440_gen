@@ -98,8 +98,10 @@ module Cor1440Gen
         :oficina_id, :minutos, :nombre, 
         :objetivo, :proyecto, :resultado,
         :fecha, :actividad, :observaciones, 
+        :usuario_id,
         :actividadarea_ids => [],
         :actividadtipo_ids => [],
+        :proyecto_ids => [],
         :actividad_rangoedadac_attributes => [
           :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
         ],

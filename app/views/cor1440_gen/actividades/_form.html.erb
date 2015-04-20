@@ -20,6 +20,11 @@
     label_method: :nombre, 
     value_method: :id 
   %>
+  <%= f.association :proyecto,
+    collection: Cor1440Gen::Proyecto.habilitados,
+    label_method: :nombre, 
+    value_method: :id 
+  %>
   <%= f.association :actividadareas, 
     collection: Cor1440Gen::Actividadarea.habilitados,
     label_method: :nombre, 
@@ -37,7 +42,6 @@
     value_method: :id 
   %>
   <%= f.input :objetivo %>
-  <%= f.input :proyecto %>
   <%= f.input :resultado, label: "Resultado" %>
   <table border=1>
     <thead>
