@@ -16,8 +16,15 @@ module Cor1440Gen
 
       def atributos_index
         [
-          "id", "nombre", "observaciones", "fechacreacion", 
-          "fechadeshabilitacion"
+          "id", 
+          "nombre", 
+          "financiador_id",
+          "proyecto_id",
+          "fechainicio",
+          "fechacierre",
+          "responsable_id",
+          "observaciones", 
+          "fechacreacion"
         ]
       end
 

@@ -2,6 +2,8 @@ es:
   attributes:
     fechacreacion: Creación
     fechadeshabilitacion: Deshabilitación 
+    fechainicio: Fecha de Inicio
+    fechacierre: Fecha de Cierre
     actividadarea: Área de Actividad
     actividadareas: Áreas de Actividad
     actividadtipo: Tipo de Actividad

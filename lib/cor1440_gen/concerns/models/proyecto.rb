@@ -3,12 +3,11 @@
 module Cor1440Gen
   module Concerns
     module Models
-      module Financiador
+      module Proyecto
         extend ActiveSupport::Concern
         include Sip::Basica
 
         included do
-
           has_many :proyectofinanciero, class_name: 'Cor1440Gen::Proyectofinanciero',
             dependent: :delete_all
 
@@ -19,5 +18,3 @@ module Cor1440Gen
     end
   end
 end
-
-
