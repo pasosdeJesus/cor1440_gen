@@ -15,7 +15,9 @@ module Cor1440Gen
        #   has_many :etiqueta, class_name: 'Sip::Etiqueta',
        #     through: :etiqueta_usuario
 
-          has_many :proyectofinanciero, class_name: 'Cor1440Gen::Proyectofinanciero',
+          has_many :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero',
+            foreign_key: 'responsable_id',
             dependent: :delete_all
           belongs_to :oficina, class_name: 'Sip::Oficina',
             foreign_key: "oficina_id", validate: true
