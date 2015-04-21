@@ -13,15 +13,17 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:fecha) %></th>
       <th><%= model_class.human_attribute_name(:oficina) %></th>
-      <th><%= model_class.human_attribute_name(:minutos) %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
+      <!-- th><%= model_class.human_attribute_name(:responsable) %></th -->
       <th><%= model_class.human_attribute_name(:areas) %></th>
+      <th><%= model_class.human_attribute_name(:tipo) %></th>
       <th><%= model_class.human_attribute_name(:objetivo) %></th>
       <th><%= model_class.human_attribute_name(:proyecto) %></th>
-      <th><%= model_class.human_attribute_name(:resultado) %></th>
-      <th><%= model_class.human_attribute_name(:fecha) %></th>
-      <th><%= model_class.human_attribute_name(:observaciones) %></th>
+      <!--th>< %= model_class.human_attribute_name(:descripcion) %></th-->
+      <th><%= model_class.human_attribute_name(:poblacion) %></th>
+      <th><%= model_class.human_attribute_name(:anexo) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -29,15 +31,17 @@
     <% @actividades.try(:each) do |actividad| %>
       <tr>
         <td><%= link_to actividad.id, cor1440_gen.actividad_path(actividad) %></td>
-        <td><%= actividad.oficina.nombre if !actividad.oficina.nil? %></td>
-        <td><%= actividad.minutos %></td>
-        <td><%= actividad.nombre %></td>
-        <td><%= actividad.actividadareas.map { |i| i.nombre} %></td>
-        <td><%= actividad.objetivo %></td>
-        <td><%= actividad.proyecto %></td>
-        <td><%= actividad.resultado %></td>
         <td><%= actividad.fecha %></td>
-        <td><%= actividad.observaciones %></td>
+        <td><%= actividad.oficina.nombre if actividad.oficina %></td>
+        <td><%= actividad.nombre if actividad.nombre %></td>
+        <!-- td>< %= actividad.responsable.nusuario if actividad.reponsable %></td-->
+        <td><%= actividad.actividadareas.map { |i| i.nombre} %></td>
+        <td><%= actividad.actividadtipo.map { |i| i.nombre} %></td>
+        <td><%= actividad.objetivo %></td>
+        <td><%= actividad.proyecto.map { |i| i.nombre} %></td>
+        <!-- td>< %= actividad.descripcion %></td-->
+        <td><%= actividad.nombre %></td>
+        <td><%= actividad.nombre %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       cor1440_gen.edit_actividad_path(actividad), :class => 'btn btn-xs' %>
