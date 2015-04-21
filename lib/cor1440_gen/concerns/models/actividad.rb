@@ -29,7 +29,6 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Proyecto'
 
           has_many :actividad_rangoedadac, foreign_key: "actividad_id", 
-            foreign_key: 'actividad_id',
             dependent: :delete_all, 
             class_name: 'Cor1440Gen::ActividadRangoedadac'
           has_many :rangoedadac, through: :actividad_rangoedadac,
