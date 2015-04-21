@@ -40,8 +40,8 @@
         <td><%= actividad.objetivo %></td>
         <td><%= actividad.proyecto.map { |i| i.nombre} %></td>
         <!-- td>< %= actividad.descripcion %></td-->
-        <td><%= actividad.nombre %></td>
-        <td><%= actividad.nombre %></td>
+        <td></td>
+        <td></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       cor1440_gen.edit_actividad_path(actividad), :class => 'btn btn-xs' %>
