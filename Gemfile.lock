@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: c9f60fe53e118318096030928251037426eab0d6
+  revision: 56bfd994f0cec65eef5b64bf324c7b42daee17f8
   specs:
     sip (2.0.a4)
       devise
@@ -122,9 +122,9 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.4.3)
+    mime-types (2.5)
     mini_portile (0.6.2)
-    minitest (5.6.0)
+    minitest (5.6.1)
     multi_json (1.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -213,7 +213,7 @@ GEM
     spring (1.3.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (3.0.2)
+    sprockets (3.0.3)
       rack (~> 1.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
@@ -235,7 +235,7 @@ GEM
       tzinfo
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.3)
+    tzinfo-data (1.2015.4)
       tzinfo (>= 1.0.0)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
