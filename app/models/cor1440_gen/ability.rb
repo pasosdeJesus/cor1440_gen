@@ -12,6 +12,7 @@ module Cor1440Gen
       ['Cor1440Gen', 'rangoedadac']
     ]  - [
       ['Sip', 'tdocumento'], 
+      ['Sip', 'trelacion'], 
       ['Sip', 'tsitio']
     ]
 
