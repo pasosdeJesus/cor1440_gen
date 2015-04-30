@@ -3,20 +3,14 @@
 module Cor1440Gen
   class Ability < Sip::Ability
     # Tablas básicas
-    @@tablasbasicas = [
+    @@tablasbasicas = Sip::Ability::TABLAS_SIP + [
       ['Cor1440Gen', 'actividadarea'], 
       ['Cor1440Gen', 'actividadtipo'], 
-      ['Sip', 'clase'], 
-      ['Sip', 'departamento'], 
-      ['Sip', 'etiqueta'], 
       ['Cor1440Gen', 'financiador'], 
-      ['Sip', 'municipio'], 
-      ['Sip', 'pais'],
       ['Cor1440Gen', 'proyecto'], 
       ['Cor1440Gen', 'proyectofinanciero'], 
-      ['Cor1440Gen', 'rangoedadac'], 
-      ['Sip', 'oficina'],
-      ['Sip', 'tclase'], 
+      ['Cor1440Gen', 'rangoedadac']
+    ]  - [
       ['Sip', 'tdocumento'], 
       ['Sip', 'tsitio']
     ]
