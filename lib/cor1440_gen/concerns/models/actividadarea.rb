@@ -8,6 +8,11 @@ module Cor1440Gen
 
         include Sip::Basica
         included do
+          has_many :actividadareas_actividad, :dependent => :delete_all,
+            class_name: 'Cor1440Gen::ActividadareasActividad'
+          has_many :actividad, :through => :actividadareas_activid,
+            class_name: 'Cor1440Gen::Actividad'
+
           validates :nombre, presence: true, allow_blank: false
           validates :fechacreacion, presence: true, allow_blank: false
         end

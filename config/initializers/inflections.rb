@@ -15,19 +15,8 @@
 #   inflect.acronym 'RESTful'
 # end
 ActiveSupport::Inflector.inflections do |inflect|
-	inflect.irregular 'actosjr', 'actosjr'
-	inflect.irregular 'aslegalrespuesta', 'aslegalrespuesta'
-	inflect.irregular 'aspsicosocialrespuesta', 'aspsicosocialrespuesta'
-	inflect.irregular 'ayudaestado', 'ayudasestado'
-	inflect.irregular 'ayudaestadorespuesta', 'ayudaestadorespuesta'
-	inflect.irregular 'ayudasjr', 'ayudassjr'
-	inflect.irregular 'ayudasjrrespuesta', 'ayudasjrrespuesta'
-	inflect.irregular 'derechorespuesta', 'derechorespuesta'
-	inflect.irregular 'emprendimientorespuesta', 'emprendimientorespuesta'
-	inflect.irregular 'motivosjr', 'motivossjr'
-	inflect.irregular 'motivosjrrespuesta', 'motivosjrrespuesta'
-	inflect.irregular 'progestadorespuesta', 'progestadorespuesta'
-	inflect.irregular 'proteccion', 'protecciones'
-	inflect.irregular 'regionsjr', 'regionessjr'
-	inflect.irregular 'respuesta', 'respuesta'
+  inflect.irregular 'rangoedadac', 'rangosedadac'
+  inflect.irregular 'actividadarea', 'actividadareas'
+  inflect.irregular 'financiador', 'financiadores'
+  inflect.irregular 'proyectofinanciero', 'proyectosfinancieros'
 end

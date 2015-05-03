@@ -2,61 +2,26 @@ es:
   attributes:
     fechacreacion: Creación
     fechadeshabilitacion: Deshabilitación 
+    fechainicio: Fecha de Inicio
+    fechacierre: Fecha de Cierre
+    actividadarea: Área de Actividad
+    actividadareas: Áreas de Actividad
+    actividadtipo: Tipo de Actividad
   activerecord:
     attributes:
-      "sivel2_sjr/acto":
-        presponsable: Agente de Persecución
-      "sivel2_sjr/aslegal":
-        Aslegal: Asistencia Legal
-        Aslegales: Asistencias Legales
-      "sivel2_sjr/ayudaestado": 
-        Ayudaestado: Ayuda del Estado
-        Ayudasestado: Ayudas del Estado
-      "sivel2_sjr/ayudasjr": 
-        Ayudasjr: Ayuda del SJR
-        Ayudassjr: Ayudas del SJR
-      "sivel2_sjr/casosjr":
-        fecharec: F. Recepción
-        regionsjr: Oficina
-        contacto: Solicitante Principal
-        statusmigratorio: Estatus Migratorio
-        proteccion: Necesidad de Protección Internacional
-      "sivel2_sjr/comosupo":
-        Comosupo: Como Supo del SJR
-        Comosupos: Como Supo del SJR
-      "sivel2_sjr/emprendimiento":
-        Emprendimiento: Emprendimiento
-        Emprendimientos: Emprendimientos
-      "sivel2_sjr/estadocivil":
-        Estadocivil: Estado Civil
-        Estadosciviles: Estado Civil
-      "sivel2_sjr/idioma":
-        Idioma: Idioma
-        Idiomas: Idiomas
-      "sivel2_sjr/maternidad":
-        Maternidad: Estado Maternidad
-        Maternidades: Estados Maternidad
-      "sivel2_sjr/motivosjr":
-        Motivosjr: Servicio/Asesoría del SJR
-        Motivossjr: Servicios y Asesorías del SJR
-      "sivel2_sjr/progestado":
-        Progestado: Programa del Estado
-        Progsestado: Programas del Estado
-      "sivel2_sjr/proteccion":
-        Proteccion: Necesidad de Protección Internacional
-        Protecciones: Necesidades de Protección Internacional
-      "sivel2_sjr/presponsable":
-        Presponsable: Agente de Persecución
-        Presponsables: Agentes de Persecución
-      "sivel2_sjr/regimensalud":
-        Regimensalud: Régimen Salud
-        Regimenessalud: Régimenes Salud
-      "sivel2_sjr/rolfamilia":
-        Rolfamilia: Rol en Familia
-        Rolesfamilia: Roles en Familia
-      "sivel2_sjr/statusmigratorio":
-        Statusmigratorio: Estatus Migratorio
-        Statusmigratorios: Estatus Migratorio
-      "sivel2_sjr/ubicacion":
-        Ubicacion: Sitio Geográfico
+      "cor1440_gen/actividadarea":
+        Actividadarea: Área de Actividad
+        Actividadareas: Áreas de Actividad
+      "cor1440_gen/actividadtipo":
+        Actividadtipo: Tipo de Actividad
+        Actividadtipos: Tipos de Actividad
+      "cor1440_gen/rangoedadac":
+        Rangoedadac: Rango de edad en Actividades
+        Rangosedadac: Rangos de edad en Actividades
+      "cor1440_gen/financiador":
+        Financiador: Financiador
+        Financiadores: Financiadores
+      "cor1440_gen/proyectofinanciero":
+        Proyectofinanciero: Proyecto Financiero
+        Proyectosfinancieros: Proyectos Financieros
 

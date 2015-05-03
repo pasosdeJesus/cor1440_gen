@@ -1,11 +1,6 @@
 #!/bin/sh
-# Hace pruebas, pruebas de regresión y envia a github
+# Hace prueba de regresión y envia a github
 
-grep "^ *gem *.sip.*, *path:" Gemfile > /dev/null 2> /dev/null
-if (test "$?" = "0") then {
-	echo "Gemfile incluye un sip cableado al sistema de archivos"
-	exit 1;
-} fi;
 grep "^ *gem *.debugger*" Gemfile > /dev/null 2> /dev/null
 if (test "$?" = "0") then {
 	echo "Gemfile incluye debugger que heroku no quiere"
@@ -20,7 +15,9 @@ if (test "$?" = "0") then {
 if (test "$SINAC" != "1") then {
 	NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle update
 } fi;
-NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle install
+if (test "$SININS" != "1") then {
+	NOKOGIRI_USE_SYSTEM_LIBRARIES=1 MAKE=gmake make=gmake QMAKE=qmake4 bundle install
+} fi;
 
 (cd spec/dummy; RAILS_ENV=test rake db:drop db:setup db:migrate sip:indices)
 if (test "$?" != "0") then {
@@ -35,6 +32,7 @@ if (test "$?" != "0") then {
 } fi;
 
 (cd spec/dummy; RAILS_ENV=test rake db:structure:dump)
+
 b=`git branch | grep "^*" | sed -e  "s/^* //g"`
 git status -s
 git commit -a

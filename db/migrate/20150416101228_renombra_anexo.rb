@@ -2,10 +2,10 @@ class RenombraAnexo < ActiveRecord::Migration
 
   def up
     execute <<-SQL 
-			ALTER SEQUENCE sivel2_gen_anexoactividad_id_seq 
+      ALTER SEQUENCE sivel2_gen_anexoactividad_id_seq 
         RENAME TO sip_anexo_id_seq
-		SQL
-	  execute <<-SQL
+    SQL
+    execute <<-SQL
       ALTER TABLE sivel2_gen_anexoactividad
         RENAME TO sip_anexo;
     SQL
@@ -27,10 +27,18 @@ class RenombraAnexo < ActiveRecord::Migration
 
     remove_column :sip_anexo, :actividad_id
 
+    add_foreign_key :cor1440_gen_actividad_sip_anexo, :sip_anexo, 
+      column: :anexo_id
+    add_foreign_key :cor1440_gen_actividad_sip_anexo, :cor1440_gen_actividad,
+      column: :actividad_id
   end
 
   def down
 
+    remove_foreign_key :cor1440_gen_actividad_sip_anexo, :sip_anexo, 
+      column: :anexo_id
+    remove_foreign_key :cor1440_gen_actividad_sip_anexo, :cor1440_gen_actividad,
+      column: :actividad_id
     add_column :sip_anexo, :actividad_id, :integer
 
     execute <<-SQL
@@ -44,10 +52,10 @@ class RenombraAnexo < ActiveRecord::Migration
     drop_join_table :cor1440_gen_actividad, :sip_anexo
 
     execute <<-SQL 
-			ALTER SEQUENCE sip_anexo_id_seq 
+      ALTER SEQUENCE sip_anexo_id_seq 
         RENAME TO sivel2_gen_anexoactividad_id_seq;
-		SQL
-	  execute <<-SQL
+    SQL
+    execute <<-SQL
       ALTER TABLE sip_anexo 
         RENAME TO sivel2_gen_anexoactividad
     SQL

@@ -1,7 +1,5 @@
 # encoding: UTF-8
 
-require 'sip/engine'
-
 module Cor1440Gen
   class Engine < ::Rails::Engine
     isolate_namespace Cor1440Gen

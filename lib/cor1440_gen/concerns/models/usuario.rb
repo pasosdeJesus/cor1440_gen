@@ -10,19 +10,23 @@ module Cor1440Gen
         include Sip::Concerns::Models::Usuario
 
         included do
-       #   has_many :etiqueta_usuario, class_name: 'Cor1440Gen::EtiquetaUsuario',
-       #     dependent: :delete_all
-       #   has_many :etiqueta, class_name: 'Sip::Etiqueta',
-       #     through: :etiqueta_usuario
+          #   has_many :etiqueta_usuario, class_name: 'Cor1440Gen::EtiquetaUsuario',
+          #     dependent: :delete_all
+          #   has_many :etiqueta, class_name: 'Sip::Etiqueta',
+          #     through: :etiqueta_usuario
 
+          has_many :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero',
+            foreign_key: 'responsable_id',
+            dependent: :delete_all
           belongs_to :oficina, class_name: 'Sip::Oficina',
             foreign_key: "oficina_id", validate: true
 
           validate :rol_usuario
           def rol_usuario
             if oficina && (rol == Ability::ROLADMIN ||
-                             rol == Ability::ROLINV || 
-                             rol == Ability::ROLDIR)
+                           rol == Ability::ROLINV || 
+                           rol == Ability::ROLDIR)
               errors.add(:oficina, "Oficina debe estar en blanco para el rol elegido")
             end
             if !oficina && rol != Ability::ROLADMIN && rol != Ability::ROLINV && 
