@@ -9,16 +9,16 @@ module Cor1440Gen
       def clase 
         "Cor1440Gen::Financiador"
       end
-  
+
       def set_financiador
         @basica = Financiador.find(params[:id])
       end
-  
+
       def atributos_index
         ["id", "nombre", "observaciones", "fechacreacion", 
           "fechadeshabilitacion"]
       end
- 
+
       def financiador_params
         params.require(:financiador).permit(*atributos_form)
       end

@@ -11,7 +11,7 @@ module Cor1440Gen
     def index
       @actividades = Actividad.order(fecha: :desc).paginate(
         :page => params[:pagina], per_page: 20)
-      render "index", layout: "application"
+        render "index", layout: "application"
     end
 
     # GET /actividades/1
@@ -78,8 +78,8 @@ module Cor1440Gen
       @actividad.destroy
       respond_to do |format|
         format.html { 
-        redirect_to actividades_url, notice: 'Actividad eliminada' }
-        format.json { head :no_content }
+          redirect_to actividades_url, notice: 'Actividad eliminada' }
+          format.json { head :no_content }
       end
     end
 
@@ -104,15 +104,15 @@ module Cor1440Gen
         :proyecto_ids => [],
         :actividad_rangoedadac_attributes => [
           :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
-        ],
+      ],
         :actividad_sip_anexo_attributes => [
           :id,
           :id_actividad, 
           :_destroy,
           :sip_anexo_attributes => [
-             :id, :descripcion, :adjunto, :_destroy
-          ]
-        ]
+            :id, :descripcion, :adjunto, :_destroy
+      ]
+      ]
       )
     end
   end

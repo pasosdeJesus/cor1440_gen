@@ -2,89 +2,89 @@
   :url => cor1440_gen.actividades_path(@actividad).sub(/\./,"/"), 
   :html => { :class => 'form-horizontal' } do |f| 
 %>
-  <%= f.error_notification %>
-  <%= f.input :nombre %>
-  <%= f.input :fecha, 
-    :input_html => { "data-behaviour" => "datepicker"}, 
-    :as => :string 
-  %>
-  <!--%= f.input :duracion %-->
-  <%= f.association :oficina,
-    collection: Sip::Oficina.habilitados,
-    label_method: :nombre, 
-    value_method: :id,
-    include_blank: false
-  %>
-  <%= f.association :actividadtipo, 
-    collection: Cor1440Gen::Actividadtipo.habilitados,
-    label_method: :nombre, 
-    value_method: :id 
-  %>
-  <%= f.association :proyecto,
-    collection: Cor1440Gen::Proyecto.habilitados,
-    label_method: :nombre, 
-    value_method: :id 
-  %>
-  <%= f.association :actividadareas, 
-    collection: Cor1440Gen::Actividadarea.habilitados,
-    label_method: :nombre, 
-    value_method: :id 
-  %>
-  <%= 
-    f.association :responsable,
+<%= f.error_notification %>
+<%= f.input :nombre %>
+<%= f.input :fecha, 
+  :input_html => { "data-behaviour" => "datepicker"}, 
+  :as => :string 
+%>
+<!--%= f.input :duracion %-->
+<%= f.association :oficina,
+  collection: Sip::Oficina.habilitados,
+  label_method: :nombre, 
+  value_method: :id,
+  include_blank: false
+%>
+<%= f.association :actividadtipo, 
+  collection: Cor1440Gen::Actividadtipo.habilitados,
+  label_method: :nombre, 
+  value_method: :id 
+%>
+<%= f.association :proyecto,
+  collection: Cor1440Gen::Proyecto.habilitados,
+  label_method: :nombre, 
+  value_method: :id 
+%>
+<%= f.association :actividadareas, 
+  collection: Cor1440Gen::Actividadarea.habilitados,
+  label_method: :nombre, 
+  value_method: :id 
+%>
+<%= 
+  f.association :responsable,
     collection: Usuario.all.order(:nombre),
     include_blank: false,
     label: "Responsable",
     label_method: lambda { |t| 
-      r = t.nusuario
-      if t.nombre then r += " - " + t.nombre end
-      r },
-    value_method: :id 
-  %>
-  <%= f.input :objetivo %>
-  <%= f.input :resultado, label: "Resultado" %>
-  <table border=1>
-    <thead>
-      <tr><th>Rango de Edad</th>
-        <th><%= Cor1440Gen.actividadg1 %></th>
-        <th><%= Cor1440Gen.actividadg2 %></th>
-        <th><%= Cor1440Gen.actividadg3 %></th>
-        <th><%= Cor1440Gen.actividadg4 %></th>
-        <th></th></tr>
-    </thead>
-    <tbody id="actividad_rangoedadac">
-      <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
-        <%= render 'actividad_rangoedadac_fields', :f => s %>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="links">
-    <%= link_to_add_association 'Añadir Rango de Edad', f, 
-      :actividad_rangoedadac, 
-      :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
-      :"data-association-insertion-method" => "append", 
-      :partial => "actividad_rangoedadac_fields", 
-      :class => "btn-primary" 
+    r = t.nusuario
+    if t.nombre then r += " - " + t.nombre end
+    r },
+      value_method: :id 
     %>
-  </div>
-
-  <%= f.input :observaciones %>
-
-  <div class="anexos-div anexosdiv">
-    <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
-      <%= render 'actividad_sip_anexo_fields', :f => a %>
-    <% end %>
+    <%= f.input :objetivo %>
+    <%= f.input :resultado, label: "Resultado" %>
+    <table border=1>
+      <thead>
+        <tr><th>Rango de Edad</th>
+          <th><%= Cor1440Gen.actividadg1 %></th>
+          <th><%= Cor1440Gen.actividadg2 %></th>
+          <th><%= Cor1440Gen.actividadg3 %></th>
+          <th><%= Cor1440Gen.actividadg4 %></th>
+          <th></th></tr>
+      </thead>
+      <tbody id="actividad_rangoedadac">
+        <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
+          <%= render 'actividad_rangoedadac_fields', :f => s %>
+        <% end %>
+      </tbody>
+    </table>
     <div class="links">
-      <%= link_to_add_association 'Añadir Anexo', f, 
-        :actividad_sip_anexo, :class => 'btn-primary' 
+      <%= link_to_add_association 'Añadir Rango de Edad', f, 
+        :actividad_rangoedadac, 
+        :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
+        :"data-association-insertion-method" => "append", 
+        :partial => "actividad_rangoedadac_fields", 
+        :class => "btn-primary" 
       %>
     </div>
-  </div> <!-- anexos-div -->
 
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-      cor1440_gen.actividades_path, :class => 'btn' 
-    %>
-  </div>
-<% end %>
+    <%= f.input :observaciones %>
+
+    <div class="anexos-div anexosdiv">
+      <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
+        <%= render 'actividad_sip_anexo_fields', :f => a %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'Añadir Anexo', f, 
+          :actividad_sip_anexo, :class => 'btn-primary' 
+        %>
+      </div>
+    </div> <!-- anexos-div -->
+
+    <div class="form-actions">
+      <%= f.button :submit, :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+        cor1440_gen.actividades_path, :class => 'btn' 
+      %>
+    </div>
+  <% end %>

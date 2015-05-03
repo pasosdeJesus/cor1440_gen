@@ -12,5 +12,5 @@ class CreaActividadActividadtipo < ActiveRecord::Migration
         DROP TABLE cor1440_gen_actividad_actividadtipo;
     SQL
   end
-    
+
 end

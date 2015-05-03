@@ -2,10 +2,10 @@ class RenombraAnexo < ActiveRecord::Migration
 
   def up
     execute <<-SQL 
-			ALTER SEQUENCE sivel2_gen_anexoactividad_id_seq 
+      ALTER SEQUENCE sivel2_gen_anexoactividad_id_seq 
         RENAME TO sip_anexo_id_seq
-		SQL
-	  execute <<-SQL
+    SQL
+    execute <<-SQL
       ALTER TABLE sivel2_gen_anexoactividad
         RENAME TO sip_anexo;
     SQL
@@ -52,10 +52,10 @@ class RenombraAnexo < ActiveRecord::Migration
     drop_join_table :cor1440_gen_actividad, :sip_anexo
 
     execute <<-SQL 
-			ALTER SEQUENCE sip_anexo_id_seq 
+      ALTER SEQUENCE sip_anexo_id_seq 
         RENAME TO sivel2_gen_anexoactividad_id_seq;
-		SQL
-	  execute <<-SQL
+    SQL
+    execute <<-SQL
       ALTER TABLE sip_anexo 
         RENAME TO sivel2_gen_anexoactividad
     SQL

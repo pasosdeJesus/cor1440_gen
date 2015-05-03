@@ -1,18 +1,18 @@
 class AgregaIdACombinadaActividadAnexo < ActiveRecord::Migration
   def up
-   execute <<-SQL
+    execute <<-SQL
      CREATE SEQUENCE cor1440_gen_actividad_sip_anexo_id_seq;
-   SQL
-   execute <<-SQL
+    SQL
+    execute <<-SQL
     ALTER TABLE cor1440_gen_actividad_sip_anexo 
       ADD COLUMN id INTEGER 
         NOT NULL UNIQUE 
         DEFAULT(nextval('cor1440_gen_actividad_sip_anexo_id_seq'));
-   SQL
-   execute <<-SQL
+    SQL
+    execute <<-SQL
     ALTER TABLE cor1440_gen_actividad_sip_anexo 
       ADD CONSTRAINT cor1440_gen_actividad_sip_anexo_pkey PRIMARY KEY (id);
-   SQL
+    SQL
   end
   def down
     execute <<-SQL
