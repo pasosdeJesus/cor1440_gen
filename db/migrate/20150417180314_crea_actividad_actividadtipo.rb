@@ -3,7 +3,7 @@ class CreaActividadActividadtipo < ActiveRecord::Migration
     execute <<-SQL
         CREATE TABLE cor1440_gen_actividad_actividadtipo (
             actividad_id    INTEGER REFERENCES cor1440_gen_actividad(id),
-            actividadtipo_id    INTEGER REFERENCES cor1440_gen_actividadtipo(id),
+            actividadtipo_id    INTEGER REFERENCES cor1440_gen_actividadtipo(id)
         );
     SQL
   end
