@@ -58,6 +58,7 @@ module Cor1440Gen
           validates_presence_of :oficina
           validates_presence_of :nombre
           validates_presence_of :fecha
+          validates :resultado, length: { maximum: 500 }
         end
       end
     end
