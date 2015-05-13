@@ -102,9 +102,10 @@ module Cor1440Gen
         :actividadarea_ids => [],
         :actividadtipo_ids => [],
         :proyecto_ids => [],
+        :usuario_ids => [],
         :actividad_rangoedadac_attributes => [
           :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
-      ],
+        ],
         :actividad_sip_anexo_attributes => [
           :id,
           :id_actividad, 

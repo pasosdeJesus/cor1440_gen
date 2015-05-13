@@ -10,6 +10,13 @@ module Cor1440Gen
           @current_usuario = -1
           attr_accessor :current_usuario
 
+          belongs_to :oficina, class_name: 'Sip::Oficina', 
+            foreign_key: 'oficina_id', validate: true
+
+          belongs_to :responsable, 
+            class_name: '::Usuario', 
+            foreign_key: 'usuario_id', validate: true
+
           has_many :actividadareas_actividad, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadareasActividad',
             foreign_key: 'actividad_id'
@@ -48,12 +55,11 @@ module Cor1440Gen
           accepts_nested_attributes_for :sip_anexo, 
             reject_if: :all_blank
 
-          belongs_to :oficina, class_name: 'Sip::Oficina', 
-            foreign_key: 'oficina_id', validate: true
-
-          belongs_to :responsable, 
-            class_name: '::Usuario', 
-            foreign_key: 'usuario_id', validate: true
+          has_many :actividad_usuario, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadUsuario',
+            foreign_key: 'actividad_id'
+          has_many :usuario, through: :actividad_usuario,
+            class_name: 'Usuario'
 
           validates_presence_of :oficina
           validates_presence_of :nombre

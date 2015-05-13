@@ -11,6 +11,7 @@ module Cor1440Gen
       ['Cor1440Gen', 'proyectofinanciero'], 
       ['Cor1440Gen', 'rangoedadac']
     ]  - [
+      ['Sip', 'fuenteprensa'], 
       ['Sip', 'tdocumento'], 
       ['Sip', 'trelacion'], 
       ['Sip', 'tsitio']
