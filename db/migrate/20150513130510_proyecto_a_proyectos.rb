@@ -3,7 +3,8 @@ class ProyectoAProyectos < ActiveRecord::Migration
     execute <<-SQL
       INSERT INTO cor1440_gen_proyecto_proyectofinanciero 
         (proyecto_id, proyectofinanciero_id) 
-        (SELECT proyecto_id, id FROM cor1440_gen_proyectofinanciero);
+        (SELECT proyecto_id, id FROM cor1440_gen_proyectofinanciero
+         WHERE proyecto_id IS NOT NULL);
       ALTER TABLE cor1440_gen_proyectofinanciero 
         DROP COLUMN proyecto_id
     SQL
