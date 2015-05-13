@@ -19,13 +19,12 @@ module Cor1440Gen
           "id", 
           "nombre", 
           "financiador_id",
-          "proyecto_id",
           "fechainicio",
           "fechacierre",
           "responsable_id",
           "observaciones", 
-          "fechacreacion"
-        ]
+          "fechacreacion" 
+        ] + [ :proyecto_ids =>  [] ] 
       end
 
       def proyectofinanciero_params

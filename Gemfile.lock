@@ -65,6 +65,8 @@ GEM
     bootstrap-datepicker-rails (1.4.0)
       railties (>= 3.0)
     builder (3.2.2)
+    byebug (4.0.5)
+      columnize (= 0.9.0)
     camertron-eprun (1.1.0)
     cancancan (1.10.1)
     cldr-plurals-runtime-rb (1.0.0)
@@ -82,6 +84,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    columnize (0.9.0)
     debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -254,6 +257,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
+  byebug
   cancancan
   cocoon!
   codeclimate-test-reporter

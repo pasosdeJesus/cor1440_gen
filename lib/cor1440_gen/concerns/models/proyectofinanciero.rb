@@ -10,10 +10,14 @@ module Cor1440Gen
         included do
           belongs_to :financiador, class_name: 'Cor1440Gen::Financiador',
             foreign_key: "financiador_id", validate: true
-          belongs_to :proyecto, class_name: 'Cor1440Gen::Proyecto',
-            foreign_key: "proyecto_id", validate: true
           belongs_to :responsable, class_name: 'Usuario',
             foreign_key: "responsable_id", validate: true
+
+          has_many :proyecto_proyectofinanciero, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ProyectoProyectofinanciero',
+            foreign_key: 'proyectofinanciero_id'
+          has_many :proyecto, through: :proyecto_proyectofinanciero,
+            class_name: 'Cor1440Gen::Proyecto'
 
           validates :nombre, presence: true, allow_blank: false
           validates :fechacreacion, presence: true, allow_blank: false

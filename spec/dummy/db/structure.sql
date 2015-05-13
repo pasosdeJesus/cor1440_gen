@@ -478,6 +478,16 @@ ALTER SEQUENCE cor1440_gen_proyecto_id_seq OWNED BY cor1440_gen_proyecto.id;
 
 
 --
+-- Name: cor1440_gen_proyecto_proyectofinanciero; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE cor1440_gen_proyecto_proyectofinanciero (
+    proyecto_id integer NOT NULL,
+    proyectofinanciero_id integer NOT NULL
+);
+
+
+--
 -- Name: cor1440_gen_proyectofinanciero; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -485,7 +495,6 @@ CREATE TABLE cor1440_gen_proyectofinanciero (
     id integer NOT NULL,
     nombre character varying(1000),
     financiador_id integer,
-    proyecto_id integer,
     observaciones character varying(5000),
     fechainicio date,
     fechacierre date,
@@ -1571,14 +1580,6 @@ ALTER TABLE ONLY cor1440_gen_proyectofinanciero
 
 
 --
--- Name: lf_proyectofinanciero_proyecto; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY cor1440_gen_proyectofinanciero
-    ADD CONSTRAINT lf_proyectofinanciero_proyecto FOREIGN KEY (proyecto_id) REFERENCES cor1440_gen_proyecto(id);
-
-
---
 -- Name: lf_proyectofinanciero_responsable; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1907,4 +1908,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150503120915');
 INSERT INTO schema_migrations (version) VALUES ('20150510125926');
 
 INSERT INTO schema_migrations (version) VALUES ('20150513112126');
+
+INSERT INTO schema_migrations (version) VALUES ('20150513130058');
+
+INSERT INTO schema_migrations (version) VALUES ('20150513130510');
 
