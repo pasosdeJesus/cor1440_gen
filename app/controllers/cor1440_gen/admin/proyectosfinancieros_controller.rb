@@ -15,16 +15,18 @@ module Cor1440Gen
       end
 
       def atributos_index
-        [
-          "id", 
+        [ "id", 
           "nombre", 
           "financiador_id",
           "fechainicio",
           "fechacierre",
-          "responsable_id",
+          "responsable_id"
+        ] +
+        [ :proyecto_ids =>  [] ] +
+        [ "compromisos", 
           "observaciones", 
           "fechacreacion" 
-        ] + [ :proyecto_ids =>  [] ] 
+        ] 
       end
 
       def proyectofinanciero_params

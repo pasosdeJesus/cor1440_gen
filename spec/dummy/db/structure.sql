@@ -502,7 +502,8 @@ CREATE TABLE cor1440_gen_proyectofinanciero (
     fechacreacion date,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    compromisos character varying(5000)
 );
 
 
@@ -1912,4 +1913,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150513112126');
 INSERT INTO schema_migrations (version) VALUES ('20150513130058');
 
 INSERT INTO schema_migrations (version) VALUES ('20150513130510');
+
+INSERT INTO schema_migrations (version) VALUES ('20150513160835');
 
