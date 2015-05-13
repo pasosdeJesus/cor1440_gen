@@ -45,8 +45,7 @@
           value_method: :id 
         %>
       <% elsif atr == {:proyecto_ids => [] } || atr == "proyecto_id" %>
-        <%= byebug;
-        f.association :proyecto,
+        <%= f.association :proyecto,
           collection: (Cor1440Gen::Proyecto.habilitados),
           label: "Proyecto",
           label_method: :nombre,
