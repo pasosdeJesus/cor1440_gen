@@ -14,7 +14,7 @@ GIT
 PATH
   remote: ../sip
   specs:
-    sip (2.0.a4)
+    sip (2.0.a6)
       devise
       jquery-rails
       rails
