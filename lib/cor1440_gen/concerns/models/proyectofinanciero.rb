@@ -25,9 +25,9 @@ module Cor1440Gen
           def presenta(atr)
             case atr.to_s
             when "financiador_id" 
-              Cor1440Gen::Financiador.find(self[atr]).nombre
+              self[atr] ? Cor1440Gen::Financiador.find(self[atr]).nombre : ""
             when "responsable_id"
-              ::Usuario.find(self[atr]).nusuario
+              self[atr] ? ::Usuario.find(self[atr]).nusuario : ""
             when "{:proyecto_ids=>[]}"
               self.proyecto.map { |i| i.nombre }
             else
