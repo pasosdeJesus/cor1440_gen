@@ -4,10 +4,12 @@
     :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <% if @actividades.size > 1 %>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
+  <p>
+  <%= link_to t('.new', :default => 'Nueva'),
     cor1440_gen.new_actividad_path,
     :class => 'btn btn-primary' 
   %>
+  </p>
 <% end %>
 <table class="table table-striped" border='1'>
   <thead>
@@ -18,12 +20,12 @@
       <th><%= model_class.human_attribute_name(:nombre) %></th>
       <!-- th><%= model_class.human_attribute_name(:responsable) %></th -->
       <th><%= model_class.human_attribute_name(:areas) %></th>
-      <th><%= model_class.human_attribute_name(:tipo) %></th>
+      <th><%= model_class.human_attribute_name(:tipos) %></th>
       <th><%= model_class.human_attribute_name(:objetivo) %></th>
-      <th><%= model_class.human_attribute_name(:proyecto) %></th>
+      <th><%= model_class.human_attribute_name(:proyectos) %></th>
       <!--th>< %= model_class.human_attribute_name(:descripcion) %></th-->
       <th><%= model_class.human_attribute_name(:poblacion) %></th>
-      <th><%= model_class.human_attribute_name(:anexo) %></th>
+      <th><%= model_class.human_attribute_name(:anexos) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -35,13 +37,36 @@
         <td><%= actividad.oficina.nombre if actividad.oficina %></td>
         <td><%= actividad.nombre if actividad.nombre %></td>
         <!-- td>< %= actividad.responsable.nusuario if actividad.reponsable %></td-->
-        <td><%= actividad.actividadareas.map { |i| i.nombre} %></td>
-        <td><%= actividad.actividadtipo.map { |i| i.nombre} %></td>
+        <td><%= actividad.actividadareas.inject("") { |memo, i| 
+          (memo == "" ? "" : memo + "; ") + i.nombre
+        } 
+        %> </td>
+        <td><%= actividad.actividadtipo.inject("") { |memo, i| 
+          (memo == "" ? "" : memo + "; ") + i.nombre
+        } 
+        %> </td>
         <td><%= actividad.objetivo %></td>
-        <td><%= actividad.proyecto.map { |i| i.nombre} %></td>
+        <td><%= actividad.proyecto.inject("") { |memo, i| 
+          (memo == "" ? "" : memo + "; ") + i.nombre
+        } 
+        %> </td>
         <!-- td>< %= actividad.descripcion %></td-->
-        <td></td>
-        <td></td>
+        <td> <%=
+          r=actividad.actividad_rangoedadac.map { |i| 
+            i.ml+i.mr+i.fl+i.fr 
+          } 
+          r.reduce(:+)
+        %> 
+        </td>
+        <td>
+          <% 
+            sep=""
+            actividad.sip_anexo.each do |i| %>
+              <%= link_to(image_tag("cor1440_gen/clip.svg", size: "16"), 
+                sip.descarga_anexo_path(i.id)) 
+              %>
+          <% end %>
+        </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       cor1440_gen.edit_actividad_path(actividad), :class => 'btn btn-xs' %>

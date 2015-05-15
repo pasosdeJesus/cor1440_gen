@@ -12,24 +12,55 @@
   <dd><%= @actividad.fecha %></dd>
   <dt><strong><%= model_class.human_attribute_name(:oficina) %>:</strong></dt>
   <dd><%= @actividad.oficina.nombre if @actividad.oficina %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tipo) %>:</strong></dt>
-  <dd><%= @actividad.actividadtipo.map { |i| i.nombre} %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:proyecto) %>:</strong></dt>
-  <dd><%= @actividad.proyecto.map { |i| i.nombre} %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tipos) %>:</strong></dt>
+  <dd><%= @actividad.actividadtipo.inject("") { |memo, i| 
+    (memo == "" ? "" : memo + "; ") + i.nombre
+  } %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:proyectos) %>:</strong></dt>
+  <dd><%= @actividad.proyecto.inject("") { |memo, i| 
+    (memo == "" ? "" : memo + "; ") + i.nombre
+  } %></dd>
   <dt><strong><%= model_class.human_attribute_name(:areas) %>:</strong></dt>
-  <dd><%= @actividad.actividadareas.map { |i| i.nombre} %></dd>
+  <dd><%= @actividad.actividadareas.inject("") { |memo, i| 
+    (memo == "" ? "" : memo + "; ") + i.nombre
+  } %></dd>
   <dt><strong><%= model_class.human_attribute_name(:responsable) %>:</strong></dt>
   <dd><%= @actividad.responsable.nusuario if @actividad.responsable %></dd>
   <dt><strong><%= model_class.human_attribute_name(:corresponsables) %>:</strong></dt>
-  <dd><%= @actividad.usuario.map { |i| i.nusuario} %></dd>
+  <dd><%= @actividad.usuario.inject("") { |memo, i| 
+    (memo == "" ? "" : memo + "; ") + i.nombre
+  } %></dd>
   <dt><strong><%= model_class.human_attribute_name(:objetivo) %>:</strong></dt>
   <dd><%= @actividad.objetivo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:poblacion) %>:</strong></dt>
+  <dd><%= 
+    r=@actividad.actividad_rangoedadac.map { |i| 
+      t=i.ml+i.mr+i.fl+i.fr 
+      i.rangoedadac.nombre + ": " + t.to_s 
+    } 
+    r.join("; ")
+    %></dd>
   <dt><strong><%= model_class.human_attribute_name(:resultado) %>:</strong></dt>
   <dd><%= @actividad.resultado %></dd>
   <dt>
     <strong><%= model_class.human_attribute_name(:observaciones) %>:</strong>
   </dt>
   <dd><%= @actividad.observaciones %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:anexos) %>:</strong></dt>
+  <dd><% 
+    sep=""
+    @actividad.sip_anexo.each do |i| 
+      if (i.descripcion.size > 20)
+        d = i.descripcion.slice(0,20) + ' ...'
+      else
+        d = i.descripcion
+      end %>
+      <%= sep %> 
+      <%= link_to(d, sip.descarga_anexo_path(i.id)) %>
+      <% sep = "; ";
+    end %>
+  </dd>
+
 </dl>
 
 <div class="form-actions">
