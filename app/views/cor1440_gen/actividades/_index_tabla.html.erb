@@ -1,0 +1,49 @@
+<% @actividades.try(:each) do |actividad| %>
+  <tr>
+    <td><%= link_to actividad.id, cor1440_gen.actividad_path(actividad) %></td>
+    <td><%= actividad.fecha %></td>
+    <td><%= actividad.oficina.nombre if actividad.oficina %></td>
+    <td><%= actividad.nombre if actividad.nombre %></td>
+    <td><%= actividad.actividadareas.inject("") { |memo, i| 
+      (memo == "" ? "" : memo + "; ") + i.nombre
+    } 
+        %> </td>
+    <td>
+      <%= actividad.actividadtipo.inject("") { |memo, i| 
+        (memo == "" ? "" : memo + "; ") + i.nombre
+      } %>
+    </td>
+    <td><%= actividad.objetivo %></td>
+    <td><%= actividad.proyecto.inject("") { |memo, i| 
+      (memo == "" ? "" : memo + "; ") + i.nombre } %> 
+    </td>
+    <td> <%= r=actividad.actividad_rangoedadac.map { |i| 
+      (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
+        (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
+      } 
+      r.reduce(:+) %> 
+    </td>
+    <td>
+      <% sep=""
+      actividad.sip_anexo.each do |i| %>
+        <%= link_to(image_tag("cor1440_gen/clip.svg", size: "16"), 
+                    sip.descarga_anexo_path(i.id) ) 
+        %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+        cor1440_gen.edit_actividad_path(actividad), :class => 'btn btn-xs' 
+      %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        cor1440_gen.actividad_path(actividad),
+        :method => :delete,
+        :data => { :confirm => t(
+          '.confirm', 
+          :default => t("helpers.links.confirm", 
+                        :default => 'Are you sure?')) },
+                        :class => 'btn btn-xs btn-danger' 
+      %>
+   </td>
+  </tr>
+<% end %>

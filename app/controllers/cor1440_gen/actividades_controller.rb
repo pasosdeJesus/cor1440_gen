@@ -6,12 +6,70 @@ module Cor1440Gen
     before_action :set_actividad, only: [:show, :edit, :update, :destroy]
     load_and_authorize_resource class: Cor1440Gen::Actividad
 
+    def param_escapa(p)
+      params[p] ? Sip::Pais.connection.quote_string(params[p]) : ''
+    end
+
     # GET /actividades
     # GET /actividades.json
     def index
-      @actividades = Actividad.order(fecha: :desc).paginate(
-        :page => params[:pagina], per_page: 20)
-        render "index", layout: "application"
+
+      ac = Actividad.order(fecha: :desc)
+      w = ""
+      pBuscodigo = param_escapa('buscodigo')
+      if pBuscodigo != '' then
+        ac = ac.where(id: pBuscodigo.to_i)
+      end
+      pFechaini = param_escapa('fechaini')
+      if pFechaini != '' then
+        ac = ac.where("fecha >= '#{pFechaini}'")
+      end
+      pFechafin = param_escapa('fechafin')
+      if pFechafin != '' then
+        ac = ac.where("fecha <= '#{pFechafin}'")
+      end
+      pBusoficina = param_escapa('busoficina')
+      if pBusoficina != '' then
+        ac = ac.where(oficina_id: pBusoficina)
+      end
+      pBusnombre = param_escapa('busnombre')
+      if pBusnombre != '' then
+        ac = ac.where("nombre ILIKE '%#{pBusnombre}%'")
+      end
+      pBusarea = param_escapa('busarea')
+      if pBusarea != '' then
+        ac = ac.joins(:actividadareas_actividad).where(
+          "cor1440_gen_actividadareas_actividad.actividadarea_id = ?",
+          pBusarea.to_i
+        )
+      end
+      pBustipo = param_escapa('bustipo')
+      if pBustipo != '' then
+        ac = ac.joins(:actividad_actividadtipo).where(
+          "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
+          pBustipo.to_i
+        )
+      end
+      pBusobjetivo = param_escapa('busobjetivo')
+      if pBusobjetivo != '' then
+        ac = ac.where("objetivo ILIKE '%#{pBusobjetivo}%'")
+      end
+      pBusproyecto = param_escapa('busproyecto')
+      if pBusproyecto != '' then
+        ac = ac.joins(:actividad_proyecto).where(
+          "cor1440_gen_actividad_proyecto.proyecto_id= ?",
+          pBusproyecto.to_i
+        )
+      end
+      
+      @actividades = ac.paginate(:page => params[:pagina], per_page: 20)
+
+      respond_to do |format|
+        format.html { render "index", layout: "application" }
+        format.json { head :no_content }
+        format.js   { render 'index_tabla' }
+      end
+      return
     end
 
     # GET /actividades/1
@@ -82,6 +140,14 @@ module Cor1440Gen
           format.json { head :no_content }
       end
     end
+
+    def filtra
+      
+      @actividades = Actividad.order(fecha: :desc).paginate(
+        :page => params[:pagina], per_page: 20)
+        render "index", layout: "application"
+    end
+
 
     private
 
