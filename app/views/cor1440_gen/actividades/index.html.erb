@@ -56,7 +56,7 @@
             options_from_collection_for_select(
               Sip::Oficina.habilitados, 
               "id", "nombre"), {include_blank: true, 
-                "data-enviarautomatico" => "", length: 10} 
+                "data-enviarautomatico" => "", style: "width: 10em"} 
           %>
         </th>
         <th>
@@ -70,7 +70,7 @@
             options_from_collection_for_select(
               Cor1440Gen::Actividadarea.habilitados, 
               "id", "nombre"), {include_blank: true,
-                "data-enviarautomatico" => "", length: 10} 
+                "data-enviarautomatico" => "", style: "width: 10em"} 
           %>
         </th>
         <th>
@@ -78,7 +78,7 @@
             options_from_collection_for_select(
               Cor1440Gen::Actividadtipo.habilitados, 
               "id", "nombre"), {include_blank: true,
-                "data-enviarautomatico" => "", length: 10} 
+                "data-enviarautomatico" => "", style: "width: 10em"} 
           %>
         </th>
         <th>
@@ -93,7 +93,7 @@
             options_from_collection_for_select(
               Cor1440Gen::Proyecto.habilitados, 
               "id", "nombre"), {include_blank: true,
-                "data-enviarautomatico" => "", length: 10} 
+                "data-enviarautomatico" => "", style: "width: 10em"} 
           %>
         </th>
         <th></th>
@@ -103,8 +103,6 @@
     </tr>
   </tfoot>
 </table>
-
-</div>
 
 <%= will_paginate @actividades, { param_name: :pagina }  %>
 <%= link_to t('.new', :default => 'Nueva'),
