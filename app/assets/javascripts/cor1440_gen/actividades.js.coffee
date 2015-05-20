@@ -10,6 +10,7 @@ $(document).on 'ready page:load',  ->
     a = f.action
     if !a.endsWith(".pdf")
     	$(f).attr("action", a + ".pdf")
+    	$(f).attr("target", "_blank")
     #f.submit()
   )
  
