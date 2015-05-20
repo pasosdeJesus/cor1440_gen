@@ -4,4 +4,10 @@
 
 #//= require sip/enviarautomatico
 
-
+$(document).on 'ready page:load',  -> 
+  $(document).on('click', '.envia_generar_pdf', (e) -> 
+    f = $(this).closest("form")
+    f.attr("action", e.target.form.action + ".pdf")
+    #f.submit()
+  )
+ 

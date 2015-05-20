@@ -12,7 +12,7 @@
   </p>
 <% end %>
 
-<%= form_tag(actividades_path, method: "get", remote: true) do %>
+<%= form_tag(actividades_path, method: "get") do %>
   <table class="table table-striped" border='1'>
     <thead>
       <tr>
@@ -20,12 +20,10 @@
         <th><%= model_class.human_attribute_name(:fecha) %></th>
         <th><%= model_class.human_attribute_name(:oficina) %></th>
         <th><%= model_class.human_attribute_name(:nombre) %></th>
-        <!-- th><%= model_class.human_attribute_name(:responsable) %></th -->
         <th><%= model_class.human_attribute_name(:areas) %></th>
         <th><%= model_class.human_attribute_name(:tipos) %></th>
         <th><%= model_class.human_attribute_name(:objetivo) %></th>
         <th><%= model_class.human_attribute_name(:proyectos) %></th>
-        <!--th>< %= model_class.human_attribute_name(:descripcion) %></th-->
         <th><%= model_class.human_attribute_name(:poblacion) %></th>
         <th><%= model_class.human_attribute_name(:anexos) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -98,7 +96,9 @@
         </th>
         <th></th>
         <th></th>
-        <th><%= submit_tag("Filtrar") %></th>
+        <th><%= submit_tag("Filtrar") %>
+            <%= submit_tag("Generar PDF", class: 'envia_generar_pdf') %>
+        </th>
       </tr>
     </tfoot>
   </table>

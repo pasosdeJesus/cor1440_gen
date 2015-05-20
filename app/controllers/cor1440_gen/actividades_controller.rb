@@ -16,58 +16,72 @@ module Cor1440Gen
 
       ac = Actividad.order(fecha: :desc)
       w = ""
-      pBuscodigo = param_escapa('buscodigo')
-      if pBuscodigo != '' then
-        ac = ac.where(id: pBuscodigo.to_i)
+      @buscodigo = param_escapa('buscodigo')
+      if @buscodigo != '' then
+        ac = ac.where(id: @buscodigo.to_i)
       end
-      pFechaini = param_escapa('fechaini')
-      if pFechaini != '' then
-        ac = ac.where("fecha >= '#{pFechaini}'")
+      @fechaini = param_escapa('fechaini')
+      if @fechaini != '' then
+        ac = ac.where("fecha >= '#{@fechaini}'")
       end
-      pFechafin = param_escapa('fechafin')
-      if pFechafin != '' then
-        ac = ac.where("fecha <= '#{pFechafin}'")
+      @fechafin = param_escapa('fechafin')
+      if @fechafin != '' then
+        ac = ac.where("fecha <= '#{@fechafin}'")
       end
-      pBusoficina = param_escapa('busoficina')
-      if pBusoficina != '' then
-        ac = ac.where(oficina_id: pBusoficina)
+      @busoficina = param_escapa('busoficina')
+      if @busoficina != '' then
+        ac = ac.where(oficina_id: @busoficina)
       end
-      pBusnombre = param_escapa('busnombre')
-      if pBusnombre != '' then
-        ac = ac.where("nombre ILIKE '%#{pBusnombre}%'")
+      @busnombre = param_escapa('busnombre')
+      if @busnombre != '' then
+        ac = ac.where("nombre ILIKE '%#{@busnombre}%'")
       end
-      pBusarea = param_escapa('busarea')
-      if pBusarea != '' then
+      @busarea = param_escapa('busarea')
+      if @busarea != '' then
         ac = ac.joins(:actividadareas_actividad).where(
           "cor1440_gen_actividadareas_actividad.actividadarea_id = ?",
-          pBusarea.to_i
+          @busarea.to_i
         )
       end
-      pBustipo = param_escapa('bustipo')
-      if pBustipo != '' then
+      @bustipo = param_escapa('bustipo')
+      if @bustipo != '' then
         ac = ac.joins(:actividad_actividadtipo).where(
           "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
-          pBustipo.to_i
+          @bustipo.to_i
         )
       end
-      pBusobjetivo = param_escapa('busobjetivo')
-      if pBusobjetivo != '' then
-        ac = ac.where("objetivo ILIKE '%#{pBusobjetivo}%'")
+      @busobjetivo = param_escapa('busobjetivo')
+      if @busobjetivo != '' then
+        ac = ac.where("objetivo ILIKE '%#{@busobjetivo}%'")
       end
-      pBusproyecto = param_escapa('busproyecto')
-      if pBusproyecto != '' then
+      @busproyecto = param_escapa('busproyecto')
+      if @busproyecto != '' then
         ac = ac.joins(:actividad_proyecto).where(
           "cor1440_gen_actividad_proyecto.proyecto_id= ?",
-          pBusproyecto.to_i
+          @busproyecto.to_i
         )
       end
       
       @actividades = ac.paginate(:page => params[:pagina], per_page: 20)
 
+      @enctabla = [ Cor1440Gen::Actividad.human_attribute_name(:id), 
+        @actividades.human_attribute_name(:fecha),
+        @actividades.human_attribute_name(:oficina),
+        @actividades.human_attribute_name(:nombre),
+        @actividades.human_attribute_name(:areas),
+        @actividades.human_attribute_name(:tipos),
+        @actividades.human_attribute_name(:objetivo),
+        @actividades.human_attribute_name(:proyectos),
+        @actividades.human_attribute_name(:poblacion),
+      ]
       respond_to do |format|
         format.html { render "index", layout: "application" }
         format.json { head :no_content }
         format.js   { render 'index_tabla' }
+        format.pdf  { prawnto(prawn: { page_layout: :landscape },
+         filename: "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
+         inline: true)
+        }
       end
       return
     end
