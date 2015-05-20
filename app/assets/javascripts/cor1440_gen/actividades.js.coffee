@@ -9,7 +9,7 @@ $(document).on 'ready page:load',  ->
     f = e.target.form
     a = f.action
     if !a.endsWith(".pdf")
-    	f.attr("action", e.target.form.action + ".pdf")
+    	$(f).attr("action", a + ".pdf")
     #f.submit()
   )
  
