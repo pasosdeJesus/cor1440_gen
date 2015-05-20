@@ -14,6 +14,6 @@ FactoryGirl.define do
     sign_in_count 0
     fechacreacion "2014-08-05"
     fechadeshabilitacion nil
-    regionsjr nil
+    oficina_id nil
   end
 end
