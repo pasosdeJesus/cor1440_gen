@@ -12,30 +12,30 @@
   </p>
 <% end %>
 
-<table class="table table-striped" border='1'>
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:fecha) %></th>
-      <th><%= model_class.human_attribute_name(:oficina) %></th>
-      <th><%= model_class.human_attribute_name(:nombre) %></th>
-      <!-- th><%= model_class.human_attribute_name(:responsable) %></th -->
-      <th><%= model_class.human_attribute_name(:areas) %></th>
-      <th><%= model_class.human_attribute_name(:tipos) %></th>
-      <th><%= model_class.human_attribute_name(:objetivo) %></th>
-      <th><%= model_class.human_attribute_name(:proyectos) %></th>
-      <!--th>< %= model_class.human_attribute_name(:descripcion) %></th-->
-      <th><%= model_class.human_attribute_name(:poblacion) %></th>
-      <th><%= model_class.human_attribute_name(:anexos) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody id="index_tabla">
-    <%= render 'index_tabla' %>
-  </tbody>
-  <tfoot>
-    <tr>
-      <%= form_tag(actividades_path, method: "get", remote: true) do %>
+<%= form_tag(actividades_path, method: "get", remote: true) do %>
+  <table class="table table-striped" border='1'>
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:fecha) %></th>
+        <th><%= model_class.human_attribute_name(:oficina) %></th>
+        <th><%= model_class.human_attribute_name(:nombre) %></th>
+        <!-- th><%= model_class.human_attribute_name(:responsable) %></th -->
+        <th><%= model_class.human_attribute_name(:areas) %></th>
+        <th><%= model_class.human_attribute_name(:tipos) %></th>
+        <th><%= model_class.human_attribute_name(:objetivo) %></th>
+        <th><%= model_class.human_attribute_name(:proyectos) %></th>
+        <!--th>< %= model_class.human_attribute_name(:descripcion) %></th-->
+        <th><%= model_class.human_attribute_name(:poblacion) %></th>
+        <th><%= model_class.human_attribute_name(:anexos) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody id="index_tabla">
+      <%= render 'index_tabla' %>
+    </tbody>
+    <tfoot>
+      <tr>
         <th>
           <%= text_field_tag 'buscodigo', @buscodigo, maxlength: 10, size: 4,
             "data-enviarautomatico" => "", 
@@ -99,10 +99,10 @@
         <th></th>
         <th></th>
         <th><%= submit_tag("Filtrar") %></th>
-    <% end %>
-    </tr>
-  </tfoot>
-</table>
+      </tr>
+    </tfoot>
+  </table>
+<% end %>
 
 <%= will_paginate @actividades, { param_name: :pagina }  %>
 <%= link_to t('.new', :default => 'Nueva'),
