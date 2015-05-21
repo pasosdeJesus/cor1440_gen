@@ -4,43 +4,10 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:id) %>:</strong></dt>
-  <dd><%= @actividad.id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
-  <dd><%= @actividad.nombre %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:fecha) %>:</strong></dt>
-  <dd><%= @actividad.fecha %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:oficina) %>:</strong></dt>
-  <dd><%= @actividad.oficina.nombre if @actividad.oficina %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tipos) %>:</strong></dt>
-  <dd><%= @actividad.actividadtipo.inject("") { |memo, i| 
-    (memo == "" ? "" : memo + "; ") + i.nombre
-  } %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:proyectos) %>:</strong></dt>
-  <dd><%= @actividad.proyecto.inject("") { |memo, i| 
-    (memo == "" ? "" : memo + "; ") + i.nombre
-  } %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:areas) %>:</strong></dt>
-  <dd><%= @actividad.actividadareas.inject("") { |memo, i| 
-    (memo == "" ? "" : memo + "; ") + i.nombre
-  } %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:responsable) %>:</strong></dt>
-  <dd><%= @actividad.responsable.nusuario if @actividad.responsable %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:corresponsables) %>:</strong></dt>
-  <dd><%= @actividad.usuario.inject("") { |memo, i| 
-    (memo == "" ? "" : memo + "; ") + i.nombre
-  } %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:objetivo) %>:</strong></dt>
-  <dd><%= @actividad.objetivo %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:poblacion) %>:</strong></dt>
-  <dd><%= 
-    r=@actividad.actividad_rangoedadac.map { |i| 
-      t= (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
-        (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
-      i.rangoedadac.nombre + ": " + t.to_s 
-    } 
-    r.join("; ")
-    %></dd>
+  <% for i in 0..@enctabla.length %>
+    <dt><strong><%= @enctabla[i] %></strong></dt>
+    <dd><%= @cuerpotabla[0][i] %></dd>
+  <% end %>
   <dt><strong><%= model_class.human_attribute_name(:resultado) %>:</strong></dt>
   <dd><%= @actividad.resultado %></dd>
   <dt>

@@ -16,15 +16,9 @@
   <table class="table table-striped" border='1'>
     <thead>
       <tr>
-        <th><%= model_class.human_attribute_name(:id) %></th>
-        <th><%= model_class.human_attribute_name(:fecha) %></th>
-        <th><%= model_class.human_attribute_name(:oficina) %></th>
-        <th><%= model_class.human_attribute_name(:nombre) %></th>
-        <th><%= model_class.human_attribute_name(:areas) %></th>
-        <th><%= model_class.human_attribute_name(:tipos) %></th>
-        <th><%= model_class.human_attribute_name(:objetivo) %></th>
-        <th><%= model_class.human_attribute_name(:proyectos) %></th>
-        <th><%= model_class.human_attribute_name(:poblacion) %></th>
+        <% @enctabla.each do |c| %>
+          <th><%= c %></th>
+        <% end %>
         <th><%= model_class.human_attribute_name(:anexos) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
@@ -96,7 +90,7 @@
         </th>
         <th></th>
         <th></th>
-        <th><%= submit_tag("Filtrar") %>
+        <th><%= submit_tag("Filtrar", class: 'envia_filtrar') %>
             <%= submit_tag("Generar PDF", class: 'envia_generar_pdf') %>
         </th>
       </tr>

@@ -166,8 +166,8 @@ CREATE TABLE cor1440_gen_actividad (
     id integer NOT NULL,
     minutos integer,
     nombre character varying(500),
-    objetivo character varying(500),
-    resultado character varying(500),
+    objetivo character varying(5000),
+    resultado character varying(5000),
     fecha date,
     observaciones character varying(5000),
     created_at timestamp without time zone,
@@ -1918,4 +1918,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150513130510');
 INSERT INTO schema_migrations (version) VALUES ('20150513160835');
 
 INSERT INTO schema_migrations (version) VALUES ('20150520115257');
+
+INSERT INTO schema_migrations (version) VALUES ('20150521092657');
 

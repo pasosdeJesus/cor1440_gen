@@ -39,30 +39,7 @@ end
 move_down  30
 
 font_size 8
-@cuerpotabla = [@enctabla]
-@actividades.try(:each) do |actividad| 
-  r=actividad.actividad_rangoedadac.map { |i| 
-    (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
-      (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
-  } 
-
-  @cuerpotabla += [[actividad.id,
-    actividad.fecha,
-      actividad.oficina ? actividad.oficina.nombre : "",
-        actividad.nombre,
-    actividad.actividadareas.inject("") { |memo, i| 
-      (memo == "" ? "" : memo + "; ") + i.nombre
-    } ,
-    actividad.actividadtipo.inject("") { |memo, i| 
-      (memo == "" ? "" : memo + "; ") + i.nombre
-    },
-    actividad.objetivo,
-    actividad.proyecto.inject("") { |memo, i| 
-      (memo == "" ? "" : memo + "; ") + i.nombre 
-    },
-    r.reduce(:+),
-  ]]
-end
+@cuerpotabla = [@enctabla]+@cuerpotabla
 
 table(@cuerpotabla, header: true) do
   row(0).font_style = :bold

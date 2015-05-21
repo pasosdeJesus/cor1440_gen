@@ -1,31 +1,17 @@
-<% @actividades.try(:each) do |actividad| %>
+<% @cuerpotabla.try(:each) do |fila| %>
+  <% 
+    actividad = @actividades.find(fila[0])
+    sep=""
+  %>
   <tr>
-    <td><%= link_to actividad.id, cor1440_gen.actividad_path(actividad) %></td>
-    <td><%= actividad.fecha %></td>
-    <td><%= actividad.oficina.nombre if actividad.oficina %></td>
-    <td><%= actividad.nombre if actividad.nombre %></td>
-    <td><%= actividad.actividadareas.inject("") { |memo, i| 
-      (memo == "" ? "" : memo + "; ") + i.nombre
-    } 
-        %> </td>
+    <td><%= link_to fila[0], cor1440_gen.actividad_path(fila[0]) %></td>
+    <% for i in 1..(fila.length-1) %>
+      <td>
+        <%= fila[i] %>
+      </td>
+    <% end %>
     <td>
-      <%= actividad.actividadtipo.inject("") { |memo, i| 
-        (memo == "" ? "" : memo + "; ") + i.nombre
-      } %>
-    </td>
-    <td><%= actividad.objetivo %></td>
-    <td><%= actividad.proyecto.inject("") { |memo, i| 
-      (memo == "" ? "" : memo + "; ") + i.nombre } %> 
-    </td>
-    <td> <%= r=actividad.actividad_rangoedadac.map { |i| 
-      (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
-        (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
-      } 
-      r.reduce(:+) %> 
-    </td>
-    <td>
-      <% sep=""
-      actividad.sip_anexo.each do |i| %>
+      <% actividad.sip_anexo.each do |i| %>
         <%= link_to(image_tag("cor1440_gen/clip.svg", size: "16"), 
                     sip.descarga_anexo_path(i.id) ) 
         %>
@@ -33,10 +19,10 @@
     </td>
     <td>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
-        cor1440_gen.edit_actividad_path(actividad), :class => 'btn btn-xs' 
+        cor1440_gen.edit_actividad_path(fila[0]), :class => 'btn btn-xs' 
       %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-        cor1440_gen.actividad_path(actividad),
+        cor1440_gen.actividad_path(fila[0]),
         :method => :delete,
         :data => { :confirm => t(
           '.confirm', 

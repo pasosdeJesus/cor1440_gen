@@ -2,12 +2,6 @@
 [![Estado Construcción](https://api.travis-ci.org/pasosdeJesus/cor1440_gen.svg?branch=master)](https://travis-ci.org/pasosdeJesus/cor1440_gen) [![Clima del Código](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/gpa.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen) [![Cobertura de Pruebas](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/coverage.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen) [![security](https://hakiri.io/github/pasosdeJesus/cor1440_gen/master.svg)](https://hakiri.io/github/pasosdeJesus/cor1440_gen/master) [![Dependencias](https://gemnasium.com/pasosdeJesus/cor1440_gen.svg)](https://gemnasium.com/pasosdeJesus/cor1440_gen) 
 
 
-## Tabla de Contenido
-* [Diseño](#diseño)
-* [Uso](#uso)
-* [Pruebas](#pruebas)
-* [Desarrollo](#pruebas)
-
 Este es un motor para sistemas de información de planeación y seguimiento de actividades en una ONG. Opera sobre Ruby on Rails 4.2 y PostgreSQL (preferiblemente cifrado como en adJ).
 
 Este motor incluye 
@@ -29,12 +23,7 @@ Los cambios a esas instrucciones son:
 
 * El usuario por defecto en PostgreSQL configurado es cor1440gen con
   clave xyz, pero puede modificarlo despues de copia la plantilla
-  spec/dummy/config/daabase.yml.plantilla en spec/dummy/config/daabase.yml
-
+  spec/dummy/config/database.yml.plantilla en spec/dummy/config/daabase.yml
 * El usuario inicial tras crear una nueva aplicación es cor1440 con
   clave cor1440
-
-
-
-
 
