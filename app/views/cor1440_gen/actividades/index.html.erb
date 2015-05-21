@@ -27,73 +27,7 @@
       <%= render 'index_tabla' %>
     </tbody>
     <tfoot>
-      <tr>
-        <th>
-          <%= text_field_tag 'buscodigo', @buscodigo, maxlength: 10, size: 4,
-            "data-enviarautomatico" => "", 
-            "placeholder" => model_class.human_attribute_name(:id) 
-          %>
-        </th>
-        <th>
-          <%= text_field_tag 'fechaini', @fechaini, maxlength: 10, size: 10,
-            "data-behaviour" => "datepicker", "data-enviarautomatico" => ""
-          %>
-          -
-          <%= text_field_tag 'fechafin', @fechafin, maxlength: 10, size: 10,
-            "data-behaviour" => "datepicker", "data-enviarautomatico" => ""
-          %>
-        </th>
-        <th>
-          <%= select_tag "busoficina", 
-            options_from_collection_for_select(
-              Sip::Oficina.habilitados, 
-              "id", "nombre"), {include_blank: true, 
-                "data-enviarautomatico" => "", style: "width: 10em"} 
-          %>
-        </th>
-        <th>
-          <%= text_field_tag 'busnombre', @busnombre, maxlength: 10, size: 12,
-            "data-enviarautomatico" => "", 
-            "placeholder" => model_class.human_attribute_name(:nombre) 
-          %>
-        </th>
-        <th>
-          <%= select_tag "busarea", 
-            options_from_collection_for_select(
-              Cor1440Gen::Actividadarea.habilitados, 
-              "id", "nombre"), {include_blank: true,
-                "data-enviarautomatico" => "", style: "width: 10em"} 
-          %>
-        </th>
-        <th>
-          <%= select_tag "bustipo", 
-            options_from_collection_for_select(
-              Cor1440Gen::Actividadtipo.habilitados, 
-              "id", "nombre"), {include_blank: true,
-                "data-enviarautomatico" => "", style: "width: 10em"} 
-          %>
-        </th>
-        <th>
-          <%= text_field_tag 'busobjetivo', @busobjetivo, 
-            maxlength: 10, size: 12,
-            "data-enviarautomatico" => "", 
-            "placeholder" => model_class.human_attribute_name(:objetivo) 
-          %>
-        </th>
-        <th>
-          <%= select_tag "busproyecto", 
-            options_from_collection_for_select(
-              Cor1440Gen::Proyecto.habilitados, 
-              "id", "nombre"), {include_blank: true,
-                "data-enviarautomatico" => "", style: "width: 10em"} 
-          %>
-        </th>
-        <th></th>
-        <th></th>
-        <th><%= submit_tag("Filtrar", class: 'envia_filtrar') %>
-            <%= submit_tag("Generar PDF", class: 'envia_generar_pdf') %>
-        </th>
-      </tr>
+      <%= render 'index_filtro' %>
     </tfoot>
   </table>
 <% end %>
