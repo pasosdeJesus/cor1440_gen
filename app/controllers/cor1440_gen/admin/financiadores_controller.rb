@@ -19,6 +19,11 @@ module Cor1440Gen
           "fechadeshabilitacion"]
       end
 
+      # Genero del nombre (F - Femenino, M - Masculino)
+      def genclase
+        return 'M';
+      end
+
       def financiador_params
         params.require(:financiador).permit(*atributos_form)
       end
