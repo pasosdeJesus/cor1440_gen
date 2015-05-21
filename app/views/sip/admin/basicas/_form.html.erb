@@ -70,6 +70,8 @@
             return r },
               value_method: :id 
         %>
+      <% elsif atr.end_with?("_id") %>
+        <%= render "basica_#{atr}", f: f %>
       <% else %>
         <%= f.input atr.to_sym %>
     <% end %>
