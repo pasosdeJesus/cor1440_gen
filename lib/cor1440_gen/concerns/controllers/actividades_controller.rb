@@ -80,31 +80,31 @@ module Cor1440Gen
             ]
           end
 
+          def fila_comun(actividad)
+            pob = actividad.actividad_rangoedadac.map { |i| 
+              (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
+                (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
+            } 
+            return [actividad.id,
+              actividad.fecha , 
+              actividad.oficina ? actividad.oficina.nombre : "",
+              actividad.nombre ? actividad.nombre : "",
+              actividad.actividadareas.inject("") { |memo, i| 
+              (memo == "" ? "" : memo + "; ") + i.nombre },
+              actividad.actividadtipo.inject("") { |memo, i| 
+              (memo == "" ? "" : memo + "; ") + i.nombre },
+              actividad.objetivo , 
+              actividad.proyecto.inject("") { |memo, i| 
+              (memo == "" ? "" : memo + "; ") + i.nombre },
+              pob.reduce(:+)
+            ]
+          end
+
           # Cuerpo de tabla comun para HTML y PDF
           def cuerpo_comun
             cuerpo = []
             @actividades.try(:each) do |actividad|
-
-              pob = actividad.actividad_rangoedadac.map { |i| 
-                (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
-                  (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
-              } 
-              cuerpo += [[actividad.id,
-                actividad.fecha , 
-                actividad.oficina ? actividad.oficina.nombre : "",
-                actividad.nombre ? actividad.nombre : "",
-                actividad.actividadareas.inject("") { |memo, i| 
-                  (memo == "" ? "" : memo + "; ") + i.nombre
-                },
-                actividad.actividadtipo.inject("") { |memo, i| 
-                  (memo == "" ? "" : memo + "; ") + i.nombre
-                },
-                actividad.objetivo , 
-                actividad.proyecto.inject("") { |memo, i| 
-                  (memo == "" ? "" : memo + "; ") + i.nombre 
-                },
-                pob.reduce(:+)
-              ]]
+              cuerpo += [fila_comun(actividad)]
             end
             return cuerpo
           end
