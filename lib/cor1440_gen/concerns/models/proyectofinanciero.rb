@@ -19,8 +19,9 @@ module Cor1440Gen
           has_many :proyecto, through: :proyecto_proyectofinanciero,
             class_name: 'Cor1440Gen::Proyecto'
 
-          validates :nombre, presence: true, allow_blank: false
-          validates :fechacreacion, presence: true, allow_blank: false
+          validates :nombre, presence: true, allow_blank: false, 
+            length: { maximum: 1000 } 
+          validates :compromisos, length: { maximum: 5000 }
 
           def presenta(atr)
             case atr.to_s

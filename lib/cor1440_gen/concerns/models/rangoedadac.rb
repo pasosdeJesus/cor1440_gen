@@ -12,6 +12,9 @@ module Cor1440Gen
             class_name: '::Cor1440Gen::ActividadRangoedadac'
           has_many :actividad, :through => :actividad_rangoedadac,
             class_name: '::Cor1440Gen::Actividad'
+
+          validates :nombre, presence: true, allow_blank: false, 
+            length: { maximum: 255 } 
         end
       end
     end

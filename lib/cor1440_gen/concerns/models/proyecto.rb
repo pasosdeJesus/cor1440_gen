@@ -14,9 +14,6 @@ module Cor1440Gen
             foreign_key: 'proyecto_id'
           has_many :proyectofinanciero, through: :proyecto_proyectofinanciero,
             class_name: 'Cor1440Gen::Proyectofinanciero'
-
-          validates :nombre, presence: true, allow_blank: false
-          validates :fechacreacion, presence: true, allow_blank: false
         end
       end
     end

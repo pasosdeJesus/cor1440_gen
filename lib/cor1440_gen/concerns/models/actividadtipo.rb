@@ -12,9 +12,6 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::ActividadActividadtipo'
           has_many :actividad, :through => :actividad_actividadtipo,
             class_name: 'Cor1440Gen::Actividadtipo'
-
-          validates :nombre, presence: true, allow_blank: false
-          validates :fechacreacion, presence: true, allow_blank: false
         end
       end
     end

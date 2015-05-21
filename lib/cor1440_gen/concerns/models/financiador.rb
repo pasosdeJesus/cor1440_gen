@@ -11,9 +11,6 @@ module Cor1440Gen
 
           has_many :proyectofinanciero, class_name: 'Cor1440Gen::Proyectofinanciero',
             dependent: :delete_all
-
-          validates :nombre, presence: true, allow_blank: false
-          validates :fechacreacion, presence: true, allow_blank: false
         end
       end
     end
