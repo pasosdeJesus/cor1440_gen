@@ -56,8 +56,11 @@ module Cor1440Gen
             foreign_key: 'usuario_id', validate: true
 
           validates_presence_of :oficina
-          validates_presence_of :nombre
-          validates_presence_of :fecha
+          validates :nombre, presence: true, allow_blank: false, 
+            length: { maximum: 500 } 
+          validates :objetivo, length: { maximum: 500 } 
+          validates :resultado, length: { maximum: 500 } 
+          validates :observaciones, length: { maximum: 5000 } 
         end
       end
     end

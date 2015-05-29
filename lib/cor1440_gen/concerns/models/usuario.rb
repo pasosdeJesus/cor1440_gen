@@ -15,6 +15,8 @@ module Cor1440Gen
           #   has_many :etiqueta, class_name: 'Sip::Etiqueta',
           #     through: :etiqueta_usuario
 
+          validates_length_of :nusuario, maximum: 15
+
           has_many :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero',
             foreign_key: 'responsable_id',

@@ -18,21 +18,13 @@ module Cor1440Gen
 
 
     # Tablas basicas cuya secuencia es de la forma tabla_id_seq 
-    @@basicas_seq_con_id = [ 
+    @@basicas_seq_con_id = TABLAS_SIP_SEQID + [
       ['Cor1440Gen', 'actividadarea'],
       ['Cor1440Gen', 'actividadtipo'],
       ['Cor1440Gen', 'financiador'], 
       ['Cor1440Gen', 'proyecto'], 
       ['Cor1440Gen', 'proyectofinanciero'], 
-      ['Cor1440Gen', 'rangoedadac'], 
-      ['Sip', 'clase'], 
-      ['Sip', 'departamento'], 
-      ['Sip', 'etiqueta'], 
-      ['Sip', 'municipio'], 
-      ['Sip', 'oficina'],
-      ['Sip', 'pais'],
-      ['Sip', 'tdocumento'], 
-      ['Sip', 'tsitio']
+      ['Cor1440Gen', 'rangoedadac']
     ]
 
     ROLADMIN  = 1
