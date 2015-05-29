@@ -13,7 +13,7 @@
        <% else %>
          <div class="actividad_sip_anexo_adjunto">
            <label for="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto">Archivo</label>
-           <a id="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto" href="/anexos/descarga_anexo/<%=a.object.id%>", style="text-decoration:none"><%= a.object.adjunto_file_name %></a>
+           <a id="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto" href="<%= sip.descarga_anexo_path(a.object.id) %>", style="text-decoration:none"><%= a.object.adjunto_file_name %></a>
          </div>
        <% end %>
 

@@ -2,13 +2,21 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-#//= require sip/geo
+#//= require sip/enviarautomatico
 
 $(document).on 'ready page:load',  -> 
-  $('[data-behaviour~=datepicker]').datepicker({
-    format: 'yyyy-mm-dd'
-    autoclose: true
-    todayHighlight: true
-    language: 'es'	
-  });
+  $(document).on('click', '.envia_filtrar', (e) -> 
+    f = e.target.form
+    a = f.action
+    if a.endsWith(".pdf")
+    	$(f).attr("action", a.substr(0, a.length-4))
+    	$(f).removeAttr("target")
+  )
+  $(document).on('click', '.envia_generar_pdf', (e) -> 
+    f = e.target.form
+    a = f.action
+    if !a.endsWith(".pdf")
+    	$(f).attr("action", a + ".pdf")
+    	$(f).attr("target", "_blank")
+  )
 

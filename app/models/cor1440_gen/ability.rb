@@ -2,8 +2,9 @@
 
 module Cor1440Gen
   class Ability < Sip::Ability
+
     # Tablas básicas
-    @@tablasbasicas = Sip::Ability::TABLAS_SIP + [
+    BASICAS = Sip::Ability::TABLAS_SIP + [
       ['Cor1440Gen', 'actividadarea'], 
       ['Cor1440Gen', 'actividadtipo'], 
       ['Cor1440Gen', 'financiador'], 
@@ -11,14 +12,16 @@ module Cor1440Gen
       ['Cor1440Gen', 'proyectofinanciero'], 
       ['Cor1440Gen', 'rangoedadac']
     ]  - [
+      ['Sip', 'fuenteprensa'], 
       ['Sip', 'tdocumento'], 
       ['Sip', 'trelacion'], 
       ['Sip', 'tsitio']
     ]
 
+    @@tablasbasicas = BASICAS
 
     # Tablas basicas cuya secuencia es de la forma tabla_id_seq 
-    @@basicas_seq_con_id = TABLAS_SIP_SEQID + [
+    BASICAS_SID = Sip::Ability::TABLAS_SIP_SEQID + [ 
       ['Cor1440Gen', 'actividadarea'],
       ['Cor1440Gen', 'actividadtipo'],
       ['Cor1440Gen', 'financiador'], 
@@ -26,6 +29,8 @@ module Cor1440Gen
       ['Cor1440Gen', 'proyectofinanciero'], 
       ['Cor1440Gen', 'rangoedadac']
     ]
+
+    @@basicas_seq_con_id = BASICAS_SID
 
     ROLADMIN  = 1
     ROLINV    = 2

@@ -4,14 +4,14 @@ es:
     fechadeshabilitacion: Deshabilitación 
     fechainicio: Fecha de Inicio
     fechacierre: Fecha de Cierre
-    actividadarea: Área de Actividad
-    actividadareas: Áreas de Actividad
+    actividadarea: Subárea de Actividad
+    actividadareas: Subáreas de Actividad
     actividadtipo: Tipo de Actividad
   activerecord:
     attributes:
       "cor1440_gen/actividadarea":
-        Actividadarea: Área de Actividad
-        Actividadareas: Áreas de Actividad
+        Actividadarea: Subárea de Actividad
+        Actividadareas: Subáreas de Actividad
       "cor1440_gen/actividadtipo":
         Actividadtipo: Tipo de Actividad
         Actividadtipos: Tipos de Actividad

@@ -15,17 +15,24 @@ module Cor1440Gen
       end
 
       def atributos_index
-        [
-          "id", 
+        [ "id", 
           "nombre", 
           "financiador_id",
-          "proyecto_id",
           "fechainicio",
           "fechacierre",
-          "responsable_id",
+          "responsable_id"
+        ] +
+        [ :proyecto_ids =>  [] ] +
+        [ "compromisos", 
+          "monto",
           "observaciones", 
-          "fechacreacion"
-        ]
+          "fechacreacion" 
+        ] 
+      end
+
+      # Genero del nombre (F - Femenino, M - Masculino)
+      def genclase
+        return 'M';
       end
 
       def proyectofinanciero_params

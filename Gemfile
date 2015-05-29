@@ -10,6 +10,11 @@ gem "pg"
 # CSS
 gem "sass"
 
+# Generación de PDF
+gem "prawn"
+gem "prawnto_2",  :require => "prawnto"
+gem "prawn-table"
+
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
 
@@ -57,8 +62,8 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor Sip
-#gem 'sip', github: 'pasosdeJesus/sip'
-gem 'sip', path: '../sip'
+gem 'sip', github: 'pasosdeJesus/sip'
+#gem 'sip', path: '../sip'
 
 group :doc do
   # Genera documentación en doc/api con bundle exec rake doc:rails

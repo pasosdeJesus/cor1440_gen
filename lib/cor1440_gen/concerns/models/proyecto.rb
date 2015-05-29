@@ -9,9 +9,11 @@ module Cor1440Gen
 
         included do
 
-          has_many :proyectofinanciero, 
-            class_name: 'Cor1440Gen::Proyectofinanciero',
-            dependent: :delete_all
+          has_many :proyecto_proyetofinanciero, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ProyectoProyectofinanciero',
+            foreign_key: 'proyecto_id'
+          has_many :proyectofinanciero, through: :proyecto_proyectofinanciero,
+            class_name: 'Cor1440Gen::Proyectofinanciero'
 
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 

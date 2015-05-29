@@ -26,6 +26,11 @@ module Cor1440Gen
         ]
       end
 
+      # Genero del nombre (F - Femenino, M - Masculino)
+      def genclase
+        return 'M';
+      end
+
       def proyecto_params
         params.require(:proyecto).permit(*atributos_form)
       end

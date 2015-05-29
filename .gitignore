@@ -18,6 +18,7 @@ config/database.yml
 *~
 *swp
 *.log
+*swp
 pkg/
 spec/dummy/config/database.yml
 spec/dummy/tmp/
