@@ -112,7 +112,9 @@ module Cor1440Gen
           # GET /actividades
           # GET /actividades.json
           def index
-            @actividades = filtra().paginate(
+            @actividades = filtra()
+            @numactividades = @actividades.size
+            @actividades = @actividades.paginate(
               :page => params[:pagina], per_page: 20
             )
             @enctabla = encabezado_comun()
@@ -120,7 +122,7 @@ module Cor1440Gen
             respond_to do |format|
               format.html { render "index", layout: "application" }
               format.json { head :no_content }
-              format.js   { render 'index_tabla' }
+              format.js   { render 'index' }
               format.pdf  { prawnto(prawn: { page_layout: :landscape },
                 filename: "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
                 inline: true)
