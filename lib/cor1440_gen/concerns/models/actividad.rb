@@ -65,8 +65,8 @@ module Cor1440Gen
           validates_presence_of :fecha
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 500 } 
-          validates :objetivo, length: { maximum: 500 } 
-          validates :resultado, length: { maximum: 500 } 
+          validates :objetivo, length: { maximum: 5000 } 
+          validates :resultado, length: { maximum: 5000 } 
           validates :observaciones, length: { maximum: 5000 } 
         end
       end
