@@ -1,6 +1,6 @@
 <% @cuerpotabla.try(:each) do |fila| %>
   <% 
-    actividad = @actividades.find(fila[0])
+    actividad = Cor1440Gen::Actividad.find(fila[0])
     sep=""
   %>
   <tr>

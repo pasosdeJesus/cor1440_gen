@@ -3,14 +3,22 @@
   <h1><%=t '.title', 
     :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<% if @actividades.size > 1 %>
-  <p>
-  <%= link_to t('.new', :default => 'Nueva'),
-    cor1440_gen.new_actividad_path,
-    :class => 'btn btn-primary' 
-  %>
-  </p>
-<% end %>
+
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <% if @actividades.size > 1 %>
+        <%= link_to t('.new', :default => 'Nueva'),
+          cor1440_gen.new_actividad_path,
+          :class => 'btn btn-primary' 
+        %>
+      <% end %>
+    </td>
+    <td style="width=50%;text-align: left">
+      Actividades: <span id="numactividades"><%= @numactividades %></span>
+    </td>
+  </tr>
+</table>
 
 <%= form_tag(actividades_path, method: "get") do %>
   <table class="table table-striped" border='1'>
