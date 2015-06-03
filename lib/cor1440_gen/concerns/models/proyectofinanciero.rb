@@ -24,19 +24,6 @@ module Cor1440Gen
             length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }
 
-          def presenta(atr)
-            case atr.to_s
-            when "financiador_id" 
-              self[atr] ? Cor1440Gen::Financiador.find(self[atr]).nombre : ""
-            when "responsable_id"
-              self[atr] ? ::Usuario.find(self[atr]).nusuario : ""
-            when "{:proyecto_ids=>[]}"
-              self.proyecto.map { |i| i.nombre }
-            else
-              self[atr].to_s
-            end
-          end
-
         end
         
         class_methods do
