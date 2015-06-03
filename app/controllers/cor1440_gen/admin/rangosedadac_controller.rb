@@ -14,7 +14,7 @@ module Cor1440Gen
       end
 
       def atributos_index
-        ["id", "nombre", "limiteinferior", "limitesuperior", 
+        ["id", "nombre", "limiteinferior", "limitesuperior", "observaciones",
           "fechacreacion", "fechadeshabilitacion"]
       end
 
