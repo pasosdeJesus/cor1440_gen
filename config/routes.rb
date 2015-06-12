@@ -12,5 +12,4 @@ Cor1440Gen::Engine.routes.draw do
     end
   end
 
-  root 'cor1440_gen/hogar#index' 
 end
