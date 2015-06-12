@@ -1,5 +1,5 @@
-class ApplicationController < Cor1440Gen::ApplicationController
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
+# encoding: UTF-8
+
+class ApplicationController < Sip::ApplicationController
   protect_from_forgery with: :exception
 end
