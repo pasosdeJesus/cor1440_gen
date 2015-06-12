@@ -81,7 +81,7 @@
     %>
   </div>
 
-  <%= f.input :observaciones %>
+  <%= f.input :observaciones, as: :text %>
 
   <div class="anexos-div anexosdiv">
     <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
