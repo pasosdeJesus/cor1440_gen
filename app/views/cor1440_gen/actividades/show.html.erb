@@ -8,13 +8,8 @@
     <dt><strong><%= @enctabla[i] %></strong></dt>
     <dd><%= @cuerpotabla[0][i] %></dd>
   <% end %>
-  <dt><strong><%= model_class.human_attribute_name(:resultado) %>:</strong></dt>
-  <dd><%= @actividad.resultado %></dd>
-  <dt>
-    <strong><%= model_class.human_attribute_name(:observaciones) %>:</strong>
-  </dt>
-  <dd><%= @actividad.observaciones %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:anexos) %>:</strong></dt>
+  <%= render "resto_show" %>
+  <dt><strong><%= Cor1440Gen::Actividad.human_attribute_name(:anexos) %></strong></dt>
   <dd><% 
     sep=""
     @actividad.sip_anexo.each do |i| 
