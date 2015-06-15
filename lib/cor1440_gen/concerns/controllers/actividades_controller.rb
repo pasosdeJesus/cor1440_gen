@@ -16,7 +16,6 @@ module Cor1440Gen
 
           def filtra
             ac = Actividad.order(fecha: :desc)
-            w = ""
             @buscodigo = param_escapa('buscodigo')
             if @buscodigo != '' then
               ac = ac.where(id: @buscodigo.to_i)

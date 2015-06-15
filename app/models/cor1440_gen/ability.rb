@@ -52,6 +52,8 @@ module Cor1440Gen
 
     # Ver documentacion de este metodo en app/models/ability de sip
     def initialize(usuario)
+      # Sin autenticación puede consultarse información geográfica 
+      can :read, [Sip::Pais, Sip::Departamento, Sip::Municipio, Sip::Clase]
       if !usuario || usuario.fechadeshabilitacion
         return
       end
@@ -74,7 +76,7 @@ module Cor1440Gen
           can [:update, :create, :destroy], Cor1440Gen::Actividad, 
             oficina: { id: usuario.oficina_id}
           can :new, Usuario
-          can [:read, :manage], Usuario, regionsjr: { id: usuario.oficina_id}
+          can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
         when Ability::ROLDIR
           can [:read, :new, :update, :create, :destroy], Cor1440Gen::Actividad
           can :manage, Usuario
