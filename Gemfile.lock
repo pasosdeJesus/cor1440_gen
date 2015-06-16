@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: 9940e638c8ea8885ebed41aefa874db4ba2a259d
+  revision: 08a754413fe6cdfe13e364bb678ec0bb8a0cfe55
   specs:
     sip (2.0.a6)
       devise
@@ -67,7 +67,7 @@ GEM
       railties (>= 3.0)
     builder (3.2.2)
     camertron-eprun (1.1.0)
-    cancancan (1.10.1)
+    cancancan (1.11.0)
     cldr-plurals-runtime-rb (1.0.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)

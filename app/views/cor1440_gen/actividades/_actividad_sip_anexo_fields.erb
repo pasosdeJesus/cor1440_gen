@@ -1,26 +1,14 @@
 <div class='control-group nested-fields'>
   <div class="controls">
 
-    <%  if f.object.sip_anexo.nil?
-    f.object.sip_anexo = Sip::Anexo.new
-       end 
-     %>
+    <%  f.object.sip_anexo = Sip::Anexo.new if !f.object.sip_anexo %>
 
-     <%= f.simple_fields_for :sip_anexo do |a| %>
-       <%= a.input :descripcion %>
-       <% if !a.object || !a.object.adjunto_file_name %>
-         <%= a.input :adjunto, as: :file, label: 'Archivo' %>
-       <% else %>
-         <div class="actividad_sip_anexo_adjunto">
-           <label for="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto">Archivo</label>
-           <a id="actividad_sip_anexo_attributes_<%=a.object.id%>_adjunto" href="<%= sip.descarga_anexo_path(a.object.id) %>", style="text-decoration:none"><%= a.object.adjunto_file_name %></a>
-         </div>
-       <% end %>
+    <%= f.simple_fields_for :sip_anexo do |a| %>
+      <%= render 'sip/anexos/anexo_campos', a: a %>
+    <% end %>
 
-       <%= a.input :id, as: :hidden %>
-     <% end %>
-
-     <%= link_to_remove_association "Eliminar Anexo", f, 
-       :class => 'btn-danger' %> 
-     </div>
-   </div>
+    <%= link_to_remove_association "Eliminar Anexo", f, 
+      :class => 'btn-danger' 
+    %> 
+  </div>
+</div>
