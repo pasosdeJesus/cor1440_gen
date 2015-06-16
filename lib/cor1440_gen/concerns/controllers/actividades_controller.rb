@@ -233,8 +233,8 @@ module Cor1440Gen
                 :_destroy,
                 :sip_anexo_attributes => [
                   :id, :descripcion, :adjunto, :_destroy
-            ]
-            ]
+                ]
+              ]
             )
           end
 
