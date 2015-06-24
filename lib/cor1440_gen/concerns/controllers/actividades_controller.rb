@@ -220,6 +220,7 @@ module Cor1440Gen
               :objetivo, :proyecto, :resultado,
               :fecha, :actividad, :observaciones, 
               :usuario_id,
+              :lugar,
               :actividadarea_ids => [],
               :actividadtipo_ids => [],
               :proyecto_ids => [],
