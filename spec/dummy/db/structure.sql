@@ -174,7 +174,8 @@ CREATE TABLE cor1440_gen_actividad (
     updated_at timestamp without time zone,
     oficina_id integer NOT NULL,
     rangoedadac_id integer,
-    usuario_id integer
+    usuario_id integer,
+    lugar character varying(500)
 );
 
 
@@ -1889,6 +1890,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150413160157');
 
 INSERT INTO schema_migrations (version) VALUES ('20150413160158');
 
+INSERT INTO schema_migrations (version) VALUES ('20150413160159');
+
 INSERT INTO schema_migrations (version) VALUES ('20150416074423');
 
 INSERT INTO schema_migrations (version) VALUES ('20150416090140');
@@ -1932,4 +1935,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150521092657');
 INSERT INTO schema_migrations (version) VALUES ('20150521181918');
 
 INSERT INTO schema_migrations (version) VALUES ('20150521191227');
+
+INSERT INTO schema_migrations (version) VALUES ('20150624200701');
 

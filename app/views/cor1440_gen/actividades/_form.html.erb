@@ -8,6 +8,9 @@
     :input_html => { "data-behaviour" => "datepicker"}, 
     :as => :string 
   %>
+
+  <%= f.input :lugar %>
+
   <%= f.association :oficina,
     collection: Sip::Oficina.habilitados,
     label_method: :nombre, 
