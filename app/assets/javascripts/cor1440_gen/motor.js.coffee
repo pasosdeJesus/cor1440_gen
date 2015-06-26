@@ -2,9 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-#//= require sip/enviarautomatico
+#//= require sip/motor
+#//= require jquery-ui/autocomplete
+#//= require cocoon
 
-$(document).on 'ready page:load',  -> 
+
+@cor1440_gen_prepara_eventos_comunes = (root) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form
     a = f.action
