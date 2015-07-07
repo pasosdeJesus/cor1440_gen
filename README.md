@@ -29,7 +29,7 @@ generales puede consultar en https://github.com/pasosdeJesus/sip
 Los cambios a esas instrucciones son:
 
 - El usuario por defecto en PostgreSQL configurado es cor1440gen con
-  clave xyz, pero puede modificarlo despues de copia la plantilla
+  clave xyz, pero puede modificarlo despues de copiar la plantilla
   spec/dummy/config/database.yml.plantilla en spec/dummy/config/database.yml
 - El usuario inicial tras crear una nueva aplicación es ```cor1440``` con
   clave ```cor1440```
