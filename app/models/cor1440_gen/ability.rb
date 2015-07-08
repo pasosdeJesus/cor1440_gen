@@ -12,13 +12,15 @@ module Cor1440Gen
       ['Cor1440Gen', 'proyectofinanciero'], 
       ['Cor1440Gen', 'rangoedadac']
     ]  
-    BASICAS = Sip::Ability::TABLAS_SIP + BASICAS_NUEVAS - [
+
+    @@tablasbasicas -= [
       ['Sip', 'fuenteprensa'], 
       ['Sip', 'tdocumento'], 
       ['Sip', 'trelacion'], 
       ['Sip', 'tsitio']
     ]
-    @@tablasbasicas = BASICAS
+
+    @@tablasbasicas += BASICAS_NUEVAS
 
     # Tablas basicas cuya secuencia es de la forma tabla_id_seq 
     BASICAS_SID_NUEVAS = [ 
@@ -30,8 +32,7 @@ module Cor1440Gen
       ['Cor1440Gen', 'rangoedadac']
     ]
 
-    BASICAS_SID = Sip::Ability::TABLAS_SIP_SEQID + BASICAS_SID_NUEVAS
-    @@basicas_seq_con_id = BASICAS_SID
+    @@basicas_seq_con_id += BASICAS_SID_NUEVAS
 
     ROLADMIN  = 1
     ROLINV    = 2
