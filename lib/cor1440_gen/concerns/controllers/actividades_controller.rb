@@ -10,61 +10,6 @@ module Cor1440Gen
           before_action :set_actividad, only: [:show, :edit, :update, :destroy]
           load_and_authorize_resource class: Cor1440Gen::Actividad
 
-          def param_escapa(p)
-            params[p] ? Sip::Pais.connection.quote_string(params[p]) : ''
-          end
-
-          def filtra
-            ac = Actividad.order(fecha: :desc)
-            @buscodigo = param_escapa('buscodigo')
-            if @buscodigo != '' then
-              ac = ac.where(id: @buscodigo.to_i)
-            end
-            @fechaini = param_escapa('fechaini')
-            if @fechaini != '' then
-              ac = ac.where("fecha >= '#{@fechaini}'")
-            end
-            @fechafin = param_escapa('fechafin')
-            if @fechafin != '' then
-              ac = ac.where("fecha <= '#{@fechafin}'")
-            end
-            @busoficina = param_escapa('busoficina')
-            if @busoficina != '' then
-              ac = ac.where(oficina_id: @busoficina)
-            end
-            @busnombre = param_escapa('busnombre')
-            if @busnombre != '' then
-              ac = ac.where("nombre ILIKE '%#{@busnombre}%'")
-            end
-            @busarea = param_escapa('busarea')
-            if @busarea != '' then
-              ac = ac.joins(:actividadareas_actividad).where(
-                "cor1440_gen_actividadareas_actividad.actividadarea_id = ?",
-                @busarea.to_i
-              )
-            end
-            @bustipo = param_escapa('bustipo')
-            if @bustipo != '' then
-              ac = ac.joins(:actividad_actividadtipo).where(
-                "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
-                @bustipo.to_i
-              )
-            end
-            @busobjetivo = param_escapa('busobjetivo')
-            if @busobjetivo != '' then
-              ac = ac.where("objetivo ILIKE '%#{@busobjetivo}%'")
-            end
-            @busproyecto = param_escapa('busproyecto')
-            if @busproyecto != '' then
-              ac = ac.joins(:actividad_proyecto).where(
-                "cor1440_gen_actividad_proyecto.proyecto_id= ?",
-                @busproyecto.to_i
-              )
-            end
-
-            return ac
-          end
-
           # Encabezado comun para HTML y PDF (primeras filas)
           def encabezado_comun
               return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
@@ -111,7 +56,7 @@ module Cor1440Gen
           # GET /actividades
           # GET /actividades.json
           def index
-            @actividades = filtra()
+            @actividades = Cor1440Gen::ActividadesController.filtra(params)
             @numactividades = @actividades.size
             @actividades = @actividades.paginate(
               :page => params[:pagina], per_page: 20
@@ -238,8 +183,67 @@ module Cor1440Gen
               ]
             )
           end
+        end
+
+        class_methods do
+          def param_escapa(par, p)
+            par[p] ? Sip::Pais.connection.quote_string(par[p]) : ''
+          end
+
+          def filtra(par)
+            ac = Actividad.order(fecha: :desc)
+            #byebug
+            @buscodigo = param_escapa(par, 'buscodigo')
+            if @buscodigo != '' then
+              ac = ac.where(id: @buscodigo.to_i)
+            end
+            @fechaini = param_escapa(par, 'fechaini')
+            if @fechaini != '' then
+              ac = ac.where("fecha >= '#{@fechaini}'")
+            end
+            @fechafin = param_escapa(par, 'fechafin')
+            if @fechafin != '' then
+              ac = ac.where("fecha <= '#{@fechafin}'")
+            end
+            @busoficina = param_escapa(par, 'busoficina')
+            if @busoficina != '' then
+              ac = ac.where(oficina_id: @busoficina)
+            end
+            @busnombre = param_escapa(par, 'busnombre')
+            if @busnombre != '' then
+              ac = ac.where("nombre ILIKE '%#{@busnombre}%'")
+            end
+            @busarea = param_escapa(par, 'busarea')
+            if @busarea != '' then
+              ac = ac.joins(:actividadareas_actividad).where(
+                "cor1440_gen_actividadareas_actividad.actividadarea_id = ?",
+                @busarea.to_i
+              )
+            end
+            @bustipo = param_escapa(par, 'bustipo')
+            if @bustipo != '' then
+              ac = ac.joins(:actividad_actividadtipo).where(
+                "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
+                @bustipo.to_i
+              )
+            end
+            @busobjetivo = param_escapa(par, 'busobjetivo')
+            if @busobjetivo != '' then
+              ac = ac.where("objetivo ILIKE '%#{@busobjetivo}%'")
+            end
+            @busproyecto = param_escapa(par, 'busproyecto')
+            if @busproyecto != '' then
+              ac = ac.joins(:actividad_proyecto).where(
+                "cor1440_gen_actividad_proyecto.proyecto_id= ?",
+                @busproyecto.to_i
+              )
+            end
+
+            return ac
+          end
 
         end
+
       end
     end
   end

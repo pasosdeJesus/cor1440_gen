@@ -24,4 +24,9 @@ es:
       "cor1440_gen/proyectofinanciero":
         Proyectofinanciero: Proyecto Financiero
         Proyectosfinancieros: Proyectos Financieros
+      "cor1440_gen/informe":
+        filtrofechaini:  Fecha inicial
+        filtrofechafin:  Fecha final
+        filtroproyecto: Proyecto
+        filtroactividadarea: Subárea 
 

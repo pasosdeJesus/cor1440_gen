@@ -1,0 +1,80 @@
+<%- model_class = Cor1440Gen::Informe -%>
+<div class="page-header" style="text-align: center">
+  <h1><%=t '.title', :default => @informe.titulo %></h1>
+  <h4>Fecha: <%= Date.today %></h4>
+</div>
+
+<h2>Listado de <%= @cuerpotabla.count if @cuerpotabla %> actividades</h2>
+
+  <% 
+    r=''
+    #byebug
+    if (@informe.filtrofechaini && !@informe.filtrofechafin) 
+      r += 'Después de ' + @informe.filtrofechaini.to_s + ".  "
+    end
+    if (!@informe.filtrofechaini && @informe.filtrofechafin) 
+      r += 'Antes de ' + @informe.filtrofechaini.to_s + ".  "
+    end
+    if (@informe.filtrofechaini && @informe.filtrofechafin) 
+      r += 'Entre ' + @informe.filtrofechaini.to_s + " y " + 
+        @informe.filtrofechaini.to_s + ".  "
+    end
+    if (@informe.proyecto)
+      r += 'Del proyecto ' + @informe.proyecto.nombre + ".  "
+    end
+    if (@informe.actividadarea)
+      r += 'De la subárea ' + @informe.actividadarea.nombre + ".  "
+    end
+  %>
+  <p><%= r %></p>
+  
+  <table class="table table-striped" border='1'>
+    <thead>
+      <tr>
+        <% @enctabla.each do |c| %>
+          <th><%= c %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody id="index_tabla">
+      <% @cuerpotabla.try(:each) do |fila| %>
+        <tr>
+          <% for i in 0..(fila.length-1) %>
+            <td>
+              <%= fila[i] %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2>Recomendaciones</h2>
+  <pre><%= @informe.recomendaciones %></pre>
+
+  <h2>Avances</h2>
+  <pre><%= @informe.avances %></pre>
+
+  <h2>Logros</h2>
+  <pre><%= @informe.logros %></pre>
+  <h2>Dificultades</h2>
+  <pre><%= @informe.dificultades %></pre>
+
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+    cor1440_gen.informes_path, :class => 'btn'  
+  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+    cor1440_gen.edit_informe_path(h @informe.id), :class => 'btn' 
+  %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+    cor1440_gen.informe_path(h @informe.id),
+    :method => 'delete',
+    :data => { :confirm => 
+      t('.confirm', :default => 
+        t("helpers.links.confirm", :default => 'Are you sure?')) 
+  },
+    :class => 'btn btn-danger' 
+  %>
+</div>

@@ -8,6 +8,9 @@ module Cor1440Gen
         include Sip::Basica
 
         included do
+          has_many :informe, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Informe',
+            foreign_key: 'filtroproyecto'
 
           has_many :proyecto_proyetofinanciero, dependent: :delete_all,
             class_name: 'Cor1440Gen::ProyectoProyectofinanciero',

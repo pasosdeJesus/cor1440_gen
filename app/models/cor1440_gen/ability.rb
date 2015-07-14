@@ -47,6 +47,8 @@ module Cor1440Gen
       ["Invitado", ROLINV], 
       ["Directivo", ROLDIR], 
       ["Coordinador Proyecto", ROLCOOR], 
+      [],
+      [],
       #["Analista de Actividades", ROLANALI], 
       ["Sistematizador de Actividades", ROLSISTACT]
     ]
@@ -73,14 +75,15 @@ module Cor1440Gen
           can [:update, :create, :destroy], Cor1440Gen::Actividad, 
             oficina: { id: usuario.oficina_id}
         when Ability::ROLCOOR
-          can :read, Cor1440Gen::Actividad
-          can :new, Cor1440Gen::Actividad
+          can :manage, Cor1440Gen::Actividad
+          can :manage, Cor1440Gen::Informe
           can [:update, :create, :destroy], Cor1440Gen::Actividad, 
             oficina: { id: usuario.oficina_id}
           can :new, Usuario
           can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
         when Ability::ROLDIR
           can [:read, :new, :update, :create, :destroy], Cor1440Gen::Actividad
+          can :manage, Cor1440Gen::Informe
           can :manage, Usuario
           can :manage, :tablasbasicas
           @@tablasbasicas.each do |t|
@@ -92,6 +95,7 @@ module Cor1440Gen
           can :read, Sip::Actividad
         when Ability::ROLADMIN
           can :manage, Cor1440Gen::Actividad
+          can :manage, Cor1440Gen::Informe
           can :manage, Usuario
           can :manage, :tablasbasicas
           @@tablasbasicas.each do |t|

@@ -1,0 +1,98 @@
+<%- model_class = Cor1440Gen::Informe -%>
+
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <% if @informes.size > 1 %>
+        <%= link_to t('.new', :default => 'Nueva'),
+          cor1440_gen.new_informe_path,
+          :class => 'btn btn-primary' 
+        %>
+      <% end %>
+    </td>
+    <td style="width=50%;text-align: left">
+      <%=t '.title', 
+        :default => model_class.model_name.human.pluralize.titleize 
+      %>: 
+      <span id="numinformes"><%= @informes.count %></span>
+    </td>
+  </tr>
+</table>
+
+<table class="table table-striped" border='1'>
+  <thead>
+    <tr>
+      <th rowspan="2">Id</th>
+      <th rowspan="2">Nombre</th>
+      <th rowspan="2">Filtro</th>
+      <th colspan="5">Columnas</th>
+      <th rowspan="2">Recomendaciones</th>
+      <th rowspan="2">Avances</th>
+      <th rowspan="2">Logros</th>
+      <th rowspan="2">Dificultades</th>
+      <th rowspan="2">Acciones</th>
+    </tr>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Objetivo</th>
+      <th>Proyecto</th>
+      <th>Población</th>
+    </tr>
+  </thead>
+  <tbody id="index_tabla">
+    <% @informes.try(:each) do |informe| %>
+      <tr>
+        <td><%= link_to informe.id, cor1440_gen.informe_path(informe.id) %></td>
+        <td><%= informe.titulo%></td>
+        <td>
+          <% if informe.filtrofechaini || informe.filtrofechafin %>
+            Rango de Fechas: 
+            <%= informe.filtrofechaini %> - <%= informe.filtrofechafin %>.
+          <% end %>
+          <% if informe.proyecto %>
+            Proyecto: <%= informe.proyecto.nombre %>
+          <% end %>
+          <% if informe.actividadarea %>
+            Subárea: <%= informe.actividadarea.nombre %>
+          <% end %>
+        </td>
+        <td><%= informe.columnanombre ? "Si" : "" %></td>
+        <td><%= informe.columnatipo ? "Si" : "" %></td>
+        <td><%= informe.columnaobjetivo ? "Si" : "" %></td>
+        <td><%= informe.columnaproyecto ? "Si" : "" %></td>
+        <td><%= informe.columnapoblacion ? "Si" : "" %></td>
+        <td><%= truncate(informe.recomendaciones, length: 50) %></td>
+        <td><%= truncate(informe.avances, length: 50) %></td>
+        <td><%= truncate(informe.logros, lenght: 50) %></td>
+        <td><%= truncate(informe.dificultades, length: 50) %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+            cor1440_gen.edit_informe_path(informe.id), :class => 'btn btn-xs' 
+          %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+            cor1440_gen.informe_path(informe.id),
+            :method => :delete,
+            :data => { :confirm => t(
+              '.confirm', 
+              :default => t(
+                "helpers.links.confirm", 
+                :default => 'Are you sure?')) 
+          },
+            :class => 'btn btn-xs btn-danger' 
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <!--%= render 'index_filtro' %-->
+  </tfoot>
+</table>
+
+<%= will_paginate @informes, { param_name: :pagina }  %>
+<%= link_to t('.new', :default => 'Nuevo'),
+  cor1440_gen.new_informe_path,
+  :class => 'btn btn-primary' 
+%>
+

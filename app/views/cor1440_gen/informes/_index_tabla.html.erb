@@ -1,0 +1,35 @@
+<% @cuerpotabla.try(:each) do |fila| %>
+  <% 
+    informe = Cor1440Gen::Informe.find(fila[0])
+    sep=""
+  %>
+  <tr>
+    <td><%= link_to fila[0], cor1440_gen.informe_path(fila[0]) %></td>
+    <% for i in 1..(fila.length-1) %>
+      <td>
+        <%= fila[i] %>
+      </td>
+    <% end %>
+    <td>
+      <% informe.sip_anexo.each do |i| %>
+        <%= link_to(image_tag("cor1440_gen/clip.svg", size: "16"), 
+                    sip.descarga_anexo_path(i.id) ) 
+        %>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+        cor1440_gen.edit_informe_path(fila[0]), :class => 'btn btn-xs' 
+      %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+        cor1440_gen.informe_path(fila[0]),
+        :method => :delete,
+        :data => { :confirm => t(
+          '.confirm', 
+          :default => t("helpers.links.confirm", 
+                        :default => 'Are you sure?')) },
+                        :class => 'btn btn-xs btn-danger' 
+      %>
+   </td>
+  </tr>
+<% end %>
