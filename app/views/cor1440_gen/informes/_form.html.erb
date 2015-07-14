@@ -4,56 +4,70 @@
 %>
   <%= f.error_notification %>
 
-  <%= f.input :titulo %>
-  <%= f.input :filtrofechaini,
-    :input_html => { "data-behaviour" => "datepicker"},
-    :as => :string
-  %>
-  <%= f.input :filtrofechafin,
-    :input_html => { "data-behaviour" => "datepicker"},
-    :as => :string
-  %>
-  <%= f.association :proyecto,
-    collection: Cor1440Gen::Proyecto.habilitados,
-    label_method: :nombre, 
-    value_method: :id
-  %>
-  <%= f.association :actividadarea,
-    collection: Cor1440Gen::Actividadarea.habilitados,
-    label_method: :nombre, 
-    value_method: :id
-  %>
-  Columnas: 
-  <table border="1">
-    <tr>
-      <td>
-  <%= f.input :columnanombre,
-    label: 'Nombre'
-  %>
-  <!-- boolean_style: :nested,-->
-  </td><td>
-  <%= f.input :columnatipo,
-    label: 'Tipo de Actividad'
-  %>
-  </td><td>
-  <%= f.input :columnaobjetivo,
-    label: 'Objetivo'
-  %>
-  </td><td>
-  <%= f.input :columnaproyecto,
-    label: 'Proyecto'
-  %>
-  </td><td>
-  <%= f.input :columnapoblacion,
-    label: 'Población'
-  %>
-</td>
-</table>
+  <div class="panel panel-default">
+    <div class="panel-heading">Filtro para el Listado de Actividades</div><div class="panel-body">
+      <%= f.input :titulo %>
+      <%= f.input :filtrofechaini,
+        :input_html => { "data-behaviour" => "datepicker"},
+        :as => :string
+      %>
+      <%= f.input :filtrofechafin,
+        :input_html => { "data-behaviour" => "datepicker"},
+        :as => :string
+      %>
+      <%= f.association :proyecto,
+        collection: Cor1440Gen::Proyecto.habilitados,
+        label_method: :nombre, 
+        value_method: :id
+      %>
+      <%= f.association :actividadarea,
+        collection: Cor1440Gen::Actividadarea.habilitados,
+        label_method: :nombre, 
+        value_method: :id
+      %>
+    </div> <!-- panel-body -->
+  </div> <!-- panel panel-default -->
 
-  <%= f.input :recomendaciones, as: :text %>
-  <%= f.input :avances, as: :text %>
-  <%= f.input :logros, as: :text %>
-  <%= f.input :dificultades, as: :text %>
+  <div class="panel panel-default">
+    <div class="panel-heading">Columnas del Listado de Actividades</div><div class="panel-body">
+      <table border="1">
+        <tr>
+          <td>
+            <%= f.input :columnanombre, label: 'Nombre' %>
+          </td>
+          <td>
+            <%= f.input :columnatipo,
+              label: 'Tipo de Actividad'
+            %>
+          </td>
+          <td>
+            <%= f.input :columnaobjetivo,
+              label: 'Objetivo'
+            %>
+          </td>
+          <td>
+            <%= f.input :columnaproyecto,
+              label: 'Proyecto'
+            %>
+          </td>
+          <td>
+            <%= f.input :columnapoblacion,
+              label: 'Población'
+            %>
+          </td>
+        </tr>
+      </table>
+    </div> <!-- panel-body -->
+  </div> <!-- panel panel-default -->
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Textos</div><div class="panel-body">
+      <%= f.input :recomendaciones, as: :text %>
+      <%= f.input :avances, as: :text %>
+      <%= f.input :logros, as: :text %>
+      <%= f.input :dificultades, as: :text %>
+    </div> <!-- panel-body -->
+  </div> <!-- panel panel-default -->
 
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
