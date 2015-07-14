@@ -81,19 +81,10 @@ module Cor1440Gen
             oficina: { id: usuario.oficina_id}
           can :new, Usuario
           can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
-        when Ability::ROLDIR
-          can [:read, :new, :update, :create, :destroy], Cor1440Gen::Actividad
-          can :manage, Cor1440Gen::Informe
-          can :manage, Usuario
-          can :manage, :tablasbasicas
-          @@tablasbasicas.each do |t|
-            c = Ability.tb_clase(t)
-            can :manage, c
-          end
         when Ability::ROLINV
           cannot :buscar, Sip::Actividad
           can :read, Sip::Actividad
-        when Ability::ROLADMIN
+        when Ability::ROLADMIN, Ability::ROLDIR
           can :manage, Cor1440Gen::Actividad
           can :manage, Cor1440Gen::Informe
           can :manage, Usuario
