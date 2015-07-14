@@ -12,7 +12,7 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyecto'
 
-          has_many :proyecto_proyetofinanciero, dependent: :delete_all,
+          has_many :proyecto_proyectofinanciero, dependent: :delete_all,
             class_name: 'Cor1440Gen::ProyectoProyectofinanciero',
             foreign_key: 'proyecto_id'
           has_many :proyectofinanciero, through: :proyecto_proyectofinanciero,
