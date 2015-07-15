@@ -20,6 +20,7 @@ module Cor1440Gen
               @actividades.human_attribute_name(:tipos),
               @actividades.human_attribute_name(:objetivo),
               @actividades.human_attribute_name(:proyectos),
+              @actividades.human_attribute_name(:proyectosfinancieros),
               @actividades.human_attribute_name(:poblacion),
             ]
           end
@@ -40,6 +41,8 @@ module Cor1440Gen
               actividad.objetivo , 
               actividad.proyecto.inject("") { |memo, i| 
               (memo == "" ? "" : memo + "; ") + i.nombre },
+              actividad.proyectofinanciero.inject("") { |memo, i| 
+                (memo == "" ? "" : memo + "; ") + i.nombre },
               pob.reduce(:+)
             ]
           end
@@ -169,6 +172,7 @@ module Cor1440Gen
               :actividadarea_ids => [],
               :actividadtipo_ids => [],
               :proyecto_ids => [],
+              :proyectofinanciero_ids => [],
               :usuario_ids => [],
               :actividad_rangoedadac_attributes => [
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
@@ -238,7 +242,13 @@ module Cor1440Gen
                 @busproyecto.to_i
               )
             end
-
+            @busproyectofinanciero = param_escapa(par, 'busproyectofinanciero')
+            if @busproyectofinanciero != '' then
+              ac = ac.joins(:actividad_proyectofinanciero).where(
+                "cor1440_gen_actividad_proyectofinanciero.proyectofinanciero_id= ?",
+                @busproyectofinanciero.to_i
+              )
+            end
             return ac
           end
 

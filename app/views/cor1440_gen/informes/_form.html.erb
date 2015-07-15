@@ -4,9 +4,9 @@
 %>
   <%= f.error_notification %>
 
+  <%= f.input :titulo %>
   <div class="panel panel-default">
     <div class="panel-heading">Filtro para el Listado de Actividades</div><div class="panel-body">
-      <%= f.input :titulo %>
       <%= f.input :filtrofechaini,
         :input_html => { "data-behaviour" => "datepicker"},
         :as => :string

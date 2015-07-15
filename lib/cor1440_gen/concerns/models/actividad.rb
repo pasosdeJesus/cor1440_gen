@@ -35,6 +35,12 @@ module Cor1440Gen
           has_many :proyecto, through: :actividad_proyecto,
             class_name: 'Cor1440Gen::Proyecto'
 
+          has_many :actividad_proyectofinanciero, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadProyectofinanciero', 
+            foreign_key: 'actividad_id'
+          has_many :proyectofinanciero, through: :actividad_proyectofinanciero,
+            class_name: 'Cor1440Gen::Proyectofinanciero'
+
           has_many :actividad_rangoedadac, foreign_key: "actividad_id", 
             dependent: :delete_all, 
             class_name: 'Cor1440Gen::ActividadRangoedadac'

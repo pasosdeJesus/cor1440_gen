@@ -59,6 +59,14 @@
           "data-enviarautomatico" => "", style: "width: 10em"
     } %>
   </th>
+  <th>
+    <%= select_tag "busproyectofinanciero", 
+      options_from_collection_for_select(
+        Cor1440Gen::Proyectofinanciero.habilitados, 
+        "id", "nombre"), {include_blank: true,
+          "data-enviarautomatico" => "", style: "width: 10em"
+    } %>
+  </th>
   <th></th>
   <th></th>
   <th><%= submit_tag("Filtrar", class: 'envia_filtrar') %>

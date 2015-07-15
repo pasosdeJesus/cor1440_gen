@@ -7,6 +7,10 @@ es:
     actividadarea: Subárea de Actividad
     actividadareas: Subáreas de Actividad
     actividadtipo: Tipo de Actividad
+    proyectos: Áreas
+    proyecto: Área
+    proyectosfinancieros: Convenios financieros
+    proyectofinanciero: Convenio financiado
   activerecord:
     attributes:
       "cor1440_gen/actividadarea":
@@ -21,12 +25,15 @@ es:
       "cor1440_gen/financiador":
         Financiador: Financiador
         Financiadores: Financiadores
+      "cor1440_gen/proyecto":
+        Proyecto: Área
+        Proyectos: Áreas
       "cor1440_gen/proyectofinanciero":
-        Proyectofinanciero: Proyecto Financiero
-        Proyectosfinancieros: Proyectos Financieros
+        Proyectofinanciero: Convenio Financiado
+        Proyectosfinancieros: Convenios Financiados
       "cor1440_gen/informe":
         filtrofechaini:  Fecha inicial
         filtrofechafin:  Fecha final
-        filtroproyecto: Proyecto
+        filtroproyecto: Área
         filtroactividadarea: Subárea 
 

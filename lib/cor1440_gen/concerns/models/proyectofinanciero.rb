@@ -20,6 +20,12 @@ module Cor1440Gen
           has_many :proyecto, through: :proyecto_proyectofinanciero,
             class_name: 'Cor1440Gen::Proyecto'
 
+          has_many :actividad_proyectofinanciero, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadProyectofinanciero',
+            foreign_key: 'proyectofinanciero_id'
+          has_many :actividad, through: :actividad_proyectofinanciero,
+            class_name: 'Cor1440Gen::Actividad'
+
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }
