@@ -191,7 +191,14 @@ module Cor1440Gen
 
         class_methods do
           def param_escapa(par, p)
-            par[p] ? Sip::Pais.connection.quote_string(par[p]) : ''
+            par[p] ? Sip::Pais.connection.quote_string(par[p].to_s) : 
+              par[p.to_sym] ? Sip::Pais.connection.quote_string(par[p.to_sym].to_s) :
+              par[p.to_s] ? Sip::Pais.connection.quote_string(par[p.to_s].to_s) :  ''
+          end
+
+          # Funcion por sobrecargar para filtrar por otros parámetros personalizados
+          def filtramas(par, ac)
+            return ac
           end
 
           def filtra(par)
@@ -215,7 +222,7 @@ module Cor1440Gen
             end
             @busnombre = param_escapa(par, 'busnombre')
             if @busnombre != '' then
-              ac = ac.where("nombre ILIKE '%#{@busnombre}%'")
+              ac = ac.where("unaccent(nombre) ILIKE unaccent(?)", "%#{@busnombre}%")
             end
             @busarea = param_escapa(par, 'busarea')
             if @busarea != '' then
@@ -233,7 +240,7 @@ module Cor1440Gen
             end
             @busobjetivo = param_escapa(par, 'busobjetivo')
             if @busobjetivo != '' then
-              ac = ac.where("objetivo ILIKE '%#{@busobjetivo}%'")
+              ac = ac.where("unaccent(objetivo) ILIKE unaccent(?)", "%#{@busobjetivo}%")
             end
             @busproyecto = param_escapa(par, 'busproyecto')
             if @busproyecto != '' then
@@ -249,6 +256,7 @@ module Cor1440Gen
                 @busproyectofinanciero.to_i
               )
             end
+            ac = filtramas(par, ac)
             return ac
           end
 
