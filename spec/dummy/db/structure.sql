@@ -472,7 +472,8 @@ CREATE TABLE cor1440_gen_informe (
     logros character varying(5000),
     dificultades character varying(5000),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    filtroproyectofinanciero integer
 );
 
 
@@ -1681,6 +1682,14 @@ ALTER TABLE ONLY cor1440_gen_actividad_proyecto
 
 
 --
+-- Name: fk_rails_40cb623d50; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_informe
+    ADD CONSTRAINT fk_rails_40cb623d50 FOREIGN KEY (filtroproyectofinanciero) REFERENCES cor1440_gen_proyectofinanciero(id);
+
+
+--
 -- Name: fk_rails_4426fc905e; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1884,7 +1893,7 @@ ALTER TABLE ONLY usuario
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, pg_catalog;
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20131128151014');
 
@@ -2085,4 +2094,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150709203137');
 INSERT INTO schema_migrations (version) VALUES ('20150710012947');
 
 INSERT INTO schema_migrations (version) VALUES ('20150710114451');
+
+INSERT INTO schema_migrations (version) VALUES ('20150716085420');
 
