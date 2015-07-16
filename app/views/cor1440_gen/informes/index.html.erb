@@ -34,9 +34,9 @@
     </tr>
     <tr>
       <th>Nombre</th>
-      <th>Tipo</th>
+      <th><%= Cor1440Gen::Actividad.human_attribute_name(:actividadtipo) %></th>
       <th>Objetivo</th>
-      <th>Proyecto</th>
+      <th><%= Cor1440Gen::Actividad.human_attribute_name(:proyecto) %></th>
       <th>Población</th>
     </tr>
   </thead>
@@ -50,11 +50,17 @@
             Rango de Fechas: 
             <%= informe.filtrofechaini %> - <%= informe.filtrofechafin %>.
           <% end %>
+          <% if informe.proyectofinanciero %>
+            <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>: 
+            <%= informe.proyectofinanciero.nombre %>
+          <% end %>
           <% if informe.proyecto %>
-            Proyecto: <%= informe.proyecto.nombre %>
+            <%= Cor1440Gen::Actividad.human_attribute_name(:proyecto) %>: 
+            <%= informe.proyecto.nombre %>
           <% end %>
           <% if informe.actividadarea %>
-            Subárea: <%= informe.actividadarea.nombre %>
+            <%= Cor1440Gen::Actividad.human_attribute_name(:actividadarea) %>: 
+            <%= informe.actividadarea.nombre %>
           <% end %>
         </td>
         <td><%= informe.columnanombre ? "Si" : "" %></td>
