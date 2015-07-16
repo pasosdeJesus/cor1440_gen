@@ -12,6 +12,9 @@ module Cor1440Gen
           belongs_to :actividadarea, 
             class_name: 'Cor1440Gen::Actividadarea', 
             foreign_key: 'filtroactividadarea', validate: true
+          belongs_to :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero', 
+            foreign_key: 'filtroproyectofinanciero', validate: true
 
           validates :titulo, presence: true
           validates :filtrofechaini, presence: true

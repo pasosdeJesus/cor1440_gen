@@ -23,8 +23,14 @@ module Cor1440Gen
 
           # GET /informes/1
           def show
-            #@actividades = Cor1440Gen::ActividadesController.filtra(params)
-            @actividades = Cor1440Gen::Actividad.all
+            #@actividades = Cor1440Gen::Actividad.all
+            @actividades = Cor1440Gen::ActividadesController.filtra({
+              fechaini: @informe.filtrofechaini,
+              fechafin: @informe.filtrofechafin,
+              busproyecto: @informe.filtroproyecto,
+              busarea: @informe.filtroactividadarea,
+              busproyectofinanciero: @informe.filtroproyectofinanciero
+            })
             @numactividades = @actividades.size
             @enctabla = []
             if @informe.columnanombre
@@ -119,6 +125,7 @@ module Cor1440Gen
               :titulo, :filtrofechaini, :filtrofechafin, 
               :filtroproyecto, 
               :filtroactividadarea, #:filtropoa, 
+              :filtroproyectofinanciero, 
               :columnanombre, :columnatipo, 
               :columnaobjetivo, :columnaproyecto, :columnapoblacion, 
               :recomendaciones, :avances, :logros, :dificultades

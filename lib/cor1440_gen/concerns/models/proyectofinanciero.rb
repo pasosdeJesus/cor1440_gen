@@ -26,6 +26,11 @@ module Cor1440Gen
           has_many :actividad, through: :actividad_proyectofinanciero,
             class_name: 'Cor1440Gen::Actividad'
 
+          has_many :informe, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Informe',
+            foreign_key: 'filtroproyectofinanciero'
+
+
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }
