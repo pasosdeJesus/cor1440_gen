@@ -3,37 +3,6 @@
 module Cor1440Gen
   class Ability < Sip::Ability
 
-    # Tablas básicas
-    BASICAS_NUEVAS = [
-      ['Cor1440Gen', 'actividadarea'], 
-      ['Cor1440Gen', 'actividadtipo'], 
-      ['Cor1440Gen', 'financiador'], 
-      ['Cor1440Gen', 'proyecto'], 
-      ['Cor1440Gen', 'proyectofinanciero'], 
-      ['Cor1440Gen', 'rangoedadac']
-    ]  
-
-    @@tablasbasicas -= [
-      ['Sip', 'fuenteprensa'], 
-      ['Sip', 'tdocumento'], 
-      ['Sip', 'trelacion'], 
-      ['Sip', 'tsitio']
-    ]
-
-    @@tablasbasicas += BASICAS_NUEVAS
-
-    # Tablas basicas cuya secuencia es de la forma tabla_id_seq 
-    BASICAS_SID_NUEVAS = [ 
-      ['Cor1440Gen', 'actividadarea'],
-      ['Cor1440Gen', 'actividadtipo'],
-      ['Cor1440Gen', 'financiador'], 
-      ['Cor1440Gen', 'proyecto'], 
-      ['Cor1440Gen', 'proyectofinanciero'], 
-      ['Cor1440Gen', 'rangoedadac']
-    ]
-
-    @@basicas_seq_con_id += BASICAS_SID_NUEVAS
-
     ROLADMIN  = 1
     ROLINV    = 2
     ROLDIR    = 3
@@ -47,12 +16,27 @@ module Cor1440Gen
       ["Invitado", ROLINV], 
       ["Directivo", ROLDIR], 
       ["Coordinador Proyecto", ROLCOOR], 
-      [],
-      [],
-      #["Analista de Actividades", ROLANALI], 
+      ["", 0 ],
+      ["", 0],
       ["Sistematizador de Actividades", ROLSISTACT]
     ]
 
+    # Tablas básicas
+    BASICAS_PROPIAS= [
+      ['Cor1440Gen', 'actividadarea'], 
+      ['Cor1440Gen', 'actividadtipo'], 
+      ['Cor1440Gen', 'financiador'], 
+      ['Cor1440Gen', 'proyecto'], 
+      ['Cor1440Gen', 'proyectofinanciero'], 
+      ['Cor1440Gen', 'rangoedadac']
+    ]  
+
+    @@tablasbasicas = Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
+      ['Sip', 'fuenteprensa'], 
+      ['Sip', 'tdocumento'], 
+      ['Sip', 'trelacion'], 
+      ['Sip', 'tsitio']
+    ]
 
     # Ver documentacion de este metodo en app/models/ability de sip
     def initialize(usuario)
@@ -70,6 +54,7 @@ module Cor1440Gen
       if !usuario.nil? && !usuario.rol.nil? then
         case usuario.rol 
         when Ability::ROLSISTACT
+          can :read, Cor1440Gen::Informe
           can :read, Cor1440Gen::Actividad
           can :new, Cor1440Gen::Actividad
           can [:update, :create, :destroy], Cor1440Gen::Actividad, 
@@ -96,5 +81,7 @@ module Cor1440Gen
         end
       end
     end
-  end
-end
+
+
+  end # class
+end   # module
