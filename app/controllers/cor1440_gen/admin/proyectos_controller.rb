@@ -28,7 +28,7 @@ module Cor1440Gen
 
       # Genero del nombre (F - Femenino, M - Masculino)
       def genclase
-        return 'M';
+        return 'F';
       end
 
       def proyecto_params
