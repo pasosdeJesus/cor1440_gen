@@ -30,6 +30,13 @@ div.field, div.actions {
   display: table;
 }
 
+.error {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+
 #error_explanation {
   width: 450px;
   border: 2px solid red;
