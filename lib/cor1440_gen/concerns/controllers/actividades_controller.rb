@@ -16,11 +16,11 @@ module Cor1440Gen
               @actividades.human_attribute_name(:fecha),
               @actividades.human_attribute_name(:oficina),
               @actividades.human_attribute_name(:nombre),
-              @actividades.human_attribute_name(:areas),
-              @actividades.human_attribute_name(:tipos),
-              @actividades.human_attribute_name(:objetivo),
+              @actividades.human_attribute_name(:actividadtipos),
               @actividades.human_attribute_name(:proyectos),
+              @actividades.human_attribute_name(:actividadareas),
               @actividades.human_attribute_name(:proyectosfinancieros),
+              @actividades.human_attribute_name(:objetivo),
               @actividades.human_attribute_name(:poblacion),
             ]
           end
@@ -34,15 +34,15 @@ module Cor1440Gen
               actividad.fecha , 
               actividad.oficina ? actividad.oficina.nombre : "",
               actividad.nombre ? actividad.nombre : "",
-              actividad.actividadareas.inject("") { |memo, i| 
-              (memo == "" ? "" : memo + "; ") + i.nombre },
               actividad.actividadtipo.inject("") { |memo, i| 
-              (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.objetivo , 
+                (memo == "" ? "" : memo + "; ") + i.nombre },
               actividad.proyecto.inject("") { |memo, i| 
-              (memo == "" ? "" : memo + "; ") + i.nombre },
+                (memo == "" ? "" : memo + "; ") + i.nombre },
+              actividad.actividadareas.inject("") { |memo, i| 
+                (memo == "" ? "" : memo + "; ") + i.nombre },
               actividad.proyectofinanciero.inject("") { |memo, i| 
                 (memo == "" ? "" : memo + "; ") + i.nombre },
+              actividad.objetivo, 
               pob.reduce(:+)
             ]
           end
