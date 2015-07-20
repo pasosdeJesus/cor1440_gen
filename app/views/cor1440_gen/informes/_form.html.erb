@@ -42,22 +42,22 @@
           </td>
           <td>
             <%= f.input :columnatipo,
-              label: 'Tipo de Actividad'
+              label: Cor1440Gen::Actividad.human_attribute_name(:actividadtipo)
             %>
           </td>
           <td>
             <%= f.input :columnaobjetivo,
-              label: 'Objetivo'
+              label: Cor1440Gen::Actividad.human_attribute_name(:objetivo)
             %>
           </td>
           <td>
             <%= f.input :columnaproyecto,
-              label: 'Proyecto'
+              label: Cor1440Gen::Actividad.human_attribute_name(:proyecto)
             %>
           </td>
           <td>
             <%= f.input :columnapoblacion,
-              label: 'Población'
+              label: Cor1440Gen::Actividad.human_attribute_name(:poblacion)
             %>
           </td>
         </tr>
