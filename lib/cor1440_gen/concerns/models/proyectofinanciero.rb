@@ -9,8 +9,6 @@ module Cor1440Gen
 
         included do
 
-          belongs_to :financiador, class_name: 'Cor1440Gen::Financiador',
-            foreign_key: "financiador_id", validate: true
           belongs_to :responsable, class_name: 'Usuario',
             foreign_key: "responsable_id", validate: true
 
@@ -25,6 +23,12 @@ module Cor1440Gen
             foreign_key: 'proyectofinanciero_id'
           has_many :actividad, through: :actividad_proyectofinanciero,
             class_name: 'Cor1440Gen::Actividad'
+
+          has_many :financiador_proyectofinanciero, dependent: :delete_all,
+            class_name: 'Cor1440Gen::FinanciadorProyectofinanciero',
+            foreign_key: 'proyectofinanciero_id'
+          has_many :financiador, through: :financiador_proyectofinanciero,
+            class_name: 'Cor1440Gen::Financiador'
 
           has_many :informe, dependent: :delete_all,
             class_name: 'Cor1440Gen::Informe',
@@ -41,6 +45,8 @@ module Cor1440Gen
           def human_attribute_name(atr)
             if (atr.to_s == "{:proyecto_ids=>[]}")
               "Proyectos"
+            elsif (atr.to_s == "{:financiador_ids=>[]}")
+              "Financiadores"
             else
               super(atr)
             end

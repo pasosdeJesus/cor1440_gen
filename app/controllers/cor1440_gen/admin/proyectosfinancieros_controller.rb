@@ -16,9 +16,9 @@ module Cor1440Gen
 
       def atributos_index
         [ "id", 
-          "nombre", 
-          "financiador_id",
-          "fechainicio",
+          "nombre" ] +
+        [ :financiador_ids =>  [] ] +
+        [ "fechainicio",
           "fechacierre",
           "responsable_id"
         ] +

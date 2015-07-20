@@ -29,14 +29,6 @@
     %>
   </th>
   <th>
-    <%= select_tag "busarea", 
-      options_from_collection_for_select(
-        Cor1440Gen::Actividadarea.habilitados, 
-        "id", "nombre"), {include_blank: true,
-          "data-enviarautomatico" => "", style: "width: 10em"
-    } %>
-  </th>
-  <th>
     <%= select_tag "bustipo", 
       options_from_collection_for_select(
         Cor1440Gen::Actividadtipo.habilitados, 
@@ -45,16 +37,17 @@
     } %>
   </th>
   <th>
-    <%= text_field_tag 'busobjetivo', @busobjetivo, 
-      maxlength: 10, size: 12,
-      "data-enviarautomatico" => "", 
-      "placeholder" => model_class.human_attribute_name(:objetivo) 
-    %>
-  </th>
-  <th>
     <%= select_tag "busproyecto", 
       options_from_collection_for_select(
         Cor1440Gen::Proyecto.habilitados, 
+        "id", "nombre"), {include_blank: true,
+          "data-enviarautomatico" => "", style: "width: 10em"
+    } %>
+  </th>
+  <th>
+    <%= select_tag "busarea", 
+      options_from_collection_for_select(
+        Cor1440Gen::Actividadarea.habilitados, 
         "id", "nombre"), {include_blank: true,
           "data-enviarautomatico" => "", style: "width: 10em"
     } %>
@@ -66,6 +59,13 @@
         "id", "nombre"), {include_blank: true,
           "data-enviarautomatico" => "", style: "width: 10em"
     } %>
+  </th>
+  <th>
+    <%= text_field_tag 'busobjetivo', @busobjetivo, 
+      maxlength: 10, size: 12,
+      "data-enviarautomatico" => "", 
+      "placeholder" => model_class.human_attribute_name(:objetivo) 
+    %>
   </th>
   <th></th>
   <th></th>
