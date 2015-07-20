@@ -6,6 +6,24 @@
 #//= require jquery-ui/autocomplete
 #//= require cocoon
 
+cor1440_gen_rangoedadac = ($this) ->
+  cid = $this.attr('id')
+  col = cid.substr(-2)
+  ini = cid.substr(0, cid.length - 5)
+  sumc = 0
+  i = 0
+  loop
+    bid = "#" + ini + "_" + i + "_" + col
+    break if $(bid).size() ==  0
+    sumc += parseInt($(bid).val())
+    i++
+  $("#tactividad" + col).text(sumc)
+  fl = parseInt($("#tactividadfl").text())
+  fr = parseInt($("#tactividadfr").text())
+  ml = parseInt($("#tactividadml").text())
+  mr = parseInt($("#tactividadmr").text())
+  $("#tactividadtot").text(fl + fr + ml + mr)
+  return
 
 @cor1440_gen_prepara_eventos_comunes = (root) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
@@ -21,5 +39,8 @@
     if !a.endsWith(".pdf")
     	$(f).attr("action", a + ".pdf")
     	$(f).attr("target", "_blank")
+  )
+  $(document).on('change', 'input[id^=actividad_actividad_rangoedadac_attributes]', (e) -> 
+    cor1440_gen_rangoedadac($(this))
   )
 

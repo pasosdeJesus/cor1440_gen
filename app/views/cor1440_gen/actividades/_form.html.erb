@@ -75,17 +75,27 @@
         <th></th></tr>
     </thead>
     <tbody id="actividad_rangoedadac">
+      <tr>
+        <td>Total:</td>
+        <td id="tactividadfl">
+          <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
+        </td>
+        <td id="tactividadfr">
+          <%= fr = f.object.actividad_rangoedadac.sum(:fr) %>
+        </td>
+        <td id="tactividadml">
+          <%= ml = f.object.actividad_rangoedadac.sum(:ml) %>
+        </td>
+        <td id="tactividadmr">
+          <%= mr = f.object.actividad_rangoedadac.sum(:mr) %>
+        </td>
+        <td id="tactividadtot">
+          <%= fr + fl + mr + ml %>
+        </td>
+      </tr>
       <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
         <%= render 'actividad_rangoedadac_fields', :f => s %>
       <% end %>
-      <tr>
-        <td></td>
-        <td id="tactividadg1">0</td>
-        <td id="tactividadg2">0</td>
-        <td id="tactividadg3">0</td>
-        <td id="tactividadg4">0</td>
-        <td id="tactividadg5">0</td>
-    </tr>
     </tbody>
   </table>
   <div class="links">
