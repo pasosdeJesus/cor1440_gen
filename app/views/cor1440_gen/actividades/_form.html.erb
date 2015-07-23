@@ -25,9 +25,9 @@
   <%= f.association :proyectofinanciero,
     collection: Cor1440Gen::Proyectofinanciero.habilitados,
     label_method: :nombre, 
-    value_method: :id,
-    label: 'Convenio Financiado'
+    value_method: :id
   %>
+  <%= render partial: 'form_complemento1', locals: { f: f } %>
   <%= f.association :proyecto,
     collection: Cor1440Gen::Proyecto.habilitados,
     label_method: :nombre, 
