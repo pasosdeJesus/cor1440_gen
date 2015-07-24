@@ -17,57 +17,26 @@ SET search_path = public, pg_catalog;
 -- Data for Name: cor1440_gen_actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'PSICOSOCIAL', '', '2013-12-04', NULL, '2014-01-09 02:23:28.732636', '2014-03-07 18:43:00.812476');
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (101, 'COMUNICACIONES', '', '2014-01-29', NULL, '2014-01-29 16:15:43.824216', '2014-03-07 18:43:45.251193');
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (103, 'INTEGRACIÓN LOCAL', '', '2014-02-08', NULL, '2014-02-08 13:30:24.014081', '2014-03-07 18:43:56.884996');
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (105, 'ACOMPAÑAMIENTO PASTORAL', '', '2014-02-08', NULL, '2014-05-15 21:54:52.38907', '2014-05-15 21:55:15.864721');
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'JURÍDICA - LEGAL', '', '2013-12-04', NULL, '2014-01-09 02:23:28.745075', '2014-03-07 18:43:14.269965');
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'ORGANIZACIÓN COMUNITARIA', '', '2013-12-04', NULL, '2014-01-09 02:23:28.747505', '2014-03-07 18:44:06.691283');
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'EMPRENDIMIENTO', '', '2013-12-04', NULL, '2014-01-09 02:23:28.749798', '2014-03-07 18:43:27.89929');
-INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'INCIDENCIA', '', '2013-12-04', NULL, '2014-01-09 02:23:28.75207', '2014-03-07 18:43:35.753539');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (101, 'ACOMPAÑAMIENTO PASTORAL', '', '2015-07-15', NULL, '2015-07-15 19:25:38.896977', '2015-07-15 19:25:38.896977');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (102, 'EMPRENDIMIENTO SOCIOECONOMICO', '', '2015-07-15', NULL, '2015-07-15 19:25:58.166017', '2015-07-15 19:25:58.166017');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (103, 'ACOMPAÑAMIENTO JURIDICO - LEGAL', '', '2015-07-15', NULL, '2015-07-15 19:26:21.9653', '2015-07-15 19:26:21.9653');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (104, 'FORTALECIMIENTO A LA ORGANIZACION COMUNITARIA', '', '2015-07-15', NULL, '2015-07-15 19:26:43.144367', '2015-07-15 19:26:43.144367');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (105, 'ACOMPAÑAMIENTO PSICOSOCIAL', '', '2015-07-15', NULL, '2015-07-15 19:26:55.224129', '2015-07-15 19:26:55.224129');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (106, 'RED SJR COLEGIOS', '', '2015-07-15', NULL, '2015-07-15 19:27:07.224159', '2015-07-15 19:27:07.224159');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (107, 'FORMACIÓN', '', '2015-07-15', NULL, '2015-07-15 19:28:19.051778', '2015-07-15 19:28:19.051778');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (108, 'PREVENCIÓN DEL DESPLAZAMIENTO', '', '2015-07-21', NULL, '2015-07-21 15:34:54.513132', '2015-07-21 15:34:54.513132');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (109, 'PREVENCIÓN DEL RECLUTAMIENTO FORZADO DE NNAJ', '', '2015-07-21', NULL, '2015-07-21 15:35:10.73305', '2015-07-21 15:35:10.73305');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (110, 'INCIDENCIA LOCAL/REGIONAL', '', '2015-07-21', NULL, '2015-07-21 15:35:45.0507', '2015-07-21 15:35:45.0507');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (111, 'INCIDENCIA NACIONAL', '', '2015-07-21', NULL, '2015-07-21 15:35:58.471572', '2015-07-21 15:35:58.471572');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'GESTIÓN DE LA INFORMACION', '', '2015-04-18', NULL, '2015-04-18 10:58:22.231407', '2015-07-01 16:38:04.737559');
+INSERT INTO cor1440_gen_actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'VOLUNTARIADO', '', '2015-03-10', NULL, '2015-03-10 11:12:30.464003', '2015-03-10 11:12:30.464003');
 
 
 --
 -- Name: cor1440_gen_actividadarea_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('cor1440_gen_actividadarea_id_seq', 105, true);
-
-
---
--- PostgreSQL database dump complete
---
-
---
--- PostgreSQL database dump
---
-
-SET statement_timeout = 0;
-
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
-SET search_path = public, pg_catalog;
-
---
--- Data for Name: cor1440_gen_rangoedadac; Type: TABLE DATA; Schema: public; Owner: -
---
-
-INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'De 0 a 11', 0, 10, '2014-02-11', NULL, '2014-03-07 19:19:02.690768', NULL);
-INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'De 12 a 17', 0, 10, '2014-02-11', NULL, '2014-03-07 19:19:02.690768', NULL);
-INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'De 18 a 25', 16, 25, '2014-02-11', NULL, '2014-03-07 19:19:09.515802', NULL);
-INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'De 26 a 45', 26, 45, '2014-02-11', NULL, '2014-03-07 19:19:09.527935', NULL);
-INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'De 46 a 60', 46, 60, '2014-02-11', NULL, '2014-03-07 19:19:09.539237', NULL);
-INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'De 61 en adelante', 61, NULL, '2014-02-11', NULL, '2014-03-07 19:19:09.549437', NULL);
-
-
---
--- Name: cor1440_gen_rangoedadac_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('cor1440_gen_rangoedadac_id_seq', 100, true);
+SELECT pg_catalog.setval('cor1440_gen_actividadarea_id_seq', 111, true);
 
 
 --
@@ -113,6 +82,141 @@ INSERT INTO cor1440_gen_actividadtipo (id, nombre, observaciones, fechacreacion,
 --
 
 SELECT pg_catalog.setval('cor1440_gen_actividadtipo_id_seq', 100, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: cor1440_gen_financiador; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+
+--
+-- Name: cor1440_gen_financiador_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cor1440_gen_financiador_id_seq', 100, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: cor1440_gen_proyecto; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (101, 'ACCIÓN HUMANITARIA', '', NULL, NULL, '', '2015-07-01', NULL, '2015-07-01 16:28:00.948626', '2015-07-01 16:28:00.948626');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (104, 'INCIDENCIA POLÍTICA', '', NULL, NULL, '', '2015-07-01', NULL, '2015-07-01 16:30:20.222396', '2015-07-01 16:30:20.222396');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (105, 'INTEGRACIÓN LOCAL', '', NULL, NULL, '', '2015-07-01', NULL, '2015-07-01 16:30:35.161691', '2015-07-01 16:30:35.161691');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (108, 'PREVENCIÓN', '', NULL, NULL, '', '2015-07-01', NULL, '2015-07-01 16:31:29.726534', '2015-07-01 16:31:29.726534');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (109, 'PROYECTOS', '', NULL, NULL, '', '2015-07-01', NULL, '2015-07-01 16:32:16.593125', '2015-07-01 16:32:16.593125');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (112, 'FORTALECIMIENTO INSTITUCIONAL ', '', NULL, NULL, '', '2015-07-15', NULL, '2015-07-15 19:24:10.851455', '2015-07-15 19:24:10.851455');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (113, 'COMUNICACIONES', '', NULL, NULL, '', '2015-07-15', NULL, '2015-07-15 19:24:45.769515', '2015-07-15 19:24:45.769515');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (114, 'DIRECCIÓN NACIONAL', '', NULL, NULL, '', '2015-07-15', NULL, '2015-07-15 19:32:11.667547', '2015-07-15 19:32:11.667547');
+INSERT INTO cor1440_gen_proyecto (id, nombre, observaciones, fechainicio, fechacierre, resultados, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (115, 'GESTIÓN ADMINISTRATIVA', '', NULL, NULL, '', '2015-07-21', NULL, '2015-07-21 15:30:24.893391', '2015-07-21 15:30:31.300962');
+
+
+--
+-- Name: cor1440_gen_proyecto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cor1440_gen_proyecto_id_seq', 115, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: cor1440_gen_proyectofinanciero; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+
+--
+-- Name: cor1440_gen_proyectofinanciero_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cor1440_gen_proyectofinanciero_id_seq', 100, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: cor1440_gen_rangoedadac; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (1, 'De 0 a 11', 0, 10, '2014-02-11', NULL, '2014-03-07 19:19:02.690768', NULL, NULL);
+INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (2, 'De 12 a 17', 0, 10, '2014-02-11', NULL, '2014-03-07 19:19:02.690768', NULL, NULL);
+INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (3, 'De 18 a 25', 16, 25, '2014-02-11', NULL, '2014-03-07 19:19:09.515802', NULL, NULL);
+INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (4, 'De 26 a 45', 26, 45, '2014-02-11', NULL, '2014-03-07 19:19:09.527935', NULL, NULL);
+INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (5, 'De 46 a 60', 46, 60, '2014-02-11', NULL, '2014-03-07 19:19:09.539237', NULL, NULL);
+INSERT INTO cor1440_gen_rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at, observaciones) VALUES (6, 'De 61 en adelante', 61, NULL, '2014-02-11', NULL, '2014-03-07 19:19:09.549437', NULL, NULL);
+
+
+--
+-- Name: cor1440_gen_rangoedadac_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('cor1440_gen_rangoedadac_id_seq', 100, true);
 
 
 --

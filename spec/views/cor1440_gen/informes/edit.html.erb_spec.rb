@@ -7,7 +7,7 @@ RSpec.describe "cor1440_gen/informes/edit", type: :view do
         :filtrofechaini => "2015-01-01",
         :filtrofechafin => "2015-01-02",
         :filtroproyecto => nil,
-        :filtroactividadarea => 1,
+        :filtroactividadarea => 9,
         :columnanombre => false,
         :columnatipo => false,
         :columnaobjetivo => false,

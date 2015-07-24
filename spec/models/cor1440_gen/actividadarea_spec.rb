@@ -16,8 +16,8 @@ module Cor1440Gen
     end
 
     it "existente" do
-      actividadarea = Cor1440Gen::Actividadarea.where(id: 1).take
-      expect(actividadarea.nombre).to eq("PSICOSOCIAL")
+      actividadarea = Cor1440Gen::Actividadarea.where(id: 9).take
+      expect(actividadarea.nombre).to eq("VOLUNTARIADO")
     end
   end
 end
