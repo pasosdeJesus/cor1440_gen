@@ -2,9 +2,12 @@
 
 conexion = ActiveRecord::Base.connection();
 
-Sip::carga_semillas_sql(conexion, 'sip', :datos)
-Sip::carga_semillas_sql(conexion, '../..', :cambios)
-Sip::carga_semillas_sql(conexion, '../..', :datos)
+# De motores y finalmente de este
+motor = ['sip', '../..']
+motor.each do |m|
+    Sip::carga_semillas_sql(conexion, m, :cambios)
+    Sip::carga_semillas_sql(conexion, m, :datos)
+end
 
 # usuario: cor1440, clave: cor1440
 conexion.execute("INSERT INTO usuario 
