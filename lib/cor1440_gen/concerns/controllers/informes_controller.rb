@@ -92,7 +92,7 @@ module Cor1440Gen
             @informe = Informe.new(informe_params)
 
             if @informe.save
-              redirect_to @informe, notice: 'Informe was successfully created.'
+              redirect_to @informe, notice: 'Informe creado.'
             else
               render :new
             end
@@ -101,7 +101,7 @@ module Cor1440Gen
           # PATCH/PUT /informes/1
           def update
             if @informe.update(informe_params)
-              redirect_to @informe, notice: 'Informe was successfully updated.'
+              redirect_to @informe, notice: 'Informe actualizado.'
             else
               render :edit
             end
@@ -110,7 +110,7 @@ module Cor1440Gen
           # DELETE /informes/1
           def destroy
             @informe.destroy
-            redirect_to informes_url, notice: 'Informe was successfully destroyed.'
+            redirect_to informes_url, notice: 'Informe eliminado.'
           end
 
           private
