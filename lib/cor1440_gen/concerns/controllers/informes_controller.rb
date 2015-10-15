@@ -14,7 +14,7 @@ module Cor1440Gen
           # GET /informes
           def index
             @informes = Informe.all
-            @informes = @informes.paginate(
+            @informes = @informes.order(filtrofechafin: :desc).paginate(
               :page => params[:pagina], per_page: 20
             )
             @cuerpotabla = []
