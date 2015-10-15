@@ -21,7 +21,6 @@ module Cor1440Gen
           validates :filtrofechafin, presence: true
 
           def new(*args, &block)
-            byebug
             super(*args, block)
           end
         end
