@@ -60,6 +60,7 @@
   <h2>Dificultades</h2>
   <pre><%= @informe.dificultades %></pre>
 
+  <%= render partial: 'show_otros_narrativos', locals: {f: @informe} %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

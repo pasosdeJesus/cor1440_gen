@@ -71,6 +71,7 @@
       <%= f.input :avances, as: :text %>
       <%= f.input :logros, as: :text %>
       <%= f.input :dificultades, as: :text %>
+      <%= render partial: 'otros_narrativos', locals: {f: f} %>
     </div> <!-- panel-body -->
   </div> <!-- panel panel-default -->
 
