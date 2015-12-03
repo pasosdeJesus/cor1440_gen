@@ -45,24 +45,7 @@
       <tr>
         <td><%= link_to informe.id, cor1440_gen.informe_path(informe.id) %></td>
         <td><%= informe.titulo%></td>
-        <td>
-          <% if informe.filtrofechaini || informe.filtrofechafin %>
-            Rango de Fechas: 
-            <%= informe.filtrofechaini %> - <%= informe.filtrofechafin %>.
-          <% end %>
-          <% if informe.proyectofinanciero %>
-            <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>: 
-            <%= informe.proyectofinanciero.nombre %>
-          <% end %>
-          <% if informe.proyecto %>
-            <%= Cor1440Gen::Actividad.human_attribute_name(:proyecto) %>: 
-            <%= informe.proyecto.nombre %>
-          <% end %>
-          <% if informe.actividadarea %>
-            <%= Cor1440Gen::Actividad.human_attribute_name(:actividadarea) %>: 
-            <%= informe.actividadarea.nombre %>
-          <% end %>
-        </td>
+        <td><%= informe.gen_descfiltro %></td>
         <td><%= informe.columnanombre ? "Si" : "" %></td>
         <td><%= informe.columnatipo ? "Si" : "" %></td>
         <td><%= informe.columnaobjetivo ? "Si" : "" %></td>

@@ -189,16 +189,17 @@ module Cor1440Gen
           end
         end
 
+        #Funcion por sobrecargar para filtrar por otros parámetros personalizados
+        #def filtramas(par, ac)
+          #  return ac
+          #end
+
+
         class_methods do
           def param_escapa(par, p)
             par[p] ? Sip::Pais.connection.quote_string(par[p].to_s) : 
               par[p.to_sym] ? Sip::Pais.connection.quote_string(par[p.to_sym].to_s) :
               par[p.to_s] ? Sip::Pais.connection.quote_string(par[p.to_s].to_s) :  ''
-          end
-
-          # Funcion por sobrecargar para filtrar por otros parámetros personalizados
-          def filtramas(par, ac)
-            return ac
           end
 
           def filtra(par)

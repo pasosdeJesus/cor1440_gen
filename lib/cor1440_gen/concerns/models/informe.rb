@@ -23,6 +23,36 @@ module Cor1440Gen
           def new(*args, &block)
             super(*args, block)
           end
+
+          # Para sobrecargar
+          def gen_descfiltro_post(descfiltro)
+            return descfiltro
+          end 
+
+          def gen_descfiltro
+            descfiltro=''
+            if (filtrofechaini && !filtrofechafin) 
+              descfiltro += 'Después de ' + filtrofechaini.to_s + ".  "
+            end
+            if (!filtrofechaini && filtrofechafin) 
+              descfiltro += 'Antes de ' + filtrofechaini.to_s + ".  "
+            end
+            if (filtrofechaini && filtrofechafin) 
+              descfiltro  += 'Entre ' + filtrofechaini.to_s + " y " + 
+                filtrofechaini.to_s + ".  "
+            end
+            if (proyectofinanciero)
+              descfiltro += "Del #{Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero)} #{proyectofinanciero.nombre}.  "
+            end
+            if (proyecto)
+              descfiltro += "Del #{Cor1440Gen::Actividad.human_attribute_name(:proyecto)} #{proyecto.nombre}.  "
+            end
+            if (actividadarea)
+              descfiltro += "De la #{Cor1440Gen::Actividad.human_attribute_name(:actividadarea)} #{actividadarea.nombre}.  "
+            end
+            
+            return gen_descfiltro_post(descfiltro)
+          end
         end
 
       end

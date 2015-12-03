@@ -21,16 +21,22 @@ module Cor1440Gen
             @enctabla = []
           end
 
-          # GET /informes/1
-          def show
-            #@actividades = Cor1440Gen::Actividad.all
-            @actividades = Cor1440Gen::ActividadesController.filtra({
+          # Retorna actividades tras aplicar filtro que está en @informe
+          def filtra_actividades
+            return Cor1440Gen::ActividadesController.filtra({
               fechaini: @informe.filtrofechaini,
               fechafin: @informe.filtrofechafin,
               busproyecto: @informe.filtroproyecto,
               busarea: @informe.filtroactividadarea,
               busproyectofinanciero: @informe.filtroproyectofinanciero
             })
+
+          end
+
+          # GET /informes/1
+          def show
+            #@actividades = Cor1440Gen::Actividad.all
+            @actividades = filtra_actividades
             @numactividades = @actividades.size
             @enctabla = []
             if @informe.columnanombre

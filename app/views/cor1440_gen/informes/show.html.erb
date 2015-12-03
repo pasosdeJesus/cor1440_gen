@@ -7,26 +7,9 @@
 <h2>Listado de <%= @cuerpotabla.count if @cuerpotabla %> actividades</h2>
 
   <% 
-    r=''
     #byebug
-    if (@informe.filtrofechaini && !@informe.filtrofechafin) 
-      r += 'Después de ' + @informe.filtrofechaini.to_s + ".  "
-    end
-    if (!@informe.filtrofechaini && @informe.filtrofechafin) 
-      r += 'Antes de ' + @informe.filtrofechaini.to_s + ".  "
-    end
-    if (@informe.filtrofechaini && @informe.filtrofechafin) 
-      r += 'Entre ' + @informe.filtrofechaini.to_s + " y " + 
-        @informe.filtrofechaini.to_s + ".  "
-    end
-    if (@informe.proyecto)
-      r += 'Del proyecto ' + @informe.proyecto.nombre + ".  "
-    end
-    if (@informe.actividadarea)
-      r += 'De la subárea ' + @informe.actividadarea.nombre + ".  "
-    end
   %>
-  <p><%= r %></p>
+  <p><%= @informe.gen_descfiltro %></p>
   
   <table class="table table-striped" border='1'>
     <thead>
