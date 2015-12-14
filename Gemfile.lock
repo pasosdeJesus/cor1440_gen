@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/pasosdeJesus/sip.git
-  revision: ac223b00ad7dbc7af3c9525bc0b099419cad6790
+  revision: feb3efe2a43914c2787906ea7a2bb44d8d9e6d07
   specs:
     sip (2.0.a7)
       bootstrap-datepicker-rails
@@ -278,11 +278,10 @@ GEM
       json (>= 1.8.0)
     warden (1.2.4)
       rack (>= 1.0)
-    web-console (2.2.1)
-      activemodel (>= 4.0)
-      binding_of_caller (>= 0.7.2)
-      railties (>= 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
+    web-console (3.0.0)
+      activemodel (>= 4.2)
+      debug_inspector
+      railties (>= 4.2)
     will_paginate (3.0.7)
 
 PLATFORMS
@@ -330,6 +329,3 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console
   will_paginate
-
-BUNDLED WITH
-   1.10.6
