@@ -52,6 +52,7 @@
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
     cor1440_gen.edit_informe_path(h @informe.id), :class => 'btn' 
   %>
+  <%= render partial: 'show_otros_botones', locals: {f: @informe} %>
   <!--%= link_to t('Generar PDF'), 
     cor1440_gen.informe_path(h @informe.id, format: 'pdf'), :class => 'btn' 
   %-->
