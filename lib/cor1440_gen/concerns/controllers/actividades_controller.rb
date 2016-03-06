@@ -257,6 +257,7 @@ module Cor1440Gen
                 @busproyectofinanciero.to_i
               )
             end
+            
             ac = filtramas(par, ac)
             return ac
           end
