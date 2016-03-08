@@ -25,6 +25,16 @@
     } %>
   </th>
   <th>
+    <%= select_tag "busresponsable", 
+      options_from_collection_for_select(
+        ::Usuario.habilitados, "id", "nombre", 
+        params[:busresponsable]),
+      { include_blank: true, 
+        "data-enviarautomatico" => "", style: "width: 10em" 
+    } %>
+  </th>
+
+  <th>
     <%= text_field_tag 'busnombre', params[:busnombre], maxlength: 10, size: 12,
       "data-enviarautomatico" => "", 
       "placeholder" => model_class.human_attribute_name(:nombre) 

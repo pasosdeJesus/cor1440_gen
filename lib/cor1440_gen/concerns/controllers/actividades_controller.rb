@@ -15,6 +15,7 @@ module Cor1440Gen
               return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
               @actividades.human_attribute_name(:fecha),
               @actividades.human_attribute_name(:oficina),
+              @actividades.human_attribute_name(:responsable),
               @actividades.human_attribute_name(:nombre),
               @actividades.human_attribute_name(:actividadtipos),
               @actividades.human_attribute_name(:proyectos),
@@ -33,6 +34,7 @@ module Cor1440Gen
             return [actividad.id,
               actividad.fecha , 
               actividad.oficina ? actividad.oficina.nombre : "",
+              actividad.responsable ? actividad.responsable.nusuario : "",
               actividad.nombre ? actividad.nombre : "",
               actividad.actividadtipo.inject("") { |memo, i| 
                 (memo == "" ? "" : memo + "; ") + i.nombre },
@@ -220,6 +222,10 @@ module Cor1440Gen
             @busoficina = param_escapa(par, 'busoficina')
             if @busoficina != '' then
               ac = ac.where(oficina_id: @busoficina)
+            end
+            @busresponsable = param_escapa(par, 'busresponsable')
+            if @busresponsable != '' then
+              ac = ac.where(responsable: @busresponsable)
             end
             @busnombre = param_escapa(par, 'busnombre')
             if @busnombre != '' then
