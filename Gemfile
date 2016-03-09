@@ -18,6 +18,9 @@ gem "prawn"
 gem "prawnto_2",  :require => "prawnto"
 gem "prawn-table"
 
+# Plantilla ODT
+gem "odf-report"
+
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
 

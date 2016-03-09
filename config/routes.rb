@@ -3,6 +3,9 @@ Cor1440Gen::Engine.routes.draw do
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
   resources :informes, path_names: { new: 'nuevo', edit: 'edita' }
 
+  get "/informes/:id/impreso" => "informes#impreso", 
+    as: :impresion
+
   namespace :admin do
     ::Ability.tablasbasicas.each do |t|
       if (t[0] == "Cor1440Gen") 
