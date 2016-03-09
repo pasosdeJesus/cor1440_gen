@@ -15,6 +15,14 @@ module Cor1440Gen
           belongs_to :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero', 
             foreign_key: 'filtroproyectofinanciero', validate: true
+          belongs_to :responsable, 
+            class_name: '::Usuario', 
+            foreign_key: 'filtroresponsable', validate: true
+          belongs_to :oficina, 
+            class_name: 'Sip::Oficina', 
+            foreign_key: 'filtrooficina', validate: true
+
+
 
           validates :titulo, presence: true
           validates :filtrofechaini, presence: true
@@ -40,6 +48,12 @@ module Cor1440Gen
             if (filtrofechaini && filtrofechafin) 
               descfiltro  += 'Entre ' + filtrofechaini.to_s + " y " + 
                 filtrofechaini.to_s + ".  "
+            end
+            if (responsable)
+              descfiltro += "Responsable #{responsable.nombre}.  "
+            end
+            if (oficina)
+              descfiltro += "Oficina #{oficina.nombre}.  "
             end
             if (proyectofinanciero)
               descfiltro += "Del #{Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero)} #{proyectofinanciero.nombre}.  "

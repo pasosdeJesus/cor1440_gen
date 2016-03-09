@@ -15,6 +15,16 @@
         :input_html => { "data-behaviour" => "datepicker"},
         :as => :string
       %>
+      <%= f.association :responsable,
+        collection: ::Usuario.habilitados,
+        label_method: :nombre, 
+        value_method: :id
+      %>
+      <%= f.association :oficina,
+        collection: Sip::Oficina.habilitados,
+        label_method: :nombre, 
+        value_method: :id
+      %>
       <%= f.association :proyectofinanciero,
         collection: Cor1440Gen::Proyectofinanciero.habilitados,
         label_method: :nombre, 
