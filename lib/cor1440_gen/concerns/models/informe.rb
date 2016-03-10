@@ -47,7 +47,7 @@ module Cor1440Gen
             end
             if (filtrofechaini && filtrofechafin) 
               descfiltro  += 'Entre ' + filtrofechaini.to_s + " y " + 
-                filtrofechaini.to_s + ".  "
+                filtrofechafin.to_s + ".  "
             end
             if (responsable)
               descfiltro += "Responsable #{responsable.nombre}.  "
