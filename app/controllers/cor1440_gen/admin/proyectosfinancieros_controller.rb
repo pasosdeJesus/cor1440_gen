@@ -25,8 +25,7 @@ module Cor1440Gen
         [ :proyecto_ids =>  [] ] +
         [ "compromisos", 
           "monto",
-          "observaciones", 
-          "fechacreacion" 
+          "observaciones"
         ] 
       end
 
