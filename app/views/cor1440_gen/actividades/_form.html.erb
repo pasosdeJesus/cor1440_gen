@@ -41,7 +41,10 @@
   %>
   <%= 
     f.association :responsable,
-      collection: Usuario.where(fechadeshabilitacion: nil).order(:nombre),
+      collection: current_usuario.oficina_id ?  Usuario.where(
+        fechadeshabilitacion: nil, 
+        oficina_id: current_usuario.oficina_id).order(:nombre) :
+        Usuario.where(fechadeshabilitacion: nil).order(:nombre),
       include_blank: false,
       label: "Responsable",
       label_method: lambda { |t| 

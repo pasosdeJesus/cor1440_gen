@@ -77,12 +77,8 @@ module Cor1440Gen
 
           validate :rol_usuario
           def rol_usuario
-            if (!oficina_id || (responsable && responsable.rol &&
-                responsable.oficina_id && oficina_id &&
-                (responsable && responsable.rol &&
-                 responsable.rol == Ability::ROLCOOR ||
-                 responsable.rol == Ability::ROLSISTACT) &&
-                 responsable.oficina_id != oficina_id)) then
+            if (oficina_id && responsable && responsable.oficina_id &&
+                 responsable.oficina_id != oficina_id) then
               errors.add(:oficina, "Responsable y oficina deben coincidir")
             end
           end
