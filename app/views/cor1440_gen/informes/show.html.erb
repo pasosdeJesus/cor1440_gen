@@ -56,9 +56,6 @@
     cor1440_gen.informe_path(h @informe.id) + '/impreso', :class => 'btn'     
   %>
   <%= render partial: 'show_otros_botones', locals: {f: @informe} %>
-  <!--%= link_to t('Generar PDF'), 
-    cor1440_gen.informe_path(h @informe.id, format: 'pdf'), :class => 'btn' 
-  %-->
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
     cor1440_gen.informe_path(h @informe.id),
     :method => 'delete',
