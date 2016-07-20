@@ -9,7 +9,7 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
   before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:usuario]
     u = build(:usuario)
-    controller.stub(:current_usuario).and_return(u)
+    allow(controller).to receive(:current_usuario).and_return(u)
   end
 
   it "should have a current_user" do
@@ -38,7 +38,7 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
   describe "GET index" do
     it "asigna todas los actividades como @actividades" do
       ac = Cor1440Gen::Actividad.create! atributos_validos
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(assigns(:actividades)).to eq([ac])
       ac.destroy!
     end
@@ -47,7 +47,7 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
   describe "GET show" do
     it "asigna la actividad requerida como @actividad" do
       ac = Cor1440Gen::Actividad.create! atributos_validos
-      get :show, {:id => ac.to_param}, valid_session
+      get :show, params: {:id => ac.to_param}, session: valid_session
       expect(assigns(:actividad)).to eq(ac)
       ac.destroy!
     end
@@ -55,7 +55,7 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
 
   describe "GET new" do
     it "asigna una nueva actividad como @actividad" do
-      get :new, {}, valid_session
+      get :new, params: {}, session: valid_session
       expect(assigns(:actividad)).to be_a_new(Cor1440Gen::Actividad)
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
   describe "GET edit" do
     it "asigna la actividad requerida como @actividad" do
       ac = Cor1440Gen::Actividad.create! atributos_validos
-      get :edit, {:id => ac.to_param}, valid_session
+      get :edit, params: {:id => ac.to_param}, session: valid_session
       expect(assigns(:actividad)).to eq(ac)
       ac.destroy!
     end
@@ -73,12 +73,14 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
     describe "con parámetros validos" do
       it "crea una Actividad" do
         expect {
-          post :create, {:actividad => atributos_validos}, valid_session
+          post :create, params: {:actividad => atributos_validos}, 
+            session: valid_session
         }.to change(Cor1440Gen::Actividad, :count).by(1)
       end
 
       it "asigna la actividad recien creado como @actividad" do
-        post :create, {:actividad => atributos_validos}, valid_session
+        post :create, params: {:actividad => atributos_validos}, 
+          session: valid_session
         expect(assigns(:actividad)).to be_a(Cor1440Gen::Actividad)
         ac = Cor1440Gen::Actividad.where(nombre: 'nombreact').take
         ac.destroy!
@@ -86,7 +88,8 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
 
       it "redirige al usuario creado" do
       skip
-        post :create, {:usuario => atributos_validos}, valid_session
+        post :create, params: {:usuario => atributos_validos}, 
+          session: valid_session
         #expect(response.status).to eq(200)
         expect(response).to redirect_to(Usuario.last)
         usuario = Usuario.where(nombre: 'nombreact').take
@@ -97,13 +100,15 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
     describe "con parámetros invalidos" do
       it "assigns a newly created but unsaved usuario as @usuario" do
         skip
-        post :create, {:usuario => inatributos_validos}, valid_session
+        post :create, params: {:usuario => inatributos_validos}, 
+          session: valid_session
         expect(assigns(:usuario)).to be_a_new(Usuario)
       end
 
       it "vuelve a presentar la plantilla 'nueva'" do
         skip
-        post :create, {:usuario => inatributos_validos}, valid_session
+        post :create, params: {:usuario => inatributos_validos}, 
+          session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -119,7 +124,9 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
       it "actualiza el usuario requerido" do
         skip
         usuario = Usuario.create! atributos_validos
-        put :update, {:id => usuario.to_param, :usuario => new_attributes}, valid_session
+        put :update, 
+          params: {:id => usuario.to_param, :usuario => new_attributes}, 
+          session: valid_session
         usuario.reload
         usuario.destroy!
         #expect(usuario.oficina_id).to eq(1)
@@ -128,7 +135,9 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
       it "asigna el usuario requerido como @usuario" do
         skip
         usuario = Usuario.create! atributos_validos
-        put :update, {:id => usuario.to_param, :usuario => atributos_validos}, valid_session
+        put :update, 
+          params: {:id => usuario.to_param, :usuario => atributos_validos}, 
+          session: valid_session
         expect(assigns(:usuario)).to eq(usuario)
         usuario.destroy!
       end
@@ -136,7 +145,9 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
       it "redirige al usuario" do
         skip
         usuario = Usuario.create! atributos_validos
-        put :update, {:id => usuario.to_param, :usuario => atributos_validos}, valid_session
+        put :update, 
+          params: {:id => usuario.to_param, :usuario => atributos_validos}, 
+          session: valid_session
         expect(response).to redirect_to(usuario)
         usuario.destroy!
       end
@@ -146,7 +157,9 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
       it "asinga el usuario como @usuario" do
         skip
         usuario = Usuario.create! atributos_validos
-        put :update, {:id => usuario.to_param, :usuario => inatributos_validos}, valid_session
+        put :update, 
+          params: {:id => usuario.to_param, :usuario => inatributos_validos}, 
+          session: valid_session
         expect(assigns(:usuario)).to eq(usuario)
         usuario.destroy!
       end
@@ -154,7 +167,9 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
       it "vuelve a presentar la plantilla 'editar'" do
         skip
         usuario = Usuario.create! atributos_validos
-        put :update, {:id => usuario.to_param, :usuario => inatributos_validos}, valid_session
+        put :update, 
+          params: {:id => usuario.to_param, :usuario => inatributos_validos}, 
+          session: valid_session
         expect(response).to render_template("edit")
         usuario.destroy!
       end
@@ -170,14 +185,16 @@ RSpec.describe Cor1440Gen::ActividadesController, :type => :controller do
         usuario = Usuario.create! atributos_validos
       end
       expect {
-        delete :destroy, {:id => usuario.to_param}, valid_session
+        delete :destroy, params: {:id => usuario.to_param}, 
+          session: valid_session
       }.to change(Usuario, :count).by(-1)
     end
 
     it "redirige a la lista de usuarios" do
         skip
       usuario = Usuario.create! atributos_validos
-      delete :destroy, {:id => usuario.to_param}, valid_session
+      delete :destroy, params: {:id => usuario.to_param}, 
+        session: valid_session
       expect(response).to redirect_to(usuarios_path)
     end
   end

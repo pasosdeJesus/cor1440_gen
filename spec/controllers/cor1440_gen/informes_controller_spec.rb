@@ -24,7 +24,7 @@ module Cor1440Gen
     let(:current_usuario) { build(:usuario) }
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:usuario]
-      controller.stub(:current_usuario).and_return(current_usuario)
+      allow(controller).to receive(:current_usuario).and_return(current_usuario)
       current_usuario.save!
     end
 
@@ -57,7 +57,7 @@ module Cor1440Gen
     describe "GET #index" do
       it "assigns all informes as @informes" do
         informe = Informe.create! valid_attributes
-        get :index, {}, valid_session
+        get :index, params: {}, session: valid_session
         expect(assigns(:informes)).to eq([informe])
       end
     end
@@ -65,14 +65,14 @@ module Cor1440Gen
     describe "GET #show" do
       it "assigns the requested informe as @informe" do
         informe = Cor1440Gen::Informe.create! valid_attributes
-        get :show, {:id => informe.to_param}, valid_session
+        get :show, params: {:id => informe.to_param}, session: valid_session
         expect(assigns(:informe)).to eq(informe)
       end
     end
 
     describe "GET #new" do
       it "assigns a new informe as @informe" do
-        get :new, {}, valid_session
+        get :new, params: {}, session: valid_session
         expect(assigns(:informe)).to be_a_new(Cor1440Gen::Informe)
       end
     end
@@ -80,7 +80,7 @@ module Cor1440Gen
     describe "GET #edit" do
       it "assigns the requested informe as @informe" do
         informe = Informe.create! valid_attributes
-        get :edit, {:id => informe.to_param}, valid_session
+        get :edit, params: {:id => informe.to_param}, session: valid_session
         expect(assigns(:informe)).to eq(informe)
       end
     end
@@ -89,30 +89,35 @@ module Cor1440Gen
       context "with valid params" do
         it "creates a new Informe" do
           expect {
-            post :create, {:informe => valid_attributes}, valid_session
+            post :create, params: {:informe => valid_attributes}, 
+              session: valid_session
           }.to change(Informe, :count).by(1)
         end
 
         it "assigns a newly created informe as @informe" do
-          post :create, {:informe => valid_attributes}, valid_session
+          post :create, params: {:informe => valid_attributes}, 
+            session: valid_session
           expect(assigns(:informe)).to be_a(Informe)
           expect(assigns(:informe)).to be_persisted
         end
 
         it "redirects to the created informe" do
-          post :create, {:informe => valid_attributes}, valid_session
+          post :create, params: {:informe => valid_attributes}, 
+            session: valid_session
           expect(response).to redirect_to(Informe.last)
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved informe as @informe" do
-          post :create, {:informe => invalid_attributes}, valid_session
+          post :create, params: {:informe => invalid_attributes}, 
+            session: valid_session
           expect(assigns(:informe)).to be_a_new(Informe)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {:informe => invalid_attributes}, valid_session
+          post :create, params: {:informe => invalid_attributes}, 
+            session: valid_session
           expect(response).to render_template("new")
         end
       end
@@ -127,20 +132,26 @@ module Cor1440Gen
 
         it "updates the requested informe" do
           informe = Informe.create! valid_attributes
-          put :update, {:id => informe.to_param, :informe => new_attributes}, valid_session
+          put :update, 
+            params: { :id => informe.to_param, :informe => new_attributes}, 
+            session: valid_session
           informe.reload
           expect(assigns(:informe)).to eq(informe)
         end
 
         it "assigns the requested informe as @informe" do
           informe = Informe.create! valid_attributes
-          put :update, {:id => informe.to_param, :informe => valid_attributes}, valid_session
+          put :update, 
+            params: {:id => informe.to_param, :informe => valid_attributes}, 
+            session: valid_session
           expect(assigns(:informe)).to eq(informe)
         end
 
         it "redirects to the informe" do
           informe = Informe.create! valid_attributes
-          put :update, {:id => informe.to_param, :informe => valid_attributes}, valid_session
+          put :update, 
+            params: {:id => informe.to_param, :informe => valid_attributes}, 
+            session: valid_session
           expect(response).to redirect_to(informe)
         end
       end
@@ -148,13 +159,17 @@ module Cor1440Gen
       context "with invalid params" do
         it "assigns the informe as @informe" do
           informe = Informe.create! valid_attributes
-          put :update, {:id => informe.to_param, :informe => invalid_attributes}, valid_session
+          put :update, 
+            params: {:id => informe.to_param, :informe => invalid_attributes}, 
+            session: valid_session
           expect(assigns(:informe)).to eq(informe)
         end
 
         it "re-renders the 'edit' template" do
           informe = Informe.create! valid_attributes
-          put :update, {:id => informe.to_param, :informe => invalid_attributes}, valid_session
+          put :update, 
+            params: {:id => informe.to_param, :informe => invalid_attributes}, 
+            session: valid_session
           expect(response).to render_template("edit")
         end
       end
@@ -164,13 +179,15 @@ module Cor1440Gen
       it "destroys the requested informe" do
         informe = Informe.create! valid_attributes
         expect {
-          delete :destroy, {:id => informe.to_param}, valid_session
+          delete :destroy, 
+          params: {:id => informe.to_param}, session: valid_session
         }.to change(Informe, :count).by(-1)
       end
 
       it "redirects to the informes list" do
         informe = Informe.create! valid_attributes
-        delete :destroy, {:id => informe.to_param}, valid_session
+        delete :destroy, params: {:id => informe.to_param}, 
+          session: valid_session
         expect(response).to redirect_to(informes_url)
       end
     end
