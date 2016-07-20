@@ -32,14 +32,14 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+	config.include Rails.application.routes.url_helpers
 	config.include FactoryGirl::Syntax::Methods
 
 	config.expect_with :rspec do |c|
 		c.syntax = :expect
 	end
 
-	config.include Rails.application.routes.url_helpers
 
 	config.include Devise::TestHelpers, :type => :controller
-	#config.include ControllerHelpers, :type => :controller
+
 end

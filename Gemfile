@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.3.rc1'
+gem "rails", '~> 5.0.0'
 gem "rails-i18n"
 
 # Postgresql
 gem "pg"
+
+gem 'puma'
 
 # CSS
 gem "sass"
@@ -33,7 +35,7 @@ gem "coffee-rails", '~> 4.1.0'
 # jquery como librería JavaScript
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"
+#gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"
 
 # Seguir enlaces más rápido. Ver: https://github.com/rails/turbolinks
 gem "turbolinks", "2.5.3"
@@ -68,7 +70,7 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor Sip
-gem 'sip', github: 'pasosdeJesus/sip'
+gem 'sip', github: 'pasosdeJesus/sip', branch: 'rails5'
 #gem 'sip', path: '../sip'
 
 group :doc do
@@ -92,6 +94,8 @@ end
 group :test do
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter", require: nil
+
+  gem 'rails-controller-testing'
 
   # Acelera desarrollo ejecutando en fondo. https://github.com/jonleighton/spring
   gem "spring"

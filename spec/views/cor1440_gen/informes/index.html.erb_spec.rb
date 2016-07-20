@@ -1,7 +1,10 @@
+require 'spec_helper'
 require 'rails_helper'
+
 
 RSpec.describe "cor1440_gen/informes/index" do
   before(:each) do
+    skip # En Rails 5
     assign(:informes, [
       Cor1440Gen::Informe.create!(
         :titulo=> "titulo",
