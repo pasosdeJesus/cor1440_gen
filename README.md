@@ -4,13 +4,14 @@
 ![Logo de cor1440](https://raw.githubusercontent.com/pasosdeJesus/cor1440_gen/master/spec/dummy/public/images/logo.jpg)
 
 Este es un motor para sistemas de información de planeación y seguimiento de 
-actividades en ONGs. Opera sobre Ruby on Rails 4.2 y PostgreSQL (preferiblemente 
+actividades en ONGs. Opera sobre Ruby on Rails 5 y PostgreSQL (preferiblemente 
 cifrado como en adJ).
 
-La aplicación ```cor1440``` disponible en https://github.com/pasosdeJesus/cor1440 
+La aplicación ```cor1440``` disponible en 
+<https://github.com/pasosdeJesus/cor1440>
 utiliza este motor sin personalización alguna.  Puede ver ejemplos de 
-personalizaciones en https://github.com/pasosdeJesus/cor1440_cinep y 
-https://github.com/pasosdeJesus/cor1440_sjrlac
+personalizaciones en <https://github.com/pasosdeJesus/cor1440_cinep> y 
+<https://github.com/pasosdeJesus/cor1440_sjrlac>
 
 
 ## Diseño, Uso, Pruebas y Desarrollo
