@@ -70,7 +70,7 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor Sip
-gem 'sip', github: 'pasosdeJesus/sip', branch: 'rails5'
+gem 'sip', github: 'pasosdeJesus/sip'
 #gem 'sip', path: '../sip'
 
 group :doc do
