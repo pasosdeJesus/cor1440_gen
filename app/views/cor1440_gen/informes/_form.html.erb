@@ -2,7 +2,8 @@
   :url => cor1440_gen.informes_path(@informe).sub(/\./,"/"), 
   :html => { :class => 'form-horizontal' } do |f| 
 %>
-  <%= f.error_notification %>
+
+  <%= render partial: 'sip/hogar/errores', locals: { f: f } %>
 
   <%= f.input :titulo %>
   <div class="panel panel-default">
