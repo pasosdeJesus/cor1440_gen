@@ -2,7 +2,8 @@
   :url => cor1440_gen.informes_path(@informe).sub(/\./,"/"), 
   :html => { :class => 'form-horizontal' } do |f| 
 %>
-  <%= f.error_notification %>
+
+  <%= render partial: 'sip/hogar/errores', locals: { f: f } %>
 
   <%= f.input :titulo %>
   <div class="panel panel-default">
@@ -73,6 +74,7 @@
               label: Cor1440Gen::Actividad.human_attribute_name(:poblacion)
             %>
           </td>
+          <%= render partial: 'otras_columnas', locals: {f: f} %>
         </tr>
       </table>
     </div> <!-- panel-body -->

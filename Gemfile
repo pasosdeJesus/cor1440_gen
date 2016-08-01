@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 4.2.3.rc1'
+gem "rails", '~> 5.0.0'
 gem "rails-i18n"
 
 # Postgresql
 gem "pg"
+
+gem 'puma'
 
 # CSS
 gem "sass"
@@ -25,18 +27,18 @@ gem "odf-report"
 gem "jbuilder"
 
 # Uglifier comprime recursos Javascript
-gem "uglifier", '>= 1.3.0'
+gem "uglifier"#, '>= 1.3.0'
 
 # CoffeeScript para recuersos .js.coffee y vistas
-gem "coffee-rails", '~> 4.1.0'
+gem "coffee-rails"#, '~> 4.1.0'
 
 # jquery como librería JavaScript
 gem "jquery-rails"
 gem "jquery-ui-rails"
-gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"
+#gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery-ui-bootstrap-rails"
 
 # Seguir enlaces más rápido. Ver: https://github.com/rails/turbolinks
-gem "turbolinks"
+gem "turbolinks"#, "2.5.3"
 
 # Ambiente de CSS
 gem "twitter-bootstrap-rails"
@@ -61,7 +63,7 @@ gem "will_paginate"
 gem 'twitter_cldr'
  
 # Maneja adjuntos
-gem "paperclip", "~> 4.1"
+gem "paperclip"#, "~> 4.1"
 
 # Zonas horarias
 gem "tzinfo"
@@ -93,6 +95,8 @@ group :test do
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter", require: nil
 
+  gem 'rails-controller-testing'
+
   # Acelera desarrollo ejecutando en fondo. https://github.com/jonleighton/spring
   gem "spring"
   
@@ -101,10 +105,10 @@ group :test do
   gem 'rspec-rails'
 
   # Un proceso para cada prueba -- acelera
-  gem 'spork', '~> 1.0rc'
+  gem 'spork'#, '~> 1.0rc'
 
   # Maneja datos de prueba
-  gem "factory_girl_rails", "~> 4.0", group: [:development, :test]
+  gem "factory_girl_rails", group: [:development, :test] #, "~> 4.0"
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados

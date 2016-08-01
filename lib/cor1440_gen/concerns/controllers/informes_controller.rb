@@ -82,6 +82,12 @@ module Cor1440Gen
               filename: 'InformeActividades.odt'
           end
 
+          def completa_encabezado(enctabla)
+          end
+          
+          def completa_fila(actividad, fila)
+          end
+
           # GET /informes/1
           def show
             #@actividades = Cor1440Gen::Actividad.all
@@ -103,6 +109,7 @@ module Cor1440Gen
             if @informe.columnapoblacion
               @enctabla << 'Población'
             end
+            completa_encabezado(@enctabla)
             @cuerpotabla = []
             
             @actividades.try(:each) do |actividad|
@@ -128,6 +135,7 @@ module Cor1440Gen
                 } 
                 fila << pob.reduce(:+)
               end
+              completa_fila(actividad, fila)
               @cuerpotabla << fila
             end
             #byebug

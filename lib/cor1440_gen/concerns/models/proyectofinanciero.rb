@@ -42,7 +42,7 @@ module Cor1440Gen
         end
         
         class_methods do
-          def human_attribute_name(atr)
+          def human_attribute_name(atr, poromision = "")
             if (atr.to_s == "{:proyecto_ids=>[]}")
               "Proyectos"
             elsif (atr.to_s == "{:financiador_ids=>[]}")
