@@ -49,8 +49,14 @@ module Cor1440Gen
             report = ::ODFReport::Report.new("#{Rails.root}/app/reportes/Plantilla-InformeActividades.odt") do |r|
               r.add_field(:titulo, @informe.titulo)
               r.add_field(:fecha, Date.today)
-              r.add_field(:numact, @actividades.size)
+              r.add_field(:numact, 
+                          ActionController::Base.helpers.pluralize(
+                            @actividades.size, 'actividad', plural: 'actividades'))
               r.add_table("ACTIVIDADES", @actividades) do |t|
+                t.add_column(:fechaact) { |ac| "#{ac.fecha}" }
+                t.add_column(:responsableact) { 
+                  |ac| ac.responsable ? ac.responsable.nusuario : ''
+                }
                 t.add_column(:nombreact) { |ac| "#{ac.nombre}" }
                 t.add_column(:tipoact) { |ac| 
                   ac.actividadtipo.inject("") { |memo, i| 
@@ -77,7 +83,8 @@ module Cor1440Gen
               r = impreso_extra(r, @informe, @actividades)
             end
 
-            send_data report.generate, type: 'application/vnd.oasis.opendocument.text',
+            send_data report.generate, 
+              #type: 'application/vnd.oasis.opendocument.text',
               disposition: 'attachment',
               filename: 'InformeActividades.odt'
           end
@@ -124,7 +131,7 @@ module Cor1440Gen
               fila << actividad.fecha if @informe.columnafecha
               if  @informe.columnaresponsable 
                 fila << (actividad.responsable ? 
-                         actividad.responsable.nombre : '')
+                         actividad.responsable.nusuario : '')
               end 
               if @informe.columnanombre
                 fila << actividad.nombre

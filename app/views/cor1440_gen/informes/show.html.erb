@@ -4,46 +4,50 @@
   <h4>Fecha: <%= Date.today %></h4>
 </div>
 
-<h2>Listado de <%= @cuerpotabla.count if @cuerpotabla %> actividades</h2>
+<h2>Listado de 
+  <%= pluralize(@cuerpotabla.count, 'actividad', plural: 'actividades') if 
+        @cuerpotabla 
+  %> 
+</h2>
 
-  <% 
-    #byebug
-  %>
-  <p><%= @informe.gen_descfiltro %></p>
-  
-  <table class="table table-striped" border='1'>
-    <thead>
+<% 
+  #byebug
+%>
+<p><%= @informe.gen_descfiltro %></p>
+
+<table class="table table-striped" border='1'>
+  <thead>
+    <tr>
+      <% @enctabla.each do |c| %>
+        <th><%= c %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody id="index_tabla">
+    <% @cuerpotabla.try(:each) do |fila| %>
       <tr>
-        <% @enctabla.each do |c| %>
-          <th><%= c %></th>
+        <% for i in 0..(fila.length-1) %>
+          <td>
+            <%= fila[i] %>
+          </td>
         <% end %>
       </tr>
-    </thead>
-    <tbody id="index_tabla">
-      <% @cuerpotabla.try(:each) do |fila| %>
-        <tr>
-          <% for i in 0..(fila.length-1) %>
-            <td>
-              <%= fila[i] %>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% end %>
+  </tbody>
+</table>
 
-  <h2>Recomendaciones</h2>
-  <pre><%= @informe.recomendaciones %></pre>
+<h2>Recomendaciones</h2>
+<pre><%= @informe.recomendaciones %></pre>
 
-  <h2>Avances</h2>
-  <pre><%= @informe.avances %></pre>
+<h2>Avances</h2>
+<pre><%= @informe.avances %></pre>
 
-  <h2>Logros</h2>
-  <pre><%= @informe.logros %></pre>
-  <h2>Dificultades</h2>
-  <pre><%= @informe.dificultades %></pre>
+<h2>Logros</h2>
+<pre><%= @informe.logros %></pre>
+<h2>Dificultades</h2>
+<pre><%= @informe.dificultades %></pre>
 
-  <%= render partial: 'show_otros_narrativos', locals: {f: @informe} %>
+<%= render partial: 'show_otros_narrativos', locals: {f: @informe} %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
@@ -53,7 +57,8 @@
     cor1440_gen.edit_informe_path(h @informe.id), :class => 'btn' 
   %>
   <%= link_to t('Generar Documento'),
-    cor1440_gen.informe_path(h @informe.id) + '/impreso', :class => 'btn'     
+    cor1440_gen.informe_path(h @informe.id) + '/impreso', :class => 'btn',
+    :target => '_blank' 
   %>
   <%= render partial: 'show_otros_botones', locals: {f: @informe} %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
