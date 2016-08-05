@@ -5,6 +5,8 @@ FactoryGirl.define do
     filtroproyecto nil
     filtroarea nil
     filtropoa nil
+    columnafecha false
+    columnaresponsable false
     columnanombre false
     columnatipo false
     columnaobjetivo false

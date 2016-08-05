@@ -94,6 +94,13 @@ module Cor1440Gen
             @actividades = filtra_actividades
             @numactividades = @actividades.size
             @enctabla = []
+
+            @enctabla << Cor1440Gen::Actividad.
+              human_attribute_name(:columnafecha) if @informe.columnafecha
+
+            @enctabla << Cor1440Gen::Actividad.human_attribute_name(
+              :columnaresponsable) if @informe.columnaresponsable
+
             if @informe.columnanombre
               @enctabla << 'Nombre'
             end
@@ -114,6 +121,11 @@ module Cor1440Gen
             
             @actividades.try(:each) do |actividad|
               fila = []
+              fila << actividad.fecha if @informe.columnafecha
+              if  @informe.columnaresponsable 
+                fila << (actividad.responsable ? 
+                         actividad.responsable.nombre : '')
+              end 
               if @informe.columnanombre
                 fila << actividad.nombre
               end
@@ -190,6 +202,7 @@ module Cor1440Gen
               :filtroproyecto, 
               :filtroactividadarea, #:filtropoa, 
               :filtroproyectofinanciero, 
+              :columnafecha, :columnaresponsable, 
               :columnanombre, :columnatipo, 
               :columnaobjetivo, :columnaproyecto, :columnapoblacion, 
               :recomendaciones, :avances, :logros, :dificultades

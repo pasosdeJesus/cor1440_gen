@@ -25,7 +25,7 @@
       <th rowspan="2">Id</th>
       <th rowspan="2">Nombre</th>
       <th rowspan="2">Filtro</th>
-      <th colspan="5">Columnas</th>
+      <th colspan="7">Columnas</th>
       <th rowspan="2">Recomendaciones</th>
       <th rowspan="2">Avances</th>
       <th rowspan="2">Logros</th>
@@ -33,9 +33,11 @@
       <th rowspan="2">Acciones</th>
     </tr>
     <tr>
-      <th>Nombre</th>
+      <th><%= Cor1440Gen::Actividad.human_attribute_name(:columnafecha) %></th>
+      <th><%= Cor1440Gen::Actividad.human_attribute_name(:columnaresponsable) %></th>
+      <th><%= Cor1440Gen::Actividad.human_attribute_name(:nombre) %></th>
       <th><%= Cor1440Gen::Actividad.human_attribute_name(:actividadtipo) %></th>
-      <th>Objetivo</th>
+      <th><%= Cor1440Gen::Actividad.human_attribute_name(:objetivo) %></th>
       <th><%= Cor1440Gen::Actividad.human_attribute_name(:proyecto) %></th>
       <th>Población</th>
     </tr>
@@ -46,6 +48,8 @@
         <td><%= link_to informe.id, cor1440_gen.informe_path(informe.id) %></td>
         <td><%= informe.titulo%></td>
         <td><%= informe.gen_descfiltro %></td>
+        <td><%= informe.columnafecha ? "Si" : "" %></td>
+        <td><%= informe.columnaresponsable ? "Si" : "" %></td>
         <td><%= informe.columnanombre ? "Si" : "" %></td>
         <td><%= informe.columnatipo ? "Si" : "" %></td>
         <td><%= informe.columnaobjetivo ? "Si" : "" %></td>
