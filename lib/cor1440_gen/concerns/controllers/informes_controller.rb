@@ -96,26 +96,26 @@ module Cor1440Gen
             @enctabla = []
 
             @enctabla << Cor1440Gen::Actividad.
-              human_attribute_name(:columnafecha) if @informe.columnafecha
+              human_attribute_name(:fecha) if @informe.columnafecha
 
             @enctabla << Cor1440Gen::Actividad.human_attribute_name(
-              :columnaresponsable) if @informe.columnaresponsable
+              :responsable) if @informe.columnaresponsable
 
-            if @informe.columnanombre
-              @enctabla << 'Nombre'
-            end
-            if @informe.columnatipo
-              @enctabla << 'Tipo'
-            end
-            if @informe.columnaobjetivo
-              @enctabla << 'Objetivo'
-            end
-            if @informe.columnaproyecto
-              @enctabla << 'Proyecto'
-            end
-            if @informe.columnapoblacion
-              @enctabla << 'Población'
-            end
+            @enctabla << Cor1440Gen::Actividad.
+              human_attribute_name(:nombre) if @informe.columnanombre 
+            
+            @enctabla << Cor1440Gen::Actividad.
+              human_attribute_name(:tipoactividad) if @informe.columnatipo
+
+            @enctabla << Cor1440Gen::Actividad.
+              human_attribute_name(:objetivo) if @informe.columnaobjetivo
+            
+            @enctabla << Cor1440Gen::Actividad.
+              human_attribute_name(:proyecto) if @informe.columnaproyecto
+           
+            @enctabla << Cor1440Gen::Actividad.
+              human_attribute_name(:poblacion) if @informe.columnapoblacion
+
             completa_encabezado(@enctabla)
             @cuerpotabla = []
             

@@ -52,13 +52,19 @@
       <table border="1">
         <tr>
           <td>
-            <%= f.input :columnafecha %>
+            <%= f.input :columnafecha, 
+              label: Cor1440Gen::Actividad.human_attribute_name(:fecha) 
+            %>
           </td>
           <td>
-            <%= f.input :columnaresponsable %>
+            <%= f.input :columnaresponsable,
+              label: Cor1440Gen::Actividad.human_attribute_name(:responsable)
+            %>
           </td>
           <td>
-            <%= f.input :columnanombre, label: 'Nombre' %>
+            <%= f.input :columnanombre, 
+              label: Cor1440Gen::Actividad.human_attribute_name(:nombre)
+            %>
           </td>
           <td>
             <%= f.input :columnatipo,
