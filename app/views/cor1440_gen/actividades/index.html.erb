@@ -30,13 +30,13 @@
         <th><%= model_class.human_attribute_name(:anexos) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
+      <tr>
+        <%= render 'index_filtro' %>
+      </tr>
     </thead>
     <tbody id="index_tabla">
       <%= render 'index_tabla' %>
     </tbody>
-    <tfoot>
-      <%= render 'index_filtro' %>
-    </tfoot>
   </table>
 <% end %>
 
