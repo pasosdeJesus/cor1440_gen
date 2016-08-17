@@ -43,9 +43,9 @@
   %>
   <%= 
     f.association :responsable,
-      collection: current_usuario.oficina_id ?  Usuario.where(
-        fechadeshabilitacion: nil, 
-        oficina_id: current_usuario.oficina_id).order(:nombre) :
+      collection: current_usuario.oficina_id ?  
+        Usuario.where(fechadeshabilitacion: nil, 
+          oficina_id: current_usuario.oficina_id).order(:nombre) :
         Usuario.where(fechadeshabilitacion: nil).order(:nombre),
       include_blank: false,
       label: "Responsable",
@@ -54,11 +54,14 @@
         if t.nombre then r += " - " + t.nombre end
         r 
       },
-      value_method: :id 
+      value_method: :id,
+      selected: f.object.responsable ? 
+        f.object.responsable : current_usuario.id
   %>
   <%= 
     f.association :usuario,
-      collection: Usuario.where(fechadeshabilitacion: nil).order(:nombre),
+      collection: Usuario.where(fechadeshabilitacion: nil).
+        order(:nombre),
       include_blank: false,
       label: "Corresponsables",
       label_method: lambda { |t| 

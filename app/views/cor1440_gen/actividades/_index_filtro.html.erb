@@ -27,7 +27,7 @@
   <th>
     <%= select_tag "busresponsable", 
       options_from_collection_for_select(
-        ::Usuario.habilitados, "id", "nombre", 
+        ::Usuario.order(:nombre), "id", "nombre", 
         params[:busresponsable]),
       { include_blank: true, 
         "data-enviarautomatico" => "", style: "width: 10em" 
