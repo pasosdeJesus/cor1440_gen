@@ -63,17 +63,28 @@ module Cor1440Gen
           def index
             @actividades = Cor1440Gen::ActividadesController.filtra(params)
             @numactividades = @actividades.size
-            @actividades = @actividades.paginate(
-              :page => params[:pagina], per_page: 20
-            )
             @enctabla = encabezado_comun()
-            @cuerpotabla = cuerpo_comun()
             respond_to do |format|
-              format.html { render "index", layout: "application" }
+              format.html { 
+                @actividades = @actividades.paginate(
+                  :page => params[:pagina], per_page: 20
+                )
+                @cuerpotabla = cuerpo_comun()
+                render "index", layout: "application" 
+              }
               format.json { head :no_content }
-              format.js   { render 'index' }
-              format.pdf  { prawnto(prawn: { page_layout: :landscape },
-                filename: "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
+              format.js   { 
+                @actividades = @actividades.paginate(
+                  :page => params[:pagina], per_page: 20
+                )
+                @cuerpotabla = cuerpo_comun()
+                render 'index' 
+              }
+              format.pdf  { 
+                @cuerpotabla = cuerpo_comun()
+                prawnto(prawn: { page_layout: :landscape },
+                filename: 
+                  "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
                 inline: true)
               }
             end
