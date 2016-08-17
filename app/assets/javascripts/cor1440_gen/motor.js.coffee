@@ -10,7 +10,8 @@ cor1440_gen_rangoedadac_uno = (ini, col) ->
   sumc = 0
   $('[id^='+ini+'][id$='+col+']').each( (o) ->
     v = $(this).val()
-    sumc += parseInt(v)
+    if (v != "")
+      sumc += parseInt(v)
   )
   $("#tactividad" + col).text(sumc)
   return
