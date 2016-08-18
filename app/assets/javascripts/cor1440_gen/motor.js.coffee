@@ -11,7 +11,9 @@ cor1440_gen_rangoedadac_uno = (ini, col) ->
   $('[id^='+ini+'][id$='+col+']').each( (o) ->
     v = $(this).val()
     if (v != "")
-      sumc += parseInt(v)
+      ab = $(this).parent().parent().css('display')
+      if (ab != 'none') 
+        sumc += parseInt(v)
   )
   $("#tactividad" + col).text(sumc)
   return
@@ -58,7 +60,7 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('change', 'input[id^=actividad_actividad_rangoedadac_attributes]', (e) -> 
     cor1440_gen_rangoedadac($(this))
   )
-  $(document).on('click', '.remove_fields', (e) -> 
+  $(document).on('cocoon:after-remove', (e) -> 
     cor1440_gen_rangoedadc_todos();
   )
 
