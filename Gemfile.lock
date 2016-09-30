@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/pasosdeJesus/sip.git
-  revision: b7a09bfed6c239f9b8203fccc1be436c8b98ed08
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: 218bb07c454868600516422d925718b6a7b6950b
   specs:
     sip (2.0.b1)
       bootstrap-datepicker-rails
@@ -19,7 +19,7 @@ GIT
       will_paginate
 
 GIT
-  remote: git://github.com/vtamara/cocoon.git
+  remote: https://github.com/vtamara/cocoon.git
   revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
   specs:
     cocoon (1.2.6)
