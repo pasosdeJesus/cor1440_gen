@@ -65,11 +65,23 @@
     } %>
   </th>
   <th>
+    <% 
+      fac = Time.now.strftime('%Y-%m-%d')
+      lpf1 = options_from_collection_for_select(
+        Cor1440Gen::Proyectofinanciero.habilitados.where(
+          'fechainicio <= ? AND ? <= fechacierre', fac, fac).order(:nombre), 
+        "id", "nombre", params[:busproyectofinanciero])
+      lpf2 = options_from_collection_for_select(
+        Cor1440Gen::Proyectofinanciero.habilitados.where(
+          '? < fechainicio OR fechacierre < ?', fac, fac).order(:nombre), 
+        "id", "nombre", params[:busproyectofinanciero])
+      lpf = lpf1 + lpf2 
+    %>
     <%= select_tag "busproyectofinanciero", 
-      options_from_collection_for_select(
-        Cor1440Gen::Proyectofinanciero.habilitados, 
-        "id", "nombre", params[:busproyectofinanciero]), {include_blank: true,
-          "data-enviarautomatico" => "", style: "width: 10em"
+      lpf,
+      { include_blank: true,
+        "data-enviarautomatico" => "", 
+        style: "width: 10em"
     } %>
   </th>
   <th>
