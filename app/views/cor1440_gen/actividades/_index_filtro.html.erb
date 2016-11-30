@@ -1,106 +1,100 @@
 <%- model_class = Cor1440Gen::Actividad -%>
 <tr>
-  <th>
-    <%= text_field_tag 'buscodigo', params[:buscodigo], maxlength: 10, size: 4,
-      "data-enviarautomatico" => "", 
-      "placeholder" => model_class.human_attribute_name(:id) 
-    %>
-  </th>
-  <th>
-    <%= text_field_tag 'fechaini', 
-      params[:fechaini], 
-      maxlength: 10, 
-      size: 10,
-      "data-behaviour" => "datepicker", 
-      "data-enviarautomatico" => "" %>
-    -
-    <%= text_field_tag 'fechafin', 
-      params[:fechafin], 
-      maxlength: 10, 
-      size: 10,
-      "data-behaviour" => "datepicker", 
-      "data-enviarautomatico" => ""
-    %>
-  </th>
-  <th>
-    <%= select_tag "busoficina", 
-      options_from_collection_for_select(
-        Sip::Oficina.habilitados, "id", "nombre", 
-        params[:busoficina]),
-      { include_blank: true, 
-        "data-enviarautomatico" => "", style: "width: 10em" 
-    } %>
-  </th>
-  <th>
-    <%= select_tag "busresponsable", 
-      options_from_collection_for_select(
-        ::Usuario.order(:nombre), "id", "nombre", 
-        params[:busresponsable]),
-      { include_blank: true, 
-        "data-enviarautomatico" => "", style: "width: 10em" 
-    } %>
-  </th>
+  <% @enctabla.each do |c| %>
+    <th>
+      <% case c %>
+      <% when @actividades.human_attribute_name('id') %>
+        <%= text_field_tag 'buscodigo', params[:buscodigo], maxlength: 10, size: 4,
+          "data-enviarautomatico" => "", 
+          "placeholder" => model_class.human_attribute_name(:id) %>
+      <% when @actividades.human_attribute_name('fecha') %>
+        <%= text_field_tag 'fechaini', 
+          params[:fechaini], 
+          maxlength: 10, 
+          size: 10,
+          "data-behaviour" => "datepicker", 
+          "data-enviarautomatico" => "" %>
+        -
+        <%= text_field_tag 'fechafin', 
+        params[:fechafin], 
+        maxlength: 10, 
+        size: 10,
+        "data-behaviour" => "datepicker", 
+        "data-enviarautomatico" => "" %>
+      <% when @actividades.human_attribute_name('oficina') %>
+        <%= select_tag "busoficina", 
+          options_from_collection_for_select(
+            Sip::Oficina.habilitados, "id", "nombre", 
+            params[:busoficina]),
+          { include_blank: true, 
+            "data-enviarautomatico" => "", style: "width: 10em" 
+        } %>
+      <% when @actividades.human_attribute_name('responsable') %>
+        <%= select_tag "busresponsable", 
+          options_from_collection_for_select(
+            ::Usuario.order(:nombre), "id", "nombre", 
+            params[:busresponsable]),
+          { include_blank: true, 
+            "data-enviarautomatico" => "", style: "width: 10em" 
+        } %>
+      <% when @actividades.human_attribute_name('nombre') %>
+        <%= text_field_tag 'busnombre', params[:busnombre], maxlength: 10, size: 12,
+          "data-enviarautomatico" => "", 
+          "placeholder" => model_class.human_attribute_name(:nombre) %>
+      <% when @actividades.human_attribute_name('actividadtipos') %>
+        <%= select_tag "bustipo", 
+          options_from_collection_for_select(
+            Cor1440Gen::Actividadtipo.habilitados, 
+            "id", "nombre", params[:bustipo]
+        ), { 
+          include_blank: true,
+          "data-enviarautomatico" => "", style: "width: 10em" } %>
+      <% when @actividades.human_attribute_name('proyectos') %>
+        <%= select_tag "busproyecto", 
+          options_from_collection_for_select(
+            Cor1440Gen::Proyecto.habilitados, 
+            "id", "nombre", params[:busproyecto]), {include_blank: true,
+                                                    "data-enviarautomatico" => "", style: "width: 10em"
+        } %>
+      <% when @actividades.human_attribute_name('actividadareas') %>
+        <%= select_tag "busarea", 
+          options_from_collection_for_select(
+            Cor1440Gen::Actividadarea.habilitados, 
+            "id", "nombre", params[:busarea]), {include_blank: true,
+                                                "data-enviarautomatico" => "", style: "width: 10em"
+        } %>
+      <% when @actividades.human_attribute_name('proyectosfinancieros')%>
+        <% fac = Time.now.strftime('%Y-%m-%d') %>
+        <% lpf1 = options_from_collection_for_select(
+          Cor1440Gen::Proyectofinanciero.habilitados.where(
+            'fechainicio <= ? AND ? <= fechacierre', fac, fac).order(:nombre), 
+          "id", "nombre", params[:busproyectofinanciero]) %>
+        <% lpf2 = options_from_collection_for_select(
+          Cor1440Gen::Proyectofinanciero.habilitados.where(
+            '? < fechainicio OR fechacierre < ?', fac, fac).order(:nombre), 
+          "id", "nombre", params[:busproyectofinanciero]) %>
+        <% lpf = lpf1 + lpf2 %> 
+        <%= select_tag "busproyectofinanciero", 
+          lpf,
+          { include_blank: true,
+            "data-enviarautomatico" => "", 
+            style: "width: 10em" } 
+          %>
+      <% when @actividades.human_attribute_name('objetivo') %>
+        <%= text_field_tag 'busobjetivo', params[:busobjetivo], 
+          maxlength: 10, size: 12,
+          "data-enviarautomatico" => "", 
+          "placeholder" => model_class.human_attribute_name(:objetivo) 
+        %>
+    <% end %>
+    </th>
+  <% end %>
+
+  <th><!-- Anexos --></th>
 
   <th>
-    <%= text_field_tag 'busnombre', params[:busnombre], maxlength: 10, size: 12,
-      "data-enviarautomatico" => "", 
-      "placeholder" => model_class.human_attribute_name(:nombre) 
-    %>
-  </th>
-  <th>
-    <%= select_tag "bustipo", 
-      options_from_collection_for_select(
-        Cor1440Gen::Actividadtipo.habilitados, 
-        "id", "nombre", params[:bustipo]), {include_blank: true,
-          "data-enviarautomatico" => "", style: "width: 10em"
-    } %>
-  </th>
-  <th>
-    <%= select_tag "busproyecto", 
-      options_from_collection_for_select(
-        Cor1440Gen::Proyecto.habilitados, 
-        "id", "nombre", params[:busproyecto]), {include_blank: true,
-          "data-enviarautomatico" => "", style: "width: 10em"
-    } %>
-  </th>
-  <th>
-    <%= select_tag "busarea", 
-      options_from_collection_for_select(
-        Cor1440Gen::Actividadarea.habilitados, 
-        "id", "nombre", params[:busarea]), {include_blank: true,
-          "data-enviarautomatico" => "", style: "width: 10em"
-    } %>
-  </th>
-  <th>
-    <% 
-      fac = Time.now.strftime('%Y-%m-%d')
-      lpf1 = options_from_collection_for_select(
-        Cor1440Gen::Proyectofinanciero.habilitados.where(
-          'fechainicio <= ? AND ? <= fechacierre', fac, fac).order(:nombre), 
-        "id", "nombre", params[:busproyectofinanciero])
-      lpf2 = options_from_collection_for_select(
-        Cor1440Gen::Proyectofinanciero.habilitados.where(
-          '? < fechainicio OR fechacierre < ?', fac, fac).order(:nombre), 
-        "id", "nombre", params[:busproyectofinanciero])
-      lpf = lpf1 + lpf2 
-    %>
-    <%= select_tag "busproyectofinanciero", 
-      lpf,
-      { include_blank: true,
-        "data-enviarautomatico" => "", 
-        style: "width: 10em"
-    } %>
-  </th>
-  <th>
-    <%= text_field_tag 'busobjetivo', params[:busobjetivo], 
-      maxlength: 10, size: 12,
-      "data-enviarautomatico" => "", 
-      "placeholder" => model_class.human_attribute_name(:objetivo) 
-    %>
-  </th>
-  <th></th>
-  <th></th>
-  <th><%= submit_tag("Filtrar", class: 'envia_filtrar') %>
+    <%= submit_tag("Filtrar", class: 'envia_filtrar') %>
     <%= submit_tag("Generar PDF", class: 'envia_generar_pdf') %>
   </th>
+
 </tr>
