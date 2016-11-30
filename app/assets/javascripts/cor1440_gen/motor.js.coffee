@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 #//= require sip/motor
-#//= require jquery-ui/autocomplete
+#//= require jquery-ui/widgets/autocomplete
 #//= require cocoon
 
 cor1440_gen_rangoedadac_uno = (ini, col) ->
