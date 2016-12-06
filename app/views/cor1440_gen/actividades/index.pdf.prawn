@@ -1,4 +1,10 @@
-
+font_families.update("Tuffy" => {
+		:normal => Cor1440Gen::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy.ttf'),
+		:italic => Cor1440Gen::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Italic.ttf'),
+		:bold => Cor1440Gen::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold.ttf'),
+		:bold_italic => Cor1440Gen::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold_Italic.ttf')
+		})
+font "Tuffy"
 font_size 16
 text("Reporte de " + @actividades.model_name.human.pluralize.titleize)
 font_size 12
