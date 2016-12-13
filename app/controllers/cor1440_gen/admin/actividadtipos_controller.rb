@@ -14,8 +14,8 @@ module Cor1440Gen
       end
 
       def atributos_index
-        ["id", "nombre", "observaciones", "fechacreacion", 
-          "fechadeshabilitacion"]
+        ["id", "nombre", "observaciones", "fechacreacion_localizada", 
+          "fechadeshabilitacion_localizada"]
       end
 
       def actividadtipo_params

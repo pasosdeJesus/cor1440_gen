@@ -14,8 +14,9 @@ module Cor1440Gen
       end
 
       def atributos_index
-        ["id", "nombre", "limiteinferior", "limitesuperior", "observaciones",
-          "fechacreacion", "fechadeshabilitacion"]
+        ["id", "nombre", "limiteinferior", "limitesuperior", 
+         "observaciones", "fechacreacion_localizada", 
+         "fechadeshabilitacion_localizada"]
       end
 
       def genclase

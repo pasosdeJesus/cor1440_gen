@@ -18,8 +18,8 @@ module Cor1440Gen
         [
           "id", 
           "nombre", 
-          "fechainicio",
-          "fechacierre",
+          "fechainicio_localizada",
+          "fechacierre_localizada",
           "resultados",
           "observaciones",
           "fechacreacion"

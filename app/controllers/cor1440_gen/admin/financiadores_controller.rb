@@ -15,8 +15,8 @@ module Cor1440Gen
       end
 
       def atributos_index
-        ["id", "nombre", "observaciones", "fechacreacion", 
-          "fechadeshabilitacion"]
+        ["id", "nombre", "observaciones", "fechacreacion_localizada", 
+          "fechadeshabilitacion_localizada"]
       end
 
       # Genero del nombre (F - Femenino, M - Masculino)

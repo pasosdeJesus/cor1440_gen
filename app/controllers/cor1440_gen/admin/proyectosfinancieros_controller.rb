@@ -18,8 +18,8 @@ module Cor1440Gen
         [ "id", 
           "nombre" ] +
         [ :financiador_ids =>  [] ] +
-        [ "fechainicio",
-          "fechacierre",
+        [ "fechainicio_localizada",
+          "fechacierre_localizada",
           "responsable_id"
         ] +
         [ :proyecto_ids =>  [] ] +
