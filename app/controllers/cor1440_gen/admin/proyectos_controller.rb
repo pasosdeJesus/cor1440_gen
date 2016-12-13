@@ -22,7 +22,7 @@ module Cor1440Gen
           "fechacierre_localizada",
           "resultados",
           "observaciones",
-          "fechacreacion"
+          "fechacreacion_localizada"
         ]
       end
 

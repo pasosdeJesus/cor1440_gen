@@ -18,6 +18,9 @@ module Cor1440Gen
           has_many :proyectofinanciero, through: :proyecto_proyectofinanciero,
             class_name: 'Cor1440Gen::Proyectofinanciero'
 
+          campofecha_localizado :fechainicio
+          campofecha_localizado :fechafin
+
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
           validates :resultados, length: { maximum: 5000 } 
