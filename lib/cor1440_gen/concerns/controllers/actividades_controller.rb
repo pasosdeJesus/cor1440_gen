@@ -7,6 +7,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
+
           before_action :set_actividad, only: [:show, :edit, :update, :destroy]
           load_and_authorize_resource class: Cor1440Gen::Actividad
 
@@ -222,11 +223,13 @@ module Cor1440Gen
             if @buscodigo != '' then
               ac = ac.where(id: @buscodigo.to_i)
             end
-            @fechaini = param_escapa(par, 'fechaini')
+            @fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(
+              param_escapa(par, 'fechaini'))
             if @fechaini != '' then
               ac = ac.where("fecha >= '#{@fechaini}'")
             end
-            @fechafin = param_escapa(par, 'fechafin')
+            @fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(
+              param_escapa(par, 'fechafin'))
             if @fechafin != '' then
               ac = ac.where("fecha <= '#{@fechafin}'")
             end
