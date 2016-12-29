@@ -9,6 +9,9 @@ gem "pg"
 
 gem 'puma'
 
+# Mientras solucionan https://github.com/sparklemotion/nokogiri/issues/1569
+gem 'nokogiri', '1.6.8.1' 
+
 # CSS
 gem "sass"
 
@@ -72,11 +75,6 @@ gem "tzinfo-data"
 # Motor Sip
 gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 #gem 'sip', path: '../sip'
-
-group :doc do
-  # Genera documentación en doc/api con bundle exec rake doc:rails
-  gem "sdoc", require: false
-end
 
 # Los siguientes son para desarrollo o para pruebas con generadores
 group :development do
