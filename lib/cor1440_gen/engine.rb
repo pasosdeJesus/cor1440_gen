@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+require 'font-awesome-rails'
+
 module Cor1440Gen
   class Engine < ::Rails::Engine
     isolate_namespace Cor1440Gen
