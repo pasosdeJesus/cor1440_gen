@@ -32,7 +32,7 @@
       <% when @actividades.human_attribute_name('responsable') %>
         <%= select_tag "busresponsable", 
           options_from_collection_for_select(
-            ::Usuario.order(:nombre), "id", "nombre", 
+            ::Usuario.order('LOWER(nombre)'), "id", "nombre", 
             params[:busresponsable]),
           { include_blank: true, 
             "data-enviarautomatico" => "", style: "width: 10em" 
