@@ -5,6 +5,7 @@ module Cor1440Gen
     module Models
       module Informe
         extend ActiveSupport::Concern
+        include Sip::Localizacion
 
         included do
           belongs_to :proyecto, class_name: 'Cor1440Gen::Proyecto',
@@ -27,6 +28,9 @@ module Cor1440Gen
           validates :titulo, presence: true
           validates :filtrofechaini, presence: true
           validates :filtrofechafin, presence: true
+
+          campofecha_localizado :filtrofechaini
+          campofecha_localizado :filtrofechafin
 
           def new(*args, &block)
             super(*args, block)

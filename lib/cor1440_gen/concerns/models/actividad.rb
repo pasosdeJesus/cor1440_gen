@@ -5,6 +5,7 @@ module Cor1440Gen
     module Models
       module Actividad
         extend ActiveSupport::Concern
+        include Sip::Localizacion
 
         included do
           @current_usuario = -1
@@ -66,6 +67,8 @@ module Cor1440Gen
             foreign_key: 'actividad_id'
           has_many :usuario, through: :actividad_usuario,
             class_name: 'Usuario'
+
+          campofecha_localizado :fecha
 
           validates_presence_of :oficina
           validates_presence_of :fecha

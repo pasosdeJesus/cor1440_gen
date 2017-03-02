@@ -14,6 +14,8 @@ es:
     proyectofinanciero: Convenio financiado
   activerecord:
     attributes:
+      "cor1440_gen/actividad":
+        fecha_localizada: Fecha
       "cor1440_gen/actividadarea":
         Actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad
@@ -34,7 +36,9 @@ es:
         Proyectosfinancieros: Convenios Financiados
       "cor1440_gen/informe":
         filtrofechaini:  Fecha inicial
+        filtrofechaini_localizada:  Fecha inicial
         filtrofechafin:  Fecha final
+        filtrofechafin_localizada:  Fecha final
         filtroproyecto: Área
         filtroactividadarea: Subárea 
         columnafecha: Fecha

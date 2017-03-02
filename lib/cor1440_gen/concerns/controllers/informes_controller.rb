@@ -24,8 +24,10 @@ module Cor1440Gen
           # Retorna actividades tras aplicar filtro que está en @informe
           def filtra_actividades
             return Cor1440Gen::ActividadesController.filtra({
-              fechaini: @informe.filtrofechaini,
-              fechafin: @informe.filtrofechafin,
+              fechaini: Sip::FormatoFechaHelper.fecha_estandar_local(
+                @informe.filtrofechaini.to_s),
+              fechafin: Sip::FormatoFechaHelper.fecha_estandar_local(
+                @informe.filtrofechafin.to_s),
               busresponsable: @informe.filtroresponsable,
               busoficina: @informe.filtrooficina,
               busproyecto: @informe.filtroproyecto,
