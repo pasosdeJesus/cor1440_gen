@@ -1,22 +1,17 @@
 # encoding: utf-8
 
 require_relative '../../test_helper'
+require_relative '../../models/cor1440_gen/actividad_test.rb'
 
 module Cor1440Gen
   class ActividadesControllerTest < ActionDispatch::IntegrationTest
     include Engine.routes.url_helpers
     include Devise::Test::IntegrationHelpers
     
-    PRUEBA_ACTIVIDAD ={
-      minutos: 45,
-      nombre: "nombreact",
-      oficina_id: 1,
-      fecha: "2014-11-11",
-      created_at: "2014-11-11"
-    }
-
     setup do
-      @actividad = Actividad.create(PRUEBA_ACTIVIDAD)
+      @actividad = Actividad.create(
+        Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD
+      )
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO) 
       sign_in @current_usuario
     end
@@ -34,7 +29,7 @@ module Cor1440Gen
     test "should create actividad" do
       assert_difference('Cor1440Gen::Actividad.count') do
         post actividades_url, params: { 
-          actividad: PRUEBA_ACTIVIDAD
+          actividad: Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD
         }
       end
 

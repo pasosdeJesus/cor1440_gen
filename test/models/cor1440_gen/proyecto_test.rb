@@ -5,22 +5,22 @@ require_relative '../../test_helper'
 module Cor1440Gen
   class ProyectoTest < ActiveSupport::TestCase
 
+    PRUEBA_PROYECTO = {
+      id: 1000,
+      nombre: "Proyecto",
+      fechacreacion: "2015-04-20",
+      created_at: "2015-04-20"
+    }
+
     test "valido" do
-      p = Proyecto.new
-		  p.id=1000 # Buscamos que no interfiera con existentes
-      p.nombre="Proyecto"
-      p.fechacreacion="2015-04-20"
-      p.created_at="2015-04-20"
+      p = Proyecto.create PRUEBA_PROYECTO
       assert p.valid?
       p.destroy
     end
 
     test "no valido" do
-      p = Proyecto.new
-		  p.id=1000 # Buscamos que no interfiera con existentes
+      p = Proyecto.new PRUEBA_PROYECTO
       p.nombre=""
-      p.fechacreacion="2015-04-20"
-      p.created_at="2015-04-20"
       assert_not p.valid?
       p.destroy
     end

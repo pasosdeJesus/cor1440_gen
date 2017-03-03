@@ -5,22 +5,22 @@ require_relative '../../test_helper'
 module Cor1440Gen
   class RangoedadactTest < ActiveSupport::TestCase
 
+    PRUEBA_RANGOEDADAC = {
+      id: 1000,
+      nombre: "Rangoedadac",
+      fechacreacion: "2014-09-09",
+      created_at: "2014-09-09"
+    }
+
     test "valido" do
-      re = Rangoedadac.new
-		  re.id=1000 # Buscamos que no intefiera con existentes
-      re.nombre="Rangoedadac"
-      re.fechacreacion="2014-09-09"
-      re.created_at="2014-09-09"
+      re = Rangoedadac.create PRUEBA_RANGOEDADAC
       assert re.valid?
       re.destroy
     end
 
     test "no valido" do
-      re = Rangoedadac.new
-		  re.id=1000 # Buscamos que no intefiera con existentes
+      re = Rangoedadac.new PRUEBA_RANGOEDADAC
       re.nombre=""
-      re.fechacreacion="2014-09-09"
-      re.created_at="2014-09-09"
       assert_not re.valid?
       re.destroy
     end
