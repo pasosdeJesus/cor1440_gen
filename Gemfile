@@ -71,8 +71,8 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor Sip
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
-#gem 'sip', path: '../sip'
+#gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+gem 'sip', path: '../sip'
 
 # Los siguientes son para desarrollo o para pruebas con generadores
 group :development do
@@ -80,7 +80,7 @@ group :development do
   gem "thor"
 
   # Depurar
-  #gem 'byebug'
+  gem 'byebug'
   
   # ConSola irb en páginas con excepciones o usando <%= console %> en vistasA
   gem 'web-console'
@@ -95,11 +95,12 @@ group :test do
 
   # Acelera desarrollo ejecutando en fondo. https://github.com/jonleighton/spring
   gem "spring"
-  
-  # Pruebas con rspec
-  gem 'spring-commands-rspec'
-  gem 'rspec-rails'
+  gem "connection_pool"
+  gem "minitest-reporters" 
+  gem "poltergeist" 
+  gem 'minitest-rails-capybara'
 
+  
   # Un proceso para cada prueba -- acelera
   gem 'spork'#, '~> 1.0rc'
 
