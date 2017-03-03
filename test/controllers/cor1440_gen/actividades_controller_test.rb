@@ -62,5 +62,12 @@ module Cor1440Gen
 
       assert_redirected_to actividades_url
     end
+
+#    test "enrutamiento" do
+#      assert_routing "/actividades", controller: "cor1440_gen/actividades", 
+#        action: "index"
+#    end
+    
+
   end
 end
