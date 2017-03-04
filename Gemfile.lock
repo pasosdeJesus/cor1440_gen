@@ -1,11 +1,6 @@
 GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
-  specs:
-    cocoon (1.2.6)
-
-PATH
-  remote: ../sip
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: d4f00d22f2dd4ff8d951882d627af7d9ae903b03
   specs:
     sip (2.0.b2)
       bootstrap-datepicker-rails
@@ -22,6 +17,12 @@ PATH
       twitter-bootstrap-rails
       twitter_cldr
       will_paginate
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
+  specs:
+    cocoon (1.2.6)
 
 GEM
   remote: https://rubygems.org/
@@ -73,7 +74,6 @@ GEM
     bootstrap-datepicker-rails (1.6.4.1)
       railties (>= 3.0)
     builder (3.2.3)
-    byebug (9.0.6)
     camertron-eprun (1.1.1)
     cancancan (1.16.0)
     capybara (2.12.1)
@@ -304,7 +304,6 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
-  byebug
   cancancan
   cocoon!
   coffee-rails
