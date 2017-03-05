@@ -6,6 +6,7 @@ module Cor1440Gen
       module Proyectofinanciero
         extend ActiveSupport::Concern
         include Sip::Basica
+        include Sip::Localizacion
 
         included do
 
@@ -34,10 +35,21 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyectofinanciero'
 
-
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }
+
+          campofecha_localizado :fechainicio
+          campofecha_localizado :fechacierre
+
+          validate :fechas_ordenadas
+          def fechas_ordenadas
+            if fechainicio && fechacierre && fechainicio > fechacierre
+              errors.add(:fechacierre, 
+                         "La fecha de cierre debe ser posterior a la de inicio")
+            end
+          end
+
 
         end
         

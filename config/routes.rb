@@ -2,6 +2,7 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
   resources :informes, path_names: { new: 'nuevo', edit: 'edita' }
+  resources :proyectosfinancieros, path_names: { new: 'nuevo', edit: 'edita' }
 
   get "/informes/:id/impreso" => "informes#impreso", 
     as: :impresion

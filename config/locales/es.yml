@@ -13,6 +13,10 @@ es:
     proyectosfinancieros: Convenios financieros
     proyectofinanciero: Convenio financiado
   activerecord:
+    models:
+      "cor1440_gen/proyectofinanciero": 
+        one: "Compromiso institucional"
+        other: "Compromisos institucionales"
     attributes:
       "cor1440_gen/actividad":
         fecha_localizada: Fecha
@@ -33,7 +37,11 @@ es:
         Proyectos: Áreas
       "cor1440_gen/proyectofinanciero":
         Proyectofinanciero: Convenio Financiado
+        proyectofinanciero: Convenio Financiado
         Proyectosfinancieros: Convenios Financiados
+        proyectosfinancieros: Convenios Financiados
+        fechainicio_localizada: Fecha de inicio
+        fechacierre_localizada: Fecha de cierre
       "cor1440_gen/informe":
         filtrofechaini:  Fecha inicial
         filtrofechaini_localizada:  Fecha inicial

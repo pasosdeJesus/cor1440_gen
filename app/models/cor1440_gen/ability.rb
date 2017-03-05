@@ -27,7 +27,6 @@ module Cor1440Gen
       ['Cor1440Gen', 'actividadtipo'], 
       ['Cor1440Gen', 'financiador'], 
       ['Cor1440Gen', 'proyecto'], 
-      ['Cor1440Gen', 'proyectofinanciero'], 
       ['Cor1440Gen', 'rangoedadac']
     ]  
     def tablasbasicas 
