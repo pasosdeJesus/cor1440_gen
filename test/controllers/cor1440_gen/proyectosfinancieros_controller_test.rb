@@ -27,14 +27,16 @@ module Cor1440Gen
     end
 
     test "should create proyectofinanciero" do
-      #assert_difference('Cor1440Gen::Proyectofinanciero.count') do
+      p = Cor1440Gen::ProyectofinancieroTest::PRUEBA_PROYECTOFINANCIERO
+      p[:nombre] = 'norepetido'
+      p[:fechainicio_localizada] = p[:fechainicio]
+      p[:fechacierre_localizada] = p[:fechacierre]
+      assert_difference('Cor1440Gen::Proyectofinanciero.count') do
         post proyectosfinancieros_url, params: { 
-          proyectofinanciero: 
-          Cor1440Gen::ProyectofinancieroTest::PRUEBA_PROYECTOFINANCIERO
+          proyectofinanciero: p
         }
-      #end
-      assert_response :success
-      #assert_redirected_to proyectofinanciero_url(Proyectofinanciero.last)
+      end
+      assert_redirected_to proyectofinanciero_url(Proyectofinanciero.last)
     end
 
     test "should show proyectofinanciero" do

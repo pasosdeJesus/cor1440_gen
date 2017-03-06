@@ -6,7 +6,6 @@ module Cor1440Gen
   class ProyectofinancieroTest < ActiveSupport::TestCase
 
     PRUEBA_PROYECTOFINANCIERO = {
-      id: 1000,
       nombre: "Proyectofinanciero",
       fechacreacion: "2015-04-20",
       created_at: "2015-04-20"

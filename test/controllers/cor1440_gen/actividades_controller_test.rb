@@ -27,6 +27,8 @@ module Cor1440Gen
     end
 
     test "should create actividad" do
+      a = Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD
+      a[:fecha_localizada] = a[:fecha]
       assert_difference('Cor1440Gen::Actividad.count') do
         post actividades_url, params: { 
           actividad: Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD

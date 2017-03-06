@@ -92,6 +92,7 @@ group :test do
   #gem "codeclimate-test-reporter", require: nil
 
 
+  #gem 'byebug'
   gem 'rails-controller-testing'
 
   # Acelera desarrollo ejecutando en fondo. https://github.com/jonleighton/spring
