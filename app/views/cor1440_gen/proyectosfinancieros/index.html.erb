@@ -8,7 +8,7 @@
 <% ng = (!genclase.nil? && genclase == 'F') ? 'Nueva' : 'Nuevo' %>
 <% if @basica.size > 5 %>
   <%= link_to t('.new', :default => [ng, t("helpers.links.new")]),
-    new_proyectofinanciero_path(@basica), :class => 'btn btn-primary' 
+    new_proyectofinanciero_path(), :class => 'btn btn-primary' 
   %>
 <% end %>
 <table class="table table-striped">
@@ -63,6 +63,6 @@
 
 <%= will_paginate @basica, { param_name: :pagina }  %>
 <%= link_to t('.new', :default => [ng, t("helpers.links.new")]),
-  new_proyectofinanciero_path(@basica),
+  new_proyectofinanciero_path(),
   :class => 'btn btn-primary' 
 %>
