@@ -3,7 +3,9 @@ es:
     fechacreacion: Creación
     fechadeshabilitacion: Deshabilitación 
     fechainicio: Fecha de Inicio
+    fechainicio_localizada: Fecha de Inicio
     fechacierre: Fecha de Cierre
+    fechacierre_localizada: Fecha de Cierre
     actividadarea: Subárea de Actividad
     actividadareas: Subáreas de Actividad
     actividadtipo: Tipo de Actividad

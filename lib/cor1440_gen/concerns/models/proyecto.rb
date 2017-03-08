@@ -19,7 +19,7 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Proyectofinanciero'
 
           campofecha_localizado :fechainicio
-          campofecha_localizado :fechafin
+          campofecha_localizado :fechacierre
 
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
