@@ -30,3 +30,4 @@ test/dummy/.sass-cache
 tmp/
 herram/
 .byebug_history
+coverage/

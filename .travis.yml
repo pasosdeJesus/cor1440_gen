@@ -3,14 +3,13 @@ rvm:
         - 2.4.0
 notifications:
         email: false
-script: CODECLIMATE_REPO_TOKEN=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e bundle exec rails test -b
+script: bundle exec rails test -b
+after_success: 
+        - CODECLIMATE_REPO_TOKEN=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e bundle exec codeclimate-test-reporter
 env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 before_install: 
-        - sudo apt-add-repository -y ppa:ubuntu-sdk-team/ppa
-        - sudo apt-get update
-        - sudo apt-get install libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev language-pack-es
         - sudo locale-gen --no-archive es_CO.UTF-8
         - sudo /etc/init.d/postgresql stop
         - sudo /etc/init.d/postgresql start 9.3
