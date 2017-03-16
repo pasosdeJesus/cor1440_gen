@@ -1,9 +1,9 @@
 language: ruby
 rvm:
-        - 2.3
+        - 2.4.0
 notifications:
         email: false
-script: CODECLIMATE_REPO_TOKEN=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e rails test -b
+script: CODECLIMATE_REPO_TOKEN=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e bundle exec rails test -b
 env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
