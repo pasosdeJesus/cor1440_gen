@@ -2,8 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: sipdes
-  password: aquiles
+  username: sip
+  password: ViWiWiGor
   host: /var/www/var/run/postgresql
 
 development:
