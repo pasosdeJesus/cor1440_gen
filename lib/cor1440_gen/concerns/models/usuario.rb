@@ -1,13 +1,10 @@
 # encoding: UTF-8
 
-#require 'sip/concerns/models/usuario'
-
 module Cor1440Gen
   module Concerns
     module Models
       module Usuario
         extend ActiveSupport::Concern
-        #include Sip::Concerns::Models::Usuario
 
         included do
 
