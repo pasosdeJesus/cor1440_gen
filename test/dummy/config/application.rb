@@ -30,5 +30,7 @@ module Dummy
     
     config.relative_url_root = '/'
 
+    config.x.heb412_ruta = Rails.root.join('public', 'heb412')
+
   end
 end

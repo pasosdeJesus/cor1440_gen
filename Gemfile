@@ -23,6 +23,9 @@ gem "prawn-table"
 # Plantilla ODT
 gem "odf-report"
 
+gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
+gem 'chosen-rails'
+
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
 

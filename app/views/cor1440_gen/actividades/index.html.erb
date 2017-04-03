@@ -36,10 +36,6 @@
       <%= render 'index_tabla' %>
     </tbody>
   </table>
-<% end %>
+  <%= render 'index_post_tabla' %>
 
-<%= will_paginate @actividades, { param_name: :pagina }  %>
-<%= link_to t('.new', :default => 'Nueva'),
-  cor1440_gen.new_actividad_path,
-  :class => 'btn btn-primary' 
-%>
+<% end %>
