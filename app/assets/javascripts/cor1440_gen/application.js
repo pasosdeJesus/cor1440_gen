@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require sip/motor
+//= require heb412_gen/motor
 //= require cor1440_gen/motor
 //= require_tree .
 
@@ -19,6 +20,7 @@ $(document).on('turbolinks:load ready page:load', function() {
   	root = typeof exports !== "undefined" && exports !== null ? 
 	  exports : window;
 	sip_prepara_eventos_comunes(root);
+	heb412_gen_prepara_eventos_comunes(root);
 	cor1440_gen_prepara_eventos_comunes(root);
         $("input[data-behaviour='datepicker']").datepicker({
           format: 'yyyy-mm-dd',

@@ -23,7 +23,7 @@ gem "prawn-table"
 # Plantilla ODT
 gem "odf-report"
 
-gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
+
 gem 'chosen-rails'
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
@@ -74,19 +74,25 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor Sip
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
-#gem 'sip', path: '../sip'
+#gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+gem 'sip', path: '../sip'
+
+# Motor heb412_gen para manejar archivos como nube y plantillas
+gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
+#gem 'heb412_gen', path: '../heb412_gen/'
 
 # Los siguientes son para desarrollo o para pruebas con generadores
 group :development do
   # Requerido por rake
   gem "thor"
-
-  # Depurar
-  #gem 'byebug'
   
   # ConSola irb en páginas con excepciones o usando <%= console %> en vistasA
   gem 'web-console'
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  #gem 'byebug', platform: :mri
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
@@ -95,8 +101,6 @@ group :test do
   # Envia resultados de pruebas desde travis a codeclimate
   gem "codeclimate-test-reporter", require: nil
 
-
-  #gem 'byebug'
   gem 'rails-controller-testing'
 
   # Acelera desarrollo ejecutando en fondo. https://github.com/jonleighton/spring

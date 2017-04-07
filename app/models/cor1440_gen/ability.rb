@@ -47,6 +47,21 @@ module Cor1440Gen
     BASICAS_PRIO = []
     # Hereda tablasbasicas_prio de sip
 
+    CAMPOS_PLANTILLAS_PROPIAS = {
+      'Actividad' => { 
+        campos: [
+          'id', 'fecha', 'oficina', 'responsable', 'nombre', 
+          'tipos_de_actividad', 'areas', 'subareas', 'convenios_financieros',
+          'objetivo', 'poblacion', 'anexos'
+        ],
+        controlador: 'Cor1440Gen::ActividadesController'
+      }
+    }
+
+    def campos_plantillas 
+      Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.
+        clone.merge(CAMPOS_PLANTILLAS_PROPIAS)
+    end
 
   end # class
 end   # module

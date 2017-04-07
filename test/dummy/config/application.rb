@@ -26,9 +26,9 @@ module Dummy
 
     config.active_record.schema_format = :sql
 
-    config.x.formato_fecha = 'yyyy-mm-dd'
-    
     config.relative_url_root = '/'
+
+    config.x.formato_fecha = 'yyyy-mm-dd'
 
     config.x.heb412_ruta = Rails.root.join('public', 'heb412')
 
