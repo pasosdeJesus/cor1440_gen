@@ -50,9 +50,11 @@ module Cor1440Gen
     CAMPOS_PLANTILLAS_PROPIAS = {
       'Actividad' => { 
         campos: [
-          'id', 'fecha', 'oficina', 'responsable', 'nombre', 
-          'tipos_de_actividad', 'areas', 'subareas', 'convenios_financieros',
-          'objetivo', 'poblacion', 'anexos'
+          'id', 'nombre', 'fecha', 'lugar', 'oficina', 
+          'tipos_de_actividad', 'convenios_financieros', 'areas', 'subareas', 
+          'responsable', 'corresponsables', 'objetivo', 
+          'resultado', 'poblacion', 'observaciones', 
+          'creacion', 'actualizacion'
         ],
         controlador: 'Cor1440Gen::ActividadesController'
       }

@@ -20,7 +20,9 @@
   </tr>
 </table>
 
-<%= form_tag(actividades_path, method: "get") do %>
+<%= simple_form_for :filtro,
+  { url: cor1440_gen.actividades_path, 
+    method: "get"} do |f| %>
   <table class="table table-striped" border='1'>
     <thead>
       <tr>
@@ -30,12 +32,12 @@
         <th><%= model_class.human_attribute_name(:anexos) %></th>
         <th><%=t '.actions', :default => t("helpers.actions") %></th>
       </tr>
-      <%= render 'index_filtro' %>
+      <%= render partial: 'index_filtro', locals: {f: f} %>
     </thead>
     <tbody id="index_tabla">
-      <%= render 'index_tabla' %>
+      <%= render partial: 'index_tabla', locals: {f: f} %>
     </tbody>
   </table>
-  <%= render 'index_post_tabla' %>
+  <%= render partial: 'index_post_tabla', locals: {f: f} %>
 
 <% end %>

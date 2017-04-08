@@ -7,6 +7,7 @@ Cor1440Gen::Engine.routes.draw do
   get "/informes/:id/impreso" => "informes#impreso", 
     as: :impresion
 
+
   namespace :admin do
     ab = ::Ability.new
     ab.tablasbasicas.each do |t|

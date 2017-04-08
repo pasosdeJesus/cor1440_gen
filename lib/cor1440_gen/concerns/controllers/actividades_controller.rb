@@ -62,7 +62,11 @@ module Cor1440Gen
           # GET /actividades
           # GET /actividades.json
           def index
-            @actividades = Cor1440Gen::ActividadesController.filtra(params)
+            @actividades = Cor1440Gen::ActividadesController.filtra(
+              params[:filtro])
+            @plantillas = Heb412Gen::Plantillahcm.where(
+              vista: 'Actividad').select('nombremenu, id').map { 
+                |c| [c.nombremenu, c.id] }
             @numactividades = @actividades.size
             @enctabla = encabezado_comun()
             respond_to do |format|
@@ -74,6 +78,51 @@ module Cor1440Gen
                 render "index", layout: "application" 
               }
               format.json { head :no_content }
+     
+              format.ods {
+
+                @cuerpotabla = cuerpo_comun()
+                aractividades = Array.new
+                @cuerpotabla.each do |a| 
+                  ac = Cor1440Gen::Actividad.find(a[0])
+                  r = {
+                    id: a[0],
+                    fecha: a[1],
+                    oficina: a[2],
+                    responsable: a[3],
+                    nombre: a[4],
+                    tipos_de_actividad: a[5],
+                    areas: a[6],
+                    subareas: a[7],
+                    convenios_financieros: a[8],
+                    objetivo: a[9],
+                    poblacion: a[10],
+                    observaciones: ac.observaciones,
+                    resultado: ac.resultado,
+                    creacion: ac.created_at,
+                    actualizacion: ac.updated_at,
+                    lugar: ac.lugar,
+                    corresponsables: ac.usuario.inject("") { |memo, i| 
+                      (memo == "" ? "" : memo + "; ") + i.nusuario },
+                  }
+                  aractividades << r
+                end
+                if params[:idplantilla].nil? 
+                  head :no_content 
+                elsif params[:idplantilla].to_i <= 0
+                  head :no_content 
+                elsif Heb412Gen::Plantillahcm.where(
+                    id: params[:idplantilla].to_i).take.nil?
+                  head :no_content 
+                else
+                  pl = Heb412Gen::Plantillahcm.find(
+                    params[:idplantilla].to_i)
+                  n = Heb412Gen::PlantillahcmController.
+                    llena_plantilla_multiple_fd(pl, aractividades)
+                  send_file n, x_sendfile: true
+                end
+              }
+
               format.js   { 
                 @actividades = @actividades.paginate(
                   :page => params[:pagina], per_page: 20
@@ -211,6 +260,7 @@ module Cor1440Gen
 
         class_methods do
           def param_escapa(par, p)
+            par.nil? ? '' :
             par[p] ? Sip::Pais.connection.quote_string(par[p].to_s) : 
               par[p.to_sym] ? Sip::Pais.connection.quote_string(par[p.to_sym].to_s) :
               par[p.to_s] ? Sip::Pais.connection.quote_string(par[p.to_s].to_s) :  ''

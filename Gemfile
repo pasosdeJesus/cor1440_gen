@@ -25,6 +25,7 @@ gem "odf-report"
 
 
 gem 'chosen-rails'
+gem 'rspreadsheet'
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
@@ -74,8 +75,8 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor Sip
-#gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
-gem 'sip', path: '../sip'
+gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+#gem 'sip', path: '../sip'
 
 # Motor heb412_gen para manejar archivos como nube y plantillas
 gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'

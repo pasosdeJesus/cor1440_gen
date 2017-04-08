@@ -1,2 +1,10 @@
-<%= submit_tag("Filtrar", class: 'envia_filtrar') %>
-<%= submit_tag("Generar PDF", class: 'envia_generar_pdf') %>
+<%= f.button :submit, 
+  name: 'filtrar',
+  value: "Filtrar", 
+  class: 'envia_filtrar btn-primary',
+  "data-disable-with": 'Filtrar'
+%>
+<%= f.button :submit, 'Generar PDF', 
+  class: 'envia_generar_pdf btn-primary',
+  "data-disable-with": 'Generar PDF'
+%>
