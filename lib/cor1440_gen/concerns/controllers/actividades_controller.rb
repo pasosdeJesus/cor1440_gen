@@ -80,10 +80,19 @@ module Cor1440Gen
               format.json { head :no_content }
      
               format.ods {
+                if params[:idplantilla].nil? 
+                  head :no_content 
+                elsif params[:idplantilla].to_i <= 0
+                  head :no_content 
+                elsif Heb412Gen::Plantillahcm.where(
+                  id: params[:idplantilla].to_i).take.nil?
+                  head :no_content 
+                end
 
                 @cuerpotabla = cuerpo_comun()
                 aractividades = Array.new
                 @cuerpotabla.each do |a| 
+
                   ac = Cor1440Gen::Actividad.find(a[0])
                   r = {
                     id: a[0],
@@ -107,20 +116,11 @@ module Cor1440Gen
                   }
                   aractividades << r
                 end
-                if params[:idplantilla].nil? 
-                  head :no_content 
-                elsif params[:idplantilla].to_i <= 0
-                  head :no_content 
-                elsif Heb412Gen::Plantillahcm.where(
-                    id: params[:idplantilla].to_i).take.nil?
-                  head :no_content 
-                else
-                  pl = Heb412Gen::Plantillahcm.find(
-                    params[:idplantilla].to_i)
-                  n = Heb412Gen::PlantillahcmController.
-                    llena_plantilla_multiple_fd(pl, aractividades)
-                  send_file n, x_sendfile: true
-                end
+                pl = Heb412Gen::Plantillahcm.find(
+                  params[:idplantilla].to_i)
+                n = Heb412Gen::PlantillahcmController.
+                  llena_plantilla_multiple_fd(pl, aractividades)
+                send_file n, x_sendfile: true
               }
 
               format.js   { 
