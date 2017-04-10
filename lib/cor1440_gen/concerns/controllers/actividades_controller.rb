@@ -25,7 +25,7 @@ module Cor1440Gen
               @actividades.human_attribute_name(:objetivo),
               @actividades.human_attribute_name(:poblacion),
             ]
-          end
+        end
 
           def fila_comun(actividad)
             pob = actividad.actividad_rangoedadac.map { |i| 
@@ -48,6 +48,31 @@ module Cor1440Gen
               actividad.objetivo, 
               pob.reduce(:+)
             ]
+          end
+
+          # transforma un vector devuelto por fila_comun en registro y
+          # lo amplia para devolver todo campo consultable de un actividad
+          def vector_a_registro(a, ac)
+            {
+              id: a[0],
+              fecha: a[1],
+              oficina: a[2],
+              responsable: a[3],
+              nombre: a[4],
+              tipos_de_actividad: a[5],
+              areas: a[6],
+              subareas: a[7],
+              convenios_financieros: a[8],
+              objetivo: a[9],
+              poblacion: a[10],
+              observaciones: ac.observaciones,
+              resultado: ac.resultado,
+              creacion: ac.created_at,
+              actualizacion: ac.updated_at,
+              lugar: ac.lugar,
+              corresponsables: ac.usuario.inject("") { |memo, i| 
+                (memo == "" ? "" : memo + "; ") + i.nusuario },
+            }
           end
 
           # Cuerpo de tabla comun para HTML y PDF
@@ -94,26 +119,7 @@ module Cor1440Gen
                 @cuerpotabla.each do |a| 
 
                   ac = Cor1440Gen::Actividad.find(a[0])
-                  r = {
-                    id: a[0],
-                    fecha: a[1],
-                    oficina: a[2],
-                    responsable: a[3],
-                    nombre: a[4],
-                    tipos_de_actividad: a[5],
-                    areas: a[6],
-                    subareas: a[7],
-                    convenios_financieros: a[8],
-                    objetivo: a[9],
-                    poblacion: a[10],
-                    observaciones: ac.observaciones,
-                    resultado: ac.resultado,
-                    creacion: ac.created_at,
-                    actualizacion: ac.updated_at,
-                    lugar: ac.lugar,
-                    corresponsables: ac.usuario.inject("") { |memo, i| 
-                      (memo == "" ? "" : memo + "; ") + i.nusuario },
-                  }
+                  r = vector_a_registro(a, ac)
                   aractividades << r
                 end
                 pl = Heb412Gen::Plantillahcm.find(
@@ -268,7 +274,6 @@ module Cor1440Gen
 
           def filtra(par)
             ac = Actividad.order(fecha: :desc)
-            #byebug
             @buscodigo = param_escapa(par, 'buscodigo')
             if @buscodigo != '' then
               ac = ac.where(id: @buscodigo.to_i)
