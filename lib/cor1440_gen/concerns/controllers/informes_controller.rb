@@ -206,7 +206,9 @@ module Cor1440Gen
           # Only allow a trusted parameter "white list" through.
           def informe_params
             r = params.require(:informe).permit(
-              :titulo, :filtrofechaini, :filtrofechafin, 
+              :titulo, 
+              :filtrofechaini, :filtrofechaini_localizada,
+              :filtrofechafin, :filtrofechafin_localizada, 
               :filtroresponsable, :filtrooficina,
               :filtroproyecto, 
               :filtroactividadarea, #:filtropoa, 
