@@ -36,18 +36,8 @@
   </tbody>
 </table>
 
-<h2>Recomendaciones</h2>
-<pre><%= @informe.recomendaciones %></pre>
 
-<h2>Avances</h2>
-<pre><%= @informe.avances %></pre>
-
-<h2>Logros</h2>
-<pre><%= @informe.logros %></pre>
-<h2>Dificultades</h2>
-<pre><%= @informe.dificultades %></pre>
-
-<%= render partial: 'show_otros_narrativos', locals: {f: @informe} %>
+<%= render partial: 'show_narrativos', locals: {f: @informe} %>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

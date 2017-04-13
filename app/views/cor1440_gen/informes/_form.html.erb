@@ -48,57 +48,15 @@
   </div> <!-- panel panel-default -->
 
   <div class="panel panel-default">
-    <div class="panel-heading">Columnas del Listado de Actividades</div><div class="panel-body">
-      <table border="1">
-        <tr>
-          <td>
-            <%= f.input :columnafecha, 
-              label: Cor1440Gen::Actividad.human_attribute_name(:fecha) 
-            %>
-          </td>
-          <td>
-            <%= f.input :columnaresponsable,
-              label: Cor1440Gen::Actividad.human_attribute_name(:responsable)
-            %>
-          </td>
-          <td>
-            <%= f.input :columnanombre, 
-              label: Cor1440Gen::Actividad.human_attribute_name(:nombre)
-            %>
-          </td>
-          <td>
-            <%= f.input :columnatipo,
-              label: Cor1440Gen::Actividad.human_attribute_name(:actividadtipo)
-            %>
-          </td>
-          <td>
-            <%= f.input :columnaobjetivo,
-              label: Cor1440Gen::Actividad.human_attribute_name(:objetivo)
-            %>
-          </td>
-          <td>
-            <%= f.input :columnaproyecto,
-              label: Cor1440Gen::Actividad.human_attribute_name(:proyecto)
-            %>
-          </td>
-          <td>
-            <%= f.input :columnapoblacion,
-              label: Cor1440Gen::Actividad.human_attribute_name(:poblacion)
-            %>
-          </td>
-          <%= render partial: 'otras_columnas', locals: {f: f} %>
-        </tr>
-      </table>
+    <div class="panel-heading">Columnas del Listado de Actividades</div>
+    <div class="panel-body">
+      <%= render partial: 'columnas_informe', locals: {f: f} %>
     </div> <!-- panel-body -->
   </div> <!-- panel panel-default -->
 
   <div class="panel panel-default">
     <div class="panel-heading">Campos Narrativos</div><div class="panel-body">
-      <%= f.input :recomendaciones, as: :text %>
-      <%= f.input :avances, as: :text %>
-      <%= f.input :logros, as: :text %>
-      <%= f.input :dificultades, as: :text %>
-      <%= render partial: 'otros_narrativos', locals: {f: f} %>
+      <%= render partial: 'form_narrativos', locals: {f: f} %>
     </div> <!-- panel-body -->
   </div> <!-- panel panel-default -->
 
