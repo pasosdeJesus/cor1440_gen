@@ -162,9 +162,14 @@ module Cor1440Gen
             #byebug
           end
 
+          # Establece valores por omision en informe
+          def valores_omision(informe)
+          end
+
           # GET /informes/new
           def new
             @informe = Informe.new
+            valores_omision(@informe)
           end
 
           # GET /informes/1/edit
