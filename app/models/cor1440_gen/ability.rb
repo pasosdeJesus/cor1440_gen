@@ -32,6 +32,7 @@ module Cor1440Gen
     def tablasbasicas 
       Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
         ['Sip', 'fuenteprensa'], 
+        ['Sip', 'grupo'], 
         ['Sip', 'tdocumento'], 
         ['Sip', 'trelacion'], 
         ['Sip', 'tsitio']
