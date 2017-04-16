@@ -16,42 +16,46 @@ module Cor1440Gen
             "Cor1440Gen::Proyectofinanciero"
           end
 
+          def new_admin_basica_path(o)
+            return new_proyectofinanciero_path()
+          end
+
           def set_proyectofinanciero
             @basica = Proyectofinanciero.find(params[:id])
           end
 
-          def create
-            @basica = Proyectofinanciero.new(
-              proyectofinanciero_params)
-            @basica.fechacreacion =  
-              DateTime.now.strftime('%Y-%m-%d') 
+#          def create
+#            @basica = Proyectofinanciero.new(
+#              proyectofinanciero_params)
+#            @basica.fechacreacion =  
+#              DateTime.now.strftime('%Y-%m-%d') 
 
-            if @basica.save
-              redirect_to proyectofinanciero_path(@basica), 
-                notice: 'Proyecto creado.'
-            else
-              render :new
-            end
-          end
+#            if @basica.save
+#              redirect_to proyectofinanciero_path(@basica), 
+#                notice: 'Proyecto creado.'
+#            else
+#              render :new
+#            end
+#          end
 
-          def update
-            if @proyectofinanciero.update(proyectofinanciero_params)
-              redirect_to proyectofinanciero_path(@proyectofinanciero), 
-                notice: 'Proyecto actualizado.' 
-            else
-              render :edit
-            end
-          end
+#          def update
+#            if @proyectofinanciero.update(proyectofinanciero_params)
+#              redirect_to proyectofinanciero_path(@proyectofinanciero), 
+#                notice: 'Proyecto actualizado.' 
+#            else
+#              render :edit
+#            end
+#          end
 
-          def destroy
-            @proyectofinanciero.destroy
-            respond_to do |format|
-              format.html { 
-                redirect_to proyectosfinancieros_path, 
-                notice: 'Proyecto eliminado' }
-              format.json { head :no_content }
-            end
-          end
+#          def destroy
+#            @proyectofinanciero.destroy
+#            respond_to do |format|
+#              format.html { 
+#                redirect_to proyectosfinancieros_path, 
+#                notice: 'Proyecto eliminado' }
+#              format.json { head :no_content }
+#            end
+#          end
 
           def atributos_index
             [ "id", 

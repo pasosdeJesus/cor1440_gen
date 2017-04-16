@@ -9,6 +9,8 @@ module Cor1440Gen
         include Sip::Localizacion
 
         included do
+          campofecha_localizado :fechainicio
+          campofecha_localizado :fechacierre
 
           belongs_to :responsable, class_name: 'Usuario',
             foreign_key: "responsable_id", validate: true
@@ -38,9 +40,6 @@ module Cor1440Gen
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }
-
-          campofecha_localizado :fechainicio
-          campofecha_localizado :fechacierre
 
           validate :fechas_ordenadas
           def fechas_ordenadas
