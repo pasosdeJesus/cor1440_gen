@@ -24,38 +24,13 @@ module Cor1440Gen
             @basica = Proyectofinanciero.find(params[:id])
           end
 
-#          def create
-#            @basica = Proyectofinanciero.new(
-#              proyectofinanciero_params)
-#            @basica.fechacreacion =  
-#              DateTime.now.strftime('%Y-%m-%d') 
-
-#            if @basica.save
-#              redirect_to proyectofinanciero_path(@basica), 
-#                notice: 'Proyecto creado.'
-#            else
-#              render :new
-#            end
-#          end
-
-#          def update
-#            if @proyectofinanciero.update(proyectofinanciero_params)
-#              redirect_to proyectofinanciero_path(@proyectofinanciero), 
-#                notice: 'Proyecto actualizado.' 
-#            else
-#              render :edit
-#            end
-#          end
-
-#          def destroy
-#            @proyectofinanciero.destroy
-#            respond_to do |format|
-#              format.html { 
-#                redirect_to proyectosfinancieros_path, 
-#                notice: 'Proyecto eliminado' }
-#              format.json { head :no_content }
-#            end
-#          end
+          # Redefinimos destroy porque el de tablas basicas 
+          # (i.e Sip::Admin::BasicasController que debe ser
+          # papa de la clase que incluye a esta)
+          # exije eliminar primero registros en tablas union
+          def destroy
+            super("", false)
+          end
 
           def atributos_index
             [ "id", 
