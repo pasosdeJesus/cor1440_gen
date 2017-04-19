@@ -21,8 +21,6 @@ module Cor1440Gen
           has_many :actividad, through: :actividad_usuario,
             class_name: 'Cor1440Gen::Actividad'
 
-          #validates_length_of :nusuario, maximum: 15
-
           validate :rol_usuario
           def rol_usuario
             if oficina && (rol == Ability::ROLADMIN ||
