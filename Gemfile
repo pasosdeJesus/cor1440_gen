@@ -25,7 +25,8 @@ gem "odf-report"
 
 
 gem 'chosen-rails'
-gem 'rspreadsheet'
+gem 'rspreadsheet', path: '../rspreadsheet/'
+gem 'libxml-ruby', '3.0'
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
