@@ -34,7 +34,7 @@
     else
       fr = Time.now.strftime('%Y-%m-%d')
     end
-    lp = Cor1440Gen::Proyectofinanciero.habilitados.where(
+    lp = Cor1440Gen::Proyectofinanciero.where(
         "fechainicio <= ? AND ? <= fechacierre", fr, fr)
    %>
 

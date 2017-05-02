@@ -119,11 +119,11 @@
         %>
       <% when @actividades.human_attribute_name('proyectosfinancieros')%>
         <% fac = Time.now.strftime('%Y-%m-%d') %>
-        <% lpf1 = Cor1440Gen::Proyectofinanciero.habilitados.where(
+        <% lpf1 = Cor1440Gen::Proyectofinanciero.where(
           'fechainicio <= ? AND ? <= fechacierre', fac, fac).
           order(:nombre).map { |r| [r.nombre, r.id] } 
         %>
-        <% lpf2 = Cor1440Gen::Proyectofinanciero.habilitados.where(
+        <% lpf2 = Cor1440Gen::Proyectofinanciero.where(
           '? < fechainicio OR fechacierre < ?', fac, fac).
           order(:nombre).map { |r| [r.nombre, r.id] }
         %>

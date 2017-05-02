@@ -5,7 +5,6 @@ module Cor1440Gen
     module Controllers
       module ProyectosfinancierosController
         extend ActiveSupport::Concern
-        #include Sip::ConsultasHelper
 
         included do
           before_action :set_proyectofinanciero, 
@@ -16,12 +15,12 @@ module Cor1440Gen
             "Cor1440Gen::Proyectofinanciero"
           end
 
-          def new_admin_basica_path(o)
+          def new_modelo_path(o)
             return new_proyectofinanciero_path()
           end
 
           def set_proyectofinanciero
-            @basica = Proyectofinanciero.find(params[:id])
+            @registro = Proyectofinanciero.find(params[:id])
           end
 
           # Redefinimos destroy porque el de tablas basicas 

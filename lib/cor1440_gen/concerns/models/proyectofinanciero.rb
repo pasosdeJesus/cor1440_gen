@@ -5,7 +5,7 @@ module Cor1440Gen
     module Models
       module Proyectofinanciero
         extend ActiveSupport::Concern
-        include Sip::Basica
+        include Sip::Modelo
         include Sip::Localizacion
 
         included do
@@ -39,7 +39,11 @@ module Cor1440Gen
 
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
-          validates :compromisos, length: { maximum: 5000 }
+          validates :compromisos, length: { maximum: 5000 }, 
+            if: :hay_compromisos?
+          def hay_compromisos?
+            respond_to?(:compromisos)
+          end
 
           validate :fechas_ordenadas
           def fechas_ordenadas
@@ -49,10 +53,10 @@ module Cor1440Gen
             end
           end
 
-
-        end
+        end #included
         
         class_methods do
+
           def human_attribute_name(atr, poromision = "")
             if (atr.to_s == "{:proyecto_ids=>[]}")
               "Proyectos"
@@ -62,7 +66,8 @@ module Cor1440Gen
               super(atr)
             end
           end
-        end
+
+        end # class_methods
 
       end
     end
