@@ -27,7 +27,7 @@
         value_method: :id
       %>
       <%= f.association :proyectofinanciero,
-        collection: Cor1440Gen::Proyectofinanciero.habilitados,
+        collection: Cor1440Gen::Proyectofinanciero.all,
         label_method: :nombre, 
         value_method: :id
       %>
