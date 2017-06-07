@@ -1,0 +1,5 @@
+  <%= f.association :proyecto,
+    collection: Cor1440Gen::Proyecto.habilitados,
+    label_method: :nombre, 
+    value_method: :id 
+  %>

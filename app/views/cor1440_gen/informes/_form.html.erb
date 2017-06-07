@@ -31,11 +31,9 @@
         label_method: :nombre, 
         value_method: :id
       %>
-      <%= f.association :proyecto,
-        collection: Cor1440Gen::Proyecto.habilitados,
-        label_method: :nombre, 
-        value_method: :id
-      %>
+
+      <%= render partial: 'form_filtros_complemento', locals: {f: f} %>
+
       <%= f.association :actividadarea,
         collection: Cor1440Gen::Actividadarea.habilitados,
         label_method: :nombre, 
