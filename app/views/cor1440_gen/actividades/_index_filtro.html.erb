@@ -17,8 +17,7 @@
             size: 6,
             "data-enviarautomatico" => "", 
             "placeholder" => model_class.human_attribute_name(:id) 
-          }
-        %>
+          } %>
       <% when @actividades.human_attribute_name('fecha') %>
         <%= f.input 'fechaini', 
           label: false,
@@ -28,19 +27,16 @@
             size: 10,
             "data-behaviour" => "datepicker", 
             "data-enviarautomatico" => "" 
-          }
-        %>
-        -
-        <%= f.input 'fechafin', 
+          } %>
+        - <%= f.input 'fechafin', 
           label: false,
           input_html: {
             value: poromision(:fechafin), 
             maxlength: 10, 
             size: 10,
             "data-behaviour" => "datepicker", 
-            "data-enviarautomatico" => "" 
-          }
-        %>
+            "data-enviarautomatico" => "" } 
+          %>
       <% when @actividades.human_attribute_name('oficina') %>
         <%= f.input "busoficina", 
           label: false,
@@ -52,21 +48,21 @@
           input_html: { 
             "data-enviarautomatico" => "", 
             style: "width: 10em" 
-          } 
-        %>
+          } %>
       <% when @actividades.human_attribute_name('responsable') %>
+        <% ord = ::Usuario.respond_to?('nombres') ? 'nombres' : 'apellidos' %>
+        <% met = ord.to_sym %>
         <%= f.input "busresponsable", 
           label: false,
-          collection: ::Usuario.order('LOWER(nombre)'), 
+          collection: ::Usuario.order("LOWER(#{ord})"), 
           value_method: :id, 
-          label_method: :nombre,
+          label_method: met,
           selected: poromision(:busresponsable),
           include_blank: true, 
           input_html: { 
             include_blank: true, 
             "data-enviarautomatico" => "", style: "width: 10em" 
-          }   
-        %>
+          } %>
       <% when @actividades.human_attribute_name('nombre') %>
         <%= f.input 'busnombre', 
           label: false,
@@ -76,21 +72,31 @@
             size: 12,
             "data-enviarautomatico" => "", 
             "placeholder" => model_class.human_attribute_name(:nombre) 
-          }
-        %>
-      <% when @actividades.human_attribute_name('actividadtipos') %>
-        <%= f.input "bustipo", 
+          } %>
+      <% when @actividades.human_attribute_name('departamento') %>
+        <%= f.input 'busdepartamento', 
+          label: false,
+          collection: Sip::Departamento.habilitados.where(id_pais: 170),
+          value_method: :id,
+          label_method: :nombre,
+          selected: poromision(:busdepartamento),
+          include_blank: true,
+          input_html: {
+            "data-enviarautomatico" => "", 
+            style: "width: 10em" 
+          } %>
+      <% when @actividades.human_attribute_name('actividadtipo') %>
+        <%= f.input "busactividadtipo", 
           label: false,
           collection: Cor1440Gen::Actividadtipo.habilitados, 
           value_method: :id, 
           label_method: :nombre, 
-          selected: poromision(:bustipo),
+          selected: poromision(:busactividadtipo),
           include_blank: true,
           input_html: { 
             "data-enviarautomatico" => "", 
             style: "width: 10em" 
-          } 
-        %>
+          } %>
       <% when @actividades.human_attribute_name('proyectos') %>
         <%= f.input "busproyecto", 
           label: false,
@@ -102,8 +108,7 @@
           input_html: {
             "data-enviarautomatico" => "", 
             style: "width: 10em" 
-          } 
-        %>
+          } %>
       <% when @actividades.human_attribute_name('actividadareas') %>
         <%= f.input "busarea", 
           label: false,
@@ -115,18 +120,15 @@
           input_html: {
             "data-enviarautomatico" => "", 
             style: "width: 10em" 
-          } 
-        %>
+          } %>
       <% when @actividades.human_attribute_name('proyectosfinancieros')%>
         <% fac = Time.now.strftime('%Y-%m-%d') %>
         <% lpf1 = Cor1440Gen::Proyectofinanciero.where(
           'fechainicio <= ? AND ? <= fechacierre', fac, fac).
-          order(:nombre).map { |r| [r.nombre, r.id] } 
-        %>
+          order(:nombre).map { |r| [r.nombre, r.id] } %>
         <% lpf2 = Cor1440Gen::Proyectofinanciero.where(
           '? < fechainicio OR fechacierre < ?', fac, fac).
-          order(:nombre).map { |r| [r.nombre, r.id] }
-        %>
+          order(:nombre).map { |r| [r.nombre, r.id] } %>
         <% lpf = lpf1 + lpf2 %> 
         <%= f.input "busproyectofinanciero", 
           label: false,
@@ -136,8 +138,7 @@
           input_html: {
             "data-enviarautomatico" => "", 
             style: "width: 10em" 
-          } 
-        %>
+          } %>
       <% when @actividades.human_attribute_name('objetivo') %>
         <%= f.input 'busobjetivo', 
           label: false,
@@ -147,9 +148,28 @@
             size: 12,
             "data-enviarautomatico" => "", 
             "placeholder" => model_class.human_attribute_name(:objetivo) 
-          }
-        %>
-    <% end %>
+          } %>
+      <% when @actividades.human_attribute_name('resultado') %>
+        <%= f.input 'busresultado', 
+          label: false,
+          input_html: { 
+            value: poromision(:busresultado), 
+            maxlength: 10, 
+            size: 12,
+            "data-enviarautomatico" => "", 
+            "placeholder" => model_class.human_attribute_name(:resultado) 
+          } %>
+      <% when @actividades.human_attribute_name('contexto') %>
+        <%= f.input 'buscontexto', 
+          label: false,
+          input_html: { 
+            value: poromision(:buscontexto), 
+            maxlength: 10, 
+            size: 12,
+            "data-enviarautomatico" => "", 
+            "placeholder" => model_class.human_attribute_name(:contexto) 
+          } %>
+      <% end %>
     </th>
   <% end %>
 

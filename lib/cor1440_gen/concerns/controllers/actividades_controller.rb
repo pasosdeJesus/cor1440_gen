@@ -24,29 +24,29 @@ module Cor1440Gen
               @actividades.human_attribute_name(:proyectosfinancieros),
               @actividades.human_attribute_name(:objetivo),
               @actividades.human_attribute_name(:poblacion),
-            ]
-        end
+              ]
+          end
 
           def fila_comun(actividad)
-            pob = actividad.actividad_rangoedadac.map { |i| 
+           pob = actividad.actividad_rangoedadac.map { |i| 
               (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
                 (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
             } 
             return [actividad.id,
-              actividad.fecha , 
-              actividad.oficina ? actividad.oficina.nombre : "",
-              actividad.responsable ? actividad.responsable.nusuario : "",
-              actividad.nombre ? actividad.nombre : "",
-              actividad.actividadtipo.inject("") { |memo, i| 
-                (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.proyecto.inject("") { |memo, i| 
-                (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.actividadareas.inject("") { |memo, i| 
-                (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.proyectofinanciero.inject("") { |memo, i| 
-                (memo == "" ? "" : memo + "; ") + i.nombre },
-              actividad.objetivo, 
-              pob.reduce(:+)
+                    actividad.fecha , 
+                    actividad.oficina ? actividad.oficina.nombre : "",
+                    actividad.responsable ? actividad.responsable.nusuario : "",
+                    actividad.nombre ? actividad.nombre : "",
+                    actividad.actividadtipo.inject("") { |memo, i| 
+                      (memo == "" ? "" : memo + "; ") + i.nombre },
+                    actividad.proyecto.inject("") { |memo, i| 
+                        (memo == "" ? "" : memo + "; ") + i.nombre },
+                    actividad.actividadareas.inject("") { |memo, i| 
+                          (memo == "" ? "" : memo + "; ") + i.nombre },
+                    actividad.proyectofinanciero.inject("") { |memo, i| 
+                            (memo == "" ? "" : memo + "; ") + i.nombre },
+                    actividad.objetivo, 
+                    pob.reduce(:+)
             ]
           end
 
@@ -92,59 +92,59 @@ module Cor1440Gen
             @plantillas = Heb412Gen::Plantillahcm.where(
               vista: 'Actividad').select('nombremenu, id').map { 
                 |c| [c.nombremenu, c.id] }
-            @numactividades = @actividades.size
-            @enctabla = encabezado_comun()
-            respond_to do |format|
-              format.html { 
-                @actividades = @actividades.paginate(
-                  :page => params[:pagina], per_page: 20
-                )
-                @cuerpotabla = cuerpo_comun()
-                render "index", layout: "application" 
-              }
-              format.json { head :no_content }
-     
-              format.ods {
-                if params[:idplantilla].nil? 
-                  head :no_content 
-                elsif params[:idplantilla].to_i <= 0
-                  head :no_content 
-                elsif Heb412Gen::Plantillahcm.where(
-                  id: params[:idplantilla].to_i).take.nil?
-                  head :no_content 
-                end
+              @numactividades = @actividades.size
+              @enctabla = encabezado_comun()
+              respond_to do |format|
+                format.html { 
+                  @actividades = @actividades.paginate(
+                    :page => params[:pagina], per_page: 20
+                  )
+                  @cuerpotabla = cuerpo_comun()
+                  render "index", layout: "application" 
+                }
+                format.json { head :no_content }
 
-                @cuerpotabla = cuerpo_comun()
-                aractividades = Array.new
-                @cuerpotabla.each do |a| 
+                format.ods {
+                  if params[:idplantilla].nil? 
+                    head :no_content 
+                  elsif params[:idplantilla].to_i <= 0
+                    head :no_content 
+                  elsif Heb412Gen::Plantillahcm.where(
+                    id: params[:idplantilla].to_i).take.nil?
+                    head :no_content 
+                  end
 
-                  ac = Cor1440Gen::Actividad.find(a[0])
-                  r = vector_a_registro(a, ac)
-                  aractividades << r
-                end
-                pl = Heb412Gen::Plantillahcm.find(
-                  params[:idplantilla].to_i)
-                n = Heb412Gen::PlantillahcmController.
-                  llena_plantilla_multiple_fd(pl, aractividades)
-                send_file n, x_sendfile: true
-              }
+                  @cuerpotabla = cuerpo_comun()
+                  aractividades = Array.new
+                  @cuerpotabla.each do |a| 
 
-              format.js   { 
-                @actividades = @actividades.paginate(
-                  :page => params[:pagina], per_page: 20
-                )
-                @cuerpotabla = cuerpo_comun()
-                render 'index' 
-              }
-              format.pdf  { 
-                @cuerpotabla = cuerpo_comun()
-                prawnto(prawn: { page_layout: :landscape },
-                filename: 
-                  "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
-                inline: true)
-              }
-            end
-            return
+                    ac = Cor1440Gen::Actividad.find(a[0])
+                    r = vector_a_registro(a, ac)
+                    aractividades << r
+                  end
+                  pl = Heb412Gen::Plantillahcm.find(
+                    params[:idplantilla].to_i)
+                  n = Heb412Gen::PlantillahcmController.
+                    llena_plantilla_multiple_fd(pl, aractividades)
+                  send_file n, x_sendfile: true
+                }
+
+                format.js   { 
+                  @actividades = @actividades.paginate(
+                    :page => params[:pagina], per_page: 20
+                  )
+                  @cuerpotabla = cuerpo_comun()
+                  render 'index' 
+                }
+                format.pdf  { 
+                  @cuerpotabla = cuerpo_comun()
+                  prawnto(prawn: { page_layout: :landscape },
+                          filename: 
+                          "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
+                  inline: true)
+                }
+              end
+              return
           end
 
           # GET /actividades/1
@@ -153,7 +153,7 @@ module Cor1440Gen
             @actividades = Actividad.where(id: @actividad.id)
             @enctabla = encabezado_comun()
             @cuerpotabla = cuerpo_comun()
-           
+
             render layout: "application"
           end
 
@@ -217,7 +217,7 @@ module Cor1440Gen
             respond_to do |format|
               format.html { 
                 redirect_to actividades_url, notice: 'Actividad eliminada' }
-                format.json { head :no_content }
+              format.json { head :no_content }
             end
           end
 
@@ -245,7 +245,7 @@ module Cor1440Gen
               :usuario_ids => [],
               :actividad_rangoedadac_attributes => [
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
-            ],
+              ],
               :actividad_sip_anexo_attributes => [
                 :id,
                 :id_actividad, 
@@ -256,7 +256,8 @@ module Cor1440Gen
               ]
             )
           end
-        end
+
+        end # included do
 
         #Funcion por sobrecargar para filtrar por otros parámetros personalizados
         #def filtramas(par, ac)
@@ -307,11 +308,11 @@ module Cor1440Gen
                 @busarea.to_i
               )
             end
-            @bustipo = param_escapa(par, 'bustipo')
-            if @bustipo != '' then
+            @busactividadtipo = param_escapa(par, 'busactividadtipo')
+            if @busactividadtipo != '' then
               ac = ac.joins(:actividad_actividadtipo).where(
                 "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
-                @bustipo.to_i
+                @busactividadtipo.to_i
               )
             end
             @busobjetivo = param_escapa(par, 'busobjetivo')
