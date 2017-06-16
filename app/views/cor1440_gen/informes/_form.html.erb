@@ -16,11 +16,16 @@
         :input_html => { "data-behaviour" => "datepicker"},
         :as => :string
       %>
-      <%= f.association :responsable,
-        collection: ::Usuario.habilitados,
-        label_method: :nombre, 
-        value_method: :id
-      %>
+      <% ord = ::Usuario.column_names.include?('nombres') ? 
+        'nombres' : 'nombre' %>
+      <% met = ord == 'nombres' ? 
+        lambda {|t| t.nombres + ' ' + t.apellidos } : ord.to_sym %>
+      <%= f.association "responsable", 
+        collection: ::Usuario.where(fechadeshabilitacion: nil).order(
+          "LOWER(#{ord})"), 
+        label_method: met,
+          value_method: :id 
+        %>
       <%= f.association :oficina,
         collection: Sip::Oficina.habilitados,
         label_method: :nombre, 

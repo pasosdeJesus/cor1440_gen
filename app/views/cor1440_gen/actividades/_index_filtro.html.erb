@@ -50,8 +50,10 @@
             style: "width: 10em" 
           } %>
       <% when @actividades.human_attribute_name('responsable') %>
-        <% ord = ::Usuario.respond_to?('nombres') ? 'nombres' : 'nombre' %>
-        <% met = ord.to_sym %>
+        <% ord = ::Usuario.column_names.include?('nombres') ? 
+          'nombres' : 'nombre' %>
+        <% met = ord == 'nombres' ? 
+          lambda {|t| t.nombres + ' ' + t.apellidos } : ord.to_sym %>
         <%= f.input "busresponsable", 
           label: false,
           collection: ::Usuario.order("LOWER(#{ord})"), 
