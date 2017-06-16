@@ -50,7 +50,7 @@
             style: "width: 10em" 
           } %>
       <% when @actividades.human_attribute_name('responsable') %>
-        <% ord = ::Usuario.respond_to?('nombres') ? 'nombres' : 'apellidos' %>
+        <% ord = ::Usuario.respond_to?('nombres') ? 'nombres' : 'nombre' %>
         <% met = ord.to_sym %>
         <%= f.input "busresponsable", 
           label: false,
