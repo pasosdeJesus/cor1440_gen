@@ -21,12 +21,14 @@
       Sip::Oficina.habilitados,
     label_method: :nombre, 
     value_method: :id,
-    include_blank: false
+    include_blank: false,
+    input_html: { class: 'chosen-select' }
   %>
   <%= f.association :actividadtipo, 
     collection: Cor1440Gen::Actividadtipo.habilitados,
     label_method: :nombre, 
-    value_method: :id 
+    value_method: :id,
+    input_html: { class: 'chosen-select' }
   %>
   <%
     if f.object.fecha 
@@ -41,7 +43,8 @@
   <%= f.association :proyectofinanciero,
     collection: lp,
     label_method: :nombre, 
-    value_method: :id
+    value_method: :id,
+    input_html: { class: 'chosen-select' }
   %>
 
   <%= render partial: 'form_complemento1', locals: { f: f } %>
@@ -51,7 +54,8 @@
   <%= f.association :actividadareas, 
     collection: Cor1440Gen::Actividadarea.habilitados,
     label_method: :nombre, 
-    value_method: :id 
+    value_method: :id,
+    input_html: { class: 'chosen-select' }
   %>
   <%= f.association :responsable,
       collection: current_usuario.oficina_id ?  
@@ -65,7 +69,8 @@
         if t.nombre then r += " - " + t.nombre end
         r 
       },
-      value_method: :id
+      value_method: :id,
+      input_html: { class: 'chosen-select' }
   %>
   <%= 
     f.association :usuario,
@@ -78,11 +83,15 @@
         if t.nombre then r += " - " + t.nombre end
         r 
       },
-      value_method: :id 
+      value_method: :id,
+      input_html: { class: 'chosen-select' }
   %>
 
   <%= f.input :objetivo %>
-  <%= f.input :resultado, label: "Resultado", as: :text %>
+  <%= f.input :resultado, 
+    label: "Resultado", 
+    as: :text 
+  %>
   <table border=1>
     <thead>
       <tr><th>Rango de Edad</th>
