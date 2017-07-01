@@ -88,7 +88,7 @@ module Cor1440Gen
           # GET /actividades.json
           def index
             @actividades = Cor1440Gen::ActividadesController.filtra(
-              params[:filtro])
+              params[:filtro], current_usuario)
             @plantillas = Heb412Gen::Plantillahcm.where(
               vista: 'Actividad').select('nombremenu, id').map { 
                 |c| [c.nombremenu, c.id] }
@@ -273,7 +273,7 @@ module Cor1440Gen
               par[p.to_s] ? Sip::Pais.connection.quote_string(par[p.to_s].to_s) :  ''
           end
 
-          def filtra(par)
+          def filtra(par, current_usuario = nil)
             ac = Actividad.order(fecha: :desc)
             @buscodigo = param_escapa(par, 'buscodigo')
             if @buscodigo != '' then
@@ -333,8 +333,7 @@ module Cor1440Gen
                 @busproyectofinanciero.to_i
               )
             end
-            
-            ac = filtramas(par, ac)
+            ac = filtramas(par, ac, current_usuario)
             return ac
           end
 

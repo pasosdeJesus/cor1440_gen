@@ -5,7 +5,7 @@ module Cor1440Gen
   class ActividadesController < ApplicationController
 
     # Funcion por sobrecargar para filtrar por otros parámetros personalizados
-    def self.filtramas(par, ac)
+    def self.filtramas(par, ac, current_usuario)
       return ac
     end
 
