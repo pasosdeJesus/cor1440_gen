@@ -43,6 +43,20 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_rangoedadac_uno(ini, 'mr')
   cor1440_gen_rangoedadac_tot()
 
+
+cor1440_gen_llena_pf = ($this, root) ->
+  sip_arregla_puntomontaje(root)
+  idpf = 'actividad_proyectofinanciero_ids'
+  fecha = $this.val()
+  x = $.getJSON(root.puntomontaje + 'proyectosfinancieros', {fecha: fecha})
+  x.done((data) ->
+    remplaza_opciones_select(idpf, data, true)
+  )
+  x.error((m1, m2, m3) -> 
+    alert(
+      'Problema leyendo convenios financiados en '+fecha+' '+m1+' '+m2+' '+m3)
+    )
+
 @cor1440_gen_prepara_eventos_comunes = (root) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form
@@ -64,4 +78,14 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('cocoon:after-remove', (e) -> 
     cor1440_gen_rangoedadc_todos();
   )
+
+  $('#actividad_fecha_localizada').datepicker({
+    format: root.formato_fecha,
+    autoclose: true,
+    todayHighlight: true,
+    language: 'es'
+  }).on('changeDate', (ev) ->
+    cor1440_gen_llena_pf($(this), root)
+  )
+
 

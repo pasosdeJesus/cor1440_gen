@@ -11,6 +11,20 @@ module Cor1440Gen
             only: [:show, :edit, :update, :destroy]
           load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero
 
+          include Sip::FormatoFechaHelper
+
+          def index(c = nil)
+            if c == nil
+              c = Cor1440Gen::Proyectofinanciero.all
+            end
+            if params[:fecha] && params[:fecha] != ''
+              fecha = fecha_local_estandar params[:fecha]
+              c = c.where('fechainicio <= ? AND ? <= fechacierre ', 
+                          fecha, fecha)
+            end
+            super(c)
+          end  
+
           def clase 
             "Cor1440Gen::Proyectofinanciero"
           end
