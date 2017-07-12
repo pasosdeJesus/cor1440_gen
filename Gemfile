@@ -102,14 +102,13 @@ end
 group :test do
   gem 'simplecov'
   # Envia resultados de pruebas desde travis a codeclimate
-  gem "codeclimate-test-reporter", require: nil
 
   gem 'rails-controller-testing'
 
   # Acelera desarrollo ejecutando en fondo. https://github.com/jonleighton/spring
   gem "spring"
   gem "connection_pool"
-  gem "minitest", '5.10.1'
+  gem "minitest"
   gem "minitest-reporters" 
   gem "poltergeist" 
   gem 'minitest-rails-capybara'
