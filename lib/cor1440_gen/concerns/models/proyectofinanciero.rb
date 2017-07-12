@@ -53,6 +53,12 @@ module Cor1440Gen
             end
           end
 
+          # Recibe un grupo de proyectosfinancieros y los filtra 
+          # de acuerdo al control de acceso del usuario
+          def filtra_acceso(current_usuario, pf)
+            return pf
+          end
+
         end #included
         
         class_methods do
@@ -66,7 +72,6 @@ module Cor1440Gen
               super(atr)
             end
           end
-
         end # class_methods
 
       end

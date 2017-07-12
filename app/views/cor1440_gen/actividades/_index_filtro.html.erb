@@ -131,7 +131,12 @@
         <% lpf2 = Cor1440Gen::Proyectofinanciero.where(
           '? < fechainicio OR fechacierre < ?', fac, fac).
           order(:nombre).map { |r| [r.nombre, r.id] } %>
-        <% lpf = lpf1 + lpf2 %> 
+        <%  lpf = lpf1 + lpf2
+            if lpf.count > 0
+              epf = lpf.take
+              lpf =epf.filtra_acceso(current_usuario, lpf)
+            end %> 
+        <%
         <%= f.input "busproyectofinanciero", 
           label: false,
           collection: lpf,
