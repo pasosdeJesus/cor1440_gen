@@ -124,19 +124,25 @@
             style: "width: 10em" 
           } %>
       <% when @actividades.human_attribute_name('proyectosfinancieros')%>
-        <% fac = Time.now.strftime('%Y-%m-%d') %>
-        <% lpf1 = Cor1440Gen::Proyectofinanciero.where(
-          'fechainicio <= ? AND ? <= fechacierre', fac, fac).
-          order(:nombre).map { |r| [r.nombre, r.id] } %>
-        <% lpf2 = Cor1440Gen::Proyectofinanciero.where(
-          '? < fechainicio OR fechacierre < ?', fac, fac).
-          order(:nombre).map { |r| [r.nombre, r.id] } %>
-        <%  lpf = lpf1 + lpf2
-            if lpf.count > 0
-              epf = lpf.take
-              lpf =epf.filtra_acceso(current_usuario, lpf)
-            end %> 
-        <%
+        <% fac = Time.now.strftime('%Y-%m-%d') 
+           pf1 = Cor1440Gen::Proyectofinanciero.where(
+             'fechainicio <= ? AND ? <= fechacierre', fac, fac)
+           pf2 = Cor1440Gen::Proyectofinanciero.where(
+             '? < fechainicio OR fechacierre < ?', fac, fac)
+           epf = nil
+           if (pf1.count > 0)
+             epf = pf1.take
+           elsif pf2.count > 0
+             epf = pf2.take
+           end
+           lpf = []
+           if epf
+             pf1 =epf.filtra_acceso(current_usuario, pf1).order(:nombre)
+             pf2 =epf.filtra_acceso(current_usuario, pf2).order(:nombre)
+             lpf1 = pf1.map { |r| [r.nombre, r.id] } 
+             lpf2 = pf2.map { |r| [r.nombre, r.id] } 
+             lpf = lpf1 + lpf2
+           end %> 
         <%= f.input "busproyectofinanciero", 
           label: false,
           collection: lpf,
