@@ -70,6 +70,8 @@
         r 
       },
       value_method: :id,
+      selected:  f.object.usuario_id ? 
+        f.object.usuario_id : current_usuario.id,
       input_html: { class: 'chosen-select' }
   %>
   <%= 
