@@ -30,22 +30,8 @@
     value_method: :id,
     input_html: { class: 'chosen-select' }
   %>
-  <%
-    if f.object.fecha 
-      fr = f.object.fecha
-    else
-      fr = Time.now.strftime('%Y-%m-%d')
-    end
-    lp = Cor1440Gen::Proyectofinanciero.where(
-        "fechainicio <= ? AND ? <= fechacierre", fr, fr)
-   %>
 
-  <%= f.association :proyectofinanciero,
-    collection: lp,
-    label_method: :nombre, 
-    value_method: :id,
-    input_html: { class: 'chosen-select' }
-  %>
+  <%= render partial: 'form_proyectofinanciero', locals: { f: f } %>
 
   <%= render partial: 'form_complemento1', locals: { f: f } %>
 
