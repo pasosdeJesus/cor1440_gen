@@ -33,7 +33,7 @@ module Cor1440Gen
               busproyecto: @informe.filtroproyecto,
               busarea: @informe.filtroactividadarea,
               busproyectofinanciero: @informe.filtroproyectofinanciero
-            })
+            }, current_usuario)
 
           end
 
