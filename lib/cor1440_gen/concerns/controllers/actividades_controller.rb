@@ -117,7 +117,7 @@ module Cor1440Gen
                   @cuerpotabla = cuerpo_comun()
                   aractividades = Array.new
                   @cuerpotabla.each do |a| 
-
+                    byebug
                     ac = Cor1440Gen::Actividad.find(a[0])
                     r = vector_a_registro(a, ac)
                     aractividades << r
