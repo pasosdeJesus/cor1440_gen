@@ -19,7 +19,8 @@
         d = i.descripcion
       end %>
       <%= sep %> 
-      <%= link_to(d, sip.descarga_anexo_path(i.id)) %>
+      <%= link_to(d, sip.descarga_anexo_path(i.id),
+                    {"data-turbolinks" => false }) %>
       <% sep = "; ";
     end %>
   </dd>
