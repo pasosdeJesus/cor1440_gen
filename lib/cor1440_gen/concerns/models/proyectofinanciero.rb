@@ -9,6 +9,8 @@ module Cor1440Gen
         include Sip::Localizacion
 
         included do
+        
+          include Sip::FormatoFechaHelper
           campofecha_localizado :fechainicio
           campofecha_localizado :fechacierre
 
@@ -58,6 +60,55 @@ module Cor1440Gen
           def filtra_acceso(current_usuario, pf)
             return pf
           end
+
+          scope :filtro_compromisos, lambda { |compromisos|
+            where("unaccent(compromisos) ILIKE '%' || unaccent(?) || '%'", 
+                  compromisos)
+          }
+
+          scope :filtro_fechainicio_localizadaini, lambda { |f|
+            where('fechainicio >= ?', 
+                  Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          }
+
+          scope :filtro_fechainicio_localizadafin, lambda { |f|
+            where('fechainicio <= ?', 
+                   Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          }
+
+          scope :filtro_fechacierre_localizadaini, lambda { |f|
+            where('fechacierre >= ?',  
+                  Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          }
+
+          scope :filtro_fechacierre_localizadafin, lambda { |f|
+            where('fechacierre <= ?', 
+                   Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          }
+
+          scope :filtro_financiador_ids, lambda { |f|
+            joins(:financiador_proyectofinanciero).
+              where('cor1440_gen_financiador_proyectofinanciero.financiador_id=?', f)
+          }
+
+          scope :filtro_nombre, lambda { |nombre|
+            where("unaccent(nombre) ILIKE '%' || unaccent(?) || '%'", 
+                  nombre)
+          }
+
+          scope :filtro_observaciones, lambda { |observaciones|
+            where("unaccent(observaciones) ILIKE '%' || unaccent(?) || '%'", observaciones)
+          }
+
+          scope :filtro_proyecto_ids, lambda { |p|
+            joins(:proyecto_proyectofinanciero).
+              where('cor1440_gen_proyecto_proyectofinanciero.proyecto_id=?', p)
+          }
+
+          scope :filtro_responsable_id, lambda { |r|
+            where(responsable_id: r)
+          }
+
 
         end #included
         
