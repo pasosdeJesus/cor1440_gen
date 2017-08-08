@@ -56,8 +56,9 @@ module Cor1440Gen
           end
 
           # Recibe un grupo de proyectosfinancieros y los filtra 
-          # de acuerdo al control de acceso del usuario
-          def filtra_acceso(current_usuario, pf)
+          # de acuerdo al control de acceso del usuario o a otros parametros
+          # recibidos
+          def filtra_acceso(current_usuario, pf, params = nil)
             return pf
           end
 

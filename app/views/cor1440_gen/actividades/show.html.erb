@@ -4,8 +4,9 @@
 </div>
 
 <dl class="dl-horizontal">
-  <% for i in 0..@enctabla.length %>
-    <dt><strong><%= @enctabla[i] %></strong></dt>
+  <% ep = controller.atributos_presenta() %>
+  <% for i in 0..ep.length-1 %>
+    <dt><strong><%= @actividades.human_attribute_name(ep[i]) %></strong></dt>
     <dd><%= @cuerpotabla[0][i] %></dd>
   <% end %>
   <%= render "resto_show" %>

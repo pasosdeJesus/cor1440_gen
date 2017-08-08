@@ -1,9 +1,4 @@
 <%- model_class = Cor1440Gen::Actividad -%>
-<%- 
-  def self.poromision(s)
-    params.nil? ? '' : (params[:filtro].nil? ? '' : params[:filtro][s])
-  end 
--%>
 <tr>
   <% @enctabla.each do |c| %>
     <th>
@@ -12,7 +7,7 @@
         <%= f.input 'buscodigo', 
           label: false,
           input_html: {
-            value: poromision(:buscodigo), 
+            value: Sip::ModeloHelper.poromision(params, :buscodigo), 
             maxlength: 10, 
             size: 6,
             "data-enviarautomatico" => "", 
@@ -22,7 +17,7 @@
         <%= f.input 'fechaini', 
           label: false,
           input_html: {
-            value: poromision(:fechaini), 
+            value: Sip::ModeloHelper.poromision(params, :fechaini), 
             maxlength: 10, 
             size: 10,
             "data-behaviour" => "datepicker", 
@@ -31,7 +26,7 @@
         - <%= f.input 'fechafin', 
           label: false,
           input_html: {
-            value: poromision(:fechafin), 
+            value: Sip::ModeloHelper.poromision(params, :fechafin), 
             maxlength: 10, 
             size: 10,
             "data-behaviour" => "datepicker", 
@@ -43,7 +38,7 @@
           collection: Sip::Oficina.habilitados, 
           value_method: :id, 
           label_method: :nombre,
-          selected: poromision(:busoficina),
+          selected: Sip::ModeloHelper.poromision(params, :busoficina),
           include_blank: true, 
           input_html: { 
             "data-enviarautomatico" => "", 
@@ -59,7 +54,7 @@
           collection: ::Usuario.order("LOWER(#{ord})"), 
           value_method: :id, 
           label_method: met,
-          selected: poromision(:busresponsable),
+          selected: Sip::ModeloHelper.poromision(params, :busresponsable),
           include_blank: true, 
           input_html: { 
             include_blank: true, 
@@ -69,7 +64,7 @@
         <%= f.input 'busnombre', 
           label: false,
           input_html: {
-            value: poromision(:busnombre),
+            value: Sip::ModeloHelper.poromision(params, :busnombre),
             maxlength: 10, 
             size: 12,
             "data-enviarautomatico" => "", 
@@ -81,7 +76,7 @@
           collection: Sip::Departamento.habilitados.where(id_pais: 170),
           value_method: :id,
           label_method: :nombre,
-          selected: poromision(:busdepartamento),
+          selected: Sip::ModeloHelper.poromision(params, :busdepartamento),
           include_blank: true,
           input_html: {
             "data-enviarautomatico" => "", 
@@ -93,7 +88,7 @@
           collection: Cor1440Gen::Actividadtipo.habilitados, 
           value_method: :id, 
           label_method: :nombre, 
-          selected: poromision(:busactividadtipo),
+          selected: Sip::ModeloHelper.poromision(params, :busactividadtipo),
           include_blank: true,
           input_html: { 
             "data-enviarautomatico" => "", 
@@ -105,7 +100,7 @@
           collection: Cor1440Gen::Proyecto.habilitados, 
           value_method: :id, 
           label_method: :nombre, 
-          selected: poromision(:busproyecto), 
+          selected: Sip::ModeloHelper.poromision(params, :busproyecto), 
           include_blank: true,
           input_html: {
             "data-enviarautomatico" => "", 
@@ -117,7 +112,7 @@
           collection: Cor1440Gen::Actividadarea.habilitados, 
           value_method: :id, 
           label_method: :nombre, 
-          selected: poromision(:busarea), 
+          selected: Sip::ModeloHelper.poromision(params, :busarea), 
           include_blank: true,
           input_html: {
             "data-enviarautomatico" => "", 
@@ -137,8 +132,8 @@
            end
            lpf = []
            if epf
-             pf1 =epf.filtra_acceso(current_usuario, pf1).order(:nombre)
-             pf2 =epf.filtra_acceso(current_usuario, pf2).order(:nombre)
+             pf1 =epf.filtra_acceso(current_usuario, pf1, params).order(:nombre)
+             pf2 =epf.filtra_acceso(current_usuario, pf2, params).order(:nombre)
              lpf1 = pf1.map { |r| [r.nombre, r.id] } 
              lpf2 = pf2.map { |r| [r.nombre, r.id] } 
              lpf = lpf1 + lpf2
@@ -147,7 +142,7 @@
           label: false,
           collection: lpf,
           include_blank: true,
-          selected: poromision(:busproyectofinanciero), 
+          selected: Sip::ModeloHelper.poromision(params, :busproyectofinanciero), 
           input_html: {
             "data-enviarautomatico" => "", 
             style: "width: 10em" 
@@ -156,7 +151,7 @@
         <%= f.input 'busobjetivo', 
           label: false,
           input_html: { 
-            value: poromision(:busobjetivo), 
+            value: Sip::ModeloHelper.poromision(params, :busobjetivo), 
             maxlength: 10, 
             size: 12,
             "data-enviarautomatico" => "", 
@@ -166,7 +161,7 @@
         <%= f.input 'busresultado', 
           label: false,
           input_html: { 
-            value: poromision(:busresultado), 
+            value: Sip::ModeloHelper.poromision(params, :busresultado), 
             maxlength: 10, 
             size: 12,
             "data-enviarautomatico" => "", 
@@ -176,7 +171,7 @@
         <%= f.input 'buscontexto', 
           label: false,
           input_html: { 
-            value: poromision(:buscontexto), 
+            value: Sip::ModeloHelper.poromision(params, :buscontexto), 
             maxlength: 10, 
             size: 12,
             "data-enviarautomatico" => "", 

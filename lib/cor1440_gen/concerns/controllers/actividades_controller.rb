@@ -27,6 +27,14 @@ module Cor1440Gen
               ]
           end
 
+          def atributos_presenta
+            [ :id, :fecha, :oficina, :responsable,
+              :nombre, :actividadtipos, :proyectos,
+              :actividadareas, :proyectosfinancieros, :objetivo,
+              :poblacion,
+              ]
+          end
+
           def fila_comun(actividad)
            pob = actividad.actividad_rangoedadac.map { |i| 
               (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
@@ -150,7 +158,6 @@ module Cor1440Gen
           # GET /actividades/1.json
           def show
             @actividades = Actividad.where(id: @actividad.id)
-            @enctabla = encabezado_comun()
             @cuerpotabla = cuerpo_comun()
 
             render layout: "application"
