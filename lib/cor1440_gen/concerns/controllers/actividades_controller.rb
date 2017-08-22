@@ -178,9 +178,7 @@ module Cor1440Gen
 
           # POST /actividades
           # POST /actividades.json
-          def create
-            @actividad = Actividad.new(actividad_params)
-            @actividad.current_usuario = current_usuario
+          def create_gen
             respond_to do |format|
               if @actividad.save
                 format.html { 
@@ -198,9 +196,15 @@ module Cor1440Gen
             end
           end
 
+          def create
+            @actividad = Actividad.new(actividad_params)
+            @actividad.current_usuario = current_usuario
+            create_gen
+          end
+
           # PATCH/PUT /actividades/1
           # PATCH/PUT /actividades/1.json
-          def update
+          def update_gen
             respond_to do |format|
               if @actividad.update(actividad_params)
                 format.html { 
@@ -214,6 +218,10 @@ module Cor1440Gen
                 }
               end
             end
+          end
+
+          def update
+            update_gen
           end
 
           # DELETE /actividades/1

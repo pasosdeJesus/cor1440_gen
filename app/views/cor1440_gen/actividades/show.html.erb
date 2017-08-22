@@ -6,8 +6,10 @@
 <dl class="dl-horizontal">
   <% ep = controller.atributos_presenta() %>
   <% for i in 0..ep.length-1 %>
-    <dt><strong><%= @actividades.human_attribute_name(ep[i]) %></strong></dt>
-    <dd><%= @cuerpotabla[0][i] %></dd>
+    <% if @cuerpotabla[0][i] %>
+      <dt><strong><%= @actividades.human_attribute_name(ep[i]) %></strong></dt>
+      <dd><%= @cuerpotabla[0][i] %></dd>
+    <% end %>
   <% end %>
   <%= render "resto_show" %>
   <dt><strong><%= Cor1440Gen::Actividad.human_attribute_name(:anexos) %></strong></dt>
