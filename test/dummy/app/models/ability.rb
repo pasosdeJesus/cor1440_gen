@@ -40,6 +40,7 @@ class Ability  < Cor1440Gen::Ability
         can :manage, Cor1440Gen::Actividad
         can :manage, Cor1440Gen::Informe
         can :manage, Heb412Gen::Doc
+        can :manage, Heb412Gen::Plantillahcm
         can :manage, :tablasbasicas
         can :manage, Usuario
         can :manage, :tablasbasicas

@@ -57,7 +57,8 @@ module Cor1440Gen
           'resultado', 'poblacion', 'observaciones', 
           'creacion', 'actualizacion'
         ],
-        controlador: 'Cor1440Gen::ActividadesController'
+        controlador: 'Cor1440Gen::ActividadesController',
+        ruta: '/actividades'
       }
     }
 
