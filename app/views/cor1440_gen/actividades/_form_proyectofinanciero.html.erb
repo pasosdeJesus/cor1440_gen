@@ -9,9 +9,13 @@
 %>
 
 <%= f.association :proyectofinanciero,
-   collection: lp,
+  collection: lp,
   label_method: :nombre, 
   value_method: :id,
-  input_html: { class: 'chosen-select' }
+  input_html: { 
+    class: 'chosen-select',
+    "data-toggle" => 'tooltip',
+    "title" => 'Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)'
+  }
 %>
 
