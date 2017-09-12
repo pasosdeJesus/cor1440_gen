@@ -46,6 +46,10 @@ module Cor1440Gen
             end
           end
 
+          scope :filtro_oficina_id, lambda {|o|
+            where(oficina_id: o)
+          }
+
         end
 
       end

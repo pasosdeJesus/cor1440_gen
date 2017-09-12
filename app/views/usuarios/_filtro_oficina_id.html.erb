@@ -1,0 +1,12 @@
+<%= f.input :busoficina_id,
+  collection: Sip::Oficina.habilitados,
+  label: false,
+  label_method: :nombre,
+  value_method: :id,
+  selected: Sip::ModeloHelper.poromision(params, :busoficina_id),
+  input_html: {
+    class: 'chosen-select',
+    'data-enviarautomatico' => ''
+  },
+  include_blank: true
+%>
