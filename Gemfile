@@ -88,14 +88,15 @@ gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch:
 group :development do
   # Requerido por rake
   gem "thor"
-  
   # ConSola irb en páginas con excepciones o usando <%= console %> en vistasA
   gem 'web-console'
+  
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   #gem 'byebug', platform: :mri
+
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
