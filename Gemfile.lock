@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 3b4135a5ae893ada1033875bd3c54cd85f9ed053
+  revision: bd6e059b145da9cab2445bec23354bdc0bf61046
   branch: us_modelo
   specs:
     sip (2.0.b4)
@@ -277,7 +277,7 @@ GEM
     rspreadsheet (0.4.5)
       andand (~> 1.3)
       rubyzip (~> 1.1)
-    ruby-progressbar (1.8.1)
+    ruby-progressbar (1.8.3)
     rubyzip (1.1.7)
     sass (3.5.1)
       sass-listen (~> 4.0.0)
