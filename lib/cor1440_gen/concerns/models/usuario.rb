@@ -9,9 +9,8 @@ module Cor1440Gen
       module Usuario
         extend ActiveSupport::Concern
 
-        include Sip::Concerns::Models::Usuario
-
         included do
+          include Sip::Concerns::Models::Usuario
 
           belongs_to :oficina, class_name: 'Sip::Oficina',
             foreign_key: "oficina_id", validate: true

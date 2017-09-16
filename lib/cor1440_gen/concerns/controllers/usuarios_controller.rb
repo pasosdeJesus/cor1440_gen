@@ -8,9 +8,9 @@ module Cor1440Gen
       module UsuariosController
 
         extend ActiveSupport::Concern
-        include Sip::Concerns::Controllers::UsuariosController
 
         included do
+          include Sip::Concerns::Controllers::UsuariosController
 
           def atributos_index
             [ "id",
