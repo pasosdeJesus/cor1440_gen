@@ -82,7 +82,7 @@
             "data-enviarautomatico" => "", 
             style: "width: 10em" 
           } %>
-      <% when @actividades.human_attribute_name('actividadtipo') %>
+      <% when @actividades.human_attribute_name('actividadtipos') %>
         <%= f.input "busactividadtipo", 
           label: false,
           collection: Cor1440Gen::Actividadtipo.habilitados, 
