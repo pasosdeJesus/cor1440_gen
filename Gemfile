@@ -77,11 +77,11 @@ gem "tzinfo"
 gem "tzinfo-data"
 
 # Motor Sip
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git", branch: :us_modelo
+gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 #gem 'sip', path: '../sip'
 
 # Motor heb412_gen para manejar archivos como nube y plantillas
-gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :us_modelo
+gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
 #gem 'heb412_gen', path: '../heb412_gen/'
 
 # Los siguientes son para desarrollo o para pruebas con generadores
