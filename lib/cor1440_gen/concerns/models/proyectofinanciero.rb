@@ -5,11 +5,10 @@ module Cor1440Gen
     module Models
       module Proyectofinanciero
         extend ActiveSupport::Concern
-        include Sip::Modelo
-        include Sip::Localizacion
 
         included do
-        
+          include Sip::Modelo
+          include Sip::Localizacion
           include Sip::FormatoFechaHelper
           campofecha_localizado :fechainicio
           campofecha_localizado :fechacierre

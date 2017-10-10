@@ -5,9 +5,10 @@ module Cor1440Gen
     module Models
       module Actividad
         extend ActiveSupport::Concern
-        include Sip::Localizacion
 
         included do
+          include Sip::Modelo 
+          include Sip::Localizacion
           @current_usuario = -1
           attr_accessor :current_usuario
 
