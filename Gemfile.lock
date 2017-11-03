@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: bfdf3351c858e344771d3acd6672c1c8f1080952
-  branch: bas_modelo
+  revision: 35f4a646cb813e09e0be1b39f0e2160370bb840e
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -12,8 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: e13cf4df35f0753d5bab112431418458c3a78a9c
-  branch: bas_modelo
+  revision: 1014c907b196eaf8f9627ef22a494d35f254b14b
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -144,7 +142,7 @@ GEM
       railties (>= 3.2, < 5.2)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    i18n (0.9.0)
+    i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     interception (0.5)
     jbuilder (2.7.0)
