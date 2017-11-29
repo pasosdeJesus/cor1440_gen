@@ -38,6 +38,31 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyectofinanciero'
 
+          has_many :objetivopf, foreign_key: 'proyectofinanciero_id',
+            validate: true, dependent: :destroy, 
+            class_name: 'Cor1440Gen::Objetivopf'
+          accepts_nested_attributes_for :objetivopf,
+            allow_destroy: true, reject_if: :all_blank
+
+          has_many :resultadopf, foreign_key: 'proyectofinanciero_id',
+            validate: true, dependent: :destroy, 
+            class_name: 'Cor1440Gen::Resultadopf'
+          accepts_nested_attributes_for :resultadopf,
+            allow_destroy: true, reject_if: :all_blank
+
+          has_many :indicadorpf, foreign_key: 'proyectofinanciero_id',
+            validate: true, dependent: :destroy, 
+            class_name: 'Cor1440Gen::Indicadorpf'
+          accepts_nested_attributes_for :indicadorpf,
+            allow_destroy: true, reject_if: :all_blank
+
+          has_many :actividadpf, foreign_key: 'proyectofinanciero_id',
+            validate: true, dependent: :destroy, 
+            class_name: 'Cor1440Gen::Actividadpf'
+          accepts_nested_attributes_for :actividadpf,
+            allow_destroy: true, reject_if: :all_blank
+
+
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }, 

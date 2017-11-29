@@ -69,6 +69,13 @@ module Cor1440Gen
           has_many :usuario, through: :actividad_usuario,
             class_name: 'Usuario'
 
+          has_many :actividad_actividadpf, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadActividadpf', 
+            foreign_key: 'actividad_id'
+          has_many :actividadpf, through: :actividad_actividadpf,
+            class_name: 'Cor1440Gen::Actividadpf'
+
+
           campofecha_localizado :fecha
 
           validates_presence_of :oficina
