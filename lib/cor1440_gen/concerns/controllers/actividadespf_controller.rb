@@ -14,8 +14,8 @@ module Cor1440Gen
             if params[:proyectofinanciero_id]
               @actividadpf = Actividadpf.new
               @actividadpf.proyectofinanciero_id = params[:proyectofinanciero_id]
-              @actividadpf.numero= "R"
-              @actividadpf.actividad= "R"
+              @actividadpf.nombrecorto = "R"
+              @actividadpf.titulo = "R"
               if @actividadpf.save(validate: false)
                 respond_to do |format|
                   format.js { render text: @actividadpf.id.to_s }

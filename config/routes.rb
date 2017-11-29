@@ -7,7 +7,7 @@ Cor1440Gen::Engine.routes.draw do
   get "/informes/:id/impreso" => "informes#impreso", 
     as: :impresion
 
-  get "/actividadespf/" => "cor1440_gen/proyectosfinancieros#actividadespf", 
+  get "/actividadespf/" => "proyectosfinancieros#actividadespf", 
     as: :actividadespf
 
   resources :objetivospf, only: [:new, :destroy]

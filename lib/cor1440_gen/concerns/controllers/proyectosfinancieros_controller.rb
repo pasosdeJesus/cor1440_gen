@@ -99,10 +99,15 @@ module Cor1440Gen
               format.json {
                 @registros = @registro = c.all
                 render :actividadespf#, json: @registro
+                return
               }
               format.js {
                 @registros = @registro = c.all
                 render :actividadespf#, json: @registro
+              }
+              format.html {
+                render inline: @registros.errors, 
+                status: :unprocessable_entity
               }
             end
           end
