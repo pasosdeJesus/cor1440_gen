@@ -1,0 +1,31 @@
+<% if @informe.filtroproyectofinanciero %>
+  <h2>Actividades de Convenio</h2>
+  <% Cor1440Gen::Actividadpf.where(
+    proyectofinanciero_id: @informe.filtroproyectofinanciero).
+    order(:id).each do |apf| %>
+    <% lac = @actividades.where( "cor1440_gen_actividad.id IN 
+      (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf 
+       WHERE actividadpf_id=?)", apf.id).reorder(:fecha) %>
+    <table border='1' width='100%'>
+      <tr>
+        <th><%= apf.nombrecorto %></th>
+        <th><%= apf.titulo %></th>
+        <th><%= lac.count %></th>
+      </tr>
+      <tr>
+        <th colspan='3'><%= apf.descripcion %></th>
+      </tr>
+      <tr>
+        <td colspan='3'>
+          <ol>
+            <% lac.each do |ac| %>
+              <li> <%= ac.nombre %> - <%= ac.fecha %>: 
+                <%= ac.resultado %> </li>
+          <% end %>
+          </ol>
+        </td>
+      </tr>
+    </table>
+    <p></p>
+  <% end %>
+<% end %>

@@ -22,28 +22,30 @@ es:
     attributes:
       "cor1440_gen/actividad":
         fecha_localizada: Fecha
+        actividadpf: Actividad de convenio 
+      "cor1440_gen/actividadpf":
+        actividadpf: Actividad de convenio
+        descripcion: Descripción
+        nombrecorto: Nombre corto
+        resultadopf: Resultado
+        titulo: Título
       "cor1440_gen/actividadarea":
         Actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad
       "cor1440_gen/actividadtipo":
         Actividadtipo: Tipo de Actividad
         Actividadtipos: Tipos de Actividad
-      "cor1440_gen/rangoedadac":
-        Rangoedadac: Rango de edad en Actividades
-        Rangosedadac: Rangos de edad en Actividades
+      "cor1440_gen/indicadorpf":
+        indicadorpf: Indicador
+        numero: Número
+        indicador: Descripción del indicador
+      "cor1440_gen/objetivopf":
+        objetivopf: Objetivo
+        numero: Número
+        objetivo: Descripción del objetivo
       "cor1440_gen/financiador":
         Financiador: Financiador
         Financiadores: Financiadores
-      "cor1440_gen/proyecto":
-        Proyecto: Área
-        Proyectos: Áreas
-      "cor1440_gen/proyectofinanciero":
-        Proyectofinanciero: Convenio Financiado
-        proyectofinanciero: Convenio Financiado
-        Proyectosfinancieros: Convenios Financiados
-        proyectosfinancieros: Convenios Financiados
-        fechainicio_localizada: Fecha de inicio
-        fechacierre_localizada: Fecha de cierre
       "cor1440_gen/informe":
         filtrofechaini:  Fecha inicial
         filtrofechaini_localizada:  Fecha inicial
@@ -53,4 +55,28 @@ es:
         filtroactividadarea: Subárea 
         columnafecha: Fecha
         columnaresponsable: Responsable
-
+      "cor1440_gen/proyecto":
+        Proyecto: Área
+        Proyectos: Áreas
+      "cor1440_gen/proyectofinanciero":
+        actividadpf: Actividad de convenio
+        fechainicio_localizada: Fecha de inicio
+        fechacierre_localizada: Fecha de cierre
+        indicador: Indicador
+        objetivopf: Objetivo
+        Proyectofinanciero: Convenio Financiado
+        proyectofinanciero: Convenio Financiado
+        Proyectosfinancieros: Convenios Financiados
+        proyectosfinancieros: Convenios Financiados
+        resultadopf: Resultado
+        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad de convenio
+        "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :_destroy]}": Indicador
+        "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
+        "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
+      "cor1440_gen/rangoedadac":
+        Rangoedadac: Rango de edad en Actividades
+        Rangosedadac: Rangos de edad en Actividades
+      "cor1440_gen/resultadopf":
+        resultadopf: Resultado
+        numero: Número
+        resultado: Descripción del resultado

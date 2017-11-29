@@ -247,12 +247,13 @@ module Cor1440Gen
           # No confiar parametros a Internet, sólo permitir lista blanca
           def actividad_params
             params.require(:actividad).permit(
-              :oficina_id, :minutos, :nombre, 
+              :oficina_id, :nombre, 
               :objetivo, :proyecto, :resultado,
               :fecha_localizada, :actividad, :observaciones, 
               :usuario_id,
               :lugar,
               :actividadarea_ids => [],
+              :actividadpf_ids => [],
               :actividadtipo_ids => [],
               :proyecto_ids => [],
               :proyectofinanciero_ids => [],
@@ -273,10 +274,6 @@ module Cor1440Gen
 
         end # included do
 
-        #Funcion por sobrecargar para filtrar por otros parámetros personalizados
-        #def filtramas(par, ac)
-          #  return ac
-          #end
 
 
         class_methods do

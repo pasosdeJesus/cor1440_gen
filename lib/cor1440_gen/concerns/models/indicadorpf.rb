@@ -12,7 +12,7 @@ module Cor1440Gen
           include Sip::FormatoFechaHelper
 
           belongs_to :resultadopf, 
-            class_name: 'Cor1440::Resultadopf',
+            class_name: 'Cor1440Gen::Resultadopf',
             foreign_key: 'resultadopf_id'
 
           validates :numero, presence: true, length: {maximum: 15}

@@ -11,14 +11,15 @@ module Cor1440Gen
           include Sip::Localizacion
           include Sip::FormatoFechaHelper
 
+          belongs_to :objetivopf, 
+            class_name: 'Cor1440Gen::Objetivopf',
+            foreign_key: 'objetivopf_id'
+
           has_many :actividadpf, dependent: :delete_all,
             class_name: 'Cor1440Gen::Actividadpf', foreign_key: 'resultadopf_id'
           has_many :indicadorpf, dependent: :delete_all,
             class_name: 'Cor1440Gen::Indicadorpf', foreign_key: 'resultadopf_id'
 
-          belongs_to :objetivopf, 
-            class_name: 'Cor1440Gen::Objetivopf',
-            foreign_key: 'objetivopf_id'
 
           validates :numero, presence: true, length: {maximum: 15}
           validates :resultado, presence:true, length: {maximum: 5000}
