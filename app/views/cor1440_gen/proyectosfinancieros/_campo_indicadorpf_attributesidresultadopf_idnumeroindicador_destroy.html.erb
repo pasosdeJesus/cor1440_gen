@@ -2,30 +2,31 @@
 <div class="panel panel-default">
   <div class="panel-heading">Indicadores</div>
   <div class="panel-body">
-  <div class="div-indicadorespf">
-    <table border=1 width="100%">
-      <thead>
-        <tr>
-          <th>Resultado</th>
-          <th width="10%">Código</th>
-          <th>Indicador</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="indicadorespf">
-        <%= f.simple_fields_for :indicadorpf do |o| %>
-          <%= render 'indicadorpf_campos', f:  o %>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="links">
-      <%= link_to_add_association 'Agregar indicador', f, :indicadorpf, {
-        :"data-association-insertion-node" => "tbody#indicadorespf", 
-        :"data-association-insertion-method" => "append", 
-        partial: 'indicadorpf_campos',
-        class: 'btn-primary', 
-        "data-ajax" => cor1440_gen.new_indicadorespf_url,
-        "data-ajaxdata" => "proyectofinanciero_id" } %>
-    </div>
-  </div> <!-- .div-indicadorespf -->
-</div>
+    <div class="div-indicadorespf">
+      <table border=1 width="100%">
+        <thead>
+          <tr>
+            <th>Ref. Resultado</th>
+            <th width="10%">Código</th>
+            <th>Indicador</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="indicadorespf">
+          <%= f.simple_fields_for :indicadorpf do |o| %>
+            <%= render 'indicadorpf_campos', f:  o %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="links">
+        <%= link_to_add_association 'Agregar indicador', f, :indicadorpf, {
+          :"data-association-insertion-node" => "tbody#indicadorespf", 
+          :"data-association-insertion-method" => "append", 
+          partial: 'indicadorpf_campos',
+          class: 'btn-primary', 
+          "data-ajax" => cor1440_gen.new_indicadorespf_url,
+          "data-ajaxdata" => "proyectofinanciero_id" } %>
+      </div> <!-- link -->
+    </div> <!-- .div-indicadorespf -->
+  </div> <!-- panel-body -->
+</div> <!-- panel -->
