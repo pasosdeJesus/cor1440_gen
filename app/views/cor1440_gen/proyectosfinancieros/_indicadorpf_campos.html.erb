@@ -12,7 +12,9 @@
     <%= f.input :indicador, label: false %>
   </td>
   <td>
-    <%= f.association :tipoindicador, label: false %>
+    <%= f.association :tipoindicador, 
+      label_method: :nombre,
+      label: false %>
   </td>
   <td>
     <%= f.input :id, as: :hidden %>

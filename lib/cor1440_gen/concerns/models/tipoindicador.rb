@@ -15,7 +15,7 @@ module Cor1440Gen
             foreign_key: 'tipoindicador_id'
 
           validates :nombre, presence: true, allow_blank: false, 
-            length: { maximum: 32} 
+            uniqueness: true, length: { maximum: 32} 
           validates :medircon, presence: true, allow_blank: false
           validates :espcampos, length: { maximum: 1000 } 
           validates :espvaloresomision, length: { maximum: 1000 } 
