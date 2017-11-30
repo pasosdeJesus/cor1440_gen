@@ -15,6 +15,8 @@ Cor1440Gen::Engine.routes.draw do
   resources :indicadorespf, only: [:new, :destroy]
   resources :actividadespf, only: [:new, :destroy]
 
+  resources :tiposindicador, path_names: { new: 'nuevo', edit: 'edita' }
+
   namespace :admin do
     ab = ::Ability.new
     ab.tablasbasicas.each do |t|

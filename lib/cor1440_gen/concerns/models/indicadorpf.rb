@@ -14,6 +14,10 @@ module Cor1440Gen
           belongs_to :resultadopf, 
             class_name: 'Cor1440Gen::Resultadopf',
             foreign_key: 'resultadopf_id'
+          belongs_to :tipoindicador, 
+            class_name: 'Cor1440Gen::Tipoindicador',
+            foreign_key: 'tipoindicador_id'
+
 
           validates :numero, presence: true, length: {maximum: 15}
           validates :indicador, presence:true, length: {maximum: 5000}

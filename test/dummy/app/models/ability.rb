@@ -35,10 +35,12 @@ class Ability  < Cor1440Gen::Ability
         cannot :buscar, Sip::Actividad
         can :read, Sip::Actividad
       when Ability::ROLADMIN, Ability::ROLDIR
-        can :manage, Cor1440Gen::Proyectofinanciero
-        can :manage, Cor1440Gen::Financiador
         can :manage, Cor1440Gen::Actividad
+        can :manage, Cor1440Gen::Financiador
+        can :manage, Cor1440Gen::Indicadorpf
+        can :manage, Cor1440Gen::Tipoindicador
         can :manage, Cor1440Gen::Informe
+        can :manage, Cor1440Gen::Proyectofinanciero
         can :manage, Heb412Gen::Doc
         can :manage, Heb412Gen::Plantillahcm
         can :manage, :tablasbasicas

@@ -67,7 +67,8 @@ module Cor1440Gen
             ] +
             [ :indicadorpf_attributes =>  [
               :id, :resultadopf_id,
-              :numero, :indicador, :_destroy ] 
+              :numero, :indicador, :tipoindicador_id,
+              :_destroy ] 
             ] +
             [ :actividadpf_attributes =>  [
               :id, :resultadopf_id,
@@ -112,13 +113,13 @@ module Cor1440Gen
             end
           end
 
-    def new
-      @registro = clase.constantize.new
-      @registro.monto = 1
-      @registro.nombre = 'N'
-      @registro.save!
-      redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
-    end
+          def new
+            @registro = clase.constantize.new
+            @registro.monto = 1
+            @registro.nombre = 'N'
+            @registro.save!
+            redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
+          end
 
         end # included
 

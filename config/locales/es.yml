@@ -14,11 +14,16 @@ es:
     proyecto: Área
     proyectosfinancieros: Convenios financieros
     proyectofinanciero: Convenio financiado
+    tiposindicador: Tipos de indicador
+    tipoindicador: Tipo de indicador
   activerecord:
     models:
       "cor1440_gen/proyectofinanciero": 
-        one: "Compromiso institucional"
-        other: "Compromisos institucionales"
+        one: "Convenio financiado"
+        other: "Convenios financieros"
+      "cor1440_gen/tipoindicador": 
+        one: "Tipo de indicador"
+        other: "Tipos de indicador"
     attributes:
       "cor1440_gen/actividad":
         fecha_localizada: Fecha
@@ -80,3 +85,14 @@ es:
         resultadopf: Resultado
         numero: Número
         resultado: Descripción del resultado
+      "cor1440_gen/tipoindicador":
+        nombre: Nombre corto
+        esptipometa: Especificación del tipo de meta
+        espcampos: Especificación de campos por añadir a actividad/efecto
+        espvaloresomision: Especificación de valores por omisión
+        espvalidaciones: Especificación de validaciones
+        espfuncionmedir: Especificación de función para medir indicador
+        medircon: Medir con
+        Tipoindicador: Tipo de indicador
+        Tiposindicador: Tipos de indicador
+
