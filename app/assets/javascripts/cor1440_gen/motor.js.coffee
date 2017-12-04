@@ -128,7 +128,7 @@ cor1440_gen_rangoedadc_todos = () ->
   )
   
   $(document).on('change', '#resultadospf [id$=_id]', (e, result) ->
-    sip_enviarautomatico_formulario($('form'), 'POST', 'json', true, 'Enviar')
+    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
   
   
@@ -139,8 +139,12 @@ cor1440_gen_rangoedadc_todos = () ->
   )
   
   $(document).on('change', '#indicadorespf [id$=_id]', (e, result) ->
-    sip_enviarautomatico_formulario($('form'), 'POST', 'json', true, 'Enviar')
+    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
   
   $(document).on('cocoon:after-insert', '#indicadorespf', cor1440_gen_actualiza_resultados)
   $(document).on('cocoon:after-insert', '#actividadespf', cor1440_gen_actualiza_resultados)
+  $(document).on('change', '#actividadespf [id$=_id]', (e, result) ->
+    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+  )
+ 
