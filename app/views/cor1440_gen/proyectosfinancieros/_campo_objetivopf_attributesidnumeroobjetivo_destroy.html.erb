@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody id="objetivospf">
-          <%= f.simple_fields_for :objetivopf do |o| %>
+          <%= f.simple_fields_for :objetivopf, f.object.objetivopf.order(:id) do |o| %>
             <%= render 'objetivopf_campos', f:  o %>
           <% end %>
         </tbody>

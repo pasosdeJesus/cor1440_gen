@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody id="indicadorespf">
-          <%= f.simple_fields_for :indicadorpf do |o| %>
+          <%= f.simple_fields_for :indicadorpf, f.object.indicadorpf.order(:id) do |o| %>
             <%= render 'indicadorpf_campos', f:  o %>
           <% end %>
         </tbody>

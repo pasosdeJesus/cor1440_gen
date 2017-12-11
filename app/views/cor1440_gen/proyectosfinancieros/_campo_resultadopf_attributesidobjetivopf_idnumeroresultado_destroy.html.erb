@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody id="resultadospf">
-          <%= f.simple_fields_for :resultadopf do |o| %>
+          <%= f.simple_fields_for :resultadopf, f.object.resultadopf.order(:id) do |o| %>
             <%= render 'resultadopf_campos', f:  o %>
           <% end %>
         </tbody>
