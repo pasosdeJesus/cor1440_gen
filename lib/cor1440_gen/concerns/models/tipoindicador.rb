@@ -14,6 +14,12 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Indicadorpf',
             foreign_key: 'tipoindicador_id'
 
+          has_many :campotind, foreign_key: 'tipoindicador_id',
+            validate: true, dependent: :destroy, 
+            class_name: 'Cor1440Gen::Campotind'
+          accepts_nested_attributes_for :campotind,
+            allow_destroy: true, reject_if: :all_blank
+
           validates :nombre, presence: true, allow_blank: false, 
             uniqueness: true, length: { maximum: 32} 
           validates :medircon, presence: true, allow_blank: false

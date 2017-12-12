@@ -31,6 +31,7 @@ module Cor1440Gen
               "medircon",
               "esptipometa",
               "espcampos",
+              "campotind",
               "espvaloresomision",
               "espvalidaciones",
               "espfuncionmedir" ]
@@ -42,7 +43,11 @@ module Cor1440Gen
           end
 
           def tipoindicador_params
-            params.require(:tipoindicador).permit(*atributos_form)
+            byebug
+            p = *atributos_form + [ :campotind_attributes => [
+              :id, :nombrecampo, :ayudauso, :_destroy ]
+            ]
+            params.require(:tipoindicador).permit(p)
           end
 
 

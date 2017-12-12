@@ -39,6 +39,7 @@ class Ability  < Cor1440Gen::Ability
         can :manage, Cor1440Gen::Financiador
         can :manage, Cor1440Gen::Indicadorpf
         can :manage, Cor1440Gen::Tipoindicador
+        can :manage, Cor1440Gen::Campotind
         can :manage, Cor1440Gen::Informe
         can :manage, Cor1440Gen::Proyectofinanciero
         can :manage, Heb412Gen::Doc

@@ -10,8 +10,22 @@ GIT
       sip
 
 GIT
-  remote: https://github.com/pasosdeJesus/sip.git
-  revision: c0fc94e453c1719c83b762b4e1e3df4fe86bf864
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
+  specs:
+    cocoon (1.2.6)
+
+GIT
+  remote: https://github.com/vtamara/odf-report.git
+  revision: bd2daa10ceaf02af401c2a9c4e6fb7bb8a69afee
+  branch: update-rubyzip
+  specs:
+    odf-report (0.5.2)
+      nokogiri (>= 1.5.0)
+      rubyzip (~> 1.2.0)
+
+PATH
+  remote: ../sip
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -30,21 +44,6 @@ GIT
       twitter-bootstrap-rails
       twitter_cldr
       will_paginate
-
-GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
-  specs:
-    cocoon (1.2.6)
-
-GIT
-  remote: https://github.com/vtamara/odf-report.git
-  revision: bd2daa10ceaf02af401c2a9c4e6fb7bb8a69afee
-  branch: update-rubyzip
-  specs:
-    odf-report (0.5.2)
-      nokogiri (>= 1.5.0)
-      rubyzip (~> 1.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -98,6 +97,7 @@ GEM
     bootstrap-datepicker-rails (1.7.1.1)
       railties (>= 3.0)
     builder (3.2.3)
+    byebug (9.1.0)
     camertron-eprun (1.1.1)
     cancancan (2.1.2)
     capybara (2.16.1)
@@ -359,6 +359,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt
   bootstrap-datepicker-rails
+  byebug
   cancancan
   chosen-rails
   cocoon!

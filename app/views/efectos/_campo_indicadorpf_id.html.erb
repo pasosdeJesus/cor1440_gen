@@ -1,0 +1,7 @@
+<%= f.input :indicadorpf_id,
+  collection: Cor1440Gen::Indicadorpf.all,
+  label_method: lambda { |i| i.numero + ' - ' + i.indicador },
+  value_method: :id,
+  input_html: { class: 'chosen-select' }
+%>
+
