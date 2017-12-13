@@ -43,7 +43,6 @@ module Cor1440Gen
           end
 
           def tipoindicador_params
-            byebug
             p = *atributos_form + [ :campotind_attributes => [
               :id, :nombrecampo, :ayudauso, :_destroy ]
             ]

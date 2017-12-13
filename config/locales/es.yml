@@ -25,6 +25,9 @@ es:
         one: "Tipo de indicador"
         other: "Tipos de indicador"
     attributes:
+      "campotind":
+        Campotind: Campo
+        Campostind: Campos
       "cor1440_gen/actividad":
         fecha_localizada: Fecha
         actividadpf: Actividad de convenio 
@@ -89,6 +92,8 @@ es:
         nombre: Nombre corto
         esptipometa: Especificación del tipo de meta
         espcampos: Especificación de campos por añadir a actividad/efecto
+        campotind: Campo
+        Campotind: Campo
         espvaloresomision: Especificación de valores por omisión
         espvalidaciones: Especificación de validaciones
         espfuncionmedir: Especificación de función para medir indicador
