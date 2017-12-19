@@ -30,7 +30,6 @@ module Cor1440Gen
               "nombre",
               "medircon",
               "esptipometa",
-              "espcampos",
               "campotind",
               "espvaloresomision",
               "espvalidaciones",
