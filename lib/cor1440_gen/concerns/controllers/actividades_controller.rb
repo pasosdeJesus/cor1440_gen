@@ -165,9 +165,9 @@ module Cor1440Gen
 
           # GET /actividades/new
           def new
-            @actividad = Actividad.new
-            @actividad.current_usuario = current_usuario
-            @actividad.oficina_id = 1
+            @registro = @actividad = Actividad.new
+            @registro = @actividad.current_usuario = current_usuario
+            @registro = @actividad.oficina_id = 1
             render layout: "application"
           end
 
@@ -238,7 +238,7 @@ module Cor1440Gen
           private
 
           def set_actividad
-            @actividad = Actividad.find(
+            @registro = @actividad = Actividad.find(
               Actividad.connection.quote_string(params[:id]).to_i
             )
             @actividad.current_usuario = current_usuario
