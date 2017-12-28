@@ -95,7 +95,8 @@ module Cor1440Gen
           # GET /actividades
           # GET /actividades.json
           def index
-            @actividades = Cor1440Gen::ActividadesController.filtra(
+            @registros = @actividades = 
+              Cor1440Gen::ActividadesController.filtra(
               params[:filtro], current_usuario)
             @plantillas = Heb412Gen::Plantillahcm.where(
               vista: 'Actividad').select('nombremenu, id').map { 
@@ -104,7 +105,7 @@ module Cor1440Gen
               @enctabla = encabezado_comun()
               respond_to do |format|
                 format.html { 
-                  @actividades = @actividades.paginate(
+                  @registros = @actividades = @actividades.paginate(
                     :page => params[:pagina], per_page: 20
                   )
                   @cuerpotabla = cuerpo_comun()
@@ -137,7 +138,7 @@ module Cor1440Gen
                 }
 
                 format.js   { 
-                  @actividades = @actividades.paginate(
+                  @registros = @actividades = @actividades.paginate(
                     :page => params[:pagina], per_page: 20
                   )
                   @cuerpotabla = cuerpo_comun()

@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: f3c37ad5de6377df2ae6c79f4c91abfd30ff7d36
+  revision: 0bdec5c21be12784741b6d900aa8746df8a58cc8
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 54241e90fbac50da24d701ed7fa1d31b49f47df2
+  revision: e3131062bc4f0c9495af04eeb70441060da323fb
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -107,7 +107,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    chosen-rails (1.5.2)
+    chosen-rails (1.8.2)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
       sass-rails (>= 3.2)
@@ -207,7 +207,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     multi_json (1.12.2)
-    nio4r (2.1.0)
+    nio4r (2.2.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
@@ -337,7 +337,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2017.3)
       tzinfo (>= 1.0.0)
-    uglifier (4.0.2)
+    uglifier (4.1.0)
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
