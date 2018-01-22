@@ -11,7 +11,10 @@
     <%= f.input :titulo, label: false %>
   </td>
   <td>
-    <%= f.input :descripcion, label: false %>
+    <%= f.input :descripcion, 
+      as: :text, 
+      input_html: { rows: 2 }, 
+      label: false %>
   </td>
   <td>
     <%= f.input :id, as: :hidden %>
