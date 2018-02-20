@@ -70,11 +70,7 @@ module Cor1440Gen
               :numero, :indicador, :tipoindicador_id,
               :_destroy ] 
             ] +
-            [ :actividadpf_attributes =>  [
-              :id, :resultadopf_id,
-              :nombrecorto, :titulo, 
-              :descripcion, :_destroy ] 
-            ] 
+            [ :actividadpf]
 
           end
 
@@ -84,7 +80,13 @@ module Cor1440Gen
           end
 
           def proyectofinanciero_params
-            params.require(:proyectofinanciero).permit(*atributos_form)
+            params.require(:proyectofinanciero).permit(
+              *atributos_form +
+              [ :actividadpf_attributes =>  [
+                :id, :resultadopf_id,
+                :nombrecorto, :titulo, 
+                :descripcion, :_destroy ] 
+              ] )
           end
 
 

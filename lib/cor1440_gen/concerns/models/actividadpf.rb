@@ -17,6 +17,10 @@ module Cor1440Gen
           belongs_to :resultadopf, 
             class_name: 'Cor1440Gen::Resultadopf',
             foreign_key: 'resultadopf_id'
+          belongs_to :actividadtipo, 
+            class_name: 'Cor1440Gen::Actividadtipo',
+            foreign_key: 'actividadtipo_id'
+
 
           has_many :actividad_actividadpf, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadActividadpf', foreign_key: 'actividadpf_id'
