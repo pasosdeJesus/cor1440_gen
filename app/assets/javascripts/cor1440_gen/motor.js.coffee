@@ -8,7 +8,8 @@
 #//= require cocoon
 
 @DEP_OBJETIVOPF = [
-    'select[id^=proyectofinanciero_resultadopf_attributes][id$=_objetivopf_id]'
+    'select[id^=proyectofinanciero_resultadopf_attributes][id$=_objetivopf_id]',
+    'select[id^=proyectofinanciero_indicadorobjetivo_attributes][id$=_objetivopf_id]'
   ]
 
 @DEP_RESULTADOPF = [
