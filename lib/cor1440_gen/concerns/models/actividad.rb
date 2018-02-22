@@ -76,7 +76,7 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Actividadpf'
 
           has_many :valorcampoact, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Valorcampoact',
+            class_name: '::Cor1440Gen::Valorcampoact',
             foreign_key: 'actividad_id',  validate: true
           accepts_nested_attributes_for :valorcampoact,
             allow_destroy: true, reject_if: :all_blank
