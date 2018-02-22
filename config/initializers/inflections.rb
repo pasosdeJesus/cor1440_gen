@@ -20,5 +20,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'financiador', 'financiadores'
   inflect.irregular 'proyectofinanciero', 'proyectosfinancieros'
   inflect.irregular 'tipoindicador', 'tiposindicador'
+  inflect.irregular 'campoact', 'camposact'
   inflect.irregular 'campotind', 'campostind'
 end

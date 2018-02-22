@@ -28,6 +28,9 @@ es:
       "campotind":
         Campotind: Campo
         Campostind: Campos
+      "campoact":
+        Campoact: Campo
+        Camposact: Campos
       "cor1440_gen/actividad":
         fecha_localizada: Fecha
         actividadpf: Actividad de convenio 
@@ -43,6 +46,8 @@ es:
       "cor1440_gen/actividadtipo":
         Actividadtipo: Tipo de Actividad
         Actividadtipos: Tipos de Actividad
+        campoact: Campo
+        Campoact: Campo
       "cor1440_gen/indicadorpf":
         indicadorpf: Indicador
         numero: Número
