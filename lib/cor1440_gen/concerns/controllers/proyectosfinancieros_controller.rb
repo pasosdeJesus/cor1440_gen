@@ -19,7 +19,8 @@ module Cor1440Gen
             end
             if params[:fecha] && params[:fecha] != ''
               fecha = fecha_local_estandar params[:fecha]
-              c = c.where('fechainicio <= ? AND ? <= fechacierre ', 
+              c = c.where('fechainicio <= ? AND " +
+                          "(? <= fechacierre OR fechacierre IS NULL) ', 
                           fecha, fecha)
             end
             super(c)
@@ -70,7 +71,7 @@ module Cor1440Gen
               :numero, :indicador, :tipoindicador_id,
               :_destroy ] 
             ] +
-            [ :actividadpf]
+            [ :actividadpf ]
 
           end
 
@@ -84,6 +85,7 @@ module Cor1440Gen
               *atributos_form +
               [ :actividadpf_attributes =>  [
                 :id, :resultadopf_id,
+                :actividadtipo_id,
                 :nombrecorto, :titulo, 
                 :descripcion, :_destroy ] 
               ] )

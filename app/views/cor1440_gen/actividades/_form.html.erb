@@ -24,13 +24,6 @@
     include_blank: false,
     input_html: { class: 'chosen-select' }
   %>
-  <%= f.association :actividadtipo, 
-    collection: Cor1440Gen::Actividadtipo.habilitados,
-    label_method: :nombre, 
-    value_method: :id,
-    input_html: { class: 'chosen-select' }
-  %>
-
   <%= render partial: 'form_proyectofinanciero', locals: { f: f } %>
 
   <%= render partial: 'form_complemento1', locals: { f: f } %>

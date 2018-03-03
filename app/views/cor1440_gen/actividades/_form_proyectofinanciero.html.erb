@@ -5,7 +5,7 @@
     fr = Time.now.strftime('%Y-%m-%d')
   end
   lp = Cor1440Gen::Proyectofinanciero.where(
-    "fechainicio <= ? AND ? <= fechacierre", fr, fr)
+    "fechainicio <= ? AND (? <= fechacierre OR fechacierre IS NULL)", fr, fr)
 %>
 
 <%= f.association :proyectofinanciero,

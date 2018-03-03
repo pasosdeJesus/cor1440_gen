@@ -23,6 +23,18 @@ module Cor1440Gen
         ]
       end
 
+      def new
+        @registro = clase.constantize.new
+        @registro.nombre = 'A'
+        @registro.fechacreacion = Date.today
+        @registro.save!(validate: false)
+        redirect_to cor1440_gen.edit_admin_actividadtipo_path(@registro)
+      end
+
+      def genclase
+        'M'
+      end
+
       def actividadtipo_params
         params.require(:actividadtipo).permit(
           *atributos_form + [:campoact_attributes => [

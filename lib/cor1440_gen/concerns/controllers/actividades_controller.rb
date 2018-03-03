@@ -18,7 +18,7 @@ module Cor1440Gen
               @actividades.human_attribute_name(:oficina),
               @actividades.human_attribute_name(:responsable),
               @actividades.human_attribute_name(:nombre),
-              @actividades.human_attribute_name(:actividadtipos),
+              @actividades.human_attribute_name(:actividadpf),
               @actividades.human_attribute_name(:proyectos),
               @actividades.human_attribute_name(:actividadareas),
               @actividades.human_attribute_name(:proyectosfinancieros),
@@ -29,7 +29,7 @@ module Cor1440Gen
 
           def atributos_presenta
             [ :id, :fecha, :oficina, :responsable,
-              :nombre, :actividadtipos, :proyectos,
+              :nombre, :actividadpf, :proyectos,
               :actividadareas, :proyectosfinancieros, :objetivo,
               :poblacion,
               ]
@@ -45,8 +45,8 @@ module Cor1440Gen
                     actividad.oficina ? actividad.oficina.nombre : "",
                     actividad.responsable ? actividad.responsable.nusuario : "",
                     actividad.nombre ? actividad.nombre : "",
-                    actividad.actividadtipo.inject("") { |memo, i| 
-                      (memo == "" ? "" : memo + "; ") + i.nombre },
+                    actividad.actividadpf.inject("") { |memo, i| 
+                      (memo == "" ? "" : memo + "; ") + i.titulo },
                     actividad.proyecto.inject("") { |memo, i| 
                         (memo == "" ? "" : memo + "; ") + i.nombre },
                     actividad.actividadareas.inject("") { |memo, i| 
@@ -167,9 +167,10 @@ module Cor1440Gen
           # GET /actividades/new
           def new
             @registro = @actividad = Actividad.new
-            @registro = @actividad.current_usuario = current_usuario
-            @registro = @actividad.oficina_id = 1
-            render layout: "application"
+            @registro.current_usuario = current_usuario
+            @registro.oficina_id = 1
+            @registro.save!(validate: false)
+            redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
 
           # GET /actividades/1/edit
@@ -255,7 +256,6 @@ module Cor1440Gen
               :lugar,
               :actividadarea_ids => [],
               :actividadpf_ids => [],
-              :actividadtipo_ids => [],
               :proyecto_ids => [],
               :proyectofinanciero_ids => [],
               :usuario_ids => [],
@@ -320,11 +320,11 @@ module Cor1440Gen
                 @busarea.to_i
               )
             end
-            @busactividadtipo = param_escapa(par, 'busactividadtipo')
-            if @busactividadtipo != '' then
-              ac = ac.joins(:actividad_actividadtipo).where(
-                "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
-                @busactividadtipo.to_i
+            @busactividadpf= param_escapa(par, 'busactividadpf')
+            if @busactividadpf != '' then
+              ac = ac.joins(:actividad_actividadpf).where(
+                "cor1440_gen_actividad_actividadpf.actividadpf_id = ?",
+                @busactividadpf.to_i
               )
             end
             @busobjetivo = param_escapa(par, 'busobjetivo')

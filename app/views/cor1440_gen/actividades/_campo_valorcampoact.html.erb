@@ -1,0 +1,5 @@
+<div id="camposdinamicos" class="valorcampoacts-div valorcampoactsdiv">
+  <%= f.simple_fields_for :valorcampoact do |vc| %>
+    <% render 'valorcampoact_campos', f: vc %>
+  <% end %>
+</div>

@@ -8,7 +8,9 @@
     <%= f.input :nombrecorto, label: false %>
   </td>
   <td>
-    <%= f.association :actividadtipo, label: false %>
+    <%= f.association :actividadtipo, 
+      label_method: :nombre,
+      label: false %>
   </td>
   <td>
     <%= f.input :titulo, label: false %>

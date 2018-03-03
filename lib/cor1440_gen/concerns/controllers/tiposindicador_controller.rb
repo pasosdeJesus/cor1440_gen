@@ -36,6 +36,13 @@ module Cor1440Gen
               "espfuncionmedir" ]
           end
 
+          def new
+            @registro = clase.constantize.new
+            @registro.nombre = 'I'
+            @registro.save!(validate: false)
+            redirect_to cor1440_gen.edit_tipoindicador_path(@registro)
+          end
+
           # Genero del nombre (F - Femenino, M - Masculino)
           def genclase
             return 'M';
