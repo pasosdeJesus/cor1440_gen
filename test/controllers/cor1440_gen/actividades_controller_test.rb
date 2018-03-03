@@ -23,7 +23,7 @@ module Cor1440Gen
 
     test "should get new" do
       get new_actividad_url
-      assert_response :success
+      assert_response 302
     end
 
     test "should create actividad" do
