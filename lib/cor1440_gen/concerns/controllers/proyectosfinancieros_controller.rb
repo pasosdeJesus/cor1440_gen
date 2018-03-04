@@ -19,8 +19,8 @@ module Cor1440Gen
             end
             if params[:fecha] && params[:fecha] != ''
               fecha = fecha_local_estandar params[:fecha]
-              c = c.where('fechainicio <= ? AND " +
-                          "(? <= fechacierre OR fechacierre IS NULL) ', 
+              c = c.where('fechainicio <= ? AND ' +
+                          '(? <= fechacierre OR fechacierre IS NULL) ', 
                           fecha, fecha)
             end
             super(c)
