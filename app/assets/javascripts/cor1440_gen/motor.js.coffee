@@ -64,8 +64,9 @@ cor1440_gen_rangoedadc_todos = () ->
         '_id', '_numero', DEP_RESULTADOPF, 'id', 'numero')
 
 @cor1440_gen_actualiza_objetivopf =  ($this, root) ->
-    sip_llena_select_con_AJAX($this, 'actividad_objetivopf_ids', 
-      'objetivospf', 'pfl', 'con Objetivos de convenio', root)
+    if $('#actividad_objetivopf_ids').length > 0
+      sip_llena_select_con_AJAX($this, 'actividad_objetivopf_ids', 
+        'objetivospf', 'pfl', 'con Objetivos de convenio', root)
 
 @cor1440_gen_actualiza_actividadpf =  ($this, root) ->
     sip_llena_select_con_AJAX($this, 'actividad_actividadpf_ids', 
