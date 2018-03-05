@@ -17,11 +17,6 @@
      'select[id^=proyectofinanciero_actividadpf_attributes][id$=_resultadopf_id]'
   ]
  
-@DEP_RESULTADOPF = [
-     'select[id^=proyectofinanciero_indicadorpf_attributes][id$=_resultadopf_id]',
-     'select[id^=proyectofinanciero_actividadpf_attributes][id$=_resultadopf_id]'
-  ]
-  
 @DEP_INDICADORPF = []
 
 cor1440_gen_rangoedadac_uno = (ini, col) ->
@@ -67,7 +62,22 @@ cor1440_gen_rangoedadc_todos = () ->
 @cor1440_gen_actualiza_resultados = (e, resultado) ->
     sip_actualiza_cuadros_seleccion_dependientes('resultadospf', 
         '_id', '_numero', DEP_RESULTADOPF, 'id', 'numero')
- 
+
+@cor1440_gen_actualiza_objetivopf =  ($this, root) ->
+    sip_llena_select_con_AJAX($this, 'actividad_objetivopf_ids', 
+      'objetivospf', 'pfl', 'con Objetivos de convenio', root)
+
+@cor1440_gen_actualiza_actividadpf =  ($this, root) ->
+    sip_llena_select_con_AJAX($this, 'actividad_actividadpf_ids', 
+      'actividadespf', 'pfl', 'con Actividades de convenio', root)
+
+@cor1440_gen_actualiza_proyectofinanciero =  ($this, root) ->
+    sip_llena_select_con_AJAX($this, 'actividad_proyectofinanciero_ids', 
+      'proyectosfinancieros', 'fecha', 'con Convenios financiados', root)
+    cor1440_gen_actualiza_actividadpf($('#actividad_proyectofinanciero_ids'), root)
+    cor1440_gen_actualiza_objetivopf($('#actividad_proyectofinanciero_ids'), root)
+    
+
 @cor1440_gen_prepara_eventos_comunes = (root) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form
@@ -96,11 +106,12 @@ cor1440_gen_rangoedadc_todos = () ->
     todayHighlight: true,
     language: 'es'
   }).on('changeDate', (ev) ->
-    sip_llena_select_con_AJAX($(this), 'actividad_proyectofinanciero_ids', 'proyectosfinancieros', 'fecha', 'con Convenios financiados', root)
+    cor1440_gen_actualiza_proyectofinanciero($(this), root)
   )
 
   $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
-    sip_llena_select_con_AJAX($(this), 'actividad_actividadpf_ids', 'actividadespf', 'pfl', 'con Actividades de convenio', root)
+    cor1440_gen_actualiza_actividadpf($(this), root)
+    cor1440_gen_actualiza_objetivopf($(this), root)
   )
 
  

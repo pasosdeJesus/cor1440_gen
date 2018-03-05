@@ -117,6 +117,31 @@ module Cor1440Gen
             end
           end
 
+          def objetivospf
+            pfl = []
+            if params[:pfl] && params[:pfl] != ''
+              params[:pfl].each do |pf|
+                pfl << pf.to_i
+              end
+            end
+            c = Cor1440Gen::Objetivopf.where(proyectofinanciero_id: pfl)
+            respond_to do |format|
+              format.json {
+                @registros = @registro = c.all
+                render :objetivospf
+                return
+              }
+              format.js {
+                @registros = @registro = c.all
+                render :objetivospf
+              }
+              format.html {
+                render inline: @registros.errors, 
+                status: :unprocessable_entity
+              }
+            end
+          end
+
           def new
             @registro = clase.constantize.new
             @registro.monto = 1

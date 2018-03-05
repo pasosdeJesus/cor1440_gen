@@ -10,6 +10,9 @@ Cor1440Gen::Engine.routes.draw do
   get "/actividadespf/" => "proyectosfinancieros#actividadespf", 
     as: :actividadespf
 
+  get "/objetivospf/" => "proyectosfinancieros#objetivospf", 
+    as: :objetivospf
+
   resources :objetivospf, only: [:new, :destroy]
   resources :resultadospf, only: [:new, :destroy]
   resources :indicadorespf, only: [:new, :destroy]
