@@ -1,5 +1,5 @@
 json.array!(@registros) do |registro|
   json.id registro.id
-  json.nombre (registro.numero+ ' ' + registro.objetivo)
+  json.nombre (registro.numero+ ': ' + registro.objetivo)
 end
 

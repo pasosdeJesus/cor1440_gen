@@ -72,12 +72,9 @@ cor1440_gen_rangoedadc_todos = () ->
     sip_llena_select_con_AJAX($this, 'actividad_actividadpf_ids', 
       'actividadespf', 'pfl', 'con Actividades de convenio', root)
 
-@cor1440_gen_actualiza_proyectofinanciero =  ($this, root) ->
-    sip_llena_select_con_AJAX($this, 'actividad_proyectofinanciero_ids', 
-      'proyectosfinancieros', 'fecha', 'con Convenios financiados', root)
+@cor1440_gen_tras_actualiza_proyectofinanciero =  (root) ->
     cor1440_gen_actualiza_actividadpf($('#actividad_proyectofinanciero_ids'), root)
     cor1440_gen_actualiza_objetivopf($('#actividad_proyectofinanciero_ids'), root)
-    
 
 @cor1440_gen_prepara_eventos_comunes = (root) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
@@ -107,7 +104,9 @@ cor1440_gen_rangoedadc_todos = () ->
     todayHighlight: true,
     language: 'es'
   }).on('changeDate', (ev) ->
-    cor1440_gen_actualiza_proyectofinanciero($(this), root)
+    sip_llena_select_con_AJAX($(this), 'actividad_proyectofinanciero_ids', 
+      'proyectosfinancieros', 'fecha', 'con Convenios financiados', root, false, 
+      'id', 'nombre', cor1440_gen_tras_actualiza_proyectofinanciero)
   )
 
   $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
