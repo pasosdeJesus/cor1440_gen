@@ -1,6 +1,8 @@
 <tr class='nested-fields'>
   <td>
     <%= f.association :resultadopf, 
+      collection: Cor1440Gen::Resultadopf.where(proyectofinanciero_id: 
+                                               f.object.proyectofinanciero_id),
       label: false,
       label_method: :numero %>
   </td>
