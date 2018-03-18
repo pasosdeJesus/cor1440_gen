@@ -28,7 +28,7 @@ gem "odf-report", git: 'https://github.com/vtamara/odf-report.git', branch: 'upd
 gem 'chosen-rails'
 gem 'rspreadsheet'
 #gem 'rspreadsheet', path: '../rspreadsheet/'
-gem 'libxml-ruby', '3.0'
+gem 'libxml-ruby', '~> 3.0'
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
