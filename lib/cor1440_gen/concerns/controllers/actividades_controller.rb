@@ -168,7 +168,8 @@ module Cor1440Gen
           def new
             @registro = @actividad = Actividad.new
             @registro.current_usuario = current_usuario
-            @registro.oficina_id = 1
+            @registro.oficina_id = current_usuario && 
+              current_usuario.oficina_id ? current_usuario.oficina_id : 1
             @registro.save!(validate: false)
             redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
