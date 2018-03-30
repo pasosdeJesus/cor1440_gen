@@ -23,7 +23,8 @@ module Cor1440Gen
                                 status: :unprocessable_entity }
                 end
               else
-                render inline: 'No implementado', status: :unprocessable_entity 
+                render inline: 'No implementado', 
+                  status: :unprocessable_entity 
               end
             else
               render inline: 'Falta id de proyectofinanciero', 

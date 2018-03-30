@@ -174,9 +174,48 @@ module Cor1440Gen
             redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
 
+
+          def asegura_camposdinamicos(actividad)
+            ci = []
+            actividad.actividadpf.each do |apf|
+              ci += apf.actividadtipo.campoact.map(&:id).sort
+            end
+            ci = ci.sort
+            cd = actividad.valorcampoact.map(&:campoact_id).sort
+            sobran = cd - ci
+            sobran.each do |i|
+              if i then
+                r = Cor1440Gen::Valorcampoact.where(
+                  'actividad_id = ? AND campoact_id = ?', 
+                  actividad.id, i).take
+              else
+                r = Cor1440Gen::Valorcampoact.where(
+                  'actividad_id = ? AND campoact_id IS NULL',
+                  actividad.id).take
+              end
+              r.delete
+            end
+            faltan = ci - cd
+            faltan.each do |i|
+              nr = Cor1440Gen::Valorcampoact.new
+              nr.campoact_id = i
+              nr.actividad_id = actividad.id
+              nr.valor = ''
+              if !nr.save
+                puts "No pudo guardar nr"
+              end
+            end
+          end
+
           # GET /actividades/1/edit
           def edit
-            render layout: "application"
+            authorize! :edit, Cor1440Gen::Actividad
+            @registro = Cor1440Gen::Actividad.find(params[:id])
+            if params['actividadpf_ids']
+              @registro.actividadpf_ids = params['actividadpf_ids']
+            end
+            asegura_camposdinamicos(@registro)
+            render layout: 'application'
           end
 
           # POST /actividades
@@ -250,19 +289,16 @@ module Cor1440Gen
           # No confiar parametros a Internet, sólo permitir lista blanca
           def actividad_params
             params.require(:actividad).permit(
-              :oficina_id, :nombre, 
-              :objetivo, :proyecto, :resultado,
-              :fecha_localizada, :actividad, :observaciones, 
-              :usuario_id,
+              :actividad,
+              :fecha_localizada, 
               :lugar,
-              :actividadarea_ids => [],
-              :actividadpf_ids => [],
-              :proyecto_ids => [],
-              :proyectofinanciero_ids => [],
-              :usuario_ids => [],
-              :actividad_rangoedadac_attributes => [
-                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
-              ],
+              :nombre, 
+              :objetivo,  
+              :observaciones, 
+              :oficina_id, 
+              :proyecto, 
+              :resultado,
+              :usuario_id,
               :actividad_sip_anexo_attributes => [
                 :id,
                 :id_actividad, 
@@ -270,7 +306,27 @@ module Cor1440Gen
                 :sip_anexo_attributes => [
                   :id, :descripcion, :adjunto, :_destroy
                 ]
-              ]
+              ],
+              :actividadarea_ids => [],
+              :actividadpf_ids => [],
+              :actividad_rangoedadac_attributes => [
+                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
+              ],
+              :valorcampoact_attributes => [
+                :id,
+                :campoact_id,
+                :valor
+              ],
+              :proyecto_ids => [],
+              :proyectofinanciero_ids => [],
+              :usuario_ids => []
+            )
+          end
+          
+
+          def actividad_actividadpf_params(nparams)
+            nparams.require(:actividad).permit(
+              :actividadpf_ids => []
             )
           end
 
