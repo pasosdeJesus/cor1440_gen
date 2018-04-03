@@ -11,29 +11,48 @@ module Cor1440Gen
           before_action :set_actividad, only: [:show, :edit, :update, :destroy]
           load_and_authorize_resource class: Cor1440Gen::Actividad
 
-          # Encabezado comun para HTML y PDF (primeras filas)
-          def encabezado_comun
-              return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
-              @actividades.human_attribute_name(:fecha),
-              @actividades.human_attribute_name(:oficina),
-              @actividades.human_attribute_name(:responsable),
-              @actividades.human_attribute_name(:nombre),
-              @actividades.human_attribute_name(:actividadpf),
-              @actividades.human_attribute_name(:proyectos),
-              @actividades.human_attribute_name(:actividadareas),
-              @actividades.human_attribute_name(:proyectosfinancieros),
-              @actividades.human_attribute_name(:objetivo),
-              @actividades.human_attribute_name(:poblacion),
-              ]
+
+          def clase
+            "Cor1440Gen::Actividad"
           end
 
-          def atributos_presenta
+          def atributos_index
+            [ :id, 
+              :fecha_localizada, 
+              :oficina, 
+              :responsable,
+              :nombre, 
+              :actividadpf, 
+              :proyectos,
+              :actividadareas,
+              :proyectosfinancieros,
+              :objetivo,
+              :poblaacion
+            ]
+          end
+
+          def atributos_form
+            atributos_index - [:id]
+          end
+
+          def atributos_show
             [ :id, :fecha, :oficina, :responsable,
               :nombre, :actividadpf, :proyectos,
               :actividadareas, :proyectosfinancieros, :objetivo,
               :poblacion,
               ]
           end
+
+          def gencalse
+            return 'F'
+          end
+
+          def show
+            authorize! :read, clase.constantize
+            @registro = clase.constantize.find(params[:id])
+            render :show, layout: 'application'
+          end
+
 
           def fila_comun(actividad)
            pob = actividad.actividad_rangoedadac.map { |i| 
@@ -94,7 +113,10 @@ module Cor1440Gen
 
           # GET /actividades
           # GET /actividades.json
-          def index
+          def index(c = nil)
+            super(c)
+            return
+            #Falta manejar pdf, json, ods como 
             @registros = @actividades = 
               Cor1440Gen::ActividadesController.filtra(
               params[:filtro], current_usuario)
@@ -155,15 +177,6 @@ module Cor1440Gen
               return
           end
 
-          # GET /actividades/1
-          # GET /actividades/1.json
-          def show
-            @actividades = Actividad.where(id: @actividad.id)
-            @cuerpotabla = cuerpo_comun()
-
-            render layout: "application"
-          end
-
           # GET /actividades/new
           def new
             @registro = @actividad = Actividad.new
@@ -216,65 +229,6 @@ module Cor1440Gen
             end
             asegura_camposdinamicos(@registro)
             render layout: 'application'
-          end
-
-          # POST /actividades
-          # POST /actividades.json
-          def create_gen
-            respond_to do |format|
-              if @actividad.save
-                format.html { 
-                  redirect_to @actividad, notice: 'Actividad creada.' 
-                }
-                format.json { 
-                  render action: 'show', status: :created, location: @actividad 
-                }
-              else
-                format.html { render action: 'new', layout: 'application' }
-                format.json { 
-                  render json: @actividad.errors, status: :unprocessable_entity 
-                }
-              end
-            end
-          end
-
-          def create
-            @actividad = Actividad.new(actividad_params)
-            @actividad.current_usuario = current_usuario
-            create_gen
-          end
-
-          # PATCH/PUT /actividades/1
-          # PATCH/PUT /actividades/1.json
-          def update_gen
-            respond_to do |format|
-              if @actividad.update(actividad_params)
-                format.html { 
-                  redirect_to @actividad, notice: 'Actividad actualizada.' 
-                }
-                format.json { head :no_content }
-              else
-                format.html { render action: 'edit', layout: 'application' }
-                format.json { 
-                  render json: @actividad.errors, status: :unprocessable_entity 
-                }
-              end
-            end
-          end
-
-          def update
-            update_gen
-          end
-
-          # DELETE /actividades/1
-          # DELETE /actividades/1.json
-          def destroy
-            @actividad.destroy
-            respond_to do |format|
-              format.html { 
-                redirect_to actividades_url, notice: 'Actividad eliminada' }
-              format.json { head :no_content }
-            end
           end
 
           private
