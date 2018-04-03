@@ -114,6 +114,23 @@ cor1440_gen_rangoedadc_todos = () ->
     cor1440_gen_actualiza_objetivopf($(this), root)
   )
 
+
+  $('#actividad_actividadpf_ids').chosen().change( (e) ->
+    root = window
+    ruta = document.location.pathname
+    if root.puntomontaje.length > 0
+      ruta = ruta.substr(window.puntomontaje.length)
+    if ruta.length == 0
+      return
+    if ruta[0] == '/'
+      ruta = ruta.substr(1)
+    datos = {
+      actividadpf_ids: $(this).val()
+    }
+    sip_envia_ajax_datos_ruta_y_pinta(ruta, datos,
+      '#camposdinamicos', '#camposdinamicos')
+  )
+
  
   $(document).on('change', '#objetivospf [id$=_numero]', cor1440_gen_actualiza_objetivos)
   
