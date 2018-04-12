@@ -178,7 +178,9 @@ module Cor1440Gen
           def asegura_camposdinamicos(actividad)
             ci = []
             actividad.actividadpf.each do |apf|
-              ci += apf.actividadtipo.campoact.map(&:id).sort
+              if apf.actividadtipo
+                ci += apf.actividadtipo.campoact.map(&:id).sort
+              end
             end
             ci = ci.sort
             cd = actividad.valorcampoact.map(&:campoact_id).sort
