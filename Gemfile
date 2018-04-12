@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Rails (internacionalización)
 gem "rails", '~> 5.2.0'
 
-#gem 'bootsnap', '>=1.1.0', require: false
+gem 'bootsnap', '>=1.1.0', require: false
 
 gem "rails-i18n"
 
