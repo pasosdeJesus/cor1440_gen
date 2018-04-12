@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 5.1.0'
+gem "rails", '~> 5.2.0'
+
+#gem 'bootsnap', '>=1.1.0', require: false
+
 gem "rails-i18n"
 
 # Postgresql
@@ -75,14 +78,14 @@ gem "paperclip"#, "~> 4.1"
 
 # Zonas horarias
 gem "tzinfo"
-gem "tzinfo-data"
+gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+gem 'sip', git: "https://github.com/pasosdeJesus/sip.git", branch: 'rails5.2'
 #gem 'sip', path: '../sip'
 
 # Motor heb412_gen para manejar archivos como nube y plantillas
-gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
+gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: 'rails5.2'
 #gem 'heb412_gen', path: '../heb412_gen/'
 
 # Los siguientes son para desarrollo o para pruebas con generadores
@@ -113,7 +116,7 @@ group :test do
   gem "minitest"
   gem "minitest-reporters" 
   gem "poltergeist" 
-  gem 'minitest-rails-capybara'
+  #gem 'minitest-rails-capybara'
 
   
   # Un proceso para cada prueba -- acelera
