@@ -314,6 +314,7 @@ module Cor1440Gen
               :actividad_rangoedadac_attributes => [
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
               ],
+              :actividadtipo_ids => [],
               :valorcampoact_attributes => [
                 :id,
                 :campoact_id,
