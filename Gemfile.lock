@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 59b6b4307dc60f1b5421c73c6100efadf54f147b
-  branch: rails5.2
+  revision: 5094accd79d49902ca45c554861b2e1f67251485
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -13,7 +12,6 @@ GIT
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
   revision: b0a152c5c2ec0a98f39c6ee70b4c5ee6cea75574
-  branch: rails5.2
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -104,15 +102,6 @@ GIT
   revision: 20f8f3bab2fee21309c57b586f5fab9921ac0894
   specs:
     cocoon (1.2.6)
-
-GIT
-  remote: https://github.com/vtamara/odf-report.git
-  revision: bd2daa10ceaf02af401c2a9c4e6fb7bb8a69afee
-  branch: update-rubyzip
-  specs:
-    odf-report (0.5.2)
-      nokogiri (>= 1.5.0)
-      rubyzip (~> 1.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -225,6 +214,9 @@ GEM
     nio4r (2.3.0)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    odf-report (0.5.2)
+      nokogiri (>= 1.5.0)
+      rubyzip (~> 1.2.0)
     orm_adapter (0.5.0)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
@@ -374,7 +366,7 @@ DEPENDENCIES
   libxml-ruby (~> 3.0)
   minitest
   minitest-reporters
-  odf-report!
+  odf-report
   paperclip
   pg
   poltergeist

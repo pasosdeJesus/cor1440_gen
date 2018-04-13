@@ -26,7 +26,7 @@ gem "prawnto_2",  :require => "prawnto"
 gem "prawn-table"
 
 # Plantilla ODT
-gem "odf-report", git: 'https://github.com/vtamara/odf-report.git', branch: 'update-rubyzip'
+gem "odf-report"
 
 
 
@@ -83,11 +83,11 @@ gem "tzinfo"
 gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git", branch: 'rails5.2'
+gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
 #gem 'sip', path: '../sip'
 
 # Motor heb412_gen para manejar archivos como nube y plantillas
-gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: 'rails5.2'
+gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
 #gem 'heb412_gen', path: '../heb412_gen/'
 
 # Los siguientes son para desarrollo o para pruebas con generadores
