@@ -20,7 +20,7 @@
             value: Sip::ModeloHelper.poromision(params, :fechaini), 
             maxlength: 10, 
             size: 10,
-            "data-behaviour" => "datepicker", 
+            type: 'date',
             "data-enviarautomatico" => "" 
           } %>
         - <%= f.input 'fechafin', 
@@ -29,7 +29,7 @@
             value: Sip::ModeloHelper.poromision(params, :fechafin), 
             maxlength: 10, 
             size: 10,
-            "data-behaviour" => "datepicker", 
+            type: 'date',
             "data-enviarautomatico" => "" } 
           %>
       <% when @actividades.human_attribute_name('oficina') %>
