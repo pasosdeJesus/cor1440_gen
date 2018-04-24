@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: b6c3b0a2c534951133d294255254a81169050c68
+  revision: 4c228db2ef8d877a7614df6dd9063bea7935905b
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: c6241ec04badfb984025ad3f3ba8c546b1e0372e
+  revision: 4b9d8401e708dad3890cea29c3270a959e55cba2
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -250,7 +250,7 @@ GEM
       pry (>= 0.9.11)
     public_suffix (3.0.2)
     puma (3.11.4)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails-controller-testing (1.0.2)
@@ -327,7 +327,7 @@ GEM
       tzinfo
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.9)
+    uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
