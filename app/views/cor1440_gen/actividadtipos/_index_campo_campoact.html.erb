@@ -1,0 +1,11 @@
+<%=  
+  if registro.campoact
+    r = ""
+    num = 1
+    registro.campoact.each do |x|
+      r += "(#{num}) #{x.nombrecampo}.  "
+      num += 1
+    end
+    r
+  end
+%>

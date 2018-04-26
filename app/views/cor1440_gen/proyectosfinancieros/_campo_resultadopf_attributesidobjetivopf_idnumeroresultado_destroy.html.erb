@@ -1,0 +1,32 @@
+<p></p>
+<div class="panel panel-default">
+  <div class="panel-heading">Resultados</div>
+  <div class="panel-body">
+    <div class="div-resultadospf">
+      <table border=1 width="100%">
+        <thead>
+          <tr>
+            <th>Ref. Objetivo</th>
+            <th width="10%">Código</th>
+            <th>Resultado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="resultadospf">
+          <%= f.simple_fields_for :resultadopf, f.object.resultadopf.order(:id) do |o| %>
+            <%= render 'resultadopf_campos', f:  o %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="links">
+        <%= link_to_add_association 'Agregar resultado', f, :resultadopf, {
+          :"data-association-insertion-node" => "tbody#resultadospf", 
+          :"data-association-insertion-method" => "append", 
+          partial: 'resultadopf_campos',
+          class: 'btn-primary', 
+          "data-ajax" => cor1440_gen.new_resultadospf_url,
+          "data-ajaxdata" => "proyectofinanciero_id" } %>
+      </div> <!-- link -->
+    </div> <!-- .div-resultadospf -->
+  </div> <!-- panel-body -->
+</div> <!-- panel -->

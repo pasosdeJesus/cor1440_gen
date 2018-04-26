@@ -1,0 +1,22 @@
+<tr class='nested-fields'>
+  <td>
+    <%= f.association :objetivopf, 
+      collection: Cor1440Gen::Objetivopf.where(proyectofinanciero_id: 
+                                               f.object.proyectofinanciero_id),
+      label: false,
+      label_method: :numero %>
+  </td>
+  <td>
+    <%= f.input :numero, label: false %>
+  </td>
+  <td>
+    <%= f.input :resultado, as: :text, input_html: { rows: 2 }, label: false %>
+  </td>
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar", f, 
+      :class => 'btn-danger', "data-existing" => true %>
+    <div><%= f.error_notification %></div>
+  </td>
+</tr>
+

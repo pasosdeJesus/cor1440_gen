@@ -9,17 +9,20 @@ module Cor1440Gen
         included do
           before_action :set_proyectofinanciero, 
             only: [:show, :edit, :update, :destroy]
-          load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero
+          load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
+            except: :actividadespf
 
           include Sip::FormatoFechaHelper
 
           def index(c = nil)
+            authorize! :index, Cor1440Gen::Proyectofinanciero
             if c == nil
               c = Cor1440Gen::Proyectofinanciero.all
             end
             if params[:fecha] && params[:fecha] != ''
               fecha = fecha_local_estandar params[:fecha]
-              c = c.where('fechainicio <= ? AND ? <= fechacierre ', 
+              c = c.where('fechainicio <= ? AND ' +
+                          '(? <= fechacierre OR fechacierre IS NULL) ', 
                           fecha, fecha)
             end
             super(c)
@@ -42,6 +45,7 @@ module Cor1440Gen
           # papa de la clase que incluye a esta)
           # exije eliminar primero registros en tablas union
           def destroy
+            authorize! :destroy, Cor1440Gen::Proyectofinanciero
             super("", false)
           end
 
@@ -57,7 +61,21 @@ module Cor1440Gen
             [ "compromisos", 
               "monto",
               "observaciones"
-            ] 
+            ] +
+            [ :objetivopf_attributes =>  [
+              :id, :numero, :objetivo, :_destroy ] 
+            ] +
+            [ :resultadopf_attributes =>  [
+              :id, :objetivopf_id,
+              :numero, :resultado, :_destroy ] 
+            ] +
+            [ :indicadorpf_attributes =>  [
+              :id, :resultadopf_id,
+              :numero, :indicador, :tipoindicador_id,
+              :_destroy ] 
+            ] +
+            [ :actividadpf ]
+
           end
 
           # Genero del nombre (F - Femenino, M - Masculino)
@@ -66,7 +84,76 @@ module Cor1440Gen
           end
 
           def proyectofinanciero_params
-            params.require(:proyectofinanciero).permit(*atributos_form)
+            params.require(:proyectofinanciero).permit(
+              *atributos_form +
+              [ :actividadpf_attributes =>  [
+                :id, :resultadopf_id,
+                :actividadtipo_id,
+                :nombrecorto, :titulo, 
+                :descripcion, :_destroy ] 
+              ] )
+          end
+
+
+          def actividadespf
+            authorize! :read, Cor1440Gen::Proyectofinanciero
+            pfl = []
+            if params[:pfl] && params[:pfl] != ''
+              params[:pfl].each do |pf|
+                pfl << pf.to_i
+              end
+            end
+            c = Cor1440Gen::Actividadpf.where(proyectofinanciero_id: pfl)
+            respond_to do |format|
+              format.json {
+                @registros = @registro = c.all
+                render :actividadespf#, json: @registro
+                return
+              }
+              format.js {
+                @registros = @registro = c.all
+                render :actividadespf#, json: @registro
+              }
+              format.html {
+                render inline: @registros.errors, 
+                status: :unprocessable_entity
+              }
+            end
+          end
+
+          def objetivospf
+            authorize! :read, Cor1440Gen::Proyectofinanciero
+            pfl = []
+            if params[:pfl] && params[:pfl] != ''
+              params[:pfl].each do |pf|
+                pfl << pf.to_i
+              end
+            end
+            c = Cor1440Gen::Objetivopf.where(proyectofinanciero_id: pfl)
+            respond_to do |format|
+              format.json {
+                @registros = @registro = c.all
+                render :objetivospf
+                return
+              }
+              format.js {
+                @registros = @registro = c.all
+                render :objetivospf
+              }
+              format.html {
+                render inline: @registros.errors, 
+                status: :unprocessable_entity
+              }
+            end
+          end
+
+          def new
+            authorize! :new, Cor1440Gen::Proyectofinanciero
+            @registro = clase.constantize.new
+            @registro.monto = 1
+            @registro.nombre = 'N'
+            @registro.save!
+            redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
           end
 
         end # included

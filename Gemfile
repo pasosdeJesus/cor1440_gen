@@ -1,11 +1,16 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 5.1.0'
+#gem "rails", '~> 5.2.0'
+# Resuelve problema con minitest y rails 5.2.0
+gem "rails", '~> 5.2.0', git: 'https://github.com/rails/rails.git', ref: '4887f97bd8a8859294ad02ccea20d83a94ec0812'
+
+gem 'bootsnap', '>=1.1.0', require: false
+
 gem "rails-i18n"
 
 # Postgresql
-gem "pg"
+gem "pg"#, '~> 0.21'
 
 gem 'puma'
 
@@ -24,10 +29,11 @@ gem "prawn-table"
 gem "odf-report"
 
 
+
 gem 'chosen-rails'
 gem 'rspreadsheet'
 #gem 'rspreadsheet', path: '../rspreadsheet/'
-gem 'libxml-ruby', '3.0'
+gem 'libxml-ruby', '~> 3.0'
 
 # API JSON facil. Ver: https://github.com/rails/jbuilder
 gem "jbuilder"
@@ -55,7 +61,8 @@ gem "bootstrap-datepicker-rails"
 gem "simple_form"
 
 # Formularios anidados (algunos con ajax)
-gem "cocoon", git: "https://github.com/vtamara/cocoon.git"
+gem "cocoon", git: "https://github.com/vtamara/cocoon.git", branch: 'new_id_with_ajax'
+
 
 # Autenticación y roles
 gem "devise"
@@ -74,7 +81,7 @@ gem "paperclip"#, "~> 4.1"
 
 # Zonas horarias
 gem "tzinfo"
-gem "tzinfo-data"
+gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
 gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
@@ -95,7 +102,7 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  #gem 'byebug', platform: :mri
+  # gem 'byebug', platform: :mri
 
 end
 
@@ -112,14 +119,11 @@ group :test do
   gem "minitest"
   gem "minitest-reporters" 
   gem "poltergeist" 
-  gem 'minitest-rails-capybara'
+  #gem 'minitest-rails-capybara'
 
   
   # Un proceso para cada prueba -- acelera
   gem 'spork'#, '~> 1.0rc'
-
-  # Maneja datos de prueba
-  gem "factory_girl_rails", group: [:development, :test] #, "~> 4.0"
 
   # https://www.relishapp.com/womply/rails-style-guide/docs/developing-rails-applications/bundler
   # Lanza programas para examinar resultados

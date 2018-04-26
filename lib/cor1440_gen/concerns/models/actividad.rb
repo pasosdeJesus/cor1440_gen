@@ -5,9 +5,10 @@ module Cor1440Gen
     module Models
       module Actividad
         extend ActiveSupport::Concern
-        include Sip::Localizacion
 
         included do
+          include Sip::Modelo 
+          include Sip::Localizacion
           @current_usuario = -1
           attr_accessor :current_usuario
 
@@ -67,6 +68,27 @@ module Cor1440Gen
             foreign_key: 'actividad_id'
           has_many :usuario, through: :actividad_usuario,
             class_name: 'Usuario'
+
+          has_many :actividad_actividadpf, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadActividadpf', 
+            foreign_key: 'actividad_id'
+          has_many :actividadpf, through: :actividad_actividadpf,
+            class_name: 'Cor1440Gen::Actividadpf'
+
+          has_many :actividad_valorcampotind, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadValorcampotind',
+            foreign_key: 'actividad_id', validate: true
+          accepts_nested_attributes_for :actividad_valorcampotind,
+            allow_destroy: true, reject_if: :all_blank
+          has_many :valorcampotind, through: :actividad_valorcampotind,
+            class_name: 'Cor1440Gen::Valorcampotind'
+          accepts_nested_attributes_for :valorcampotind,  reject_if: :all_blank
+
+          has_many :valorcampoact, dependent: :delete_all,
+            class_name: '::Cor1440Gen::Valorcampoact',
+            foreign_key: 'actividad_id',  validate: true
+          accepts_nested_attributes_for :valorcampoact,
+            allow_destroy: true, reject_if: :all_blank
 
           campofecha_localizado :fecha
 

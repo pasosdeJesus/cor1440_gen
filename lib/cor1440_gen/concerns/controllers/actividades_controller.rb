@@ -18,7 +18,7 @@ module Cor1440Gen
               @actividades.human_attribute_name(:oficina),
               @actividades.human_attribute_name(:responsable),
               @actividades.human_attribute_name(:nombre),
-              @actividades.human_attribute_name(:actividadtipos),
+              @actividades.human_attribute_name(:actividadpf),
               @actividades.human_attribute_name(:proyectos),
               @actividades.human_attribute_name(:actividadareas),
               @actividades.human_attribute_name(:proyectosfinancieros),
@@ -29,7 +29,7 @@ module Cor1440Gen
 
           def atributos_presenta
             [ :id, :fecha, :oficina, :responsable,
-              :nombre, :actividadtipos, :proyectos,
+              :nombre, :actividadpf, :proyectos,
               :actividadareas, :proyectosfinancieros, :objetivo,
               :poblacion,
               ]
@@ -45,8 +45,8 @@ module Cor1440Gen
                     actividad.oficina ? actividad.oficina.nombre : "",
                     actividad.responsable ? actividad.responsable.nusuario : "",
                     actividad.nombre ? actividad.nombre : "",
-                    actividad.actividadtipo.inject("") { |memo, i| 
-                      (memo == "" ? "" : memo + "; ") + i.nombre },
+                    actividad.actividadpf.inject("") { |memo, i| 
+                      (memo == "" ? "" : memo + "; ") + i.titulo },
                     actividad.proyecto.inject("") { |memo, i| 
                         (memo == "" ? "" : memo + "; ") + i.nombre },
                     actividad.actividadareas.inject("") { |memo, i| 
@@ -95,7 +95,8 @@ module Cor1440Gen
           # GET /actividades
           # GET /actividades.json
           def index
-            @actividades = Cor1440Gen::ActividadesController.filtra(
+            @registros = @actividades = 
+              Cor1440Gen::ActividadesController.filtra(
               params[:filtro], current_usuario)
             @plantillas = Heb412Gen::Plantillahcm.where(
               vista: 'Actividad').select('nombremenu, id').map { 
@@ -104,7 +105,7 @@ module Cor1440Gen
               @enctabla = encabezado_comun()
               respond_to do |format|
                 format.html { 
-                  @actividades = @actividades.paginate(
+                  @registros = @actividades = @actividades.paginate(
                     :page => params[:pagina], per_page: 20
                   )
                   @cuerpotabla = cuerpo_comun()
@@ -137,7 +138,7 @@ module Cor1440Gen
                 }
 
                 format.js   { 
-                  @actividades = @actividades.paginate(
+                  @registros = @actividades = @actividades.paginate(
                     :page => params[:pagina], per_page: 20
                   )
                   @cuerpotabla = cuerpo_comun()
@@ -165,15 +166,58 @@ module Cor1440Gen
 
           # GET /actividades/new
           def new
-            @actividad = Actividad.new
-            @actividad.current_usuario = current_usuario
-            @actividad.oficina_id = 1
-            render layout: "application"
+            @registro = @actividad = Actividad.new
+            @registro.current_usuario = current_usuario
+            @registro.oficina_id = current_usuario && 
+              current_usuario.oficina_id ? current_usuario.oficina_id : 1
+            @registro.save!(validate: false)
+            redirect_to cor1440_gen.edit_actividad_path(@registro)
+          end
+
+
+          def asegura_camposdinamicos(actividad)
+            ci = []
+            actividad.actividadpf.each do |apf|
+              if apf.actividadtipo
+                ci += apf.actividadtipo.campoact.map(&:id).sort
+              end
+            end
+            ci = ci.sort
+            cd = actividad.valorcampoact.map(&:campoact_id).sort
+            sobran = cd - ci
+            sobran.each do |i|
+              if i then
+                r = Cor1440Gen::Valorcampoact.where(
+                  'actividad_id = ? AND campoact_id = ?', 
+                  actividad.id, i).take
+              else
+                r = Cor1440Gen::Valorcampoact.where(
+                  'actividad_id = ? AND campoact_id IS NULL',
+                  actividad.id).take
+              end
+              r.delete
+            end
+            faltan = ci - cd
+            faltan.each do |i|
+              nr = Cor1440Gen::Valorcampoact.new
+              nr.campoact_id = i
+              nr.actividad_id = actividad.id
+              nr.valor = ''
+              if !nr.save
+                puts "No pudo guardar nr"
+              end
+            end
           end
 
           # GET /actividades/1/edit
           def edit
-            render layout: "application"
+            authorize! :edit, Cor1440Gen::Actividad
+            @registro = Cor1440Gen::Actividad.find(params[:id])
+            if params['actividadpf_ids']
+              @registro.actividadpf_ids = params['actividadpf_ids']
+            end
+            asegura_camposdinamicos(@registro)
+            render layout: 'application'
           end
 
           # POST /actividades
@@ -238,7 +282,7 @@ module Cor1440Gen
           private
 
           def set_actividad
-            @actividad = Actividad.find(
+            @registro = @actividad = Actividad.find(
               Actividad.connection.quote_string(params[:id]).to_i
             )
             @actividad.current_usuario = current_usuario
@@ -247,19 +291,16 @@ module Cor1440Gen
           # No confiar parametros a Internet, sólo permitir lista blanca
           def actividad_params
             params.require(:actividad).permit(
-              :oficina_id, :minutos, :nombre, 
-              :objetivo, :proyecto, :resultado,
-              :fecha_localizada, :actividad, :observaciones, 
-              :usuario_id,
+              :actividad,
+              :fecha_localizada, 
               :lugar,
-              :actividadarea_ids => [],
-              :actividadtipo_ids => [],
-              :proyecto_ids => [],
-              :proyectofinanciero_ids => [],
-              :usuario_ids => [],
-              :actividad_rangoedadac_attributes => [
-                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
-              ],
+              :nombre, 
+              :objetivo,  
+              :observaciones, 
+              :oficina_id, 
+              :proyecto, 
+              :resultado,
+              :usuario_id,
               :actividad_sip_anexo_attributes => [
                 :id,
                 :id_actividad, 
@@ -267,16 +308,33 @@ module Cor1440Gen
                 :sip_anexo_attributes => [
                   :id, :descripcion, :adjunto, :_destroy
                 ]
-              ]
+              ],
+              :actividadarea_ids => [],
+              :actividadpf_ids => [],
+              :actividad_rangoedadac_attributes => [
+                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
+              ],
+              :actividadtipo_ids => [],
+              :valorcampoact_attributes => [
+                :id,
+                :campoact_id,
+                :valor
+              ],
+              :proyecto_ids => [],
+              :proyectofinanciero_ids => [],
+              :usuario_ids => []
+            )
+          end
+          
+
+          def actividad_actividadpf_params(nparams)
+            nparams.require(:actividad).permit(
+              :actividadpf_ids => []
             )
           end
 
         end # included do
 
-        #Funcion por sobrecargar para filtrar por otros parámetros personalizados
-        #def filtramas(par, ac)
-          #  return ac
-          #end
 
 
         class_methods do
@@ -322,11 +380,11 @@ module Cor1440Gen
                 @busarea.to_i
               )
             end
-            @busactividadtipo = param_escapa(par, 'busactividadtipo')
-            if @busactividadtipo != '' then
-              ac = ac.joins(:actividad_actividadtipo).where(
-                "cor1440_gen_actividad_actividadtipo.actividadtipo_id = ?",
-                @busactividadtipo.to_i
+            @busactividadpf= param_escapa(par, 'busactividadpf')
+            if @busactividadpf != '' then
+              ac = ac.joins(:actividad_actividadpf).where(
+                "cor1440_gen_actividad_actividadpf.actividadpf_id = ?",
+                @busactividadpf.to_i
               )
             end
             @busobjetivo = param_escapa(par, 'busobjetivo')

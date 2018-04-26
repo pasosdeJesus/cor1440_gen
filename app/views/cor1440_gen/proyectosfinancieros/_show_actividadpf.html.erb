@@ -1,0 +1,2 @@
+<%= @registro.actividadpf.inject("") { |memo, i|
+  (memo == '' ? '' : memo + '; ') + i.titulo } %>

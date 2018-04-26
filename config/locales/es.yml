@@ -14,36 +14,51 @@ es:
     proyecto: Área
     proyectosfinancieros: Convenios financieros
     proyectofinanciero: Convenio financiado
+    tiposindicador: Tipos de indicador
+    tipoindicador: Tipo de indicador
   activerecord:
     models:
       "cor1440_gen/proyectofinanciero": 
-        one: "Compromiso institucional"
-        other: "Compromisos institucionales"
+        one: "Convenio financiado"
+        other: "Convenios financieros"
+      "cor1440_gen/tipoindicador": 
+        one: "Tipo de indicador"
+        other: "Tipos de indicador"
     attributes:
+      "campotind":
+        Campotind: Campo
+        Campostind: Campos
+      "campoact":
+        Campoact: Campo
+        Camposact: Campos
       "cor1440_gen/actividad":
         fecha_localizada: Fecha
+        actividadpf: Actividad de convenio 
+      "cor1440_gen/actividadpf":
+        actividadpf: Actividad de convenio
+        descripcion: Descripción
+        nombrecorto: Nombre corto
+        resultadopf: Resultado
+        titulo: Título
       "cor1440_gen/actividadarea":
         Actividadarea: Subárea de Actividad
         Actividadareas: Subáreas de Actividad
       "cor1440_gen/actividadtipo":
         Actividadtipo: Tipo de Actividad
         Actividadtipos: Tipos de Actividad
-      "cor1440_gen/rangoedadac":
-        Rangoedadac: Rango de edad en Actividades
-        Rangosedadac: Rangos de edad en Actividades
+        campoact: Campo
+        Campoact: Campo
+      "cor1440_gen/indicadorpf":
+        indicadorpf: Indicador
+        numero: Número
+        indicador: Descripción del indicador
+      "cor1440_gen/objetivopf":
+        objetivopf: Objetivo
+        numero: Número
+        objetivo: Descripción del objetivo
       "cor1440_gen/financiador":
         Financiador: Financiador
         Financiadores: Financiadores
-      "cor1440_gen/proyecto":
-        Proyecto: Área
-        Proyectos: Áreas
-      "cor1440_gen/proyectofinanciero":
-        Proyectofinanciero: Convenio Financiado
-        proyectofinanciero: Convenio Financiado
-        Proyectosfinancieros: Convenios Financiados
-        proyectosfinancieros: Convenios Financiados
-        fechainicio_localizada: Fecha de inicio
-        fechacierre_localizada: Fecha de cierre
       "cor1440_gen/informe":
         filtrofechaini:  Fecha inicial
         filtrofechaini_localizada:  Fecha inicial
@@ -53,4 +68,41 @@ es:
         filtroactividadarea: Subárea 
         columnafecha: Fecha
         columnaresponsable: Responsable
+      "cor1440_gen/proyecto":
+        Proyecto: Área
+        Proyectos: Áreas
+      "cor1440_gen/proyectofinanciero":
+        actividadpf: Actividad de convenio
+        fechainicio_localizada: Fecha de inicio
+        fechacierre_localizada: Fecha de cierre
+        indicador: Indicador
+        objetivopf: Objetivo
+        Proyectofinanciero: Convenio Financiado
+        proyectofinanciero: Convenio Financiado
+        Proyectosfinancieros: Convenios Financiados
+        proyectosfinancieros: Convenios Financiados
+        resultadopf: Resultado
+        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad de convenio
+        "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
+        "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
+        "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
+      "cor1440_gen/rangoedadac":
+        Rangoedadac: Rango de edad en Actividades
+        Rangosedadac: Rangos de edad en Actividades
+      "cor1440_gen/resultadopf":
+        resultadopf: Resultado
+        numero: Número
+        resultado: Descripción del resultado
+      "cor1440_gen/tipoindicador":
+        nombre: Nombre corto
+        esptipometa: Especificación del tipo de meta
+        espcampos: Especificación de campos por añadir a actividad/efecto
+        campotind: Campo
+        Campotind: Campo
+        espvaloresomision: Especificación de valores por omisión
+        espvalidaciones: Especificación de validaciones
+        espfuncionmedir: Especificación de función para medir indicador
+        medircon: Medir con
+        Tipoindicador: Tipo de indicador
+        Tiposindicador: Tipos de indicador
 

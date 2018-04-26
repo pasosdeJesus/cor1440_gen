@@ -1,0 +1,10 @@
+<%= v.input :valor,
+  label: v.object.campoact.nombrecampo ?  
+    v.object.campoact.nombrecampo : 'valor', 
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => v.object.campoact.ayudauso ? v.object.campoact.ayudauso : ''
+  }
+%>
+<%= v.input :campoact_id, as: :hidden %>
+<%= v.input :id, as: :hidden %>

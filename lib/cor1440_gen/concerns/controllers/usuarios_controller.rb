@@ -24,7 +24,7 @@ module Cor1440Gen
           end
 
           def atributos_form
-            r = [ 
+            [ 
               "nusuario",
               "nombre",
               "descripcion",

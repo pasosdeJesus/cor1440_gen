@@ -20,18 +20,23 @@
       <% end %>
     </td>
     <td>
-      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-        cor1440_gen.edit_actividad_path(fila[0]), :class => 'btn btn-xs' 
-      %>
-      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-        cor1440_gen.actividad_path(fila[0]),
-        :method => :delete,
-        :data => { :confirm => t(
-          '.confirm', 
-          :default => t("helpers.links.confirm", 
-                        :default => 'Are you sure?')) },
-                        :class => 'btn btn-xs btn-danger' 
-      %>
+      <% if can? :edit, actividad %>
+        <%= link_to t('.edit', default: t("helpers.links.edit")),
+          cor1440_gen.edit_actividad_path(fila[0]), 
+          class: 'btn btn-xs' %>
+      <% end %>
+      <% if can? :destroy, actividad %>
+        <%= link_to t('.destroy', default: t("helpers.links.destroy")),
+          cor1440_gen.actividad_path(fila[0]),
+          method: :delete,
+          data:  { 
+            confirm: t('.confirm', 
+                       default: t("helpers.links.confirm", 
+                       :default => 'Are you sure?')
+                      ) 
+          },
+          class: 'btn btn-xs btn-danger' %> 
+      <% end %>
    </td>
   </tr>
 <% end %>
