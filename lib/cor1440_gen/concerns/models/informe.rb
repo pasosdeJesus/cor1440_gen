@@ -54,7 +54,7 @@ module Cor1440Gen
                 filtrofechafin.to_s + ".  "
             end
             if (responsable)
-              descfiltro += "Responsable #{responsable.nombres} #{responsable.apellidos}.  "
+              descfiltro += "Responsable #{responsable.presenta_nombre}.  "
             end
             if (oficina)
               descfiltro += "Oficina #{oficina.nombre}.  "
