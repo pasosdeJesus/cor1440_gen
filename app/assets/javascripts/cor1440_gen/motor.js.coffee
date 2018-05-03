@@ -63,20 +63,26 @@ cor1440_gen_rangoedadc_todos = () ->
     sip_actualiza_cuadros_seleccion_dependientes('resultadospf', 
         '_id', '_numero', DEP_RESULTADOPF, 'id', 'numero')
 
-@cor1440_gen_actualiza_objetivopf =  ($this, root) ->
-    if $('#actividad_objetivopf_ids').length > 0
-      sip_llena_select_con_AJAX($this, 'actividad_objetivopf_ids', 
-        'objetivospf', 'pfl', 'con Objetivos de convenio', root)
+# En formulario actividad
+@cor1440_gen_actividad_actualiza_actividadpf =  (root) ->
+  params = {
+    pfl: $('#actividad_proyectofinanciero_ids').val(),
+  }
+  sip_llena_select_con_AJAX2('actividadespf', params, 
+    'actividad_actividadpf_ids', 'con Actividades de convenio', root,
+    'id', 'nombre')
 
-@cor1440_gen_actualiza_actividadpf =  ($this, root) ->
-    sip_llena_select_con_AJAX($this, 'actividad_actividadpf_ids', 
-      'actividadespf', 'pfl', 'con Actividades de convenio', root)
+@cor1440_gen_actividad_actualiza_pf = (root) ->
+  params = {
+    fecha: $('#actividad_fecha_localizada').val(),
+  }
+  sip_llena_select_con_AJAX2('proyectosfinancieros', params, 
+    'actividad_proyectofinanciero_ids', 'con Convenios financiados', 
+    root, 'id', 'nombre', 
+    cor1440_gen_actividad_actualiza_actividadpf)
 
-@cor1440_gen_tras_actualiza_proyectofinanciero =  (root) ->
-    cor1440_gen_actualiza_actividadpf($('#actividad_proyectofinanciero_ids'), root)
-    cor1440_gen_actualiza_objetivopf($('#actividad_proyectofinanciero_ids'), root)
 
-@cor1440_gen_prepara_eventos_comunes = (root) ->
+@cor1440_gen_prepara_eventos_comunes = (root, opciones = {}) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form
     a = f.action
@@ -98,21 +104,21 @@ cor1440_gen_rangoedadc_todos = () ->
     cor1440_gen_rangoedadc_todos();
   )
 
-  $('#actividad_fecha_localizada').datepicker({
-    format: root.formato_fecha,
-    autoclose: true,
-    todayHighlight: true,
-    language: 'es'
-  }).on('changeDate', (ev) ->
-    sip_llena_select_con_AJAX($(this), 'actividad_proyectofinanciero_ids', 
-      'proyectosfinancieros', 'fecha', 'con Convenios financiados', root, false, 
-      'id', 'nombre', cor1440_gen_tras_actualiza_proyectofinanciero)
-  )
-
-  $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
-    cor1440_gen_actualiza_actividadpf($(this), root)
-    cor1440_gen_actualiza_objetivopf($(this), root)
-  )
+  if (!opciones['sin_eventos_cambia_proyecto'])
+    $('#actividad_fecha_localizada').on('change', (ev) ->
+      cor1440_gen_actividad_actualiza_pf(root)
+    )
+    $('#actividad_fecha_localizada').datepicker({
+      format: root.formato_fecha,
+      autoclose: true,
+      todayHighlight: true,
+      language: 'es'
+    }).on('changeDate', (ev) ->
+      cor1440_gen_actividad_actualiza_pf(root)
+    )
+    $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
+      cor1440_gen_actividad_actualiza_actividadpf(root)
+    )
 
  
   $(document).on('change', '#objetivospf [id$=_numero]', cor1440_gen_actualiza_objetivos)
@@ -125,8 +131,6 @@ cor1440_gen_rangoedadc_todos = () ->
     return sip_intenta_eliminar_fila(objetivo, '/objetivospf/', DEP_OBJETIVOPF)
   )
   
- 
- 
   $(document).on('change', '#resultadospf [id$=_numero]', cor1440_gen_actualiza_resultados)
   
   $(document).on('cocoon:after-remove', '#resultadospf', cor1440_gen_actualiza_resultados)

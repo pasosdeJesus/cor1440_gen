@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 76ab510a072fd2f6e81d4b9cef1ad6521b220c18
+  revision: b803c0915e1b9d8589167d0b097400476bfebe9c
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 2bb534b1b602ccee482754007115b3f7e30feff8
+  revision: 26e52c7deeaf703bcabbeed8fc2baac5c9142ffb
   specs:
     sip (2.0.b4)
       bootstrap-datepicker-rails
@@ -123,13 +123,13 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (2.2.0)
-    capybara (2.18.0)
+    capybara (3.0.3)
       addressable
       mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (>= 2.0, < 4.0)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      xpath (~> 3.0)
     chosen-rails (1.8.3)
       coffee-rails (>= 3.2)
       railties (>= 3.0)
@@ -212,7 +212,7 @@ GEM
       ruby-progressbar
     msgpack (1.2.4)
     multi_json (1.13.1)
-    nio4r (2.3.0)
+    nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     odf-report (0.5.2)
@@ -227,8 +227,8 @@ GEM
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
     pg (1.0.0)
-    poltergeist (1.17.0)
-      capybara (~> 2.1)
+    poltergeist (1.18.0)
+      capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
     prawn (2.2.2)
@@ -331,7 +331,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.6.1)
+    web-console (3.6.2)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
