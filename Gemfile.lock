@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: b803c0915e1b9d8589167d0b097400476bfebe9c
+  revision: 28438d1dfc5c9f7b1fc43e4487ecfaa6614db8f9
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -99,7 +99,7 @@ GIT
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
-  revision: f8fbad8d9d6bb087223221d70733b58a3d2efd8a
+  revision: f710fc1759612895846adeb7a7753e4191ddeb10
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
