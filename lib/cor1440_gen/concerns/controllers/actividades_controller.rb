@@ -36,9 +36,16 @@ module Cor1440Gen
           end
 
           def atributos_show
-            [ :id, :fecha, :oficina, :responsable,
-              :nombre, :actividadpf, :proyectos,
-              :actividadareas, :proyectosfinancieros, :objetivo,
+            [ :id, 
+              :fecha_localizada, 
+              :oficina, 
+              :responsable,
+              :nombre, 
+              :actividadpf, 
+              :proyectos,
+              :actividadareas, 
+              :proyectosfinancieros, 
+              :objetivo,
               :poblacion,
               ]
           end

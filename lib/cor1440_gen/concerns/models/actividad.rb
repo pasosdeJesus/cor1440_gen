@@ -108,6 +108,18 @@ module Cor1440Gen
             end
           end
 
+
+          scope :filtro_fecha_localizadaini, lambda { |f|
+            where('fecha >= ?', f)
+            # El control de fecha HTML estándar retorna la fecha
+            # en formato yyyy-mm-dd siempre
+          }
+          scope :filtro_fecha_localizadafin, lambda { |f|
+              where('fecha <= ?', f)
+              # Si se usara un control diferente:
+              # Sip::FormatoFechaHelper.fecha_local_estandar(f) 
+          }
+
         end
       end
     end

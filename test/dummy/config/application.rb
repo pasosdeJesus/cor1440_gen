@@ -28,7 +28,7 @@ module Dummy
 
     config.relative_url_root = '/'
 
-    config.x.formato_fecha = 'yyyy-mm-dd'
+    config.x.formato_fecha = 'dd-M-yyyy'
 
     config.x.heb412_ruta = Rails.root.join('public', 'heb412')
 
