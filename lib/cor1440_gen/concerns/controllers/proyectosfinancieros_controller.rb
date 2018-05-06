@@ -9,11 +9,13 @@ module Cor1440Gen
         included do
           before_action :set_proyectofinanciero, 
             only: [:show, :edit, :update, :destroy]
-          load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero
+          load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
+            except: :actividadespf
 
           include Sip::FormatoFechaHelper
 
           def index(c = nil)
+            authorize! :index, Cor1440Gen::Proyectofinanciero
             if c == nil
               c = Cor1440Gen::Proyectofinanciero.all
             end
@@ -43,6 +45,7 @@ module Cor1440Gen
           # papa de la clase que incluye a esta)
           # exije eliminar primero registros en tablas union
           def destroy
+            authorize! :destroy, Cor1440Gen::Proyectofinanciero
             super("", false)
           end
 
@@ -109,6 +112,7 @@ module Cor1440Gen
 
 
           def actividadespf
+            authorize! :read, Cor1440Gen::Proyectofinanciero
             pfl = []
             if params[:pfl] && params[:pfl] != ''
               params[:pfl].each do |pf|
@@ -134,6 +138,7 @@ module Cor1440Gen
           end
 
           def objetivospf
+            authorize! :read, Cor1440Gen::Proyectofinanciero
             pfl = []
             if params[:pfl] && params[:pfl] != ''
               params[:pfl].each do |pf|
@@ -159,6 +164,7 @@ module Cor1440Gen
           end
 
           def new
+            authorize! :new, Cor1440Gen::Proyectofinanciero
             @registro = clase.constantize.new
             @registro.monto = 1
             @registro.nombre = 'N'

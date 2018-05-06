@@ -271,6 +271,7 @@ module Cor1440Gen
               :actividad_rangoedadac_attributes => [
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
               ],
+              :actividadtipo_ids => [],
               :valorcampoact_attributes => [
                 :id,
                 :campoact_id,
@@ -304,58 +305,58 @@ module Cor1440Gen
           def filtra(par, current_usuario = nil)
             ac = Actividad.order(fecha: :desc)
             @buscodigo = param_escapa(par, 'buscodigo')
-            if @buscodigo != '' then
+            if @buscodigo && @buscodigo != '' then
               ac = ac.where(id: @buscodigo.to_i)
             end
-            @fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(
-              param_escapa(par, 'fechaini'))
-            if @fechaini != '' then
+            fi = param_escapa(par, 'fechaini')
+            @fechaini = Date.strptime(fi, '%Y-%m-%d').to_s if fi && fi != ''
+            if @fechaini && @fechaini != '' 
               ac = ac.where("fecha >= '#{@fechaini}'")
             end
-            @fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(
-              param_escapa(par, 'fechafin'))
-            if @fechafin != '' then
+            ff = param_escapa(par, 'fechafin')
+            @fechafin = Date.strptime(ff, '%Y-%m-%d').to_s if ff && ff != ''
+            if @fechafin && @fechafin != '' then
               ac = ac.where("fecha <= '#{@fechafin}'")
             end
             @busoficina = param_escapa(par, 'busoficina')
-            if @busoficina != '' then
+            if @busoficina && @busoficina != '' then
               ac = ac.where(oficina_id: @busoficina)
             end
             @busresponsable = param_escapa(par, 'busresponsable')
-            if @busresponsable != '' then
+            if @busresponsable && @busresponsable != '' then
               ac = ac.where(responsable: @busresponsable)
             end
             @busnombre = param_escapa(par, 'busnombre')
-            if @busnombre != '' then
+            if @busnombre && @busnombre != '' then
               ac = ac.where("unaccent(nombre) ILIKE unaccent(?)", "%#{@busnombre}%")
             end
             @busarea = param_escapa(par, 'busarea')
-            if @busarea != '' then
+            if @busarea && @busarea != '' then
               ac = ac.joins(:actividadareas_actividad).where(
                 "cor1440_gen_actividadareas_actividad.actividadarea_id = ?",
                 @busarea.to_i
               )
             end
             @busactividadpf= param_escapa(par, 'busactividadpf')
-            if @busactividadpf != '' then
+            if @buscatividadpf && @busactividadpf != '' then
               ac = ac.joins(:actividad_actividadpf).where(
                 "cor1440_gen_actividad_actividadpf.actividadpf_id = ?",
                 @busactividadpf.to_i
               )
             end
             @busobjetivo = param_escapa(par, 'busobjetivo')
-            if @busobjetivo != '' then
+            if @busobjetivo && @busobjetivo != '' then
               ac = ac.where("unaccent(objetivo) ILIKE unaccent(?)", "%#{@busobjetivo}%")
             end
             @busproyecto = param_escapa(par, 'busproyecto')
-            if @busproyecto != '' then
+            if @busproyecto && @busproyecto != '' then
               ac = ac.joins(:actividad_proyecto).where(
                 "cor1440_gen_actividad_proyecto.proyecto_id= ?",
                 @busproyecto.to_i
               )
             end
             @busproyectofinanciero = param_escapa(par, 'busproyectofinanciero')
-            if @busproyectofinanciero != '' then
+            if @busproyectofinanciero && @busproyectofinanciero != '' then
               ac = ac.joins(:actividad_proyectofinanciero).where(
                 "cor1440_gen_actividad_proyectofinanciero.proyectofinanciero_id= ?",
                 @busproyectofinanciero.to_i
