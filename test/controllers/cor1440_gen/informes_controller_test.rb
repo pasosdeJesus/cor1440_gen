@@ -18,6 +18,7 @@ module Cor1440Gen
     }
 
     setup do
+      Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
       @informe = Informe.create(PRUEBA_INFORME)
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO) 
       sign_in @current_usuario

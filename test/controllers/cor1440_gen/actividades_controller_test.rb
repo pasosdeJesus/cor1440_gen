@@ -9,6 +9,7 @@ module Cor1440Gen
     include Devise::Test::IntegrationHelpers
     
     setup do
+      Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
       @actividad = Actividad.create(
         Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD
       )

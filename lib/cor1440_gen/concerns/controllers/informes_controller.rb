@@ -23,18 +23,22 @@ module Cor1440Gen
 
           # Retorna actividades tras aplicar filtro que está en @informe
           def filtra_actividades
-            return Cor1440Gen::ActividadesController.filtra({
-              fechaini: Sip::FormatoFechaHelper.fecha_estandar_local(
-                @informe.filtrofechaini.to_s),
-              fechafin: Sip::FormatoFechaHelper.fecha_estandar_local(
-                @informe.filtrofechafin.to_s),
-              busresponsable: @informe.filtroresponsable,
-              busoficina: @informe.filtrooficina,
-              busproyecto: @informe.filtroproyecto,
-              busarea: @informe.filtroactividadarea,
-              busproyectofinanciero: @informe.filtroproyectofinanciero
-            }, current_usuario)
-
+            c = Cor1440Gen::ActividadesController.new()
+            a = Cor1440Gen::Actividad.all
+            params_filtro = {
+              "busfecha_localizadaini" => @informe.filtrofechaini.to_s,
+               # El control de fecha HTML estándar --usado en el filtro de
+               # actividad-- retorna la fecha en formato yyyy-mm-dd
+              "busfecha_localizadafin" => @informe.filtrofechafin.to_s,
+              "busresponsable" => @informe.filtroresponsable,
+              "busoficina" => @informe.filtrooficina,
+              "busproyecto" => @informe.filtroproyecto,
+              "busarea" => @informe.filtroactividadarea,
+              "busproyectofinanciero" => @informe.filtroproyectofinanciero
+            }
+            a = c.filtrar(a, params_filtro)
+            return a
+            #Cor1440Gen::ActividadesController.filtra({ }, current_usuario)
           end
 
           def impreso_extra(r, informe, actividades)
