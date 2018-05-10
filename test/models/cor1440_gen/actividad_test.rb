@@ -10,6 +10,10 @@ module Cor1440Gen
       oficina_id:1
     }
 
+    setup do
+      Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
+    end
+
     test "valido" do
       a = Cor1440Gen::Actividad.create PRUEBA_ACTIVIDAD
       assert a.valid?

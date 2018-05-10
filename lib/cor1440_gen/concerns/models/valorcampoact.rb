@@ -16,6 +16,9 @@ module Cor1440Gen
 
           validates :valor, length: { maximum: 5000}
 
+          def presenta_nombre
+            "#{campoact.presenta_nombre}: #{valor.to_s}"
+          end
         end # included
       end
     end

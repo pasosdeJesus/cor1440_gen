@@ -19,6 +19,9 @@ module Cor1440Gen
           validates :nombrecampo, length: { maximum: 128}
           validates :ayudauso, length: { maximum: 1024}
 
+          def presenta_nombre
+            nombrecampo
+          end
         end # included
       end
     end

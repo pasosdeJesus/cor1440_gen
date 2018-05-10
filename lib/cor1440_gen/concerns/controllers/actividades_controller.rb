@@ -32,7 +32,7 @@ module Cor1440Gen
           end
 
           def atributos_form
-            atributos_index - [:id]
+            atributos_show - [:id]
           end
 
           def atributos_show
@@ -204,36 +204,15 @@ module Cor1440Gen
             ci = []
             actividad.actividadpf.each do |apf|
               if apf.actividadtipo
-                ci += apf.actividadtipo.campoact.map(&:id).sort
+                ci += apf.actividadtipo.campoact_ids
               end
             end
-            ci = ci.sort
-            cd = []
-            if actividad.valorcampoact
-              cd = actividad.valorcampoact.map(&:campoact_id).sort
-            end
+            cd = actividad.valorcampoact_ids
             sobran = cd - ci
-            sobran.each do |i|
-              if i then
-                r = Cor1440Gen::Valorcampoact.where(
-                  'actividad_id = ? AND campoact_id = ?', 
-                  actividad.id, i).take
-              else
-                r = Cor1440Gen::Valorcampoact.where(
-                  'actividad_id = ? AND campoact_id IS NULL',
-                  actividad.id).take
-              end
-              r.delete
-            end
+            actividad.valorcampoact_ids -= sobran            
             faltan = ci - cd
-            faltan.each do |i|
-              nr = Cor1440Gen::Valorcampoact.new
-              nr.campoact_id = i
-              nr.actividad_id = actividad.id
-              nr.valor = ''
-              if !nr.save
-                puts "No pudo guardar nr"
-              end
+            faltan.each do |f|
+              actividad.valorcampoact.new(campoact_id: f, valor: '').save
             end
           end
 
@@ -245,6 +224,7 @@ module Cor1440Gen
               @registro.actividadpf_ids = params['actividadpf_ids']
             end
             asegura_camposdinamicos(@registro)
+            @registro.save!(validate: false)
             render layout: 'application'
           end
 
