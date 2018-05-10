@@ -1,0 +1,8 @@
+<%= f.association :oficina,
+  collection: current_usuario.oficina_id ? [current_usuario.oficina] : 
+  Sip::Oficina.habilitados,
+  label_method: :nombre, 
+  value_method: :id,
+  include_blank: false,
+  input_html: { class: 'chosen-select' }
+%>

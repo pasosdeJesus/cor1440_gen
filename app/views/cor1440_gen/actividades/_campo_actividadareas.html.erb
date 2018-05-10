@@ -1,0 +1,6 @@
+<%= f.association :actividadareas, 
+  collection: Cor1440Gen::Actividadarea.habilitados,
+  label_method: :nombre, 
+  value_method: :id,
+  input_html: { class: 'chosen-select' }
+%>
