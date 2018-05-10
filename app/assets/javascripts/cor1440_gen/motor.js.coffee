@@ -64,13 +64,28 @@ cor1440_gen_rangoedadc_todos = () ->
         '_id', '_numero', DEP_RESULTADOPF, 'id', 'numero')
 
 # En formulario actividad
+@cor1440_gen_actividad_actualiza_camposdinamicos = (root) ->
+  ruta = document.location.pathname
+  if ruta.length == 0
+    return
+  if ruta.startsWith(root.puntomontaje)
+    ruta = ruta.substr(root.puntomontaje.length)
+  if ruta[0] == '/'
+    ruta = ruta.substr(1)
+  params = {
+    actividadpf_ids: $('#actividad_actividadpf_ids').val()
+  }
+  sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+    '#camposdinamicos', '#camposdinamicos')
+
+ 
 @cor1440_gen_actividad_actualiza_actividadpf =  (root) ->
   params = {
     pfl: $('#actividad_proyectofinanciero_ids').val(),
   }
   sip_llena_select_con_AJAX2('actividadespf', params, 
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
-    'id', 'nombre')
+    'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
 @cor1440_gen_actividad_actualiza_pf = (root) ->
   params = {
@@ -120,24 +135,12 @@ cor1440_gen_rangoedadc_todos = () ->
       cor1440_gen_actividad_actualiza_actividadpf(root)
     )
 
+    $('#actividad_actividadpf_ids').chosen().change( (e) ->
+      cor1440_gen_actividad_actualiza_camposdinamicos(root)
+    )
 
-  $('#actividad_actividadpf_ids').chosen().change( (e) ->
-    root = window
-    ruta = document.location.pathname
-    if root.puntomontaje.length > 0
-      ruta = ruta.substr(window.puntomontaje.length)
-    if ruta.length == 0
-      return
-    if ruta[0] == '/'
-      ruta = ruta.substr(1)
-    datos = {
-      actividadpf_ids: $(this).val()
-    }
-    sip_envia_ajax_datos_ruta_y_pinta(ruta, datos,
-      '#camposdinamicos', '#camposdinamicos')
-  )
 
- 
+
   $(document).on('change', '#objetivospf [id$=_numero]', cor1440_gen_actualiza_objetivos)
   
   $(document).on('cocoon:after-remove', '#objetivospf', cor1440_gen_actualiza_objetivos)

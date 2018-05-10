@@ -22,12 +22,12 @@ module Cor1440Gen
               :oficina, 
               :responsable,
               :nombre, 
-              :actividadpf, 
               :proyectos,
               :actividadareas,
               :proyectosfinancieros,
+              :actividadpf, 
               :objetivo,
-              :poblaacion
+              :poblacion
             ]
           end
 
@@ -37,16 +37,21 @@ module Cor1440Gen
 
           def atributos_show
             [ :id, 
-              :fecha_localizada, 
-              :oficina, 
-              :responsable,
               :nombre, 
-              :actividadpf, 
+              :fecha_localizada, 
+              :lugar, 
+              :oficina, 
+              :proyectosfinancieros, 
               :proyectos,
               :actividadareas, 
-              :proyectosfinancieros, 
+              :responsable,
+              :corresponsables,
+              :actividadpf, 
+              :valorcampoact,
               :objetivo,
+              :resultado, 
               :poblacion,
+              :anexos
               ]
           end
 

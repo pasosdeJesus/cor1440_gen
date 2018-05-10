@@ -63,7 +63,6 @@ module Cor1440Gen
             allow_destroy: true, reject_if: :all_blank
 
 
-
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }, 
