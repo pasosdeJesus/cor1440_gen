@@ -14,11 +14,6 @@
     <%= f.input :indicador, as: :text, input_html: { rows: 2 }, label: false %>
   </td>
   <td>
-    <%= f.association :tipoindicador, 
-      label_method: :nombre,
-      label: false %>
-  </td>
-  <td>
     <%= f.input :id, as: :hidden %>
     <%= link_to_remove_association "Eliminar", f, 
       :class => 'btn-danger', "data-existing" => true %>

@@ -150,6 +150,20 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('cocoon:before-remove', '#objetivospf', (e, objetivo) ->
     return sip_intenta_eliminar_fila(objetivo, '/objetivospf/', DEP_OBJETIVOPF)
   )
+
+  $(document).on('cocoon:before-remove', '#indicadoresobjetivos', (e, indicador) ->
+    sip_intenta_eliminar_fila(indicador, '/indicadorespf/', 
+        DEP_INDICADORPF
+    )
+  )
+  
+  $(document).on('change', '#indicadoresobjetivos [id$=_id]', (e, result) ->
+    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+  )
+  
+  $(document).on('cocoon:after-insert', '#indicadoresobjetivos', 
+    cor1440_gen_actualiza_objetivos)
+
   
   $(document).on('change', '#resultadospf [id$=_numero]', cor1440_gen_actualiza_resultados)
   
@@ -179,6 +193,7 @@ cor1440_gen_rangoedadc_todos = () ->
   )
   
   $(document).on('cocoon:after-insert', '#indicadorespf', cor1440_gen_actualiza_resultados)
+
   $(document).on('cocoon:after-insert', '#actividadespf', cor1440_gen_actualiza_resultados)
   $(document).on('change', '#actividadespf [id$=_id]', (e, result) ->
     sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')

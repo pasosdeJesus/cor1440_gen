@@ -38,6 +38,12 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyectofinanciero'
 
+          has_many :indicadorobjetivo, foreign_key: 'proyectofinanciero_id',
+            validate: true, dependent: :destroy, 
+            class_name: 'Cor1440Gen::Indicadorpf'
+          accepts_nested_attributes_for :indicadorobjetivo,
+            allow_destroy: true, reject_if: :all_blank
+
           has_many :indicadorpf, foreign_key: 'proyectofinanciero_id',
             validate: true, dependent: :destroy, 
             class_name: 'Cor1440Gen::Indicadorpf'

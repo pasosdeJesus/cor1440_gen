@@ -1,7 +1,7 @@
 <p></p>
 <%= f.input :id, as: :hidden %>
 <div class="panel panel-default">
-  <div class="panel-heading">Objetivos</div>
+  <div class="panel-heading">Objetivos / Efectos</div>
   <div class="panel-body">
 
     <div class="div-objetivospf">
@@ -20,7 +20,7 @@
         </tbody>
       </table>
       <div class="links">
-        <%= link_to_add_association 'Agregar objetivo', f, :objetivopf, {
+        <%= link_to_add_association 'Agregar objetivo / efecto', f, :objetivopf, {
           :"data-association-insertion-node" => "tbody#objetivospf", 
           :"data-association-insertion-method" => "append", 
           partial: 'objetivopf_campos',

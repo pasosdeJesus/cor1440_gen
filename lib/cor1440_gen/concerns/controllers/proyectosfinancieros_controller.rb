@@ -59,7 +59,10 @@ module Cor1440Gen
             ] +
             [ :proyecto_ids =>  [] ] +
             [ "compromisos", 
-              "monto", "observaciones", :objetivopf,
+              "monto", 
+              "observaciones", 
+              :objetivopf,
+              :indicadorobjetivo,
               :resultadopf,
               :indicadorpf,
               :actividadpf ]
@@ -92,6 +95,12 @@ module Cor1440Gen
               [ 
                 :objetivopf_attributes =>  [
                   :id, :numero, :objetivo, :_destroy ] 
+              ] +
+              [
+                :indicadorobjetivo_attributes =>  [
+                  :id, :objetivopf_id,
+                  :numero, :indicador, 
+                  :tipoindicador_id, :_destroy ] 
               ] +
               [ :resultadopf_attributes =>  [
                 :id, :objetivopf_id,
