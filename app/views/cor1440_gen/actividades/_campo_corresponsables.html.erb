@@ -1,0 +1,19 @@
+<% # Usuarios activos en el tiempo de la actividad %>
+<% condr = "(fechacreacion <= '#{f.object.fecha}'" %>
+<% condr += " AND (fechadeshabilitacion IS NULL OR " +
+  "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% if f.object && f.object.usuario && f.object.usuario.length > 0 %>
+  <% condr += " OR (id IN (#{f.object.usuario.map(&:id).join(", ")}))" %>
+<% end %>
+<% lus = Usuario.where("#{condr}") %>
+<%= f.association :usuario,
+  collection: lus,
+  include_blank: false,
+  label: "Corresponsables",
+  label_method: lambda { |t|
+    r = t.nusuario
+    if t.nombre then r += " - " + t.nombre end
+    r
+  },
+  value_method: :id
+%>

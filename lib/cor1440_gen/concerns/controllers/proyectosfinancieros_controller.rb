@@ -50,23 +50,26 @@ module Cor1440Gen
           end
 
           def atributos_index
-            [ "id", 
-              "nombre" ] +
-              [ :financiador_ids =>  [] ] +
-              [ "fechainicio_localizada",
-                "fechacierre_localizada",
-                "responsable_id"
+            [ 
+              :id, 
+              :nombre 
+            ] +
+            [ :financiador_ids =>  [] ] +
+            [ 
+              :fechainicio_localizada,
+              :fechacierre_localizada,
+              :responsable_id
             ] +
             [ :proyecto_ids =>  [] ] +
-            [ "compromisos", 
-              "monto", 
-              "observaciones", 
+            [ :compromisos, 
+              :monto, 
+              :observaciones, 
               :objetivopf,
               :indicadorobjetivo,
               :resultadopf,
               :indicadorpf,
-              :actividadpf ]
-
+              :actividadpf 
+            ]
           end
 
           # Genero del nombre (F - Femenino, M - Masculino)

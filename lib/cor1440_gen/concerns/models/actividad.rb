@@ -108,16 +108,46 @@ module Cor1440Gen
             end
           end
 
-          scope :filtro_fecha_localizadaini, lambda { |f|
+          validate :fecha_concuerda_corresponsables_habilitados
+          def fecha_concuerda_corresponsables_habilitados
+            if (fecha && usuario && usuario.length > 0) then
+              usuario.each do |u|
+                if u.fechacreacion > fecha
+                  errors.add(:usuario, "Corresponsable #{u.presenta_nombre} " +
+                             " tiene fecha de creación posterior a la actividad")
+                end
+                if u.fechadeshabilitacion && u.fechadeshabilitacion < fecha
+                  errors.add(:usuario, "Corresponsable #{u.presenta_nombre} " +
+                             " tiene fecha de deshabilitacion anterior " +
+                             "a la actividad")
+                end
+              end
+            end
+          end
+
+          validate :fecha_concuerda_responsable_habilitado
+          def fecha_concuerda_responsable_habilitado
+            if (fecha && responsable) then
+              if responsable.fechacreacion > fecha
+                errors.add(:responsable, "Responsable tiene " +
+                           " fecha de creación posterior a la actividad")
+              end
+              if responsable.fechadeshabilitacion && 
+                responsable.fechadeshabilitacion < fecha
+                errors.add(:responsable, "Responsable tiene " +
+                           " fecha de deshabilitacion anterior a la actividad")
+              end
+            end
+          end
+
+          scope :filtro_fechaini, lambda { |f|
             where('fecha >= ?', f)
             # El control de fecha HTML estándar retorna la fecha
             # en formato yyyy-mm-dd siempre
           }
 
-          scope :filtro_fecha_localizadafin, lambda { |f|
+          scope :filtro_fechafin, lambda { |f|
             where('fecha <= ?', f)
-            # Si se usara un control diferente:
-            # Sip::FormatoFechaHelper.fecha_local_estandar(f) 
           }
 
         end

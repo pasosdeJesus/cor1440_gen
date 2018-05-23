@@ -1,14 +1,23 @@
+<% # Usuarios activos en el tiempo de la actividad %>
+<% condr = "(fechacreacion <= '#{f.object.fecha}'" %>
+<% condr += " AND (fechadeshabilitacion IS NULL OR " +
+  "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% if f.object && f.object.responsable %>
+  <% condr += " OR (id = #{f.object.responsable.id})" %>
+<% end %>
+<% lus = Usuario.where("#{condr}") %>
+<% if current_usuario.oficina_id %>
+  <% lus = lus.where(oficina_id: current_usuario.oficina_id) %>
+<% end %>
 <%= f.association :responsable,
-  collection: current_usuario.oficina_id ?  Usuario.where(fechadeshabilitacion: nil, 
-                oficina_id: current_usuario.oficina_id).order(:nombre) :
-      Usuario.where(fechadeshabilitacion: nil).order(:nombre),
+  collection: lus.order(:nusuario),
   include_blank: false,
   label: "Responsable",
-  label_method: lambda { |t| 
-    r = t.nusuario
-    if t.nombre then r += " - " + t.nombre end
-    r 
-  },
+  label_method: lambda { |t|  t.presenta_nombre },
+#    r = t.nusuario
+#    if t.nombre then r += " - " + t.nombre end
+#    r 
+#  },
   value_method: :id,
   selected:  f.object.usuario_id ?  f.object.usuario_id : current_usuario.id,
   input_html: { class: 'chosen-select' }
