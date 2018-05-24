@@ -150,6 +150,41 @@ module Cor1440Gen
             where('fecha <= ?', f)
           }
 
+         scope :filtro_lugar, lambda { |l|
+            where("unaccent(lugar) ILIKE '%' || unaccent(?) || '%'", l)
+          }
+ 
+          scope :filtro_nombre, lambda { |n|
+            where("unaccent(nombre) ILIKE '%' || unaccent(?) || '%'", n)
+          }
+ 
+          scope :filtro_objetivo, lambda { |o|
+            where("unaccent(objetivo) ILIKE '%' || unaccent(?) || '%'", o)
+          }
+ 
+          scope :filtro_observaciones, lambda { |o|
+            where("unaccent(observaciones) ILIKE '%' || unaccent(?) || '%'", 
+                  o)
+          }
+ 
+          scope :filtro_oficina, lambda { |oid|
+            where(oficina_id: oid)
+          }
+
+          scope :filtro_proyectofinanciero, lambda { |pid|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividad_proyectofinanciero WHERE ' +
+                  'proyectofinanciero_id = ?)',pid)
+          }
+
+          scope :filtro_responsable, lambda { |uid|
+            where(usuario_id: uid)
+          }
+
+          scope :filtro_resultado, lambda { |r|
+            where("unaccent(resultado) ILIKE '%' || unaccent(?) || '%'", r)
+          }
+ 
         end
       end
     end

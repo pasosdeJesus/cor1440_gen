@@ -24,7 +24,7 @@ module Cor1440Gen
               :nombre, 
               :proyectos,
               :actividadareas,
-              :proyectosfinancieros,
+              :proyectofinanciero,
               :actividadpf, 
               :objetivo,
               :poblacion
