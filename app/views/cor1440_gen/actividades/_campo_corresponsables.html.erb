@@ -1,7 +1,10 @@
 <% # Usuarios activos en el tiempo de la actividad %>
-<% condr = "(fechacreacion <= '#{f.object.fecha}'" %>
-<% condr += " AND (fechadeshabilitacion IS NULL OR " +
-  "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% condr = "" %>
+<% if f.object && f.object.fecha && f.object.fecha.to_s != '' %>
+  <% condr += "(fechacreacion <= '#{f.object.fecha}'" %>
+  <% condr += " AND (fechadeshabilitacion IS NULL OR " +
+    "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% end %>
 <% if f.object && f.object.usuario && f.object.usuario.length > 0 %>
   <% condr += " OR (id IN (#{f.object.usuario.map(&:id).join(", ")}))" %>
 <% end %>

@@ -1,11 +1,17 @@
 <% # Usuarios activos en el tiempo de la actividad %>
-<% condr = "(fechacreacion <= '#{f.object.fecha}'" %>
-<% condr += " AND (fechadeshabilitacion IS NULL OR " +
-  "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% condr = "" %>
+<% if f.object && f.object.fecha && f.object.fecha.to_s != '' %>
+  <% condr += "(fechacreacion <= '#{f.object.fecha}'" %>
+  <% condr += " AND (fechadeshabilitacion IS NULL OR " +
+    "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% end %>
 <% if f.object && f.object.responsable %>
   <% condr += " OR (id = #{f.object.responsable.id})" %>
 <% end %>
-<% lus = Usuario.where("#{condr}") %>
+<% lus = Usuario.all %>
+<% if condr != '' %>
+  <% lus = lus.where("#{condr}") %>
+<% end %>
 <% if current_usuario.oficina_id %>
   <% lus = lus.where(oficina_id: current_usuario.oficina_id) %>
 <% end %>
