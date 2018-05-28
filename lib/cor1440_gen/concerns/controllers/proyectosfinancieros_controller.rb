@@ -14,20 +14,6 @@ module Cor1440Gen
 
           include Sip::FormatoFechaHelper
 
-          def index(c = nil)
-            authorize! :index, Cor1440Gen::Proyectofinanciero
-            if c == nil
-              c = Cor1440Gen::Proyectofinanciero.all
-            end
-            if params[:fecha] && params[:fecha] != ''
-              fecha = fecha_local_estandar params[:fecha]
-              c = c.where('fechainicio <= ? AND ' +
-                          '(? <= fechacierre OR fechacierre IS NULL) ', 
-                          fecha, fecha)
-            end
-            super(c)
-          end  
-
           def clase 
             "Cor1440Gen::Proyectofinanciero"
           end
@@ -77,51 +63,19 @@ module Cor1440Gen
             return 'M';
           end
 
-          def proyectofinanciero_params
-            params.require(:proyectofinanciero).permit(
-              [ 
-                "id", 
-                "nombre" 
-              ] +
-              [ :financiador_ids =>  [] ] +
-              [ 
-                "fechainicio_localizada",
-                "fechacierre_localizada",
-                "responsable_id" 
-              ] +
-              [ :proyecto_ids =>  [] ] +
-              [ 
-                "compromisos", 
-                "monto",
-                "observaciones"
-              ] +
-              [ 
-                :objetivopf_attributes =>  [
-                  :id, :numero, :objetivo, :_destroy ] 
-              ] +
-              [
-                :indicadorobjetivo_attributes =>  [
-                  :id, :objetivopf_id,
-                  :numero, :indicador, 
-                  :tipoindicador_id, :_destroy ] 
-              ] +
-              [ :resultadopf_attributes =>  [
-                :id, :objetivopf_id,
-                :numero, :resultado, :_destroy ] 
-              ] +
-              [ :indicadorpf_attributes =>  [
-                :id, :resultadopf_id,
-                :numero, :indicador, :tipoindicador_id,
-                :_destroy ] 
-              ] +
-              [ :actividadpf_attributes =>  [
-                :id, :resultadopf_id,
-                :actividadtipo_id,
-                :nombrecorto, :titulo, 
-                :descripcion, :_destroy ] 
-              ] )
-          end
-
+          def index(c = nil)
+            authorize! :index, Cor1440Gen::Proyectofinanciero
+            if c == nil
+              c = Cor1440Gen::Proyectofinanciero.all
+            end
+            if params[:fecha] && params[:fecha] != ''
+              fecha = fecha_local_estandar params[:fecha]
+              c = c.where('fechainicio <= ? AND ' +
+                          '(? <= fechacierre OR fechacierre IS NULL) ', 
+                          fecha, fecha)
+            end
+            super(c)
+          end  
 
           def actividadespf
             authorize! :read, Cor1440Gen::Proyectofinanciero
@@ -183,6 +137,39 @@ module Cor1440Gen
             @registro.save!
             redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
           end
+
+
+          def proyectofinanciero_params
+            params.require(:proyectofinanciero).permit(
+              atributos_show +
+              [ 
+                :objetivopf_attributes =>  [
+                  :id, :numero, :objetivo, :_destroy ] 
+              ] +
+              [
+                :indicadorobjetivo_attributes =>  [
+                  :id, :objetivopf_id,
+                  :numero, :indicador, 
+                  :tipoindicador_id, :_destroy ] 
+              ] +
+              [ :resultadopf_attributes =>  [
+                :id, :objetivopf_id,
+                :numero, :resultado, :_destroy ] 
+              ] +
+              [ :indicadorpf_attributes =>  [
+                :id, :resultadopf_id,
+                :numero, :indicador, :tipoindicador_id,
+                :_destroy ] 
+              ] +
+              [ :actividadpf_attributes =>  [
+                :id, :resultadopf_id,
+                :actividadtipo_id,
+                :nombrecorto, :titulo, 
+                :descripcion, :_destroy ] 
+              ] )
+          end
+
+
 
         end # included
 
