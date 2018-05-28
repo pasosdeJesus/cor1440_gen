@@ -81,7 +81,7 @@ gem "paperclip"#, "~> 4.1"
 
 # Zonas horarias
 gem "tzinfo"
-gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
+#gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
 gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"

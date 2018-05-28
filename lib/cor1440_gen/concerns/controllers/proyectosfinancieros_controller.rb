@@ -58,7 +58,7 @@ module Cor1440Gen
             [ 
               :fechainicio_localizada,
               :fechacierre_localizada,
-              :responsable_id
+              :responsable
             ] +
             [ :proyecto_ids =>  [] ] +
             [ :compromisos, 

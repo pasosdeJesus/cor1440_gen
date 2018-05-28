@@ -13,7 +13,7 @@ module Cor1440Gen
           campofecha_localizado :fechainicio
           campofecha_localizado :fechacierre
 
-          belongs_to :responsable, class_name: 'Usuario',
+          belongs_to :responsable, class_name: '::Usuario',
             foreign_key: "responsable_id", validate: true
 
           has_many :proyecto_proyectofinanciero, dependent: :delete_all,

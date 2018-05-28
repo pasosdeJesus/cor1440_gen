@@ -32,7 +32,6 @@ module Dummy
 
     config.x.heb412_ruta = Rails.root.join('public', 'heb412')
 
-    #config.web_console.whitelisted_ips = '190.27.122.155'
-
+    #config.web_console.whitelisted_ips = '190.25.163.93'
   end
 end

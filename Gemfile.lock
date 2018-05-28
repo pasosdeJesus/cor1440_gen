@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 9ae315342e813613d290a805e0a150fe5a77ea84
+  revision: 0fee49ed4e26f4f5d8f602f680132ac40577cbd4
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -99,7 +99,7 @@ GIT
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
-  revision: f710fc1759612895846adeb7a7753e4191ddeb10
+  revision: 9d29a8abcc5b6ed9aefcad85ca54dd1364262583
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
@@ -123,7 +123,7 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (2.2.0)
-    capybara (3.1.0)
+    capybara (3.1.1)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -148,7 +148,7 @@ GEM
     colorize (0.8.1)
     commonjs (0.2.7)
     concurrent-ruby (1.0.5)
-    connection_pool (2.2.1)
+    connection_pool (2.2.2)
     crass (1.0.4)
     debug_inspector (0.0.3)
     devise (4.4.3)
@@ -159,7 +159,7 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.6.2)
       devise (>= 4.4)
-    docile (1.3.0)
+    docile (1.3.1)
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.23)
@@ -227,7 +227,7 @@ GEM
       terrapin (~> 0.6.0)
     pdf-core (0.7.0)
     pg (1.0.0)
-    poltergeist (1.18.0)
+    poltergeist (1.18.1)
       capybara (>= 2.1, < 4)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
@@ -340,7 +340,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     will_paginate (3.1.6)
-    xpath (3.0.0)
+    xpath (3.1.0)
       nokogiri (~> 1.8)
 
 PLATFORMS
@@ -392,7 +392,6 @@ DEPENDENCIES
   twitter-bootstrap-rails
   twitter_cldr
   tzinfo
-  tzinfo-data
   uglifier
   web-console
   will_paginate
