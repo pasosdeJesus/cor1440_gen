@@ -64,7 +64,7 @@ module Cor1440Gen
           end
 
           def index(c = nil)
-            authorize! :index, Cor1440Gen::Proyectofinanciero
+            authorize! :read, Cor1440Gen::Proyectofinanciero
             if c == nil
               c = Cor1440Gen::Proyectofinanciero.all
             end

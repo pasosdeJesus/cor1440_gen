@@ -1,12 +1,13 @@
 <% # Usuarios activos en el tiempo de la actividad %>
 <% condr = "" %>
 <% if f.object && f.object.fecha && f.object.fecha.to_s != '' %>
-  <% condr += "(fechacreacion <= '#{f.object.fecha}'" %>
-  <% condr += " AND (fechadeshabilitacion IS NULL OR " +
+  <% condr << "(fechacreacion <= '#{f.object.fecha}'" %>
+  <% condr << " AND (fechadeshabilitacion IS NULL OR " +
     "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
 <% end %>
 <% if f.object && f.object.responsable %>
-  <% condr += " OR (id = #{f.object.responsable.id})" %>
+  <% condr << " OR " if condr != ""%>
+  <% condr << "(id = #{f.object.responsable.id})" %>
 <% end %>
 <% lus = Usuario.all %>
 <% if condr != '' %>
