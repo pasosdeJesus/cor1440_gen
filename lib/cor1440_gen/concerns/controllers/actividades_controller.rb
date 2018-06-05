@@ -16,6 +16,10 @@ module Cor1440Gen
             "Cor1440Gen::Actividad"
           end
 
+          def gencalse
+            return 'F'
+          end
+
           def atributos_index
             [ :id, 
               :fecha_localizada, 
@@ -55,8 +59,10 @@ module Cor1440Gen
               ]
           end
 
-          def gencalse
-            return 'F'
+
+          def index_reordenar(c)
+            c = c.reorder('cor1440_gen_actividad.fecha DESC')
+            return c
           end
 
           def show
@@ -216,8 +222,7 @@ module Cor1440Gen
             end
           end
 
-          # GET /actividades/1/edit
-          def edit
+          def edit_cor1440_gen
             authorize! :edit, Cor1440Gen::Actividad
             @registro = Cor1440Gen::Actividad.find(params[:id])
             if params['actividadpf_ids']
@@ -225,6 +230,11 @@ module Cor1440Gen
             end
             asegura_camposdinamicos(@registro)
             @registro.save!(validate: false)
+          end
+
+          # GET /actividades/1/edit
+          def edit
+            edit_cor1440_gen
             render layout: 'application'
           end
 
