@@ -9,22 +9,16 @@
   <% condr << " OR " if condr != ""%>
   <% condr << "(id = #{f.object.responsable.id})" %>
 <% end %>
-<% lus = Usuario.all %>
+<% lus = ::Usuario.all %>
 <% if condr != '' %>
   <% lus = lus.where("#{condr}") %>
 <% end %>
-<% if current_usuario.oficina_id %>
-  <% lus = lus.where(oficina_id: current_usuario.oficina_id) %>
-<% end %>
+<% lus = filtra_usuario_responsable(lus) %>
 <%= f.association :responsable,
-  collection: lus.order(:nusuario),
+  collection: lus,
   include_blank: false,
   label: "Responsable",
-  label_method: lambda { |t|  t.presenta_nombre },
-#    r = t.nusuario
-#    if t.nombre then r += " - " + t.nombre end
-#    r 
-#  },
+  label_method: :presenta_nombre,
   value_method: :id,
   selected:  f.object.usuario_id ?  f.object.usuario_id : current_usuario.id,
   input_html: { class: 'chosen-select' }

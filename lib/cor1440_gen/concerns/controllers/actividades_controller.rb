@@ -238,6 +238,18 @@ module Cor1440Gen
             render layout: 'application'
           end
 
+          # Llamado por control para presentar responsables en formulario
+          # Para limitar por permisos
+          def filtra_usuario_responsable(lista_usuarios)
+            if Rails.configuration.x.cor1440_permisos_por_oficina && 
+              current_usuario.oficina_id 
+              lista_usuarios = lista_usuarios.
+                where(oficina_id: current_usuario.oficina_id)
+            end
+            return lista_usuarios
+          end
+          helper_method :filtra_usuario_responsable
+
           private
 
           def set_actividad
