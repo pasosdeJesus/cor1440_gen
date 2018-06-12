@@ -3,7 +3,9 @@
     r = ""
     num = 1
     @registro.campotind.each do |x|
-      r += "(#{num}) #{x.nombrecampo}.  "
+      r += "(#{num}) #{x.nombrecampo} : #{
+        Sip::ModeloHelper.etiqueta_coleccion(
+        Cor1440Gen::ApplicationHelper::TIPO_CAMPODIN, x.tipo)}.  "
       num += 1
     end
     r

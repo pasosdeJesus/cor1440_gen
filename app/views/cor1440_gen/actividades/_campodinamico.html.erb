@@ -1,0 +1,42 @@
+<% if tipo == 1 %>
+  <% # Texto corto %>
+  <%= v.input :valor,
+    label: etiqueta, 
+    input_html: {
+      "data-toggle" => 'tooltip',
+      "title" => ayudae
+    }
+  %>
+<% elsif tipo == 2 %>
+  <% # Texto largo %>
+  <%= v.input :valor,
+  label: etiqueta, 
+  as: :text,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => ayudae,
+    rows: 5
+  } %>
+<% elsif tipo == 3 %>
+  <% # Entero %>
+  <%= v.input :valor,
+  label: etiqueta, 
+  as: :integer,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => ayudae
+  } %>
+<% elsif tipo == 4 %>
+  <% # Booleano%>
+  <%= v.input :valor,
+  boolean_style: :nested,
+  inline_label: etiqueta,
+  as: :boolean,
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => ayudae
+  } %>
+<% else %>
+  <% # No definido %>
+  <p>Tipo <%= tipo %> no definido.</p>
+<% end %>
