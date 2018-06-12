@@ -6,5 +6,9 @@ module Cor1440Gen
     include ::FontAwesome::Rails::IconHelper
     include Sip::PaginacionAjaxHelper
 
+    TIPO_CAMPODIN = [ ['Texto', 1],
+                      ['Texto largo', 2],
+                      ['Entero', 3],
+                      ['Booleano', 4] ]
   end
 end

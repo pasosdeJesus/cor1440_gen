@@ -38,7 +38,7 @@ module Cor1440Gen
       def actividadtipo_params
         params.require(:actividadtipo).permit(
           *atributos_form + [:campoact_attributes => [
-            :id, :nombrecampo, :ayudauso, :_destroy ]
+            :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
           ])
       end
     end

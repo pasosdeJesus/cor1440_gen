@@ -213,9 +213,16 @@ module Cor1440Gen
                 ci += apf.actividadtipo.campoact_ids
               end
             end
-            cd = actividad.valorcampoact_ids
+#            actividad.valorcampoact.each do |va|
+#              cd << va.campoact_id
+
+
+            cd = actividad.valorcampoact.map(&:campoact_id)
             sobran = cd - ci
-            actividad.valorcampoact_ids -= sobran            
+            borrar = actividad.valorcampoact.where(campoact_id: sobran).
+              map(&:id)
+            actividad.valorcampoact_ids -= borrar
+            puts actividad.valorcampoact_ids 
             faltan = ci - cd
             faltan.each do |f|
               actividad.valorcampoact.new(campoact_id: f, valor: '').save

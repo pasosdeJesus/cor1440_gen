@@ -102,7 +102,6 @@ end
 
 group :development, :test do
   #gem 'byebug', platform: :mri
-
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo

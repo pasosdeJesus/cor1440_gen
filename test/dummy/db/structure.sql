@@ -519,7 +519,8 @@ CREATE TABLE cor1440_gen_campoact (
     id bigint NOT NULL,
     actividadtipo_id integer,
     nombrecampo character varying(128),
-    ayudauso character varying(1024)
+    ayudauso character varying(1024),
+    tipo integer DEFAULT 1
 );
 
 
@@ -3420,6 +3421,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180320230847'),
 ('20180427194732'),
 ('20180509111948'),
-('20180519102415');
+('20180519102415'),
+('20180611222635');
 
 
