@@ -31,7 +31,8 @@ module Cor1440Gen
               :proyectofinanciero,
               :actividadpf, 
               :objetivo,
-              :poblacion
+              :poblacion,
+              :anexo
             ]
           end
 
@@ -55,7 +56,7 @@ module Cor1440Gen
               :objetivo,
               :resultado, 
               :poblacion,
-              :anexos
+              :anexo
               ]
           end
 
