@@ -67,8 +67,8 @@ module Cor1440Gen
           end
 
           def show
-            authorize! :read, clase.constantize
             @registro = clase.constantize.find(params[:id])
+            authorize! :read, @registro
             render :show, layout: 'application'
           end
 
@@ -231,8 +231,8 @@ module Cor1440Gen
           end
 
           def edit_cor1440_gen
-            authorize! :edit, Cor1440Gen::Actividad
             @registro = Cor1440Gen::Actividad.find(params[:id])
+            authorize! :edit, @registro
             if params['actividadpf_ids']
               @registro.actividadpf_ids = params['actividadpf_ids']
             end
