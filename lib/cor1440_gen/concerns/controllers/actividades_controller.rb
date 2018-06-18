@@ -66,12 +66,6 @@ module Cor1440Gen
             return c
           end
 
-          def show
-            @registro = clase.constantize.find(params[:id])
-            authorize! :read, @registro
-            render :show, layout: 'application'
-          end
-
 
           def fila_comun(actividad)
            pob = actividad.actividad_rangoedadac.map { |i| 
