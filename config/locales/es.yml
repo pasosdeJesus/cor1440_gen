@@ -95,8 +95,8 @@ es:
         numero: Número
         resultado: Descripción del resultado
       "cor1440_gen/sectoractor":
-        sectoractor: Sector de actor social
-        sectoresactores: Sectores de actores sociales
+        Sectoractor: Sector de actor social
+        Sectoresactores: Sectores de actores sociales
         numero: Número
         resultado: Descripción del resultado
       "cor1440_gen/tipoindicador":
