@@ -891,6 +891,40 @@ ALTER SEQUENCE cor1440_gen_resultadopf_id_seq OWNED BY cor1440_gen_resultadopf.i
 
 
 --
+-- Name: cor1440_gen_sectoractor; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE cor1440_gen_sectoractor (
+    id bigint NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: cor1440_gen_sectoractor_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cor1440_gen_sectoractor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cor1440_gen_sectoractor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cor1440_gen_sectoractor_id_seq OWNED BY cor1440_gen_sectoractor.id;
+
+
+--
 -- Name: cor1440_gen_tipoindicador; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2033,6 +2067,13 @@ ALTER TABLE ONLY cor1440_gen_resultadopf ALTER COLUMN id SET DEFAULT nextval('co
 
 
 --
+-- Name: cor1440_gen_sectoractor id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_sectoractor ALTER COLUMN id SET DEFAULT nextval('cor1440_gen_sectoractor_id_seq'::regclass);
+
+
+--
 -- Name: cor1440_gen_tipoindicador id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -2317,6 +2358,14 @@ ALTER TABLE ONLY cor1440_gen_proyectofinanciero
 
 ALTER TABLE ONLY cor1440_gen_resultadopf
     ADD CONSTRAINT cor1440_gen_resultadopf_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cor1440_gen_sectoractor cor1440_gen_sectoractor_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cor1440_gen_sectoractor
+    ADD CONSTRAINT cor1440_gen_sectoractor_pkey PRIMARY KEY (id);
 
 
 --
@@ -3425,6 +3474,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180519102415'),
 ('20180611222635'),
 ('20180612024009'),
-('20180612030340');
+('20180612030340'),
+('20180626123640');
 
 

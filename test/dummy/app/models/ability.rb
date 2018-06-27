@@ -42,6 +42,7 @@ class Ability  < Cor1440Gen::Ability
         can :manage, Cor1440Gen::Campotind
         can :manage, Cor1440Gen::Informe
         can :manage, Cor1440Gen::Proyectofinanciero
+        can :manage, Cor1440Gen::Sectoractor
         can :manage, Heb412Gen::Doc
         can :manage, Heb412Gen::Plantillahcm
         can :manage, :tablasbasicas
