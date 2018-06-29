@@ -49,9 +49,10 @@ es:
         Actividadtipos: Tipos de Actividad
         campoact: Campo
         Campoact: Campo
-      "cor1440_gen/sectoractor":
+      "cor1440_gen/actorsocial":
         Actorsocial: Actor social
         Actoressociales: Actores sociales
+        direccion: Dirección
       "cor1440_gen/indicadorpf":
         indicadorpf: Indicador
         numero: Número
