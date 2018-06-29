@@ -49,6 +49,9 @@ es:
         Actividadtipos: Tipos de Actividad
         campoact: Campo
         Campoact: Campo
+      "cor1440_gen/sectoractor":
+        Actorsocial: Actor social
+        Actoressociales: Actores sociales
       "cor1440_gen/indicadorpf":
         indicadorpf: Indicador
         numero: Número
@@ -97,8 +100,6 @@ es:
       "cor1440_gen/sectoractor":
         Sectoractor: Sector de actor social
         Sectoresactores: Sectores de actores sociales
-        numero: Número
-        resultado: Descripción del resultado
       "cor1440_gen/tipoindicador":
         nombre: Nombre corto
         esptipometa: Especificación del tipo de meta
