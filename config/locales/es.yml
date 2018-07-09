@@ -2,14 +2,14 @@ es:
   attributes:
     fechacreacion: Creación
     fechadeshabilitacion: Deshabilitación 
-    fechainicio: Fecha de Inicio
-    fechainicio_localizada: Fecha de Inicio
-    fechacierre: Fecha de Cierre
-    fechacierre_localizada: Fecha de Cierre
-    actividadarea: Subárea de Actividad
-    actividadareas: Subáreas de Actividad
-    actividadtipo: Tipo de Actividad
-    actividadtipos: Tipos de Actividad
+    fechainicio: Fecha de inicio
+    fechainicio_localizada: Fecha de inicio
+    fechacierre: Fecha de cierre
+    fechacierre_localizada: Fecha de cierre
+    actividadarea: Subárea de actividad
+    actividadareas: Subáreas de actividad
+    actividadtipo: Tipo de actividad
+    actividadtipos: Tipos de actividad
     proyectos: Áreas
     proyecto: Área
     proyectosfinancieros: Convenios financieros
@@ -42,11 +42,11 @@ es:
         resultadopf: Resultado
         titulo: Título
       "cor1440_gen/actividadarea":
-        Actividadarea: Subárea de Actividad
-        Actividadareas: Subáreas de Actividad
+        Actividadarea: Subárea de actividad
+        Actividadareas: Subáreas de actividad
       "cor1440_gen/actividadtipo":
-        Actividadtipo: Tipo de Actividad
-        Actividadtipos: Tipos de Actividad
+        Actividadtipo: Tipo de actividad
+        Actividadtipos: Tipos de actividad
         campoact: Campo
         Campoact: Campo
       "cor1440_gen/actorsocial":
@@ -82,18 +82,18 @@ es:
         fechacierre_localizada: Fecha de cierre
         indicador: Indicador
         objetivopf: Objetivo
-        Proyectofinanciero: Convenio Financiado
-        proyectofinanciero: Convenio Financiado
-        Proyectosfinancieros: Convenios Financiados
-        proyectosfinancieros: Convenios Financiados
+        Proyectofinanciero: Convenio financiado
+        proyectofinanciero: Convenio financiado
+        Proyectosfinancieros: Convenios financiados
+        proyectosfinancieros: Convenios financiados
         resultadopf: Resultado
         "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad de convenio
         "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
         "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
         "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
       "cor1440_gen/rangoedadac":
-        Rangoedadac: Rango de edad en Actividades
-        Rangosedadac: Rangos de edad en Actividades
+        Rangoedadac: Rango de edad en actividades
+        Rangosedadac: Rangos de edad en actividades
       "cor1440_gen/resultadopf":
         resultadopf: Resultado
         numero: Número
