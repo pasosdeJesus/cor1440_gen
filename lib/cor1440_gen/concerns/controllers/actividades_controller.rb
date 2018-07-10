@@ -32,7 +32,7 @@ module Cor1440Gen
               :actividadpf, 
               :objetivo,
               :poblacion,
-              :anexo
+              :anexos
             ]
           end
 
@@ -56,7 +56,7 @@ module Cor1440Gen
               :objetivo,
               :resultado, 
               :poblacion,
-              :anexo
+              :anexos
               ]
           end
 
