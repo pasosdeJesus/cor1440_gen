@@ -6,7 +6,8 @@
     "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
 <% end %>
 <% if f.object && f.object.usuario && f.object.usuario.length > 0 %>
-  <% condr += " OR (id IN (#{f.object.usuario.map(&:id).join(", ")}))" %>
+  <% condr += " OR " if condr != "" %>
+  <% condr += "(id IN (#{f.object.usuario.map(&:id).join(", ")}))" %>
 <% end %>
 <% lus = Usuario.where("#{condr}") %>
 <%= f.association :usuario,
