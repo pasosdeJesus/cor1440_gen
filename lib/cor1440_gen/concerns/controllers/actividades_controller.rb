@@ -16,7 +16,7 @@ module Cor1440Gen
             "Cor1440Gen::Actividad"
           end
 
-          def gencalse
+          def genclase
             return 'F'
           end
 
