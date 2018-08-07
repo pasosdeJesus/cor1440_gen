@@ -166,6 +166,31 @@ module Cor1440Gen
             render 'validar', layout: 'application'
           end
 
+          # Más validaciones a un proyecto financiero
+          # @param registro proyecto que se valida
+          # @param detalle Lista de errores, se agregan si hay
+          def validar_mas_registro(registro, detalle)
+          end
+
+          # Valida un proyecto financiero
+          # @param registro proyecto que se valida
+          # @param detalle Lista de errores, se agregan si hay
+          def validar_registro(registro, detalle)
+            detalleini = detalle.clone
+            if !registro.fechainicio 
+              detalle << "No tiene fecha de inicio"
+            elsif registro.fechainicio < Date.new(2000, 1, 1)
+              detalle << "Fecha de inicio anterior al 1.Ene.2000"
+            end
+            if !registro.fechacierre
+              detalle << "No tiene fecha de terminación"
+            elsif registro.fechacierre <= registro.fechainicio
+              detalle << "Fecha de terminación posterior o igual a la de inicio"
+            end
+            validar_mas_registro(registro, detalle)
+            return detalleini == detalle
+          end
+
           def proyectofinanciero_params
             params.require(:proyectofinanciero).permit(
               atributos_show +
