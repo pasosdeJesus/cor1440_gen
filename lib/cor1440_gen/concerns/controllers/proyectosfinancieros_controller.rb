@@ -8,7 +8,8 @@ module Cor1440Gen
 
         included do
           load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
-            except: :actividadespf
+            only: [:new, :create, :destroy, :edit, :update, :index, :show,
+                   :objetivospf, :validar]
           before_action :set_proyectofinanciero,
             only: [:show, :edit, :update, :destroy]      
           skip_before_action :set_proyectofinanciero, only: [:validar]
@@ -137,8 +138,8 @@ module Cor1440Gen
             redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
           end
 
-          def validar_filtramas(registro)
-            return registro
+          # Completa modificacion de validarpf y registro según filtro
+          def validar_filtramas
           end
 
           def validar
@@ -160,7 +161,7 @@ module Cor1440Gen
               @registro = @registro.where('fechainicio <= ?', 
                                           @validarpf.fechafin)
             end
-            @registro = validar_filtramas(@registro)
+            validar_filtramas
 
             render 'validar', layout: 'application'
           end
