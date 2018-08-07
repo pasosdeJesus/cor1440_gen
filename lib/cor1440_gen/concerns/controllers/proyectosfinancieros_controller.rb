@@ -7,12 +7,11 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          before_action :set_proyectofinanciero, 
-            only: [:show, :edit, :update, :destroy]
           load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
             except: :actividadespf
-
-          include Sip::FormatoFechaHelper
+          before_action :set_proyectofinanciero,
+            only: [:show, :edit, :update, :destroy]      
+          skip_before_action :set_proyectofinanciero, only: [:validar]
 
           def clase 
             "Cor1440Gen::Proyectofinanciero"
@@ -138,6 +137,33 @@ module Cor1440Gen
             redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
           end
 
+          def validar_filtramas(registro)
+            return registro
+          end
+
+          def validar
+            @validarpf = Cor1440Gen::Validarpf.new
+            @registro = Cor1440Gen::Proyectofinanciero.all
+            if params && params[:validarpf] && 
+              params[:validarpf][:fechaini_localizada] &&
+              params[:validarpf][:fechaini_localizada] != ''
+              @validarpf.fechaini_localizada = 
+                params[:validarpf][:fechaini_localizada]
+              @registro = @registro.where('fechainicio >= ?', 
+                                          @validarpf.fechaini)
+            end
+            if params && params[:validarpf] && 
+              params[:validarpf][:fechafin_localizada] &&
+              params[:validarpf][:fechafin_localizada] != ''
+              @validarpf.fechafin_localizada = 
+                params[:validarpf][:fechafin_localizada]
+              @registro = @registro.where('fechainicio <= ?', 
+                                          @validarpf.fechafin)
+            end
+            @registro = validar_filtramas(@registro)
+
+            render 'validar', layout: 'application'
+          end
 
           def proyectofinanciero_params
             params.require(:proyectofinanciero).permit(

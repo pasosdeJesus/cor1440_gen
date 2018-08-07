@@ -1,0 +1,20 @@
+
+<h2>Fecha de inicio ausente o anterior a 2000</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Fecha de inicio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registro.where("fechainicio IS NULL OR fechainicio<'2000-01-01'").
+      each do |pf| %>
+      <tr>
+        <td><%= link_to(pf.id, pf) %></td>
+        <td><%= pf.fechainicio %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= render partial: 'resultado_2_validar' %>

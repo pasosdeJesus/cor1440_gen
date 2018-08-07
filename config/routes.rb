@@ -1,26 +1,32 @@
 Cor1440Gen::Engine.routes.draw do
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
-  resources :informes, path_names: { new: 'nuevo', edit: 'edita' }
-  resources :proyectosfinancieros, path_names: { new: 'nuevo', edit: 'edita' }
+  
+  get "/actividadespf/" => "proyectosfinancieros#actividadespf", 
+    as: :actividadespf
+  resources :actividadespf, only: [:new, :destroy]
 
+  resources :camposact, path_names: { new: 'nuevo', edit: 'edita' }
+
+  resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
+
+  resources :indicadorespf, only: [:new, :destroy]
+
+  resources :informes, path_names: { new: 'nuevo', edit: 'edita' }
   get "/informes/:id/impreso" => "informes#impreso", 
     as: :impresion
 
-  get "/actividadespf/" => "proyectosfinancieros#actividadespf", 
-    as: :actividadespf
-
   get "/objetivospf/" => "proyectosfinancieros#objetivospf", 
     as: :objetivospf
-
   resources :objetivospf, only: [:new, :destroy]
+  
+  get "/proyectosfinancieros/validar" => "proyectosfinancieros#validar", 
+    as: :validar_proyectosfinancieros
+  resources :proyectosfinancieros, path_names: { new: 'nuevo', edit: 'edita' }
+
   resources :resultadospf, only: [:new, :destroy]
-  resources :indicadorespf, only: [:new, :destroy]
-  resources :actividadespf, only: [:new, :destroy]
 
   resources :tiposindicador, path_names: { new: 'nuevo', edit: 'edita' }
-  resources :camposact, path_names: { new: 'nuevo', edit: 'edita' }
-  resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 
   namespace :admin do
     ab = ::Ability.new
