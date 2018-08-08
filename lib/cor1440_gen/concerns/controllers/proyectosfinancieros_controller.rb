@@ -7,6 +7,9 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
+          include Sip::FormatoFechaHelper
+          helper Sip::FormatoFechaHelper
+
           load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
             only: [:new, :create, :destroy, :edit, :update, :index, :show,
                    :objetivospf, :validar]
