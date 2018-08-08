@@ -1,4 +1,5 @@
-<% if tipo == 1 %>
+<% case tipo %>
+<% when 1 %>
   <% # Texto corto %>
   <%= v.input :valor,
     label: etiqueta, 
@@ -7,7 +8,7 @@
       "title" => ayudae
     }
   %>
-<% elsif tipo == 2 %>
+<% when 2 %>
   <% # Texto largo %>
   <%= v.input :valor,
   label: etiqueta, 
@@ -17,7 +18,7 @@
     "title" => ayudae,
     rows: 5
   } %>
-<% elsif tipo == 3 %>
+<% when 3 %>
   <% # Entero %>
   <%= v.input :valor,
   label: etiqueta, 
@@ -26,7 +27,7 @@
     "data-toggle" => 'tooltip',
     "title" => ayudae
   } %>
-<% elsif tipo == 4 %>
+<% when 4 %>
   <% # Booleano%>
   <%= v.input :valor,
   boolean_style: :nested,
@@ -35,6 +36,16 @@
   input_html: {
     "data-toggle" => 'tooltip',
     "title" => ayudae
+  } %>
+<% when 5 %>
+  <% # Flotante %>
+  <%= v.input :valor,
+  label: etiqueta, 
+  input_html: {
+    "data-toggle" => 'tooltip',
+    "title" => ayudae,
+    type: 'number',
+    step: 0.01
   } %>
 <% else %>
   <% # No definido %>
