@@ -25,6 +25,7 @@ module Cor1440Gen
              "nombre", 
              "observaciones", 
              "campoact",
+             "listadoasistencia",
              "fechacreacion_localizada", 
              "fechadeshabilitacion_localizada"
             ]
@@ -34,6 +35,7 @@ module Cor1440Gen
             @registro = clase.constantize.new
             @registro.nombre = 'A'
             @registro.fechacreacion = Date.today
+            @registro.listadoasistencia = false
             @registro.save!(validate: false)
             redirect_to cor1440_gen.edit_admin_actividadtipo_path(@registro)
           end

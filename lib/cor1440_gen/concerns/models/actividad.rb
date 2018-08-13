@@ -84,6 +84,15 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Valorcampotind'
           accepts_nested_attributes_for :valorcampotind,  reject_if: :all_blank
 
+          has_many :asistencia, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Asistencia',
+            foreign_key: 'actividad_id'
+          has_many :persona, through: :asistencia, class_name: 'Sip::Persona'
+          accepts_nested_attributes_for :persona, reject_if: :all_blank
+          accepts_nested_attributes_for :asistencia,
+            allow_destroy: true, reject_if: :all_blank
+
+
           has_many :valorcampoact, dependent: :delete_all,
             class_name: '::Cor1440Gen::Valorcampoact',
             foreign_key: 'actividad_id',  validate: true

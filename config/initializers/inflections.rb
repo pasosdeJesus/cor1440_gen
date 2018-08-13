@@ -15,6 +15,7 @@
 #   inflect.acronym 'RESTful'
 # end
 ActiveSupport::Inflector.inflections do |inflect|
+  inflect.irregular 'asistencia', 'asistencias'
   inflect.irregular 'actividadarea', 'actividadareas'
   inflect.irregular 'actorsocial', 'actoressociales'
   inflect.irregular 'campoact', 'camposact'

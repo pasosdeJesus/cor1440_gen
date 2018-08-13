@@ -55,6 +55,7 @@ module Cor1440Gen
               :valorcampoact,
               :objetivo,
               :resultado, 
+              :listadoasistencia,
               :poblacion,
               :anexos
               ]
@@ -202,15 +203,18 @@ module Cor1440Gen
 
 
           def asegura_camposdinamicos(actividad)
+            @listadoasistencia = false
             ci = []
             actividad.actividadpf.each do |apf|
               if apf.actividadtipo
                 ci += apf.actividadtipo.campoact_ids
+                if apf.actividadtipo.listadoasistencia
+                  @listadoasistencia = true
+                end
               end
             end
 #            actividad.valorcampoact.each do |va|
 #              cd << va.campoact_id
-
 
             cd = actividad.valorcampoact.map(&:campoact_id)
             sobran = cd - ci
@@ -288,6 +292,22 @@ module Cor1440Gen
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
               ],
               :actividadtipo_ids => [],
+              :asistencia_attributes => [
+                :actorsocial_id,
+                :externo,
+                :id,
+                :rangoedadac_id,
+                :perfilactorsocial_id,
+                :_destroy,
+                :persona_attributes => [
+                  :apellidos, 
+                  :id, 
+                  :nombres, 
+                  :numerodocumento, 
+                  :sexo, 
+                  :tdocumento_id
+                ]
+              ],
               :valorcampoact_attributes => [
                 :id,
                 :campoact_id,
