@@ -265,9 +265,8 @@ module Cor1440Gen
             @actividad.current_usuario = current_usuario
           end
 
-          # No confiar parametros a Internet, sólo permitir lista blanca
-          def actividad_params
-            params.require(:actividad).permit(
+          def lista_params
+            [ 
               :actividad,
               :fecha_localizada, 
               :lugar,
@@ -316,9 +315,13 @@ module Cor1440Gen
               :proyecto_ids => [],
               :proyectofinanciero_ids => [],
               :usuario_ids => []
-            )
+            ]
           end
-          
+
+          # Lista blanca de parametros
+          def actividad_params
+            params.require(:actividad).permit(lista_params)
+          end
 
           def actividad_actividadpf_params(nparams)
             nparams.require(:actividad).permit(

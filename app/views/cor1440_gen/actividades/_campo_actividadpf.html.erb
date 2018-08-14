@@ -1,7 +1,16 @@
+
+<% if defined? con_label %>
+  <% l = con_label ? nil : false %>
+<% else %>
+  <% l = nil %>
+<% end %>
 <%= f.association :actividadpf, 
   collection: ::Cor1440Gen::Actividadpf.where(proyectofinanciero_id: 
                                   f.object.proyectofinanciero.map(&:id)),
   label_method: lambda { |t| t.nombrecorto + ':' + t.titulo},
   value_method: :id,
-  input_html: { class: 'chosen-select' }
+  label: l,
+  input_html: { 
+    class: 'chosen-select' 
+  }
 %>
