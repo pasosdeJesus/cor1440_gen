@@ -149,6 +149,12 @@ module Cor1440Gen
             end
           end
 
+          scope :filtro_actividadpf, lambda { |ida|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividad_actividadpf WHERE ' +
+                  'actividadpf_id = ?)',ida)
+          }
+
           scope :filtro_fechaini, lambda { |f|
             where('fecha >= ?', f)
             # El control de fecha HTML estándar retorna la fecha
