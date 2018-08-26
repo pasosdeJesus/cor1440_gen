@@ -149,10 +149,31 @@ module Cor1440Gen
             end
           end
 
+          def presenta(atr)
+            case atr.to_s
+            when 'poblacion'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.ml ? r.ml : 0
+                memo += r.mr ? r.mr : 0
+                memo += r.fl ? r.fl : 0
+                memo += r.fr ? r.fr : 0
+                memo
+              }
+            else
+              presenta_gen(atr)
+            end
+          end
+
           scope :filtro_actividadpf, lambda { |ida|
             where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
                   'cor1440_gen_actividad_actividadpf WHERE ' +
                   'actividadpf_id = ?)',ida)
+          }
+
+          scope :filtro_actividadareas, lambda { |ida|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividadareas_actividad WHERE ' +
+                  'actividadarea_id = ?)',ida)
           }
 
           scope :filtro_fechaini, lambda { |f|
@@ -184,6 +205,12 @@ module Cor1440Gen
  
           scope :filtro_oficina, lambda { |oid|
             where(oficina_id: oid)
+          }
+
+          scope :filtro_proyectos, lambda { |idp|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividad_proyecto WHERE ' +
+                  'proyecto_id = ?)',idp)
           }
 
           scope :filtro_proyectofinanciero, lambda { |pid|

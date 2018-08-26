@@ -62,6 +62,20 @@ module Cor1440Gen
           end
 
 
+          def vistas_manejadas
+            ['Actividades']
+          end
+
+          def show_plantillas
+            @plantillas = [['', '']]
+            @plantillas = Heb412Gen::Plantilladoc.where(
+              "vista IN ('Actividades')").
+            select('nombremenu, id').map { 
+                |co| [co.nombremenu, "#{co.id}.odt"] 
+              }
+          end
+
+
           def index_reordenar(c)
             c = c.reorder('cor1440_gen_actividad.fecha DESC')
             return c
