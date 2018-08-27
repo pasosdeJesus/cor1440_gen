@@ -63,17 +63,21 @@ module Cor1440Gen
 
 
           def vistas_manejadas
-            ['Actividades']
+            ['Actividad']
           end
 
-          def show_plantillas
-            @plantillas = [['', '']]
-            @plantillas = Heb412Gen::Plantilladoc.where(
-              "vista IN ('Actividades')").
-            select('nombremenu, id').map { 
-                |co| [co.nombremenu, "#{co.id}.odt"] 
-              }
-          end
+#          def cons_a_fd(cons)
+#            byebug
+#            l = []
+#            cons.each do |r|
+#              f = {}
+#              r.class.columns.map(&:name).each do |c|
+#                f[c] = r[c].to_s
+#              end
+#              l << f
+#            end
+#            return l
+#          end
 
 
           def index_reordenar(c)

@@ -52,7 +52,14 @@ module Cor1440Gen
       'Actividad' => { 
         campos: [
           'id', 'nombre', 'fecha', 'lugar', 'oficina', 
-          'tipos_de_actividad', 'convenios_financieros', 'areas', 'subareas', 
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectofinanciero).downcase.gsub(' ', '_'), 
+          Cor1440Gen::Actividad.human_attribute_name(
+            :actividadpf).downcase.gsub(' ', '_'), 
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectos).downcase.gsub(' ', '_'), 
+          Cor1440Gen::Actividad.human_attribute_name(
+            :actividadareas).downcase.gsub(' ', '_'), 
           'responsable', 'corresponsables', 'objetivo', 
           'resultado', 'poblacion', 'observaciones', 
           'creacion', 'actualizacion'

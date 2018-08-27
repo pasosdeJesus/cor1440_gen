@@ -151,6 +151,32 @@ module Cor1440Gen
 
           def presenta(atr)
             case atr.to_s
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :actividadareas).downcase.gsub(' ', '_')
+              actividadareas.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+              }
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :actividadpf).downcase.gsub(' ', '_')
+              actividadpf.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                #memo += '; ' if memo != ''
+                #memo += r.nombrecorto + ' ' + r.titulo
+                #memo
+              }
+
+            when 'actualizacion'
+              updated_at
+              
+            when 'creacion'
+              created_at
+
+            when 'corresponsables'
+              usuario.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+              }
+
             when 'poblacion'
               actividad_rangoedadac.inject(0) { |memo, r| 
                 memo += r.ml ? r.ml : 0
@@ -159,6 +185,21 @@ module Cor1440Gen
                 memo += r.fr ? r.fr : 0
                 memo
               }
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :proyectos).downcase.gsub(' ', '_')
+              proyecto.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                #memo == '' ? r.nombre : '; ' + r.nombre
+              }
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :proyectofinanciero).downcase.gsub(' ', '_')
+              proyectofinanciero.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                #memo == '' ? r.nombre : '; ' + r.nombre
+              }
+
             else
               presenta_gen(atr)
             end
