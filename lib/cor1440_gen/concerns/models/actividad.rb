@@ -177,6 +177,40 @@ module Cor1440Gen
                 memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
               }
 
+            when 'objetivo_convenio_financiero'
+              actividadpf.inject('') { |memo, a|
+                sep = memo == '' ? '' : ';'
+                if a.resultadopf && a.resultadopf.objetivopf
+                  memo + sep + a.resultadopf.objetivopf.numero
+                else
+                  memo
+                end
+              }
+
+            when 'poblacion_hombres_l'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.ml ? r.ml : 0
+                memo
+              }
+            
+            when 'poblacion_hombres_r'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.mr ? r.mr : 0
+                memo
+              }
+
+            when 'poblacion_mujeres_l'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.fl ? r.fl : 0
+                memo
+              }
+
+            when 'poblacion_mujeres_r'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.fr ? r.fr : 0
+                memo
+              }
+
             when 'poblacion'
               actividad_rangoedadac.inject(0) { |memo, r| 
                 memo += r.ml ? r.ml : 0

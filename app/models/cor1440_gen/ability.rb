@@ -60,8 +60,13 @@ module Cor1440Gen
             :proyectos).downcase.gsub(' ', '_'), 
           Cor1440Gen::Actividad.human_attribute_name(
             :actividadareas).downcase.gsub(' ', '_'), 
+          'objetivo_convenio_financiero',
           'responsable', 'corresponsables', 'objetivo', 
           'resultado', 'poblacion', 'observaciones', 
+          'poblacion_mujeres_l',
+          'poblacion_mujeres_r',
+          'poblacion_hombres_l',
+          'poblacion_hombres_r',
           'creacion', 'actualizacion'
         ],
         controlador: 'Cor1440Gen::ActividadesController',
