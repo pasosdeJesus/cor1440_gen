@@ -149,8 +149,16 @@ module Cor1440Gen
             end
           end
 
-          def presenta(atr)
+          def presenta_actividad(atr)
             case atr.to_s
+            when /anexo_[0-9]_desc/
+              i = atr[6].to_i
+              if sip_anexo.count >= i
+                sip_anexo.order(:id)[i-1].descripcion
+              else 
+                ''
+              end
+
             when Cor1440Gen::Actividad.human_attribute_name(
               :actividadareas).downcase.gsub(' ', '_')
               actividadareas.inject('') { |memo, r| 
@@ -187,12 +195,22 @@ module Cor1440Gen
                 end
               }
 
+            when 'poblacion'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.ml ? r.ml : 0
+                memo += r.mr ? r.mr : 0
+                memo += r.fl ? r.fl : 0
+                memo += r.fr ? r.fr : 0
+                memo
+              }
+
             when 'poblacion_hombres_l'
               actividad_rangoedadac.inject(0) { |memo, r| 
                 memo += r.ml ? r.ml : 0
                 memo
               }
-            
+ 
+           
             when 'poblacion_hombres_r'
               actividad_rangoedadac.inject(0) { |memo, r| 
                 memo += r.mr ? r.mr : 0
@@ -210,15 +228,38 @@ module Cor1440Gen
                 memo += r.fr ? r.fr : 0
                 memo
               }
-
-            when 'poblacion'
-              actividad_rangoedadac.inject(0) { |memo, r| 
+            when /poblacion_hombres_l_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                  inject(0) { |memo, r| 
                 memo += r.ml ? r.ml : 0
+                memo
+              }
+           
+            when /poblacion_hombres_r_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                inject(0) { |memo, r| 
                 memo += r.mr ? r.mr : 0
+                memo
+              }
+
+            when /poblacion_mujeres_l_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                inject(0) { |memo, r| 
                 memo += r.fl ? r.fl : 0
+                memo
+              }
+
+            when /poblacion_mujeres_r_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                inject(0) { |memo, r| 
                 memo += r.fr ? r.fr : 0
                 memo
               }
+
 
             when Cor1440Gen::Actividad.human_attribute_name(
               :proyectos).downcase.gsub(' ', '_')
@@ -237,6 +278,10 @@ module Cor1440Gen
             else
               presenta_gen(atr)
             end
+          end
+
+          def presenta(atr)
+            presenta_actividad(atr)
           end
 
           scope :filtro_actividadpf, lambda { |ida|
