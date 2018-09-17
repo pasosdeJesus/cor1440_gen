@@ -178,10 +178,10 @@ module Cor1440Gen
               updated_at
               
             when 'campos_dinamicos'
-               valorcampotind.inject('') { |memo, v|
+              valorcampoact.inject('') { |memo, v|
                 sep = memo == '' ? '' : ';'
-                if v.campotind 
-                  memo + sep + v.campotind.nombre + ": " + v.valor
+                if v.campoact
+                  memo + sep + v.campoact.nombrecampo + ": " + v.valor
                 else
                   memo
                 end
