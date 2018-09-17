@@ -177,6 +177,16 @@ module Cor1440Gen
             when 'actualizacion'
               updated_at
               
+            when 'campos_dinamicos'
+               valorcampotind.inject('') { |memo, v|
+                sep = memo == '' ? '' : ';'
+                if v.campotind 
+                  memo + sep + v.campotind.nombre + ": " + v.valor
+                else
+                  memo
+                end
+              }
+             
             when 'creacion'
               created_at
 

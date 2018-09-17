@@ -26,7 +26,7 @@ module Cor1440Gen
               :oficina, 
               :responsable,
               :nombre, 
-              :proyectos,
+              :proyecto,
               :actividadareas,
               :proyectofinanciero,
               :actividadpf, 
@@ -61,30 +61,14 @@ module Cor1440Gen
               ]
           end
 
-
           def vistas_manejadas
             ['Actividad']
           end
-
-#          def cons_a_fd(cons)
-#            byebug
-#            l = []
-#            cons.each do |r|
-#              f = {}
-#              r.class.columns.map(&:name).each do |c|
-#                f[c] = r[c].to_s
-#              end
-#              l << f
-#            end
-#            return l
-#          end
-
 
           def index_reordenar(c)
             c = c.reorder('cor1440_gen_actividad.fecha DESC')
             return c
           end
-
 
           def fila_comun(actividad)
            pob = actividad.actividad_rangoedadac.map { |i| 
@@ -143,72 +127,6 @@ module Cor1440Gen
             return cuerpo
           end
 
-          # GET /actividades
-          # GET /actividades.json
-          def index(c = nil)
-            super(c)
-            return
-            #Falta manejar pdf, json, ods como 
-            @registros = @actividades = 
-              Cor1440Gen::ActividadesController.filtra(
-              params[:filtro], current_usuario)
-            @plantillas = Heb412Gen::Plantillahcm.where(
-              vista: 'Actividad').select('nombremenu, id').map { 
-                |c| [c.nombremenu, c.id] }
-              @numactividades = @actividades.size
-              @enctabla = encabezado_comun()
-              respond_to do |format|
-                format.html { 
-                  @registros = @actividades = @actividades.paginate(
-                    :page => params[:pagina], per_page: 20
-                  )
-                  @cuerpotabla = cuerpo_comun()
-                  render "index", layout: "application" 
-                }
-                format.json { head :no_content }
-
-                format.ods {
-                  if params[:idplantilla].nil? 
-                    head :no_content 
-                  elsif params[:idplantilla].to_i <= 0
-                    head :no_content 
-                  elsif Heb412Gen::Plantillahcm.where(
-                    id: params[:idplantilla].to_i).take.nil?
-                    head :no_content 
-                  end
-
-                  @cuerpotabla = cuerpo_comun()
-                  aractividades = Array.new
-                  @cuerpotabla.each do |a| 
-                    ac = Cor1440Gen::Actividad.find(a[0])
-                    r = vector_a_registro(a, ac)
-                    aractividades << r
-                  end
-                  pl = Heb412Gen::Plantillahcm.find(
-                    params[:idplantilla].to_i)
-                  n = Heb412Gen::PlantillahcmController.
-                    llena_plantilla_multiple_fd(pl, aractividades)
-                  send_file n, x_sendfile: true
-                }
-
-                format.js   { 
-                  @registros = @actividades = @actividades.paginate(
-                    :page => params[:pagina], per_page: 20
-                  )
-                  @cuerpotabla = cuerpo_comun()
-                  render 'index' 
-                }
-                format.pdf  { 
-                  @cuerpotabla = cuerpo_comun()
-                  prawnto(prawn: { page_layout: :landscape },
-                          filename: 
-                          "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
-                  inline: true)
-                }
-              end
-              return
-          end
-
           # GET /actividades/new
           def new
             @registro = @actividad = Actividad.new
@@ -218,7 +136,6 @@ module Cor1440Gen
             @registro.save!(validate: false)
             redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
-
 
           def asegura_camposdinamicos(actividad)
             @listadoasistencia = false
@@ -231,8 +148,6 @@ module Cor1440Gen
                 end
               end
             end
-#            actividad.valorcampoact.each do |va|
-#              cd << va.campoact_id
 
             cd = actividad.valorcampoact.map(&:campoact_id)
             sobran = cd - ci
@@ -348,7 +263,6 @@ module Cor1440Gen
           end
 
         end # included do
-
 
 
         class_methods do

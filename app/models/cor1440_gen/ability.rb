@@ -51,18 +51,29 @@ module Cor1440Gen
     CAMPOS_PLANTILLAS_PROPIAS = {
       'Actividad' => { 
         campos: [
-          'id', 'nombre', 'fecha', 'lugar', 'oficina', 
-          Cor1440Gen::Actividad.human_attribute_name(
-            :proyectofinanciero).downcase.gsub(' ', '_'), 
-          Cor1440Gen::Actividad.human_attribute_name(
-            :actividadpf).downcase.gsub(' ', '_'), 
-          Cor1440Gen::Actividad.human_attribute_name(
-            :proyectos).downcase.gsub(' ', '_'), 
           Cor1440Gen::Actividad.human_attribute_name(
             :actividadareas).downcase.gsub(' ', '_'), 
+          Cor1440Gen::Actividad.human_attribute_name(
+            :actividadpf).downcase.gsub(' ', '_'), 
+          'actualizacion',
+          'anexo_1_desc',
+          'anexo_2_desc',
+          'anexo_3_desc',
+          'anexo_4_desc',
+          'anexo_5_desc',
+          'campos_dinamicos', 
+          'corresponsables', 
+          'creacion', 
+          'fecha', 
+          'fecha_localizada', 
+          'id', 
+          'lugar', 
+          'nombre', 
+          'objetivo', 
+          'observaciones', 
           'objetivo_convenio_financiero',
-          'responsable', 'corresponsables', 'objetivo', 
-          'resultado', 'poblacion', 'observaciones', 
+          'oficina', 
+          'poblacion', 
           'poblacion_mujeres_l',
           'poblacion_mujeres_r',
           'poblacion_hombres_l',
@@ -83,13 +94,12 @@ module Cor1440Gen
           'poblacion_mujeres_r_g4',
           'poblacion_hombres_l_g4',
           'poblacion_hombres_r_g4',
-          'creacion', 
-          'actualizacion',
-          'anexo_1_desc',
-          'anexo_2_desc',
-          'anexo_3_desc',
-          'anexo_4_desc',
-          'anexo_5_desc'
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectofinanciero).downcase.gsub(' ', '_'), 
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectos).downcase.gsub(' ', '_'), 
+          'responsable', 
+          'resultado', 
         ],
         controlador: 'Cor1440Gen::ActividadesController',
         ruta: '/actividades'
