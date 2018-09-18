@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: d26bec4f7626b8a27d48d183bde80913dcbbc29e
+  revision: 6f1f90a67c96e9964290931723b26a9dff617e2c
+  branch: hojacalculo_registro
   specs:
     heb412_gen (1.0.a1)
       chosen-rails

@@ -8,12 +8,19 @@ class Ability  < Cor1440Gen::Ability
     if !usuario || usuario.fechadeshabilitacion
       return
     end
+    can :nuevo, Cor1440Gen::Actividad
+
+    can :read, Heb412Gen::Doc
+    can :read, Heb412Gen::Plantilladoc
+    can :read, Heb412Gen::Plantillahcm
+    can :read, Heb412Gen::Plantillahcr
+
+    can :descarga_anexo, Sip::Anexo
     can :contar, Sip::Ubicacion
     can :buscar, Sip::Ubicacion
     can :lista, Sip::Ubicacion
-    can :descarga_anexo, Sip::Anexo
-    can :nuevo, Cor1440Gen::Actividad
     can :nuevo, Sip::Ubicacion
+
     if !usuario.nil? && !usuario.rol.nil? then
       case usuario.rol 
       when Ability::ROLSISTACT
@@ -47,8 +54,12 @@ class Ability  < Cor1440Gen::Ability
         can :manage, Cor1440Gen::Informe
         can :manage, Cor1440Gen::Proyectofinanciero
         can :manage, Cor1440Gen::Sectoractor
+
         can :manage, Heb412Gen::Doc
+        can :manage, Heb412Gen::Plantilladoc
         can :manage, Heb412Gen::Plantillahcm
+        can :manage, Heb412Gen::Plantillahcr
+
         can :manage, Sip::Actorsocial
         can :manage, Usuario
         can :manage, :tablasbasicas
