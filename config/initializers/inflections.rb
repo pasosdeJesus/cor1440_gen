@@ -15,11 +15,14 @@
 #   inflect.acronym 'RESTful'
 # end
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'rangoedadac', 'rangosedadac'
+  inflect.irregular 'asistencia', 'asistencias'
   inflect.irregular 'actividadarea', 'actividadareas'
-  inflect.irregular 'financiador', 'financiadores'
-  inflect.irregular 'proyectofinanciero', 'proyectosfinancieros'
-  inflect.irregular 'tipoindicador', 'tiposindicador'
+  inflect.irregular 'actorsocial', 'actoressociales'
   inflect.irregular 'campoact', 'camposact'
   inflect.irregular 'campotind', 'campostind'
+  inflect.irregular 'financiador', 'financiadores'
+  inflect.irregular 'proyectofinanciero', 'proyectosfinancieros'
+  inflect.irregular 'rangoedadac', 'rangosedadac'
+  inflect.irregular 'sectoractor', 'sectoresactores'
+  inflect.irregular 'tipoindicador', 'tiposindicador'
 end

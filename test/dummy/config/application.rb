@@ -28,11 +28,12 @@ module Dummy
 
     config.relative_url_root = '/'
 
-    config.x.formato_fecha = 'yyyy-mm-dd'
+    config.x.formato_fecha = 'dd-M-yyyy'
 
     config.x.heb412_ruta = Rails.root.join('public', 'heb412')
 
-    #config.web_console.whitelisted_ips = '190.27.122.155'
+    config.x.cor1440_permisos_por_oficina = true
 
+    #config.web_console.whitelisted_ips = '190.25.163.93'
   end
 end

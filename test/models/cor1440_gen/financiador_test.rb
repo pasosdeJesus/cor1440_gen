@@ -12,6 +12,10 @@ module Cor1440Gen
       created_at: "2015-04-20"
     } 
 
+    setup do
+      Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
+    end
+
     test "valido" do
       f = Financiador.create PRUEBA_FINANCIADOR
       assert f.valid?

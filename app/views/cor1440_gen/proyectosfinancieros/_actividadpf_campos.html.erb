@@ -11,6 +11,7 @@
   </td>
   <td>
     <%= f.association :actividadtipo, 
+      collection: Cor1440Gen::Actividadtipo.order(:nombre),
       label_method: :nombre,
       label: false %>
   </td>

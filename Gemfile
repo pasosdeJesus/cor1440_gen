@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-#gem "rails", '~> 5.2.0'
-# Resuelve problema con minitest y rails 5.2.0
-gem "rails", '~> 5.2.0', git: 'https://github.com/rails/rails.git', ref: '4887f97bd8a8859294ad02ccea20d83a94ec0812'
+gem "rails", '~> 5.2.1'
 
 gem 'bootsnap', '>=1.1.0', require: false
 
@@ -81,7 +79,7 @@ gem "paperclip"#, "~> 4.1"
 
 # Zonas horarias
 gem "tzinfo"
-gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
+#gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
 gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
@@ -101,9 +99,7 @@ group :development do
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   #gem 'byebug', platform: :mri
-
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo

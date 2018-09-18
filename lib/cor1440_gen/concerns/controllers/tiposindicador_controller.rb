@@ -50,7 +50,7 @@ module Cor1440Gen
 
           def tipoindicador_params
             p = *atributos_form + [ :campotind_attributes => [
-              :id, :nombrecampo, :ayudauso, :_destroy ]
+              :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
             ]
             params.require(:tipoindicador).permit(p)
           end

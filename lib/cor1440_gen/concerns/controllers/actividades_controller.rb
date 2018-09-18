@@ -11,28 +11,63 @@ module Cor1440Gen
           before_action :set_actividad, only: [:show, :edit, :update, :destroy]
           load_and_authorize_resource class: Cor1440Gen::Actividad
 
-          # Encabezado comun para HTML y PDF (primeras filas)
-          def encabezado_comun
-              return [ Cor1440Gen::Actividad.human_attribute_name(:id), 
-              @actividades.human_attribute_name(:fecha),
-              @actividades.human_attribute_name(:oficina),
-              @actividades.human_attribute_name(:responsable),
-              @actividades.human_attribute_name(:nombre),
-              @actividades.human_attribute_name(:actividadpf),
-              @actividades.human_attribute_name(:proyectos),
-              @actividades.human_attribute_name(:actividadareas),
-              @actividades.human_attribute_name(:proyectosfinancieros),
-              @actividades.human_attribute_name(:objetivo),
-              @actividades.human_attribute_name(:poblacion),
+
+          def clase
+            "Cor1440Gen::Actividad"
+          end
+
+          def genclase
+            return 'F'
+          end
+
+          def atributos_index
+            [ :id, 
+              :fecha_localizada, 
+              :oficina, 
+              :responsable,
+              :nombre, 
+              :proyecto,
+              :actividadareas,
+              :proyectofinanciero,
+              :actividadpf, 
+              :objetivo,
+              :poblacion,
+              :anexos
+            ]
+          end
+
+          def atributos_form
+            atributos_show - [:id]
+          end
+
+          def atributos_show
+            [ :id, 
+              :nombre, 
+              :fecha_localizada, 
+              :lugar, 
+              :oficina, 
+              :proyectosfinancieros, 
+              :proyectos,
+              :actividadareas, 
+              :responsable,
+              :corresponsables,
+              :actividadpf, 
+              :valorcampoact,
+              :objetivo,
+              :resultado, 
+              :listadoasistencia,
+              :poblacion,
+              :anexos
               ]
           end
 
-          def atributos_presenta
-            [ :id, :fecha, :oficina, :responsable,
-              :nombre, :actividadpf, :proyectos,
-              :actividadareas, :proyectosfinancieros, :objetivo,
-              :poblacion,
-              ]
+          def vistas_manejadas
+            ['Actividad']
+          end
+
+          def index_reordenar(c)
+            c = c.reorder('cor1440_gen_actividad.fecha DESC')
+            return c
           end
 
           def fila_comun(actividad)
@@ -92,78 +127,6 @@ module Cor1440Gen
             return cuerpo
           end
 
-          # GET /actividades
-          # GET /actividades.json
-          def index
-            @registros = @actividades = 
-              Cor1440Gen::ActividadesController.filtra(
-              params[:filtro], current_usuario)
-            @plantillas = Heb412Gen::Plantillahcm.where(
-              vista: 'Actividad').select('nombremenu, id').map { 
-                |c| [c.nombremenu, c.id] }
-              @numactividades = @actividades.size
-              @enctabla = encabezado_comun()
-              respond_to do |format|
-                format.html { 
-                  @registros = @actividades = @actividades.paginate(
-                    :page => params[:pagina], per_page: 20
-                  )
-                  @cuerpotabla = cuerpo_comun()
-                  render "index", layout: "application" 
-                }
-                format.json { head :no_content }
-
-                format.ods {
-                  if params[:idplantilla].nil? 
-                    head :no_content 
-                  elsif params[:idplantilla].to_i <= 0
-                    head :no_content 
-                  elsif Heb412Gen::Plantillahcm.where(
-                    id: params[:idplantilla].to_i).take.nil?
-                    head :no_content 
-                  end
-
-                  @cuerpotabla = cuerpo_comun()
-                  aractividades = Array.new
-                  @cuerpotabla.each do |a| 
-                    ac = Cor1440Gen::Actividad.find(a[0])
-                    r = vector_a_registro(a, ac)
-                    aractividades << r
-                  end
-                  pl = Heb412Gen::Plantillahcm.find(
-                    params[:idplantilla].to_i)
-                  n = Heb412Gen::PlantillahcmController.
-                    llena_plantilla_multiple_fd(pl, aractividades)
-                  send_file n, x_sendfile: true
-                }
-
-                format.js   { 
-                  @registros = @actividades = @actividades.paginate(
-                    :page => params[:pagina], per_page: 20
-                  )
-                  @cuerpotabla = cuerpo_comun()
-                  render 'index' 
-                }
-                format.pdf  { 
-                  @cuerpotabla = cuerpo_comun()
-                  prawnto(prawn: { page_layout: :landscape },
-                          filename: 
-                          "actividades-#{Time.now.strftime('%Y-%m-%d')}.pdf", 
-                  inline: true)
-                }
-              end
-              return
-          end
-
-          # GET /actividades/1
-          # GET /actividades/1.json
-          def show
-            @actividades = Actividad.where(id: @actividad.id)
-            @cuerpotabla = cuerpo_comun()
-
-            render layout: "application"
-          end
-
           # GET /actividades/new
           def new
             @registro = @actividad = Actividad.new
@@ -174,110 +137,57 @@ module Cor1440Gen
             redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
 
-
           def asegura_camposdinamicos(actividad)
+            @listadoasistencia = false
             ci = []
             actividad.actividadpf.each do |apf|
               if apf.actividadtipo
-                ci += apf.actividadtipo.campoact.map(&:id).sort
+                ci += apf.actividadtipo.campoact_ids
+                if apf.actividadtipo.listadoasistencia
+                  @listadoasistencia = true
+                end
               end
             end
-            ci = ci.sort
-            cd = actividad.valorcampoact.map(&:campoact_id).sort
+
+            cd = actividad.valorcampoact.map(&:campoact_id)
             sobran = cd - ci
-            sobran.each do |i|
-              if i then
-                r = Cor1440Gen::Valorcampoact.where(
-                  'actividad_id = ? AND campoact_id = ?', 
-                  actividad.id, i).take
-              else
-                r = Cor1440Gen::Valorcampoact.where(
-                  'actividad_id = ? AND campoact_id IS NULL',
-                  actividad.id).take
-              end
-              r.delete
-            end
+            borrar = actividad.valorcampoact.where(campoact_id: sobran).
+              map(&:id)
+            actividad.valorcampoact_ids -= borrar
+            puts actividad.valorcampoact_ids 
             faltan = ci - cd
-            faltan.each do |i|
-              nr = Cor1440Gen::Valorcampoact.new
-              nr.campoact_id = i
-              nr.actividad_id = actividad.id
-              nr.valor = ''
-              if !nr.save
-                puts "No pudo guardar nr"
-              end
+            faltan.each do |f|
+              actividad.valorcampoact.new(campoact_id: f, valor: '').save
             end
           end
 
-          # GET /actividades/1/edit
-          def edit
-            authorize! :edit, Cor1440Gen::Actividad
+          def edit_cor1440_gen
             @registro = Cor1440Gen::Actividad.find(params[:id])
+            authorize! :edit, @registro
             if params['actividadpf_ids']
               @registro.actividadpf_ids = params['actividadpf_ids']
             end
             asegura_camposdinamicos(@registro)
+            @registro.save!(validate: false)
+          end
+
+          # GET /actividades/1/edit
+          def edit
+            edit_cor1440_gen
             render layout: 'application'
           end
 
-          # POST /actividades
-          # POST /actividades.json
-          def create_gen
-            respond_to do |format|
-              if @actividad.save
-                format.html { 
-                  redirect_to @actividad, notice: 'Actividad creada.' 
-                }
-                format.json { 
-                  render action: 'show', status: :created, location: @actividad 
-                }
-              else
-                format.html { render action: 'new', layout: 'application' }
-                format.json { 
-                  render json: @actividad.errors, status: :unprocessable_entity 
-                }
-              end
+          # Llamado por control para presentar responsables en formulario
+          # Para limitar por permisos
+          def filtra_usuario_responsable(lista_usuarios)
+            if Rails.configuration.x.cor1440_permisos_por_oficina && 
+              current_usuario.oficina_id 
+              lista_usuarios = lista_usuarios.
+                where(oficina_id: current_usuario.oficina_id)
             end
+            return lista_usuarios
           end
-
-          def create
-            @actividad = Actividad.new(actividad_params)
-            @actividad.current_usuario = current_usuario
-            create_gen
-          end
-
-          # PATCH/PUT /actividades/1
-          # PATCH/PUT /actividades/1.json
-          def update_gen
-            respond_to do |format|
-              if @actividad.update(actividad_params)
-                format.html { 
-                  redirect_to @actividad, notice: 'Actividad actualizada.' 
-                }
-                format.json { head :no_content }
-              else
-                format.html { render action: 'edit', layout: 'application' }
-                format.json { 
-                  render json: @actividad.errors, status: :unprocessable_entity 
-                }
-              end
-            end
-          end
-
-          def update
-            update_gen
-          end
-
-          # DELETE /actividades/1
-          # DELETE /actividades/1.json
-          def destroy
-            @actividad.destroy
-            respond_to do |format|
-              format.html { 
-                redirect_to actividades_url, notice: 'Actividad eliminada' }
-              format.json { head :no_content }
-            end
-          end
+          helper_method :filtra_usuario_responsable
 
           private
 
@@ -288,9 +198,8 @@ module Cor1440Gen
             @actividad.current_usuario = current_usuario
           end
 
-          # No confiar parametros a Internet, sólo permitir lista blanca
-          def actividad_params
-            params.require(:actividad).permit(
+          def lista_params
+            [ 
               :actividad,
               :fecha_localizada, 
               :lugar,
@@ -315,6 +224,22 @@ module Cor1440Gen
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
               ],
               :actividadtipo_ids => [],
+              :asistencia_attributes => [
+                :actorsocial_id,
+                :externo,
+                :id,
+                :rangoedadac_id,
+                :perfilactorsocial_id,
+                :_destroy,
+                :persona_attributes => [
+                  :apellidos, 
+                  :id, 
+                  :nombres, 
+                  :numerodocumento, 
+                  :sexo, 
+                  :tdocumento_id
+                ]
+              ],
               :valorcampoact_attributes => [
                 :id,
                 :campoact_id,
@@ -323,9 +248,13 @@ module Cor1440Gen
               :proyecto_ids => [],
               :proyectofinanciero_ids => [],
               :usuario_ids => []
-            )
+            ]
           end
-          
+
+          # Lista blanca de parametros
+          def actividad_params
+            params.require(:actividad).permit(lista_params)
+          end
 
           def actividad_actividadpf_params(nparams)
             nparams.require(:actividad).permit(
@@ -334,7 +263,6 @@ module Cor1440Gen
           end
 
         end # included do
-
 
 
         class_methods do

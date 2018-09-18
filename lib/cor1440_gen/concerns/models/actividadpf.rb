@@ -23,7 +23,8 @@ module Cor1440Gen
 
 
           has_many :actividad_actividadpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadActividadpf', foreign_key: 'actividadpf_id'
+            class_name: 'Cor1440Gen::ActividadActividadpf', 
+            foreign_key: 'actividadpf_id'
           has_many :actividad, through: :actividad_actividadpf,
             class_name: 'Cor1440Gen::Actividad'
 
@@ -32,7 +33,8 @@ module Cor1440Gen
           validates :descripcion, length: {maximum: 5000}
 
           def presenta_nombre
-            nombrecorto + ":" + titulo
+            #nombrecorto + ":" + titulo
+            titulo
           end
         end # included
 

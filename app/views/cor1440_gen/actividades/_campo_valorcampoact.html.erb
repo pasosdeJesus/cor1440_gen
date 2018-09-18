@@ -1,5 +1,6 @@
-<div id="camposdinamicos2" class="valorcampoacts-div valorcampoactsdiv">
-  <%= f.simple_fields_for :valorcampoact do |v| %>
-    <% render 'valorcampoact_campos', v: v %>
+<div id="camposdinamicos" class="valorcampoacts-div valorcampoactsdiv">
+  <%= f.simple_fields_for :valorcampoact, f.object.valorcampoact.order(:id) do |v| %>
+    <% render partial: 'valorcampoact_campos', locals: { f: f, v: v} %>
   <% end %>
 </div>
+

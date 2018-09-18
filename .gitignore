@@ -32,3 +32,4 @@ herram/
 .byebug_history
 coverage/
 public/heb412/
+test/dummy/public/heb412/generados/

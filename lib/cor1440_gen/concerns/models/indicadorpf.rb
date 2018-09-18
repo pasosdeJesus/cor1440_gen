@@ -11,6 +11,9 @@ module Cor1440Gen
           include Sip::Localizacion
           include Sip::FormatoFechaHelper
 
+          belongs_to :objetivopf, 
+            class_name: 'Cor1440Gen::Objetivopf',
+            foreign_key: 'objetivopf_id'
           belongs_to :resultadopf, 
             class_name: 'Cor1440Gen::Resultadopf',
             foreign_key: 'resultadopf_id'

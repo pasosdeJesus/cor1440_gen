@@ -1,0 +1,75 @@
+<div class="page-header">
+  <h1>Validar 
+    <%= Cor1440Gen::Proyectofinanciero.human_attribute_name(
+      :proyectosfinancieros) %></h1>
+</div>
+<%= simple_form_for @validarpf,
+  url: cor1440_gen.validar_proyectosfinancieros_path,
+  method: :get,
+  html: { :class => 'form-horizontal' } do |f| 
+%>
+  <div data-role="content" class="form-inputs">
+    <div id="errores">
+      <% if f.object.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-error">
+            El formulario tiene 
+            <%= pluralize(f.object.errors.count, "error") %>.
+          </div>
+          <ul>
+            <% f.object.errors.full_messages.each do |msg| %>
+              <li>* <%= msg %></li>
+            <% end %>
+          </ul>
+        </div> <!-- error-explanation -->
+      <% end %>
+      <%= f.error_notification %>
+    </div> <!-- errores -->
+    <div class="container">
+      <div class="row filtro-fila">
+        <div class="col-sm-offset-0 col-sm-3">
+          Rango para fecha de inicio
+        </div>
+        <div class="col-sm-offset-0 col-sm-3">
+          <%= f.input :fechaini_localizada,
+            maxlength: 10, 
+            size: 10,
+            label: false,
+            placeholder: 'Inicial',
+            input_html: {
+              "data-behaviour" => "datepicker",
+              value: @validarpf.fechaini_localizada ?  
+              @validarpf.fechaini_localizada : ''
+            }
+          %>
+        </div>
+        <div class="col-sm-offset-1 col-sm-3">
+          <%= f.input :fechafin_localizada,
+            maxlength: 10, 
+            size: 10,
+            label: false,
+            placeholder: 'Final',
+            input_html: {
+              "data-behaviour" => "datepicker",
+              value: @validarpf.fechafin_localizada ?  
+              @validarpf.fechafin_localizada : ''
+            }
+          %>
+        </div>
+      </div> <!-- row -->
+
+      <%= render 'validar_restofiltro', {f: f} %>
+
+      <div class="row filtro-fila">
+        <div class="col-md-offset-5 col-md-2">
+          <%= f.button :submit, 'Filtrar', class: 'btn btn-default' %>
+        </div>
+      </div> <!-- class: row -->
+
+    </div>  <!-- class:container -->
+  </div> <!-- class:form-inputs -->
+<% end %>
+
+<div id="resultado">
+  <%= render 'cor1440_gen/proyectosfinancieros/resultado_validar' %>
+</div> <!-- id: resultado -->

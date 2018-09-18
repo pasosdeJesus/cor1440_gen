@@ -1,9 +1,10 @@
-<%= v.input :valor,
-  label: v.object.campotind.nombrecampo ?  v.object.campotind.nombrecampo : 'valor', 
-  input_html: {
-    "data-toggle" => 'tooltip',
-    "title" => v.object.campotind.ayudauso ? v.object.campotind.ayudauso : ''
-  }
-%>
+<% etiqueta = v.object.campotind.nombrecampo ?  
+  v.object.campotind.nombrecampo : 'valor' %>
+<% ayudae = v.object.campotind.ayudauso ? v.object.campotind.ayudauso : '' %>
+<% tipo = v.object.campotind.tipo ? v.object.campotind.tipo : 1 %>
+
+<%= render partial: 'cor1440_gen/actividades/campodinamico', 
+  locals: { etiqueta: etiqueta, ayudae: ayudae, v: v, tipo: tipo } %>
+
 <%= v.input :campotind_id, as: :hidden %>
 <%= v.input :id, as: :hidden %>

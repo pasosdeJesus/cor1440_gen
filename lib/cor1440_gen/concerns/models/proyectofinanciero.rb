@@ -13,7 +13,7 @@ module Cor1440Gen
           campofecha_localizado :fechainicio
           campofecha_localizado :fechacierre
 
-          belongs_to :responsable, class_name: 'Usuario',
+          belongs_to :responsable, class_name: '::Usuario',
             foreign_key: "responsable_id", validate: true
 
           has_many :proyecto_proyectofinanciero, dependent: :delete_all,
@@ -38,6 +38,12 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyectofinanciero'
 
+          has_many :indicadorobjetivo, foreign_key: 'proyectofinanciero_id',
+            validate: true, dependent: :destroy, 
+            class_name: 'Cor1440Gen::Indicadorpf'
+          accepts_nested_attributes_for :indicadorobjetivo,
+            allow_destroy: true, reject_if: :all_blank
+
           has_many :indicadorpf, foreign_key: 'proyectofinanciero_id',
             validate: true, dependent: :destroy, 
             class_name: 'Cor1440Gen::Indicadorpf'
@@ -61,7 +67,6 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Objetivopf'
           accepts_nested_attributes_for :objetivopf,
             allow_destroy: true, reject_if: :all_blank
-
 
 
           validates :nombre, presence: true, allow_blank: false, 
@@ -92,24 +97,20 @@ module Cor1440Gen
                   compromisos)
           }
 
-          scope :filtro_fechainicio_localizadaini, lambda { |f|
-            where('fechainicio >= ?', 
-                  Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          scope :filtro_fechainicioini, lambda { |f|
+            where('fechainicio >= ?', f)
           }
 
-          scope :filtro_fechainicio_localizadafin, lambda { |f|
-            where('fechainicio <= ?', 
-                   Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          scope :filtro_fechainiciofin, lambda { |f|
+            where('fechainicio <= ?', f)
           }
 
-          scope :filtro_fechacierre_localizadaini, lambda { |f|
-            where('fechacierre >= ?',  
-                  Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          scope :filtro_fechacierreini, lambda { |f|
+            where('fechacierre >= ?',  f)
           }
 
-          scope :filtro_fechacierre_localizadafin, lambda { |f|
-            where('fechacierre <= ?', 
-                   Sip::FormatoFechaHelper.fecha_local_estandar(f))
+          scope :filtro_fechacierrefin, lambda { |f|
+            where('fechacierre <= ?', f)
           }
 
           scope :filtro_financiador_ids, lambda { |f|

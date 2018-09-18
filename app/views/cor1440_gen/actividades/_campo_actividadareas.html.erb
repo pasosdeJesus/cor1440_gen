@@ -1,0 +1,13 @@
+<% if defined? con_label %>
+  <% l = con_label ? nil : false %>
+<% else %>
+  <% l = nil %>
+<% end %>
+<%= f.association :actividadareas, 
+  collection: Sip::ModeloHelper.coleccion_basica(
+    Cor1440Gen::Actividadarea.all, f.object.actividadareas.map(&:id)),
+  label_method: :presenta_nombre, 
+  value_method: :id,
+  label: l,
+  input_html: { class: 'chosen-select' }
+%>

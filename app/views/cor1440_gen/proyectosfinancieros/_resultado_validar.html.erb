@@ -1,0 +1,37 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Fecha Inicio</th>
+      <th>Estado</th>
+      <th>Detalle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registro.order('fechainicio DESC').each do |pf| %>
+      <tr>
+        <td><%= link_to(pf.id, pf) %></td>
+        <td><%= pf.fechainicio %></td>
+        <% det = [] %>
+        <% estado = controller.validar_registro(pf, det) %>
+        <% if estado %>
+          <td style='color:green'>
+            &#x2713;
+          </td>
+        <% else %>
+          <td style='color:red'>
+            &#x2717;
+          </td>
+        <% end %>
+        <td>
+          <ol>
+          <% det.each do |d| %>
+            <li><%= d %></li>
+          <% end %>
+          </ol>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

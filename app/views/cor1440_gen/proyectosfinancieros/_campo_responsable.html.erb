@@ -1,0 +1,13 @@
+<% # Usuarios activos en el tiempo de la actividad %>
+<% condr = "fechadeshabilitacion IS NULL" %>
+<% lus = Usuario.all.where(condr) %>
+<%= f.association :responsable,
+  collection: lus.order(:nusuario),
+  include_blank: false,
+  label: "Responsable",
+  label_method: lambda { |t|  t.presenta_nombre },
+  value_method: :id,
+  selected:  f.object.responsable_id ?  f.object.responsable_id : 
+    current_usuario.id,
+  input_html: { class: 'chosen-select' }
+%>

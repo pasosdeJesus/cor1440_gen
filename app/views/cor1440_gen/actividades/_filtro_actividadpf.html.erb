@@ -1,0 +1,13 @@
+<% col = Cor1440Gen::Actividadpf.all %>
+<%= f.input :busactividadpf,
+  collection: col.order(:titulo),
+  include_blank: true,
+  label_method: :titulo,
+  value_method: :id,
+  label: false,
+  selected: Sip::ModeloHelper.poromision(params, :busactividadpf),
+  input_html: {
+    class: 'chosen-select',
+    'data-enviarautomatico' => ''
+  }
+%>

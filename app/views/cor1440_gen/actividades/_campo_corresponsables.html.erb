@@ -1,0 +1,25 @@
+<% # Usuarios activos en el tiempo de la actividad %>
+<% condr = "" %>
+<% if f.object && f.object.fecha && f.object.fecha.to_s != '' %>
+  <% condr += "(fechacreacion <= '#{f.object.fecha}'" %>
+  <% condr += " AND (fechadeshabilitacion IS NULL OR " +
+    "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% end %>
+<% if f.object && f.object.usuario && f.object.usuario.length > 0 %>
+  <% condr += " OR " if condr != "" %>
+  <% condr += "(id IN (#{f.object.usuario.map(&:id).join(", ")}))" %>
+<% end %>
+<% lus = Usuario.where("#{condr}") %>
+<% if defined? con_label %>
+  <% l = con_label ? 'Corresponsable(s)' : false %>
+<% else %>
+  <% l = 'Corresponsable(s)' %>
+<% end %>
+<%= f.association :usuario,
+  collection: lus,
+  include_blank: false,
+  label: l,
+  label_method: :presenta_nombre,
+  value_method: :id,
+  input_html: { class: 'chosen-select' }
+%>

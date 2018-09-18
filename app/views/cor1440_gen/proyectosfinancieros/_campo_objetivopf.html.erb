@@ -1,0 +1,33 @@
+<p></p>
+<%= f.input :id, as: :hidden %>
+<div class="panel panel-default">
+  <div class="panel-heading">Objetivos / Efectos</div>
+  <div class="panel-body">
+
+    <div class="div-objetivospf">
+      <table border=1 width="100%">
+        <thead>
+          <tr>
+            <th width="25%">Código</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="objetivospf">
+          <%= f.simple_fields_for :objetivopf, f.object.objetivopf.order(:id) do |o| %>
+            <%= render 'objetivopf_campos', f:  o %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="links">
+        <%= link_to_add_association 'Agregar objetivo / efecto', f, :objetivopf, {
+          :"data-association-insertion-node" => "tbody#objetivospf", 
+          :"data-association-insertion-method" => "append", 
+          partial: 'objetivopf_campos',
+          class: 'btn-primary', 
+          "data-ajax" => cor1440_gen.new_objetivospf_url,
+          "data-ajaxdata" => "proyectofinanciero_id" } %>
+      </div> <!-- links -->
+    </div> <!-- .div-objetivospf -->
+  </div><!-- panel-body -->
+</div><!-- panel -->

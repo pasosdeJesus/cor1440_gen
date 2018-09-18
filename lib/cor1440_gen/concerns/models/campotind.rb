@@ -12,6 +12,11 @@ module Cor1440Gen
           belongs_to :tipoindicador, class_name: 'Cor1440Gen::Tipoindicador',
             foreign_key: 'tipoindicador_id'
 
+          has_many :valorcampotind, 
+            class_name: 'Cor1440Gen::Valorcampotind',
+            foreign_key: 'campotind_id',
+            dependent: :delete_all
+
           validates :nombrecampo, length: { maximum: 128}
           validates :ayudauso, length: { maximum: 1024}
 

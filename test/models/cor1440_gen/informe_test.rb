@@ -14,6 +14,10 @@ module Cor1440Gen
       updated_at: "2014-09-09"
     }
 
+    setup do
+      Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
+    end
+
     test "valido" do
       i = Informe.create PRUEBA_INFORME
       assert i.valid?

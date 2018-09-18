@@ -7,26 +7,15 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          before_action :set_proyectofinanciero, 
-            only: [:show, :edit, :update, :destroy]
-          load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
-            except: :actividadespf
-
           include Sip::FormatoFechaHelper
+          helper Sip::FormatoFechaHelper
 
-          def index(c = nil)
-            authorize! :index, Cor1440Gen::Proyectofinanciero
-            if c == nil
-              c = Cor1440Gen::Proyectofinanciero.all
-            end
-            if params[:fecha] && params[:fecha] != ''
-              fecha = fecha_local_estandar params[:fecha]
-              c = c.where('fechainicio <= ? AND ' +
-                          '(? <= fechacierre OR fechacierre IS NULL) ', 
-                          fecha, fecha)
-            end
-            super(c)
-          end  
+          load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
+            only: [:new, :create, :destroy, :edit, :update, :index, :show,
+                   :objetivospf]
+          before_action :set_proyectofinanciero,
+            only: [:show, :edit, :update, :destroy]      
+          skip_before_action :set_proyectofinanciero, only: [:validar]
 
           def clase 
             "Cor1440Gen::Proyectofinanciero"
@@ -50,32 +39,26 @@ module Cor1440Gen
           end
 
           def atributos_index
-            [ "id", 
-              "nombre" ] +
-              [ :financiador_ids =>  [] ] +
-              [ "fechainicio_localizada",
-                "fechacierre_localizada",
-                "responsable_id"
+            [ 
+              :id, 
+              :nombre 
+            ] +
+            [ :financiador_ids =>  [] ] +
+            [ 
+              :fechainicio_localizada,
+              :fechacierre_localizada,
+              :responsable
             ] +
             [ :proyecto_ids =>  [] ] +
-            [ "compromisos", 
-              "monto",
-              "observaciones"
-            ] +
-            [ :objetivopf_attributes =>  [
-              :id, :numero, :objetivo, :_destroy ] 
-            ] +
-            [ :resultadopf_attributes =>  [
-              :id, :objetivopf_id,
-              :numero, :resultado, :_destroy ] 
-            ] +
-            [ :indicadorpf_attributes =>  [
-              :id, :resultadopf_id,
-              :numero, :indicador, :tipoindicador_id,
-              :_destroy ] 
-            ] +
-            [ :actividadpf ]
-
+            [ :compromisos, 
+              :monto, 
+              :observaciones, 
+              :objetivopf,
+              :indicadorobjetivo,
+              :resultadopf,
+              :indicadorpf,
+              :actividadpf 
+            ]
           end
 
           # Genero del nombre (F - Femenino, M - Masculino)
@@ -83,17 +66,19 @@ module Cor1440Gen
             return 'M';
           end
 
-          def proyectofinanciero_params
-            params.require(:proyectofinanciero).permit(
-              *atributos_form +
-              [ :actividadpf_attributes =>  [
-                :id, :resultadopf_id,
-                :actividadtipo_id,
-                :nombrecorto, :titulo, 
-                :descripcion, :_destroy ] 
-              ] )
-          end
-
+          def index(c = nil)
+            authorize! :read, Cor1440Gen::Proyectofinanciero
+            if c == nil
+              c = Cor1440Gen::Proyectofinanciero.all
+            end
+            if params[:fecha] && params[:fecha] != ''
+              fecha = fecha_local_estandar params[:fecha]
+              c = c.where('fechainicio <= ? AND ' +
+                          '(? <= fechacierre OR fechacierre IS NULL) ', 
+                          fecha, fecha)
+            end
+            super(c)
+          end  
 
           def actividadespf
             authorize! :read, Cor1440Gen::Proyectofinanciero
@@ -155,6 +140,91 @@ module Cor1440Gen
             @registro.save!
             redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
           end
+
+          # Completa modificacion de validarpf y registro según filtro
+          def validar_filtramas
+          end
+
+          def validar
+            @validarpf = Cor1440Gen::Validarpf.new
+            @registro = Cor1440Gen::Proyectofinanciero.all
+            if params && params[:validarpf] && 
+              params[:validarpf][:fechaini_localizada] &&
+              params[:validarpf][:fechaini_localizada] != ''
+              @validarpf.fechaini_localizada = 
+                params[:validarpf][:fechaini_localizada]
+              @registro = @registro.where('fechainicio >= ?', 
+                                          @validarpf.fechaini)
+            end
+            if params && params[:validarpf] && 
+              params[:validarpf][:fechafin_localizada] &&
+              params[:validarpf][:fechafin_localizada] != ''
+              @validarpf.fechafin_localizada = 
+                params[:validarpf][:fechafin_localizada]
+              @registro = @registro.where('fechainicio <= ?', 
+                                          @validarpf.fechafin)
+            end
+            validar_filtramas
+
+            render 'validar', layout: 'application'
+          end
+
+          # Más validaciones a un proyecto financiero
+          # @param registro proyecto que se valida
+          # @param detalle Lista de errores, se agregan si hay
+          def validar_mas_registro(registro, detalle)
+          end
+
+          # Valida un proyecto financiero
+          # @param registro proyecto que se valida
+          # @param detalle Lista de errores, se agregan si hay
+          def validar_registro(registro, detalle)
+            detalleini = detalle.clone
+            if !registro.fechainicio 
+              detalle << "No tiene fecha de inicio"
+            elsif registro.fechainicio < Date.new(2000, 1, 1)
+              detalle << "Fecha de inicio anterior al 1.Ene.2000"
+            end
+            if !registro.fechacierre
+              detalle << "No tiene fecha de terminación"
+            elsif registro.fechacierre <= registro.fechainicio
+              detalle << "Fecha de terminación posterior o igual a la de inicio"
+            end
+            validar_mas_registro(registro, detalle)
+            return detalleini == detalle
+          end
+
+          def proyectofinanciero_params
+            params.require(:proyectofinanciero).permit(
+              atributos_show +
+              [ 
+                :objetivopf_attributes =>  [
+                  :id, :numero, :objetivo, :_destroy ] 
+              ] +
+              [
+                :indicadorobjetivo_attributes =>  [
+                  :id, :objetivopf_id,
+                  :numero, :indicador, 
+                  :tipoindicador_id, :_destroy ] 
+              ] +
+              [ :resultadopf_attributes =>  [
+                :id, :objetivopf_id,
+                :numero, :resultado, :_destroy ] 
+              ] +
+              [ :indicadorpf_attributes =>  [
+                :id, :resultadopf_id,
+                :numero, :indicador, :tipoindicador_id,
+                :_destroy ] 
+              ] +
+              [ :actividadpf_attributes =>  [
+                :id, :resultadopf_id,
+                :actividadtipo_id,
+                :nombrecorto, :titulo, 
+                :descripcion, :_destroy ] 
+              ] )
+          end
+
+
 
         end # included
 

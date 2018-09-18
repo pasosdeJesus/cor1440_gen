@@ -14,6 +14,11 @@ module Cor1440Gen
           has_many :actividad, :through => :actividad_actividadtipo,
             class_name: 'Cor1440Gen::Actividadtipo'
 
+          has_many :actividadpf, :dependent => :delete_all,
+            class_name: 'Cor1440Gen::Actividadpf', 
+            foreign_key: 'actividadtipo_id'
+
+
           has_many :campoact, foreign_key: 'actividadtipo_id',
             validate: true, dependent: :destroy,
             class_name: 'Cor1440Gen::Campoact'

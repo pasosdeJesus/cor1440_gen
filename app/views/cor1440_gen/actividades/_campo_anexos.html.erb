@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Medios de Verificación / Anexos</div>
+  <div class="panel-body">
+   
+    <div class="anexos-div anexosdiv">
+      <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
+        <%= render 'actividad_sip_anexo_fields', :f => a %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association 'Añadir Anexo', f, 
+          :actividad_sip_anexo, :class => 'btn-primary' 
+        %>
+      </div>
+    </div> <!-- anexos-div -->
+
+  </div> <!-- panel-body -->
+</div> <!-- panel panel-default -->
+ 

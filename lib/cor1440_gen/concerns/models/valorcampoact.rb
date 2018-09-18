@@ -16,6 +16,17 @@ module Cor1440Gen
 
           validates :valor, length: { maximum: 5000}
 
+          def presenta_nombre
+            r = "#{campoact.presenta_nombre}: "
+            if !campoact.tipo || campoact.tipo == 1 || campoact.tipo == 2 || 
+              campoact.tipo == 3
+              r += "#{valor.to_s}"
+            elsif campoact.tipo == 4
+              r += valor.to_i == 0 ? "NO" : "SI"
+            end
+            r
+          end
+
         end # included
       end
     end

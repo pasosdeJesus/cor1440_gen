@@ -9,6 +9,7 @@ module Cor1440Gen
     include Devise::Test::IntegrationHelpers
 
     setup do
+      Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
       @proyectofinanciero = Proyectofinanciero.create(
         Cor1440Gen::ProyectofinancieroTest::PRUEBA_PROYECTOFINANCIERO
       )

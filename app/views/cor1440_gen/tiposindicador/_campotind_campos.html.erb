@@ -5,6 +5,11 @@
       label: false %>
   </td>
   <td>
+    <%= f.input :tipo, 
+      collection: Cor1440Gen::ApplicationHelper::TIPO_CAMPODIN,
+      label: false %>
+  </td>
+  <td>
     <%= f.input :ayudauso, label: false %>
   </td>
   <td>

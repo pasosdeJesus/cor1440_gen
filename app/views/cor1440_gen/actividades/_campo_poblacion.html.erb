@@ -1,0 +1,46 @@
+<% if @listadoasistencia %>
+
+<% else %>
+  <table border=1>
+    <thead>
+      <tr><th>Rango de Edad</th>
+        <th><%= Cor1440Gen.actividadg1 %></th>
+        <th><%= Cor1440Gen.actividadg2 %></th>
+        <th><%= Cor1440Gen.actividadg3 %></th>
+        <th><%= Cor1440Gen.actividadg4 %></th>
+        <th></th></tr>
+    </thead>
+    <tbody id="actividad_rangoedadac">
+      <tr>
+        <td>Total:</td>
+        <td id="tactividadfl">
+          <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
+        </td>
+        <td id="tactividadfr">
+          <%= fr = f.object.actividad_rangoedadac.sum(:fr) %>
+        </td>
+        <td id="tactividadml">
+          <%= ml = f.object.actividad_rangoedadac.sum(:ml) %>
+        </td>
+        <td id="tactividadmr">
+          <%= mr = f.object.actividad_rangoedadac.sum(:mr) %>
+        </td>
+        <td id="tactividadtot">
+          <%= fr + fl + mr + ml %>
+        </td>
+      </tr>
+      <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
+        <%= render 'actividad_rangoedadac_fields', :f => s %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="links">
+    <%= link_to_add_association 'Añadir Rango de Edad', f, 
+      :actividad_rangoedadac, 
+      :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
+      :"data-association-insertion-method" => "append", 
+      :partial => "actividad_rangoedadac_fields", 
+      :class => "btn-primary" 
+    %>
+  </div>
+<% end %>

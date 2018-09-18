@@ -84,6 +84,15 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Valorcampotind'
           accepts_nested_attributes_for :valorcampotind,  reject_if: :all_blank
 
+          has_many :asistencia, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Asistencia',
+            foreign_key: 'actividad_id'
+          has_many :persona, through: :asistencia, class_name: 'Sip::Persona'
+          accepts_nested_attributes_for :persona, reject_if: :all_blank
+          accepts_nested_attributes_for :asistencia,
+            allow_destroy: true, reject_if: :all_blank
+
+
           has_many :valorcampoact, dependent: :delete_all,
             class_name: '::Cor1440Gen::Valorcampoact',
             foreign_key: 'actividad_id',  validate: true
@@ -108,6 +117,246 @@ module Cor1440Gen
             end
           end
 
+          validate :fecha_concuerda_corresponsables_habilitados
+          def fecha_concuerda_corresponsables_habilitados
+            if (fecha && usuario && usuario.length > 0) then
+              usuario.each do |u|
+                if u.fechacreacion > fecha
+                  errors.add(:usuario, "Corresponsable #{u.presenta_nombre} " +
+                             " tiene fecha de creación posterior a la actividad")
+                end
+                if u.fechadeshabilitacion && u.fechadeshabilitacion < fecha
+                  errors.add(:usuario, "Corresponsable #{u.presenta_nombre} " +
+                             " tiene fecha de deshabilitacion anterior " +
+                             "a la actividad")
+                end
+              end
+            end
+          end
+
+          validate :fecha_concuerda_responsable_habilitado
+          def fecha_concuerda_responsable_habilitado
+            if (fecha && responsable) then
+              if responsable.fechacreacion > fecha
+                errors.add(:responsable, "Responsable tiene " +
+                           " fecha de creación posterior a la actividad")
+              end
+              if responsable.fechadeshabilitacion && 
+                responsable.fechadeshabilitacion < fecha
+                errors.add(:responsable, "Responsable tiene " +
+                           " fecha de deshabilitacion anterior a la actividad")
+              end
+            end
+          end
+
+          def presenta_actividad(atr)
+            case atr.to_s
+            when /anexo_[0-9]_desc/
+              i = atr[6].to_i
+              if sip_anexo.count >= i
+                sip_anexo.order(:id)[i-1].descripcion
+              else 
+                ''
+              end
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :actividadareas).downcase.gsub(' ', '_')
+              actividadareas.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+              }
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :actividadpf).downcase.gsub(' ', '_')
+              actividadpf.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                #memo += '; ' if memo != ''
+                #memo += r.nombrecorto + ' ' + r.titulo
+                #memo
+              }
+
+            when 'actualizacion'
+              updated_at
+              
+            when 'campos_dinamicos'
+              valorcampoact.inject('') { |memo, v|
+                sep = memo == '' ? '' : ';'
+                if v.campoact
+                  memo + sep + v.campoact.nombrecampo + ": " + v.valor
+                else
+                  memo
+                end
+              }
+             
+            when 'creacion'
+              created_at
+
+            when 'corresponsables'
+              usuario.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+              }
+
+            when 'objetivo_convenio_financiero'
+              actividadpf.inject('') { |memo, a|
+                sep = memo == '' ? '' : ';'
+                if a.resultadopf && a.resultadopf.objetivopf
+                  memo + sep + a.resultadopf.objetivopf.numero
+                else
+                  memo
+                end
+              }
+
+            when 'poblacion'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.ml ? r.ml : 0
+                memo += r.mr ? r.mr : 0
+                memo += r.fl ? r.fl : 0
+                memo += r.fr ? r.fr : 0
+                memo
+              }
+
+            when 'poblacion_hombres_l'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.ml ? r.ml : 0
+                memo
+              }
+ 
+           
+            when 'poblacion_hombres_r'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.mr ? r.mr : 0
+                memo
+              }
+
+            when 'poblacion_mujeres_l'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.fl ? r.fl : 0
+                memo
+              }
+
+            when 'poblacion_mujeres_r'
+              actividad_rangoedadac.inject(0) { |memo, r| 
+                memo += r.fr ? r.fr : 0
+                memo
+              }
+            when /poblacion_hombres_l_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                  inject(0) { |memo, r| 
+                memo += r.ml ? r.ml : 0
+                memo
+              }
+           
+            when /poblacion_hombres_r_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                inject(0) { |memo, r| 
+                memo += r.mr ? r.mr : 0
+                memo
+              }
+
+            when /poblacion_mujeres_l_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                inject(0) { |memo, r| 
+                memo += r.fl ? r.fl : 0
+                memo
+              }
+
+            when /poblacion_mujeres_r_g[0-9]*/
+              g = atr[21..-1].to_i
+              actividad_rangoedadac.where(rangoedadac_id: g).
+                inject(0) { |memo, r| 
+                memo += r.fr ? r.fr : 0
+                memo
+              }
+
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :proyectos).downcase.gsub(' ', '_')
+              proyecto.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                #memo == '' ? r.nombre : '; ' + r.nombre
+              }
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :proyectofinanciero).downcase.gsub(' ', '_')
+              proyectofinanciero.inject('') { |memo, r| 
+                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                #memo == '' ? r.nombre : '; ' + r.nombre
+              }
+
+            else
+              presenta_gen(atr)
+            end
+          end
+
+          def presenta(atr)
+            presenta_actividad(atr)
+          end
+
+          scope :filtro_actividadpf, lambda { |ida|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividad_actividadpf WHERE ' +
+                  'actividadpf_id = ?)',ida)
+          }
+
+          scope :filtro_actividadareas, lambda { |ida|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividadareas_actividad WHERE ' +
+                  'actividadarea_id = ?)',ida)
+          }
+
+          scope :filtro_fechaini, lambda { |f|
+            where('fecha >= ?', f)
+            # El control de fecha HTML estándar retorna la fecha
+            # en formato yyyy-mm-dd siempre
+          }
+
+          scope :filtro_fechafin, lambda { |f|
+            where('fecha <= ?', f)
+          }
+
+         scope :filtro_lugar, lambda { |l|
+            where("unaccent(lugar) ILIKE '%' || unaccent(?) || '%'", l)
+          }
+ 
+          scope :filtro_nombre, lambda { |n|
+            where("unaccent(nombre) ILIKE '%' || unaccent(?) || '%'", n)
+          }
+ 
+          scope :filtro_objetivo, lambda { |o|
+            where("unaccent(objetivo) ILIKE '%' || unaccent(?) || '%'", o)
+          }
+ 
+          scope :filtro_observaciones, lambda { |o|
+            where("unaccent(observaciones) ILIKE '%' || unaccent(?) || '%'", 
+                  o)
+          }
+ 
+          scope :filtro_oficina, lambda { |oid|
+            where(oficina_id: oid)
+          }
+
+          scope :filtro_proyectos, lambda { |idp|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividad_proyecto WHERE ' +
+                  'proyecto_id = ?)',idp)
+          }
+
+          scope :filtro_proyectofinanciero, lambda { |pid|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividad_proyectofinanciero WHERE ' +
+                  'proyectofinanciero_id = ?)',pid)
+          }
+
+          scope :filtro_responsable, lambda { |uid|
+            where(usuario_id: uid)
+          }
+
+          scope :filtro_resultado, lambda { |r|
+            where("unaccent(resultado) ILIKE '%' || unaccent(?) || '%'", r)
+          }
+ 
         end
       end
     end

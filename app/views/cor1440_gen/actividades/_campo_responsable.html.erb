@@ -1,0 +1,32 @@
+<% # Usuarios activos en el tiempo de la actividad %>
+<% condr = "" %>
+<% if f.object && f.object.fecha && f.object.fecha.to_s != '' %>
+  <% condr << "(fechacreacion <= '#{f.object.fecha}'" %>
+  <% condr << " AND (fechadeshabilitacion IS NULL OR " +
+    "fechadeshabilitacion >= '#{f.object.fecha}'))" %>
+<% end %>
+<% if f.object && f.object.responsable %>
+  <% condr << " OR " if condr != ""%>
+  <% condr << "(id = #{f.object.responsable.id})" %>
+<% end %>
+<% lus = ::Usuario.all %>
+<% if condr != '' %>
+  <% lus = lus.where("#{condr}") %>
+<% end %>
+<% lus = filtra_usuario_responsable(lus) %>
+
+<% if defined? con_label %>
+  <% l = con_label ? nil : false %>
+<% else %>
+  <% l = nil %>
+<% end %>
+
+<%= f.association :responsable,
+  collection: lus,
+  include_blank: false,
+  label: l,
+  label_method: :presenta_nombre,
+  value_method: :id,
+  selected:  f.object.usuario_id ?  f.object.usuario_id : current_usuario.id,
+  input_html: { class: 'chosen-select' }
+%>

@@ -11,7 +11,7 @@ module Cor1440Gen
 
           # GET /campoacts/new
           def new
-            if params[:actividadtipo_id]
+            if params[:actividadtipo_id] 
               @campoact = Campoact.new
               @campoact.actividadtipo_id = params[:actividadtipo_id]
               @campoact.nombrecampo = "N"
