@@ -94,6 +94,14 @@ module Cor1440Gen
           'poblacion_mujeres_r_g4',
           'poblacion_hombres_l_g4',
           'poblacion_hombres_r_g4',
+          'poblacion_mujeres_l_g5',
+          'poblacion_mujeres_r_g5',
+          'poblacion_hombres_l_g5',
+          'poblacion_hombres_r_g5',
+          'poblacion_mujeres_l_g6',
+          'poblacion_mujeres_r_g6',
+          'poblacion_hombres_l_g6',
+          'poblacion_hombres_r_g6',
           Cor1440Gen::Actividad.human_attribute_name(
             :proyectofinanciero).downcase.gsub(' ', '_'), 
           Cor1440Gen::Actividad.human_attribute_name(
