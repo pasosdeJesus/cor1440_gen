@@ -34,7 +34,7 @@ module Cor1440Gen
           # papa de la clase que incluye a esta)
           # exije eliminar primero registros en tablas union
           def destroy
-            authorize! :destroy, Cor1440Gen::Proyectofinanciero
+            authorize! :destroy, @registro
             super("", false)
           end
 
