@@ -1,4 +1,4 @@
-class CreaCombinadaFinanciadorProyectofinanciero < ActiveRecord::Migration
+class CreaCombinadaFinanciadorProyectofinanciero < ActiveRecord::Migration[4.2]
   def change
     create_join_table :financiador, :proyectofinanciero, {
       table_name: 'cor1440_gen_financiador_proyectofinanciero' 

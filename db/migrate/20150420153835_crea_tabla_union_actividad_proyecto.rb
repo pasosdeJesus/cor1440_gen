@@ -1,4 +1,4 @@
-class CreaTablaUnionActividadProyecto < ActiveRecord::Migration
+class CreaTablaUnionActividadProyecto < ActiveRecord::Migration[4.2]
   def change
     remove_column :cor1440_gen_actividad, :proyecto, :string, limit: 500
     create_table :cor1440_gen_actividad_proyecto do |t|

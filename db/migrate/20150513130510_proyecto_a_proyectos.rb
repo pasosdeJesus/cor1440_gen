@@ -1,4 +1,4 @@
-class ProyectoAProyectos < ActiveRecord::Migration
+class ProyectoAProyectos < ActiveRecord::Migration[4.2]
   def up
     execute <<-SQL
       INSERT INTO cor1440_gen_proyecto_proyectofinanciero 

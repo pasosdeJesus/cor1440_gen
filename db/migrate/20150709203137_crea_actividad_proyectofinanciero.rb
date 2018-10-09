@@ -1,4 +1,4 @@
-class CreaActividadProyectofinanciero < ActiveRecord::Migration
+class CreaActividadProyectofinanciero < ActiveRecord::Migration[4.2]
   def change
     create_join_table :actividad, :proyectofinanciero, {
       table_name: 'cor1440_gen_actividad_proyectofinanciero' 

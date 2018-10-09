@@ -1,15 +1,6 @@
-class RenombraAnexo < ActiveRecord::Migration
+class RenombraAnexo < ActiveRecord::Migration[4.2]
 
   def up
-    execute <<-SQL 
-      ALTER SEQUENCE sivel2_gen_anexoactividad_id_seq 
-        RENAME TO sip_anexo_id_seq
-    SQL
-    execute <<-SQL
-      ALTER TABLE sivel2_gen_anexoactividad
-        RENAME TO sip_anexo;
-    SQL
-
     create_join_table :cor1440_gen_actividad, :sip_anexo do |t|
       t.index :sip_anexo_id
     end
@@ -19,18 +10,29 @@ class RenombraAnexo < ActiveRecord::Migration
     rename_column :cor1440_gen_actividad_sip_anexo, :sip_anexo_id,
       :anexo_id
 
-    execute <<-SQL
-      INSERT INTO cor1440_gen_actividad_sip_anexo
-      (actividad_id, anexo_id) 
-      (SELECT actividad_id, id FROM sip_anexo)
-    SQL
+    if connection.table_exists?(:sivel2_gen_anexoactividad)
+      execute <<-SQL 
+        ALTER SEQUENCE sivel2_gen_anexoactividad_id_seq 
+          RENAME TO sip_anexo_id_seq
+      SQL
+      execute <<-SQL
+        ALTER TABLE sivel2_gen_anexoactividad
+          RENAME TO sip_anexo;
+      SQL
+      execute <<-SQL
+        INSERT INTO cor1440_gen_actividad_sip_anexo
+        (actividad_id, anexo_id) 
+        (SELECT actividad_id, id FROM sip_anexo)
+      SQL
+  
+      remove_column :sip_anexo, :actividad_id
 
-    remove_column :sip_anexo, :actividad_id
+    end
 
-    add_foreign_key :cor1440_gen_actividad_sip_anexo, :sip_anexo, 
-      column: :anexo_id
-    add_foreign_key :cor1440_gen_actividad_sip_anexo, :cor1440_gen_actividad,
-      column: :actividad_id
+    #add_foreign_key :cor1440_gen_actividad_sip_anexo, :sip_anexo, 
+    #  column: :anexo_id
+    #add_foreign_key :cor1440_gen_actividad_sip_anexo, :cor1440_gen_actividad,
+    #  column: :actividad_id
   end
 
   def down

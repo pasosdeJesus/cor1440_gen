@@ -1,4 +1,4 @@
-class AgregaOficinaAUsuario < ActiveRecord::Migration
+class AgregaOficinaAUsuario < ActiveRecord::Migration[4.2]
   def up
     if !column_exists? :usuario, :oficina_id
       add_column :usuario, :oficina_id, :integer, 
