@@ -75,9 +75,12 @@ class RenombraActividad < ActiveRecord::Migration[4.2]
             NO MAXVALUE
             CACHE 1;
         
-        
-        ALTER SEQUENCE public.cor1440_gen_actividad_id_seq OWNED BY public.cor1440_gen_actividad.id;
-        
+        ALTER SEQUENCE public.cor1440_gen_actividad_id_seq OWNED BY 
+          public.cor1440_gen_actividad.id;
+
+        ALTER TABLE ONLY public.cor1440_gen_actividad ALTER COLUMN id 
+          SET DEFAULT nextval('public.cor1440_gen_actividad_id_seq'::regclass);
+
         -- rangoedadac
         
         CREATE TABLE public.cor1440_gen_rangoedadac (
@@ -98,8 +101,13 @@ class RenombraActividad < ActiveRecord::Migration[4.2]
             NO MAXVALUE
             CACHE 1;
         
-        ALTER SEQUENCE public.cor1440_gen_rangoedadac_id_seq OWNED BY public.cor1440_gen_rangoedadac.id;
-        
+        ALTER SEQUENCE public.cor1440_gen_rangoedadac_id_seq 
+          OWNED BY public.cor1440_gen_rangoedadac.id;
+       
+        ALTER TABLE ONLY public.cor1440_gen_rangoedadac 
+          ALTER COLUMN id SET DEFAULT 
+          nextval('public.cor1440_gen_rangoedadac_id_seq'::regclass);
+
         -- actividad_rangoedadac
         
         CREATE TABLE public.cor1440_gen_actividad_rangoedadac (
@@ -121,8 +129,13 @@ class RenombraActividad < ActiveRecord::Migration[4.2]
             NO MAXVALUE
             CACHE 1;
         
-        ALTER SEQUENCE public.cor1440_gen_actividad_rangoedadac_id_seq OWNED BY public.cor1440_gen_actividad_rangoedadac.id;
+        ALTER SEQUENCE public.cor1440_gen_actividad_rangoedadac_id_seq 
+          OWNED BY public.cor1440_gen_actividad_rangoedadac.id;
         
+        ALTER TABLE ONLY public.cor1440_gen_actividad_rangoedadac 
+          ALTER COLUMN id SET DEFAULT 
+          nextval('public.cor1440_gen_actividad_rangoedadac_id_seq'::regclass);
+
         -- actividadarea
         
         CREATE TABLE public.cor1440_gen_actividadarea (
@@ -145,7 +158,10 @@ class RenombraActividad < ActiveRecord::Migration[4.2]
         
         ALTER SEQUENCE public.cor1440_gen_actividadarea_id_seq 
           OWNED BY public.cor1440_gen_actividadarea.id;
-        
+       
+        ALTER TABLE ONLY public.cor1440_gen_actividadarea ALTER COLUMN id SET 
+          DEFAULT nextval('public.cor1440_gen_actividadarea_id_seq'::regclass);
+
         -- actividadareas_actividad
         CREATE TABLE public.cor1440_gen_actividadareas_actividad (
             id integer NOT NULL,
@@ -162,7 +178,10 @@ class RenombraActividad < ActiveRecord::Migration[4.2]
             NO MAXVALUE
             CACHE 1;
         
-        ALTER SEQUENCE public.cor1440_gen_actividadareas_actividad_id_seq OWNED BY public.cor1440_gen_actividadareas_actividad.id;
+        ALTER SEQUENCE public.cor1440_gen_actividadareas_actividad_id_seq 
+          OWNED BY public.cor1440_gen_actividadareas_actividad.id;
+
+
       SQL
     end
   end
