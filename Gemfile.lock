@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 918d2e3b55ae0992b5a44021e0e11b95edfaa51c
+  revision: ea8f85695c309b32f49c540c8e53ecd031c92474
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: b227a1b94c00471bbd21710c3b92bda3b138e165
+  revision: d30ff5681deafadfbeb5ddb6c26e6073a522a8d6
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -211,9 +211,9 @@ GEM
       ttfunk (~> 1.5)
     prawn-table (0.2.2)
       prawn (>= 1.3.0, < 3.0.0)
-    prawnto_2 (0.2.6)
-      prawn (>= 0.6.0)
-      rails (>= 3.1)
+    prawnto_2 (0.3.0)
+      prawn (>= 1.0.0)
+      rails (>= 3.2)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
