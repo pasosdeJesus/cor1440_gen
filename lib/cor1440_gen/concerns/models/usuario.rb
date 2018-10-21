@@ -15,15 +15,19 @@ module Cor1440Gen
           belongs_to :oficina, class_name: 'Sip::Oficina',
             foreign_key: "oficina_id", validate: true
 
-          has_many :proyectofinanciero, 
-            class_name: 'Cor1440Gen::Proyectofinanciero',
-            foreign_key: 'responsable_id',
-            dependent: :delete_all
           has_many :actividad_usuario, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadUsuario',
             foreign_key: 'usuario_id'
           has_many :actividad, through: :actividad_usuario,
             class_name: 'Cor1440Gen::Actividad'
+          has_many :filtroresponsable, 
+            class_name: 'Cor1440Gen::Informe',
+            foreign_key: 'filtroresponsable',
+            dependent: :delete_all
+          has_many :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero',
+            foreign_key: 'responsable_id',
+            dependent: :delete_all
 
           validate :rol_usuario
           def rol_usuario
