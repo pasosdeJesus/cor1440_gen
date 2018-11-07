@@ -27,7 +27,7 @@ module Cor1440Gen
              "campoact",
              "listadoasistencia",
              "fechacreacion_localizada", 
-             "fechadeshabilitacion_localizada"
+             "habilitado"
             ]
           end
 
