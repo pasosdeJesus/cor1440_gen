@@ -76,12 +76,3 @@
   height: inherit;
 } 
 
-.nav-tabs > li > a {
-	padding: 10px 15px;
-	border-radius: 4px 4px 0 0;
-	line-height: 1.42857143;
-	margin-right: 2px;
-	background-color: red;
-	border: 1px solid #aaa;
-	border-bottom-color: transparent;
-}

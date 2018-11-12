@@ -1,4 +1,4 @@
-class AgregaIdACombinadaActividadAnexo < ActiveRecord::Migration
+class AgregaIdACombinadaActividadAnexo < ActiveRecord::Migration[4.2]
   def up
     execute <<-SQL
      CREATE SEQUENCE cor1440_gen_actividad_sip_anexo_id_seq;

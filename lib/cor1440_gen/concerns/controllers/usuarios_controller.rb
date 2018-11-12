@@ -20,6 +20,7 @@ module Cor1440Gen
               "oficina_id",
               "email",
               "created_at_localizada"
+              "habilitado"
             ]
           end
 

@@ -1,4 +1,4 @@
-class CreaCor1440GenFinanciador < ActiveRecord::Migration
+class CreaCor1440GenFinanciador < ActiveRecord::Migration[4.2]
   def change
     create_table :cor1440_gen_financiador do |t|
       t.string :nombre, limit: 1000

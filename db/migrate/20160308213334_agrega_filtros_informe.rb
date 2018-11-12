@@ -1,4 +1,4 @@
-class AgregaFiltrosInforme < ActiveRecord::Migration
+class AgregaFiltrosInforme < ActiveRecord::Migration[4.2]
   def change
     add_column :cor1440_gen_informe, :filtroresponsable, :integer
     add_column :cor1440_gen_informe, :filtrooficina, :integer

@@ -27,7 +27,7 @@ module Cor1440Gen
               "nombre", 
               "observaciones", 
               "fechacreacion_localizada", 
-              "fechadeshabilitacion_localizada"
+              "habilitado"
             ]
           end
 

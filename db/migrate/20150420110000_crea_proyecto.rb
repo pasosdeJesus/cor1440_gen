@@ -1,4 +1,4 @@
-class CreaProyecto < ActiveRecord::Migration
+class CreaProyecto < ActiveRecord::Migration[4.2]
   def change
     create_table :cor1440_gen_proyecto do |t|
       t.string :nombre, limit: 1000
