@@ -48,10 +48,19 @@ module Cor1440Gen
             return 'M';
           end
 
-          def tipoindicador_params
+          def lista_params_gen
             p = *atributos_form + [ :campotind_attributes => [
               :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
             ]
+            return p
+          end
+
+          def lista_params
+            lista_params_gen
+          end
+
+          def tipoindicador_params
+            p = lista_params
             params.require(:tipoindicador).permit(p)
           end
 
