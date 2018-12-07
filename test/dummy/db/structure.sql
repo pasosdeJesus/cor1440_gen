@@ -3728,7 +3728,7 @@ ALTER TABLE ONLY public.usuario
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO public, pg_catalog;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20131128151014'),

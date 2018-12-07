@@ -1,0 +1,57 @@
+<p>
+<table border="1">
+  <tr>
+    <th>Objetivos/Efectos</th>
+    <th>Indicadores de Objetivo/Efecto</th>
+  </tr>
+  <% @registro.objetivopf.order(:id).each do |o| %>
+    <tr>
+      <td><%= o.numero %> <%= o.objetivo %></td>
+      <td>
+        <ul>
+          <% o.indicadorpf.order(:id).each do |io| %>
+            <li><%= io.numero %> <%= io.indicador%></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <th>Resultados/Productos</th>
+    <th>Indicadores de Resultado</th>
+  </tr>
+  <% @registro.resultadopf.order(:numero).each do |r| %>
+    <tr>
+      <td><%= r.numero %> <%= r.resultado %></td>
+      <td>
+        <ul>
+          <% r.indicadorpf.order(:numero).each do |ir| %>
+            <li><%= ir.numero %> <%= ir.indicador%></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<table border="1">
+  <tr>
+    <th>Resultado</th><th>Actividades</th>
+  </tr>
+  <% @registro.resultadopf.order(:numero).each do |r| %>
+    <tr>
+      <td><%= r.numero %></td>
+      <td>
+        <% r.actividadpf.order(:nombrecorto).each do |a| %>
+          <li>
+            <%= a.nombrecorto %> <%= a.titulo %>.
+            <% if a.actividadtipo_id %>
+              (Tipo: <%= a.actividadtipo.nombre %>)
+            <% end%>
+            <%= a.descripcion %>
+          </li>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+</p>

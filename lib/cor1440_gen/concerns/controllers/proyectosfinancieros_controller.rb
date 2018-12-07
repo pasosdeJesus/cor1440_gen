@@ -61,6 +61,30 @@ module Cor1440Gen
             ]
           end
 
+          def atributos_form
+            atributos_index -
+              ["id", :id, 'created_at', :created_at, 'updated_at', :updated_at]
+          end
+
+          def atributos_show
+            [ 
+              :id, 
+              :nombre 
+            ] +
+            [ :financiador_ids =>  [] ] +
+            [ 
+              :fechainicio_localizada,
+              :fechacierre_localizada,
+              :responsable
+            ] +
+            [ :proyecto_ids =>  [] ] +
+            [ :compromisos, 
+              :monto, 
+              :observaciones, 
+              :marcologico
+            ]
+          end
+
           # Genero del nombre (F - Femenino, M - Masculino)
           def genclase
             return 'M';
@@ -196,7 +220,7 @@ module Cor1440Gen
 
           def proyectofinanciero_params
             params.require(:proyectofinanciero).permit(
-              atributos_show +
+              atributos_form +
               [ 
                 :objetivopf_attributes =>  [
                   :id, :numero, :objetivo, :_destroy ] 
