@@ -34,8 +34,10 @@ module Cor1440Gen
 
           def destroy
             if params[:id]
-              @indicadorpf = Indicadorpf.find(params[:id])
-              @indicadorpf.destroy
+              if Indicadorpf.where(id: params[:id]).count > 0
+                @indicadorpf = Indicadorpf.find(params[:id])
+                @indicadorpf.destroy
+              end
               respond_to do |format|
                 format.html { render inline: 'Not implemented', 
                               status: :unprocessable_entity }
