@@ -57,12 +57,13 @@ module Cor1440Gen
               :indicadorobjetivo,
               :resultadopf,
               :indicadorpf,
-              :actividadpf 
+              :actividadpf
             ]
           end
 
           def atributos_form
-            atributos_index -
+            atributos_index +
+              [:anexo_proyectofinanciero] -
               ["id", :id, 'created_at', :created_at, 'updated_at', :updated_at]
           end
 
@@ -81,7 +82,8 @@ module Cor1440Gen
             [ :compromisos, 
               :monto, 
               :observaciones, 
-              :marcologico
+              :marcologico,
+              :anexo_proyectofinanciero
             ]
           end
 
@@ -218,34 +220,61 @@ module Cor1440Gen
             return detalleini == detalle
           end
 
+          def proyectofinanciero_params_cor1440_gen
+            atributos_form + [ 
+              :actividadpf_attributes =>  [
+                :id, 
+                :resultadopf_id,
+                :actividadtipo_id,
+                :nombrecorto, 
+                :titulo, 
+                :descripcion, 
+                :_destroy ] 
+            ] + [
+              :anexo_proyectofinanciero_attributes => [
+                :id,
+                :proyectofinanciero_id,
+                :_destroy,
+                :anexo_attributes => [
+                  :adjunto, 
+                  :descripcion, 
+                  :id, 
+                  :_destroy ] ]
+            ] + [
+              :indicadorobjetivo_attributes =>  [
+                :id, 
+                :objetivopf_id,
+                :numero, 
+                :indicador, 
+                :tipoindicador_id, 
+                :_destroy ] 
+            ] + [ 
+              :indicadorpf_attributes =>  [
+                :id, 
+                :resultadopf_id,
+                :numero, 
+                :indicador, 
+                :tipoindicador_id,
+                :_destroy ] 
+            ] + [ 
+              :objetivopf_attributes =>  [
+                :id, 
+                :numero, 
+                :objetivo, 
+                :_destroy ] 
+            ] + [
+              :resultadopf_attributes =>  [
+                :id, 
+                :objetivopf_id,
+                :numero, 
+                :resultado, 
+                :_destroy ] 
+            ]
+          end
+
           def proyectofinanciero_params
             params.require(:proyectofinanciero).permit(
-              atributos_form +
-              [ 
-                :objetivopf_attributes =>  [
-                  :id, :numero, :objetivo, :_destroy ] 
-              ] +
-              [
-                :indicadorobjetivo_attributes =>  [
-                  :id, :objetivopf_id,
-                  :numero, :indicador, 
-                  :tipoindicador_id, :_destroy ] 
-              ] +
-              [ :resultadopf_attributes =>  [
-                :id, :objetivopf_id,
-                :numero, :resultado, :_destroy ] 
-              ] +
-              [ :indicadorpf_attributes =>  [
-                :id, :resultadopf_id,
-                :numero, :indicador, :tipoindicador_id,
-                :_destroy ] 
-              ] +
-              [ :actividadpf_attributes =>  [
-                :id, :resultadopf_id,
-                :actividadtipo_id,
-                :nombrecorto, :titulo, 
-                :descripcion, :_destroy ] 
-              ] )
+              proyectofinanciero_params_cor1440_gen)
           end
 
 

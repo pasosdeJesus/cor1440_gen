@@ -1,0 +1,14 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+
+    <%  f.object.anexo = Sip::Anexo.new if !f.object.anexo %>
+
+    <%= f.simple_fields_for :anexo do |a| %>
+      <%= render 'sip/anexos/anexo_campos', a: a %>
+    <% end %>
+
+    <%= link_to_remove_association "Eliminar Anexo", f, 
+      :class => 'btn-danger' 
+    %> 
+  </div>
+</div>

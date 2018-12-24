@@ -1,0 +1,10 @@
+<div class="anexos-div anexosdiv">
+  <%= f.simple_fields_for :anexo_proyectofinanciero do |a| %>
+    <%= render 'anexo_proyectofinanciero_campos', :f => a %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association 'Añadir Anexo', f, 
+      :anexo_proyectofinanciero, :class => 'btn-primary',
+      partial: 'anexo_proyectofinanciero_campos' %>
+  </div>
+</div> <!-- anexos-div -->
