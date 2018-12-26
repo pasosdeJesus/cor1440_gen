@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Rails (internacionalización)
 gem "rails", '~> 5.2.1'
 
-gem 'bigdecimal', '1.3.5' # OJO quitar version una vez arreglen 1.4
+gem 'bigdecimal'
 
 gem 'bootsnap', '>=1.1.0', require: false
 
