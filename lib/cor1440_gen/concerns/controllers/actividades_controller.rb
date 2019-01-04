@@ -46,7 +46,7 @@ module Cor1440Gen
               :fecha_localizada, 
               :lugar, 
               :oficina, 
-              :proyectosfinancieros, 
+              :proyectofinanciero, 
               :proyectos,
               :actividadareas, 
               :responsable,

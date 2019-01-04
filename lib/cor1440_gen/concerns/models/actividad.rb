@@ -192,7 +192,7 @@ module Cor1440Gen
 
             when 'corresponsables'
               usuario.inject('') { |memo, r| 
-                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                memo == '' ? r.presenta_nombre : memo + '; ' + r.presenta_nombre
               }
 
             when 'objetivo_convenio_financiero'
