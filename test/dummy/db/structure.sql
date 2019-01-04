@@ -219,6 +219,16 @@ CREATE TABLE public.cor1440_gen_actividad_actividadtipo (
 
 
 --
+-- Name: cor1440_gen_actividad_actorsocial; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_actividad_actorsocial (
+    actividad_id bigint NOT NULL,
+    actorsocial_id bigint NOT NULL
+);
+
+
+--
 -- Name: cor1440_gen_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3442,6 +3452,14 @@ ALTER TABLE ONLY public.sal7711_gen_articulo_categoriaprensa
 
 
 --
+-- Name: cor1440_gen_actividad_actorsocial fk_rails_8ba599a224; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
+    ADD CONSTRAINT fk_rails_8ba599a224 FOREIGN KEY (actorsocial_id) REFERENCES public.sip_actorsocial(id);
+
+
+--
 -- Name: sip_grupo_usuario fk_rails_8d24f7c1c0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3599,6 +3617,14 @@ ALTER TABLE ONLY public.cor1440_gen_valorcampoact
 
 ALTER TABLE ONLY public.cor1440_gen_actividad_valorcampotind
     ADD CONSTRAINT fk_rails_e8cd697f5d FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
+
+
+--
+-- Name: cor1440_gen_actividad_actorsocial fk_rails_ecdad5c731; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_actividad_actorsocial
+    ADD CONSTRAINT fk_rails_ecdad5c731 FOREIGN KEY (actividad_id) REFERENCES public.cor1440_gen_actividad(id);
 
 
 --
@@ -3975,6 +4001,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180921120954'),
 ('20181011104537'),
 ('20181012110629'),
+('20181113025055'),
 ('20181224112813');
 
 
