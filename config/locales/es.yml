@@ -35,6 +35,7 @@ es:
         fecha_localizada: Fecha
         actividadpf: Actividad de convenio 
         valorcampoact: Campos del tipo de actividad
+        actorsocial: Actores sociales en listado de asistencia
       "cor1440_gen/actividadpf":
         actividadpf: Actividad de convenio
         descripcion: Descripción

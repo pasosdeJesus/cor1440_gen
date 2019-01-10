@@ -55,6 +55,7 @@ module Cor1440Gen
               :valorcampoact,
               :objetivo,
               :resultado, 
+              :actorsocial,
               :listadoasistencia,
               :poblacion,
               :anexos
@@ -198,7 +199,7 @@ module Cor1440Gen
             @actividad.current_usuario = current_usuario
           end
 
-          def lista_params
+          def lista_params_cor1440_gen
             [ 
               :actividad,
               :fecha_localizada, 
@@ -224,6 +225,7 @@ module Cor1440Gen
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
               ],
               :actividadtipo_ids => [],
+              :actorsocial_ids => [],
               :asistencia_attributes => [
                 :actorsocial_id,
                 :externo,
@@ -249,6 +251,10 @@ module Cor1440Gen
               :proyectofinanciero_ids => [],
               :usuario_ids => []
             ]
+          end
+
+          def lista_params
+            lista_params_cor1440_gen
           end
 
           # Lista blanca de parametros

@@ -12,6 +12,12 @@ module Cor1440Gen
           @current_usuario = -1
           attr_accessor :current_usuario
 
+          has_and_belongs_to_many :actorsocial, 
+            class_name: 'Sip::Actorsocial',
+            foreign_key: 'actividad_id',
+            association_foreign_key: 'actorsocial_id',
+            join_table: 'cor1440_gen_actividad_actorsocial'
+
           belongs_to :oficina, class_name: 'Sip::Oficina', 
             foreign_key: 'oficina_id', validate: true
 
