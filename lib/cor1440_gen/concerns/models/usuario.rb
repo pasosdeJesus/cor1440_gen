@@ -15,11 +15,12 @@ module Cor1440Gen
           belongs_to :oficina, class_name: 'Sip::Oficina',
             foreign_key: "oficina_id", validate: true
 
-          has_many :actividad_usuario, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadUsuario',
-            foreign_key: 'usuario_id'
-          has_many :actividad, through: :actividad_usuario,
-            class_name: 'Cor1440Gen::Actividad'
+          has_and_belongs_to_many :actividad, 
+            foreign_key: 'usuario_id',
+            class_name: 'Cor1440Gen::Actividad',
+            association_foreign_key: 'actividad_id',
+            join_table: 'cor1440_gen_actividad_usuario'
+
           has_many :filtroresponsable, 
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroresponsable',
