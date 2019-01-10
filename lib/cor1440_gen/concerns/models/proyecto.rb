@@ -12,11 +12,11 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyecto'
 
-          has_many :proyecto_proyectofinanciero, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ProyectoProyectofinanciero',
-            foreign_key: 'proyecto_id'
-          has_many :proyectofinanciero, through: :proyecto_proyectofinanciero,
-            class_name: 'Cor1440Gen::Proyectofinanciero'
+          has_and_belongs_to_many :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero',
+            foreign_key: 'proyecto_id',
+            association_foreign_key: 'proyectofinanciero_id',
+            join_table: 'cor1440_gen_proyecto_proyectofinanciero'
 
           campofecha_localizado :fechainicio
           campofecha_localizado :fechacierre

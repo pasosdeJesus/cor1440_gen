@@ -31,11 +31,11 @@ module Cor1440Gen
           has_many :actividadareas, through: :actividadareas_actividad,
             class_name: 'Cor1440Gen::Actividadarea'
 
-          has_many :actividad_actividadtipo, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadActividadtipo',
-            foreign_key: 'actividad_id'
-          has_many :actividadtipo, through: :actividad_actividadtipo,
-            class_name: 'Cor1440Gen::Actividadtipo'
+          has_and_belongs_to_many :actividadtipo, 
+            class_name: 'Cor1440Gen::Actividadtipo',
+            foreign_key: 'actividad_id',
+            association_foreign_key: 'actividadtipo_id',
+            join_table: 'cor1440_gen_actividad_actividadtipo'
 
           has_many :actividad_proyecto, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadProyecto',
@@ -43,11 +43,11 @@ module Cor1440Gen
           has_many :proyecto, through: :actividad_proyecto,
             class_name: 'Cor1440Gen::Proyecto'
 
-          has_many :actividad_proyectofinanciero, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadProyectofinanciero', 
-            foreign_key: 'actividad_id'
-          has_many :proyectofinanciero, through: :actividad_proyectofinanciero,
-            class_name: 'Cor1440Gen::Proyectofinanciero'
+          has_and_belongs_to_many :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero',
+            foreign_key: 'actividad_id',
+            association_foreign_key: 'proyectofinanciero_id',
+            join_table: 'cor1440_gen_actividad_proyectofinanciero'
 
           has_many :actividad_rangoedadac, foreign_key: "actividad_id", 
             dependent: :delete_all, 
@@ -69,17 +69,17 @@ module Cor1440Gen
           accepts_nested_attributes_for :sip_anexo, 
             reject_if: :all_blank
 
-          has_many :actividad_usuario, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadUsuario',
-            foreign_key: 'actividad_id'
-          has_many :usuario, through: :actividad_usuario,
-            class_name: 'Usuario'
+          has_and_belongs_to_many :usuario, 
+            class_name: 'Usuario',
+            foreign_key: 'actividad_id',
+            association_foreign_key: 'usuario_id',
+            join_table: 'cor1440_gen_actividad_usuario'
 
-          has_many :actividad_actividadpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadActividadpf', 
-            foreign_key: 'actividad_id'
-          has_many :actividadpf, through: :actividad_actividadpf,
-            class_name: 'Cor1440Gen::Actividadpf'
+          has_and_belongs_to_many :actividadpf, 
+            class_name: 'Cor1440Gen::Actividadpf',
+            foreign_key: 'actividad_id',
+            association_foreign_key: 'actividadpf_id',
+            join_table: 'cor1440_gen_actividad_actividadpf'
 
           has_many :actividad_valorcampotind, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadValorcampotind',

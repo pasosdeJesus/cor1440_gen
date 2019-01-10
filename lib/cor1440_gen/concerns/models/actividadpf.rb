@@ -21,12 +21,11 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Actividadtipo',
             foreign_key: 'actividadtipo_id'
 
-
-          has_many :actividad_actividadpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadActividadpf', 
-            foreign_key: 'actividadpf_id'
-          has_many :actividad, through: :actividad_actividadpf,
-            class_name: 'Cor1440Gen::Actividad'
+          has_and_belongs_to_many :actividad, 
+            class_name: 'Cor1440Gen::Actividad',
+            foreign_key: 'actividadpf_id',
+            association_foreign_key: 'actividad_id',
+            join_table: 'cor1440_gen_actividad_actividadpf'
 
           validates :nombrecorto, presence: true, length: {maximum: 15}
           validates :titulo, length: {maximum: 255}

@@ -9,10 +9,11 @@ module Cor1440Gen
         include Sip::Basica
         included do
 
-          has_many :actividad_actividadtipo, :dependent => :delete_all,
-            class_name: 'Cor1440Gen::ActividadActividadtipo'
-          has_many :actividad, :through => :actividad_actividadtipo,
-            class_name: 'Cor1440Gen::Actividadtipo'
+          has_and_belongs_to_many :actividad, 
+            class_name: 'Cor1440Gen::Actividadtipo',
+            foreign_key: 'actividadtipo_id',
+            association_foreign_key: 'actividad_id',
+            join_table: 'cor1440_gen_actividad_actividadtipo'
 
           has_many :actividadpf, :dependent => :delete_all,
             class_name: 'Cor1440Gen::Actividadpf', 

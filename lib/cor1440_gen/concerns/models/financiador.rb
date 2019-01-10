@@ -9,13 +9,11 @@ module Cor1440Gen
 
         included do
 
-          has_many :financiador_proyectofinanciero, 
-            dependent: :delete_all,
-            class_name: 'Cor1440Gen::FinanciadorProyectofinanciero', 
-            foreign_key: 'financiador_id'
-          has_many :proyectofinanciero, 
-            through: :financiador_proyectofinanciero,
-            class_name: 'Cor1440Gen::Proyectofinanciero'
+          has_and_belongs_to_many :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero',
+            foreign_key: 'financiador_id',
+            association_foreign_key: 'proyectofinanciero_id',
+            join_table: 'cor1440_gen_financiador_proyectofinanciero'
 
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
