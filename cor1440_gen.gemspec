@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "paperclip"
   s.add_runtime_dependency "sip"
   s.add_runtime_dependency "heb412_gen"
+  s.add_runtime_dependency "mr519_gen"
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "capybara"
