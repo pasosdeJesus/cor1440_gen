@@ -28,6 +28,12 @@ module Cor1440Gen
             association_foreign_key: 'persona_id',
             join_table: 'cor1440_gen_beneficiariopf'
 
+          has_and_belongs_to_many :caracterizacion,
+            class_name: '::Mr519Gen::Formulario',
+            foreign_key: 'proyectofinanciero_id',
+            association_foreign_key: 'formulario_id',
+            join_table: 'cor1440_gen_caracterizacionpf'
+
           has_and_belongs_to_many :financiador, 
             class_name: 'Cor1440Gen::Financiador',
             foreign_key: 'proyectofinanciero_id',

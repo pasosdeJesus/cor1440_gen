@@ -62,6 +62,8 @@ class Ability  < Cor1440Gen::Ability
         can :manage, Heb412Gen::Plantilladoc
         can :manage, Heb412Gen::Plantillahcm
         can :manage, Heb412Gen::Plantillahcr
+        
+        can :manage, Mr519Gen::Formulario
 
         can :manage, Sip::Actorsocial
         can :manage, Sip::Persona

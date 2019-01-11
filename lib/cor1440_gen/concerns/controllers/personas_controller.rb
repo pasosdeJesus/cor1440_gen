@@ -1,0 +1,112 @@
+# encoding: UTF-8
+
+require 'sip/concerns/controllers/personas_controller'
+
+module Cor1440Gen
+  module Concerns
+    module Controllers
+      module PersonasController
+
+        extend ActiveSupport::Concern
+
+        included do
+          include Sip::Concerns::Controllers::PersonasController
+
+          def atributos_index
+            [ :id, 
+              :nombres,
+              :apellidos,
+              :anionac,
+              :mesnac,
+              :dianac,
+              :sexo,
+              :pais,
+              :departamento,
+              :municipio,
+              :clase,
+              :nacionalde,
+              :tdocumento,
+              :numerodocumento
+            ]
+          end
+
+          def atributos_show
+            atributos_index
+          end  
+
+          def atributos_form
+            atributos_show - [:id] + [
+              :caracterizaciones
+            ]
+          end
+
+          def asegura_camposdinamicos(persona)
+            persona.proyectofinanciero.each do |pf|
+              pf.caracterizacion.each do |ca|
+                cp = Cor1440Gen::Caracterizacionpersona.where(
+                    proyectofinanciero_id: pf.id,
+                    persona_id: persona.id)
+                if cp.count == 0
+                  rf = Mr519Gen::Respuestafor.create(
+                    formulario_id: ca.id,
+                    fechaini: Date.today,
+                    fechacambio: Date.today)
+                  car = Cor1440Gen::Caracterizacionpersona.create(
+                    proyectofinanciero_id: pf.id,
+                    persona_id: persona.id,
+                    respuestafor_id: rf.id,
+                    ulteditor_id: current_usuario.id
+                  )
+                elsif cp.count > 1
+                  flash.now[:notice] = "Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
+                  car= cp.take
+                else
+                  car = cp.take
+                end
+                Mr519Gen::ApplicationHelper::asegura_camposdinamicos(car)
+              end
+            end
+          end
+
+          def edit
+            @registro = clase.constantize.find(params[:id])
+            if cannot? :edit, clase.constantize
+              authorize! :update, @registro
+            end
+            asegura_camposdinamicos(@registro)
+            render layout: 'application'
+          end
+
+          private
+
+          def lista_params_cor1440
+            atributos_form + 
+              [ "caracterizacionpersona_attributes" =>
+                [ :id,
+                  "respuestafor_attributes" => [
+                    :id,
+                    "valorcampo_attributes" => [
+                      :valor,
+                      :campo_id,
+                      :id
+                    ]
+                ] ]
+            ]
+          end
+
+          def lista_params
+            lista_params_cor1440
+          end
+
+          def persona_params
+            p = params.require(:persona).permit(lista_params)
+            return p
+          end
+
+
+        end  # included
+
+      end
+    end
+  end
+end

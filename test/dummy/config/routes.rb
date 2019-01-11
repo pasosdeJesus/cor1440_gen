@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   
     root 'sip/hogar#index'
     mount Cor1440Gen::Engine, at: "/", as: "cor1440_gen"
+    mount Mr519Gen::Engine => "/", as: 'mr519_gen'
     mount Heb412Gen::Engine => "/", as: 'heb412_gen'
     mount Sip::Engine, at: "/", as: "sip"
   

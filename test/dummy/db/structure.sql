@@ -692,6 +692,16 @@ ALTER SEQUENCE public.cor1440_gen_caracterizacionpersona_id_seq OWNED BY public.
 
 
 --
+-- Name: cor1440_gen_caracterizacionpf; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cor1440_gen_caracterizacionpf (
+    formulario_id integer,
+    proyectofinanciero_id integer
+);
+
+
+--
 -- Name: cor1440_gen_financiador; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3574,6 +3584,14 @@ ALTER TABLE ONLY public.mr519_gen_encuestausuario
 
 
 --
+-- Name: cor1440_gen_caracterizacionpf fk_rails_1d1caee38f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_caracterizacionpf
+    ADD CONSTRAINT fk_rails_1d1caee38f FOREIGN KEY (formulario_id) REFERENCES public.mr519_gen_formulario(id);
+
+
+--
 -- Name: heb412_gen_campohc fk_rails_1e5f26c999; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3699,6 +3717,14 @@ ALTER TABLE ONLY public.cor1440_gen_indicadorpf
 
 ALTER TABLE ONLY public.cor1440_gen_valorcampotind
     ADD CONSTRAINT fk_rails_4f2fc96457 FOREIGN KEY (campotind_id) REFERENCES public.cor1440_gen_campotind(id);
+
+
+--
+-- Name: cor1440_gen_caracterizacionpf fk_rails_4fcf0ffb4f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_caracterizacionpf
+    ADD CONSTRAINT fk_rails_4fcf0ffb4f FOREIGN KEY (proyectofinanciero_id) REFERENCES public.cor1440_gen_proyectofinanciero(id);
 
 
 --
@@ -4233,7 +4259,7 @@ ALTER TABLE ONLY public.usuario
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO public, pg_catalog;
+SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20131128151014'),
@@ -4435,6 +4461,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20181228014507'),
 ('20190109125417'),
 ('20190110191802'),
-('20190111092816');
+('20190111092816'),
+('20190111102201');
 
 

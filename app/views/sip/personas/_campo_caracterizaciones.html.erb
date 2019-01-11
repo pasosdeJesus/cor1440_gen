@@ -1,0 +1,12 @@
+<%= f.simple_fields_for :caracterizacionpersona, 
+  f.object.caracterizacionpersona.order(:id) do |car| %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= car.object.respuestafor.formulario.nombre %></div>
+    <div class="panel-body">
+      <%= car.simple_fields_for :respuestafor do |rf| %>
+        <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
+          locals: {f: rf} %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
