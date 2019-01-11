@@ -30,8 +30,10 @@ class Ability  < Cor1440Gen::Ability
         can [:update, :create, :destroy], Cor1440Gen::Actividad, 
           oficina: { id: usuario.oficina_id}
         can :read, Cor1440Gen::Proyectofinanciero
+
         can [:new, :create, :read, :index, :edit, :update],
           Sip::Actorsocial
+        can :manage, Sip::Persona
       when Ability::ROLCOOR
         can :manage, Cor1440Gen::Actividad
         can :manage, Cor1440Gen::Informe
@@ -42,6 +44,7 @@ class Ability  < Cor1440Gen::Ability
         can :read, Cor1440Gen::Proyectofinanciero
         can [:new, :create, :read, :index, :edit, :update],
           Sip::Actorsocial
+        can :manage, Sip::Persona
       when Ability::ROLINV
         cannot :buscar, Sip::Actividad
         can :read, Sip::Actividad
@@ -61,6 +64,8 @@ class Ability  < Cor1440Gen::Ability
         can :manage, Heb412Gen::Plantillahcr
 
         can :manage, Sip::Actorsocial
+        can :manage, Sip::Persona
+
         can :manage, Usuario
         can :manage, :tablasbasicas
         tablasbasicas.each do |t|

@@ -63,7 +63,7 @@ module Cor1440Gen
 
           def atributos_form
             atributos_index +
-              [:anexo_proyectofinanciero] -
+              [:beneficiario, :anexo_proyectofinanciero] -
               ["id", :id, 'created_at', :created_at, 'updated_at', :updated_at]
           end
 
@@ -83,6 +83,7 @@ module Cor1440Gen
               :monto, 
               :observaciones, 
               :marcologico,
+              :beneficiario,
               :anexo_proyectofinanciero
             ]
           end
@@ -240,6 +241,8 @@ module Cor1440Gen
                   :descripcion, 
                   :id, 
                   :_destroy ] ]
+            ] + [
+              :beneficiario_ids => []
             ] + [
               :indicadorobjetivo_attributes =>  [
                 :id, 

@@ -22,6 +22,12 @@ module Cor1440Gen
             association_foreign_key: 'actividad_id',
             join_table: 'cor1440_gen_actividad_proyectofinanciero'
 
+          has_and_belongs_to_many :beneficiario,
+            class_name: 'Sip::Persona',
+            foreign_key: 'proyectofinanciero_id',
+            association_foreign_key: 'persona_id',
+            join_table: 'cor1440_gen_beneficiariopf'
+
           has_and_belongs_to_many :financiador, 
             class_name: 'Cor1440Gen::Financiador',
             foreign_key: 'proyectofinanciero_id',

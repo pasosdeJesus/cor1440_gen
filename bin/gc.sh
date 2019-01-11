@@ -50,14 +50,16 @@ if (test "$?" != "0") then {
 
 (cd test/dummy; RAILS_ENV=test bundle exec rake db:structure:dump)
 
-b=`git branch | grep "^*" | sed -e  "s/^* //g"`
-git status -s
-if (test "$MENSCONS" = "") then {
-	MENSCONS="Actualiza"
-} fi;
-git commit -m "$MENSCONS" -a
-git push origin ${b}
-if (test "$?" != "0") then {
-	echo "No pudo subirse el cambio a github";
-	exit 1;
+if (test "$SINGH" != "1") then {
+	b=`git branch | grep "^*" | sed -e  "s/^* //g"`
+	git status -s
+	if (test "$MENSCONS" = "") then {
+		MENSCONS="Actualiza"
+	} fi;
+	git commit -m "$MENSCONS" -a
+	git push origin ${b}
+	if (test "$?" != "0") then {
+		echo "No pudo subirse el cambio a github";
+		exit 1;
+	} fi;
 } fi;

@@ -81,6 +81,7 @@ es:
       "cor1440_gen/proyectofinanciero":
         actividadpf: Actividad de convenio
         anexo_proyectofinanciero: "Anexos"
+        beneficiario: Beneficiarios
         fechainicio_localizada: Fecha de inicio
         fechacierre_localizada: Fecha de cierre
         indicador: Indicador

@@ -7,16 +7,21 @@ module Cor1440Gen
     module Models
       module Persona
         extend ActiveSupport::Concern
-        include Sip::Concerns::Models::Persona
 
         included do
+          include Sip::Concerns::Models::Persona
 
-          has_many :asistente, foreign_key: 'persona_id', validate: true,
-            class_name: 'Sivel2Gen::Asistente'
+          has_many_and_belongs_to :proyectofinanciero, 
+            class_name: 'Sip::Proyectofinanciero', 
+            foreign_key: 'persona_id',
+            association_foreign_key: 'proyectofinanciero_id',
+            join_table: 'cor1440_gen_beneficiariopf'
 
         end # included
       end
     end
   end
 end
+
+
 
