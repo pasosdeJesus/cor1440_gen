@@ -11,7 +11,7 @@ module Cor1440Gen
         included do
           include Sip::Concerns::Models::Persona
 
-          has_many_and_belongs_to :proyectofinanciero, 
+          has_and_belongs_to_many :proyectofinanciero, 
             class_name: 'Sip::Proyectofinanciero', 
             foreign_key: 'persona_id',
             association_foreign_key: 'proyectofinanciero_id',
