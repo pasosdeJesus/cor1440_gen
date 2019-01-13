@@ -23,6 +23,14 @@ module Cor1440Gen
           accepts_nested_attributes_for :caracterizacionpersona,
             reject_if: :all_blank
 
+          def presenta_nombre
+            ip = numerodocumento
+            if tdocumento
+              ip = tdocumento.sigla + ":" + ip
+            end
+            r = nombres + " " + apellidos + 
+              " (" + ip + ")"
+          end
         end # included
       end
     end
