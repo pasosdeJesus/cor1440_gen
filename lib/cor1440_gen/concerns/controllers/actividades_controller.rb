@@ -183,12 +183,16 @@ module Cor1440Gen
               actividad_params[:asistencia_attributes].each do |a|
                 # Ubicamos los de autocompletacion y para esos creamos un registro 
                 if a[1] && a[1][:id] && a[1][:id] == '' && 
-                    a[1][:persona_attributes][:id]
+                    a[1][:persona_attributes] && 
+                    a[1][:persona_attributes][:id] &&
+                    a[1][:persona_attributes][:id].to_i > 0 &&
+                    Sip::Persona.where(
+                      id: a[1][:persona_attributes][:id].to_i).count == 1
                   ac = Cor1440Gen::Asistencia.create({
                     actividad_id: @actividad.id,
                     persona_id: a[1][:persona_attributes][:id]
                   })
-                  ac.save!
+                  ac.save!(validate: false)
                   params[:actividad][:asistencia_attributes][a[0].to_s][:id] = ac.id
                 end
               end
@@ -256,7 +260,10 @@ module Cor1440Gen
                   :nombres, 
                   :numerodocumento, 
                   :sexo, 
-                  :tdocumento_id
+                  :tdocumento_id,
+                  :anionac,
+                  :mesnac,
+                  :dianac
                 ]
               ],
               :valorcampoact_attributes => [
