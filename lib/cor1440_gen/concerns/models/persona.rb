@@ -30,6 +30,7 @@ module Cor1440Gen
             end
             r = nombres + " " + apellidos + 
               " (" + ip + ")"
+            r
           end
         end # included
       end

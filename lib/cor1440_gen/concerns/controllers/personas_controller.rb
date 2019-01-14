@@ -77,6 +77,29 @@ module Cor1440Gen
             render layout: 'application'
           end
 
+
+          # API
+        
+          def datos
+            @persona = Sip::Persona.find(params[:id_persona].to_i)
+            authorize! :read, @persona
+            respond_to do |format|
+              oj = { 
+                id: @persona.id,
+                nombres: @persona.nombres,
+                apellidos: @persona.apellidos,
+                sexo: @persona.sexo,
+                tdocumento: @persona.tdocumento ? @persona.tdocumento.sigla :
+                 '',
+                numerodocumento: @persona.numerodocumento,
+                dianac: @persona.dianac,
+                mesnac: @persona.mesnac,
+                anionac: @persona.anionac 
+              }
+              format.json { render json: oj, status: :ok }
+              format.html { render inilne: oj.to_s, status: :ok }
+            end
+          end
           private
 
           def lista_params_cor1440

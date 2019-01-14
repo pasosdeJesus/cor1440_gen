@@ -7,7 +7,16 @@
   <%= f.simple_fields_for :persona do |p| %>
     <td>
       <%= p.input :id, as: :hidden %>
-      <%= p.input :nombres, label: false %>
+      <% ph = 'N'
+      ac = {'data-autocompleta' => 'no' }
+      if (!p.object.nombres || p.object.nombres == 'N' || p.object.nombres == '')
+        ph = 'Buscar'
+        ac = { }
+      end %>
+      <%= p.input :nombres, placeholder: ph,
+        value_method: lambda {|t| '' if t.nombres == 'N'},
+        label: false,
+        :input_html => ac %>
     </td>
     <td>
       <%= p.input :apellidos, label: false %>
@@ -33,15 +42,22 @@
         input_html: { style: 'width: 4em' },
         include_blank: false %>
     </td>
+    <td>
+      <%= p.input :anionac, 
+        input_html: { style: 'width: 9em' },
+        label: false %>
+    </td>
+    <td>
+      <%= p.input :mesnac, 
+        input_html: { style: 'width: 9em' },
+        label: false %>
+    </td>
+    <td>
+      <%= p.input :dianac, 
+        input_html: { style: 'width: 9em' },
+        label: false %>
+    </td>
   <% end %>
-  <td>
-    <%= f.input :rangoedadac_id, 
-      collection: Cor1440Gen::Rangoedadac.all,
-      label_method: :nombre,
-      input_html: { style: 'width: 8em' },
-      label: false %>
-  </td>
-  </td>
   <td>
     <%= f.input :externo, label: false %>
   </td>

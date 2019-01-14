@@ -178,6 +178,23 @@ module Cor1440Gen
             render layout: 'application'
           end
 
+          def update
+            if actividad_params[:asistencia_attributes]
+              actividad_params[:asistencia_attributes].each do |a|
+                # Ubicamos los de autocompletacion y para esos creamos un registro 
+                if a[1] && a[1][:id] && a[1][:id] == '' && 
+                    a[1][:persona_attributes][:id]
+                  ac = Cor1440Gen::Asistencia.create({
+                    actividad_id: @actividad.id,
+                    persona_id: a[1][:persona_attributes][:id]
+                  })
+                  ac.save!
+                  params[:actividad][:asistencia_attributes][a[0].to_s][:id] = ac.id
+                end
+              end
+            end
+            update_gen
+          end
           # Llamado por control para presentar responsables en formulario
           # Para limitar por permisos
           def filtra_usuario_responsable(lista_usuarios)

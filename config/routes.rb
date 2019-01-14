@@ -11,8 +11,6 @@ Cor1440Gen::Engine.routes.draw do
     as: :actividadespf
   resources :actividadespf, only: [:new, :destroy]
 
-    
-
   resources :camposact, path_names: { new: 'nuevo', edit: 'edita' }
 
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
@@ -26,7 +24,7 @@ Cor1440Gen::Engine.routes.draw do
   get "/objetivospf/" => "proyectosfinancieros#objetivospf", 
     as: :objetivospf
   resources :objetivospf, only: [:new, :destroy]
-  
+ 
   get "/proyectosfinancieros/validar" => "proyectosfinancieros#validar", 
     as: :validar_proyectosfinancieros
   resources :proyectosfinancieros, path_names: { new: 'nuevo', edit: 'edita' }
