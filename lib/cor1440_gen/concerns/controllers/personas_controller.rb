@@ -41,29 +41,31 @@ module Cor1440Gen
           end
 
           def asegura_camposdinamicos(persona)
-            persona.proyectofinanciero.each do |pf|
-              pf.caracterizacion.each do |ca|
-                cp = Cor1440Gen::Caracterizacionpersona.where(
+            if persona.respond_to?(:proyectofinanciero)
+              persona.proyectofinanciero.each do |pf|
+                pf.caracterizacion.each do |ca|
+                  cp = Cor1440Gen::Caracterizacionpersona.where(
                     proyectofinanciero_id: pf.id,
                     persona_id: persona.id)
-                if cp.count == 0
-                  rf = Mr519Gen::Respuestafor.create(
-                    formulario_id: ca.id,
-                    fechaini: Date.today,
-                    fechacambio: Date.today)
-                  car = Cor1440Gen::Caracterizacionpersona.create(
-                    proyectofinanciero_id: pf.id,
-                    persona_id: persona.id,
-                    respuestafor_id: rf.id,
-                    ulteditor_id: current_usuario.id
-                  )
-                elsif cp.count > 1
-                  flash.now[:notice] = "Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
-                  car= cp.take
-                else
-                  car = cp.take
+                  if cp.count == 0
+                    rf = Mr519Gen::Respuestafor.create(
+                      formulario_id: ca.id,
+                      fechaini: Date.today,
+                      fechacambio: Date.today)
+                    car = Cor1440Gen::Caracterizacionpersona.create(
+                      proyectofinanciero_id: pf.id,
+                      persona_id: persona.id,
+                      respuestafor_id: rf.id,
+                      ulteditor_id: current_usuario.id
+                    )
+                  elsif cp.count > 1
+                    flash.now[:notice] = "Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
+                    car= cp.take
+                  else
+                    car = cp.take
+                  end
+                  Mr519Gen::ApplicationHelper::asegura_camposdinamicos(car)
                 end
-                Mr519Gen::ApplicationHelper::asegura_camposdinamicos(car)
               end
             end
           end
