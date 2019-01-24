@@ -24,9 +24,9 @@ module Cor1440Gen
             reject_if: :all_blank
 
           def presenta_nombre
-            ip = numerodocumento
+            ip = numerodocumento.to_s
             if tdocumento
-              ip = tdocumento.sigla + ":" + ip
+              ip = tdocumento.sigla.to_s + ":" + ip
             end
             r = nombres + " " + apellidos + 
               " (" + ip + ")"
