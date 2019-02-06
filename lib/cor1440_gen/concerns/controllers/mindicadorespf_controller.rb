@@ -102,8 +102,6 @@ module Cor1440Gen
                       '?filtro[busid]='+lac.join(',')
                     end
                   end
-                  byebug
-
                 end
                 respond_to do |format|
                   format.json { 
