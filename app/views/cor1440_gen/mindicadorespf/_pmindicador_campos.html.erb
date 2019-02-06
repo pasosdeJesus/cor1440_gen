@@ -1,0 +1,65 @@
+<tr class='nested-fields'>
+  <td>
+    <%= f.input :fecha_localizada,
+      label: false, 
+      input_html: {"data-behaviour" => "datepicker"}, as: :string %>
+  </td><td>
+    <%= f.input :finicio_localizada,
+      label: false, 
+      input_html: {"data-behaviour" => "datepicker"}, as: :string %>
+  </td><td>
+    <%= f.input :ffin_localizada,
+      label: false, 
+      input_html: {"data-behaviour" => "datepicker"}, as: :string %>
+  </td><td>
+    <%= f.input :restiempo,
+      label: false %>
+  </td>
+  <% if @descd1 != '' %> 
+    <td>
+      <%= f.input :dmed1, 
+        label: false %>
+      <%= f.input :urlev1, 
+        label: false, as: :hidden %>
+    </td>
+  <% end %>
+  <% if @descd2 != '' %> 
+    <td>
+      <%= f.input :dmed2,
+        label: false %>
+      <%= f.input :urlev2, 
+        label: false, as: :hidden %>
+    </td>
+  <% end %>
+  <% if @descd3 != '' %> 
+    <td>
+      <%= f.input :dmed3,
+        label: false %>
+      <%= f.input :urlev3, 
+        label: false, as: :hidden %>
+    </td>
+  <% end %>
+  <td>
+    <%= f.input :rind,
+      label: false %>
+      <%= f.input :urlevrind, 
+        label: false, as: :hidden %>
+  </td>
+  <td>
+    <%= f.input :meta,
+      label: false %>
+  </td>
+  <td> 
+    <%= f.input :porcump, label: false %> 
+  </td>
+  <!--td> <%= f.input :analisis, label: false %> </td><td> <%= f.input :acciones, label: false %> </td><td> <%= f.input :responsables, label: false %> </td><td> <%= f.input :plazo, label: false %> </td-->
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to t('Calcular'), '#',
+                  class: 'btn btn-xs', 
+                  onclick: 'cor1440_gen_calcula_pmindicador(this, event)' %>
+    <%= link_to_remove_association "Eliminar", f, 
+      :class => 'btn-danger' %>
+    <div><%= f.error_notification %></div>
+  </td>
+</tr>

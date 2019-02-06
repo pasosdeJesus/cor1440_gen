@@ -21,6 +21,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'campoact', 'camposact'
   inflect.irregular 'campotind', 'campostind'
   inflect.irregular 'financiador', 'financiadores'
+  inflect.irregular 'mindicadorpf', 'mindicadorespf'
   inflect.irregular 'proyectofinanciero', 'proyectosfinancieros'
   inflect.irregular 'rangoedadac', 'rangosedadac'
   inflect.irregular 'sectoractor', 'sectoresactores'

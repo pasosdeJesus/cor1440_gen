@@ -84,8 +84,8 @@ gem "tzinfo"
 #gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
-#gem 'sip', path: '../sip'
+#gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+gem 'sip', path: '../sip'
 
 # Motor heb412_gen para manejar archivos como nube y plantillas
 gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
@@ -106,7 +106,7 @@ group :development do
 end
 
 group :development, :test do
-  #gem 'byebug', platform: :mri
+  gem 'byebug', platform: :mri
 end
 
 # Los siguientes son para pruebas y no tiene generadores requeridos en desarrollo
