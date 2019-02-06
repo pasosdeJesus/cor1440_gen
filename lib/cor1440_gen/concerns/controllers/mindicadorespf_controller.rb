@@ -51,7 +51,7 @@ module Cor1440Gen
               ind = Cor1440Gen::Indicadorpf.find(indid)
               tipoind = ind.tipoindicador
               hmi = params[:hmindicadorpf_id].to_i
-              if fini && ffin && ind && tipoind
+              if fini && ffin && ind
                 resind = 0.0
                 urlevrind = ''
                 d1 = 0.0
@@ -60,50 +60,67 @@ module Cor1440Gen
                 urlev2 = ''
                 d3 = 0.0
                 urlev3 = ''
-                case tipoind.nombre
-                when 'IG-FG-01'
-                  # Participacion efectiva en convocatorias
-                  base = Cor1440Gen::Proyectofinanciero.
-                    where('fechaformulacion >= ?', fini).
-                    where('fechaformulacion <= ?', ffin).
-                    where('respgp_id IS NOT NULL')
-                  cd1 = base.clone.where(
-                    'estado IN (?)', ::ApplicationHelper::ESTADOS_APROBADO) 
-                  d1 = cd1.count
-                  evd1 = cd1.pluck('id')
-                  urlev1 = cor1440_gen.proyectosfinancieros_url +
-                    '?filtro[busid]='+evd1.join(',')
-                  cd2 = base.clone
-                  d2 = cd2.count
-                  evd2 = cd2.pluck('id')
-                  urlev2 = cor1440_gen.proyectosfinancieros_url +
-                    '?filtro[busid]='+evd2.join(',')
-                  resind = d2.to_f > 0 ? 100*d1.to_f/d2.to_f : nil;
-               else
-                 base = "SELECT COUNT(*) FROM efecto WHERE 
-                 fecha>='#{fini}' AND fecha<='#{ffin}'
-                 AND indicadorpf_id='#{ind.id}'"
-                 d1 = ActiveRecord::Base.connection.execute(base).
-                   first['count'].to_f
-                 resind = d1
-               end
+                if tipoind
+                  case tipoind.nombre
+                  when 'IG-FG-01'
+                    # Participacion efectiva en convocatorias
+                    base = Cor1440Gen::Proyectofinanciero.
+                      where('fechaformulacion >= ?', fini).
+                      where('fechaformulacion <= ?', ffin).
+                      where('respgp_id IS NOT NULL')
+                    cd1 = base.clone.where(
+                      'estado IN (?)', ::ApplicationHelper::ESTADOS_APROBADO) 
+                    d1 = cd1.count
+                    evd1 = cd1.pluck('id')
+                    urlev1 = cor1440_gen.proyectosfinancieros_url +
+                      '?filtro[busid]='+evd1.join(',')
+                    cd2 = base.clone
+                    d2 = cd2.count
+                    evd2 = cd2.pluck('id')
+                    urlev2 = cor1440_gen.proyectosfinancieros_url +
+                      '?filtro[busid]='+evd2.join(',')
+                    resind = d2.to_f > 0 ? 100*d1.to_f/d2.to_f : nil;
+                  else
+                    base = "SELECT COUNT(*) FROM efecto WHERE 
+                    fecha>='#{fini}' AND fecha<='#{ffin}'
+                    AND indicadorpf_id='#{ind.id}'"
+                    d1 = ActiveRecord::Base.connection.execute(base).
+                    first['count'].to_f
+                    resind = d1
+                  end
+                else
+                  # Contar categorias de actividad relacionadas 
+                  # con el resultado
+                  res = ind.resultadopf
+                  if res.actividadpf.count > 0
+                    lac = Cor1440Gen::ActividadActividadpf.
+                      where(actividadpf_id: [1]).
+                      pluck(:actividad_id).uniq
+                    resind = lac.count
+                    if resind > 0
+                      urlevrind = cor1440_gen.actividades_url +
+                      '?filtro[busid]='+lac.join(',')
+                    end
+                  end
+                  byebug
 
+                end
                 respond_to do |format|
                   format.json { 
                     render json: {
-                    fechaloc:  Sip::FormatoFechaHelper.fecha_estandar_local(
-                      Date.today),
-                      hmindicadorpf_id: hmi, 
-                      dmed1: d1, 
-                      urlev1: urlev1,
-                      dmed2: d2, 
-                      urlev2: urlev2,
-                      dmed3: d3, 
-                      urlev3: urlev3,
-                      rind: resind,
-                      urlevrind: urlevrind }, 
-                      status: :ok
-                      return
+                      fechaloc:  Sip::FormatoFechaHelper.fecha_estandar_local(
+                        Date.today),
+                        hmindicadorpf_id: hmi, 
+                        dmed1: d1, 
+                        urlev1: urlev1,
+                        dmed2: d2, 
+                        urlev2: urlev2,
+                        dmed3: d3, 
+                        urlev3: urlev3,
+                        rind: resind,
+                        urlevrind: urlevrind }, 
+                        status: :ok
+                        return
                   }
                 end
               else

@@ -36,11 +36,11 @@ module Cor1440Gen
 
         end # included
 
-        class_methods do 
-          def modelos_path
-            'cor1440_gen.mindicadorespf_path'
-          end
-        end
+#        class_methods do 
+#          def modelos_path
+#            'mindicadorespf_path'
+#          end
+#        end
 
       end
     end

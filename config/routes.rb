@@ -22,6 +22,8 @@ Cor1440Gen::Engine.routes.draw do
     as: :impresion
 
   resources :mindicadorespf, path_names: { new: 'nuevo', edit: 'edita' }
+  get "/api/cor1440gen/mideindicador" => "mindicadorespf#mideindicador", 
+    as: :mideindicador
 
   get "/objetivospf/" => "proyectosfinancieros#objetivospf", 
     as: :objetivospf

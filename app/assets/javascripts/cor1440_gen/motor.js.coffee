@@ -157,6 +157,44 @@ cor1440_gen_rangoedadc_todos = () ->
           event.preventDefault()
     })
   return
+
+# Medicion de indicadores
+
+@cor1440_gen_llena_medicion = (root, res) ->
+  hid = res.hmindicadorpf_id
+  $('[id$=_' + hid + '_fecha_localizada]').val(res.fechaloc)
+  $('[id$=_' + hid + '_dmed1]').val(res.dmed1)
+  $('[id$=_' + hid + '_urlev1]').val(res.urlev1)
+  $('[id$=_' + hid + '_dmed2]').val(res.dmed2)
+  $('[id$=_' + hid + '_urlev2]').val(res.urlev2)
+  $('[id$=_' + hid + '_dmed3]').val(res.dmed3)
+  $('[id$=_' + hid + '_urlev3]').val(res.urlev3)
+  $('[id$=_' + hid + '_rind]').val(res.rind)
+  $('[id$=_' + hid + '_urlevrind]').val(res.urlevrind)
+  meta = +$('[id$=_' + hid + '_meta]').val()
+  if ( meta > 0)
+    $('[id$=_' + hid + '_porcump]').val(res.rind*100/meta)
+
+
+@cor1440_gen_calcula_pmindicador = (elem, event) ->
+  event.stopPropagation() 
+  event.preventDefault() 
+  root =  window
+  r = $(elem).closest('tr')
+  efinicio = r.find('[id$=finicio_localizada]')
+  hid = efinicio.attr('id').replace(/.*_attributes_([0-9]*)_finicio_localizada/, '$1');
+  datos = {
+    finicio_localizada: efinicio.val()
+    ffin_localizada: r.find('[id$=ffin_localizada]').val()
+    indicadorpf_id: $(document).find('#mindicadorpf_indicadorpf_id').val()
+    hmindicadorpf_id: hid
+  }
+  sip_ajax_recibe_json(root, 'api/cor1440gen/mideindicador', 
+    datos, cor1440_gen_llena_medicion)  
+  return
+
+
+
 @cor1440_gen_prepara_eventos_comunes = (root, opciones = {}) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form

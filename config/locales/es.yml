@@ -59,6 +59,20 @@ es:
         indicadorpf: Indicador
         numero: Número
         indicador: Descripción del indicador
+      "cor1440_gen/mindicadorpf":
+        Mindicadorpf: Medición de un indicador
+        Mindicadorespf: Mediciones de indicadores
+        cor1440_gen_proyectofinanciero: Proyecto
+        cor1440_gen_indicadorpf: 'Indicador'
+        frecuenciaanual: 'Frecuencia de medición anual'
+        indicadorpf: 'Indicador'
+        indicadorpf_id: 'Indicador'
+        pmindicador: 'Puntos de medición'
+        proyectofinanciero: Proyecto
+        proyectofinanciero_id: Proyecto
+        descd1: Descripción de dato intermedio 1
+        descd2: Descripción de dato intermedio 2
+        descd3: Descripción de dato intermedio 3
       "cor1440_gen/objetivopf":
         objetivopf: Objetivo
         numero: Número
