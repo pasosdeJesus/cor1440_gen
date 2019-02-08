@@ -13,11 +13,11 @@ class CreaMindicadorpf < ActiveRecord::Migration[5.2]
         t.timestamp :created_at, null: false
         t.timestamp :updated_at, null: false
       end
+      add_foreign_key :cor1440_gen_mindicadorpf,  
+        :cor1440_gen_proyectofinanciero, column: :proyectofinanciero_id
+      add_foreign_key :cor1440_gen_mindicadorpf,
+        :cor1440_gen_indicadorpf, column: :indicadorpf_id
     end
-    add_foreign_key :cor1440_gen_mindicadorpf,  
-      :cor1440_gen_proyectofinanciero, column: :proyectofinanciero_id
-    add_foreign_key :cor1440_gen_mindicadorpf,
-      :cor1440_gen_indicadorpf, column: :indicadorpf_id
   end
 
   def down

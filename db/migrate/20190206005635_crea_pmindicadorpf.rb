@@ -26,9 +26,9 @@ class CreaPmindicadorpf < ActiveRecord::Migration[5.2]
         t.timestamp :created_at, null: false
         t.timestamp :updated_at, null: false
       end
+      add_foreign_key :cor1440_gen_pmindicadorpf,  
+        :cor1440_gen_mindicadorpf,  column: :mindicadorpf_id
     end
-    add_foreign_key :cor1440_gen_pmindicadorpf,  
-     :cor1440_gen_mindicadorpf,  column: :mindicadorpf_id
   end
 
   def down
