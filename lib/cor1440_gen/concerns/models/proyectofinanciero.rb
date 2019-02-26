@@ -135,8 +135,8 @@ module Cor1440Gen
           }
 
           scope :filtro_financiador_ids, lambda { |f|
-            joins(:financiador_proyectofinanciero).
-              where('cor1440_gen_financiador_proyectofinanciero.financiador_id=?', f)
+            joins(:financiador).
+              where('cor1440_gen_financiador.id=?', f)
           }
 
           scope :filtro_nombre, lambda { |nombre|
