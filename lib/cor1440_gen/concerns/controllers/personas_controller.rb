@@ -13,6 +13,10 @@ module Cor1440Gen
           include Sip::Concerns::Controllers::PersonasController
 
           def atributos_index
+            atributos_show
+          end
+
+          def atributos_show
             [ :id, 
               :nombres,
               :apellidos,
@@ -28,16 +32,16 @@ module Cor1440Gen
               :tdocumento,
               :numerodocumento
             ]
-          end
-
-          def atributos_show
-            atributos_index
           end  
 
           def atributos_form
-            atributos_show - [:id] + [
-              :caracterizaciones
-            ]
+            a = atributos_show - [:id] + [:caracterizaciones]
+            a[a.index(:clase)] = :id_clase
+            a[a.index(:departamento)] = :id_departamento
+            a[a.index(:municipio)] = :id_municipio
+            a[a.index(:pais)] = :id_pais
+            a[a.index(:tdocumento)] = :tdocumento_id
+            return a
           end
 
           def asegura_camposdinamicos(persona)
