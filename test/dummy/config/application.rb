@@ -34,6 +34,8 @@ module Dummy
 
     config.x.cor1440_permisos_por_oficina = true
 
+    config.relative_url_root = '/cor1440'      
+
     #config.web_console.whitelisted_ips = '190.25.163.93'
   end
 end

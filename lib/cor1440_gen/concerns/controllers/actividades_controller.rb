@@ -62,6 +62,65 @@ module Cor1440Gen
               ]
           end
 
+          def cuenta
+            #@misgrupos = Cor1440Gen::GruposHelper.
+            #  mis_grupos_sinus(current_usuario) 
+            # Investigadores ven sólo su linea
+            #mg = @misgrupos.where("nombre LIKE '#{::Ability::GRUPO_LINEA}%'").
+            #  order(:nombre)
+            #if mg.count > 0 && mg.count < 3
+            #  @misgrupos = mg
+            #end
+            #@miscompromisos = Cor1440Gen::GruposHelper.
+            #  compromisos_grupos(Cor1440Gen::Proyectofinanciero.all,
+            #                     @misgrupos)
+            @pfid = params[:filtro] && params[:filtro][:proyectofinanciero_id] ? 
+              params[:filtro][:proyectofinanciero_id].to_i : 18  
+            @baseactividad = Cor1440Gen::Actividad.all
+            grupo = nil
+            if params[:filtro] && params[:filtro][:grupo_id] && 
+                params[:filtro][:grupo_id] != ""
+              grupo = Sip::Grupo.find(params[:filtro][:grupo_id].to_i)
+            else 
+              if mg.count == 1
+                grupo = mg.first
+              end
+            end
+            if grupo
+              @grupoid = grupo.id
+              @baseactividad = @baseactividad.where(
+                'cor1440_gen_actividad.id IN (SELECT actividad_id 
+             FROM actividad_grupo WHERE grupo_id = ?)', @grupoid)
+            end
+
+            if !params[:filtro] || !params[:filtro]['fechaini'] || 
+                params[:filtro]['fechaini'] != ""
+              if !params[:filtro] || !params[:filtro]['fechaini']
+                @fechaini = inicio_semestre_ant
+              else
+                @fechaini = fecha_local_estandar(params[:filtro]['fechaini'])
+              end
+              @baseactividad = @baseactividad.where(
+                'cor1440_gen_actividad.fecha >= ?', @fechaini)
+            end
+            if !params[:filtro] || !params[:filtro]['fechafin'] || 
+                params[:filtro]['fechafin'] != ""
+              if !params[:filtro] || !params[:filtro]['fechafin']
+                @fechafin = fin_semestre_ant
+              else
+                @fechafin = fecha_local_estandar(params[:filtro]['fechafin'])
+              end
+              @baseactividad = @baseactividad.where(
+                'cor1440_gen_actividad.fecha <= ?', @fechafin)
+            end
+
+            respond_to do |format|
+              format.html { render layout: 'application' }
+              format.json { head :no_content }
+              format.js { render }
+            end
+          end
+
           def vistas_manejadas
             ['Actividad']
           end
@@ -178,6 +237,27 @@ module Cor1440Gen
             render layout: 'application'
           end
 
+          def update
+            if actividad_params[:asistencia_attributes]
+              actividad_params[:asistencia_attributes].each do |a|
+                # Ubicamos los de autocompletacion y para esos creamos un registro 
+                if a[1] && a[1][:id] && a[1][:id] == '' && 
+                    a[1][:persona_attributes] && 
+                    a[1][:persona_attributes][:id] &&
+                    a[1][:persona_attributes][:id].to_i > 0 &&
+                    Sip::Persona.where(
+                      id: a[1][:persona_attributes][:id].to_i).count == 1
+                  ac = Cor1440Gen::Asistencia.create({
+                    actividad_id: @actividad.id,
+                    persona_id: a[1][:persona_attributes][:id]
+                  })
+                  ac.save!(validate: false)
+                  params[:actividad][:asistencia_attributes][a[0].to_s][:id] = ac.id
+                end
+              end
+            end
+            update_gen
+          end
           # Llamado por control para presentar responsables en formulario
           # Para limitar por permisos
           def filtra_usuario_responsable(lista_usuarios)
@@ -239,7 +319,10 @@ module Cor1440Gen
                   :nombres, 
                   :numerodocumento, 
                   :sexo, 
-                  :tdocumento_id
+                  :tdocumento_id,
+                  :anionac,
+                  :mesnac,
+                  :dianac
                 ]
               ],
               :valorcampoact_attributes => [

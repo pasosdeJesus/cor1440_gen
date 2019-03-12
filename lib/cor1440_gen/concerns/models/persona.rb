@@ -24,12 +24,13 @@ module Cor1440Gen
             reject_if: :all_blank
 
           def presenta_nombre
-            ip = numerodocumento ? numerodocumento : ''
+            ip = numerodocumento ? numerodocumento.to_s : ''
             if tdocumento
-              ip = tdocumento.sigla + ":" + ip
+              ip = tdocumento.sigla.to_s + ":" + ip
             end
             r = nombres + " " + apellidos + 
               " (" + ip + ")"
+            r
           end
 
         end # included

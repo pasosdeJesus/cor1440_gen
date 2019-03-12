@@ -1,0 +1,6 @@
+<% if registro %>
+  <% pm = registro.pmindicador.order(:ffin) %>
+  <% if pm.count > 0 %>
+    <%= pm.last.ffin %>: <%= pm.last.rind %>
+  <% end %>
+<% end %>

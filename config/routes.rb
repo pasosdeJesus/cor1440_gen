@@ -11,8 +11,6 @@ Cor1440Gen::Engine.routes.draw do
     as: :actividadespf
   resources :actividadespf, only: [:new, :destroy]
 
-    
-
   resources :camposact, path_names: { new: 'nuevo', edit: 'edita' }
 
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
@@ -23,10 +21,14 @@ Cor1440Gen::Engine.routes.draw do
   get "/informes/:id/impreso" => "informes#impreso", 
     as: :impresion
 
+  resources :mindicadorespf, path_names: { new: 'nuevo', edit: 'edita' }
+  get "/api/cor1440gen/mideindicador" => "mindicadorespf#mideindicador", 
+    as: :mideindicador
+
   get "/objetivospf/" => "proyectosfinancieros#objetivospf", 
     as: :objetivospf
   resources :objetivospf, only: [:new, :destroy]
-  
+ 
   get "/proyectosfinancieros/validar" => "proyectosfinancieros#validar", 
     as: :validar_proyectosfinancieros
   resources :proyectosfinancieros, path_names: { new: 'nuevo', edit: 'edita' }

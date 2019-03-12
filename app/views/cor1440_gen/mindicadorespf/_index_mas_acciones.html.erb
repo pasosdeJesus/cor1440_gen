@@ -1,0 +1,9 @@
+<% if registro.indicadorpf_id && registro.indicadorpf.objetivopf_id %>
+  <%= link_to 'Registrar avance',
+    main_app.new_efecto_path(indicadorpf_id: registro.indicadorpf_id), 
+    class: 'btn btn-xs' %>
+  <%= link_to 'Ver registros de avance', 
+    main_app.efectos_path('filtro[busindicadorpf_id]' => registro.indicadorpf_id), 
+    class: 'btn btn-xs' %>
+
+<% end %>
