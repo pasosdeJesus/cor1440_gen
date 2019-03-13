@@ -399,8 +399,8 @@ module Cor1440Gen
             end
             @busactividadpf= param_escapa(par, 'busactividadpf')
             if @buscatividadpf && @busactividadpf != '' then
-              ac = ac.joins(:actividad_actividadpf).where(
-                "cor1440_gen_actividad_actividadpf.actividadpf_id = ?",
+              ac = ac.joins(:actividadpf).where(
+                "cor1440_gen_actividadpf.id = ?",
                 @busactividadpf.to_i
               )
             end
@@ -417,8 +417,8 @@ module Cor1440Gen
             end
             @busproyectofinanciero = param_escapa(par, 'busproyectofinanciero')
             if @busproyectofinanciero && @busproyectofinanciero != '' then
-              ac = ac.joins(:actividad_proyectofinanciero).where(
-                "cor1440_gen_actividad_proyectofinanciero.proyectofinanciero_id= ?",
+              ac = ac.joins(:proyectofinanciero).where(
+                "cor1440_gen_proyectofinanciero.id= ?",
                 @busproyectofinanciero.to_i
               )
             end
