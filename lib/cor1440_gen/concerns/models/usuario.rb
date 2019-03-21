@@ -1,6 +1,6 @@
 # encoding: UTF-8
 
-require 'sip/concerns/models/usuario'
+require 'mr519_gen/concerns/models/usuario'
 
 
 module Cor1440Gen
@@ -10,7 +10,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Models::Usuario
+          include Mr519Gen::Concerns::Models::Usuario
 
           belongs_to :oficina, class_name: 'Sip::Oficina',
             foreign_key: "oficina_id", validate: true
