@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: bc936efaadb1fb67d5a6d1ab7c32dbb68e738f5d
+  revision: d74642658b54161315351f4fb2a0473ee169627d
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
-  revision: 9d29a8abcc5b6ed9aefcad85ca54dd1364262583
+  revision: f1c8458db49f388d0f1f02e98d04e8c23c131bb9
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
