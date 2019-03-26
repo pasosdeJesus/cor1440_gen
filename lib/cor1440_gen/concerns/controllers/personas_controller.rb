@@ -84,6 +84,10 @@ module Cor1440Gen
           end
 
 
+          def actualiza_especial(registro, paramf, paramsf)
+            return true
+          end
+
           # API
         
           def datos
@@ -117,8 +121,8 @@ module Cor1440Gen
                     "valorcampo_attributes" => [
                       :valor,
                       :campo_id,
-                      :id
-                    ]
+                      :id 
+                     ] + [:valor_ids => []],
                 ] ]
             ]
           end
@@ -128,7 +132,8 @@ module Cor1440Gen
           end
 
           def persona_params
-            p = params.require(:persona).permit(lista_params)
+            p = params.require(:persona)
+            p= p.permit(lista_params)
             return p
           end
 
