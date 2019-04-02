@@ -1,7 +1,7 @@
 # cor1440_gen : Motor para planeación y seguimiento de actividades e informes en una ONG
 [![Estado Construcción](https://api.travis-ci.org/pasosdeJesus/cor1440_gen.svg?branch=master)](https://travis-ci.org/pasosdeJesus/cor1440_gen) [![Clima del Código](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/gpa.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen) [![Cobertura de Pruebas](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/coverage.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen) [![security](https://hakiri.io/github/pasosdeJesus/cor1440_gen/master.svg)](https://hakiri.io/github/pasosdeJesus/cor1440_gen/master) [![Dependencias](https://gemnasium.com/pasosdeJesus/cor1440_gen.svg)](https://gemnasium.com/pasosdeJesus/cor1440_gen) 
 
-![Logo de cor1440](https://raw.githubusercontent.com/pasosdeJesus/cor1440_gen/master/spec/dummy/public/images/logo.jpg)
+![Logo de cor1440](https://raw.githubusercontent.com/pasosdeJesus/cor1440_gen/master/spec/dummy/app/assets/images/logo.jpg)
 
 Este es un motor para sistemas de información de planeación y seguimiento de 
 actividades en ONGs. Opera sobre Ruby on Rails 5 y PostgreSQL (preferiblemente 
