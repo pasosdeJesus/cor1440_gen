@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 408db7d0841995eb51f218dafed4f15ff55d22c0
+  revision: af9434b91e0564424205c643cbe9cecf32c873f2
   specs:
     heb412_gen (1.0.a1)
       chosen-rails
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 7034ae370d2aed2c3787867ac5f15c0b7678e2a1
+  revision: 5a3b3ebaff5d8fafe4d22300bf6614daee31cc95
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 5bf55a4073069dd39187046cad8bd550cdb7c504
+  revision: aefa79fe2c3ef25d2df358231d0a2f024b744c0c
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -235,7 +235,7 @@ GEM
       pry (>= 0.9.11)
     public_suffix (3.0.3)
     puma (3.12.1)
-    rack (2.0.6)
+    rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.3)
@@ -274,7 +274,7 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     redcarpet (3.4.0)
-    regexp_parser (1.3.0)
+    regexp_parser (1.4.0)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
       railties (>= 4.2.0, < 6.0)
