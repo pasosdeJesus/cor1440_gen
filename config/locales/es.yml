@@ -102,6 +102,7 @@ es:
         indicador: Indicador
         marcologico: Marco lógico
         objetivopf: Objetivo
+        plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este convenio
         Proyectofinanciero: Convenio financiado
         proyectofinanciero: Convenio financiado
         Proyectosfinancieros: Convenios financiados
@@ -133,4 +134,6 @@ es:
         medircon: Medir con
         Tipoindicador: Tipo de indicador
         Tiposindicador: Tipos de indicador
+      "heb412_gen/plantillahcm":
+        proyectofinanciero: Convenios financieros que exportan/importan con la plantilla
 
