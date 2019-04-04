@@ -12,6 +12,7 @@
 //
 //= require sip/motor
 //= require heb412_gen/motor
+//= require mr519_gen/motor
 //= require cor1440_gen/motor
 //= require_tree .
 
@@ -21,6 +22,7 @@ $(document).on('turbolinks:load ready page:load', function() {
 	  exports : window;
 	sip_prepara_eventos_comunes(root);
 	heb412_gen_prepara_eventos_comunes(root);
+	mr519_gen_prepara_eventos_comunes(root);
 	cor1440_gen_prepara_eventos_comunes(root);
         $("input[data-behaviour='datepicker']").datepicker({
           format: 'yyyy-mm-dd',
