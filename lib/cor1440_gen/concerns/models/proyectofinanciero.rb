@@ -40,6 +40,12 @@ module Cor1440Gen
             association_foreign_key: 'financiador_id',
             join_table: 'cor1440_gen_financiador_proyectofinanciero'
 
+          has_and_belongs_to_many :plantillahcm,
+            class_name: '::Heb412Gen::Plantillahcm',
+            foreign_key: 'proyectofinanciero_id',
+            association_foreign_key: 'plantillahcm_id',
+            join_table: 'cor1440_gen_plantillahcm_proyectofinanciero'
+
           has_and_belongs_to_many :proyecto, 
             class_name: 'Cor1440Gen::Proyecto',
             foreign_key: 'proyectofinanciero_id',

@@ -66,6 +66,7 @@ module Cor1440Gen
               [
                 :caracterizacion, 
                 :beneficiario, 
+                :plantillahcm, 
                 :anexo_proyectofinanciero
             ] - [
               "id", :id, 'created_at', :created_at, 'updated_at', :updated_at
@@ -90,6 +91,7 @@ module Cor1440Gen
               :marcologico,
               :caracterizacion, 
               :beneficiario,
+              :plantillahcm,
               :anexo_proyectofinanciero
             ]
           end
@@ -251,6 +253,8 @@ module Cor1440Gen
               :beneficiario_ids => []
             ] + [
               :caracterizacion_ids => []
+            ] + [
+              :planillahcm_ids => []
             ] + [
               :indicadorobjetivo_attributes =>  [
                 :id, 
