@@ -120,24 +120,24 @@ module Cor1440Gen
           end
 
           scope :filtro_compromisos, lambda { |compromisos|
-            where("unaccent(compromisos) ILIKE '%' || unaccent(?) || '%'", 
+            where("unaccent(cor1440_gen_proyectofinanciero.compromisos) ILIKE '%' || unaccent(?) || '%'", 
                   compromisos)
           }
 
           scope :filtro_fechainicioini, lambda { |f|
-            where('fechainicio >= ?', f)
+            where('cor1440_gen_proyectofinanciero.fechainicio >= ?', f)
           }
 
           scope :filtro_fechainiciofin, lambda { |f|
-            where('fechainicio <= ?', f)
+            where('cor1440_gen_proyectofinanciero.fechainicio <= ?', f)
           }
 
           scope :filtro_fechacierreini, lambda { |f|
-            where('fechacierre >= ?',  f)
+            where('cor1440_gen_proyectofinanciero.fechacierre >= ?',  f)
           }
 
           scope :filtro_fechacierrefin, lambda { |f|
-            where('fechacierre <= ?', f)
+            where('cor1440_gen_proyectofinanciero.fechacierre <= ?', f)
           }
 
           scope :filtro_financiador_ids, lambda { |f|
@@ -146,12 +146,12 @@ module Cor1440Gen
           }
 
           scope :filtro_nombre, lambda { |nombre|
-            where("unaccent(nombre) ILIKE '%' || unaccent(?) || '%'", 
+            where("unaccent(cor1440_gen_proyectofinanciero.nombre) ILIKE '%' || unaccent(?) || '%'", 
                   nombre)
           }
 
           scope :filtro_observaciones, lambda { |observaciones|
-            where("unaccent(observaciones) ILIKE '%' || unaccent(?) || '%'", observaciones)
+            where("unaccent(cor1440_gen_proyectofinanciero.observaciones) ILIKE '%' || unaccent(?) || '%'", observaciones)
           }
 
           scope :filtro_proyecto_ids, lambda { |p|
@@ -160,7 +160,7 @@ module Cor1440Gen
           }
 
           scope :filtro_responsable_id, lambda { |r|
-            where(responsable_id: r)
+            where('cor1440_gen_proyectofinanciero.responsable_id=?', r)
           }
 
 
