@@ -1,0 +1,30 @@
+<% 
+  ab = ::Ability.new 
+  v = defined?(vista) ? vista : 
+    defined?(@vista) ? @vista :
+    defined?(f.object.plantillahcm.vista) ? 
+    f.object.plantillahcm.vista :
+    defined?(ab.campos_plantillas['Usuario']) ? 'Usuario' : nil
+  if v.nil? || ab.campos_plantillas[v].nil?
+    col = [['','']]
+  else
+    col = ab.campos_plantillas[v][:campos]
+  end
+  f.object.plantillahcm.proyectofinanciero.each do |pf|
+    puts "pf=#{pf.nombre}"
+    pf.caracterizacion.each do |fm|
+      nf=fm.nombreinterno
+      puts "nf=#{nf}"
+      fm.campo.each do |c|
+        puts "c=#{c.nombreinterno}"
+        col << nf + '.' + c.nombreinterno
+      end
+    end
+  end
+  col.sort!.uniq!
+  puts "OJO campoplantillahcm. col=#{col.to_s}"
+%>
+<%= f.input :nombrecampo,
+  collection: col,
+  label: false
+%>
