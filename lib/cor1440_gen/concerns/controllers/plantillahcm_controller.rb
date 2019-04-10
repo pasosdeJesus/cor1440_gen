@@ -56,6 +56,18 @@ module Cor1440Gen
 
         end  # included
 
+        class_methods do
+          
+          def valor_campo(c, r)
+            byebug
+            v = r[c.nombrecampo.to_sym].nil? ?
+              r[c.nombrecampo] :
+              r[c.nombrecampo.to_sym]
+            return v
+          end
+
+        end
+
       end
     end
   end
