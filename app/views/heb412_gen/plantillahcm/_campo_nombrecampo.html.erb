@@ -10,14 +10,16 @@
   else
     col = ab.campos_plantillas[v][:campos]
   end
-  f.object.plantillahcm.proyectofinanciero.each do |pf|
-    puts "pf=#{pf.nombre}"
-    pf.caracterizacion.each do |fm|
-      nf=fm.nombreinterno
-      puts "nf=#{nf}"
-      fm.campo.each do |c|
-        puts "c=#{c.nombreinterno}"
-        col << nf + '.' + c.nombreinterno
+  if f.object.plantillahcm
+    f.object.plantillahcm.proyectofinanciero.each do |pf|
+      puts "pf=#{pf.nombre}"
+      pf.caracterizacion.each do |fm|
+        nf=fm.nombreinterno
+        puts "nf=#{nf}"
+        fm.campo.each do |c|
+          puts "c=#{c.nombreinterno}"
+          col << nf + '.' + c.nombreinterno
+        end
       end
     end
   end
