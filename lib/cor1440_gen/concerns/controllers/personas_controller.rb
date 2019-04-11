@@ -88,6 +88,35 @@ module Cor1440Gen
             return true
           end
 
+
+          def self.valor_campo_compuesto(registro, campo)
+            p = campo.partition('.')
+            if Mr519Gen::Formulario.where(nombreinterno: p[0]).count == 0
+              return "No se encontró formulario con nombreinterno #{p[0]}"
+            end
+            f = Mr519Gen::Formulario.where(nombreinterno: p[0]).take
+            if f.campo.where(nombreinterno: p[2]).count == 0
+              return "En formulario #{f.id} no se encontró campo con nombre interno #{p[2]}"
+            end
+            c = f.campo.where(nombreinterno: p[2]).take
+            rfs=Mr519Gen::Respuestafor.joins('JOIN cor1440_gen_caracterizacionpersona AS car ON car.respuestafor_id=mr519_gen_respuestafor.id').where(formulario_id: f.id).where('car.persona_id=?', registro.id) 
+            if rfs.count == 0
+              return "No hay caracterización"
+            end
+            if rfs.count > 1
+              return "Hay varios proyectos con respuesta"
+            end
+            rf = rfs.take
+            if rf.valorcampo.where(campo_id: c.id).count == 0
+              return "En respuesta a formularoi #{rf.id} no se encontró valor para el campo #{c.id}"
+            end
+
+            vc = rf.valorcampo.where(campo_id: c.id).take
+            #byebug
+            vc.presenta_valor(false)
+          end
+
+
           # API
         
           def datos
