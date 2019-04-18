@@ -33,6 +33,11 @@ module Cor1440Gen
             r
           end
 
+          scope :filtro_proyectofinanciero_ids, lambda { |p|
+            joins(:proyectofinanciero).
+              where('cor1440_gen_proyectofinanciero.id=?', p)
+          }
+
         end # included
       end
     end

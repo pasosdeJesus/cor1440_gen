@@ -136,4 +136,6 @@ es:
         Tiposindicador: Tipos de indicador
       "heb412_gen/plantillahcm":
         proyectofinanciero: Convenios financieros que exportan/importan con la plantilla
+      "sip/persona":
+        proyectofinanciero_ids: Convenios financieros
 

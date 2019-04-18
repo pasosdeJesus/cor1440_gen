@@ -18,7 +18,12 @@
         puts "nf=#{nf}"
         fm.campo.each do |c|
           puts "c=#{c.nombreinterno}"
-          col << nf + '.' + c.nombreinterno
+          col << "#{nf}.#{c.nombreinterno}"
+          if c.tipo == Mr519Gen::ApplicationHelper::SELECCIONMULTIPLE
+            c.opcioncs.each do |op|
+              col << "#{nf}.#{c.nombreinterno}.#{op.valor}"
+            end
+          end
         end
       end
     end
