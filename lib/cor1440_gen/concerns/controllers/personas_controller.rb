@@ -99,6 +99,28 @@ module Cor1440Gen
               return "No se encontró formulario con nombreinterno #{p[0]}"
             end
             f = Mr519Gen::Formulario.where(nombreinterno: p[0]).take
+
+            car = Cor1440Gen::Caracterizacionpersona.where(
+              persona_id: registro.id).where('respuestafor_id IN
+              (SELECT id FROM mr519_gen_respuestafor 
+              WHERE formulario_id=?)', f.id)
+            if car.count == 0
+              return "No se encontró caracterización para persona #{registro.id} con formulario #{f.id}"
+            elsif car.count > 1
+              return "Hay #{car.count} caracterizaciones par ala persona #{registro.id} con formulario #{f.id}"
+            end
+            car = car.take
+
+            if p[1] == 'ultimo_editor' 
+              return car.ulteditor.nusuario
+            end
+
+            rf = car.respuestafor
+
+            if p[1] == 'fecha_ultimaedicion'
+              return rf.fechacambio
+            end
+
             if f.campo.where(nombreinterno: p[1]).count == 0
               return "En formulario #{f.id} no se encontró campo con nombre interno #{p[2]}"
             end
@@ -116,14 +138,6 @@ module Cor1440Gen
                 ope = op.where(valor: p[2]).take
               end
             end
-            rfs=Mr519Gen::Respuestafor.joins('JOIN cor1440_gen_caracterizacionpersona AS car ON car.respuestafor_id=mr519_gen_respuestafor.id').where(formulario_id: f.id).where('car.persona_id=?', registro.id) 
-            if rfs.count == 0
-              return "No hay caracterización"
-            end
-            if rfs.count > 1
-              return "Hay varios proyectos con respuesta"
-            end
-            rf = rfs.take
             if rf.valorcampo.where(campo_id: campo.id).count == 0
               return "En respuesta a formularoi #{rf.id} no se encontró valor para el campo #{campo.id}"
             end
@@ -132,6 +146,15 @@ module Cor1440Gen
             if !ope.nil?
               return vc.valorjson.include?(ope.id.to_s) ? 1 : 0
             end
+            if campo.tipo == Mr519Gen::ApplicationHelper::SELECCIONMULTIPLE
+              cop = vc.valorjson.select{|i| i != ''}.map {|idop|
+                ope = Mr519Gen::Opcioncs.where(id: idop.to_i)
+                ope.count == 0  ?  "No hay opcion con id #{idop}" :
+                  ope.take.nombre
+              }
+              return cop.join(". ")
+            end
+
             vc.presenta_valor(false)
           end
 

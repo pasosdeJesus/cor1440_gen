@@ -16,6 +16,8 @@
       pf.caracterizacion.each do |fm|
         nf=fm.nombreinterno
         puts "nf=#{nf}"
+        col << "#{nf}.ultimo_editor"
+        col << "#{nf}.fecha_ultimaedicion"
         fm.campo.each do |c|
           puts "c=#{c.nombreinterno}"
           col << "#{nf}.#{c.nombreinterno}"
