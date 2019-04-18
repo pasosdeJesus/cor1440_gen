@@ -1,7 +1,7 @@
 <%= f.simple_fields_for :caracterizacionpersona, 
   f.object.caracterizacionpersona.order(:id) do |car| %>
   <div class="panel panel-default">
-    <div class="panel-heading"><%= car.object.respuestafor.formulario.nombre %></div>
+    <div class="panel-heading"><%= car.object.respuestafor.formulario.nombre %> -  <%= Cor1440Gen::Proyectofinanciero.where('id IN (SELECT proyectofinanciero_id FROM cor1440_gen_caracterizacionpf WHERE formulario_id=?)', car.object.respuestafor.formulario_id).pluck('nombre').join('; ') %></div>
     <div class="panel-body">
       <%= car.simple_fields_for :respuestafor do |rf| %>
         <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 

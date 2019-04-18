@@ -50,15 +50,15 @@ module Cor1440Gen
               persona.proyectofinanciero.each do |pf|
                 pf.caracterizacion.each do |ca|
                   cp = Cor1440Gen::Caracterizacionpersona.where(
-                    proyectofinanciero_id: pf.id,
-                    persona_id: persona.id)
+                    persona_id: persona.id).where('respuestafor_id IN
+                  (SELECT id FROM mr519_gen_respuestafor WHERE
+                     formulario_id=?)', ca.id)
                   if cp.count == 0
                     rf = Mr519Gen::Respuestafor.create(
                       formulario_id: ca.id,
                       fechaini: Date.today,
                       fechacambio: Date.today)
                     car = Cor1440Gen::Caracterizacionpersona.create(
-                      proyectofinanciero_id: pf.id,
                       persona_id: persona.id,
                       respuestafor_id: rf.id,
                       ulteditor_id: current_usuario.id
