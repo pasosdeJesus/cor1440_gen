@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: b351fff8c758b3dfe5d46a2131d406e60517fd9e
+  revision: adfc319534fb16afd6e5ef1cedde083e0f815c57
   specs:
     mr519_gen (0.1.0)
       rails (~> 5.2.2, >= 5.2.2)
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: cb287d1afd2aa195cd3f80a8d587dea6f7a30d4e
+  revision: 58fa999a85c643912b7d6f9ab8aa38b5ee5d348d
   specs:
     sip (2.0.b5)
       bootstrap-datepicker-rails
@@ -123,9 +123,9 @@ GEM
     climate_control (0.2.0)
     cliver (0.3.2)
     coderay (1.1.2)
-    coffee-rails (4.2.2)
+    coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
+      railties (>= 5.2.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
