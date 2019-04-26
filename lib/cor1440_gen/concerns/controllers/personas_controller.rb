@@ -158,7 +158,26 @@ module Cor1440Gen
             vc.presenta_valor(false)
           end
 
-
+#          def self.importa_dato(registro, menserr)
+#            byebug
+#            if registro[:pais] || registro[:departamento] || 
+#              registro[:municipio] || registro[:clase]
+#              u = Sip::Ubicacion.importa_dato(registro, menserr)
+#              byebug
+#            end
+#            p = Sip::Persona.new
+#            registro.keys.each do |ll|
+#              case ll.to_sym
+#              when :actualizado_en
+#                p.updated_at = registro[ll.to_sym]
+#              else
+#                p.importa(ll, registro[ll.to_sym])
+#              end
+#            end
+#            byebug
+#            return menserr
+#          end
+#
           # API
         
           def datos
@@ -195,6 +214,8 @@ module Cor1440Gen
                       :id 
                      ] + [:valor_ids => []],
                 ] ]
+            ] + [ 
+              'proyectofinanciero_ids' => [] 
             ]
           end
 
