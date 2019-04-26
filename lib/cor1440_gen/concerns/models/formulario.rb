@@ -9,10 +9,10 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Models::Formulario
+          include Mr519Gen::Concerns::Models::Formulario
 
           has_and_belongs_to_many :caracterizacion, 
-            class_name: 'Sip::Proyectofinanciero', 
+            class_name: 'Cor1440Gen::Proyectofinanciero', 
             foreign_key: 'formulario_id',
             association_foreign_key: 'proyectofinanciero_id',
             join_table: 'cor1440_gen_caracterizacionpf'
