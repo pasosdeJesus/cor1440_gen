@@ -890,29 +890,9 @@ ALTER SEQUENCE public.cor1440_gen_objetivopf_id_seq OWNED BY public.cor1440_gen_
 --
 
 CREATE TABLE public.cor1440_gen_plantillahcm_proyectofinanciero (
-    id bigint NOT NULL,
     plantillahcm_id integer,
     proyectofinanciero_id integer
 );
-
-
---
--- Name: cor1440_gen_plantillahcm_proyectofinanciero_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.cor1440_gen_plantillahcm_proyectofinanciero_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: cor1440_gen_plantillahcm_proyectofinanciero_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.cor1440_gen_plantillahcm_proyectofinanciero_id_seq OWNED BY public.cor1440_gen_plantillahcm_proyectofinanciero.id;
 
 
 --
@@ -2704,13 +2684,6 @@ ALTER TABLE ONLY public.cor1440_gen_objetivopf ALTER COLUMN id SET DEFAULT nextv
 
 
 --
--- Name: cor1440_gen_plantillahcm_proyectofinanciero id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_plantillahcm_proyectofinanciero ALTER COLUMN id SET DEFAULT nextval('public.cor1440_gen_plantillahcm_proyectofinanciero_id_seq'::regclass);
-
-
---
 -- Name: cor1440_gen_pmindicadorpf id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -3129,14 +3102,6 @@ ALTER TABLE ONLY public.cor1440_gen_mindicadorpf
 
 ALTER TABLE ONLY public.cor1440_gen_objetivopf
     ADD CONSTRAINT cor1440_gen_objetivopf_pkey PRIMARY KEY (id);
-
-
---
--- Name: cor1440_gen_plantillahcm_proyectofinanciero cor1440_gen_plantillahcm_proyectofinanciero_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_plantillahcm_proyectofinanciero
-    ADD CONSTRAINT cor1440_gen_plantillahcm_proyectofinanciero_pkey PRIMARY KEY (id);
 
 
 --
@@ -4706,6 +4671,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190418011743'),
 ('20190418014012'),
 ('20190418123920'),
-('20190418142712');
+('20190418142712'),
+('20190426131119');
 
 
