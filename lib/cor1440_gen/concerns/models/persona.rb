@@ -141,7 +141,7 @@ module Cor1440Gen
               # beneficiario de ese
               pf = Cor1440Gen::Caracterizacionpf.where(formulario_id: fid)
               if pf.count != 1
-                menserror << "  Se enocntraron #{pf.count} convenios financieros que usan en caracterizaciones el formulario #{fid} (se esperaba 1)."
+                puts "  Se enocntraron #{pf.count} convenios financieros que usan en caracterizaciones el formulario #{fid} (se esperaba 1 para ponerlo automaticamente, toca ponerlo manualmente)."
               else
                 b = Cor1440Gen::Beneficiariopf.where(proyectofinanciero_id:
                                                  pf.take.id)
