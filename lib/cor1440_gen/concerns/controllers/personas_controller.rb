@@ -107,7 +107,7 @@ module Cor1440Gen
             if car.count == 0
               return "No se encontró caracterización para persona #{registro.id} con formulario #{f.id}"
             elsif car.count > 1
-              return "Hay #{car.count} caracterizaciones par ala persona #{registro.id} con formulario #{f.id}"
+              return "Hay #{car.count} caracterizaciones para la persona #{registro.id} con formulario #{f.id}"
             end
             car = car.take
 
@@ -116,7 +116,7 @@ module Cor1440Gen
             end
 
             rf = car.respuestafor
-
+            
             if p[1] == 'fecha_ultimaedicion'
               return rf.fechacambio
             end
@@ -129,11 +129,11 @@ module Cor1440Gen
             ope = nil
             if campo.tipo == Mr519Gen::ApplicationHelper::SELECCIONMULTIPLE
               op = campo.opcioncs
-              if p.count > 2
+              if p.count > 2 # Solicitud tiene opcion
                 if op.where(valor: p[2]).count == 0
-                  return "En formulario #{f.id}, el campo con nombre interno #{p[2]} no tiene una opción con valor #{p[2]}"
+                  return "En formulario #{f.id}, el campo con nombre interno #{p[1]} no tiene una opción con valor #{p[2]}"
                 elsif op.where(valor: p[2]).count > 1
-                  return "En formulario #{f.id}, el campo con nombre interno #{p[2]} tiene más de una opción con valor #{p[2]}"
+                  return "En formulario #{f.id}, el campo con nombre interno #{p[1]} tiene más de una opción con valor #{p[2]}"
                 end
                 ope = op.where(valor: p[2]).take
               end
@@ -158,26 +158,6 @@ module Cor1440Gen
             vc.presenta_valor(false)
           end
 
-#          def self.importa_dato(registro, menserr)
-#            byebug
-#            if registro[:pais] || registro[:departamento] || 
-#              registro[:municipio] || registro[:clase]
-#              u = Sip::Ubicacion.importa_dato(registro, menserr)
-#              byebug
-#            end
-#            p = Sip::Persona.new
-#            registro.keys.each do |ll|
-#              case ll.to_sym
-#              when :actualizado_en
-#                p.updated_at = registro[ll.to_sym]
-#              else
-#                p.importa(ll, registro[ll.to_sym])
-#              end
-#            end
-#            byebug
-#            return menserr
-#          end
-#
           # API
         
           def datos
