@@ -121,7 +121,8 @@ module Cor1440Gen
             return importa_sip(ndatosent, datossal, menserror, opciones)
           end
 
-          def complementa_importa(datossal, menserror, opciones)
+          def complementa_importa(ulteditor_id, datossal, menserror, opciones)
+            puts "OJO complementa_importa ulteditor_id=#{ulteditor_id}"
             if !datossal[:respuestafor] ||
               !datossal[:caracterizacion] ||
               !datossal[:valorcampo] 
@@ -155,8 +156,12 @@ module Cor1440Gen
               if datossal[:respuestafor][fid].id
                 c.persona_id = self.id
                 c.respuestafor_id = datossal[:respuestafor][fid].id
-                if c.ulteditor_id.nil?
-                  c.ulteditor = current_usuario
+                if c.ulteditor_id.nil? 
+                  if defined?(current_usuario)
+                    c.ulteditor = current_usuario
+                  else
+                    c.ulteditor_id = ulteditor_id
+                  end
                 end
                 c.save
                 if c.errors.messages && c.errors.messages.count > 0
