@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Rails (internacionalización)
-gem "rails", '~> 5.2.1'
+gem "rails", '~> 6.0.0.rc1'
 
 gem 'bigdecimal'
 
@@ -30,7 +30,8 @@ gem "odf-report"
 
 
 
-gem 'chosen-rails'
+gem 'chosen-rails', git: "https://github.com/vtamara/chosen-rails.git", branch: 'several-fixes'
+
 gem 'rspreadsheet'
 #gem 'rspreadsheet', path: '../rspreadsheet/'
 gem 'libxml-ruby', '~> 3.0'
@@ -84,15 +85,15 @@ gem "tzinfo"
 #gem "tzinfo-data", platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
-gem 'sip', git: "https://github.com/pasosdeJesus/sip.git"
+gem 'sip', git: "https://github.com/pasosdeJesus/sip.git", branch: :rails6
 #gem 'sip', path: '../sip'
 
 # Motor heb412_gen para manejar archivos como nube y plantillas
-gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
+gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :rails6
 #gem 'heb412_gen', path: '../heb412_gen/'
 
 # Motor para formularios
-gem 'mr519_gen', git: 'https://github.com/pasosdeJesus/mr519_gen.git'
+gem 'mr519_gen', git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: :rails6
 #gem 'mr519_gen', path: '../mr519_gen/'
 
 
