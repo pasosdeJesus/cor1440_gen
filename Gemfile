@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 # Rails (internacionalización)
 gem "rails", '~> 6.0.0.rc1'
 
-gem 'bigdecimal'
-
 gem 'bootsnap', '>=1.1.0', require: false
 
 gem "rails-i18n"
