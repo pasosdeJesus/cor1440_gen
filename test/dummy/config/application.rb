@@ -8,7 +8,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-require 'cor1440_gen'
+#require 'cor1440_gen'
 
 module Dummy
   class Application < Rails::Application
