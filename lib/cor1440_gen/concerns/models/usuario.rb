@@ -13,7 +13,7 @@ module Cor1440Gen
           include Mr519Gen::Concerns::Models::Usuario
 
           belongs_to :oficina, class_name: 'Sip::Oficina',
-            foreign_key: "oficina_id", validate: true
+            foreign_key: "oficina_id", validate: true, optional: true
 
           has_and_belongs_to_many :actividad, 
             foreign_key: 'usuario_id',

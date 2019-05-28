@@ -16,10 +16,10 @@ module Cor1440Gen
             foreign_key: 'proyectofinanciero_id'
           belongs_to :resultadopf, 
             class_name: 'Cor1440Gen::Resultadopf',
-            foreign_key: 'resultadopf_id'
+            foreign_key: 'resultadopf_id', optional: true
           belongs_to :actividadtipo, 
             class_name: 'Cor1440Gen::Actividadtipo',
-            foreign_key: 'actividadtipo_id'
+            foreign_key: 'actividadtipo_id', optional: true
 
           has_and_belongs_to_many :actividad, 
             class_name: 'Cor1440Gen::Actividad',

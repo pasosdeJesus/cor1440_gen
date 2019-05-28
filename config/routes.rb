@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 Cor1440Gen::Engine.routes.draw do
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }

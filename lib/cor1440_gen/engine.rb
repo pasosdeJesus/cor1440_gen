@@ -1,14 +1,16 @@
 # encoding: UTF-8
 
-require 'font-awesome-rails'
+#require 'sip/engine'
+#require 'font-awesome-rails'
 
 module Cor1440Gen
   class Engine < ::Rails::Engine
+
     isolate_namespace Cor1440Gen
 
     config.generators do |g|
       g.test_framework      :minitest, spec: true, :fixture => false
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.fixture_replacement :factory_girl, :dir => 'test/factories'
       g.assets false
       g.helper false
     end

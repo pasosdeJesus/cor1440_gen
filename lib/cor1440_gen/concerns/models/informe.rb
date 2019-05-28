@@ -9,19 +9,20 @@ module Cor1440Gen
 
         included do
           belongs_to :proyecto, class_name: 'Cor1440Gen::Proyecto',
-            foreign_key: 'filtroproyecto', validate: true
+            foreign_key: 'filtroproyecto', validate: true, optional: true
           belongs_to :actividadarea, 
             class_name: 'Cor1440Gen::Actividadarea', 
-            foreign_key: 'filtroactividadarea', validate: true
+            foreign_key: 'filtroactividadarea', validate: true, optional: true
           belongs_to :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero', 
-            foreign_key: 'filtroproyectofinanciero', validate: true
+            foreign_key: 'filtroproyectofinanciero', validate: true, 
+            optional: true
           belongs_to :responsable, 
             class_name: '::Usuario', 
-            foreign_key: 'filtroresponsable', validate: true
+            foreign_key: 'filtroresponsable', validate: true, optional: true
           belongs_to :oficina, 
             class_name: 'Sip::Oficina', 
-            foreign_key: 'filtrooficina', validate: true
+            foreign_key: 'filtrooficina', validate: true, optional: true
 
 
 

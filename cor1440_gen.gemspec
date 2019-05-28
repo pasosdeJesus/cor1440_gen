@@ -1,5 +1,5 @@
+# encoding: UTF_8
 $:.push File.expand_path("../lib", __FILE__)
-# encoding: UTF-8 
 
 # Maintain your gem's version:
 require "cor1440_gen/version"
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.license     = "Dominio Público de acuerdo a Legislación Colombiana"
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENCIA.md", "Rakefile", "README.md"]
-  s.test_files = Dir["spec/**/*"]
+  s.test_files = Dir["test/**/*"]
 
 
   s.add_dependency "jquery-rails"

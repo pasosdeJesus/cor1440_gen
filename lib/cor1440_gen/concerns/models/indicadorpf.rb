@@ -13,13 +13,13 @@ module Cor1440Gen
 
           belongs_to :objetivopf, 
             class_name: 'Cor1440Gen::Objetivopf',
-            foreign_key: 'objetivopf_id'
+            foreign_key: 'objetivopf_id', optional: true
           belongs_to :resultadopf, 
             class_name: 'Cor1440Gen::Resultadopf',
-            foreign_key: 'resultadopf_id'
+            foreign_key: 'resultadopf_id', optional: true
           belongs_to :tipoindicador, 
             class_name: 'Cor1440Gen::Tipoindicador',
-            foreign_key: 'tipoindicador_id'
+            foreign_key: 'tipoindicador_id', optional: true
 
 
           validates :numero, presence: true, length: {maximum: 15}

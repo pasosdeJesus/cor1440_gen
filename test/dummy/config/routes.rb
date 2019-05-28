@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
 
-  scope 'cor1440/' do
+  scope '/cor1440' do
     devise_scope :usuario do
       get 'sign_out' => 'devise/sessions#destroy'
     end
@@ -16,10 +16,10 @@ Rails.application.routes.draw do
     resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
   
     root 'sip/hogar#index'
-    mount Cor1440Gen::Engine, at: "/", as: "cor1440_gen"
-    mount Mr519Gen::Engine => "/", as: 'mr519_gen'
-    mount Heb412Gen::Engine => "/", as: 'heb412_gen'
-    mount Sip::Engine, at: "/", as: "sip"
+    mount Cor1440Gen::Engine, at: "/cor1440", as: "cor1440_gen"
+    mount Mr519Gen::Engine => "/cor1440", as: 'mr519_gen'
+    mount Heb412Gen::Engine => "/cor1440", as: 'heb412_gen'
+    mount Sip::Engine, at: "/cor1440", as: "sip"
   
     namespace :admin do
       ab = ::Ability.new
