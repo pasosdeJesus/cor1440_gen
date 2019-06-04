@@ -15,17 +15,21 @@ module Cor1440Gen
             association_foreign_key: 'actividad_id',
             join_table: 'cor1440_gen_actividad_actividadtipo'
 
+          has_and_belongs_to_many :formulario, 
+            class_name: 'Mr519Gen::Formulario',
+            foreign_key: 'actividadtipo_id',
+            association_foreign_key: 'formulario_id', 
+            join_table: 'cor1440_gen_actividadtipo_formulario'
+
           has_many :actividadpf, :dependent => :delete_all,
             class_name: 'Cor1440Gen::Actividadpf', 
             foreign_key: 'actividadtipo_id'
-
 
           has_many :campoact, foreign_key: 'actividadtipo_id',
             validate: true, dependent: :destroy,
             class_name: 'Cor1440Gen::Campoact'
           accepts_nested_attributes_for :campoact,
             allow_destroy: true, reject_if: :all_blank
-
 
         end
       end

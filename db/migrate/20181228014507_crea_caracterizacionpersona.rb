@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class CreaCaracterizacionpersona < ActiveRecord::Migration[5.2]
   def change
     create_table :cor1440_gen_caracterizacionpersona do |t|

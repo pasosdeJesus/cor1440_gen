@@ -8,8 +8,8 @@ es:
     fechacierre_localizada: Fecha de cierre
     actividadarea: Subárea de actividad
     actividadareas: Subáreas de actividad
-    actividadtipo: Tipo de actividad
-    actividadtipos: Tipos de actividad
+    actividadtipo: Tipo de actividad de proyecto financiero
+    actividadtipos: Tipos de actividad de proyecto financiero
     proyectos: Áreas
     proyecto: Área
     proyectosfinancieros: Convenios financieros
@@ -46,8 +46,8 @@ es:
         Actividadarea: Subárea de actividad
         Actividadareas: Subáreas de actividad
       "cor1440_gen/actividadtipo":
-        Actividadtipo: Tipo de actividad
-        Actividadtipos: Tipos de actividad
+        Actividadtipo: Tipo de actividad de proyecto financiero
+        Actividadtipos: Tipos de actividad de proyecto financiero
         campoact: Campo
         Campoact: Campo
         listadoasistencia: Listado de asistencia

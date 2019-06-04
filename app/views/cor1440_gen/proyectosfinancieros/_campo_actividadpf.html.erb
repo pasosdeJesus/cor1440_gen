@@ -15,7 +15,8 @@
           </tr>
         </thead>
         <tbody id="actividadespf">
-          <%= f.simple_fields_for :actividadpf, f.object.actividadpf.order(:id) do |o| %>
+          <%= f.simple_fields_for :actividadpf, 
+            f.object.actividadpf.order(:id) do |o| %>
             <%= render 'actividadpf_campos', f:  o %>
           <% end %>
         </tbody>

@@ -66,7 +66,7 @@ module Cor1440Gen
                   elsif cp.count > 1
                     flash.now[:notice] = "Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
                     car= cp.take
-                  else
+                  else # cp.count == 1
                     car = cp.take
                   end
                   Mr519Gen::ApplicationHelper::asegura_camposdinamicos(car)

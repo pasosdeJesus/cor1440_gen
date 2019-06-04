@@ -37,6 +37,14 @@ module Cor1440Gen
             association_foreign_key: 'actorsocial_id',
             join_table: 'cor1440_gen_actividad_actorsocial'
 
+          has_and_belongs_to_many :respuestafor, 
+            class_name: 'Mr519Gen::Respuestafor',
+            foreign_key: 'actividad_id',
+            association_foreign_key: 'respuestafor_id', 
+            join_table: 'cor1440_gen_actividad_respuestafor'
+          accepts_nested_attributes_for :respuestafor, 
+            allow_destroy: true, reject_if: :all_blank
+
           has_and_belongs_to_many :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero',
             foreign_key: 'actividad_id',

@@ -21,13 +21,14 @@ module Cor1440Gen
           end
 
           def atributos_index
-            ["id", 
-             "nombre", 
-             "observaciones", 
-             "campoact",
-             "listadoasistencia",
-             "fechacreacion_localizada", 
-             "habilitado"
+            [:id, 
+             :nombre, 
+             :observaciones, 
+             :formulario,
+             :campoact,
+             :listadoasistencia,
+             :fechacreacion_localizada, 
+             :habilitado
             ]
           end
 
@@ -45,10 +46,12 @@ module Cor1440Gen
           end
 
           def actividadtipo_params
-            params.require(:actividadtipo).permit(
-              *atributos_form + [:campoact_attributes => [
+            l =  atributos_form - [:formulario] +
+              [:formulario_ids => [] ] +
+              [:campoact_attributes => [
                 :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
-              ])
+            ]
+            params.require(:actividadtipo).permit(l)
           end
 
         end

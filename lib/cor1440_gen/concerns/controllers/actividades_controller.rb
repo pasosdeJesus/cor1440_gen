@@ -52,6 +52,7 @@ module Cor1440Gen
               :responsable,
               :corresponsables,
               :actividadpf, 
+              :respuestafor,
               :valorcampoact,
               :objetivo,
               :resultado, 
@@ -200,15 +201,55 @@ module Cor1440Gen
           def asegura_camposdinamicos(actividad)
             @listadoasistencia = false
             ci = []
+            vfid = []
             actividad.actividadpf.each do |apf|
               if apf.actividadtipo
                 ci += apf.actividadtipo.campoact_ids
                 if apf.actividadtipo.listadoasistencia
                   @listadoasistencia = true
                 end
+                apf.actividadtipo.formulario.each do |f|
+                  vfid << f.id
+                  aw = actividad.respuestafor.where(formulario_id: f.id) 
+                  if  aw.count == 0
+                    rf = Mr519Gen::Respuestafor.create(
+                      formulario_id: f.id,
+                      fechaini: Date.today,
+                      fechacambio: Date.today)
+                    ar = Cor1440Gen::ActividadRespuestafor.create(
+                      actividad_id: actividad.id,
+                      respuestafor_id: rf.id,
+                    )
+                  else # aw.count == 1
+                    r = actividad.respuestafor.where(formulario_id: f.id).take
+                    ar = Cor1440Gen::ActividadRespuestafor.where(
+                      actividad_id: actividad.id,
+                      respuestafor_id: r.id,
+                    ).take
+                  end
+                  Mr519Gen::ApplicationHelper::asegura_camposdinamicos(ar)
+                end
               end
             end
+            if vfid.count > 0
+              ar = Cor1440Gen::ActividadRespuestafor.
+                where(actividad_id: actividad.id).
+                joins(:respuestafor).
+                where('formulario_id NOT IN (?)', vfid.join(', '))
+            else vfid.count == 0
+              ar = Cor1440Gen::ActividadRespuestafor.
+                where(actividad_id: actividad.id)
+            end
+            if ar.count > 0
+              rb = ar.map(&:respuestafor_id)
+              Cor1440Gen::ActividadRespuestafor.connection.
+                execute("DELETE FROM cor1440_gen_actividad_respuestafor
+                        WHERE actividad_id=#{actividad.id} 
+                        AND respuestafor_id IN (#{rb.join(', ')})")
+              Mr519Gen::Respuestafor.where(id: rb).destroy_all
+            end
 
+            
             cd = actividad.valorcampoact.map(&:campoact_id)
             sobran = cd - ci
             borrar = actividad.valorcampoact.where(campoact_id: sobran).
@@ -219,7 +260,9 @@ module Cor1440Gen
             faltan.each do |f|
               actividad.valorcampoact.new(campoact_id: f, valor: '').save
             end
+
           end
+
 
           def edit_cor1440_gen
             @registro = Cor1440Gen::Actividad.find(params[:id])
@@ -325,6 +368,16 @@ module Cor1440Gen
                   :dianac
                 ]
               ],
+
+              :respuestafor_attributes => [
+                :id,
+                "valorcampo_attributes" => [
+                  :valor,
+                  :campo_id,
+                  :id 
+              ] + [:valor_ids => []]
+              ],
+
               :valorcampoact_attributes => [
                 :id,
                 :campoact_id,
