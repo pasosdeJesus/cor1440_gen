@@ -53,7 +53,6 @@ module Cor1440Gen
               :corresponsables,
               :actividadpf, 
               :respuestafor,
-              :valorcampoact,
               :objetivo,
               :resultado, 
               :actorsocial,
@@ -235,7 +234,7 @@ module Cor1440Gen
               ar = Cor1440Gen::ActividadRespuestafor.
                 where(actividad_id: actividad.id).
                 joins(:respuestafor).
-                where('formulario_id NOT IN (?)', vfid.join(', '))
+                where("formulario_id NOT IN (#{vfid.join(', ')})")
             else vfid.count == 0
               ar = Cor1440Gen::ActividadRespuestafor.
                 where(actividad_id: actividad.id)
@@ -250,22 +249,22 @@ module Cor1440Gen
             end
 
             
-            cd = actividad.valorcampoact.map(&:campoact_id)
-            sobran = cd - ci
-            borrar = actividad.valorcampoact.where(campoact_id: sobran).
-              map(&:id)
-            actividad.valorcampoact_ids -= borrar
-            puts actividad.valorcampoact_ids 
-            faltan = ci - cd
-            faltan.each do |f|
-              actividad.valorcampoact.new(campoact_id: f, valor: '').save
-            end
+            #cd = actividad.valorcampoact.map(&:campoact_id)
+            #sobran = cd - ci
+            #borrar = actividad.valorcampoact.where(campoact_id: sobran).
+            #  map(&:id)
+            #actividad.valorcampoact_ids -= borrar
+            #puts actividad.valorcampoact_ids 
+            #faltan = ci - cd
+            #faltan.each do |f|
+            #  actividad.valorcampoact.new(campoact_id: f, valor: '').save
+            #end
 
           end
 
 
           def edit_cor1440_gen
-            @registro = Cor1440Gen::Actividad.find(params[:id])
+            @actividad = @registro = Cor1440Gen::Actividad.find(params[:id])
             authorize! :edit, @registro
             if params['actividadpf_ids']
               @registro.actividadpf_ids = params['actividadpf_ids']
@@ -375,14 +374,15 @@ module Cor1440Gen
                   :valor,
                   :campo_id,
                   :id 
-              ] + [:valor_ids => []]
+                ] + 
+                [:valor_ids => []]
               ],
 
-              :valorcampoact_attributes => [
-                :id,
-                :campoact_id,
-                :valor
-              ],
+              #:valorcampoact_attributes => [
+              #  :id,
+              #  :campoact_id,
+              #  :valor
+              #],
               :proyecto_ids => [],
               :proyectofinanciero_ids => [],
               :usuario_ids => []

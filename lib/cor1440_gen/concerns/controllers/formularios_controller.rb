@@ -18,23 +18,17 @@ module Cor1440Gen
               :nombre,
               :nombreinterno,
               :campos,
-              :caracterizacion
+              :caracterizacion,
+              :actividadtipo
             ]
           end
 
             
           def lista_params
             mr519_gen_params +
-            [ 
-              :caracterizacion_ids => []
-            ]
+            [ :caracterizacion_ids => [] ] +
+            [ :actividadtipo_ids => [] ] 
           end
-
-          # Lista blanca de parametros
-          #def formulario_params
-          #  params.require(:formulario).permit(lista_params)
-          #end
-
 
         end  # included
 
