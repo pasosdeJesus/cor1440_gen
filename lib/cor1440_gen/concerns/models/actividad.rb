@@ -113,13 +113,6 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Valorcampotind'
           accepts_nested_attributes_for :valorcampotind,  reject_if: :all_blank
 
-
-          has_many :valorcampoact, dependent: :delete_all,
-            class_name: '::Cor1440Gen::Valorcampoact',
-            foreign_key: 'actividad_id',  validate: true
-          accepts_nested_attributes_for :valorcampoact,
-            allow_destroy: true, reject_if: :all_blank
-
           campofecha_localizado :fecha
 
           validates_presence_of :oficina
@@ -199,15 +192,18 @@ module Cor1440Gen
               updated_at
               
             when 'campos_dinamicos'
-              valorcampoact.inject('') { |memo, v|
-                sep = memo == '' ? '' : ';'
-                if v.campoact
-                  memo + sep + v.campoact.nombrecampo + ": " + v.valor
-                else
-                  memo
-                end
-              }
-             
+              if !respuestafor || respuestafor.valorcampo.count==0
+                ""
+              else
+                respuestafor.valorcampo.inject('') { |memo, v|
+                  sep = memo == '' ? '' : ';'
+                  if v.campo
+                    memo + sep + v.campo.nombre + ": " + v.valor
+                  else
+                    memo
+                  end
+                }
+              end
             when 'creacion'
               created_at
 

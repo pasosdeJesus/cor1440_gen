@@ -25,7 +25,6 @@ module Cor1440Gen
              :nombre, 
              :observaciones, 
              :formulario,
-             :campoact,
              :listadoasistencia,
              :fechacreacion_localizada, 
              :habilitado
@@ -47,10 +46,7 @@ module Cor1440Gen
 
           def actividadtipo_params
             l =  atributos_form - [:formulario] +
-              [:formulario_ids => [] ] +
-              [:campoact_attributes => [
-                :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
-            ]
+              [:formulario_ids => [] ] 
             params.require(:actividadtipo).permit(l)
           end
 

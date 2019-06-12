@@ -18,7 +18,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'asistencia', 'asistencias'
   inflect.irregular 'actividadarea', 'actividadareas'
   inflect.irregular 'actorsocial', 'actoressociales'
-  inflect.irregular 'campoact', 'camposact'
   inflect.irregular 'campotind', 'campostind'
   inflect.irregular 'financiador', 'financiadores'
   inflect.irregular 'mindicadorpf', 'mindicadorespf'

@@ -199,11 +199,10 @@ module Cor1440Gen
 
           def asegura_camposdinamicos(actividad)
             @listadoasistencia = false
-            ci = []
+            #ci = []
             vfid = []
             actividad.actividadpf.each do |apf|
               if apf.actividadtipo
-                ci += apf.actividadtipo.campoact_ids
                 if apf.actividadtipo.listadoasistencia
                   @listadoasistencia = true
                 end
@@ -247,19 +246,6 @@ module Cor1440Gen
                         AND respuestafor_id IN (#{rb.join(', ')})")
               Mr519Gen::Respuestafor.where(id: rb).destroy_all
             end
-
-            
-            #cd = actividad.valorcampoact.map(&:campoact_id)
-            #sobran = cd - ci
-            #borrar = actividad.valorcampoact.where(campoact_id: sobran).
-            #  map(&:id)
-            #actividad.valorcampoact_ids -= borrar
-            #puts actividad.valorcampoact_ids 
-            #faltan = ci - cd
-            #faltan.each do |f|
-            #  actividad.valorcampoact.new(campoact_id: f, valor: '').save
-            #end
-
           end
 
 
@@ -377,12 +363,6 @@ module Cor1440Gen
                 ] + 
                 [:valor_ids => []]
               ],
-
-              #:valorcampoact_attributes => [
-              #  :id,
-              #  :campoact_id,
-              #  :valor
-              #],
               :proyecto_ids => [],
               :proyectofinanciero_ids => [],
               :usuario_ids => []
