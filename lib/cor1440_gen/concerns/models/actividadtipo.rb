@@ -25,12 +25,6 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Actividadpf', 
             foreign_key: 'actividadtipo_id'
 
-          has_many :campoact, foreign_key: 'actividadtipo_id',
-            validate: true, dependent: :destroy,
-            class_name: 'Cor1440Gen::Campoact'
-          accepts_nested_attributes_for :campoact,
-            allow_destroy: true, reject_if: :all_blank
-
         end
       end
     end
