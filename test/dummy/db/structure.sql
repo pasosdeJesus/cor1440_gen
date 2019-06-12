@@ -1142,7 +1142,12 @@ CREATE TABLE public.cor1440_gen_tipoindicador (
     espvaloresomision character varying(1000),
     espvalidaciones character varying(1000),
     esptipometa character varying(32),
-    espfuncionmedir character varying(1000)
+    espfuncionmedir character varying(1000),
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at date,
+    updated_at date
 );
 
 
@@ -4757,6 +4762,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190603234145'),
 ('20190605143420'),
 ('20190612101211'),
-('20190612111043');
+('20190612111043'),
+('20190612113734');
 
 
