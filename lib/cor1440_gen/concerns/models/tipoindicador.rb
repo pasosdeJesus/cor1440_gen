@@ -7,8 +7,13 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo 
-          include Sip::Localizacion
+          include Sip::Basica
+
+          has_and_belongs_to_many :formulario, 
+            class_name: 'Mr519Gen::Formulario',
+            foreign_key: 'tipoindicador_id',
+            association_foreign_key: 'formulario_id', 
+            join_table: 'cor1440_gen_formulario_tipoindicador'
 
           has_many :indicadorpf, dependent: :delete_all,
             class_name: 'Cor1440Gen::Indicadorpf',

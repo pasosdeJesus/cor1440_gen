@@ -6,8 +6,8 @@ module Cor1440Gen
       module Actividadtipo
         extend ActiveSupport::Concern
 
-        include Sip::Basica
         included do
+          include Sip::Basica
 
           has_and_belongs_to_many :actividad, 
             class_name: 'Cor1440Gen::Actividadtipo',

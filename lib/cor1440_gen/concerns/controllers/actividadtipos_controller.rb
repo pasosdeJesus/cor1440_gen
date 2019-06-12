@@ -9,7 +9,8 @@ module Cor1440Gen
         included do
           include ActionView::Helpers::AssetUrlHelper
 
-          before_action :set_actividadtipo, only: [:show, :edit, :update, :destroy]
+          before_action :set_actividadtipo, 
+            only: [:show, :edit, :update, :destroy]
           load_and_authorize_resource class: Cor1440Gen::Actividadtipo
 
           def clase 
@@ -44,9 +45,19 @@ module Cor1440Gen
             'M'
           end
 
-          def actividadtipo_params
-            l =  atributos_form - [:formulario] +
+
+          def lista_params_cor1440_gen
+            p = atributos_form - [:formulario] +
               [:formulario_ids => [] ] 
+            return p
+          end
+
+          def lista_params
+            lista_params_cor1440_gen
+          end
+
+          def actividadtipo_params
+            l =  lista_params
             params.require(:actividadtipo).permit(l)
           end
 

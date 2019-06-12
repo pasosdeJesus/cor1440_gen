@@ -13,8 +13,6 @@ Cor1440Gen::Engine.routes.draw do
     as: :actividadespf
   resources :actividadespf, only: [:new, :destroy]
 
-  resources :camposact, path_names: { new: 'nuevo', edit: 'edita' }
-
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 
   resources :indicadorespf, only: [:new, :destroy]
@@ -37,7 +35,7 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :resultadospf, only: [:new, :destroy]
 
-  resources :tiposindicador, path_names: { new: 'nuevo', edit: 'edita' }
+  #resources :tiposindicador, path_names: { new: 'nuevo', edit: 'edita' }
 
   namespace :admin do
     ab = ::Ability.new

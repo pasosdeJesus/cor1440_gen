@@ -17,30 +17,31 @@ module Cor1440Gen
             "Cor1440Gen::Tipoindicador"
           end
 
-          def new_modelo_path(o)
-            return new_tipoindicador_path()
-          end
+#          def new_modelo_path(o)
+#            return new_tipoindicador_path()
+#          end
 
           def set_tipoindicador
             @registro = Tipoindicador.find(params[:id])
           end
 
           def atributos_index
-            [ "id", 
-              "nombre",
-              "medircon",
-              "esptipometa",
-              "campotind",
-              "espvaloresomision",
-              "espvalidaciones",
-              "espfuncionmedir" ]
+            [ :id, 
+              :nombre,
+              :medircon,
+              :esptipometa,
+              :formulario,
+              :campotind,
+              :espvaloresomision,
+              :espvalidaciones,
+              :espfuncionmedir ]
           end
 
           def new
             @registro = clase.constantize.new
             @registro.nombre = 'I'
             @registro.save!(validate: false)
-            redirect_to cor1440_gen.edit_tipoindicador_path(@registro)
+            redirect_to cor1440_gen.edit_admin_tipoindicador_path(@registro)
           end
 
           # Genero del nombre (F - Femenino, M - Masculino)
@@ -48,15 +49,17 @@ module Cor1440Gen
             return 'M';
           end
 
-          def lista_params_gen
-            p = *atributos_form + [ :campotind_attributes => [
-              :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
+          def lista_params_cor1440_gen
+            p = atributos_form - [:formulario] +
+              [:formulario_ids => [] ] +
+              [ :campotind_attributes => [
+                :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
             ]
             return p
           end
 
           def lista_params
-            lista_params_gen
+            lista_params_cor1440_gen
           end
 
           def tipoindicador_params
