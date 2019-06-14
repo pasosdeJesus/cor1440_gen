@@ -12,5 +12,6 @@ class CreaEfectoRespuestafor < ActiveRecord::Migration[6.0]
         column: :efecto_id
       add_foreign_key :cor1440_gen_efecto_respuestafor, :mr519_gen_respuestafor,
         column: :respuestafor_id
+    end
   end
 end
