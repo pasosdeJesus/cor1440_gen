@@ -1,0 +1,12 @@
+<div id="camposdinamicos">
+  <%= f.simple_fields_for :respuestafor, f.object.respuestafor.order(:id) do |r| %>
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= r.object.formulario.nombre %></div>
+      <div class="panel-body">
+        <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
+          locals: {f: r} 
+        %>
+      </div>
+    </div>
+  <% end %>
+</div>

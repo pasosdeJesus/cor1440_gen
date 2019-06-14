@@ -55,6 +55,17 @@ es:
         Actorsocial: Actor social
         Actoressociales: Actores sociales
         direccion: Dirección
+      "cor1440_gen/efecto":
+        Efecto: 'Avance en indicador de efecto'
+        Efectos: 'Avance en indicadores de efecto'
+        actorsocial: Actor(es) social(es)
+        "{:actorsocial_ids=>[]}": Actor(es) social(es)
+        anexo_efecto: Anexos / Medios de verificación
+        fecha_localizada: Fecha
+        indicadorpf: Indicador
+        indicadorpf_id: Indicador
+        registradopor: Registrado por
+        registradopor_id: Registrado por
       "cor1440_gen/indicadorpf":
         indicadorpf: Indicador
         numero: Número

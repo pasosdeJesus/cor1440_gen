@@ -1,0 +1,7 @@
+<%= f.input :indicadorpf_id,
+  #collection: Cor1440Gen::Indicadorpf.where('tipoindicador_id IN (SELECT id FROM cor1440_gen_tipoindicador WHERE medircon=2)').order(:numero),
+  collection: Cor1440Gen::Indicadorpf.order(:numero),
+  label_method: lambda { |i| i.numero + ' - ' + i.indicador },
+  value_method: :id
+%>
+

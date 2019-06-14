@@ -1,0 +1,14 @@
+<%= 
+  if !registro.actorsocial
+    ''
+  else
+    r = registro.actorsocial.inject('') { |memo, a|
+      (memo == '' ? '' : memo + '; ') + a.presenta_nombre
+    }
+    if r.length < 80
+      r
+    else
+      r[0..79] + "..."
+    end
+  end
+%>

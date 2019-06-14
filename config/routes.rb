@@ -15,6 +15,8 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 
+  resources :efectos, path_names: { new: 'nuevo', edit: 'edita' }
+
   resources :indicadorespf, only: [:new, :destroy]
 
   resources :informes, path_names: { new: 'nuevo', edit: 'edita' }

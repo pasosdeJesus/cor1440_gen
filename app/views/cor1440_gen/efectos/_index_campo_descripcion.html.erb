@@ -1,0 +1,9 @@
+<%= 
+  if !registro.descripcion
+    ''
+  elsif registro.descripcion.length < 80
+    registro.descripcion 
+  else
+    registro.descripcion[0..79] + "..."
+  end
+%>

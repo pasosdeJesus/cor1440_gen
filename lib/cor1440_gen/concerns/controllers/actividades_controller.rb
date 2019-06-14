@@ -199,8 +199,7 @@ module Cor1440Gen
 
           def asegura_camposdinamicos(actividad)
             @listadoasistencia = false
-            #ci = []
-            vfid = []
+            vfid = []  # ids de formularios que deben presentarse
             actividad.actividadpf.each do |apf|
               if apf.actividadtipo
                 if apf.actividadtipo.listadoasistencia
@@ -219,7 +218,7 @@ module Cor1440Gen
                       respuestafor_id: rf.id,
                     )
                   else # aw.count == 1
-                    r = actividad.respuestafor.where(formulario_id: f.id).take
+                    r = aw.take
                     ar = Cor1440Gen::ActividadRespuestafor.where(
                       actividad_id: actividad.id,
                       respuestafor_id: r.id,
@@ -234,7 +233,7 @@ module Cor1440Gen
                 where(actividad_id: actividad.id).
                 joins(:respuestafor).
                 where("formulario_id NOT IN (#{vfid.join(', ')})")
-            else vfid.count == 0
+            else #vfid.count == 0
               ar = Cor1440Gen::ActividadRespuestafor.
                 where(actividad_id: actividad.id)
             end
