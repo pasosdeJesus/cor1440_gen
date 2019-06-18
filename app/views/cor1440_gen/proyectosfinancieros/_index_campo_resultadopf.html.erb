@@ -1,0 +1,3 @@
+<%= registro.resultadopf.inject("") { |memo, i|
+  (memo == '' ? '' : memo + '; ') + i.numero + ': ' + 
+    (i.resultado.length > 15 ? i.resultado[0..14] + '... ' : i.resultado) } %>

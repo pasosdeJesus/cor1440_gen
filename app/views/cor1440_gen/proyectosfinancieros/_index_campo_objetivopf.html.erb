@@ -1,0 +1,3 @@
+<%= registro.objetivopf.inject("") { |memo, i|
+  (memo == '' ? '' : memo + '; ') + i.numero + ': ' + 
+    (i.objetivo.length > 15 ? i.objetivo[0..14] + '... ' : i.objetivo) } %>

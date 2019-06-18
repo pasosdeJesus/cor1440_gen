@@ -1,2 +1,3 @@
 <%= registro.actividadpf.inject("") { |memo, i|
-  (memo == '' ? '' : memo + '; ') + i.titulo } %>
+  (memo == '' ? '' : memo + '; ') + i.nombrecorto + ': ' + 
+    (i.titulo.length > 15 ? i.titulo[0..14] + '... ' : i.titulo) } %>

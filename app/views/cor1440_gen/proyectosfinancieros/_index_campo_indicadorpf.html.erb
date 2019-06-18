@@ -1,0 +1,3 @@
+<%= registro.indicadorpf.where('resultadopf_id IS NULL').inject("") { |memo, i|
+  (memo == '' ? '' : memo + '; ') + i.numero + ': ' + 
+    (i.indicador.length > 15 ? i.indicador[0..14] + '... ' : i.indicador) } %>
