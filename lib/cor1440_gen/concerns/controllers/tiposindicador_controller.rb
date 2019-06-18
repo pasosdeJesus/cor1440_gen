@@ -31,7 +31,6 @@ module Cor1440Gen
               :medircon,
               :esptipometa,
               :formulario,
-              :campotind,
               :espvaloresomision,
               :espvalidaciones,
               :espfuncionmedir ]
@@ -40,6 +39,7 @@ module Cor1440Gen
           def new
             @registro = clase.constantize.new
             @registro.nombre = 'I'
+            @registro.fechacreacion = Date.today
             @registro.save!(validate: false)
             redirect_to cor1440_gen.edit_admin_tipoindicador_path(@registro)
           end
@@ -51,10 +51,7 @@ module Cor1440Gen
 
           def lista_params_cor1440_gen
             p = atributos_form - [:formulario] +
-              [:formulario_ids => [] ] +
-              [ :campotind_attributes => [
-                :id, :nombrecampo, :tipo, :ayudauso, :_destroy ]
-            ]
+              [:formulario_ids => [] ] 
             return p
           end
 
