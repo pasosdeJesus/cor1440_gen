@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 7cd3f4feb245efafafda7f04b79c7989c25c9594
+  revision: 60b1410beb3ff2197f778f8c26a5570f41096ba1
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 853b40dfcef87839c51790b1f16fc38ac2bcadf2
+  revision: 75665b77cbb26f7e90d8436efa0b394e60395ce1
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -19,7 +19,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ed13bc2235af26d602be64a87ce8c123e748667b
+  revision: d8ddee384d1e840db02f3cee6e86180ff8235898
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -211,7 +211,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    msgpack (1.2.10)
+    msgpack (1.3.0)
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
