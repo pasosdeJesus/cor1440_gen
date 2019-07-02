@@ -17,8 +17,10 @@ module Cor1440Gen
             association_foreign_key: 'actividad_id',
             join_table: 'cor1440_gen_actividad_actorsocial'
 
-          has_many :actorsocial_efecto, dependent: :delete_all
-          has_many :efecto, through: :actorsocial_efecto
+          has_many :actorsocial_efecto, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActorsocialEfecto'
+          has_many :efecto, through: :actorsocial_efecto,
+            class_name: 'Cor1440Gen::Efecto'
 
         end
 
