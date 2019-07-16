@@ -58,6 +58,10 @@ gem 'twitter-bootstrap-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap-datepicker-rails'
 
+# Facilita elegir colores en tema
+gem 'pick-a-color-rails'
+gem 'tiny-color-rails'
+
 # Formularios simples 
 gem 'simple_form'
 
@@ -85,17 +89,16 @@ gem 'tzinfo'
 #gem 'tzinfo-data', platforms:  [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Motor Sip
-gem 'sip', git: 'https://github.com/pasosdeJesus/sip.git'
+gem 'sip', git: 'https://github.com/pasosdeJesus/sip.git', branch: :temas
 #gem 'sip', path: '../sip'
 
-# Motor heb412_gen para manejar archivos como nube y plantillas
-gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
-#gem 'heb412_gen', path: '../heb412_gen/'
-
 # Motor para formularios
-gem 'mr519_gen', git: 'https://github.com/pasosdeJesus/mr519_gen.git'
+gem 'mr519_gen', git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: :temas
 #gem 'mr519_gen', path: '../mr519_gen/'
 
+# Motor heb412_gen para manejar archivos como nube y plantillas
+gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :temas
+#gem 'heb412_gen', path: '../heb412_gen/'
 
 # Los siguientes son para desarrollo o para pruebas con generadores
 group :development do
