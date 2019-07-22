@@ -205,7 +205,7 @@ module Cor1440Gen
                         memo
                       end
                     }
-                    memrf + seprf + rf.formulario.nombreinterno + 
+                    memorf + seprf + rf.formulario.nombreinterno + 
                       "[" + vc + "]"
                 end
               end
