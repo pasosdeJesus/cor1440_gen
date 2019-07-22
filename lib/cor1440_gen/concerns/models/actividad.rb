@@ -192,17 +192,22 @@ module Cor1440Gen
               updated_at
               
             when 'campos_dinamicos'
-              if !respuestafor || respuestafor.valorcampo.count==0
+              if !respuestafor || respuestafor.count == 0
                 ""
               else
-                respuestafor.valorcampo.inject('') { |memo, v|
-                  sep = memo == '' ? '' : ';'
-                  if v.campo
-                    memo + sep + v.campo.nombre + ": " + v.valor
-                  else
-                    memo
-                  end
-                }
+                respuestafor.inject('') do |memorf, rf|
+                    seprf = memorf == '' ? '' : '. '
+                    vc = rf.valorcampo.inject('') { |memo, v|
+                      sep = memo == '' ? '' : ';'
+                      if v.campo
+                        memo + sep + v.campo.nombre + ": " + v.valor
+                      else
+                        memo
+                      end
+                    }
+                    memrf + seprf + rf.formulario.nombreinterno + 
+                      "[" + vc + "]"
+                end
               end
             when 'creacion'
               created_at
