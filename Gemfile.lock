@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 785a5df75b8b5821903723ebbf9bc06c54333f3b
+  revision: a50289c220992a42db84b9c6020b7900825ceb7a
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 7fa7d76ffbde682180c8fa4ef586a57aa23b508e
+  revision: 32b0ea2dfc779c0e6d1fcbd1beb1ffd071233d30
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 736af1b02a21e2f242e1b76bb18be89999d52497
+  revision: 751012a3f07ea740c986ba9542036f5e857b25b6
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -130,17 +130,8 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
-    capybara (3.27.0)
-      addressable
-      mini_mime (>= 0.1.3)
-      nokogiri (~> 1.8)
-      rack (>= 1.6.0)
-      rack-test (>= 0.6.3)
-      regexp_parser (~> 1.5)
-      xpath (~> 3.2)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
-    cliver (0.3.2)
     coderay (1.1.2)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
@@ -232,10 +223,6 @@ GEM
       jquery-rails
       railties (>= 3.0)
       tiny-color-rails
-    poltergeist (1.18.1)
-      capybara (>= 2.1, < 4)
-      cliver (~> 0.3.1)
-      websocket-driver (>= 0.2.0)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -299,7 +286,6 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     redcarpet (3.4.0)
-    regexp_parser (1.6.0)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -375,8 +361,6 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
     will_paginate (3.1.7)
-    xpath (3.2.0)
-      nokogiri (~> 1.8)
     zeitwerk (2.1.9)
 
 PLATFORMS
@@ -408,7 +392,6 @@ DEPENDENCIES
   paperclip
   pg
   pick-a-color-rails
-  poltergeist
   prawn
   prawn-table
   prawnto_2
