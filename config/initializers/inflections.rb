@@ -16,6 +16,7 @@
 # end
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'asistencia', 'asistencias'
+  inflect.irregular 'actividad', 'actividades'
   inflect.irregular 'actividadarea', 'actividadareas'
   inflect.irregular 'actorsocial', 'actoressociales'
   inflect.irregular 'campotind', 'campostind'
