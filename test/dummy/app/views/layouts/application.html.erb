@@ -10,7 +10,10 @@
         <%= menu_item "Validar", cor1440_gen.validar_proyectosfinancieros_path %>
         <%= menu_item "Medir Indicadores", cor1440_gen.mindicadorespf_path %>
       <% end %>
-      <%= menu_item "Actividades", cor1440_gen.actividades_path %>
+      <%= drop_down "Actividades" do %>
+        <%= menu_item "Listado", cor1440_gen.actividades_path %>
+        <%= menu_item "Contar", cor1440_gen.contar_actividades_path %>
+      <% end %>
       <%= menu_item "Informes", cor1440_gen.informes_path %>
       <% if can? :manage, ::Sip::Actorsocial %>
         <%= menu_item "Actores sociales", sip.actoressociales_path %>

@@ -1,0 +1,111 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th rowspan='2'>
+        Actividades
+      </th>
+      <th rowspan='2'>
+        Total<br>Actividades
+      </th>
+      <th colspan='4'>Participaciones</th>
+      </th>
+    </tr>
+    <tr>
+        <th><%= Cor1440Gen.actividadg1 %></th>
+        <th><%= Cor1440Gen.actividadg2 %></th>
+        <th><%= Cor1440Gen.actividadg3 %></th>
+        <th><%= Cor1440Gen.actividadg4 %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% a = Cor1440Gen::Actividadpf.where(
+      proyectofinanciero_id: @cuenta_pfid).order(:nombrecorto) %>
+    <% a.each do |a| %>
+      <tr>
+        <% # Una misma actividad puede tener varias actividades de convenio del
+           # mismo proyecto por eso no sacar totales
+        %>
+        <% consb = @cuenta_actividad.where('cor1440_gen_actividad.id IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
+           WHERE actividadpf_id=?)',a.id).
+          where('cor1440_gen_actividad.id IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
+           WHERE proyectofinanciero_id=?)',@cuenta_pfid)
+         %>
+        <td><%= a.nombrecorto %> <%= a.titulo%></td>
+        <td>
+          <% tot = consb.count %>
+          <%= tot %>
+        </td>
+        <td>
+          <% consbr = consb.joins(:actividad_rangoedadac) %> 
+          <% #if consbr.count > 0 
+               #byebug 
+          #end
+             %>
+          <% fl = consbr.sum(:fl) %>
+          <%= fl %>
+        </td>
+        <td>
+          <% fr = consbr.sum(:fr) %>
+          <%= fr %>
+        </td>
+        <td>
+          <% ml = consbr.sum(:ml) %>
+          <%= ml %>
+        </td>
+        <td>
+          <% mr = consbr.sum(:mr) %>
+          <%= mr %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <% consb = @cuenta_actividad.where('cor1440_gen_actividad.id NOT IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
+           JOIN cor1440_gen_actividadpf ON 
+            cor1440_gen_actividad_actividadpf.actividadpf_id=
+            cor1440_gen_actividadpf.id
+           WHERE cor1440_gen_actividadpf.proyectofinanciero_id=?)',@cuenta_pfid).
+           where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM 
+                 cor1440_gen_actividad_proyectofinanciero WHERE 
+                proyectofinanciero_id=?)', @cuenta_pfid)
+         %>
+       <td><em>Sin actividad de convenio</em><br>
+        <% sep = '' %>
+        <% consb.each do |a| %>
+          <%= sep %><%= link_to(a.id, cor1440_gen.actividad_path(a.id)) %> 
+          <% sep = ", " %>
+        <% end %>
+      </td>
+      <td>
+        <% tot = consb.count %>
+        <%= tot %>
+      </td>
+      <td>
+        <% consbr = consb.joins(:actividad_rangoedadac) %> 
+        <% fl = consbr.sum(:fl) %>
+        <%= fl %>
+      </td>
+      <td>
+        <% fr = consbr.sum(:fr) %>
+        <%= fr %>
+      </td>
+      <td>
+        <% ml = consbr.sum(:ml) %>
+        <%= ml %>
+      </td>
+      <td>
+        <% mr = consbr.sum(:mr) %>
+        <%= mr %>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td colspan="5">No se hacen sumas verticales columna porque una actividad puede tener varias actividades de convenio</td>
+    </tr>
+  </tfoot>
+
+</table>

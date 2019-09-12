@@ -2,12 +2,16 @@
 
 Cor1440Gen::Engine.routes.draw do
 
+  get "/actividades/cuenta" => "actividades#cuenta", 
+    as: :cuenta_actividades
+
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
   
   get "/actividades/:id/fichaimp" => "actividades#fichaimp", 
     as: :actividad_fichaimp
   get "/actividades/:id/fichapdf" => "actividades#fichapdf", 
     as: :actividad_fichapdf
+
 
   get "/actividadespf/" => "proyectosfinancieros#actividadespf", 
     as: :actividadespf

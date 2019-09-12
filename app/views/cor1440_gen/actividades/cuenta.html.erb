@@ -1,0 +1,76 @@
+
+<div class="page-header">
+  <h1><%=t '.title', :default => 'Conteo de actividades' %></h1>
+</div>
+<%= simple_form_for :filtro, 
+  { remote: true, 
+    url: cor1440_gen.cuenta_actividades_path,
+    method: "get" } do |f| 
+%>
+
+  <div class="container">
+    <div class="row filtro-fila">
+      <div class="col-sm-offset-0 col-sm-4 col-md-offset-1 col-md-1">
+        Filtrar por:
+      </div>
+      <div class="col-sm-offset-0 col-sm-4">
+        <%= f.input :fechaini,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Fecha Inicial',
+          input_html: {
+            "data-behaviour" => "datepicker",
+            "data-contarautomatico" => "",
+            value: fecha_estandar_local(@fechaini)
+          }
+        %>
+      </div>
+      <div class="col-sm-offset-0 col-sm-4">
+        <%= f.input :fechafin,
+          maxlength: 10, 
+          size: 10,
+          label: false,
+          placeholder: 'Fecha Final',
+          input_html: {
+            "data-behaviour" => "datepicker",
+            "data-contarautomatico" => "",
+            value: fecha_estandar_local(@fechafin)
+          } %>
+      </div>
+    </div> <!-- row -->
+
+    <div class="row filtro-fila">
+      <div class="col-sm-offset-2 col-sm-4">
+        <%= render partial: 'cuenta_filtro_2_1', locals: {f: f} %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :proyectofinanciero_id,
+          collection: @cuenta_pf,
+          label_method: :nombre,
+          value_method: :id,
+          label: false,
+          include_blank: Cor1440Gen::Actividad.human_attribute_name(
+            :proyectofinanciero
+          ),
+          selected: @pfid,
+          input_html: { 
+              "data-contarautomatico" => "",
+              class: 'chosen-select' 
+            }
+        %>
+      </div>
+    </div> <!-- row -->
+
+    <div class="row filtro-fila">
+      <div class="col-md-offset-5 col-md-3">
+        <%= f.button :submit, 'Contar', class: 'btn btn-default' %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+
+<div id="resultado">
+  <%= render 'cuenta_tabla' %>
+</div> <!-- id: resultado -->
