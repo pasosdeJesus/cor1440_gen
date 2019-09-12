@@ -12,7 +12,7 @@
       <% end %>
       <%= drop_down "Actividades" do %>
         <%= menu_item "Listado", cor1440_gen.actividades_path %>
-        <%= menu_item "Contar", cor1440_gen.contar_actividades_path %>
+        <%= menu_item "Contar por actividad de convenio", cor1440_gen.contar_actividades_path %>
       <% end %>
       <%= menu_item "Informes", cor1440_gen.informes_path %>
       <% if can? :manage, ::Sip::Actorsocial %>
