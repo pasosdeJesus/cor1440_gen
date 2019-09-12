@@ -10,7 +10,7 @@ module Cor1440Gen
 
           before_action :set_actividad, 
             only: [:show, :edit, :update, :destroy],
-            exclude: [:cuenta]
+            exclude: [:contar]
           load_and_authorize_resource class: Cor1440Gen::Actividad
 
 
@@ -241,36 +241,36 @@ module Cor1440Gen
           helper_method :filtra_usuario_responsable
 
 
-          # Filtra actividades por contar @cuenta_actividad,
-          # proyectos financieros por presentar @cuenta_pf y
-          # proyecto por omision @cuenta_pfid
+          # Filtra actividades por contar @contar_actividad,
+          # proyectos financieros por presentar @contar_pf y
+          # proyecto por omision @contar_pfid
           # de acuerdo al control de acceso
-          def filtracuenta_control_acceso
+          def filtra_contar_control_acceso
 
           end
 
-          # Filtra actividades por contar @cuenta_actividad,
-          # proyectos financieros por presentar @cuenta_pf 
-          # proyecto por omision @cuenta_pfid
+          # Filtra actividades por contar @contar_actividad,
+          # proyectos financieros por presentar @contar_pf 
+          # proyecto por omision @contar_pfid
           # de acuerdo a parámetros (fuera de los estándar fechaini, 
           # fechafin y pfid)
-          def filtracuenta_por_parametros
+          def filtra_contar_por_parametros
 
           end
 
           # Genera conteo por actividad de convenio
-          def cuenta
-            @cuenta_actividad = Cor1440Gen::Actividad.all
-            @cuenta_pf = Cor1440Gen::Proyectofinanciero.all
-            @cuenta_pfid = nil
+          def contar
+            @contar_actividad = Cor1440Gen::Actividad.all
+            @contar_pf = Cor1440Gen::Proyectofinanciero.all
+            @contar_pfid = nil
 
             # Control de acceso
-            filtracuenta_control_acceso
+            filtra_contar_control_acceso
 
             # Parámetros
-            @cuenta_pfid = params[:filtro] && 
+            @contar_pfid = params[:filtro] && 
               params[:filtro][:proyectofinanciero_id] ?  
-              params[:filtro][:proyectofinanciero_id].to_i : @cuenta_pfid
+              params[:filtro][:proyectofinanciero_id].to_i : @contar_pfid
 
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
               params[:filtro]['fechaini'] != ""
@@ -279,7 +279,7 @@ module Cor1440Gen
               else
                 @fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechaini'])
               end
-              @cuenta_actividad = @cuenta_actividad.where(
+              @contar_actividad = @contar_actividad.where(
                 'cor1440_gen_actividad.fecha >= ?', @fechaini)
             end
 
@@ -290,10 +290,10 @@ module Cor1440Gen
               else
                 @fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechafin'])
               end
-              @cuenta_actividad = @cuenta_actividad.where(
+              @contar_actividad = @contar_actividad.where(
                 'cor1440_gen_actividad.fecha <= ?', @fechafin)
             end
-            filtracuenta_por_parametros 
+            filtra_contar_por_parametros 
 
             respond_to do |format|
               format.html { render layout: 'application' }

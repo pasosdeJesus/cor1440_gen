@@ -19,18 +19,18 @@
   </thead>
   <tbody>
     <% a = Cor1440Gen::Actividadpf.where(
-      proyectofinanciero_id: @cuenta_pfid).order(:nombrecorto) %>
+      proyectofinanciero_id: @contar_pfid).order(:nombrecorto) %>
     <% a.each do |a| %>
       <tr>
         <% # Una misma actividad puede tener varias actividades de convenio del
            # mismo proyecto por eso no sacar totales
         %>
-        <% consb = @cuenta_actividad.where('cor1440_gen_actividad.id IN 
+        <% consb = @contar_actividad.where('cor1440_gen_actividad.id IN 
           (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
            WHERE actividadpf_id=?)',a.id).
           where('cor1440_gen_actividad.id IN 
           (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
-           WHERE proyectofinanciero_id=?)',@cuenta_pfid)
+           WHERE proyectofinanciero_id=?)',@contar_pfid)
          %>
         <td><%= a.nombrecorto %> <%= a.titulo%></td>
         <td>
@@ -61,15 +61,15 @@
       </tr>
     <% end %>
     <tr>
-      <% consb = @cuenta_actividad.where('cor1440_gen_actividad.id NOT IN 
+      <% consb = @contar_actividad.where('cor1440_gen_actividad.id NOT IN 
           (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
            JOIN cor1440_gen_actividadpf ON 
             cor1440_gen_actividad_actividadpf.actividadpf_id=
             cor1440_gen_actividadpf.id
-           WHERE cor1440_gen_actividadpf.proyectofinanciero_id=?)',@cuenta_pfid).
+           WHERE cor1440_gen_actividadpf.proyectofinanciero_id=?)',@contar_pfid).
            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM 
                  cor1440_gen_actividad_proyectofinanciero WHERE 
-                proyectofinanciero_id=?)', @cuenta_pfid)
+                proyectofinanciero_id=?)', @contar_pfid)
          %>
        <td><em>Sin actividad de convenio</em><br>
         <% sep = '' %>

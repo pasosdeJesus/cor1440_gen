@@ -4,7 +4,7 @@
 </div>
 <%= simple_form_for :filtro, 
   { remote: true, 
-    url: cor1440_gen.cuenta_actividades_path,
+    url: cor1440_gen.contar_actividades_path,
     method: "get" } do |f| 
 %>
 
@@ -42,11 +42,11 @@
 
     <div class="row filtro-fila">
       <div class="col-sm-offset-2 col-sm-4">
-        <%= render partial: 'cuenta_filtro_2_1', locals: {f: f} %>
+        <%= render partial: 'contar_filtro_2_1', locals: {f: f} %>
       </div>
       <div class="col-sm-4">
         <%= f.input :proyectofinanciero_id,
-          collection: @cuenta_pf,
+          collection: @contar_pf,
           label_method: :nombre,
           value_method: :id,
           label: false,
@@ -72,5 +72,5 @@
 <% end %>
 
 <div id="resultado">
-  <%= render 'cuenta_tabla' %>
+  <%= render 'contar_tabla' %>
 </div> <!-- id: resultado -->
