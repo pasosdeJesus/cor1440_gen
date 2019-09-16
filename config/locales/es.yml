@@ -150,5 +150,6 @@ es:
       'mr519_gen/formulario':
         caracterizacion: Caracterizacion en convenios financiados
       "sip/persona":
-        proyectofinanciero_ids: Convenios financieros
+        proyectofinanciero_ids: Convenios financieros que caracterizan
+        proyectofinanciero: Convenios financieros que caracterizan
 

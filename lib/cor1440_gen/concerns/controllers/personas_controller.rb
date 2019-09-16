@@ -105,7 +105,7 @@ module Cor1440Gen
               (SELECT id FROM mr519_gen_respuestafor 
               WHERE formulario_id=?)', f.id)
             if car.count == 0
-              return "No se encontró caracterización para persona #{registro.id} con formulario #{f.id}"
+              return "" #No se encontró caracterización para persona #{registro.id} con formulario #{f.id}
             elsif car.count > 1
               return "Hay #{car.count} caracterizaciones para la persona #{registro.id} con formulario #{f.id}"
             end
