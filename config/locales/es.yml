@@ -13,13 +13,13 @@ es:
     proyectos: Áreas
     proyecto: Área
     proyectosfinancieros: Convenios financieros
-    proyectofinanciero: Convenio financiado
+    proyectofinanciero: Convenio financiero
     tiposindicador: Tipos de indicador
     tipoindicador: Tipo de indicador
   activerecord:
     models:
       "cor1440_gen/proyectofinanciero": 
-        one: "Convenio financiado"
+        one: "Convenio financiero"
         other: "Convenios financieros"
       "cor1440_gen/tipoindicador": 
         one: "Tipo de indicador"
@@ -114,10 +114,10 @@ es:
         marcologico: Marco lógico
         objetivopf: Objetivo
         plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este convenio
-        Proyectofinanciero: Convenio financiado
-        proyectofinanciero: Convenio financiado
-        Proyectosfinancieros: Convenios financiados
-        proyectosfinancieros: Convenios financiados
+        Proyectofinanciero: Convenio financiero
+        proyectofinanciero: Convenio financiero
+        Proyectosfinancieros: Convenios financiero
+        proyectosfinancieros: Convenios financiero
         resultadopf: Resultado
         "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad de convenio
         "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
@@ -148,7 +148,7 @@ es:
       "heb412_gen/plantillahcm":
         proyectofinanciero: Convenios financieros que exportan/importan con la plantilla
       'mr519_gen/formulario':
-        caracterizacion: Caracterizacion en convenios financiados
+        caracterizacion: Caracterizacion en convenios financieros
       "sip/persona":
         proyectofinanciero_ids: Convenios financieros que caracterizan
         proyectofinanciero: Convenios financieros que caracterizan
