@@ -140,7 +140,7 @@ module Cor1440Gen
             redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
 
-          def asegura_camposdinamicos(actividad)
+          def asegura_camposdinamicos(actividad, current_usuario_id)
             @listadoasistencia = false
             vfid = []  # ids de formularios que deben presentarse
             actividad.actividadpf.each do |apf|
@@ -167,7 +167,8 @@ module Cor1440Gen
                       respuestafor_id: r.id,
                     ).take
                   end
-                  Mr519Gen::ApplicationHelper::asegura_camposdinamicos(ar)
+                  Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
+                    ar, current_usuario_id)
                 end
               end
             end
@@ -197,7 +198,7 @@ module Cor1440Gen
             if params['actividadpf_ids']
               @registro.actividadpf_ids = params['actividadpf_ids']
             end
-            asegura_camposdinamicos(@registro)
+            asegura_camposdinamicos(@registro, current_usuario.id)
             @registro.save!(validate: false)
           end
 

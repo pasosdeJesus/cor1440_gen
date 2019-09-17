@@ -45,7 +45,7 @@ module Cor1440Gen
             return a
           end
 
-          def asegura_camposdinamicos(persona)
+          def self.asegura_camposdinamicos(persona, current_usuario_id)
             if persona.respond_to?(:proyectofinanciero)
               persona.proyectofinanciero.each do |pf|
                 pf.caracterizacion.each do |ca|
@@ -61,7 +61,7 @@ module Cor1440Gen
                     car = Cor1440Gen::Caracterizacionpersona.create(
                       persona_id: persona.id,
                       respuestafor_id: rf.id,
-                      ulteditor_id: current_usuario.id
+                      ulteditor_id: current_usuario_id
                     )
                   elsif cp.count > 1
                     flash.now[:notice] = "Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
@@ -69,7 +69,8 @@ module Cor1440Gen
                   else # cp.count == 1
                     car = cp.take
                   end
-                  Mr519Gen::ApplicationHelper::asegura_camposdinamicos(car)
+                  Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
+                    car, current_usuario_id)
                 end
               end
             end
@@ -80,7 +81,7 @@ module Cor1440Gen
             if cannot? :edit, clase.constantize
               authorize! :update, @registro
             end
-            asegura_camposdinamicos(@registro)
+            self.class.asegura_camposdinamicos(@registro, current_usuario.id)
             render layout: 'application'
           end
 

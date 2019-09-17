@@ -60,7 +60,7 @@ module Cor1440Gen
 
 
 
-          def asegura_camposdinamicos(efecto)
+          def asegura_camposdinamicos(efecto, current_usuario_id)
             vfid = []  # ids de formularios que deben presentarse
             if efecto.indicadorpf && efecto.indicadorpf.tipoindicador && 
               efecto.indicadorpf.tipoindicador.formulario
@@ -84,7 +84,8 @@ module Cor1440Gen
                     respuestafor_id: r.id,
                   ).take
                 end
-                Mr519Gen::ApplicationHelper::asegura_camposdinamicos(er)
+                Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
+                  er, current_usuario_id)
               end
             end
 
@@ -118,7 +119,7 @@ module Cor1440Gen
               @registro.indicadorpf_id = params['indicadorpf_id'].to_i
               @registro.valorcampotind = []
             end
-            asegura_camposdinamicos(@registro)
+            asegura_camposdinamicos(@registro, current_usuario.id)
             render layout: 'application'
           end
 
