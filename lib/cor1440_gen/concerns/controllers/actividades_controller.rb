@@ -131,12 +131,16 @@ module Cor1440Gen
           end
 
           # GET /actividades/new
-          def new
+          def new_cor1440_gen
             @registro = @actividad = Actividad.new
             @registro.current_usuario = current_usuario
             @registro.oficina_id = current_usuario && 
               current_usuario.oficina_id ? current_usuario.oficina_id : 1
             @registro.save!(validate: false)
+          end
+
+          def new
+            new_cor1440_gen
             redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
 
