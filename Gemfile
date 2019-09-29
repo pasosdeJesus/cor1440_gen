@@ -32,7 +32,7 @@ gem 'odf-report'
 
 gem 'chosen-rails', git: 'https://github.com/vtamara/chosen-rails.git', branch: 'several-fixes'
 
-gem 'rspreadsheet'
+gem 'rspreadsheet', '>= 0.5.1'
 #gem 'rspreadsheet', path: '../rspreadsheet/'
 gem 'libxml-ruby', '~> 3.0'
 

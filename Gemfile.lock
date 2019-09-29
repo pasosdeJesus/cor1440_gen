@@ -405,7 +405,7 @@ DEPENDENCIES
   rails (~> 6.0.0.rc1)
   rails-controller-testing
   rails-i18n
-  rspreadsheet
+  rspreadsheet (>= 0.5.1)
   sass
   simple_form
   simplecov
@@ -424,4 +424,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.0.2
+   1.17.3
