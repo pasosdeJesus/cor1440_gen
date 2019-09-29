@@ -39,7 +39,7 @@ cor1440_gen_rangoedadac_tot = () ->
   $("#tactividadtot").text(fl + fr + ml + mr)
   return
 
-cor1440_gen_rangoedadac = ($this) ->
+@cor1440_gen_rangoedadac = ($this) ->
   cid = $this.attr('id')
   col = cid.substr(-2)
   ini = cid.slice(0, cid.indexOf("attributes") + 10)

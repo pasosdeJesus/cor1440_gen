@@ -30,7 +30,8 @@
         </td>
       </tr>
       <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
-        <%= render 'actividad_rangoedadac_fields', :f => s %>
+        <%= render partial: 'actividad_rangoedadac_fields', 
+          locals: {f: s, ac: f} %>
       <% end %>
     </tbody>
   </table>
