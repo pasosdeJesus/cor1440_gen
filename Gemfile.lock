@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 69a2c2e87df61f22fee4397dc6b037a3ac973be7
+  revision: 25750a8d4b5e811160a2b08ee9e681b0a37b7f66
   specs:
     heb412_gen (1.0.b6)
       chosen-rails
@@ -12,7 +12,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: f2f8f1872466ec7c82c590cf6ad78baa23d27fc6
+  revision: 3a530bb89ca36e7f6b0fdf23b35c5ab9019d9e90
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 86f0d3732f6aff32eb5fe80063ae8d7dfa463523
+  revision: 17f3af95a93852e577920144bddf2305af678c2f
   specs:
     sip (2.0.b6)
       bootstrap-datepicker-rails
@@ -56,6 +56,18 @@ GIT
   branch: new_id_with_ajax
   specs:
     cocoon (1.2.11)
+
+PATH
+  remote: .
+  specs:
+    cor1440_gen (1.0b3)
+      devise
+      heb412_gen
+      jquery-rails
+      mr519_gen
+      paperclip
+      rails
+      sip
 
 GEM
   remote: https://rubygems.org/
@@ -121,8 +133,6 @@ GEM
     ansi (1.5.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
-    binding_of_caller (0.8.0)
-      debug_inspector (>= 0.0.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     bootstrap-datepicker-rails (1.8.0.1)
@@ -130,9 +140,16 @@ GEM
     builder (3.2.3)
     camertron-eprun (1.1.1)
     cancancan (3.0.1)
+    capybara (3.29.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (~> 1.5)
+      xpath (~> 3.2)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
-    coderay (1.1.2)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
@@ -145,7 +162,6 @@ GEM
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
-    debug_inspector (0.0.3)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -154,9 +170,15 @@ GEM
       warden (~> 1.2.3)
     devise-i18n (1.8.2)
       devise (>= 4.6)
+    diff-lcs (1.3)
     docile (1.3.2)
     erubi (1.9.0)
     execjs (2.7.0)
+    factory_girl (4.9.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.9.0)
+      factory_girl (~> 4.9.0)
+      railties (>= 3.0.0)
     ffi (1.11.1)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
@@ -164,7 +186,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    interception (0.5)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.5)
@@ -174,8 +195,6 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.2.0)
-    launchy (2.4.3)
-      addressable (~> 2.3)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (4.0.0)
@@ -231,15 +250,6 @@ GEM
     prawnto_2 (0.3.0)
       prawn (>= 1.0.0)
       rails (>= 3.2)
-    pry (0.12.2)
-      coderay (~> 1.1.0)
-      method_source (~> 0.9.0)
-    pry-rescue (1.5.0)
-      interception (>= 0.5)
-      pry (>= 0.12.0)
-    pry-stack_explorer (0.4.9.3)
-      binding_of_caller (>= 0.7)
-      pry (>= 0.9.11)
     public_suffix (4.0.1)
     puma (4.2.0)
       nio4r (~> 2.0)
@@ -286,9 +296,27 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     redcarpet (3.5.0)
+    regexp_parser (1.6.0)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-core (3.8.2)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.4)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.8.0)
+    rspec-rails (3.8.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.2)
     rspreadsheet (0.5.1)
       andand (~> 1.3)
       rubyzip (~> 1.1)
@@ -365,6 +393,8 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
     will_paginate (3.1.8)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
     zeitwerk (2.1.10)
 
 PLATFORMS
@@ -375,19 +405,21 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap-datepicker-rails
   cancancan
+  capybara
   chosen-rails!
   cocoon!
   coffee-rails
   colorize
   connection_pool
+  cor1440_gen!
   devise
   devise-i18n
+  factory_girl_rails
   font-awesome-rails
   heb412_gen!
   jbuilder
   jquery-rails
   jquery-ui-rails
-  launchy
   libxml-ruby (~> 3.0)
   minitest
   minitest-reporters
@@ -399,12 +431,11 @@ DEPENDENCIES
   prawn
   prawn-table
   prawnto_2
-  pry-rescue
-  pry-stack_explorer
   puma
   rails (~> 6.0.0.rc1)
   rails-controller-testing
   rails-i18n
+  rspec-rails
   rspreadsheet
   sass
   simple_form
