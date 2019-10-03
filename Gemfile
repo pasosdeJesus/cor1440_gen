@@ -37,13 +37,13 @@ gem 'jquery-rails' # jquery como librería JavaScript
 
 gem 'jquery-ui-rails'
 
-gem 'libxml-ruby', '~> 3.0'
+gem 'libxml-ruby'
 
 # Motor para formularios
 gem 'mr519_gen', git: 'https://github.com/pasosdeJesus/mr519_gen.git'
 #gem 'mr519_gen', path: '../mr519_gen/'
 
-gem 'odf-report' # Plantilla ODT
+gem 'odf-report', git: 'https://github.com/vtamara/odf-report.git', branch: 'rubyzip-1.3' # Genera ODT
 
 gem 'paperclip' # Maneja adjuntos
 
@@ -64,6 +64,8 @@ gem 'rails', '~> 6.0.0.rc1' # Rails (internacionalización)
 gem 'rails-i18n'
 
 gem 'rspreadsheet'
+
+gem 'rubyzip', '>= 2.0.0'
 
 gem 'sass' # CSS
 
