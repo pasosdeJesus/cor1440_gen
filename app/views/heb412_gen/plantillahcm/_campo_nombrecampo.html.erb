@@ -30,7 +30,7 @@
       end
     end
   end
-  col.sort!.uniq!
+  col = col.map(&:to_s).localize(:es).sort.to_a.uniq
   puts "OJO campoplantillahcm. col=#{col.to_s}"
 %>
 <%= f.input :nombrecampo,
