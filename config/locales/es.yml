@@ -32,10 +32,11 @@ es:
         Campoact: Campo
         Camposact: Campos
       "cor1440_gen/actividad":
-        fecha_localizada: Fecha
         actividadpf: Actividad de convenio 
-        valorcampoact: Campos del tipo de actividad
         actorsocial: Actores sociales en listado de asistencia
+        fecha_localizada: Fecha
+        objetivo: Objetivo de la actividad
+        valorcampoact: Campos del tipo de actividad
       "cor1440_gen/actividadpf":
         actividadpf: Actividad de convenio
         descripcion: Descripción
