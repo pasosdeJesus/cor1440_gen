@@ -1,8 +1,6 @@
-<!--% if @listadoasistencia %-->
-
-<!--% else %-->
-  <table border=1>
-    <thead>
+<div class="table-responsive" style="overflow-x:scroll;">
+  <table class="tablapoblacion table  table-bordered table-sm ">
+    <thead class="thead-light">
       <tr><th>Rango de Edad</th>
         <th><%= Cor1440Gen.actividadg1 %></th>
         <th><%= Cor1440Gen.actividadg2 %></th>
@@ -12,7 +10,7 @@
     </thead>
     <tbody id="actividad_rangoedadac">
       <tr>
-        <td>Total:</td>
+        <th scope='row'>Total</th>
         <td id="tactividadfl">
           <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
         </td>
@@ -44,4 +42,4 @@
       :class => "btn-primary" 
     %>
   </div>
-<!--% end %-->
+</div> <!-- table-responsive -->
