@@ -125,6 +125,8 @@ cor1440_gen_rangoedadc_todos = () ->
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_anionac]').val(e.anionac)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_mesnac]').val(e.mesnac)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_dianac]').val(e.dianac)
+    if typeof jrs_recalcula_poblacion == 'function'
+      jrs_recalcula_poblacion()
     #$(document).trigger("sip:autocompleto_persona", [id_victima, id_persona])
     return
   )

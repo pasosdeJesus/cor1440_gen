@@ -59,9 +59,6 @@
     </td>
   <% end %>
   <td>
-    <%= f.input :externo, label: false %>
-  </td>
-  <td>
     <%= f.association :actorsocial,
       collection: Sip::Actorsocial.all,
       label_method: :presenta_nombre,
