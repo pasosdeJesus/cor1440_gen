@@ -2,8 +2,12 @@
 
 Cor1440Gen::Engine.routes.draw do
 
+  # Poner antes de resources :actividads
   get "/actividades/contar" => "actividades#contar", 
     as: :contar_actividades
+
+  get "/actividades/contar_beneficiarios" => "actividades#contar_beneficiarios", 
+    as: :contar_actividades_beneficiarios
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
   
@@ -16,6 +20,7 @@ Cor1440Gen::Engine.routes.draw do
   get "/actividadespf/" => "proyectosfinancieros#actividadespf", 
     as: :actividadespf
   resources :actividadespf, only: [:new, :destroy]
+
 
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 

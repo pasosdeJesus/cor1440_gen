@@ -39,10 +39,6 @@
         </td>
         <td>
           <% consbr = consb.joins(:actividad_rangoedadac) %> 
-          <% #if consbr.count > 0 
-               #byebug 
-          #end
-             %>
           <% fl = consbr.sum(:fl) %>
           <%= fl %>
         </td>

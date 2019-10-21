@@ -8,7 +8,7 @@ module Cor1440Gen
 
     before_action :set_actividad, 
       only: [:show, :edit, :update, :destroy],
-      exclude: [:contar]
+      exclude: [:contar, :contar_beneficiarios]
     load_and_authorize_resource class: Cor1440Gen::Actividad
 
   end

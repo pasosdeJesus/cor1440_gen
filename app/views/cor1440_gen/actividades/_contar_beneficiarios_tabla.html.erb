@@ -1,0 +1,60 @@
+<% sumcol = {} %>
+<% ac = Cor1440Gen::Actividadpf.where(
+  proyectofinanciero_id: @contar_pfid).order(:nombrecorto) %>
+<% posac = @contar_actividad.where('cor1440_gen_actividad.id IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
+           WHERE proyectofinanciero_id=?)',@contar_pfid) %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Beneficiario
+      </th>
+      <% ac.each do |a| %>
+        <th>
+          <%= a.nombrecorto %>
+          <% sumcol[a.id] = 0 %>
+        </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% lb = Sip::Persona.where('id IN (SELECT persona_id FROM
+            cor1440_gen_asistencia WHERE actividad_id IN (?))', 
+            posac.select(:id)) %>
+    <% lb.each do |b| %>
+      <tr>
+        <td>
+          <%= b.presenta_nombre %>
+        </td>
+        <% ac.each do |a| %>
+          <td>
+            <% consb = posac.where('cor1440_gen_actividad.id IN 
+          (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
+           WHERE actividadpf_id=?)',a.id) %>
+            <% consas = Cor1440Gen::Asistencia.where(
+               'persona_id=?', b.id).where(
+                 'actividad_id IN (?)', consb.select(:id)) %>
+            <% totconsas = consas.count %>
+            <% if totconsas > 0 %>
+              <% #byebug %>
+            <% end %>
+            <%= totconsas %>
+            <% sumcol[a.id] += totconsas %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Totales:</th>
+      <% ac.each do |a| %>
+        <th>
+          <%= sumcol[a.id] %>
+        </th>
+      <% end %>
+    </tr>
+  </tfoot>
+
+</table>

@@ -8,7 +8,6 @@ module Cor1440Gen
 
         included do
 
-
           def clase
             "Cor1440Gen::Actividad"
           end
@@ -302,13 +301,60 @@ module Cor1440Gen
             end
           end
 
+
+          # Genera conteo por beneficiario y actividad de convenio
+          def contar_beneficiarios
+            @contar_actividad = Cor1440Gen::Actividad.all
+            @contar_pf = Cor1440Gen::Proyectofinanciero.all
+            @contar_pfid = nil
+
+            # Control de acceso
+            filtra_contar_control_acceso
+
+            # Parámetros
+            @contar_pfid = params[:filtro] && 
+              params[:filtro][:proyectofinanciero_id] ?  
+              params[:filtro][:proyectofinanciero_id].to_i : @contar_pfid
+
+            if !params[:filtro] || !params[:filtro]['fechaini'] || 
+              params[:filtro]['fechaini'] != ""
+              if !params[:filtro] || !params[:filtro]['fechaini']
+                @fechaini = Sip::FormatoFechaHelper.inicio_semestre_ant
+              else
+                @fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechaini'])
+              end
+              @contar_actividad = @contar_actividad.where(
+                'cor1440_gen_actividad.fecha >= ?', @fechaini)
+            end
+
+            if !params[:filtro] || !params[:filtro]['fechafin'] || 
+              params[:filtro]['fechafin'] != ""
+              if !params[:filtro] || !params[:filtro]['fechafin']
+                @fechafin = Sip::FormatoFechaHelper.fin_semestre_ant
+              else
+                @fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechafin'])
+              end
+              @contar_actividad = @contar_actividad.where(
+                'cor1440_gen_actividad.fecha <= ?', @fechafin)
+            end
+            filtra_contar_por_parametros 
+
+            respond_to do |format|
+              format.html { render layout: 'application' }
+              format.json { head :no_content }
+              format.js { render }
+            end
+          end
+
+
           private
 
           def set_actividad
-            @registro = @actividad = Actividad.find(
-              Actividad.connection.quote_string(params[:id]).to_i
-            )
-            @actividad.current_usuario = current_usuario
+            @registro = nil
+            if params[:id] && params[:id].to_i > 0
+              @registro = @actividad = Actividad.find(params[:id].to_i)
+              @actividad.current_usuario = current_usuario
+            end
           end
 
           def lista_params_cor1440_gen
