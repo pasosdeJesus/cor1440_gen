@@ -3,12 +3,20 @@
   proyectofinanciero_id: @contar_pfid).order(:nombrecorto) %>
 <% posac = @contar_actividad.where('cor1440_gen_actividad.id IN 
           (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
-           WHERE proyectofinanciero_id=?)',@contar_pfid) %>
+           WHERE proyectofinanciero_id=?)',@contar_pfid).where(
+             'cor1440_gen_actividad.id IN 
+             (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)') %>
 <table class="table table-striped">
   <thead>
     <tr>
       <th>
         Beneficiario
+      </th>
+      <th>
+        Sexo
+      </th>
+      <th>
+        Rango(s) de edad
       </th>
       <% ac.each do |a| %>
         <th>
@@ -23,10 +31,30 @@
             cor1440_gen_asistencia WHERE actividad_id IN (?))', 
             posac.select(:id)) %>
     <% lb.each do |b| %>
+      <% asg = Cor1440Gen::Asistencia.where(
+        'persona_id=?', b.id).where(
+          'actividad_id IN (?)', posac.select(:id)) %>
+        <% fechas = Cor1440Gen::Actividad.where(id: asg.select(:actividad_id)).
+          pluck(:fecha).uniq %>
+        <% rangosedad = fechas.map {|f|
+          cr = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
+            Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
+            b.anionac, b.mesnac, b.dianac,
+            f.year, f.month, f.day), 'Cor1440Gen::Rangoedadac')
+          ret = cr>=0 ? Cor1440Gen::Rangoedadac.find(cr).nombre : ''
+          ret
+        }.join("; ") %>
       <tr>
         <td>
           <%= b.presenta_nombre %>
         </td>
+        <td>
+          <%= b.sexo %>
+        </td>
+        <td>
+          <%= rangosedad %>
+        </td>
+
         <% ac.each do |a| %>
           <td>
             <% consb = posac.where('cor1440_gen_actividad.id IN 
@@ -48,7 +76,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <th>Totales:</th>
+      <th colspan='3'>Totales:</th>
       <% ac.each do |a| %>
         <th>
           <%= sumcol[a.id] %>
