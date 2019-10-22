@@ -304,40 +304,56 @@ module Cor1440Gen
 
           # Genera conteo por beneficiario y actividad de convenio
           def contar_beneficiarios
-            @contar_actividad = Cor1440Gen::Actividad.all
-            @contar_pf = Cor1440Gen::Proyectofinanciero.all
-            @contar_pfid = nil
+            @contarb_actividad = Cor1440Gen::Actividad.all
+            @contarb_pf = Cor1440Gen::Proyectofinanciero.all
+            @contarb_pfid = nil
 
             # Control de acceso
-            filtra_contar_control_acceso
+            #filtra_contarb_control_acceso
 
             # Parámetros
-            @contar_pfid = params[:filtro] && 
+            @contarb_pfid = params[:filtro] && 
               params[:filtro][:proyectofinanciero_id] ?  
-              params[:filtro][:proyectofinanciero_id].to_i : @contar_pfid
+              params[:filtro][:proyectofinanciero_id].to_i : @contarb_pfid
+
+            @contarb_actividad = @contarb_actividad.where(
+              'cor1440_gen_actividad.id IN 
+                (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
+                  WHERE proyectofinanciero_id=?)',@contarb_pfid).where(
+              'cor1440_gen_actividad.id IN 
+                (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)')
 
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
               params[:filtro]['fechaini'] != ""
               if !params[:filtro] || !params[:filtro]['fechaini']
-                @fechaini = Sip::FormatoFechaHelper.inicio_semestre_ant
+                @contarb_fechaini = Sip::FormatoFechaHelper.inicio_semestre_ant
               else
-                @fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechaini'])
+                @contarb_fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(
+                  params[:filtro]['fechaini'])
               end
-              @contar_actividad = @contar_actividad.where(
-                'cor1440_gen_actividad.fecha >= ?', @fechaini)
+              @contarb_actividad = @contarb_actividad.where(
+                'cor1440_gen_actividad.fecha >= ?', @contarb_fechaini)
             end
 
             if !params[:filtro] || !params[:filtro]['fechafin'] || 
               params[:filtro]['fechafin'] != ""
               if !params[:filtro] || !params[:filtro]['fechafin']
-                @fechafin = Sip::FormatoFechaHelper.fin_semestre_ant
+                @contarb_fechafin = Sip::FormatoFechaHelper.fin_semestre_ant
               else
-                @fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechafin'])
+                @contarb_fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(
+                  params[:filtro]['fechafin'])
               end
-              @contar_actividad = @contar_actividad.where(
-                'cor1440_gen_actividad.fecha <= ?', @fechafin)
+              @contarb_actividad = @contarb_actividad.where(
+                'cor1440_gen_actividad.fecha <= ?', @contarb_fechafin)
             end
-            filtra_contar_por_parametros 
+            #filtra_contarb_por_parametros 
+
+            @contarb_listabenef = Sip::Persona.where('id IN 
+              (SELECT persona_id FROM cor1440_gen_asistencia 
+                WHERE actividad_id IN (?))', @contarb_actividad.select(:id))
+
+            @contarb_listaac = Cor1440Gen::Actividadpf.where(
+              proyectofinanciero_id: @contarb_pfid).order(:nombrecorto) 
 
             respond_to do |format|
               format.html { render layout: 'application' }

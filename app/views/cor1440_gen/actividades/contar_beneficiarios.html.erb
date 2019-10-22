@@ -1,6 +1,7 @@
 
 <div class="page-header">
-  <h1><%=t '.title', :default => 'Conteo de actividades' %></h1>
+  <h1><%=t '.title', 
+    :default => 'Conteo de beneficiarios por actividad de convenio' %></h1>
 </div>
 <%= simple_form_for :filtro, 
   { remote: true, 
@@ -22,7 +23,7 @@
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "",
-            value: fecha_estandar_local(@fechaini)
+            value: fecha_estandar_local(@contarb_fechaini)
           }
         %>
       </div>
@@ -35,7 +36,7 @@
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "",
-            value: fecha_estandar_local(@fechafin)
+            value: fecha_estandar_local(@contarb_fechafin)
           } %>
       </div>
     </div> <!-- row -->
@@ -46,14 +47,14 @@
       </div>
       <div class="col-sm-4">
         <%= f.input :proyectofinanciero_id,
-          collection: @contar_pf,
+          collection: @contarb_pf,
           label_method: :nombre,
           value_method: :id,
           label: false,
           include_blank: Cor1440Gen::Actividad.human_attribute_name(
             :proyectofinanciero
           ),
-          selected: @contar_pfid,
+          selected: @contarb_pfid,
           input_html: { 
               "data-contarautomatico" => "",
               class: 'chosen-select' 
