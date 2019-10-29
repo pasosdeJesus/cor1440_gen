@@ -27,10 +27,6 @@ gem 'devise-i18n'
 
 gem 'font-awesome-rails'
 
-# Motor heb412_gen para manejar archivos como nube y plantillas
-gem 'heb412_gen', git: 'https://github.com/pasosdeJesus/heb412_gen.git'
-#gem 'heb412_gen', path: '../heb412_gen/'
-
 gem 'jbuilder'
 
 gem 'jquery-rails' # jquery como librería JavaScript
@@ -38,10 +34,6 @@ gem 'jquery-rails' # jquery como librería JavaScript
 gem 'jquery-ui-rails'
 
 gem 'libxml-ruby'
-
-# Motor para formularios
-gem 'mr519_gen', git: 'https://github.com/pasosdeJesus/mr519_gen.git'
-#gem 'mr519_gen', path: '../mr519_gen/'
 
 gem 'odf-report' # Genera ODT
 
@@ -71,10 +63,6 @@ gem 'sass' # CSS
 
 gem 'simple_form' # Formularios simples 
 
-# Motor Sip
-gem 'sip', git: 'https://github.com/pasosdeJesus/sip.git'
-#gem 'sip', path: '../sip'
-
 gem 'tiny-color-rails'
 
 gem 'twitter-bootstrap-rails' # Ambiente de CSS
@@ -91,6 +79,22 @@ gem 'webpacker'
 
 gem 'will_paginate' # Pagina listados
 
+
+#####
+# Motores que se sobrecargan vistas (deben ponerse en orden de apilamiento 
+# lógico y no alfabetico como las gemas anteriores)
+
+gem 'sip', # Motor generico
+  git: 'https://github.com/pasosdeJesus/sip.git'
+#gem 'sip', path: '../sip'
+
+gem 'mr519_gen', # Motor de gestion de formularios y encuestas
+  git: 'https://github.com/pasosdeJesus/mr519_gen.git'
+#gem 'mr519_gen', path: '../mr519_gen'
+
+gem 'heb412_gen',  # Motor de nube y llenado de plantillas
+  git: 'https://github.com/pasosdeJesus/heb412_gen.git'
+#gem 'heb412_gen', path: '../heb412_gen'
 
 
 group :development do
