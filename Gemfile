@@ -15,21 +15,11 @@ gem 'cocoon', git: 'https://github.com/vtamara/cocoon.git', branch: 'new_id_with
 
 gem 'coffee-rails' # CoffeeScript para recuersos .js.coffee y vistas
 
-gem 'colorize' # Colores en Terminl
-
-gem 'chosen-rails', git: 'https://github.com/vtamara/chosen-rails.git', branch: 'several-fixes'
-
 gem 'devise'# Autenticación 
 
 gem 'devise-i18n'
 
-gem 'font-awesome-rails'
-
 gem 'jbuilder'
-
-gem 'jquery-rails' # jquery como librería JavaScript
-
-gem 'jquery-ui-rails'
 
 gem 'libxml-ruby'
 
@@ -38,8 +28,6 @@ gem 'odf-report' # Genera ODT
 gem 'paperclip' # Maneja adjuntos
 
 gem 'pg' # Postgresql
-
-gem 'pick-a-color-rails' # Facilita elegir colores en tema
 
 gem 'puma'
 
@@ -57,19 +45,15 @@ gem 'rspreadsheet'
 
 gem 'rubyzip', '>= 2.0.0'
 
-gem 'sass' # CSS
+gem 'sassc-rails' # CSS
 
 gem 'simple_form' # Formularios simples 
-
-gem 'tiny-color-rails'
 
 gem 'twitter_cldr' # ICU con CLDR
 
 gem 'turbolinks' # Seguir enlaces más rápido
 
 gem 'tzinfo' # Zonas horarias
-
-gem 'uglifier' # Uglifier comprime recursos Javascript
 
 gem 'webpacker'
 
@@ -80,16 +64,16 @@ gem 'will_paginate' # Pagina listados
 # lógico y no alfabetico como las gemas anteriores)
 
 gem 'sip', # Motor generico
-  git: 'https://github.com/pasosdeJesus/sip.git', branch: :bs4
-#gem 'sip', path: '../sip'
+  #git: 'https://github.com/pasosdeJesus/sip.git', branch: :bs4
+  path: '../sip'
 
 gem 'mr519_gen', # Motor de gestion de formularios y encuestas
   git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: :bs4
-#gem 'mr519_gen', path: '../mr519_gen'
+  #path: '../mr519_gen'
 
 gem 'heb412_gen',  # Motor de nube y llenado de plantillas
-  git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :bs4
-#gem 'heb412_gen', path: '../heb412_gen'
+  #git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :bs4
+  path: '../heb412_gen'
 
 
 group :development do
@@ -104,6 +88,8 @@ end
 group :development, :test do
 
   #gem 'byebug', platform: :mri
+
+  gem 'colorize' # Colores en Terminl
 end
 
 
