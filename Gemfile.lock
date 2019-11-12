@@ -1,11 +1,30 @@
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: ed3f9bc48ab8a7cd0735298e6be35177b81e4c02
+  revision: 5c28be8065feeb442a476ab51e09472232aca0a9
   branch: bs4
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
       sip
+
+GIT
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: a1bd72e34fbb7ab820fd2a7dbe51e21d5dd03749
+  branch: bs4
+  specs:
+    sip (2.0.b7)
+      cancancan
+      chosen-rails
+      devise
+      devise-i18n
+      jquery-ui-rails
+      minitest
+      paperclip
+      rails
+      rails-i18n
+      simple_form
+      twitter_cldr
+      will_paginate
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
@@ -22,23 +41,6 @@ PATH
       redcarpet
       rspreadsheet
       sip
-
-PATH
-  remote: ../sip
-  specs:
-    sip (2.0.b7)
-      cancancan
-      chosen-rails
-      devise
-      devise-i18n
-      jquery-ui-rails
-      minitest
-      paperclip
-      rails
-      rails-i18n
-      simple_form
-      twitter_cldr
-      will_paginate
 
 PATH
   remote: .
@@ -163,7 +165,7 @@ GEM
     factory_girl_rails (4.9.0)
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
-    ffi (1.11.1)
+    ffi (1.11.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.7.0)
@@ -322,9 +324,6 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.10)
     ttfunk (1.5.1)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
     twitter_cldr (5.0.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.0)
@@ -392,7 +391,6 @@ DEPENDENCIES
   spork
   spring
   thor
-  turbolinks
   twitter_cldr
   tzinfo
   web-console

@@ -51,8 +51,6 @@ gem 'simple_form' # Formularios simples
 
 gem 'twitter_cldr' # ICU con CLDR
 
-gem 'turbolinks' # Seguir enlaces más rápido
-
 gem 'tzinfo' # Zonas horarias
 
 gem 'webpacker'
@@ -64,8 +62,8 @@ gem 'will_paginate' # Pagina listados
 # lógico y no alfabetico como las gemas anteriores)
 
 gem 'sip', # Motor generico
-  #git: 'https://github.com/pasosdeJesus/sip.git', branch: :bs4
-  path: '../sip'
+  git: 'https://github.com/pasosdeJesus/sip.git', branch: :bs4
+  #path: '../sip'
 
 gem 'mr519_gen', # Motor de gestion de formularios y encuestas
   git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: :bs4
