@@ -3,7 +3,6 @@
 module Cor1440Gen
   module ApplicationHelper
 
-    include ::FontAwesome::Rails::IconHelper
     include Sip::PaginacionAjaxHelper
 
     TIPO_CAMPODIN = [ ['Texto', 1],

@@ -11,10 +11,10 @@
 
   <div class="container">
     <div class="row filtro-fila">
-      <div class="col-sm-offset-0 col-sm-4 col-md-offset-1 col-md-1">
+      <div class="offset-sm-0 col-sm-4 offset-md-1 col-md-1">
         Filtrar por:
       </div>
-      <div class="col-sm-offset-0 col-sm-4">
+      <div class="offset-sm-0 col-sm-4">
         <%= f.input :fechaini,
           maxlength: 10, 
           size: 10,
@@ -27,7 +27,7 @@
           }
         %>
       </div>
-      <div class="col-sm-offset-0 col-sm-4">
+      <div class="offset-sm-0 col-sm-4">
         <%= f.input :fechafin,
           maxlength: 10, 
           size: 10,
@@ -42,7 +42,7 @@
     </div> <!-- row -->
 
     <div class="row filtro-fila">
-      <div class="col-sm-offset-2 col-sm-4">
+      <div class="offset-sm-2 col-sm-4">
         <%= render partial: 'contar_filtro_2_1', locals: {f: f} %>
       </div>
       <div class="col-sm-4">
@@ -64,7 +64,7 @@
     </div> <!-- row -->
 
     <div class="row filtro-fila">
-      <div class="col-md-offset-5 col-md-3">
+      <div class="offset-md-5 col-md-3">
         <%= f.button :submit, 'Contar', class: 'btn btn-default' %>
       </div>
     </div>
