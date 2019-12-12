@@ -23,7 +23,6 @@ module Cor1440Gen
               return @fechafin
             end
             puts a
-            byebug
             return nil
           end
 
@@ -37,7 +36,6 @@ module Cor1440Gen
               return v
             end
             puts a, v
-            byebug
             return nil
           end
 
