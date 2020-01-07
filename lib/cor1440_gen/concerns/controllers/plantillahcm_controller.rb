@@ -35,22 +35,13 @@ module Cor1440Gen
             ]
           end  
 
+          def lista_params_cor1440
+            lista_params_heb412 + 
+              [ :proyectofinanciero_ids => [] ]
+          end
+
           def plantillahcm_params
-            params.require(:plantillahcm).permit(
-              :filainicial,
-              :fuente,
-              :licencia,
-              :nombremenu, 
-              :ruta,
-              :vista,
-              :proyectofinanciero_ids => [],
-              :campoplantillahcm_attributes => [
-                :id,
-                :nombrecampo,
-                :columna,
-                :_destroy
-            ]
-            )
+            params.require(:plantillahcm).permit(lista_params_cor1440)
           end
 
         end  # included
