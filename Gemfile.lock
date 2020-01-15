@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: c272d1a53bf85cb2c27424d540df571ef8bc6635
+  revision: 674480178d914964e4c3961f91941798f486e8d3
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 3c6058a029c3c3ffc893440cf14476337cc606d3
+  revision: 1b301b087e7f6aa1f16c0a059f0ec248ffaf2f21
   specs:
     mr519_gen (0.2.0)
       rails (~> 6.0.0.rc1, >= 6.0.0.rc1)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: ad94453d2f45c945b1fca19e06f1cd1c71b7c8d0
+  revision: bdc77263dcc0d380ca65702e73c4a600b35b5982
   specs:
     sip (2.0.b7)
       cancancan
@@ -146,7 +146,7 @@ GEM
     colorize (0.8.1)
     concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
-    crass (1.0.5)
+    crass (1.0.6)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -164,10 +164,10 @@ GEM
     factory_girl_rails (4.9.0)
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
-    ffi (1.11.3)
+    ffi (1.12.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.8.1)
+    i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
@@ -193,7 +193,7 @@ GEM
     mimemagic (0.3.3)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.13.0)
+    minitest (5.14.0)
     minitest-reporters (1.4.2)
       ansi
       builder
@@ -226,7 +226,7 @@ GEM
     public_suffix (4.0.3)
     puma (4.3.1)
       nio4r (~> 2.0)
-    rack (2.1.0)
+    rack (2.1.1)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
