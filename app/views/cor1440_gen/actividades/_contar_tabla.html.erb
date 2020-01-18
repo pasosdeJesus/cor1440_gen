@@ -15,6 +15,7 @@
         <th><%= Cor1440Gen.actividadg2 %></th>
         <th><%= Cor1440Gen.actividadg3 %></th>
         <th><%= Cor1440Gen.actividadg4 %></th>
+        <th><%= Cor1440Gen.actividadg5 %></th>
     </tr>
   </thead>
   <tbody>
@@ -53,6 +54,10 @@
         <td>
           <% mr = consbr.sum(:mr) %>
           <%= mr %>
+        </td>
+        <td>
+          <% sr = consbr.sum(:s) %>
+          <%= sr %>
         </td>
       </tr>
     <% end %>
@@ -94,6 +99,10 @@
       <td>
         <% mr = consbr.sum(:mr) %>
         <%= mr %>
+      </td>
+      <td>
+        <% sr = consbr.sum(:s) %>
+        <%= sr %>
       </td>
     </tr>
   </tbody>

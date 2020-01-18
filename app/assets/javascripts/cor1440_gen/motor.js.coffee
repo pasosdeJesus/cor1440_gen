@@ -35,7 +35,8 @@ cor1440_gen_rangoedadac_tot = () ->
   fr = parseInt($("#tactividadfr").text())
   ml = parseInt($("#tactividadml").text())
   mr = parseInt($("#tactividadmr").text())
-  $("#tactividadtot").text(fl + fr + ml + mr)
+  sr = parseInt($("#tactividads").text())
+  $("#tactividadtot").text(fl + fr + ml + mr + sr)
   return
 
 @cor1440_gen_rangoedadac = ($this) ->
@@ -52,6 +53,7 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_rangoedadac_uno(ini, 'fr')
   cor1440_gen_rangoedadac_uno(ini, 'ml')
   cor1440_gen_rangoedadac_uno(ini, 'mr')
+  cor1440_gen_rangoedadac_uno(ini, 's')
   cor1440_gen_rangoedadac_tot()
 
 @cor1440_gen_actualiza_objetivos = (e, objetivo) ->
