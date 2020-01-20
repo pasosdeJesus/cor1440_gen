@@ -41,7 +41,8 @@ cor1440_gen_rangoedadac_tot = () ->
 
 @cor1440_gen_rangoedadac = ($this) ->
   cid = $this.attr('id')
-  col = cid.substr(-2)
+  n = cid.lastIndexOf('_')
+  col = cid.slice(n+1)
   ini = cid.slice(0, cid.indexOf("attributes") + 10)
   cor1440_gen_rangoedadac_uno(ini, col)
   cor1440_gen_rangoedadac_tot()
