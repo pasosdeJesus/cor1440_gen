@@ -70,7 +70,9 @@ module Cor1440Gen
           def fila_comun(actividad)
            pob = actividad.actividad_rangoedadac.map { |i| 
               (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
-                (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0)
+              (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0) +
+              (i.s ? i.s : 0)
+                
             } 
             return [actividad.id,
                     actividad.fecha , 
@@ -396,7 +398,7 @@ module Cor1440Gen
               :actividadarea_ids => [],
               :actividadpf_ids => [],
               :actividad_rangoedadac_attributes => [
-                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :_destroy
+                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :s, :_destroy
               ],
               :actividadtipo_ids => [],
               :actorsocial_ids => [],
