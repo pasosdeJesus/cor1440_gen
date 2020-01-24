@@ -43,7 +43,7 @@ module Cor1440Gen
     self.actividadg2 = "Mujeres externas"
     self.actividadg3 = "Hombres organización"
     self.actividadg4 = "Hombres externos"
-    self.actividadg5 = "Externos otro sexo o desconocido"
+    self.actividadg5 = "Externos sin sexo"
   end
 
   def self.setup(&block)
