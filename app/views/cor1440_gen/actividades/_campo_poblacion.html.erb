@@ -6,6 +6,7 @@
         <th><%= Cor1440Gen.actividadg2 %></th>
         <th><%= Cor1440Gen.actividadg3 %></th>
         <th><%= Cor1440Gen.actividadg4 %></th>
+        <th><%= Cor1440Gen.actividadg5 %></th>
         <th></th></tr>
     </thead>
     <tbody id="actividad_rangoedadac">
@@ -23,8 +24,11 @@
         <td id="tactividadmr">
           <%= mr = f.object.actividad_rangoedadac.sum(:mr) %>
         </td>
+        <td id="tactividads">
+          <%= sr = f.object.actividad_rangoedadac.sum(:s) %>
+        </td>
         <td id="tactividadtot">
-          <%= fr + fl + mr + ml %>
+          <%= fr + fl + mr + ml + sr %>
         </td>
       </tr>
       <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
