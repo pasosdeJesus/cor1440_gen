@@ -3477,6 +3477,14 @@ ALTER TABLE ONLY public.cor1440_gen_proyectofinanciero
 
 
 --
+-- Name: cor1440_gen_rangoedadac cor1440_gen_rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_rangoedadac
+    ADD CONSTRAINT cor1440_gen_rangoedadac_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cor1440_gen_resultadopf cor1440_gen_resultadopf_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3658,14 +3666,6 @@ ALTER TABLE ONLY public.sip_persona
 
 ALTER TABLE ONLY public.poa
     ADD CONSTRAINT poa_pkey PRIMARY KEY (id);
-
-
---
--- Name: cor1440_gen_rangoedadac rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_rangoedadac
-    ADD CONSTRAINT rangoedadac_pkey PRIMARY KEY (id);
 
 
 --
@@ -5343,6 +5343,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191219011910'),
 ('20191231102721'),
 ('20200116003807'),
-('20200211112230');
+('20200211112230'),
+('20200212103617');
 
 

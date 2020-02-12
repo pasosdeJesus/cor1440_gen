@@ -94,7 +94,7 @@ module Cor1440Gen
                   res = ind.resultadopf
                   if res.actividadpf.count > 0
                     lac = Cor1440Gen::ActividadActividadpf.
-                      where(actividadpf_id: [1]).
+                      where(actividadpf_id: [res.actividadpf_ids]).
                       pluck(:actividad_id).uniq
                     resind = lac.count
                     if resind > 0
