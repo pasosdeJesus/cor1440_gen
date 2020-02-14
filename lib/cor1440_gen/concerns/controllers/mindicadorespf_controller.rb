@@ -34,8 +34,75 @@ module Cor1440Gen
             return new_minidicadorpf_path()
           end
 
+          # Mide indicador de resultado con método muy general
+          # Suponemos que se aporta uno al indicador cuando se realiza una actividad
+          # cuya actividad de proyecto financiero es del mismo resultado del indicador.
+          # Esto basta para marcos lógicos muy simples con un indicador por resultado
+          # y una actividad por resultado.
+          # Para otros debe especificarse la función de medición sobrecargando mideindicador_particular
+          def mideindicador_cor1440_gen(ind, fini, ffin)
+            # Contar categorias de actividad relacionadas 
+            # con el resultado en el periodo
+            resind = 0.0
+            urlevrind = ''
+            d1 = 0.0
+            urlev1 = ''
+            d2 = 0.0
+            urlev2 = ''
+            d3 = 0.0
+            urlev3 = ''
+
+            res = ind.resultadopf
+            if res.actividadpf.count > 0
+              lac = Cor1440Gen::Actividad.joins(:actividadpf).
+                where('cor1440_gen_actividadpf.id IN (?)', res.actividadpf_ids).
+                where('fecha >= ?', fini).
+                where('fecha <= ?', ffin).
+                pluck(:id).uniq
+              resind = lac.count
+              if resind > 0
+                urlevrind = cor1440_gen.actividades_url +
+                  '?filtro[busid]='+lac.join(',')
+              end
+            end
+            return [resind, urlevrind, d1, urlev1, d2, urlev2, d3, urlev3]
+          end
+
+          # Por sobrecargar. Recibe indicador y fecha inicial y final de medicion
+          # Retorna arreglo con medicioń de indicador así:
+          # [resind, urlevrind, d1, urlev1, d2, urlev2, d3, urlev3] siendo
+          # resind Resultado del indicador
+          # urlevrind Url que verificar resultado
+          # d1 Dato intermedio 1
+          # urlev1 URL que verifica dato intermedio 1
+          # d1 Dato intermedio 2
+          # urlev2 URL que verifica dato intermedio 2
+          # d1 Dato intermedio 3
+          # urlev2 URL que verifica dato intermedio 3
+          def mideindicador_particular(ind, fini, ffin)
+            resind = 0.0
+            urlevrind = ''
+            d1 = 0.0
+            urlev1 = ''
+            d2 = 0.0
+            urlev2 = ''
+            d3 = 0.0
+            urlev3 = ''
+            tipoind = ind.tipoindicador
+            if tipoind
+              case tipoind.nombre
+              when 'ejemplo-por-sobrecargar'
+                resind = 5
+              end
+            else
+              return mideindicador_cor1440_gen(ind, fini, ffin)
+            end
+            return [resind, urlevrind, d1, urlev1, d2, urlev2, d3, urlev3]
+          end
+
+
           # Mide indicador
-          # Calcula medición de un indicador
+          # Calcula medición de un indicador con parametros que vienen en param
           def mideindicador
             prob = ''
             if params[:finicio_localizada] && 
@@ -49,60 +116,18 @@ module Cor1440Gen
               ffin = Date.strptime(ffin, '%Y-%m-%d')
               indid = params[:indicadorpf_id].to_i
               ind = Cor1440Gen::Indicadorpf.find(indid)
-              tipoind = ind.tipoindicador
               hmi = params[:hmindicadorpf_id].to_i
               if fini && ffin && ind
-                resind = 0.0
-                urlevrind = ''
-                d1 = 0.0
-                urlev1 = ''
-                d2 = 0.0
-                urlev2 = ''
-                d3 = 0.0
-                urlev3 = ''
-                if tipoind
-                  case tipoind.nombre
-                  when 'IG-FG-01'
-                    # Participacion efectiva en convocatorias
-                    base = Cor1440Gen::Proyectofinanciero.
-                      where('fechaformulacion >= ?', fini).
-                      where('fechaformulacion <= ?', ffin).
-                      where('respgp_id IS NOT NULL')
-                    cd1 = base.clone.where(
-                      'estado IN (?)', ::ApplicationHelper::ESTADOS_APROBADO) 
-                    d1 = cd1.count
-                    evd1 = cd1.pluck('id')
-                    urlev1 = cor1440_gen.proyectosfinancieros_url +
-                      '?filtro[busid]='+evd1.join(',')
-                    cd2 = base.clone
-                    d2 = cd2.count
-                    evd2 = cd2.pluck('id')
-                    urlev2 = cor1440_gen.proyectosfinancieros_url +
-                      '?filtro[busid]='+evd2.join(',')
-                    resind = d2.to_f > 0 ? 100*d1.to_f/d2.to_f : nil;
-                  else
-                    base = "SELECT COUNT(*) FROM efecto WHERE 
-                    fecha>='#{fini}' AND fecha<='#{ffin}'
-                    AND indicadorpf_id='#{ind.id}'"
-                    d1 = ActiveRecord::Base.connection.execute(base).
-                    first['count'].to_f
-                    resind = d1
-                  end
-                else
-                  # Contar categorias de actividad relacionadas 
-                  # con el resultado
-                  res = ind.resultadopf
-                  if res.actividadpf.count > 0
-                    lac = Cor1440Gen::ActividadActividadpf.
-                      where(actividadpf_id: [res.actividadpf_ids]).
-                      pluck(:actividad_id).uniq
-                    resind = lac.count
-                    if resind > 0
-                      urlevrind = cor1440_gen.actividades_url +
-                      '?filtro[busid]='+lac.join(',')
-                    end
-                  end
-                end
+                rl = mideindicador_particular(ind, fini, ffin)
+                resind = rl[0]
+                urlevrind = rl[1]
+                d1 = rl[2]
+                urlev1 = rl[3]
+                d2 = rl[4]
+                urlev2 = rl[5]
+                d3 = rl[6]
+                urlev3 = rl[7]
+
                 respond_to do |format|
                   format.json { 
                     render json: {
