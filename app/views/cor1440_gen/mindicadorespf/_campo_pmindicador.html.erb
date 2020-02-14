@@ -2,39 +2,42 @@
 <% @descd2 = @registro.descd2 ? @registro.descd2 : '' %>
 <% @descd3 = @registro.descd3 ? @registro.descd3 : '' %>
 
-<table border=1 width="100%">
-  <thead>
-    <tr>
-      <th>Fecha Medición</th>
-      <th>Inicio</th>
-      <th>Fin</th>
-      <th>Tiempo</th>
-      <% if @descd1 != '' %>
-        <th><%= @descd1 %></th>
+<div class='table-responsive'>
+  <table border=1 width="100%">
+    <thead>
+      <tr>
+        <th>Fecha Medición</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Tiempo</th>
+        <% if @descd1 != '' %>
+          <th><%= @descd1 %></th>
+        <% end %>
+        <% if @descd2 != '' %>
+          <th><%= @descd2 %></th>
+        <% end %>
+        <% if @descd3 != '' %>
+          <th><%= @descd3 %></th>
+        <% end %>
+        <th>Resultado</th>
+        <th>Meta</th>
+        <th>% Cumplimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="pmindicador">
+      <%= f.simple_fields_for :pmindicador,
+        f.object.pmindicador.order(:finicio, :ffin) do |pmi| %>
+        <%= render 'pmindicador_campos', :f => pmi %>
       <% end %>
-      <% if @descd2 != '' %>
-        <th><%= @descd2 %></th>
-      <% end %>
-      <% if @descd3 != '' %>
-        <th><%= @descd3 %></th>
-      <% end %>
-      <th>Resultado</th>
-      <th>Meta</th>
-      <th>% Cumplimiento</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody id="pmindicador">
-    <%= f.simple_fields_for :pmindicador do |pmi| %>
-      <%= render 'pmindicador_campos', :f => pmi %>
-    <% end %>
-  </tbody>
-</table>
-<div class="links">
-  <%= link_to_add_association 'Añadir Punto de Medición', f, 
-    :pmindicador,
-    :"data-association-insertion-node" => "tbody#pmindicador", 
-    :"data-association-insertion-method" => "append", 
-    partial: 'pmindicador_campos',
-    :class => 'btn-primary' %>
-    </div>
+    </tbody>
+  </table>
+  <div class="links">
+    <%= link_to_add_association 'Añadir Punto de Medición', f, 
+      :pmindicador,
+      :"data-association-insertion-node" => "tbody#pmindicador", 
+      :"data-association-insertion-method" => "append", 
+      partial: 'pmindicador_campos',
+      :class => 'btn-primary' %>
+  </div>
+</div>

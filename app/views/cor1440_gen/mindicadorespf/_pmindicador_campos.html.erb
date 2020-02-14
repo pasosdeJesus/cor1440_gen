@@ -2,18 +2,30 @@
   <td>
     <%= f.input :fecha_localizada,
       label: false, 
-      input_html: {"data-behaviour" => "datepicker"}, as: :string %>
+      input_html: {
+        "data-behaviour" => "datepicker",
+        class: 'em8'
+      }, as: :string %>
   </td><td>
     <%= f.input :finicio_localizada,
       label: false, 
-      input_html: {"data-behaviour" => "datepicker"}, as: :string %>
+      input_html: {
+        "data-behaviour" => "datepicker",
+        class: 'em8'
+      }, as: :string %>
   </td><td>
     <%= f.input :ffin_localizada,
       label: false, 
-      input_html: {"data-behaviour" => "datepicker"}, as: :string %>
+      input_html: {
+        "data-behaviour" => "datepicker",
+        class: 'em8'
+      }, as: :string %>
   </td><td>
     <%= f.input :restiempo,
-      label: false %>
+      label: false,
+      input_html: {
+        class: 'em8'
+      }  %>
   </td>
   <% if @descd1 != '' %> 
     <td>
@@ -47,7 +59,10 @@
   </td>
   <td>
     <%= f.input :meta,
-      label: false %>
+      label: false,
+      input_html: {
+        class: 'em8'
+      }  %>
   </td>
   <td> 
     <%= f.input :porcump, label: false %> 
