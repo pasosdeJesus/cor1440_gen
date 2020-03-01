@@ -60,6 +60,8 @@ module Cor1440Gen
           has_many :actividad_proyecto, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadProyecto',
             foreign_key: 'actividad_id'
+          accepts_nested_attributes_for :actividad_proyecto, 
+            allow_destroy: true, reject_if: :all_blank
 
           has_many :actividadareas_actividad, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadareasActividad',
@@ -90,6 +92,12 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Asistencia',
             foreign_key: 'actividad_id'
 
+          has_many :proyectoyconvenio, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Proyectoyconvenio',
+            foreign_key: 'id_actividad'
+          accepts_nested_attributes_for :proyectoyconvenio,
+            allow_destroy: true, reject_if: :all_blank
+          
           has_many :persona, through: :asistencia, class_name: 'Sip::Persona'
           accepts_nested_attributes_for :persona, reject_if: :all_blank
           accepts_nested_attributes_for :asistencia,

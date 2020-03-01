@@ -1,0 +1,49 @@
+<table class="tablapoblacion table  table-bordered table-sm ">
+  <thead>
+    <tr>
+      <td> Proyecto Financiero </td>
+      <td> Actividades del proyecto </td>
+    </tr>
+  </thead>
+  <tbody>
+    <% if ac.object.fecha %>
+      <% fr = ac.object.fecha %>
+    <% else %>
+      <% fr = Time.now.strftime('%Y-%m-%d') %>
+    <% end %>
+    <%  lp1 = Cor1440Gen::Proyectofinanciero.where(
+      "fechainicio <= ? AND (? <= fechacierre OR fechacierre IS NULL)", 
+      fr, fr)
+    ids1 = lp1.pluck(:id)
+    ids2 = ac.object.proyectofinanciero.pluck(:id)
+    col = Cor1440Gen::Proyectofinanciero.where(id: ids1 | ids2)
+  %>
+<tr class='nested-fields'>
+  <td>
+    <%= f.input :proyecto_id,
+      collection: col,
+      label: false,
+      label_method: :nombre, 
+      value_method: :id,
+      input_html: { 
+        "title" => 'Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)'
+      }
+    %>
+</td>
+<td>
+  <%= ac.association :actividadpf, 
+    collection: ::Cor1440Gen::Actividadpf.where(proyectofinanciero_id: 
+                                                ac.object.proyectofinanciero.map(&:id)),
+  label_method: lambda { |t| t.nombrecorto + ':' + t.titulo},
+  value_method: :id,
+  label: false
+%>
+</td>  
+<td>
+  <%= link_to_remove_association "Eliminar", f, 
+    :class => 'btn-danger' 
+  %>
+</td>
+</tr>
+  </tbody>
+</table>
