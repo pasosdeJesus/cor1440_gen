@@ -2,13 +2,13 @@
   <table class="tablapoblacion table  table-bordered table-sm ">
     <thead>
       <tr>
-        <td> Proyecto Financiero </td>
+        <td> <%= @actividad.class.human_attribute_name(:proyectofinanciero) %> </td>
         <td> Actividades del proyecto </td>
       </tr>
     </thead>
     <tbody id="actividad_proyectofinanciero">
-      <%= f.simple_fields_for :actividad_proyecto do |ap| %>
-        <%= render partial: 'actividad_proyectofinanciero_fields',
+      <%= f.simple_fields_for :proyectofinanciero do |ap| %>
+        <%= render partial: 'actividad_proyectofinanciero_campos',
           locals: {f: ap, ac: f} %>
       <% end %>
     </tbody>
@@ -19,7 +19,7 @@
       render_options: {locals: { ac: f }},
       :"data-association-insertion-node" => "tbody#actividad_proyectofinanciero", 
       :"data-association-insertion-method" => "append", 
-      :partial => "actividad_proyectofinanciero_fields", 
+      :partial => "actividad_proyectofinanciero_campos", 
       :class => "btn-primary" 
     %>
   </div>

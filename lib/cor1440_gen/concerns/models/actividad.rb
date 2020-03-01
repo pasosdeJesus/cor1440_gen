@@ -50,6 +50,8 @@ module Cor1440Gen
             foreign_key: 'actividad_id',
             association_foreign_key: 'proyectofinanciero_id',
             join_table: 'cor1440_gen_actividad_proyectofinanciero'
+          accepts_nested_attributes_for :proyectofinanciero,
+            allow_destroy: true, reject_if: :all_blank
 
           has_and_belongs_to_many :usuario, 
             class_name: 'Usuario',
@@ -60,8 +62,6 @@ module Cor1440Gen
           has_many :actividad_proyecto, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadProyecto',
             foreign_key: 'actividad_id'
-          accepts_nested_attributes_for :actividad_proyecto,
-            allow_destroy: true, reject_if: :all_blank
 
           has_many :actividadareas_actividad, dependent: :delete_all,
             class_name: 'Cor1440Gen::ActividadareasActividad',
