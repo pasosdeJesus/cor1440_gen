@@ -132,6 +132,8 @@ module Cor1440Gen
             @registro.current_usuario = current_usuario
             @registro.oficina_id = current_usuario && 
               current_usuario.oficina_id ? current_usuario.oficina_id : 1
+            @registro.fecha = Date.today
+            @registro.usuario_id= current_usuario.id
             @registro.save!(validate: false)
           end
 
