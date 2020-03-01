@@ -87,6 +87,9 @@ group :development, :test do
   #gem 'byebug', platform: :mri
 
   gem 'colorize' # Colores en Terminl
+
+  gem 'rails-erd' # Para generar modelo entidad asociación 
+
 end
 
 
