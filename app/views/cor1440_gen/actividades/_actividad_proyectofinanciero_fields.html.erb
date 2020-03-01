@@ -36,7 +36,10 @@
                                                 ac.object.proyectofinanciero.map(&:id)),
   label_method: lambda { |t| t.nombrecorto + ':' + t.titulo},
   value_method: :id,
-  label: false
+  label: false,
+  input_html: { 
+    class: 'chosen-select' 
+  }
 %>
 </td>  
 <td>
