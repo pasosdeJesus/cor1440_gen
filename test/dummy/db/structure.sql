@@ -174,13 +174,13 @@ CREATE TABLE public.cor1440_gen_actividad (
     nombre character varying(500),
     objetivo character varying(5000),
     resultado character varying(5000),
-    fecha date,
+    fecha date NOT NULL,
     observaciones character varying(5000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     oficina_id integer NOT NULL,
     rangoedadac_id integer,
-    usuario_id integer,
+    usuario_id integer NOT NULL,
     lugar character varying(500)
 );
 
@@ -1864,6 +1864,38 @@ ALTER SEQUENCE public.poa_id_seq OWNED BY public.poa.id;
 
 
 --
+-- Name: proyectoyconvenio; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.proyectoyconvenio (
+    id bigint NOT NULL,
+    id_actividad_proyectofinanciero integer,
+    id_actividad_actividadf integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: proyectoyconvenio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.proyectoyconvenio_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: proyectoyconvenio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.proyectoyconvenio_id_seq OWNED BY public.proyectoyconvenio.id;
+
+
+--
 -- Name: sal7711_gen_articulo; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2035,7 +2067,8 @@ CREATE TABLE public.sip_actorsocial_persona (
     actorsocial_id integer,
     perfilactorsocial_id integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    correo character varying(100)
 );
 
 
@@ -3156,6 +3189,13 @@ ALTER TABLE ONLY public.poa ALTER COLUMN id SET DEFAULT nextval('public.poa_id_s
 
 
 --
+-- Name: proyectoyconvenio id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.proyectoyconvenio ALTER COLUMN id SET DEFAULT nextval('public.proyectoyconvenio_id_seq'::regclass);
+
+
+--
 -- Name: sal7711_gen_articulo id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -3666,6 +3706,14 @@ ALTER TABLE ONLY public.sip_persona
 
 ALTER TABLE ONLY public.poa
     ADD CONSTRAINT poa_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: proyectoyconvenio proyectoyconvenio_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.proyectoyconvenio
+    ADD CONSTRAINT proyectoyconvenio_pkey PRIMARY KEY (id);
 
 
 --
@@ -5344,6 +5392,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20191231102721'),
 ('20200116003807'),
 ('20200211112230'),
-('20200212103617');
+('20200212103617'),
+('20200228235200'),
+('20200229005951'),
+('20200229191119');
 
 

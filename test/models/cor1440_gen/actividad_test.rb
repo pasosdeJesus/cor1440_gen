@@ -7,7 +7,8 @@ module Cor1440Gen
     PRUEBA_ACTIVIDAD = {
       nombre:'n',
       fecha:'2017-03-02',
-      oficina_id:1
+      oficina_id:1,
+      usuario_id:1,
     }
 
     setup do
