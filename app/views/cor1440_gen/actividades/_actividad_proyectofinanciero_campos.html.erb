@@ -12,7 +12,7 @@
   col = Cor1440Gen::Proyectofinanciero.where(id: ids1 | ids2)
 %>
   <td>
-    <%= f.input :proyecto_id,
+    <%= f.input :id,
       collection: col,
       label: false,
       label_method: :nombre, 
