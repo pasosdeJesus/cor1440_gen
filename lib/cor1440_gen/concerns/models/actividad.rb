@@ -116,7 +116,7 @@ module Cor1440Gen
           campofecha_localizado :fecha
 
           validates_presence_of :oficina
-          validates_presence_of :fecha
+          validates :fecha, presence: true, allow_blank: false
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 500 } 
           validates :objetivo, length: { maximum: 5000 } 
