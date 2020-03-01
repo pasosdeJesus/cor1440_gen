@@ -1,20 +1,26 @@
 <div class="table-responsive" style="overflow-x:scroll;">
-  <div id="actividad_proyectofinanciero">
-    <%= f.simple_fields_for :actividad_proyecto do |ap| %>
-      <%= render partial: 'actividad_proyectofinanciero_fields',
-        locals: {f: ap, ac: f} %>
-    <% end %>
-  </div>
+  <table class="tablapoblacion table  table-bordered table-sm ">
+    <thead>
+      <tr>
+        <td> Proyecto Financiero </td>
+        <td> Actividades del proyecto </td>
+      </tr>
+    </thead>
+    <tbody id="actividad_proyectofinanciero">
+      <%= f.simple_fields_for :actividad_proyecto do |ap| %>
+        <%= render partial: 'actividad_proyectofinanciero_fields',
+          locals: {f: ap, ac: f} %>
+      <% end %>
+    </tbody>
   </table>
   <div class="links">
     <%= link_to_add_association 'Añadir Proyecto financiero', f, 
       :actividad_proyecto,
       render_options: {locals: { ac: f }},
-      :"data-association-insertion-node" => "div#actividad_proyectofinanciero", 
+      :"data-association-insertion-node" => "tbody#actividad_proyectofinanciero", 
       :"data-association-insertion-method" => "append", 
       :partial => "actividad_proyectofinanciero_fields", 
       :class => "btn-primary" 
     %>
   </div>
 </div>
-
