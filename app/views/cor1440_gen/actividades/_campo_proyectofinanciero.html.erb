@@ -1,26 +1,24 @@
-<div class="table-responsive" style="overflow-x:scroll;">
-  <table class="tablapoblacion table  table-bordered table-sm ">
-    <thead>
-      <tr>
-        <td> <%= @actividad.class.human_attribute_name(:proyectofinanciero) %> </td>
-        <td> Actividades del proyecto </td>
-      </tr>
-    </thead>
-    <tbody id="actividad_proyectofinanciero">
-      <%= f.simple_fields_for :proyectofinanciero do |ap| %>
-        <%= render partial: 'actividad_proyectofinanciero_campos',
-          locals: {f: ap, ac: f} %>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="links">
-    <%= link_to_add_association 'Añadir Proyecto financiero', f, 
-      :actividad_proyecto,
-      render_options: {locals: { ac: f }},
-      :"data-association-insertion-node" => "tbody#actividad_proyectofinanciero", 
-      :"data-association-insertion-method" => "append", 
-      :partial => "actividad_proyectofinanciero_campos", 
-      :class => "btn-primary" 
-    %>
-  </div>
+<table class="tablapfac table-bordered table-sm ">
+  <thead>
+    <tr>
+      <td> <%= @actividad.class.human_attribute_name(:proyectofinanciero) %> </td>
+      <td> Actividades del <%= @actividad.class.human_attribute_name(:proyectofinanciero) %> </td>
+    </tr>
+  </thead>
+  <tbody id="actividad_proyectofinanciero">
+    <%= f.simple_fields_for :actividad_proyectofinanciero do |ap| %>
+      <%= render partial: 'actividad_proyectofinanciero_campos',
+        locals: {f: ap, ac: f} %>
+    <% end %>
+  </tbody>
+</table>
+<div class="links">
+  <%= link_to_add_association 'Añadir Proyecto financiero', f, 
+    :actividad_proyectofinanciero,
+    render_options: {locals: { ac: f }},
+    :"data-association-insertion-node" => "tbody#actividad_proyectofinanciero", 
+    :"data-association-insertion-method" => "append", 
+    :partial => "actividad_proyectofinanciero_campos", 
+    :class => "btn-primary" 
+  %>
 </div>

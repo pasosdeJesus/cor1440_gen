@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: e366ee85520ffcaceadece0683dc78ce368c425a
+  revision: 5e0c967396c49640b276b2374a212e100c214725
   specs:
     heb412_gen (1.0.b6)
       mr519_gen

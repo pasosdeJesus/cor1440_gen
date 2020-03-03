@@ -399,8 +399,12 @@ module Cor1440Gen
               ],
               :actividadarea_ids => [],
               :actividadpf_ids => [],
+              :actividad_proyectofinanciero_attributes => [
+                :id, :actividad_id, :proyectofinanciero_id, :_destroy,
+                :actividadpf_ids => []
+              ],
               :actividad_rangoedadac_attributes => [
-                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :s, :_destroy
+                :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :s, :_destroy 
               ],
               :actividadtipo_ids => [],
               :actorsocial_ids => [],
@@ -435,6 +439,9 @@ module Cor1440Gen
               ],
               :proyecto_ids => [],
               :proyectofinanciero_ids => [],
+              :proyectofinanciero_attributes => [
+
+              ],
               :usuario_ids => []
             ]
           end

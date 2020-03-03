@@ -19,11 +19,14 @@ module Cor1440Gen
             class_name: '::Usuario', 
             foreign_key: 'usuario_id', validate: true, optional: true
 
-          has_and_belongs_to_many :actividadpf, 
-            class_name: 'Cor1440Gen::Actividadpf',
-            foreign_key: 'actividad_id',
-            association_foreign_key: 'actividadpf_id',
-            join_table: 'cor1440_gen_actividad_actividadpf'
+          has_many :actividad_actividadpf, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadActividadpf',
+            foreign_key: 'actividad_id'
+          accepts_nested_attributes_for :actividad_actividadpf,
+            allow_destroy: true, reject_if: :all_blank
+
+          has_many  :actividadpf, through: :actividad_actividadpf,
+            class_name: 'Cor1440Gen::Actividadpf'
 
           has_and_belongs_to_many :actividadtipo, 
             class_name: 'Cor1440Gen::Actividadtipo',
@@ -45,13 +48,17 @@ module Cor1440Gen
           accepts_nested_attributes_for :respuestafor, 
             allow_destroy: true, reject_if: :all_blank
 
-          has_and_belongs_to_many :proyectofinanciero, 
-            class_name: 'Cor1440Gen::Proyectofinanciero',
-            foreign_key: 'actividad_id',
-            association_foreign_key: 'proyectofinanciero_id',
-            join_table: 'cor1440_gen_actividad_proyectofinanciero'
-          accepts_nested_attributes_for :proyectofinanciero,
+          has_many :actividad_proyectofinanciero, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadProyectofinanciero',
+            foreign_key: 'actividad_id'
+          accepts_nested_attributes_for :actividad_proyectofinanciero,
             allow_destroy: true, reject_if: :all_blank
+
+          has_many  :proyectofinanciero, through: :actividad_proyectofinanciero,
+            class_name: 'Cor1440Gen::Proyectofinanciero'
+
+          has_many :actividadpf_pf, through: :actividad_proyectofinanciero,
+            class_name: 'Cor1440Gen::Actividadpf'
 
           has_and_belongs_to_many :usuario, 
             class_name: 'Usuario',

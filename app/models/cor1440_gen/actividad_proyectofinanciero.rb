@@ -1,12 +1,7 @@
-# encoding: UTF-8
+require 'cor1440_gen/concerns/models/actividad_proyectofinanciero'
 
 module Cor1440Gen
   class ActividadProyectofinanciero < ActiveRecord::Base
-    belongs_to :actividad, class_name: 'Cor1440Gen::Actividad', 
-      foreign_key: 'actividad_id'
-    belongs_to :proyectofinanciero, 
-      class_name: 'Cor1440Gen::Proyectofinanciero',
-      foreign_key: 'proyectofinanciero_id'
+        include Cor1440Gen::Concerns::Models::ActividadProyectofinanciero
   end
 end
-
