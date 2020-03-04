@@ -84,7 +84,7 @@ end
 
 group :development, :test do
 
-  #gem 'byebug', platform: :mri
+  gem 'byebug', platform: :mri
 
   gem 'colorize' # Colores en Terminl
 

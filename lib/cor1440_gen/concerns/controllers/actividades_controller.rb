@@ -400,7 +400,7 @@ module Cor1440Gen
               :actividadarea_ids => [],
               :actividadpf_ids => [],
               :actividad_proyectofinanciero_attributes => [
-                :id, :actividad_id, :proyectofinanciero_id, :_destroy,
+                :id, :proyectofinanciero_id, :_destroy,
                 :actividadpf_ids => []
               ],
               :actividad_rangoedadac_attributes => [

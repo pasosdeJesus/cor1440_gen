@@ -12,7 +12,9 @@
   <% col = Cor1440Gen::Proyectofinanciero.where(id: ids1 | ids2) %>
   <td>
     <%= f.input :id, as: :hidden %>
-    <!--%= f.input :actividad_id, as: :hidden %-->
+    <% if !f.object || !f.object.actividad || !f.object.actividad.proyectofinanciero || f.object.actividad.proyectofinanciero.count == 0 %>
+      <%= f.input :actividad_id, as: :hidden %>
+    <% end %>
 
     <%= f.input :proyectofinanciero_id,
       collection: col,

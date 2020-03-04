@@ -54,11 +54,9 @@ module Cor1440Gen
           accepts_nested_attributes_for :actividad_proyectofinanciero,
             allow_destroy: true, reject_if: :all_blank
 
-          has_many  :proyectofinanciero, through: :actividad_proyectofinanciero,
+          has_many  :proyectofinanciero, 
+            through: :actividad_proyectofinanciero,
             class_name: 'Cor1440Gen::Proyectofinanciero'
-
-          has_many :actividadpf_pf, through: :actividad_proyectofinanciero,
-            class_name: 'Cor1440Gen::Actividadpf'
 
           has_and_belongs_to_many :usuario, 
             class_name: 'Usuario',

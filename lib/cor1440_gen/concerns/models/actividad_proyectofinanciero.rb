@@ -17,10 +17,15 @@ module Cor1440Gen
             through: :actividad
 
           def actividadpf_ids
-            self.actividad.actividadpf.where(proyectofinanciero_id: self.proyectofinanciero_id).pluck(:id)
+            self.actividad.actividadpf.where(
+              proyectofinanciero_id: self.proyectofinanciero_id).pluck(:id)
           end
 
           def actividadpf_ids=(v)
+            if !self.actividad
+              puts "OJO SIN ACTIVIDAD_ID"
+              return
+            end
             if v.respond_to?(:each)
               ant = []
               if self.actividad.actividadpf
