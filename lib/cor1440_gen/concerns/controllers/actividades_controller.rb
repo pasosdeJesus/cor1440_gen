@@ -33,7 +33,7 @@ module Cor1440Gen
           end
 
           def atributos_form
-            atributos_show - [:id]
+            atributos_show - [:id, :actividadpf]
           end
 
           def atributos_show
@@ -398,7 +398,6 @@ module Cor1440Gen
                 ]
               ],
               :actividadarea_ids => [],
-              :actividadpf_ids => [],
               :actividad_proyectofinanciero_attributes => [
                 :id, :proyectofinanciero_id, :_destroy,
                 :actividadpf_ids => []

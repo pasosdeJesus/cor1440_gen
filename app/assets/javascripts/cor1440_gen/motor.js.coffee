@@ -236,12 +236,14 @@ cor1440_gen_rangoedadc_todos = () ->
     $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
       cor1440_gen_actividad_actualiza_actividadpf(root)
     )
-
     $('#actividad_actividadpf_ids').chosen().change( (e) ->
       cor1440_gen_actividad_actualiza_camposdinamicos(root)
     )
 
-
+  $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
+    $('.chosen-select').chosen()
+    return
+  )
 
   $(document).on('change', '#objetivospf [id$=_numero]', cor1440_gen_actualiza_objetivos)
   
@@ -266,7 +268,6 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('cocoon:after-insert', '#indicadoresobjetivos', 
     cor1440_gen_actualiza_objetivos)
 
-  
   $(document).on('change', '#resultadospf [id$=_numero]', cor1440_gen_actualiza_resultados)
   
   $(document).on('cocoon:after-remove', '#resultadospf', cor1440_gen_actualiza_resultados)

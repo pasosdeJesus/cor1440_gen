@@ -79,3 +79,20 @@
 .em8 {
   width: 8em;
 }
+
+.div_actividad_proyectofinanciero {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.tablapfac {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.agregar-proyectofinanciero {
+  margin-left: auto;
+  margin-right: auto;
+}

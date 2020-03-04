@@ -12,9 +12,6 @@
   <% col = Cor1440Gen::Proyectofinanciero.where(id: ids1 | ids2) %>
   <td>
     <%= f.input :id, as: :hidden %>
-    <% if !f.object || !f.object.actividad || !f.object.actividad.proyectofinanciero || f.object.actividad.proyectofinanciero.count == 0 %>
-      <%= f.input :actividad_id, as: :hidden %>
-    <% end %>
 
     <%= f.input :proyectofinanciero_id,
       collection: col,
@@ -23,8 +20,8 @@
       value_method: :id,
       selected: f.object.proyectofinanciero_id,
       input_html: { 
-        "title" => 'Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)'#,
-        #class: 'chosen-select' 
+        "title" => 'Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)',
+        class: 'chosen-select' 
       }
     %>
   </td>
