@@ -36,6 +36,7 @@ es:
         actorsocial: Actores sociales en listado de asistencia
         fecha_localizada: Fecha
         objetivo: Objetivo de la actividad
+        proyectofinanciero: Convenio financiado
         valorcampoact: Campos del tipo de actividad
       "cor1440_gen/actividadpf":
         actividadpf: Actividad de convenio
@@ -80,7 +81,7 @@ es:
         indicadorpf: 'Indicador'
         indicadorpf_id: 'Indicador'
         pmindicador: 'Puntos de medición'
-        proyectofinanciero: Convenio financidado
+        proyectofinanciero: Convenio financiado
         proyectofinanciero_id: Convenio financiado
         descd1: Descripción de dato intermedio 1
         descd2: Descripción de dato intermedio 2

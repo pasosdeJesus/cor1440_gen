@@ -80,7 +80,15 @@ cor1440_gen_rangoedadc_todos = () ->
   sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
 
- 
+@cor1440_gen_actividad_actualiza_actividadpf_pf =  (root, proyectofinanciero_id) ->
+  params = {
+    pfl: [proyectofinanciero_id]
+  }
+  sip_llena_select_con_AJAX2('actividadespf', params, 
+    'actividad_actividadpf_ids', 'con Actividades de convenio', root,
+    'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
+
+
 @cor1440_gen_actividad_actualiza_actividadpf =  (root) ->
   params = {
     pfl: $('#actividad_proyectofinanciero_ids').val(),
@@ -239,12 +247,42 @@ cor1440_gen_rangoedadc_todos = () ->
     $('#actividad_actividadpf_ids').chosen().change( (e) ->
       cor1440_gen_actividad_actualiza_camposdinamicos(root)
     )
+  
+    
+    # Tras añadir una fila a la tabla de proyectosfinancieros y sus actividadespf
+    $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
+ 
+      $('.chosen-select').chosen()
+      # Determinar nuevas opciones excluyendo las ya elegidas 
+      otrospfid = []
+      objetivo.siblings().not(':hidden').find('select').each(() -> 
+        otrospfid.push(this.value)
+      )
+      idsel = objetivo.find('select').attr('id')
+      nuevasop = []
+      objetivo.find('option').each(() -> 
+        if !otrospfid.includes(this.value)
+          nuevasop.push({'id': this.value, 'nombre': this.innerHTML})
+      )
+      sip_remplaza_opciones_select(idsel, nuevasop, true)
+      return
+    )
 
-  $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
-    $('.chosen-select').chosen()
-    return
-  )
+    # En tabla de formulario actividad para agregar proyectosfinancieros y actividades de proyectofinanciero
+    $("[id^=actividad_actividad_proyectofinanciero_attributes][id$=proyectofinanciero_id]").chosen().change( (e) ->
+      objetivo.find('.actividad_actividad_proyectofinanciero_proyectofinanciero_id>select').attr('disabled', true)
+      debugger
+      # deshabilitar
+      cor1440_gen_actividad_actualiza_actividadpf(root)
+    )
 
+    # En talba de formulario actividad para agregar proyectosfinancierso y actividades al cambiar actividades de proyectofinanciero en alguna fila
+    $('#actividad_actividadpf_ids').chosen().change( (e) ->
+      
+      debugger
+      cor1440_gen_actividad_actualiza_camposdinamicos(root)
+    )
+ 
   $(document).on('change', '#objetivospf [id$=_numero]', cor1440_gen_actualiza_objetivos)
   
   $(document).on('cocoon:after-remove', '#objetivospf', cor1440_gen_actualiza_objetivos)

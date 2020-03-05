@@ -9,14 +9,21 @@
     fr, fr) %>
   <% ids1 = lp1.pluck(:id) %>
   <% ids2 = ac.object.proyectofinanciero.pluck(:id) %>
-  <% col = Cor1440Gen::Proyectofinanciero.where(id: ids1 | ids2) %>
+  <% # Si es uno nuevo excluimos los ya elegidos %>
+  <% ids = ids1 | ids2 %>
+  <% col = Cor1440Gen::Proyectofinanciero.where(id: ids) %>
   <td>
     <%= f.input :id, as: :hidden %>
 
+    <% vdis = false %>
+    <% if f.object.proyectofinanciero_id %>
+      <% vdis = true %>
+    <% end %>
     <%= f.input :proyectofinanciero_id,
       collection: col,
       label: false,
       label_method: :nombre, 
+      disabled: vdis,
       value_method: :id,
       selected: f.object.proyectofinanciero_id,
       input_html: { 
