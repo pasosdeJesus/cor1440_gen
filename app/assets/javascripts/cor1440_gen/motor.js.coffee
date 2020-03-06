@@ -66,6 +66,8 @@ cor1440_gen_rangoedadc_todos = () ->
         '_id', '_numero', DEP_RESULTADOPF, 'id', 'numero')
 
 # En formulario actividad
+
+# Actualiza campos dinámicos cuando hay un solo campo de actividades de proyectofinanciero
 @cor1440_gen_actividad_actualiza_camposdinamicos = (root) ->
   ruta = document.location.pathname
   if ruta.length == 0
@@ -76,6 +78,30 @@ cor1440_gen_rangoedadc_todos = () ->
     ruta = ruta.substr(1)
   params = {
     actividadpf_ids: $('#actividad_actividadpf_ids').val()
+  }
+  sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+    '#camposdinamicos', '#camposdinamicos')
+
+
+# Actualiza campos dinámicos cuando hay una tabla de proyectofinanciero
+# y actividades de proyectofinanciero
+@cor1440_gen_actividad_actualiza_camposdinamicos2 = (root) ->
+  ruta = document.location.pathname
+  if ruta.length == 0
+    return
+  if ruta.startsWith(root.puntomontaje)
+    ruta = ruta.substr(root.puntomontaje.length)
+  if ruta[0] == '/'
+    ruta = ruta.substr(1)
+  acids = ['']
+  $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () -> 
+    t = $(this)
+    if t.parent().parent().parent().not(':hidden').length > 0
+      acids = acids.concat(t.val())
+  )
+
+  params = {
+    actividadpf_ids: acids
   }
   sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
@@ -97,15 +123,88 @@ cor1440_gen_rangoedadc_todos = () ->
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
     'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
+
 @cor1440_gen_actividad_actualiza_pf = (root) ->
   params = {
     fecha: $('#actividad_fecha_localizada').val(),
   }
-  sip_llena_select_con_AJAX2('proyectosfinancieros', params, 
-    'actividad_proyectofinanciero_ids', 'con Convenios financiados', 
-    root, 'id', 'nombre', 
+  sip_llena_select_con_AJAX2('proyectosfinancieros', params,
+    'actividad_proyectofinanciero_ids', 'con Convenios financiados',
+    root, 'id', 'nombre',
     cor1440_gen_actividad_actualiza_actividadpf)
 
+
+@cor1440_gen_actividad_actualiza_pf2 =  (root, pfpend = null) ->
+  # Si hay listado de proyectos vigentes, limitar a esos
+  if pfpend != null
+    pfpendid = pfpend.map((e) => (e.id))
+    pfex = []
+    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+      idex = $(this).find('select[id$=proyectofinanciero_id]').val()
+      if !(pfpendid.includes(+idex))
+        $(this).remove()
+    )
+  # Actualizar campos dinámicos
+  cor1440_gen_actividad_actualiza_camposdinamicos2(root)
+
+#  porac = []
+#  $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+#      porac.push({
+#        npf: $(this).find('select[id$=proyectofinanciero_id]').val(),
+#        idac: $(this).find('select[id$=actividadpf_ids]').attr('id') 
+#      })
+#  )
+#
+#  debugger
+#  # Llenar los select de actividades de convenio y tras de el último
+#  # actualizar campos dinámicos --dando tiempo a los ajax de terminar
+#  n = 0
+#  porac.forEach((r) ->
+#    params = { pfl: [r.npf] }
+#    f = null
+#    if n == r.length -1
+#    sip_llena_select_con_AJAX2('actividadespf', params, 
+#        r.idac, 'con Actividades de convenio ' + r.npf, root,
+#        'id', 'nombre', f)
+#    n += 1
+#  )
+
+@cor1440_gen_actividad_limita_pf_actualiza_actividadpf =  (root, pfpend = null) ->
+  # Si hay listado de proyectos vigentes, limitar a esos
+  if pfpend != null
+    pfpendid = pfpend.map((e) => (e.id))
+    pfex = []
+    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+      idex = $(this).find('select[id$=proyectofinanciero_id]').val()
+      if !(pfpendid.includes(+idex))
+        $(this).remove()
+    )
+ 
+@cor1440_gen_actividad_actualiza_fecha2 = (root) ->
+  params = {
+    fecha: $('#actividad_fecha_localizada').val(),
+  }
+  sip_funcion_tras_AJAX('proyectosfinancieros', params, 
+    cor1440_gen_actividad_actualiza_pf2, 'con Convenios Financiados', 
+    root)
+
+@cor1440_gen_actividad_actualiza_pf_op = (root, resp, objetivo) ->
+  # Determinar nuevas opciones excluyendo las ya elegidas 
+  otrospfid = []
+  objetivo.siblings().not(':hidden').find('select').each(() -> 
+    otrospfid.push(+this.value)
+  )
+  idsel = objetivo.find('select').attr('id')
+  nuevasop = []
+  resp.forEach((r) -> 
+    if !otrospfid.includes(+r.id)
+      nuevasop.push({'id': +r.id, 'nombre': r.nombre})
+  )
+  sip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', true)
+  $('#' + idsel).val('')
+  $('#' + idsel).trigger('chosen:updated')
+
+  return
 
 
 # Elije un asistente en autocompletación
@@ -206,7 +305,6 @@ cor1440_gen_rangoedadc_todos = () ->
   return
 
 
-
 @cor1440_gen_prepara_eventos_comunes = (root, opciones = {}) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form
@@ -231,7 +329,7 @@ cor1440_gen_rangoedadc_todos = () ->
 
   if (!opciones['sin_eventos_cambia_proyecto'])
     $('#actividad_fecha_localizada').on('change', (ev) ->
-      cor1440_gen_actividad_actualiza_pf(root)
+      cor1440_gen_actividad_actualiza_fecha2(root)
     )
     $('#actividad_fecha_localizada').datepicker({
       format: root.formato_fecha,
@@ -239,48 +337,61 @@ cor1440_gen_rangoedadc_todos = () ->
       todayHighlight: true,
       language: 'es'
     }).on('changeDate', (ev) ->
-      cor1440_gen_actividad_actualiza_pf(root)
+      cor1440_gen_actividad_actualiza_fecha2(root)
     )
-    $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
-      cor1440_gen_actividad_actualiza_actividadpf(root)
-    )
-    $('#actividad_actividadpf_ids').chosen().change( (e) ->
-      cor1440_gen_actividad_actualiza_camposdinamicos(root)
-    )
-  
+#    $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
+#      cor1440_gen_actividad_actualiza_actividadpf(root, null)
+#    )
+#    $('#actividad_actividadpf_ids').chosen().change( (e) ->
+#      cor1440_gen_actividad_actualiza_camposdinamicos(root)
+#    )
     
-    # Tras añadir una fila a la tabla de proyectosfinancieros y sus actividadespf
+    # Tras añadir una fila a la tabla de proyectosfinancieros y sus 
+    # actividadespf, se deja proyecto en blanco y se permite elegir uno de
+    # entre los vigentes pero excluyendos los que ya estuvierna 
+    # (para evitar filas repetidas)
     $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
  
       $('.chosen-select').chosen()
-      # Determinar nuevas opciones excluyendo las ya elegidas 
-      otrospfid = []
-      objetivo.siblings().not(':hidden').find('select').each(() -> 
-        otrospfid.push(this.value)
-      )
-      idsel = objetivo.find('select').attr('id')
-      nuevasop = []
-      objetivo.find('option').each(() -> 
-        if !otrospfid.includes(this.value)
-          nuevasop.push({'id': this.value, 'nombre': this.innerHTML})
-      )
-      sip_remplaza_opciones_select(idsel, nuevasop, true)
-      return
+      params = {
+        fecha: $('#actividad_fecha_localizada').val(),
+      }
+      sip_funcion_1p_tras_AJAX('proyectosfinancieros', params, 
+        cor1440_gen_actividad_actualiza_pf_op, objetivo, 
+        'con Convenios Financiados', root)
     )
 
-    # En tabla de formulario actividad para agregar proyectosfinancieros y actividades de proyectofinanciero
-    $("[id^=actividad_actividad_proyectofinanciero_attributes][id$=proyectofinanciero_id]").chosen().change( (e) ->
-      objetivo.find('.actividad_actividad_proyectofinanciero_proyectofinanciero_id>select').attr('disabled', true)
-      debugger
-      # deshabilitar
-      cor1440_gen_actividad_actualiza_actividadpf(root)
+    # Al eliminar una fila de la tabla
+    # se retiran subformularios de actividades de convenio
+    $(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objetivo) ->
+      cor1440_gen_actividad_actualiza_camposdinamicos2(root)
     )
 
-    # En talba de formulario actividad para agregar proyectosfinancierso y actividades al cambiar actividades de proyectofinanciero en alguna fila
-    $('#actividad_actividadpf_ids').chosen().change( (e) ->
-      
-      debugger
-      cor1440_gen_actividad_actualiza_camposdinamicos(root)
+    # Al establecer un proyectofinanciero se deshabilita 
+    # posibilidad de edición al mismo y en la celda de actividades
+    # de convenio se permite eleir entre las del proyecto elegido
+    $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=proyectofinanciero_id]', (e, res) ->
+      # Deshabilitar edición y dejar disponibles actividades de convenio
+      $(e.target).attr('disabled', true)
+      $(e.target).trigger('chosen:updated')
+      idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
+      params = { pfl: [+res.selected]}
+      sip_llena_select_con_AJAX2('actividadespf', params, 
+        idac, 'con Actividades de convenio ' + res.selected, root,
+        'id', 'nombre', null)
+    )
+
+    # Antes de enviar el formulario de actividad, habilitamos campos 
+    # proyectofinanciero, que se habían deshabilitado para simplificar
+    # interacción por parte de usuario.
+    $("form[id^=edit_actividad]").submit(() ->
+      $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_proyectofinanciero_id]').removeAttr('disabled')
+    );
+    
+    # Tras agregar o eliminar actividades de convenio a un convenio
+    # agregare o eliminar subformularios asociados
+    $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
+      cor1440_gen_actividad_actualiza_camposdinamicos2(root)
     )
  
   $(document).on('change', '#objetivospf [id$=_numero]', cor1440_gen_actualiza_objetivos)
