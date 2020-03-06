@@ -16,6 +16,11 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Actividadpf', 
             through: :actividad
 
+          after_destroy do
+            # Si hay respuestafor asociada a actividadpf del proyectofinanciero_id que se desasocia eliminarla
+            self.actividad.actividadpf_ids -= self.proyectofinanciero.actividadpf_ids
+          end
+
           def actividadpf_ids
             self.actividad.actividadpf.where(
               proyectofinanciero_id: self.proyectofinanciero_id).pluck(:id)
