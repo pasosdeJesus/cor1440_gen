@@ -189,7 +189,7 @@ cor1440_gen_rangoedadc_todos = () ->
     root)
 
 @cor1440_gen_actividad_actualiza_pf_op = (root, resp, objetivo) ->
-  # Determinar nuevas opciones excluyendo las ya elegidas 
+  # Determinar nuevas opciones excluyendo las ya elegidas
   otrospfid = []
   objetivo.siblings().not(':hidden').find('select').each(() -> 
     otrospfid.push(+this.value)
@@ -206,6 +206,23 @@ cor1440_gen_rangoedadc_todos = () ->
 
   return
 
+@cor1440_gen_actividad_actualiza_sel_rango = (root, resp, objetivo) ->
+  # Determinar nuevas opciones excluyendo las ya elegidas
+  otrospfid = []
+  objetivo.siblings().not(':hidden').find('select').each(() -> 
+    otrospfid.push(+this.value)
+  )
+  idsel = objetivo.find('select').attr('id')
+  nuevasop = []
+  resp.forEach((r) -> 
+    if !otrospfid.includes(+r.id)
+      nuevasop.push({'id': +r.id, 'nombre': r.nombre})
+  )
+  sip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', false)
+  $('#' + idsel).val(7)
+  $('#' + idsel).trigger('chosen:updated')
+
+  return
 
 # Elije un asistente en autocompletación
 @cor1440_gen_autocompleta_asistente = (label, id, divcp, root) ->
@@ -359,6 +376,14 @@ cor1440_gen_rangoedadc_todos = () ->
       sip_funcion_1p_tras_AJAX('proyectosfinancieros', params, 
         cor1440_gen_actividad_actualiza_pf_op, objetivo, 
         'con Convenios Financiados', root)
+    )
+
+    $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
+      #$('select').chosen({disable_search_threshold: 10})
+      params = {}
+      sip_funcion_1p_tras_AJAX('actividades/rangosedadac', params, 
+        cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
+        'con Rangos de edad', root)
     )
 
     # Al eliminar una fila de la tabla
