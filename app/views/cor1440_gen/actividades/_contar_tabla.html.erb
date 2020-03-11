@@ -23,7 +23,7 @@
   </thead>
   <tbody>
     <% a = Cor1440Gen::Actividadpf.where(
-      proyectofinanciero_id: @contar_pfid).order(:nombrecorto) %>
+      proyectofinanciero_id: @contar_pfid).order('resultadopf_id, nombrecorto') %>
     <% a.each do |a| %>
       <tr>
         <% # Una misma actividad puede tener varias actividades de convenio del
