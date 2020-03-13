@@ -1,0 +1,18 @@
+<% col = Cor1440Gen::Proyectofinanciero.all %>
+<% sel = nil %>
+<% if f.object.proyectofinanciero_id %>
+  <% col = col.where(id: f.object.proyectofinanciero_id) %>
+  <% sel = f.object.proyectofinanciero_id %>
+<% elsif params && params['filtro'] && params['filtro']['busproyectofinanciero_id'] && params['filtro']['busproyectofinanciero_id'] != '' %>
+  <% col = col.where(id: params['filtro']['busproyectofinanciero_id'].to_i) %>
+  <% sel = params['filtro']['busproyectofinanciero_id'].to_i %>
+<% end %>
+
+<%= f.input :proyectofinanciero_id,
+  collection: col,
+  label_method: :nombre,
+  value_method: :id,
+  selected: sel,
+  input_html: { class: 'chosen-select' }
+%>
+

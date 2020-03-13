@@ -18,16 +18,30 @@ module Cor1440Gen
 
           def atributos_index
             [ "id",
-              "proyectofinanciero_id",
+              #"proyectofinanciero_id",
               "indicadorpf_id",
               "frecuenciaanual",
               "pmindicador"
             ]
           end
 
+          def atributos_form
+            [ "proyectofinanciero_id",
+              "indicadorpf_id",
+              "frecuenciaanual",
+              "pmindicador"
+            ]
+          end
+
+
           def index_reordenar(registros)
-            return registros.reorder(proyectofinanciero_id: :asc, 
-                                     indicadorpf_id: :asc)
+            @contar_pf = Cor1440Gen::Proyectofinanciero.all
+            @contar_pfid = params[:filtro] && 
+              params[:filtro][:busproyectofinanciero_id] ?  
+              params[:filtro][:busproyectofinanciero_id].to_i : (@contar_pfid or nil)
+
+            return registros.where(proyectofinanciero_id: @contar_pfid).
+              reorder(proyectofinanciero_id: :asc, indicadorpf_id: :asc)
           end
 
           def new_modelo_path(o)

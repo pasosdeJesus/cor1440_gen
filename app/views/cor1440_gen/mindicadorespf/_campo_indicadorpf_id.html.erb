@@ -1,0 +1,18 @@
+<% col = Cor1440Gen::Indicadorpf.all %>
+<% sel = nil %>
+<% if f.object.indicadorpf_id %>
+  <% col = col.where(id: f.object.indicadorpf_id) %>
+  <% sel = f.object.indicadorpf_id %>
+<% elsif params && params['filtro'] && params['filtro']['busproyectofinanciero_id'] && params['filtro']['busproyectofinanciero_id'] != '' %>
+  <% col = col.where(proyectofinanciero_id: 
+                     params['filtro']['busproyectofinanciero_id'].to_i) %>
+<% end %>
+
+<%= f.input :indicadorpf_id,
+  collection: col,
+  label_method: :presenta_nombre,
+  value_method: :id,
+  selected: sel,
+  input_html: { class: 'chosen-select' }
+%>
+

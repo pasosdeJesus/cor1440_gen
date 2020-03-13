@@ -1,0 +1,13 @@
+<%= f.input :busindicadorpf_id,
+  collection: Cor1440Gen::Indicadorpf.
+  where(proyectofinanciero_id: @contar_pfid),
+  include_blank: true,
+  label_method: :presenta_nombre,
+  value_method: :id,
+  label: false,
+  selected: Sip::ModeloHelper.poromision(params, :busindicadorpf_id),
+  input_html: { 
+    class: 'chosen-select',
+    'data-enviarautomatico' => ''
+  }
+%>
