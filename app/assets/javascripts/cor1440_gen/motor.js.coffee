@@ -381,7 +381,7 @@ cor1440_gen_rangoedadc_todos = () ->
     $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
       #$('select').chosen({disable_search_threshold: 10})
       params = {}
-      sip_funcion_1p_tras_AJAX('actividades/rangosedadac', params, 
+      sip_funcion_1p_tras_AJAX('admin/rangosedadac', params, 
         cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
         'con Rangos de edad', root)
     )
