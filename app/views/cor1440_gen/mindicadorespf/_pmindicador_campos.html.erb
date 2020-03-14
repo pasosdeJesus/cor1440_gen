@@ -4,6 +4,7 @@
       label: false, 
       input_html: {
         "data-behaviour" => "datepicker",
+        readonly: 'readonly',
         class: 'em8'
       }, as: :string %>
   </td><td>
@@ -30,31 +31,39 @@
   <% if @descd1 != '' %> 
     <td>
       <%= f.input :dmed1, 
+        readonly: 'readonly',
         label: false %>
       <%= f.input :urlev1, 
+        readonly: 'readonly',
         label: false, as: :hidden %>
     </td>
   <% end %>
   <% if @descd2 != '' %> 
     <td>
       <%= f.input :dmed2,
+        readonly: 'readonly',
         label: false %>
       <%= f.input :urlev2, 
+        readonly: 'readonly',
         label: false, as: :hidden %>
     </td>
   <% end %>
   <% if @descd3 != '' %> 
     <td>
       <%= f.input :dmed3,
+        readonly: 'readonly',
         label: false %>
       <%= f.input :urlev3, 
+        readonly: 'readonly',
         label: false, as: :hidden %>
     </td>
   <% end %>
   <td>
     <%= f.input :rind,
+        readonly: 'readonly',
       label: false %>
       <%= f.input :urlevrind, 
+        readonly: 'readonly',
         label: false, as: :hidden %>
   </td>
   <td>
@@ -65,7 +74,9 @@
       }  %>
   </td>
   <td> 
-    <%= f.input :porcump, label: false %> 
+    <%= f.input :porcump, 
+        readonly: 'readonly',
+        label: false %> 
   </td>
   <!--td> <%= f.input :analisis, label: false %> </td><td> <%= f.input :acciones, label: false %> </td><td> <%= f.input :responsables, label: false %> </td><td> <%= f.input :plazo, label: false %> </td-->
   <td>

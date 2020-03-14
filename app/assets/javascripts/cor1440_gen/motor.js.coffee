@@ -225,6 +225,7 @@ cor1440_gen_rangoedadc_todos = () ->
   return
 
 # Elije un asistente en autocompletación
+# Tras autocompletar disprar el evento cor1440gen:autocompletado-asistente
 @cor1440_gen_autocompleta_asistente = (label, id, divcp, root) ->
   sip_arregla_puntomontaje(root)
   cs = id.split(";")
@@ -251,9 +252,9 @@ cor1440_gen_rangoedadc_todos = () ->
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_anionac]').val(e.anionac)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_mesnac]').val(e.mesnac)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_dianac]').val(e.dianac)
-    if typeof jrs_recalcula_poblacion == 'function'
-      jrs_recalcula_poblacion()
-    #$(document).trigger("sip:autocompleto_persona", [id_victima, id_persona])
+    #if typeof jrs_recalcula_poblacion == 'function'
+    #  jrs_recalcula_poblacion()
+    $(document).trigger("cor1440gen:autocompletado-asistente")
     return
   )
   return
@@ -379,12 +380,15 @@ cor1440_gen_rangoedadc_todos = () ->
     )
 
     $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
-      #$('select').chosen({disable_search_threshold: 10})
-      params = {}
-      sip_funcion_1p_tras_AJAX('admin/rangosedadac', params, 
-        cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
-        'con Rangos de edad', root)
-    )
+      # Si se d
+      if (typeof root.cor1440_gen_sinrevisar_actividad_rangoedadac == 'undefined') || root.cor1440_gen_sinrevisar_actividad_rangoedadac == 0
+        params = {}
+        sip_funcion_1p_tras_AJAX('admin/rangosedadac', params, 
+          cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
+          'con Rangos de edad', root)
+        )
+      else
+        root.cor1440_gen_sinrevisar_actividad_rangoedadac = 0
 
     # Al eliminar una fila de la tabla
     # se retiran subformularios de actividades de convenio
