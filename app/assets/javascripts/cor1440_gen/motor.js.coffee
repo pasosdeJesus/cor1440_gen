@@ -391,6 +391,11 @@ cor1440_gen_rangoedadc_todos = () ->
         'con Rangos de edad', root)
     )
 
+    $(document).on('change', 'select[id^=actividad_actividad_rangoedadac_attributes_][id$=rangoedadac_id]', (e, res) ->
+      $(e.target).attr('disabled', true)
+      $(e.target).trigger('chosen:updated')
+    )
+
     # Al eliminar una fila de la tabla
     # se retiran subformularios de actividades de convenio
     $(document).on('cocoon:after-remove', '#actividad_proyectofinanciero', (e, objetivo) ->
@@ -416,6 +421,7 @@ cor1440_gen_rangoedadc_todos = () ->
     # interacción por parte de usuario.
     $("form[id^=edit_actividad]").submit(() ->
       $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_proyectofinanciero_id]').removeAttr('disabled')
+      $('select[id^=actividad_actividad_rangoedadac_attributes_][id$=_rangoedadac_id]').removeAttr('disabled')
     );
     
     # Tras agregar o eliminar actividades de convenio a un convenio
