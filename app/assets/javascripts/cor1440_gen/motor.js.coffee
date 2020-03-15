@@ -381,9 +381,14 @@ cor1440_gen_rangoedadc_todos = () ->
     $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
       #$('select').chosen({disable_search_threshold: 10})
       params = {}
-      sip_funcion_1p_tras_AJAX('actividades/rangosedadac', params, 
+      sip_funcion_1p_tras_AJAX('admin/rangosedadac', params, 
         cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
         'con Rangos de edad', root)
+    )
+
+    $(document).on('change', 'select[id^=actividad_actividad_rangoedadac_attributes_][id$=rangoedadac_id]', (e, res) ->
+      $(e.target).attr('disabled', true)
+      $(e.target).trigger('chosen:updated')
     )
 
     # Al eliminar una fila de la tabla
@@ -411,6 +416,7 @@ cor1440_gen_rangoedadc_todos = () ->
     # interacción por parte de usuario.
     $("form[id^=edit_actividad]").submit(() ->
       $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_proyectofinanciero_id]').removeAttr('disabled')
+      $('select[id^=actividad_actividad_rangoedadac_attributes_][id$=_rangoedadac_id]').removeAttr('disabled')
     );
     
     # Tras agregar o eliminar actividades de convenio a un convenio
