@@ -213,13 +213,17 @@ cor1440_gen_rangoedadc_todos = () ->
     otrospfid.push(+this.value)
   )
   idsel = objetivo.find('select').attr('id')
+  valac = +$('#' + idsel).val()
+  valsel = 7
   nuevasop = []
   resp.forEach((r) -> 
     if !otrospfid.includes(+r.id)
       nuevasop.push({'id': +r.id, 'nombre': r.nombre})
+      if r.id == valac
+        valsel = valac
   )
   sip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', false)
-  $('#' + idsel).val(7)
+  $('#' + idsel).val(valsel)
   $('#' + idsel).trigger('chosen:updated')
 
   return
@@ -380,15 +384,12 @@ cor1440_gen_rangoedadc_todos = () ->
     )
 
     $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
-      # Si se d
-      if (typeof root.cor1440_gen_sinrevisar_actividad_rangoedadac == 'undefined') || root.cor1440_gen_sinrevisar_actividad_rangoedadac == 0
-        params = {}
-        sip_funcion_1p_tras_AJAX('admin/rangosedadac', params, 
-          cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
-          'con Rangos de edad', root)
-        )
-      else
-        root.cor1440_gen_sinrevisar_actividad_rangoedadac = 0
+      # Si se ha deshabilitado, no operar pero volver a habilitar
+      params = {}
+      sip_funcion_1p_tras_AJAX('admin/rangosedadac', params, 
+        cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
+        'con Rangos de edad', root)
+    )
 
     # Al eliminar una fila de la tabla
     # se retiran subformularios de actividades de convenio
