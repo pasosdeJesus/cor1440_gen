@@ -32,7 +32,7 @@
         </td>
       </tr>
       <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
-        <%= render partial: 'actividad_rangoedadac_fields', 
+        <%= render partial: 'actividad_rangoedadac_campos', 
           locals: {f: s, ac: f} %>
       <% end %>
     </tbody>
@@ -42,7 +42,7 @@
       :actividad_rangoedadac, 
       :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
       :"data-association-insertion-method" => "append", 
-      :partial => "actividad_rangoedadac_fields", 
+      :partial => "actividad_rangoedadac_campos", 
       :class => "btn-primary" 
     %>
   </div>
