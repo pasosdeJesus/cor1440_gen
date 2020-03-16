@@ -10,7 +10,7 @@
 
 <%= f.input :indicadorpf_id,
   collection: col,
-  label_method: :presenta_nombre,
+  label_method: lambda {|t| t.resultadopf.numero + t.numero + ':' + t.indicador},
   value_method: :id,
   selected: sel,
   input_html: { class: 'chosen-select' }

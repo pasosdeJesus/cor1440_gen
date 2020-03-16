@@ -170,6 +170,10 @@ module Cor1440Gen
             end
           end
 
+          def presenta_nombre
+            resultadopf.numero + nombrecorto + " " + titulo
+          end
+
           def presenta_actividad(atr)
             case atr.to_s
             when /anexo_[0-9]_desc/
