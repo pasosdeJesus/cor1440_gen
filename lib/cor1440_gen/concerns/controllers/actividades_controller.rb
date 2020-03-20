@@ -266,6 +266,7 @@ module Cor1440Gen
             @contar_actividad = Cor1440Gen::Actividad.all
             @contar_pf = Cor1440Gen::Proyectofinanciero.all
             @contar_pfid = nil
+            @contar_ofi = nil
 
             # Control de acceso
             filtra_contar_control_acceso
@@ -274,6 +275,10 @@ module Cor1440Gen
             @contar_pfid = params[:filtro] && 
               params[:filtro][:proyectofinanciero_id] ?  
               params[:filtro][:proyectofinanciero_id].to_i : @contar_pfid
+            
+            @contar_ofi = params[:filtro] && 
+              params[:filtro][:oficina_id] ?  
+              params[:filtro][:oficina_id].to_i : @contar_ofi
 
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
               params[:filtro]['fechaini'] != ""
@@ -295,6 +300,13 @@ module Cor1440Gen
               end
               @contar_actividad = @contar_actividad.where(
                 'cor1440_gen_actividad.fecha <= ?', @fechafin)
+            end
+            
+            if params[:filtro]
+              if params[:filtro]['oficina_id'] 
+                @contar_actividad = @contar_actividad.where(
+                  'cor1440_gen_actividad.oficina_id >= ?', @contar_ofi)
+              end
             end
             filtra_contar_por_parametros 
 
