@@ -63,18 +63,6 @@
     </div> <!-- row -->
 
     <div class="row filtro-fila">
-      <div class="offset-sm-2 col-sm-4">
-        <%= f.input :oficina_id,
-          collection: Sip::Oficina.all,
-          label_method: :nombre,
-          value_method: :id,
-          label: false,
-          include_blank: '-- Oficina'
-        %>
-      </div>
-    </div> <!-- row -->
-
-    <div class="row filtro-fila">
       <div class="offset-md-5 col-md-3">
         <%= f.button :submit, 'Contar', class: 'btn btn-default' %>
       </div>
