@@ -305,7 +305,7 @@ module Cor1440Gen
             if params[:filtro]
               if params[:filtro]['oficina_id']
                 @contar_actividad = @contar_actividad.where(
-                  'cor1440_gen_actividad.oficina_id >= ?', @contar_ofi)
+                  'cor1440_gen_actividad.oficina_id = ?', @contar_ofi)
               end
             end
             filtra_contar_por_parametros 
