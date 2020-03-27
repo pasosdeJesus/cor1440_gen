@@ -75,6 +75,7 @@ es:
       "cor1440_gen/mindicadorpf":
         Mindicadorpf: Medición de un indicador
         Mindicadorespf: Mediciones de indicadores
+        actividadpf: Actividades de convenio relacionadas con el indicador
         cor1440_gen_proyectofinanciero: Proyecto
         cor1440_gen_indicadorpf: 'Indicador'
         frecuenciaanual: 'Frecuencia de medición anual'
