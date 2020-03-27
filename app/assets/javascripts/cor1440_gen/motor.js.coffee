@@ -321,6 +321,7 @@ cor1440_gen_rangoedadc_todos = () ->
     ffin_localizada: r.find('[id$=ffin_localizada]').val()
     indicadorpf_id: $(document).find('#mindicadorpf_indicadorpf_id').val()
     hmindicadorpf_id: hid
+    mindicadorpf_id: $('form.edit_mindicadorpf')[0].id.split('_')[2]
   }
   sip_ajax_recibe_json(root, 'api/cor1440gen/mideindicador', 
     datos, cor1440_gen_llena_medicion)  

@@ -230,7 +230,7 @@ module Cor1440Gen
           end
 
           def proyectofinanciero_params_cor1440_gen
-            atributos_form + [ 
+            atributos_form + [:responsable_id] + [ 
               :actividadpf_attributes =>  [
                 :id, 
                 :resultadopf_id,
@@ -254,7 +254,7 @@ module Cor1440Gen
             ] + [
               :caracterizacion_ids => []
             ] + [
-              :planillahcm_ids => []
+              :plantillahcm_ids => []
             ] + [
               :indicadorobjetivo_attributes =>  [
                 :id, 

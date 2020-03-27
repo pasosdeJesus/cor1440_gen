@@ -1,0 +1,15 @@
+<%= f.association :actividadpf,
+  collection: Cor1440Gen::Actividadpf.
+  where(proyectofinanciero_id: f.object.proyectofinanciero_id).
+  where(resultadopf_id: f.object.indicadorpf.resultadopf_id),
+  value_method: :id,
+  label_method: lambda {|t| t.resultadopf.numero + 
+                        t.nombrecorto + ':' + t.titulo},
+  input_html: {
+    class: 'chosen-select'
+  }
+%>
+
+
+
+    

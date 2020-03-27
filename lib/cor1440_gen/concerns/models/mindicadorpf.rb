@@ -26,6 +26,12 @@ module Cor1440Gen
             allow_destroy: true, 
             reject_if: :all_blank
 
+          has_and_belongs_to_many :actividadpf, 
+            class_name: 'Cor1440Gen::Actividadpf',
+            foreign_key: 'mindicadorpf_id',
+            association_foreign_key: 'actividadpf_id',
+            join_table: 'cor1440_gen_actividadpf_mindicadorpf'
+
           scope :filtro_proyectofinanciero_id, lambda { |pf|
             where(proyectofinanciero_id: pf)
           }
