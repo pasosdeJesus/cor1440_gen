@@ -77,12 +77,15 @@ module Cor1440Gen
               sum(sexo.to_sym)
           end
 
-          # Cuenta personas unicas asistentes a actividades de listado lac 
-          # Retorna listado de ids diferentes
-          def asistencia_por_sexo(idacs, sexo)
-            Cor1440Gen::Asistencia.joins(:persona).
+          # Cuenta asistentes a actividades de listado lac 
+          # Retorna listado de ids.  Será únicas si uncas es verdadero diferentes
+          def asistencia_por_sexo(idacs, sexo, unicas = false)
+            res = Cor1440Gen::Asistencia.joins(:persona).
               where(actividad_id: idacs).
-              where('sip_persona.sexo = ?', sexo).pluck(:persona_id).uniq
+              where('sip_persona.sexo = ?', sexo).pluck(:persona_id)
+            if unicas
+              res = res.uniq
+            end
           end
 
           # Mide indicador de resultado con métodos muy generales
@@ -118,8 +121,9 @@ module Cor1440Gen
               d3 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 's')
               resind = d1+d2+d3
 
-            when 3 # Contar asistentes únicos en listados de asistencia 
-              # de actividades y cuentas intermedias por sexo
+            when 3 # Contar asistentes en listados de asistencia (no 
+              # necesariamente únicos) de actividades y cuentas 
+              # intermedias por sexo 
               idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
               mujeres = asistencia_por_sexo(idacs, 'F')
               hombres = asistencia_por_sexo(idacs, 'M')
@@ -140,6 +144,30 @@ module Cor1440Gen
                 urlev3 = sip.personas_url + '?filtro[busid]=' + 
                   sinsexo.join(',')
               end
+
+            when 4 # Contar asistentes únicos en listados de asistencia 
+              # de actividades y cuentas intermedias por sexo
+              idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
+              mujeres = asistencia_por_sexo(idacs, 'F', true)
+              hombres = asistencia_por_sexo(idacs, 'M', true)
+              sinsexo = asistencia_por_sexo(idacs, 'S', true)
+              resind =  mujeres.count + hombres.count + sinsexo.count
+              d1 = mujeres.count
+              if d1 > 0
+                urlev1 = sip.personas_url + '?filtro[busid]=' + 
+                  mujeres.join(',')
+              end
+              d2 = hombres.count
+              if d2 > 0
+                urlev2 = sip.personas_url + '?filtro[busid]=' + 
+                  hombres.join(',')
+              end
+              d3 = sinsexo.count
+              if d3 > 0
+                urlev3 = sip.personas_url + '?filtro[busid]=' + 
+                  sinsexo.join(',')
+              end
+
             else
               res = ind.resultadopf
               if res.actividadpf.count > 0
