@@ -40,6 +40,23 @@ module Cor1440Gen
             where(indicadorpf_id: ipf)
           }
 
+
+          def presenta(atr)
+            case atr.to_s
+            when 'actividadpf'
+              m = actividadpf_ids.map {|idapf| 
+                apf = Cor1440Gen::Actividadpf.find(idapf)
+                apf.resultadopf.numero + apf.nombrecorto
+              }
+              return m.join(', ')
+            when 'tipoindicador'
+              return (indicadorpf && indicadorpf.tipoindicador ?
+                      indicadorpf.tipoindicador.nombre : '')
+            end
+            presenta_gen(atr)
+          end
+
+
         end # included
 
 #        class_methods do 

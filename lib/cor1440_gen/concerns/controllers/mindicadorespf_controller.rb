@@ -17,24 +17,36 @@ module Cor1440Gen
           end
 
           def atributos_index
-            [ "id",
-              #"proyectofinanciero_id",
-              "indicadorpf_id",
-              "frecuenciaanual",
-              "pmindicador"
+            [ :id,
+              #:proyectofinanciero_id,
+              :indicadorpf_id,
+              :frecuenciaanual,
+              :pmindicador
             ]
           end
 
           def atributos_form
-            [ "proyectofinanciero_id",
-              "indicadorpf_id"] +
+            [ :proyectofinanciero_id,
+              :indicadorpf_id] +
               (@registro && @registro.indicadorpf && 
                @registro.indicadorpf.resultadopf ? [:actividadpf] : []) +
             [
-              "frecuenciaanual",
-              "pmindicador"
+              :frecuenciaanual,
+              :pmindicador
             ]
           end
+
+          def atributos_show
+            [ :id,
+              :proyectofinanciero_id,
+              :indicadorpf_id,
+              :tipoindicador,
+              :frecuenciaanual,
+              :actividadpf,
+              :pmindicador
+            ]
+          end
+
 
 
           def index_reordenar(registros)
@@ -66,6 +78,29 @@ module Cor1440Gen
             end
 
             return lac.pluck(:id).uniq
+          end
+
+          # Descr
+          def descripciones_datos_intermedios(mindicador)
+            [ 
+              mindicador.descd1 ? mindicador.descd1 : (
+                mindicador.indicadorpf && 
+                mindicador.indicadorpf.tipoindicador ? 
+                mindicador.indicadorpf.tipoindicador.descd1 : ''
+              ),
+              mindicador.descd2 ? mindicador.descd2 : (
+                mindicador.indicadorpf && 
+                mindicador.indicadorpf.tipoindicador && 
+                mindicador.indicadorpf.tipoindicador.descd2 ?
+                mindicador.indicadorpf.tipoindicador.descd2 : ''
+              ),
+              mindicador.descd3 ? mindicador.descd3 : (
+                mindicador.indicadorpf && 
+                mindicador.indicadorpf.tipoindicador &&
+                mindicador.indicadorpf.tipoindicador.descd3 ?
+                mindicador.indicadorpf.tipoindicador.descd3 : ''
+              ) 
+            ]
           end
 
 

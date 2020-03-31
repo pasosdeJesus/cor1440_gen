@@ -1,7 +1,8 @@
 <% if @registro %>
-  <% @descd1 = @registro.descd1 ? @registro.descd1 : '' %>
-  <% @descd2 = @registro.descd2 ? @registro.descd2 : '' %>
-  <% @descd3 = @registro.descd3 ? @registro.descd3 : '' %>
+  <% d = controller.descripciones_datos_intermedios(@registro) %>
+  <% @descd1 = d[0] %>
+  <% @descd2 = d[1] %>
+  <% @descd3 = d[2] %>
   <% pms = @registro.pmindicador.order(:fecha, :ffin) %>
   
   <div>
@@ -30,7 +31,7 @@
           <td>
             <% v = pm.dmed1 ? pm.dmed1.round(1) : '' %>
             <% if pm.urlev1 && pm.dmed1 %>
-              <%= link_to v, pm.urlev1 %>
+              <%= link_to v, pm.urlev1, target: '_blank' %>
             <% else %>
               <%= v %>
             <% end %>
@@ -40,7 +41,7 @@
           <td>
             <% v = pm.dmed2 ? pm.dmed2.round(1) : '' %>
             <% if pm.urlev2 && pm.dmed2 %>
-              <%= link_to v, pm.urlev2 %>
+              <%= link_to v, pm.urlev2, target: '_blank'  %>
             <% else %>
               <%= v %>
             <% end %>
@@ -50,7 +51,7 @@
           <td>
             <% v = pm.dmed3 ? pm.dmed3.round(1) : '' %>
             <% if pm.urlev3 && pm.dmed3 %>
-              <%= link_to v, pm.urlev3 %>
+              <%= link_to v, pm.urlev3, target: '_blank'  %>
             <% else %>
               <%= v %>
             <% end %>
@@ -58,13 +59,24 @@
         <td>
           <% v = pm.rind ? pm.rind.round(1) : '' %>
           <% if pm.urlevrind && pm.rind %>
-            <%= link_to v, pm.urlevrind %>
+            <%= link_to v, pm.urlevrind, target: '_blank'  %>
           <% else %>
               <%= v %>
           <% end %>
         </td>
         <td><%= pm.meta %></td>
-        <td><%= pm.porcump ? pm.porcump.round(1) : '' %></td>
+        <td>
+          <% c = "red" %>
+          <% v = pm.porcump ? pm.porcump.round(1) : '' %>
+          <% if v.to_i > 99 %>
+            <% c = 'green' %>
+          <% elsif v.to_i >= 60 %>
+            <% c = 'orange' %>
+          <% end %>
+          <span style='color: <%= c %>'>
+            <%= v %>
+          </span>
+        </td>
       </tr>
     <% end %>
   </table>

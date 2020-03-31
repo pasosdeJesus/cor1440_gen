@@ -1,7 +1,9 @@
-<% @descd1 = @registro.descd1 ? @registro.descd1 : '' %>
-<% @descd2 = @registro.descd2 ? @registro.descd2 : '' %>
-<% @descd3 = @registro.descd3 ? @registro.descd3 : '' %>
-
+<% d = controller.descripciones_datos_intermedios(@registro) %>
+<% @descd1 = d[0] %>
+<% @descd2 = d[1] %>
+<% @descd3 = d[2] %>
+<% pms = @registro.pmindicador.order(:fecha, :ffin) %>
+  
 <div class='table-responsive'>
   <table border=1 width="100%">
     <thead>

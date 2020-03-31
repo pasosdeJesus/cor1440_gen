@@ -9,9 +9,9 @@ class MejoraTipoindicadorIntermedios < ActiveRecord::Migration[6.0]
       nombre: 'CUENTA ASIST. ÚNICOS ACT',
       espfuncionmedir: 'Un participante que esté en listado de dos actividades diferentes cuenta una sóla vez',
       medircon: 1,
-      descd1: 'Hombres',
-      descd2: 'Mujeres',
-      descd3: 'Sin Sexo de Nacimiento',
+      descd1: 'Hombres únicos',
+      descd2: 'Mujeres únicas',
+      descd3: 'Sin Sexo de Nacimiento únicos',
       descd4: '',
       fechacreacion: '2020-03-30',
       created_at: '2020-03-30',
@@ -24,11 +24,13 @@ class MejoraTipoindicadorIntermedios < ActiveRecord::Migration[6.0]
     t.descd1 = 'Hombres'
     t.descd2 = 'Mujeres'
     t.descd3 = 'Sin Sexo de Nacimiento'
+    t.save!
 
     t = Cor1440Gen::Tipoindicador.find(3)
     t.descd1 = 'Hombres'
     t.descd2 = 'Mujeres'
     t.descd3 = 'Sin Sexo de Nacimiento'
+    t.save!
   end
 
   def down
