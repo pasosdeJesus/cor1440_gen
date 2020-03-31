@@ -83,6 +83,10 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyectofinanciero'
 
+          has_many :mindicadorpf, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Mindicadorpf',
+            foreign_key: 'proyectofinanciero_id'
+
           has_many :objetivopf, foreign_key: 'proyectofinanciero_id',
             validate: true, dependent: :destroy, 
             class_name: 'Cor1440Gen::Objetivopf'

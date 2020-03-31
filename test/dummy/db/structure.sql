@@ -1255,7 +1255,11 @@ CREATE TABLE public.cor1440_gen_tipoindicador (
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at date,
-    updated_at date
+    updated_at date,
+    descd1 character varying(32),
+    descd2 character varying(32),
+    descd3 character varying(32),
+    descd4 character varying(32)
 );
 
 
@@ -5531,6 +5535,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200314033958'),
 ('20200319183515'),
 ('20200326212919'),
-('20200327004702');
+('20200327004702'),
+('20200330174434');
 
 

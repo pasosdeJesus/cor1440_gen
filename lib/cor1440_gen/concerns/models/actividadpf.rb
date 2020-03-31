@@ -27,6 +27,10 @@ module Cor1440Gen
             association_foreign_key: 'actividad_id',
             join_table: 'cor1440_gen_actividad_actividadpf'
 
+          has_many :actividadpf_mindicadorpf, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ActividadpfMindicadorpf',
+            foreign_key: 'actividadpf_id'
+
           validates :nombrecorto, presence: true, length: {maximum: 15}
           validates :titulo, length: {maximum: 255}
           validates :descripcion, length: {maximum: 5000}
