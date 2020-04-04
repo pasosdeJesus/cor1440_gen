@@ -3,9 +3,6 @@ language: ruby
 rvm:
         - 2.6.1
 
-node_js:
-        - 10
-
 addon:
         postgresql: '9.6'
 
@@ -16,6 +13,7 @@ env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
                 - CC_TEST_REPORTER_ID=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e
+                - TRAVIS_NODE_VERSION="10.16.3"
 
 before_install: 
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
