@@ -3,6 +3,9 @@ language: ruby
 rvm:
         - 2.6.1
 
+node_js:
+        - 10
+
 addon:
         postgresql: '9.6'
 
