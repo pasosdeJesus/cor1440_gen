@@ -4,7 +4,12 @@ rvm:
         - 2.6.1
 
 addon:
-        postgresql: '9.6'
+        postgresql: '10'
+
+apt:
+        packages:
+                - postgresql-10
+                - postgresql-client-10
 
 notifications:
         email: false
@@ -13,6 +18,7 @@ env:
         global:
                 - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
                 - CC_TEST_REPORTER_ID=3060021dfb597aeb61e254a2e49db4e7f1fb245f39b1322c23dd1dc95803de6e
+                - PGPORT=5432
 
 before_install: 
         - nvm install node
