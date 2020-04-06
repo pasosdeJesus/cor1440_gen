@@ -3,7 +3,7 @@
 module Cor1440Gen
   module Concerns
     module Models
-      module ActividafpfMindicadorpf
+      module ActividadpfMindicadorpf
         extend ActiveSupport::Concern
 
         included do
