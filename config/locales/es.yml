@@ -32,10 +32,12 @@ es:
         Campoact: Campo
         Camposact: Campos
       "cor1440_gen/actividad":
+        actividadarea: Subáreas
         actividadpf: Actividad de convenio 
         actorsocial: Actores sociales en listado de asistencia
         fecha_localizada: Fecha
         objetivo: Objetivo de la actividad
+        proyecto: Área
         proyectofinanciero: Convenio financiado
         valorcampoact: Campos del tipo de actividad
       "cor1440_gen/actividadpf":
@@ -100,6 +102,7 @@ es:
         filtrofechafin:  Fecha final
         filtrofechafin_localizada:  Fecha final
         filtroproyecto: Área
+        filtroproyectofinanciero: Convenio financiado
         filtroactividadarea: Subárea 
         columnafecha: Fecha
         columnaresponsable: Responsable
@@ -113,10 +116,15 @@ es:
         caracterizacion: Caracterizaciones
         fechainicio_localizada: Fecha de inicio
         fechacierre_localizada: Fecha de cierre
+        financiador_ids: Financiadores
         indicador: Indicador
         marcologico: Marco lógico
         objetivopf: Objetivo
         plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este convenio
+        proyecto: Área
+        proyectos: Área
+        proyecto_ids: Áreas
+        "{:proyecto_ids=>[]}": Áreas
         Proyectofinanciero: Convenio financiado
         proyectofinanciero: Convenio financiado
         Proyectosfinancieros: Convenios financiados
