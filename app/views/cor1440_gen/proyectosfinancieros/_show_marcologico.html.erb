@@ -10,7 +10,7 @@
       <td>
         <ul>
           <% o.indicadorpf.order(:id).each do |io| %>
-            <li><%= io.numero %> <%= io.indicador%></li>
+            <li><%= o.numero + io.numero %> <%= io.indicador%></li>
           <% end %>
         </ul>
       </td>
@@ -26,7 +26,7 @@
       <td>
         <ul>
           <% r.indicadorpf.order(:numero).each do |ir| %>
-            <li><%= ir.numero %> <%= ir.indicador%></li>
+            <li><%= r.numero + ir.numero %> <%= ir.indicador%></li>
           <% end %>
         </ul>
       </td>
@@ -43,7 +43,7 @@
       <td>
         <% r.actividadpf.order(:nombrecorto).each do |a| %>
           <li>
-            <%= a.nombrecorto %> <%= a.titulo %>.
+            <%= r.numero + a.nombrecorto %> <%= a.titulo %>.
             <% if a.actividadtipo_id %>
               (Tipo: <%= a.actividadtipo.nombre %>)
             <% end%>
