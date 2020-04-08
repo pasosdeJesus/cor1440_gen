@@ -12,6 +12,12 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Informe',
             foreign_key: 'filtroproyecto'
 
+          has_and_belongs_to_many :actividad, 
+            class_name: 'Cor1440Gen::Actividad',
+            foreign_key: 'proyecto_id',
+            association_foreign_key: 'actividad_id',
+            join_table: 'cor1440_gen_actividad_proyecto'
+
           has_and_belongs_to_many :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero',
             foreign_key: 'proyecto_id',
