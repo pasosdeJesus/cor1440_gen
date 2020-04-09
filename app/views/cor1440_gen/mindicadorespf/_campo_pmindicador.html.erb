@@ -1,3 +1,7 @@
+
+<% if f.object.indicadorpf_id.nil? %>
+  <% return %>
+<% end %>
 <% d = controller.descripciones_datos_intermedios(@registro) %>
 <% @descd1 = d[0] %>
 <% @descd2 = d[1] %>

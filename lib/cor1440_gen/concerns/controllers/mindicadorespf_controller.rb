@@ -41,8 +41,8 @@ module Cor1440Gen
               :proyectofinanciero_id,
               :indicadorpf_id,
               :tipoindicador,
-              :frecuenciaanual,
               :actividadpf,
+              :frecuenciaanual,
               :pmindicador
             ]
           end
@@ -78,6 +78,71 @@ module Cor1440Gen
             end
 
             return lac.pluck(:id).uniq
+          end
+
+          def create
+            authorize! :new, clase.constantize
+            # Crear puntos de medición de acuerdo a frecuencia
+            registro = Cor1440Gen::Mindicadorpf.new(mindicadorpf_params)
+            if registro.valid? && registro.frecuenciaanual &&
+                registro.proyectofinanciero &&
+                registro.proyectofinanciero.fechainicio &&
+                registro.proyectofinanciero.fechacierre
+              registro.save
+              if registro.valid? 
+                f1 = registro.proyectofinanciero.fechainicio
+                f2 = registro.proyectofinanciero.fechacierre
+                if registro.frecuenciaanual.to_f > 0
+                  cm = 12/registro.frecuenciaanual.to_f
+                elsif registro.frecuenciaanual == '0,33'
+                  cm = 36
+                else
+                  cm = 60
+                end
+                cm = cm > 1 ? cm.to_i : 1
+                fi = f1 + cm.months
+                case cm
+                when 1
+                  np = 'MES(ES)'
+                when 2
+                  np = 'BIMESTRE(S)'
+                when 3
+                  np = 'TRIMESTRE(S)'
+                when 4
+                  np = 'CUADRIMESTRE(S)'
+                when 6
+                  np = 'SEMESTRE(S)'
+                when 12
+                  np = 'AÑO(S)'
+                when 36
+                  np = 'TRIENIO(S)'
+                else
+                  np = 'QUINQUENIO(S)'
+                end
+                num = 1
+                while fi<f2
+                  pm = Cor1440Gen::Pmindicadorpf.create(
+                    mindicadorpf_id: registro.id,
+                    finicio: f1,
+                    ffin: fi,
+                    restiempo: "#{num} #{np}",
+                    meta: num)
+                  pm.save
+                  fi += cm.months
+                  num += 1
+                end
+                if f1<f2
+                  pm = Cor1440Gen::Pmindicadorpf.create(
+                    mindicadorpf_id: registro.id,
+                    finicio: f1,
+                    ffin: f2,
+                    restiempo: "#{num} #{np}",
+                    meta: num)
+                  pm.save
+                end 
+              end
+            end
+            create_gen(registro)
           end
 
           # Descr
