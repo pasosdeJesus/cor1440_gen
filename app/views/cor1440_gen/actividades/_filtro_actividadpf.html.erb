@@ -2,7 +2,7 @@
 <%= f.input :busactividadpf,
   collection: col.order(:titulo),
   include_blank: true,
-  label_method: :titulo,
+  label_method: :presenta_nombre,
   value_method: :id,
   label: false,
   selected: Sip::ModeloHelper.poromision(params, :busactividadpf),
