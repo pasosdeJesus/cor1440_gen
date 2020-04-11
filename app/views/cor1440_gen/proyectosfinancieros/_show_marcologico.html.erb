@@ -22,7 +22,7 @@
   </tr>
   <% @registro.resultadopf.order(:numero).each do |r| %>
     <tr>
-      <td><%= r.numero %> <%= r.resultado %></td>
+      <td><%= r.objetivopf.numero + r.numero %> <%= r.resultado %></td>
       <td>
         <ul>
           <% r.indicadorpf.order(:numero).each do |ir| %>
@@ -39,7 +39,7 @@
   </tr>
   <% @registro.resultadopf.order(:numero).each do |r| %>
     <tr>
-      <td><%= r.numero %></td>
+      <td><%= r.objetivopf.numero + r.numero %></td>
       <td>
         <% r.actividadpf.order(:nombrecorto).each do |a| %>
           <li>
