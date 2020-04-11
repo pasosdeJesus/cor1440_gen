@@ -8,19 +8,19 @@ es:
     fechacierre_localizada: Fecha de cierre
     actividadarea: Subárea de actividad
     actividadareas: Subáreas de actividad
-    actividadtipo: Tipo de actividad de convenio financiado
-    actividadtipos: Tipos de actividad de convenio financiado
+    actividadtipo: Tipo de actividad de marco lógico
+    actividadtipos: Tipos de actividad de marco lógico
     proyectos: Áreas
     proyecto: Área
-    proyectosfinancieros: Convenios financiados
-    proyectofinanciero: Convenio financiado
+    proyectosfinancieros: Proyectos
+    proyectofinanciero: Proyecto
     tiposindicador: Tipos de indicador
     tipoindicador: Tipo de indicador
   activerecord:
     models:
       "cor1440_gen/proyectofinanciero": 
-        one: "Convenio financiado"
-        other: "Convenios financiados"
+        one: "Proyecto"
+        other: "Proyectos"
       "cor1440_gen/tipoindicador": 
         one: "Tipo de indicador"
         other: "Tipos de indicador"
@@ -33,15 +33,15 @@ es:
         Camposact: Campos
       "cor1440_gen/actividad":
         actividadarea: Subáreas
-        actividadpf: Actividad de convenio 
+        actividadpf: Actividad de marco lógico
         actorsocial: Actores sociales en listado de asistencia
         fecha_localizada: Fecha
         objetivo: Objetivo de la actividad
         proyecto: Área
-        proyectofinanciero: Convenio financiado
+        proyectofinanciero: Proyecto
         valorcampoact: Campos del tipo de actividad
       "cor1440_gen/actividadpf":
-        actividadpf: Actividad de convenio
+        actividadpf: Actividad de marco lógico
         descripcion: Descripción
         nombrecorto: Nombre corto
         resultadopf: Resultado
@@ -50,8 +50,8 @@ es:
         Actividadarea: Subárea de actividad
         Actividadareas: Subáreas de actividad
       "cor1440_gen/actividadtipo":
-        Actividadtipo: Tipo de actividad de convenio financiado
-        Actividadtipos: Tipos de actividad de convenio financiado
+        Actividadtipo: Tipo de actividad de marco lógico
+        Actividadtipos: Tipos de actividad de marco lógico
         campoact: Campo
         Campoact: Campo
         listadoasistencia: Listado de asistencia
@@ -77,15 +77,15 @@ es:
       "cor1440_gen/mindicadorpf":
         Mindicadorpf: Medición de un indicador
         Mindicadorespf: Mediciones de indicadores
-        actividadpf: Actividades de convenio relacionadas con el indicador
+        actividadpf: Actividades de marco lógico relacionadas con el indicador
         cor1440_gen_proyectofinanciero: Proyecto
         cor1440_gen_indicadorpf: 'Indicador'
         frecuenciaanual: 'Frecuencia de medición anual'
         indicadorpf: 'Indicador'
         indicadorpf_id: 'Indicador'
         pmindicador: 'Puntos de medición'
-        proyectofinanciero: Convenio financiado
-        proyectofinanciero_id: Convenio financiado
+        proyectofinanciero: Proyecto
+        proyectofinanciero_id: Proyecto
         descd1: Descripción de dato intermedio 1
         descd2: Descripción de dato intermedio 2
         descd3: Descripción de dato intermedio 3
@@ -102,7 +102,7 @@ es:
         filtrofechafin:  Fecha final
         filtrofechafin_localizada:  Fecha final
         filtroproyecto: Área
-        filtroproyectofinanciero: Convenio financiado
+        filtroproyectofinanciero: Proyecto
         filtroactividadarea: Subárea 
         columnafecha: Fecha
         columnaresponsable: Responsable
@@ -110,7 +110,7 @@ es:
         Proyecto: Área
         Proyectos: Áreas
       "cor1440_gen/proyectofinanciero":
-        actividadpf: Actividad de convenio
+        actividadpf: Actividad de marco lógico
         anexo_proyectofinanciero: "Anexos"
         beneficiario: Beneficiarios
         caracterizacion: Caracterizaciones
@@ -120,17 +120,17 @@ es:
         indicador: Indicador
         marcologico: Marco lógico
         objetivopf: Objetivo
-        plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este convenio
+        plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este proyecto
         proyecto: Área
         proyectos: Área
         proyecto_ids: Áreas
         "{:proyecto_ids=>[]}": Áreas
-        Proyectofinanciero: Convenio financiado
-        proyectofinanciero: Convenio financiado
-        Proyectosfinancieros: Convenios financiados
-        proyectosfinancieros: Convenios financiados
+        Proyectofinanciero: Proyecto
+        proyectofinanciero: Proyecto
+        Proyectosfinancieros: Proyectos
+        proyectosfinancieros: Proyectos
         resultadopf: Resultado
-        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad de convenio
+        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad de marco lógico
         "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
         "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
         "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
@@ -157,10 +157,10 @@ es:
         Tipoindicador: Tipo de indicador
         Tiposindicador: Tipos de indicador
       "heb412_gen/plantillahcm":
-        proyectofinanciero: Convenios financidaos que exportan/importan con la plantilla
+        proyectofinanciero: Proyectos que exportan/importan con la plantilla
       'mr519_gen/formulario':
-        caracterizacion: Caracterizacion en convenios financiados
+        caracterizacion: Caracterizacion en proyectos
       "sip/persona":
-        proyectofinanciero_ids: Convenios financiados que caracterizan
-        proyectofinanciero: Convenios financiados que caracterizan
+        proyectofinanciero_ids: Proyectos que caracterizan
+        proyectofinanciero: Proyectos que caracterizan
 
