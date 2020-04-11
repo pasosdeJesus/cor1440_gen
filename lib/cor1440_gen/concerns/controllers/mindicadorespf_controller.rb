@@ -208,14 +208,19 @@ module Cor1440Gen
             d3 = 0.0
             urlev3 = ''
            
+            idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
+            # Evidencia de resultado principal son actividades con ids idacs
+            if idacs.count > 0
+              urlevrind = cor1440_gen.actividades_url +
+                '?filtro[busid]='+idacs.join(',')
+            end
+
             case ind.tipoindicador_id
             when 1 # Contar actividades con actividades de convenio espec.
               # Sin cuentas intermedias
-              idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
               resind = idacs.count
             when 2 # Contar población de tabla etarea en actividades y 
               # cuentas intermedias por sexo
-              idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
               d1 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'fr')
               d2 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'mr')
               d3 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 's')
@@ -224,7 +229,6 @@ module Cor1440Gen
             when 3 # Contar asistentes en listados de asistencia (no 
               # necesariamente únicos) de actividades y cuentas 
               # intermedias por sexo 
-              idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
               mujeres = asistencia_por_sexo(idacs, 'F')
               hombres = asistencia_por_sexo(idacs, 'M')
               sinsexo = asistencia_por_sexo(idacs, 'S')
@@ -247,7 +251,6 @@ module Cor1440Gen
 
             when 4 # Contar asistentes únicos en listados de asistencia 
               # de actividades y cuentas intermedias por sexo
-              idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
               mujeres = asistencia_por_sexo(idacs, 'F', true)
               hombres = asistencia_por_sexo(idacs, 'M', true)
               sinsexo = asistencia_por_sexo(idacs, 'S', true)
@@ -269,18 +272,8 @@ module Cor1440Gen
               end
 
             else
-              res = ind.resultadopf
-              if res.actividadpf.count > 0
-                idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
-                resind = idacs.count
-              end
+              resind = -1
             end
-            # Evidencia de resultado principal son actividades con ids idacs
-            if resind > 0
-              urlevrind = cor1440_gen.actividades_url +
-                '?filtro[busid]='+idacs.join(',')
-            end
-
             return [resind, urlevrind, d1, urlev1, d2, urlev2, d3, urlev3]
           end
 
@@ -298,21 +291,7 @@ module Cor1440Gen
           # d1 Dato intermedio 3
           # urlev2 URL que verifica dato intermedio 3
           def mideindicador_particular(mind, ind, fini, ffin)
-            resind = 0.0
-            urlevrind = ''
-            d1 = 0.0
-            urlev1 = ''
-            d2 = 0.0
-            urlev2 = ''
-            d3 = 0.0
-            urlev3 = ''
-            case ind.numero
-            when 'ejemplo_loco1' 
-              resind=2
-            else
-              return mideindicador_cor1440_gen(mind, ind, fini, ffin)
-            end
-            return [resind, urlevrind, d1, urlev1, d2, urlev2, d3, urlev3]
+            return mideindicador_cor1440_gen(mind, ind, fini, ffin)
           end
 
 
