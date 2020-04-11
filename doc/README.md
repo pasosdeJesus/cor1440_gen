@@ -1,5 +1,5 @@
 
-Medición de indicadores de resultado
+# Medición de indicadores de resultado
 
 
 1. Cree un tipo de indicador que se mida con actividades y que describa para usuarios el resultado y los datos intermedios que retorna la función, así como la evidencia para resultado y la evidencia para los datos intermedios.
