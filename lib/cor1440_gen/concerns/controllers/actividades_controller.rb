@@ -378,6 +378,43 @@ module Cor1440Gen
           end
 
 
+          def relacionadas
+            prob = ''
+            actividadpf_ids = []
+            proyectofinanciero_ids = []
+            if params[:proyectofinanciero_ids]
+              proyectofinanciero_ids = params[:proyectofinanciero_ids]
+            end
+            if params[:actividadpf_ids]
+              params[:actividadpf_ids].reject(&:empty?).each do |ac|
+                tipo = Cor1440Gen::Actividadpf.
+                  find(ac).actividadtipo_id
+                if !tipo.nil?
+                  presente_otros = Cor1440Gen::Actividadpf.
+                    where(actividadtipo_id: tipo).
+                    where(proyectofinanciero_id: proyectofinanciero_ids)
+                    actividadpf_ids |= presente_otros.pluck(:id).uniq
+                end
+              end
+              respond_to do |format|
+                format.json { 
+                  render json: {
+                    ac_ids_relacionadas: actividadpf_ids}, 
+                    status: :ok
+                    return
+                }
+              end
+            else
+              prob = 'Falla al convertir parametros'
+            end
+          respond_to do |format|
+            format.html { render action: "error" }
+            format.json { render json: prob, 
+                          status: :unprocessable_entity 
+            }
+          end
+        end
+
           private
 
           def set_actividad
