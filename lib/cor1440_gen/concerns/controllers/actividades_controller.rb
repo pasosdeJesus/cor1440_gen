@@ -387,13 +387,15 @@ module Cor1440Gen
             end
             if params[:actividadpf_ids]
               params[:actividadpf_ids].reject(&:empty?).each do |ac|
-                tipo = Cor1440Gen::Actividadpf.
-                  find(ac).actividadtipo_id
-                if !tipo.nil?
-                  presente_otros = Cor1440Gen::Actividadpf.
-                    where(actividadtipo_id: tipo).
-                    where(proyectofinanciero_id: proyectofinanciero_ids)
-                    actividadpf_ids |= presente_otros.pluck(:id).uniq
+                if Cor1440Gen::Actividadpf.where(id: ac)
+                  tipo = Cor1440Gen::Actividadpf.
+                    find(ac).actividadtipo_id
+                  if !tipo.nil?
+                    presente_otros = Cor1440Gen::Actividadpf.
+                      where(actividadtipo_id: tipo).
+                      where(proyectofinanciero_id: proyectofinanciero_ids)
+                      actividadpf_ids |= presente_otros.pluck(:id).uniq
+                  end
                 end
               end
               respond_to do |format|
