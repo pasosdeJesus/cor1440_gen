@@ -21,7 +21,7 @@ module Cor1440Gen
               #:proyectofinanciero_id,
               :indicadorpf_id,
               :frecuenciaanual,
-              :pmindicador
+              :pmindicadorpf
             ]
           end
 
@@ -32,7 +32,7 @@ module Cor1440Gen
                @registro.indicadorpf.resultadopf ? [:actividadpf] : []) +
             [
               :frecuenciaanual,
-              :pmindicador
+              :pmindicadorpf
             ]
           end
 
@@ -43,11 +43,9 @@ module Cor1440Gen
               :tipoindicador,
               :actividadpf,
               :frecuenciaanual,
-              :pmindicador
+              :pmindicadorpf
             ]
           end
-
-
 
           def index_reordenar(registros)
             @contar_pf = Cor1440Gen::Proyectofinanciero.all
@@ -81,6 +79,28 @@ module Cor1440Gen
           end
 
           def create
+            def crea_pmindicadorpf(mind, fini, ffin, num, np)
+              pm = Cor1440Gen::Pmindicadorpf.create(
+                mindicadorpf_id: mind.id,
+                finicio: fini,
+                ffin: ffin,
+                restiempo: "#{num} #{np}",
+                meta: num)
+              pm.save
+              if mind.indicadorpf.tipoindicador && 
+                  mind.indicadorpf.tipoindicador.datointermedioti 
+                dids = mind.indicadorpf.tipoindicador.datointermedioti.
+                  map(&:id)
+                dids.each do |di|
+                  dp = Cor1440Gen::DatointermediotiPmindicadorpf.create(
+                    pmindicadorpf_id: pm.id,
+                    datointermedioti_id: di
+                  )
+                  dp.save
+                end
+              end
+            end
+
             authorize! :new, clase.constantize
             # Crear puntos de medición de acuerdo a frecuencia
             registro = Cor1440Gen::Mindicadorpf.new(mindicadorpf_params)
@@ -121,24 +141,12 @@ module Cor1440Gen
                 end
                 num = 1
                 while fi<f2
-                  pm = Cor1440Gen::Pmindicadorpf.create(
-                    mindicadorpf_id: registro.id,
-                    finicio: f1,
-                    ffin: fi,
-                    restiempo: "#{num} #{np}",
-                    meta: num)
-                  pm.save
+                  crea_pmindicadorpf(registro, f1, fi-1, num, np)
                   fi += cm.months
                   num += 1
                 end
                 if f1<f2
-                  pm = Cor1440Gen::Pmindicadorpf.create(
-                    mindicadorpf_id: registro.id,
-                    finicio: f1,
-                    ffin: f2,
-                    restiempo: "#{num} #{np}",
-                    meta: num)
-                  pm.save
+                  crea_pmindicadorpf(registro, f1, f2, num, np)
                 end 
               end
             end
@@ -147,25 +155,13 @@ module Cor1440Gen
 
           # Descr
           def descripciones_datos_intermedios(mindicador)
-            [ 
-              mindicador.descd1 ? mindicador.descd1 : (
-                mindicador.indicadorpf && 
-                mindicador.indicadorpf.tipoindicador ? 
-                mindicador.indicadorpf.tipoindicador.descd1 : ''
-              ),
-              mindicador.descd2 ? mindicador.descd2 : (
-                mindicador.indicadorpf && 
-                mindicador.indicadorpf.tipoindicador && 
-                mindicador.indicadorpf.tipoindicador.descd2 ?
-                mindicador.indicadorpf.tipoindicador.descd2 : ''
-              ),
-              mindicador.descd3 ? mindicador.descd3 : (
-                mindicador.indicadorpf && 
-                mindicador.indicadorpf.tipoindicador &&
-                mindicador.indicadorpf.tipoindicador.descd3 ?
-                mindicador.indicadorpf.tipoindicador.descd3 : ''
-              ) 
-            ]
+            if mindicador.indicadorpf.tipoindicador.nil? || 
+                mindicador.indicadorpf.tipoindicador.datointermedioti.nil? ||
+                mindicador.indicadorpf.tipoindicador.datointermedioti.count == 0
+              return []
+            end
+            return mindicador.indicadorpf.tipoindicador.datointermedioti.
+              pluck(:nombre)
           end
 
 
@@ -186,121 +182,158 @@ module Cor1440Gen
             if unicas
               res = res.uniq
             end
+            return res
           end
 
-          # Mide indicador de resultado con métodos muy generales
-          # Por tipos de indicador 1,2 y 3 o en su defecto
-          #   cuenta de actividades con actividad de convenio en el 
-          #   mismo resultado del indicador que se mide.
-          #   Eso basta para marcos lógicos muy simples con un indicador 
-          #   por resultado y una actividad por resultado.
-          # Para otros casos debe especificarse la función de medición 
-          #   sobrecargando mideindicador_particular que puede llamara
-          #   a esta para los casos generales
-          def mideindicador_cor1440_gen(mind, ind, fini, ffin)
-            resind = 0.0
-            idacs = []
-            urlevrind = ''
-            d1 = 0.0
-            urlev1 = ''
-            d2 = 0.0
-            urlev2 = ''
-            d3 = 0.0
-            urlev3 = ''
-           
-            idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
-            # Evidencia de resultado principal son actividades con ids idacs
-            if idacs.count > 0
-              urlevrind = cor1440_gen.actividades_url +
-                '?filtro[busid]='+idacs.join(',')
+          # Mide indicador de resultado tipo 1. Cantidad de actividades
+          # No retorna datos intermedios
+          def medir_indicador_res_tipo_1(idacs, mind, fini, ffin)
+            return {resind: idacs.count, datosint: []}
+          end
+
+          # Mide indicador de resultado tipo 2. Suma de poblaciones tomadas
+          # de tablas población de cada actividad. Puede incluir repetidos.
+          # Los datos intermedios que retorna son mujeres, hombres y sin sexo de nacimiento
+          # No retorna  para esos datos intermedios (serían las
+          # mismas actividades que n el resultado).
+          def medir_indicador_res_tipo_2(idacs, mind, fini, ffin)
+            datosint = []
+            d1 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'fr')
+            d2 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'mr')
+            d3 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 's')
+            resind = d1+d2+d3
+            datosint << {valor: d1, rutaevidencia: '#'}
+            datosint << {valor: d2, rutaevidencia: '#'}
+            datosint << {valor: d3, rutaevidencia: '#'}
+
+            return {resind: resind, datosint: datosint}
+          end
+
+          # Mide indicador de resultado tipo 3. Cantidad de asistentes
+          # en listados de asistencia. Puede incluir repetidos
+          # Los datos intermedios que retorna son mujeres, hombres y 
+          # sin sexo de nacimiento
+          # La  que retorna en cada caso es lista de mujeres,
+          # lista de hombres y de sin sexo de nacimiento.
+          def medir_indicador_res_tipo_3(idacs, mind, fini, ffin)
+            datosint = []
+            mujeres = asistencia_por_sexo(idacs, 'F', false)
+            hombres = asistencia_por_sexo(idacs, 'M', false)
+            sinsexo = asistencia_por_sexo(idacs, 'S', false)
+            resind =  mujeres.count + hombres.count + sinsexo.count
+            datosint << {valor: mujeres.count, rutaevidencia: '#'}
+            datosint << {valor: hombres.count, rutaevidencia: '#'}
+            datosint << {valor: sinsexo.count, rutaevidencia: '#'}
+            if datosint[0][:valor] > 0 # mujeres
+                datosint[0][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
+                  mujeres.join(',')
+            end
+            if datosint[1][:valor] > 0 # hombres
+              datosint[1][:rutaevidencia] = sip.personas_path + 
+                '?filtro[busid]=' + hombres.join(',')
+            end
+            if datosint[2][:valor] > 0 # sin sexo nac
+              datosint[2][:rutaevidencia] = sip.personas_path + 
+                '?filtro[busid]=' + sinsexo.join(',')
             end
 
-            case ind.tipoindicador_id
-            when 1 # Contar actividades con actividades de convenio espec.
-              # Sin cuentas intermedias
-              resind = idacs.count
-            when 2 # Contar población de tabla etarea en actividades y 
-              # cuentas intermedias por sexo
-              d1 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'fr')
-              d2 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'mr')
-              d3 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 's')
-              resind = d1+d2+d3
+            return {resind: resind, datosint: datosint}
+          end
 
-            when 3 # Contar asistentes en listados de asistencia (no 
-              # necesariamente únicos) de actividades y cuentas 
-              # intermedias por sexo 
-              mujeres = asistencia_por_sexo(idacs, 'F')
-              hombres = asistencia_por_sexo(idacs, 'M')
-              sinsexo = asistencia_por_sexo(idacs, 'S')
-              resind =  mujeres.count + hombres.count + sinsexo.count
-              d1 = mujeres.count
-              if d1 > 0
-                urlev1 = sip.personas_url + '?filtro[busid]=' + 
+          # Mide indicador de resultado tipo 4. Cantidad de asistentes únicos
+          # en listados de asistencia. No incluye repetidos
+          # Los datos intermedios que retorna son mujeres únicas, 
+          # hombres únicos y sin sexo de nacimiento únicos
+          # La  evidencia que retorna en cada caso es lista de mujeres,
+          # lista de hombres y lista de sin sexo de nacimiento.
+          def medir_indicador_res_tipo_4(idacs, mind, fini, ffin)
+            datosint = []
+            mujeres = asistencia_por_sexo(idacs, 'F', true)
+            hombres = asistencia_por_sexo(idacs, 'M', true)
+            sinsexo = asistencia_por_sexo(idacs, 'S', true)
+            resind =  mujeres.count + hombres.count + sinsexo.count
+            datosint << {valor: mujeres.count, rutaevidencia: '#'}
+            datosint << {valor: hombres.count, rutaevidencia: '#'}
+            datosint << {valor: sinsexo.count, rutaevidencia: '#'}
+            if datosint[0][:valor] > 0 # mujeres
+                datosint[0][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
                   mujeres.join(',')
               end
-              d2 = hombres.count
-              if d2 > 0
-                urlev2 = sip.personas_url + '?filtro[busid]=' + 
+              if datosint[1][:valor] > 0 # hombres
+                datosint[1][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
                   hombres.join(',')
               end
-              d3 = sinsexo.count
-              if d3 > 0
-                urlev3 = sip.personas_url + '?filtro[busid]=' + 
+              if datosint[2][:valor] > 0 # sin sexo nac
+                datosint[2][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
                   sinsexo.join(',')
               end
 
-            when 4 # Contar asistentes únicos en listados de asistencia 
-              # de actividades y cuentas intermedias por sexo
-              mujeres = asistencia_por_sexo(idacs, 'F', true)
-              hombres = asistencia_por_sexo(idacs, 'M', true)
-              sinsexo = asistencia_por_sexo(idacs, 'S', true)
-              resind =  mujeres.count + hombres.count + sinsexo.count
-              d1 = mujeres.count
-              if d1 > 0
-                urlev1 = sip.personas_url + '?filtro[busid]=' + 
-                  mujeres.join(',')
-              end
-              d2 = hombres.count
-              if d2 > 0
-                urlev2 = sip.personas_url + '?filtro[busid]=' + 
-                  hombres.join(',')
-              end
-              d3 = sinsexo.count
-              if d3 > 0
-                urlev3 = sip.personas_url + '?filtro[busid]=' + 
-                  sinsexo.join(',')
-              end
-
-            else
-              resind = -1
-            end
-            return [resind, urlevrind, d1, urlev1, d2, urlev2, d3, urlev3]
+            return {resind: resind, datosint: datosint}
           end
 
 
-          # Por sobrecargar. Recibe indicador y fecha inicial y 
-          #   final de medicion
-          # Retorna arreglo con medicioń de indicador así:
-          # [resind, urlevrind, d1, urlev1, d2, urlev2, d3, urlev3] siendo
+
+          # Recibe medición de indicador por completar
+          #   y fecha inicial y final de medicion
+          # Retorna objeto con 
+          # {resind: resind, rutaevidencia: rutaevidencia, datosint: datosint}
           # resind Resultado del indicador
-          # urlevrind Url que verificar resultado
-          # d1 Dato intermedio 1
-          # urlev1 URL que verifica dato intermedio 1
-          # d1 Dato intermedio 2
-          # urlev2 URL que verifica dato intermedio 2
-          # d1 Dato intermedio 3
-          # urlev2 URL que verifica dato intermedio 3
-          def mideindicador_particular(mind, ind, fini, ffin)
-            return mideindicador_cor1440_gen(mind, ind, fini, ffin)
+          # rutaevidencia: Ruta que verificar resultado o '#'
+          # datosint Datos intermedios, arreglo con objetos de la forma
+          # {valor: valor, rutaevidencia: rutaevidencia}
+          # valor es dato intermedio
+          # rutaevidencia es ruta que verifica dato intermedio o '#'
+          def medir_indicador_particular(mind, fini, ffin)
+            resf = {resind: -1.0, rutaevidencia: '#', datosint: []} 
+
+            ind = mind.indicadorpf
+            if ind.nil?
+              puts "Error: Medición sin indicador"
+              return resf
+            end
+            if ind.tipoindicador.nil?
+              puts "Error: Indicador sin tipo"
+              return resf
+            end
+
+            if ind.tipoindicador.medircon == 1 # Actividades
+              idacs = []
+              idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
+              if self.respond_to?('medir_indicador_res_tipo_' + 
+                  ind.tipoindicador_id.to_s)
+                resf = self.send('medir_indicador_res_tipo_' + 
+                                 ind.tipoindicador_id.to_s,
+                                 idacs, mind, fini, ffin)
+                if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
+                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipindicador.datointermedioti.count})."
+                end
+                # Evidencia de resultado principal son actividades con ids idacs
+                if idacs.count > 0
+                  resf[:rutaevidencia] = cor1440_gen.actividades_path +
+                    '?filtro[busid]='+idacs.join(',')
+                end
+              end
+            elsif ind.tipoindicador.medircon == 2 # Efectos
+
+            elsif ind.tipoindicador.medircon == 3 # Proyectos
+              # Medición interna 
+              # ...
+            end
+
+            return resf
           end
 
 
           # Mide indicador
           # Calcula medición de un indicador con parametros que vienen en param
-          def mideindicador
+          def medir_indicador
             prob = ''
             if params[:finicio_localizada] && 
-              params[:ffin_localizada] && params[:indicadorpf_id] &&
+              params[:finicio_localizada] != '' && 
+              params[:ffin_localizada] && 
+              params[:ffin_localizada] != '' && 
+              params[:indicadorpf_id] &&
+              params[:indicadorpf_id] != '' &&
               params[:hmindicadorpf_id] && params[:mindicadorpf_id] &&
               params[:mindicadorpf_id].to_i > 0
               fini = Sip::FormatoFechaHelper.fecha_local_estandar(
@@ -314,32 +347,18 @@ module Cor1440Gen
               hmi = params[:hmindicadorpf_id].to_i
               mi = params[:mindicadorpf_id].to_i
               mind = Cor1440Gen::Mindicadorpf.find(mi)
-              if fini && ffin && ind
-                rl = mideindicador_particular(mind, ind, fini, ffin)
-                resind = rl[0]
-                urlevrind = rl[1]
-                d1 = rl[2]
-                urlev1 = rl[3]
-                d2 = rl[4]
-                urlev2 = rl[5]
-                d3 = rl[6]
-                urlev3 = rl[7]
-
+              if fini && ffin && ind && mind.indicadorpf_id == indid
+                rl = medir_indicador_particular(mind, fini, ffin)
                 respond_to do |format|
                   format.json { 
-                    render json: {
+                    render json: { 
                       fechaloc:  Sip::FormatoFechaHelper.fecha_estandar_local(
                         Date.today),
-                        hmindicadorpf_id: hmi, 
-                        dmed1: d1, 
-                        urlev1: urlev1,
-                        dmed2: d2, 
-                        urlev2: urlev2,
-                        dmed3: d3, 
-                        urlev3: urlev3,
-                        rind: resind,
-                        urlevrind: urlevrind }, 
-                        status: :ok
+                      hmindicadorpf_id: hmi, 
+                      datosint: rl[:datosint],
+                      resind: rl[:resind],
+                      rutaevidencia: rl[:rutaevidencia]}, 
+                      status: :ok
                         return
                   }
                 end
@@ -371,10 +390,10 @@ module Cor1440Gen
           # Never trust parameters from the scary internet, only allow the white list through.
           def mindicadorpf_params
             params.require(:mindicadorpf).permit(
-              atributos_form - ["pmindicador", :actividadpf] +
+              atributos_form - ["pmindicadorpf", :actividadpf] +
               [:actividadpf_ids => []] +
               [
-                'pmindicador_attributes' => [
+                'pmindicadorpf_attributes' => [
                   'fecha_localizada', 
                   'finicio_localizada', 
                   'ffin_localizada', 
@@ -385,8 +404,8 @@ module Cor1440Gen
                   'urlev2', 
                   'dmed3', 
                   'urlev3', 
-                  'rind', 
-                  'urlevrind', 
+                  'resind', 
+                  'rutaevidencia', 
                   'meta', 
                   'porcump', 
                   'analisis', 
@@ -394,9 +413,15 @@ module Cor1440Gen
                   'responsables', 
                   'plazo', 
                   'id', 
-                  '_destroy'
-            ]
-            ]
+                  '_destroy',
+                  'datointermedioti_pmindicadorpf_attributes' => [
+                    :valor,
+                    :rutaevidencia,
+                    :datointermedioti_id,
+                    :id
+                  ]
+                ]
+              ]
             ) 
           end
 
