@@ -295,21 +295,21 @@ cor1440_gen_rangoedadc_todos = () ->
 
 @cor1440_gen_llena_medicion = (root, res) ->
   hid = res.hmindicadorpf_id
-  $('[id$=_' + hid + '_fecha_localizada]').val(res.fechaloc)
-  $('[id$=_' + hid + '_dmed1]').val(res.dmed1)
-  $('[id$=_' + hid + '_urlev1]').val(res.urlev1)
-  $('[id$=_' + hid + '_dmed2]').val(res.dmed2)
-  $('[id$=_' + hid + '_urlev2]').val(res.urlev2)
-  $('[id$=_' + hid + '_dmed3]').val(res.dmed3)
-  $('[id$=_' + hid + '_urlev3]').val(res.urlev3)
-  $('[id$=_' + hid + '_rind]').val(res.rind)
-  $('[id$=_' + hid + '_urlevrind]').val(res.urlevrind)
-  meta = +$('[id$=_' + hid + '_meta]').val()
+  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_fecha_localizada]').val(res.fechaloc)
+  cont = 0
+  res.datosint.forEach((v) ->
+    $('[id$=_' + hid + '_datointermedioti_pmindicadorpf_attributes_' + cont + '_valor]').val(v.valor)
+    $('[id$=_' + hid + '_datointermedioti_pmindicadorpf_attributes_' + cont + '_rutaevidencia]').val(v.rutaevidencia)
+    cont++
+  )
+  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_resind]').val(res.resind)
+  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_rutaevidencia]').val(res.rutaevidencia)
+  meta = +$('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_meta]').val()
   if ( meta > 0)
-    $('[id$=_' + hid + '_porcump]').val(res.rind*100/meta)
+    $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_porcump]').val(res.resind*100/meta)
 
 
-@cor1440_gen_calcula_pmindicador = (elem, event) ->
+@cor1440_gen_calcula_pmindicadorpf = (elem, event) ->
   event.stopPropagation() 
   event.preventDefault() 
   root =  window
@@ -323,7 +323,7 @@ cor1440_gen_rangoedadc_todos = () ->
     hmindicadorpf_id: hid
     mindicadorpf_id: $('form.edit_mindicadorpf')[0].id.split('_')[2]
   }
-  sip_ajax_recibe_json(root, 'api/cor1440gen/mideindicador', 
+  sip_ajax_recibe_json(root, 'api/cor1440gen/medir_indicador', 
     datos, cor1440_gen_llena_medicion)  
   return
 
@@ -494,4 +494,20 @@ cor1440_gen_rangoedadc_todos = () ->
   (e) ->
     cor1440_gen_busca_asistente($(this))
   )
+
+  # En medición de indicadores, elegir convenio hace click
+  $(document).on('change', '[data-enviar-haciendo-click]', (e, result) ->
+    $('[name=' + $(this).data('enviar-haciendo-click') + ']').trigger('click')
+  )
+
+  $(document).on('cocoon:after-insert', '#pmindicadorpf', (e, objetivo) ->
+    dids = $.map($('[name^=datosintermediosti]'), (e) => +e.value)
+    cuenta = objetivo.parent().parent().find('input[name^=datosintermediosti]').length - 1
+    idpm = +objetivo.find('input[id^=mindicadorpf_pmindicadorpf_attributes_][id$=_id]')[0].id.match(/mindicadorpf_pmindicadorpf_attributes_([0-9]*)_id/)[1]
+    objetivo.parent().parent().find('input[name^=datosintermediosti]').each( (d) ->
+      $(objetivo.children('td')[4]).before('<td> <div class="input float optional mindicadorpf_pmindicadorpf_datointermedioti_pmindicadorpf_valor"><input class="numeric float optional form-control span10" type="number" step="any" name="mindicadorpf[pmindicadorpf_attributes][' + idpm + '][datointermedioti_pmindicadorpf_attributes][' + cuenta + '][valor]" id="mindicadorpf_pmindicadorpf_attributes_' + idpm + '_datointermedioti_pmindicadorpf_attributes_' + cuenta + '_valor" style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"></div><div class="input hidden mindicadorpf_pmindicadorpf_datointermedioti_pmindicadorpf_rutaevidencia"><input class="hidden form-control span10" type="hidden" name="mindicadorpf[pmindicadorpf_attributes][' + idpm + '][datointermedioti_pmindicadorpf_attributes][' + cuenta + '][rutaevidencia]" id="mindicadorpf_pmindicadorpf_attributes_' + idpm + '_datointermedioti_pmindicadorpf_attributes_' + cuenta + '_rutaevidencia" style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"></div><input class="hidden form-control span10" type="hidden" value="' + dids[cuenta] + '" name="mindicadorpf[pmindicadorpf_attributes][' + idpm + '][datointermedioti_pmindicadorpf_attributes][' + cuenta + '][datointermedioti_id]" id="mindicadorpf_pmindicadorpf_attributes_' + idpm + '_datointermedioti_pmindicadorpf_attributes_' + cuenta + '_datointermedioti_id"> <input class="hidden form-control span10" type="hidden" value="" name="mindicadorpf[pmindicadorpf_attributes][' + idpm + '][datointermedioti_pmindicadorpf_attributes][' + cuenta + '][id]" id="mindicadorpf_pmindicadorpf_attributes_' + idpm + '_datointermedioti_pmindicadorpf_attributes_' + cuenta + '_id"></td>')
+      cuenta--
+    )
+  )
+  return
 

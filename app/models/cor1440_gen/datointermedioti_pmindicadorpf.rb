@@ -1,0 +1,16 @@
+# encoding: UTF-8
+
+module Cor1440Gen
+  class DatointermediotiPmindicadorpf < ActiveRecord::Base
+
+    belongs_to :datointermedioti, class_name: 'Cor1440Gen::Datointermedioti',
+      foreign_key: 'datointermedioti_id'
+    belongs_to :pmindicadorpf, class_name: 'Cor1440Gen::Pmindicadorpf',
+      foreign_key: 'pmindicadorpf_id'
+
+    validates_uniqueness_of :pmindicadorpf_id, scope: :datointermedioti_id
+    
+    validates :rutaevidencia, length: {maximum: 5000}
+
+  end
+end

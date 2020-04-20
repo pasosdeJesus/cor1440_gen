@@ -17,12 +17,12 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Indicadorpf', 
             foreign_key: 'indicadorpf_id'
 
-          has_many :pmindicador, 
+          has_many :pmindicadorpf, 
             foreign_key: 'mindicadorpf_id', 
             validate: true,
             dependent: :destroy, 
             class_name: 'Cor1440Gen::Pmindicadorpf'
-          accepts_nested_attributes_for :pmindicador, 
+          accepts_nested_attributes_for :pmindicadorpf, 
             allow_destroy: true, 
             reject_if: :all_blank
 

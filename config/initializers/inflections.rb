@@ -23,6 +23,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'financiador', 'financiadores'
   inflect.irregular 'mindicadorpf', 'mindicadorespf'
   inflect.irregular 'proyectofinanciero', 'proyectosfinancieros'
+  inflect.irregular 'pmindicadorpf', 'pmsindicadorpf'
   inflect.irregular 'rangoedadac', 'rangosedadac'
   inflect.irregular 'sectoractor', 'sectoresactores'
   inflect.irregular 'tipoindicador', 'tiposindicador'

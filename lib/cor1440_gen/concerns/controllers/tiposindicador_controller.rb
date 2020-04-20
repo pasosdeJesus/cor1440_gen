@@ -30,10 +30,10 @@ module Cor1440Gen
               :nombre,
               :medircon,
               :esptipometa,
-              :formulario,
-              :espvaloresomision,
-              :espvalidaciones,
-              :espfuncionmedir ]
+              :espfuncionmedir,
+              :datointermedioti,
+              :formulario
+            ]
           end
 
           def new
@@ -50,8 +50,9 @@ module Cor1440Gen
           end
 
           def lista_params_cor1440_gen
-            p = atributos_form - [:formulario] +
-              [:formulario_ids => [] ] 
+            p = atributos_form - [:formulario, :datointermedioti] +
+              [:formulario_ids => [] ] +
+              [:datointermedioti_attributes => [ :nombre, :id, :_destroy ] ] 
             return p
           end
 

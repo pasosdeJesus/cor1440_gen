@@ -159,8 +159,8 @@ module Cor1440Gen
           }
 
           scope :filtro_proyecto_ids, lambda { |p|
-            joins(:proyecto_proyectofinanciero).
-              where('cor1440_gen_proyecto_proyectofinanciero.proyecto_id=?', p)
+            joins(:proyecto).
+              where('cor1440_gen_proyecto.id=?', p)
           }
 
           scope :filtro_responsable_id, lambda { |r|

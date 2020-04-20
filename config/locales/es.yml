@@ -32,7 +32,8 @@ es:
         Campoact: Campo
         Camposact: Campos
       "cor1440_gen/actividad":
-        actividadarea: Subáreas
+        actividadarea: Subárea
+        actividadareas: Subáreas
         actividadpf: Actividad de marco lógico
         actorsocial: Actores sociales en listado de asistencia
         fecha_localizada: Fecha
@@ -83,7 +84,7 @@ es:
         frecuenciaanual: 'Frecuencia de medición anual'
         indicadorpf: 'Indicador'
         indicadorpf_id: 'Indicador'
-        pmindicador: 'Puntos de medición'
+        pmindicadorpf: 'Puntos de medición'
         proyectofinanciero: Proyecto
         proyectofinanciero_id: Proyecto
         descd1: Descripción de dato intermedio 1
@@ -146,10 +147,11 @@ es:
         Sectoresactores: Sectores de actores sociales
       "cor1440_gen/tipoindicador":
         nombre: Nombre corto
-        esptipometa: Especificación del tipo de meta
-        espcampos: Especificación de campos por añadir a actividad/efecto
         campotind: Campo
         Campotind: Campo
+        datointermedioti: Datos intermedios
+        esptipometa: Especificación del tipo de meta
+        espcampos: Especificación de campos por añadir a actividad/efecto
         espvaloresomision: Especificación de valores por omisión
         espvalidaciones: Especificación de validaciones
         espfuncionmedir: Especificación de función para medir indicador

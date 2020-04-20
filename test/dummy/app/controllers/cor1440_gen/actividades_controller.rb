@@ -6,12 +6,17 @@ module Cor1440Gen
 
     include Cor1440Gen::Concerns::Controllers::ActividadesController
 
-          # GET /actividades/1/edit
-          def edit
-            edit_cor1440_gen
-            @listadoasistencia = true
-            render layout: 'application'
-          end
+    before_action :set_actividad, 
+      only: [:show, :edit, :update, :destroy],
+      exclude: [:contar, :contar_beneficiarios]
+    load_and_authorize_resource class: Cor1440Gen::Actividad
+    
+    # GET /actividades/1/edit
+    def edit
+      edit_cor1440_gen
+      @listadoasistencia = true
+      render layout: 'application'
+    end
 
   end
 end

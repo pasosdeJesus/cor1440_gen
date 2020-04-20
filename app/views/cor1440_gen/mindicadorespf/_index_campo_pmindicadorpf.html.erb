@@ -1,13 +1,13 @@
 <% if registro %>
-  <% pm = registro.pmindicador.order(:ffin) %>
+  <% pm = registro.pmindicadorpf.order(:ffin) %>
   <% if pm.count > 0 %>
     <% v = "" %>
     <% c = "red" %>
-    <% if pm.last.rind %>
-      <% v = pm.last.rind.round(1) %>
-      <% if pm.last.meta > 0 && (pm.last.rind/pm.last.meta) > 0.99 %>
+    <% if pm.last.resind %>
+      <% v = pm.last.resind.round(1) %>
+      <% if pm.last.meta > 0 && (pm.last.resind/pm.last.meta) > 0.99 %>
         <% c = 'green' %>
-      <% elsif pm.last.meta > 0  && (pm.last.rind/pm.last.meta) >= 0.6 %>
+      <% elsif pm.last.meta > 0  && (pm.last.resind/pm.last.meta) >= 0.6 %>
         <% c = 'orange' %>
       <% end %>
       <%= pm.last.ffin %> 
