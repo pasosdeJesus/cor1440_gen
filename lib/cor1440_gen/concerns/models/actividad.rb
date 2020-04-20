@@ -239,10 +239,13 @@ module Cor1440Gen
               }
 
             when 'poblacion'
+              # En cuenta de poblacion no tiene en cuenta locales,
+              # para coincidir con tipo de indicador que cuenta
+              # usando tabla de población
               actividad_rangoedadac.inject(0) { |memo, r| 
-                memo += r.ml ? r.ml : 0
+                #memo += r.ml ? r.ml : 0
                 memo += r.mr ? r.mr : 0
-                memo += r.fl ? r.fl : 0
+                #memo += r.fl ? r.fl : 0
                 memo += r.fr ? r.fr : 0
                 memo += r.s ? r.s : 0
                 memo
