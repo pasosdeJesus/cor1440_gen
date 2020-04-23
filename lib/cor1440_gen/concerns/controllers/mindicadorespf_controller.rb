@@ -305,13 +305,13 @@ module Cor1440Gen
                                  ind.tipoindicador_id.to_s,
                                  idacs, mind, fini, ffin)
                 if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
-                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipindicador.datointermedioti.count})."
+                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
                 end
-                # Evidencia de resultado principal son actividades con ids idacs
-                if idacs.count > 0
-                  resf[:rutaevidencia] = cor1440_gen.actividades_path +
-                    '?filtro[busid]='+idacs.join(',')
-                end
+              end
+              # Evidencia de resultado principal son actividades con ids idacs
+              if idacs.count > 0
+                resf[:rutaevidencia] = cor1440_gen.actividades_path +
+                  '?filtro[busid]='+idacs.join(',')
               end
             elsif ind.tipoindicador.medircon == 2 # Efectos
 
