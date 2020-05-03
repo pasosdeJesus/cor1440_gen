@@ -3,7 +3,6 @@
     <%= f.input :fecha_localizada,
       label: false, 
       input_html: {
-        "data-behaviour" => "datepicker",
         readonly: 'readonly',
         class: 'em8'
       }, as: :string %>
@@ -28,43 +27,18 @@
         class: 'em8'
       }  %>
   </td>
-  <% if @descd1 != '' %> 
+  <%= f.simple_fields_for :datointermedioti_pmindicadorpf,
+    f.object.datointermedioti_pmindicadorpf.order(:datointermedioti_id) do |di| %>
     <td>
-      <%= f.input :dmed1, 
-        readonly: 'readonly',
-        label: false %>
-      <%= f.input :urlev1, 
-        readonly: 'readonly',
-        label: false, as: :hidden %>
-    </td>
-  <% end %>
-  <% if @descd2 != '' %> 
-    <td>
-      <%= f.input :dmed2,
-        readonly: 'readonly',
-        label: false %>
-      <%= f.input :urlev2, 
-        readonly: 'readonly',
-        label: false, as: :hidden %>
-    </td>
-  <% end %>
-  <% if @descd3 != '' %> 
-    <td>
-      <%= f.input :dmed3,
-        readonly: 'readonly',
-        label: false %>
-      <%= f.input :urlev3, 
-        readonly: 'readonly',
-        label: false, as: :hidden %>
+      <%= render 'datointermedioti_pmindicadorpf_campos', :f => di %>
     </td>
   <% end %>
   <td>
-    <%= f.input :rind,
-        readonly: 'readonly',
+    <%= f.input :resind,
+      input_html: { readonly: 'readonly' },
       label: false %>
-      <%= f.input :urlevrind, 
-        readonly: 'readonly',
-        label: false, as: :hidden %>
+    <%= f.input :rutaevidencia, 
+      label: false, as: :hidden %>
   </td>
   <td>
     <%= f.input :meta,
@@ -75,15 +49,15 @@
   </td>
   <td> 
     <%= f.input :porcump, 
-        readonly: 'readonly',
-        label: false %> 
+      input_html: { readonly: 'readonly' },
+      label: false %> 
   </td>
   <!--td> <%= f.input :analisis, label: false %> </td><td> <%= f.input :acciones, label: false %> </td><td> <%= f.input :responsables, label: false %> </td><td> <%= f.input :plazo, label: false %> </td-->
   <td>
     <%= f.input :id, as: :hidden %>
     <%= link_to t('Calcular'), '#',
                   class: 'btn btn-sm', 
-                  onclick: 'cor1440_gen_calcula_pmindicador(this, event)' %>
+                  onclick: 'cor1440_gen_calcula_pmindicadorpf(this, event)' %>
     <%= link_to_remove_association "Eliminar", f, 
       :class => 'btn-danger' %>
     <div><%= f.error_notification %></div>

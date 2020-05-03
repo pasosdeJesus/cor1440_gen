@@ -3,21 +3,18 @@
   <% @descd1 = d[0] %>
   <% @descd2 = d[1] %>
   <% @descd3 = d[2] %>
-  <% pms = @registro.pmindicador.order(:fecha, :ffin) %>
+  <% pms = @registro.pmindicadorpf.order(:fecha, :ffin) %>
   
   <div>
     <table border=1>
     <tr>
       <th>Fecha Med.</th>
       <th>Fecha Inicio</th><th>Fecha Fin</th><th>Tiempo</th>
-      <% if @descd1 != '' %>
-        <th><%= @descd1 %></th>
-      <% end %>
-      <% if @descd2 != '' %>
-        <th><%= @descd2 %></th>
-      <% end %>
-      <% if @descd3 != '' %>
-        <th><%= @descd3 %></th>
+      <% if @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
+          @registro.indicadorpf.tipoindicador.datointermedioti %>
+        <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
+            <th><%= di.nombre %></th>
+        <% end %>
       <% end %>
       <th>Resultado</th><th>Meta</th><th>Porcentaje</th>
     </tr>
@@ -27,39 +24,28 @@
         <td><%= pm.finicio_localizada %></td>
         <td><%= pm.ffin_localizada %></td>
         <td><%= pm.restiempo %></td>
-        <% if @descd1 != '' %>
-          <td>
-            <% v = pm.dmed1 ? pm.dmed1.round(1) : '' %>
-            <% if pm.urlev1 && pm.dmed1 %>
-              <%= link_to v, pm.urlev1, target: '_blank' %>
-            <% else %>
-              <%= v %>
-            <% end %>
-          </td>
+        <% if @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
+            @registro.indicadorpf.tipoindicador.datointermedioti %>
+          <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
+            <td>
+              <% if pm.datointermedioti_pmindicadorpf.where(datointermedioti_id: di.id).count > 0 %>
+                <% pdi = pm.datointermedioti_pmindicadorpf.where(datointermedioti_id: di.id).take %>
+                <% v = pdi.valor ? pdi.valor.round(1) : '' %>
+                <% if pdi.rutaevidencia && pdi.rutaevidencia != '' &&
+                    pdi.rutaevidencia != '#' && pdi.valor %>
+                  <%= link_to v, pdi.rutaevidencia, target: '_blank' %>
+                <% else %>
+                  <%= v %>
+                <% end %>
+              <% end%>
+            </td>
+          <% end %>
         <% end %>
-        <% if @descd2 != '' %>
-          <td>
-            <% v = pm.dmed2 ? pm.dmed2.round(1) : '' %>
-            <% if pm.urlev2 && pm.dmed2 %>
-              <%= link_to v, pm.urlev2, target: '_blank'  %>
-            <% else %>
-              <%= v %>
-            <% end %>
-          </td>
-        <% end %>
-        <% if @descd3 != '' %>
-          <td>
-            <% v = pm.dmed3 ? pm.dmed3.round(1) : '' %>
-            <% if pm.urlev3 && pm.dmed3 %>
-              <%= link_to v, pm.urlev3, target: '_blank'  %>
-            <% else %>
-              <%= v %>
-            <% end %>
-        <% end %>
+
         <td>
-          <% v = pm.rind ? pm.rind.round(1) : '' %>
-          <% if pm.urlevrind && pm.rind %>
-            <%= link_to v, pm.urlevrind, target: '_blank'  %>
+          <% v = pm.resind ? pm.resind.round(1) : '' %>
+          <% if pm.rutaevidencia && pm.resind %>
+            <%= link_to v, pm.rutaevidencia, target: '_blank'  %>
           <% else %>
               <%= v %>
           <% end %>

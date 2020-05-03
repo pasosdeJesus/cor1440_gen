@@ -1,0 +1,49 @@
+
+<% if f.object.indicadorpf_id.nil? %>
+  <% return %>
+<% end %>
+<% @datosint = controller.descripciones_datos_intermedios(@registro) %>
+<% pms = @registro.pmindicadorpf.order(:fecha, :ffin) %>
+
+<%= f.input :id, as: :hidden %>
+<div class='table-responsive'>
+  <table border=1 width="100%">
+    <thead>
+      <tr>
+        <th>Fecha Medición</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Tiempo</th>
+        <% if @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
+            @registro.indicadorpf.tipoindicador.datointermedioti %>
+          <% cont = 0 %>
+          <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
+            <th><%= di.nombre %><input type='hidden' name='datosintermediosti[<%= cont %>]' value='<%= di.id %>'/></th>
+            <% cont += 1 %>
+          <% end %>
+        <% end %>
+        <th>Resultado</th>
+        <th>Meta</th>
+        <th>% Cumplimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody id="pmindicadorpf">
+      <%= f.simple_fields_for :pmindicadorpf,
+        f.object.pmindicadorpf.order(:finicio, :ffin) do |pmi| %>
+        <%= render 'pmindicadorpf_campos', :f => pmi %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="links">
+    <%= link_to_add_association 'Añadir Punto de Medición', f, 
+      :pmindicadorpf,
+      :"data-association-insertion-node" => "tbody#pmindicadorpf", 
+      :"data-association-insertion-method" => "append", 
+      partial: 'pmindicadorpf_campos',
+      :class => 'btn-primary',
+      "data-ajax" => cor1440_gen.new_pmindicadorpf_url,
+      "data-ajaxdata" => "mindicadorpf_id"
+    %>
+  </div>
+</div>

@@ -14,14 +14,16 @@ module Cor1440Gen
           campofecha_localizado :finicio
           campofecha_localizado :ffin
 
-          validates :urlev1, length: {maximum: 1024}
-          validates :urlev2, length: {maximum: 1024}
-          validates :urlev3, length: {maximum: 1024}
-          validates :urlevrind, length: {maximum: 1024}
-
-          belongs_to :cor1440_gen_mindicadorpf, 
+          belongs_to :mindicadorpf, 
             class_name: 'Cor1440Gen::Mindicadorpf', 
             foreign_key: 'mindicadorpf_id'
+
+          has_many :datointermedioti_pmindicadorpf,
+            class_name: 'Cor1440Gen::DatointermediotiPmindicadorpf',
+            foreign_key: 'pmindicadorpf_id',
+            dependent: :delete_all
+          accepts_nested_attributes_for :datointermedioti_pmindicadorpf,
+            allow_destroy: true, reject_if: :all_blank
 
         end # included
 

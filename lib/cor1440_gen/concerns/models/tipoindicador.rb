@@ -15,15 +15,21 @@ module Cor1440Gen
             association_foreign_key: 'formulario_id', 
             join_table: 'cor1440_gen_formulario_tipoindicador'
 
-          has_many :indicadorpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Indicadorpf',
-            foreign_key: 'tipoindicador_id'
-
           has_many :campotind, foreign_key: 'tipoindicador_id',
             validate: true, dependent: :destroy, 
             class_name: 'Cor1440Gen::Campotind'
           accepts_nested_attributes_for :campotind,
             allow_destroy: true, reject_if: :all_blank
+
+          has_many :datointermedioti, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Datointermedioti',
+            foreign_key: 'tipoindicador_id'
+          accepts_nested_attributes_for :datointermedioti,
+            allow_destroy: true, reject_if: :all_blank
+
+          has_many :indicadorpf, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Indicadorpf',
+            foreign_key: 'tipoindicador_id'
 
           validates :nombre, presence: true, allow_blank: false, 
             uniqueness: true, length: { maximum: 32} 

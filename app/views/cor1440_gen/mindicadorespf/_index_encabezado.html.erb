@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row filtro-fila">
     <div class="offset-sm-2 col-sm-4">
-      <%= Cor1440Gen::Actividad.human_attribute_name( :proyectofinanciero) %>
+      <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>
     </div>
     <div class="col-sm-4">
       <%= f.input :busproyectofinanciero_id,
@@ -12,7 +12,7 @@
         include_blank: 'Elija uno',
         selected: @contar_pfid,
         input_html: { 
-          "data-enviarautomatico" => "",
+          'data-enviar-haciendo-click': 'filtrar',
           class: 'chosen-select' 
         }
       %>

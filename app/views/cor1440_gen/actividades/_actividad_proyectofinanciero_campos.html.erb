@@ -37,7 +37,7 @@
       collection: ::Cor1440Gen::Actividadpf.
       where( proyectofinanciero_id: f.object.proyectofinanciero_id),
       label_method: lambda { |t| (t.resultadopf ? t.resultadopf.numero : '') +
-                             t.nombrecorto + ':' + t.titulo},
+                             t.nombrecorto + ' ' + t.titulo},
       value_method: :id,
       label: false,
       selected: f.object.actividadpf_ids, 

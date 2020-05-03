@@ -1,0 +1,14 @@
+<% f.object = Cor1440Gen::Datointermedioti.new() if !f.object  %>
+<tr class='nested-fields'>
+  <td>
+    <%= f.input :nombre, 
+      label: false %>
+  </td>
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar", f, 
+      :class => 'btn-danger', "data-existing" => true %>
+    <div><%= f.error_notification %></div>
+  </td>
+</tr>
+

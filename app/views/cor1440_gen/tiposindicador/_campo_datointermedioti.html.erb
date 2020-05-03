@@ -1,0 +1,31 @@
+<%= f.input :id, as: :hidden %>
+<div class="panel panel-default">
+  <div class="panel-heading">Datos intermedios</div>
+  <div class="panel-body">
+
+    <div class="div-campostind">
+      <table border=1 width="100%">
+        <thead>
+          <tr>
+            <th width="75%">Nombre</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="datointermedioti">
+          <%= f.simple_fields_for :datointermedioti, 
+            f.object.datointermedioti.order(:id) do |o| %>
+            <%= render 'cor1440_gen/tiposindicador/datointermedioti_campos', f:  o %>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="links">
+        <%= link_to_add_association 'Agregar dato intermedio', f, 
+          :datointermedioti, {
+          :"data-association-insertion-node" => "tbody#datointermedioti", 
+          :"data-association-insertion-method" => "append", 
+          partial: 'cor1440_gen/tiposindicador/datointermedioti_campos',
+          class: 'btn-primary' } %>
+      </div> <!-- links -->
+    </div> <!-- .div-campostind -->
+  </div><!-- panel-body -->
+</div><!-- panel -->
