@@ -21,6 +21,11 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Tipoindicador',
             foreign_key: 'tipoindicador_id', optional: true
 
+          has_many :mindicador, 
+            foreign_key: 'indicadorpf_id', 
+            validate: true,
+            dependent: :destroy, 
+            class_name: 'Cor1440Gen::Mindicadorpf'
 
           validates :numero, presence: true, length: {maximum: 15}
           validates :indicador, presence:true, length: {maximum: 5000}
