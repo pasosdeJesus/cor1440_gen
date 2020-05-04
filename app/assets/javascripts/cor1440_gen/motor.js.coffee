@@ -57,13 +57,23 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_rangoedadac_uno(ini, 's')
   cor1440_gen_rangoedadac_tot()
 
+@cor1440_gen_fun_etiqueta_resultadopf = (jv) ->
+   et = jv.find('select[id$=_objetivopf_id] option[selected]').text() + 
+    jv.find('input[id$=_numero]').val()
+   return et
+
 @cor1440_gen_actualiza_objetivos = (e, objetivo) ->
   sip_actualiza_cuadros_seleccion_dependientes('objetivospf', 
     '_id', '_numero', DEP_OBJETIVOPF, 'id', 'numero')
+  sip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
+    'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf, 
+    DEP_RESULTADOPF, 'id', 'numero')
+
 
 @cor1440_gen_actualiza_resultados = (e, resultado) ->
-    sip_actualiza_cuadros_seleccion_dependientes('resultadospf', 
-        '_id', '_numero', DEP_RESULTADOPF, 'id', 'numero')
+  sip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
+    'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf, 
+    DEP_RESULTADOPF, 'id', 'numero')
 
 # En formulario actividad
 
