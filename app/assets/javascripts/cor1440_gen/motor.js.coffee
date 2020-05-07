@@ -92,38 +92,6 @@ cor1440_gen_rangoedadc_todos = () ->
   sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
 
-@cor1440_gen_llena_actividadpf_relacionadas = (root, res) ->
-  ac_relacionadas = res.ac_ids_relacionadas
-  val_actuales = []
-  if ac_relacionadas.length > 0
-    $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
-      val_actuales = $(this).find('select[id$=actividadpf_ids]').val()
-      if val_actuales.length > 0
-        ac_relacionadas = ac_relacionadas.concat(val_actuales)
-    )
-    $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
-      $(this).find('select[id$=actividadpf_ids]').val(ac_relacionadas)
-      $(this).find('select[id$=actividadpf_ids]').trigger('chosen:updated')
-    )
-@cor1440_gen_actividad_actualiza_mismotipo = (root, res) ->
-  if res.selected?
-    acids = ['']
-    $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () -> 
-      t = $(this)
-      if t.parent().parent().parent().not(':hidden').length > 0
-        acids = acids.concat(t.val())
-    )
-    prids = []
-    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
-      idex = $(this).find('select[id$=proyectofinanciero_id]').val()
-      prids.push(idex) 
-    )
-    params = {
-      actividadpf_ids: acids,
-      proyectofinanciero_ids: prids
-    }
-    sip_ajax_recibe_json(root, 'api/actividades/relacionadas', 
-      params, cor1440_gen_llena_actividadpf_relacionadas)
 # Actualiza campos dinámicos cuando hay una tabla de proyectofinanciero
 # y actividades de proyectofinanciero
 @cor1440_gen_actividad_actualiza_camposdinamicos2 = (root) ->
@@ -468,7 +436,6 @@ cor1440_gen_rangoedadc_todos = () ->
     # Tras agregar o eliminar actividades de convenio a un convenio
     # agregare o eliminar subformularios asociados
     $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
-      cor1440_gen_actividad_actualiza_mismotipo(root, res)
       cor1440_gen_actividad_actualiza_camposdinamicos2(root)
     )
  

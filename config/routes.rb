@@ -35,8 +35,6 @@ Cor1440Gen::Engine.routes.draw do
   resources :mindicadorespf, path_names: { new: 'nuevo', edit: 'edita' }
   get "/api/cor1440gen/medir_indicador" => "mindicadorespf#medir_indicador", 
     as: :medir_indicador
-  get "/api/actividades/relacionadas" => "actividades#relacionadas",
-    as: :relacionadas
   get "/objetivospf/" => "proyectosfinancieros#objetivospf", 
     as: :objetivospf
   resources :objetivospf, only: [:new, :destroy]
