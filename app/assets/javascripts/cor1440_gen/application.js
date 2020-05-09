@@ -17,19 +17,20 @@
 //= require_tree .
 
 document.addEventListener('turbolinks:load', function() {
-	var root;
-  	root = typeof exports !== "undefined" && exports !== null ? 
-	  exports : window;
-	sip_prepara_eventos_comunes(root);
-	heb412_gen_prepara_eventos_comunes(root);
-	mr519_gen_prepara_eventos_comunes(root);
-	cor1440_gen_prepara_eventos_comunes(root);
-        $("input[data-behaviour='datepicker']").datepicker({
-          format: 'yyyy-mm-dd',
-          autoclose: true,
-          todayHighlight: true,
-          language: 'es'
-        })
+  var root;
+  root = typeof exports !== "undefined" && exports !== null ? 
+    exports : window;
+  root.cor1440_gen_activa_autocompleta_mismotipo = true
+  sip_prepara_eventos_comunes(root);
+  heb412_gen_prepara_eventos_comunes(root);
+  mr519_gen_prepara_eventos_comunes(root);
+  cor1440_gen_prepara_eventos_comunes(root);
+  $("input[data-behaviour='datepicker']").datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    todayHighlight: true,
+    language: 'es'
+  })
 });
 
 

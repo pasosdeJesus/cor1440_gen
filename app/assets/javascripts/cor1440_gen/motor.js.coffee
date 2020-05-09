@@ -468,7 +468,7 @@ cor1440_gen_rangoedadc_todos = () ->
     # Tras agregar o eliminar actividades de convenio a un convenio
     # agregare o eliminar subformularios asociados
     $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
-      if typeof root.cor1440_gen_activa_autocompleta_mismotipo != 'undefined' && root.cor1440_gen_activa_autocompleta_mismotipo === true
+      if typeof root.cor1440_gen_activa_autocompleta_mismotipo != 'undefined' && root.cor1440_gen_activa_autocompleta_mismotipo == true
         cor1440_gen_actividad_actualiza_mismotipo(root, res)
 
       cor1440_gen_actividad_actualiza_camposdinamicos2(root)
