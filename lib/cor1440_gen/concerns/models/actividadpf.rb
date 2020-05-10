@@ -36,9 +36,17 @@ module Cor1440Gen
           validates :descripcion, length: {maximum: 5000}
 
           def presenta_nombre
-            (resultadopf ? resultadopf.numero : '') + nombrecorto + " " + titulo
-            #titulo
+            r = ''
+            if resultadopf
+              if resultadopf.objetivopf
+                r += resultadopf.objetivopf.numero
+              end
+              r += resultadopf.numero
+            end
+            r += nombrecorto + ' ' + titulo
+            return r
           end
+
         end # included
 
       end

@@ -124,6 +124,7 @@ cor1440_gen_rangoedadc_todos = () ->
     }
     sip_ajax_recibe_json(root, 'api/actividades/relacionadas', 
       params, cor1440_gen_llena_actividadpf_relacionadas)
+
 # Actualiza campos dinámicos cuando hay una tabla de proyectofinanciero
 # y actividades de proyectofinanciero
 @cor1440_gen_actividad_actualiza_camposdinamicos2 = (root) ->
@@ -412,7 +413,7 @@ cor1440_gen_rangoedadc_todos = () ->
     
     # Tras añadir una fila a la tabla de proyectosfinancieros y sus 
     # actividadespf, se deja proyecto en blanco y se permite elegir uno de
-    # entre los vigentes pero excluyendos los que ya estuvierna 
+    # entre los vigentes pero excluyendos los que ya estuvieran 
     # (para evitar filas repetidas)
     $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
       $('.chosen-select').chosen()
