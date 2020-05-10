@@ -152,7 +152,7 @@ module Cor1440Gen
   
           can :read, Cor1440Gen::Actividad
           can :new, Cor1440Gen::Actividad
-          can [:update, :create, :destroy], Cor1440Gen::Actividad, 
+          can [:update, :create, :edit, :destroy], Cor1440Gen::Actividad, 
             oficina: { id: usuario.oficina_id}
           can :read, Cor1440Gen::FormularioTipoindicador
           can :read, Cor1440Gen::Informe

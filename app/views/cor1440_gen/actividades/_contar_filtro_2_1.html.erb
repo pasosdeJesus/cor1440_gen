@@ -1,11 +1,12 @@
-<%= f.input :oficina_id,
-  collection: Sip::Oficina.all,
-  label_method: :nombre,
-  value_method: :id,
-  label: false,
-  input_html: { 
-    "data-contarautomatico" => "",
-    class: 'chosen-select' 
-  },
-  include_blank: '-- Oficina'
-%>
+<% if can? :read, Sip::Oficina %>
+  <%= f.input :oficina_id,
+    collection: Sip::Oficina.all,
+    label_method: :nombre,
+    value_method: :id,
+    label: false,
+    input_html: { 
+      "data-contarautomatico" => "",
+      class: 'chosen-select' 
+    },
+    include_blank: '-- Oficina' %>
+<% end %>
