@@ -20,12 +20,12 @@
     <th>Resultados/Productos</th>
     <th>Indicadores de Resultado</th>
   </tr>
-  <% @registro.resultadopf.order(:numero).each do |r| %>
+  <% @registro.resultadopf.order(:id).each do |r| %>
     <tr>
       <td><%= (r.objetivopf ? r.objetivopf.numero : '') + r.numero %> <%= r.resultado %></td>
       <td>
         <ul>
-          <% r.indicadorpf.order(:numero).each do |ir| %>
+          <% r.indicadorpf.order(:id).each do |ir| %>
             <li><%= r.numero + ir.numero %> <%= ir.indicador%></li>
           <% end %>
         </ul>
@@ -37,14 +37,14 @@
   <tr>
     <th>Resultado</th><th>Actividades</th>
   </tr>
-  <% @registro.resultadopf.order(:numero).each do |r| %>
+  <% @registro.resultadopf.order(:id).each do |r| %>
     <tr>
       <td>
         <% cr = (r.objetivopf ? r.objetivopf.numero : '') + r.numero %>
         <%= cr %>
       </td>
       <td>
-        <% r.actividadpf.order(:nombrecorto).each do |a| %>
+        <% r.actividadpf.order(:id).each do |a| %>
           <li>
             <%= cr + a.nombrecorto %> <%= a.titulo %>.
             <% if a.actividadtipo_id %>
