@@ -20,7 +20,7 @@ module Cor1440Gen
           has_many :pmindicadorpf, 
             foreign_key: 'mindicadorpf_id', 
             validate: true,
-            dependent: :destroy, 
+            dependent: :delete_all, 
             class_name: 'Cor1440Gen::Pmindicadorpf'
           accepts_nested_attributes_for :pmindicadorpf, 
             allow_destroy: true, 
