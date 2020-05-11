@@ -26,7 +26,8 @@
       <td>
         <ul>
           <% r.indicadorpf.order(:id).each do |ir| %>
-            <li><%= r.numero + ir.numero %> <%= ir.indicador%></li>
+            <li><%= (r.objetivopf ? r.objetivopf.numero : '') + r.numero + 
+              ir.numero %> <%= ir.indicador%></li>
           <% end %>
         </ul>
       </td>

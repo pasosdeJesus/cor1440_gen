@@ -109,3 +109,7 @@
   width: 10em;
 }
 
+.panel-heading {
+	text-align: center;
+}
+

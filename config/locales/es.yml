@@ -114,7 +114,7 @@ es:
         actividadpf: Actividad de marco lógico
         anexo_proyectofinanciero: "Anexos"
         beneficiario: Beneficiarios
-        caracterizacion: Caracterizaciones
+        caracterizacion: Caracterización de beneficiarios
         fechainicio_localizada: Fecha de inicio
         fechacierre_localizada: Fecha de cierre
         financiador_ids: Financiadores
@@ -161,7 +161,7 @@ es:
       "heb412_gen/plantillahcm":
         proyectofinanciero: Proyectos que exportan/importan con la plantilla
       'mr519_gen/formulario':
-        caracterizacion: Caracterizacion en proyectos
+        caracterizacion: Caracterizacion de beneficiaris en proyectos
       "sip/persona":
         proyectofinanciero_ids: Proyectos que caracterizan
         proyectofinanciero: Proyectos que caracterizan
