@@ -13,19 +13,19 @@ gem 'cancancan'
 
 gem 'cocoon', git: 'https://github.com/vtamara/cocoon.git', branch: 'new_id_with_ajax' # Formularios anidados (algunos con ajax)
 
-gem 'coffee-rails' # CoffeeScript para recuersos .js.coffee y vistas
+gem 'coffee-rails' , '>= 5.0.0' # CoffeeScript para recuersos .js.coffee y vistas
 
-gem 'devise'# Autenticación 
+gem 'devise', '>= 4.7.1' # Autenticación 
 
-gem 'devise-i18n'
+gem 'devise-i18n', '>= 1.9.1'
 
-gem 'jbuilder'
+gem 'jbuilder', '>= 2.10.0'
 
 gem 'libxml-ruby'
 
 gem 'odf-report' # Genera ODT
 
-gem 'paperclip' # Maneja adjuntos
+gem 'paperclip' , '>= 6.1.0' # Maneja adjuntos
 
 gem 'pg' # Postgresql
 
@@ -33,27 +33,27 @@ gem 'puma'
 
 gem 'prawn' # Generación de PDF
 
-gem 'prawnto_2',  :require => 'prawnto'
+gem 'prawnto_2', '>= 0.3.0', :require => 'prawnto'
 
 gem 'prawn-table'
 
-gem 'rails', '~> 6.0.0.rc1' # Rails (internacionalización)
+gem 'rails', '~> 6.0.3.1' # Rails (internacionalización)
 
-gem 'rails-i18n'
+gem 'rails-i18n', '>= 6.0.0'
 
 gem 'rspreadsheet'
 
 gem 'rubyzip', '>= 2.0.0'
 
-gem 'sassc-rails' # CSS
+gem 'sassc-rails' , '>= 2.1.2' # CSS
 
-gem 'simple_form' # Formularios simples 
+gem 'simple_form' , '>= 5.0.2' # Formularios simples 
 
 gem 'twitter_cldr' # ICU con CLDR
 
 gem 'tzinfo' # Zonas horarias
 
-gem 'webpacker'
+gem 'webpacker', '>= 5.1.1'
 
 gem 'will_paginate' # Pagina listados
 
@@ -77,7 +77,7 @@ group :development do
   
   gem 'thor' # Requerido por rake
   
-  gem 'web-console' # ConSola irb en páginas 
+  gem 'web-console' , '>= 4.0.2' # ConSola irb en páginas 
   
 end
 
@@ -88,7 +88,7 @@ group :development, :test do
 
   gem 'colorize' # Colores en Terminl
 
-  gem 'rails-erd' # Para generar modelo entidad asociación 
+  gem 'rails-erd' , '>= 1.6.0' # Para generar modelo entidad asociación 
 
 end
 
@@ -101,7 +101,7 @@ group :test do
 
   gem 'minitest-reporters' 
 
-  gem 'rails-controller-testing'
+  gem 'rails-controller-testing', '>= 1.0.4'
 
   gem 'simplecov' # Envia resultados de pruebas desde travis a codeclimate
 
