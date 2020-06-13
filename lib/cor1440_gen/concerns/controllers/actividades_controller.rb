@@ -137,25 +137,13 @@ module Cor1440Gen
             @registro.save!(validate: false)
             return @registro
           end
-
-          def cancelar(actividad)
-            po = new_cor1440_gen 
-            camposporomision = [po.minutos, po.nombre, po.objetivo,
-                                po.resultado, po.fecha, po.observaciones,
-                                po.oficina_id, po.rangoedadac_id, 
-                                po.usuario_id, po.lugar] 
-            nuevo = [actividad.minutos, actividad.nombre, 
-                     actividad.objetivo, actividad.resultado, 
-                     actividad.fecha, actividad.observaciones, 
-                     actividad.oficina_id, actividad.rangoedadac_id, 
-                     actividad.usuario_id, actividad.lugar]
-            po.destroy!
-            if camposporomision == nuevo
-              actividad.destroy!
-            end
+          
+          def destroy
+            pf_act = Cor1440Gen::ActividadProyectofinanciero.where(actividad_id: @registro.id)
+            pf_act[0].destroy!
+            @registro.destroy!
+            redirect_to cor1440_gen.actividades_path
           end
-          helper_method :cancelar
-
           def new
             new_cor1440_gen
             redirect_to cor1440_gen.edit_actividad_path(@registro)
