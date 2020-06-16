@@ -16,6 +16,8 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Actividadpf', 
             through: :actividad
 
+          validates :proyectofinanciero_id, presence: true
+
           after_destroy do
             # Si hay respuestafor asociada a actividadpf del proyectofinanciero_id que se desasocia eliminarla
             self.actividad.actividadpf_ids -= self.proyectofinanciero.actividadpf_ids
