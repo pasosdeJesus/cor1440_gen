@@ -139,11 +139,16 @@ module Cor1440Gen
           end
           
           def destroy
-            pf_act = Cor1440Gen::ActividadProyectofinanciero.where(actividad_id: @registro.id)
-            pf_act[0].destroy!
-            @registro.destroy!
-            redirect_to cor1440_gen.actividades_path
+            pf_act = Cor1440Gen::ActividadProyectofinanciero.
+              where(actividad_id: @registro.id)
+            if pf_act.count > 0
+              pf_act[0].destroy!
+            end
+            destroy_gen
+            #@registro.destroy!
+            #redirect_to cor1440_gen.actividades_path
           end
+
           def new
             new_cor1440_gen
             redirect_to cor1440_gen.edit_actividad_path(@registro)
