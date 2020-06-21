@@ -370,7 +370,22 @@ cor1440_gen_rangoedadc_todos = () ->
   return
 
 
-
+@validar_act_poromision = (actividad) ->
+  nombre=$('#actividad_nombre').val()
+  fecha = $('#actividad_fecha_localizada').val()
+  objetivo = $('#actividad_objetivo').val()
+  resultado = $('#actividad_resultado').val()
+  oficinaid = $('#actividad_oficina_id').val()
+  lugar = $('#actividad_lugar').val()
+  hoy = new Date().toJSON().slice(0,10);
+  root = window
+  purl = root.puntomontaje
+  if purl == '/'
+    purl = ''
+  if (nombre == '' && objetivo == '' && resultado == '' && fecha == hoy && oficinaid == "1" && lugar == '')
+    actividadId = actividad
+    $('#cancelar_act_btn').attr('data-method', 'delete')
+    $('#cancelar_act_btn').attr('href', purl + '/actividades/' + actividadId)
 # Cambiar cancelar por eliminar
 
 @cor1440_gen_cancelar_pf_eliminar_vacio = (proyectofinanciero) ->

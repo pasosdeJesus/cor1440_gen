@@ -1,0 +1,3 @@
+<% idact = @actividad.id.to_s %>
+<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+  cor1440_gen.actividades_path, :class => 'btn', :id => 'cancelar_act_btn', onclick: 'javascript: validar_act_poromision('+ idact +')' %>
