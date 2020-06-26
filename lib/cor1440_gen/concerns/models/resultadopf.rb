@@ -25,7 +25,11 @@ module Cor1440Gen
           validates :resultado, presence:true, length: {maximum: 5000}
 
           def presenta_nombre
-            numero + " " + resultado
+            objetivopf.numero + numero + " " + resultado
+          end
+
+          def codigo_completo
+            objetivopf.numero + numero
           end
 
         end #included

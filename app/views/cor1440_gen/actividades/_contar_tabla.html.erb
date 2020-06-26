@@ -38,7 +38,7 @@
           (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
            WHERE proyectofinanciero_id=?)',@contar_pfid)
          %>
-       <td><%= a.resultadopf.numero if a.resultadopf %></td>
+       <td><%= a.resultadopf.codigo_completo if a.resultadopf %></td>
         <td><%= a.nombrecorto %> <%= a.titulo%></td>
         <td>
           <% tot = consb.count %>
