@@ -46,9 +46,9 @@ module Cor1440Gen
             when 'actividadpf'
               m = actividadpf_ids.map {|idapf| 
                 apf = Cor1440Gen::Actividadpf.find(idapf)
-                apf.resultadopf.numero + apf.nombrecorto
+                apf.presenta_nombre
               }
-              return m.join(', ')
+              return m.join('; ')
             when 'tipoindicador'
               return (indicadorpf && indicadorpf.tipoindicador ?
                       indicadorpf.tipoindicador.nombre : '')

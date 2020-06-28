@@ -31,7 +31,9 @@ module Cor1440Gen
           validates :indicador, presence:true, length: {maximum: 5000}
 
           def presenta_nombre
-            (resultadopf ? resultadopf.numero : '') + numero + " " + indicador 
+            (resultadopf ? 
+             (resultadopf.objetivopf ? resultadopf.objetivopf.numero : '' ) + 
+             resultadopf.numero : '') + numero + " " + indicador 
           end
 
         end # included
