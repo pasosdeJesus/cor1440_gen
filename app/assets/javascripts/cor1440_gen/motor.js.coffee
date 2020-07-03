@@ -75,6 +75,7 @@ cor1440_gen_rangoedadc_todos = () ->
     'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf, 
     DEP_RESULTADOPF, 'id', 'numero')
 
+
 # En formulario actividad
 
 # Actualiza campos dinámicos cuando hay un solo campo de actividades de proyectofinanciero
@@ -400,6 +401,30 @@ cor1440_gen_rangoedadc_todos = () ->
     $('#btn-cancelar-actividad').attr('href', purl + '/actividades/' + actividadId)
 
 
+# En formulario persona/beneficiario
+
+# Actualiza campos dinámicos cuando hay caracterización
+@cor1440_gen_persona_actualiza_camposdinamicos = (root) ->
+  ruta = document.location.pathname
+  if ruta.length == 0
+    return
+  if ruta.startsWith(root.puntomontaje)
+    ruta = ruta.substr(root.puntomontaje.length)
+  if ruta[0] == '/'
+    ruta = ruta.substr(1)
+  pfids = $('#persona_proyectofinanciero_ids').val()
+
+  if pfids.length == 0
+    pfids = [-1] # convencio vacio. Si se usa [] no llega al controlador
+
+
+  params = {
+    proyectofinanciero_ids: pfids
+  }
+  sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+    '#camposdinamicos', '#camposdinamicos')
+
+
 @cor1440_gen_prepara_eventos_comunes = (root, opciones = {}) ->
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form
@@ -584,5 +609,15 @@ cor1440_gen_rangoedadc_todos = () ->
     )
   )
 
+
+  # Beneficiarios
+  # Campos dinámicos
+  $(document).on('change', 'select[id=persona_proyectofinanciero_ids]', (e, res) ->
+    cor1440_gen_persona_actualiza_camposdinamicos(root)
+  )
+ 
+#    $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
+#      cor1440_gen_actividad_actualiza_actividadpf(root, null)
+#    )
   return
 

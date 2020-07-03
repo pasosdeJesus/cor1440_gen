@@ -209,6 +209,9 @@ module Cor1440Gen
           def edit_cor1440_gen
             @actividad = @registro = Cor1440Gen::Actividad.find(params[:id])
             authorize! :edit, @registro
+            if cannot? :edit, clase.constantize
+              authorize! :update, @registro
+            end
             if params['actividadpf_ids']
               @registro.actividadpf_ids = params['actividadpf_ids']
             end

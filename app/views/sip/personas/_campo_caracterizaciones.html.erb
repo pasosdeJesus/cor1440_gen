@@ -1,35 +1,32 @@
-<%= f.association :proyectofinanciero,
-  collection: Cor1440Gen::Proyectofinanciero.all,
-  include_blank: false,
-  label_method: :nombre, 
-  value_method: :id,
-  input_html: {
-    class: 'chosen-select',
-    "data-toggle" => 'tooltip'
-  } 
-%>
-
-<div class="panel-group" id="accordioncp">
-  <% nump = 1 %>
-  <%= f.simple_fields_for :caracterizacionpersona, 
-    f.object.caracterizacionpersona.order(:id) do |car| %>
-    <div class="panel panel-default" id="panelcp<%= nump %>">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <a data-toggle="collapse" data-target="#collapsecp<%= nump %>" href="#collapsecp<%= nump %>">
-            <%= car.object.respuestafor.formulario.nombre %> -  <%= Cor1440Gen::Proyectofinanciero.where('id IN (SELECT proyectofinanciero_id FROM cor1440_gen_caracterizacionpf WHERE formulario_id=?)', car.object.respuestafor.formulario_id).pluck('nombre').join('; ') %>
-          </a>
+<div id="camposdinamicos">
+  <div class="panel-group" id="accordioncp">
+    <% nump = 1 %>
+    <%= f.simple_fields_for :caracterizacionpersona, 
+      f.object.caracterizacionpersona.where(
+        'respuestafor_id IN (SELECT id FROM mr519_gen_respuestafor AS rf ' +
+        'JOIN cor1440_gen_caracterizacionpf AS cpf ON ' +
+        'rf.formulario_id=cpf.formulario_id JOIN ' +
+        'cor1440_gen_beneficiariopf AS bpf ON ' +
+        'bpf.proyectofinanciero_id=cpf.proyectofinanciero_id ' +
+        'WHERE bpf.persona_id=?)', f.object.id).order(:id) do |car| %>
+      <div class="panel panel-default" id="panelcp<%= nump %>">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <a data-toggle="collapse" data-target="#collapsecp<%= nump %>" href="#collapsecp<%= nump %>">
+              <%= car.object.respuestafor.formulario.nombre %> -  <%= Cor1440Gen::Proyectofinanciero.where('id IN (SELECT proyectofinanciero_id FROM cor1440_gen_caracterizacionpf WHERE formulario_id=?)', car.object.respuestafor.formulario_id).pluck('nombre').join('; ') %>
+            </a>
+          </div>
+        </div>
+        <div id="collapsecp<%= nump %>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <%= car.simple_fields_for :respuestafor do |rf| %>
+              <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
+                locals: {f: rf} %>
+            <% end %>
+          </div>
         </div>
       </div>
-      <div id="collapsecp<%= nump %>" class="panel-collapse collapse">
-        <div class="panel-body">
-          <%= car.simple_fields_for :respuestafor do |rf| %>
-            <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
-              locals: {f: rf} %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <% nump += 1 %>
-  <% end %>
+      <% nump += 1 %>
+    <% end %>
+  </div>
 </div>

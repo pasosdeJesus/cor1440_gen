@@ -161,8 +161,8 @@ es:
       "heb412_gen/plantillahcm":
         proyectofinanciero: Proyectos que exportan/importan con la plantilla
       'mr519_gen/formulario':
-        caracterizacion: Caracterizacion de beneficiaris en proyectos
+        caracterizacion: Caracterizacion de beneficiarios en proyectos
       "sip/persona":
-        proyectofinanciero_ids: Proyectos que caracterizan
-        proyectofinanciero: Proyectos que caracterizan
+        proyectofinanciero_ids: Proyectos de los que es beneficiario(a)
+        proyectofinanciero: Proyectos de los que es beneficiario(a)
 

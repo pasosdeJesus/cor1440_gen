@@ -20,7 +20,6 @@ module Cor1440Gen
             [ :id, 
               :nombres,
               :apellidos,
-              :proyectofinanciero_ids,
               :anionac,
               :mesnac,
               :dianac,
@@ -31,7 +30,8 @@ module Cor1440Gen
               :clase,
               :nacionalde,
               :tdocumento,
-              :numerodocumento
+              :numerodocumento,
+              :proyectofinanciero_ids,
             ]
           end  
 
@@ -76,14 +76,37 @@ module Cor1440Gen
             end
           end
 
-          def edit
-            @registro = clase.constantize.find(params[:id])
-            if cannot? :edit, clase.constantize
-              authorize! :update, @registro
+          def editar_intermedio(registro, usuario_actual_id)
+            if params['proyectofinanciero_ids']
+              if params['proyectofinanciero_ids'] == ['-1'] # Convención vacio
+                # Si la llamada AJAC se hace con [] ese parametro no llega 
+                registro.proyectofinanciero_ids = []
+              else
+                registro.proyectofinanciero_ids = 
+                  params['proyectofinanciero_ids']
+              end
             end
-            self.class.asegura_camposdinamicos(@registro, current_usuario.id)
-            render layout: 'application'
+            self.class.asegura_camposdinamicos(registro, usuario_actual_id)
           end
+
+          # Al acatualizar eliminamos caracterizacionespersona de
+          # proyectos de los cuales la persona ya no sea beneficiario
+          def actualizar_intermedio
+            quedan = @registro.caracterizacionpersona.where(
+              'respuestafor_id IN (SELECT id ' +
+              'FROM mr519_gen_respuestafor AS rf ' +
+              'JOIN cor1440_gen_caracterizacionpf AS cpf ON ' +
+              'rf.formulario_id=cpf.formulario_id JOIN ' +
+              'cor1440_gen_beneficiariopf AS bpf ON ' +
+              'bpf.proyectofinanciero_id=cpf.proyectofinanciero_id ' +
+              'WHERE bpf.persona_id=?)', @registro.id).pluck(:id)
+            elim = @registro.caracterizacionpersona_ids - quedan
+            if elim != []
+              Cor1440Gen::Caracterizacionpersona.where(id: elim).delete_all
+            end
+            return true 
+          end
+
 
           def vistas_manejadas
             ['Persona']
