@@ -125,6 +125,7 @@ es:
         proyecto: Área
         proyectos: Área
         proyecto_ids: Áreas
+        proyectofinanciero_usuario: Equipo de trabajo
         "{:proyecto_ids=>[]}": Áreas
         Proyectofinanciero: Proyecto
         proyectofinanciero: Proyecto

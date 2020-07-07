@@ -1,0 +1,19 @@
+<tr class='nested-fields'>
+  <td>
+    <% col = ::Usuario.order(:nombre).habilitados %>
+    <%= f.association :usuario,
+      collection: col,
+      label: false,
+      label_method: lambda { |n| n.nombre.to_s },
+      value_method: :id,
+      include_blank: "POR CONTRATAR",
+      input_html: { class: 'chosen-select' } %>
+  </td>
+  <td>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar", f, 
+        :class => 'btn-danger' 
+    %>
+    <div><%= f.error_notification %></div>
+  </td>
+</tr>

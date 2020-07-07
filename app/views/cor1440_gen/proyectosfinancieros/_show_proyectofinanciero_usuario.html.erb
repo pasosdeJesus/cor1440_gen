@@ -1,0 +1,10 @@
+<table border="1">
+  <tr>
+    <th>Persona</th>
+  </tr>
+  <% @registro.proyectofinanciero_usuario.each do |pu| %>
+    <tr>
+      <td><%= pu.usuario ? pu.usuario.presenta_nombre : 'Por contratar' %></td>
+    </tr>
+  <% end %>
+</table>

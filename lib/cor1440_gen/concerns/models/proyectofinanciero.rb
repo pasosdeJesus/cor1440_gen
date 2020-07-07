@@ -93,6 +93,14 @@ module Cor1440Gen
           accepts_nested_attributes_for :objetivopf,
             allow_destroy: true, reject_if: :all_blank
 
+          has_many :proyectofinanciero_usuario, dependent: :delete_all,
+            class_name: 'Cor1440Gen::ProyectofinancieroUsuario',
+            foreign_key: 'proyectofinanciero_id', validate: true
+          accepts_nested_attributes_for :proyectofinanciero_usuario, 
+            allow_destroy: true#, reject_if: :all_blank
+          has_many :usuario, through: :proyectofinanciero_usuario,
+            class_name: '::Usuario'
+
           has_many :resultadopf, foreign_key: 'proyectofinanciero_id',
             validate: true, dependent: :destroy, 
             class_name: 'Cor1440Gen::Resultadopf'
@@ -166,6 +174,17 @@ module Cor1440Gen
           scope :filtro_responsable_id, lambda { |r|
             where('cor1440_gen_proyectofinanciero.responsable_id=?', r)
           }
+
+          def presenta(atr)
+            case atr.to_s
+            when 'proyectofinanciero_usuario'
+              self.proyectofinanciero_usuario.map {|pu|
+                pu.usuario ? pu.usuario.nusuario : 'Por contratar'
+              }.join('; ')
+            else
+              presenta_gen(atr)
+            end
+          end
 
 
         end #included

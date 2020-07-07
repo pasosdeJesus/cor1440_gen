@@ -47,7 +47,8 @@ module Cor1440Gen
             [ 
               :fechainicio_localizada,
               :fechacierre_localizada,
-              :responsable
+              :responsable,
+              :proyectofinanciero_usuario,
             ] +
             [ :proyecto_ids =>  [] ] +
             [ :compromisos, 
@@ -82,7 +83,8 @@ module Cor1440Gen
             [ 
               :fechainicio_localizada,
               :fechacierre_localizada,
-              :responsable
+              :responsable,
+              :proyectofinanciero_usuario,
             ] +
             [ :proyecto_ids =>  [] ] +
             [ :compromisos, 
@@ -277,6 +279,11 @@ module Cor1440Gen
                 :numero, 
                 :objetivo, 
                 :_destroy ] 
+            ] + [
+              :proyectofinanciero_usuario_attributes => [
+                :id,
+                :usuario_id,
+                :_destroy ]
             ] + [
               :resultadopf_attributes =>  [
                 :id, 

@@ -30,6 +30,12 @@ module Cor1440Gen
             foreign_key: 'responsable_id',
             dependent: :delete_all
 
+          has_many :proyectofinanciero_usuario, #dependent: :destroy,
+            class_name: 'Cor1440Gen::ProyectofinancieroUsuario',
+            foreign_key: 'usuario_id'
+          has_many :proyectofinanciero, through: :proyectofinanciero_usuario,
+            class_name: 'Cor1440Gen::Proyectofinanciero'
+
           validate :rol_usuario
           def rol_usuario
             if oficina && (rol == Ability::ROLADMIN ||

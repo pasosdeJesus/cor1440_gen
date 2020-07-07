@@ -43,9 +43,15 @@ module Cor1440Gen
     BASICAS_ID_NOAUTO = []
     # Hereda basicas_id_noauto de sip
    
-    NOBASICAS_INDSEQID =  []
+    NOBASICAS_INDSEQID =  [
+      ['cor1440_gen', 'proyectofinanciero_usuario']
+    ]
     # Hereda nobasicas_indice_seq_con_id de sip
-   
+    def nobasicas_indice_seq_con_id 
+      Sip::Ability::NOBASICAS_INDSEQID +
+        Cor1440Gen::Ability::NOBASICAS_INDSEQID 
+    end
+
     BASICAS_PRIO = []
     # Hereda tablasbasicas_prio de sip
 
