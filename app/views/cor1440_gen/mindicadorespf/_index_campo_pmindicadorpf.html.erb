@@ -1,9 +1,9 @@
 <% if registro %>
   <% pm = registro.pmindicadorpf.order(:ffin) %>
-  <% if pm.count > 0 %>
+  <% if pm && pm.count > 0 %>
     <% v = "" %>
     <% c = "red" %>
-    <% if pm.last.resind %>
+    <% if pm.last.ffin && pm.last.meta && pm.last.resind %>
       <% v = pm.last.resind.round(1) %>
       <% if pm.last.meta > 0 && (pm.last.resind/pm.last.meta) > 0.99 %>
         <% c = 'green' %>
