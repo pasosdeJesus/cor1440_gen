@@ -310,7 +310,25 @@ module Cor1440Gen
                 resf[:rutaevidencia] = cor1440_gen.actividades_path +
                   '?filtro[busid]='+idacs.join(',')
               end
+
             elsif ind.tipoindicador.medircon == 2 # Efectos
+              byebug
+
+              if self.respond_to?('medir_indicador_efecto_tipo_' + 
+                  ind.tipoindicador_id.to_s)
+                resf = self.send('medir_indicador_efecto_tipo_' + 
+                                 ind.tipoindicador_id.to_s,
+                                 idacs, mind, fini, ffin)
+                if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
+                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
+                end
+              end
+              # Evidencia de resultado principal son efectos
+              #
+              if idacs.count > 0
+                resf[:rutaevidencia] = cor1440_gen.actividades_path +
+                  '?filtro[busid]='+idacs.join(',')
+              end
 
             elsif ind.tipoindicador.medircon == 3 # Proyectos
               # Medición interna 
