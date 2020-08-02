@@ -1,7 +1,9 @@
 es:
   attributes:
     fechacreacion: Creación
+    fechacreacion_localizada: Creación
     fechadeshabilitacion: Deshabilitación 
+    fechadeshabilitacion_localizada: Deshabilitación 
     fechainicio: Fecha de inicio
     fechainicio_localizada: Fecha de inicio
     fechacierre: Fecha de cierre
@@ -51,6 +53,8 @@ es:
         Actividadarea: Subárea de actividad
         Actividadareas: Subáreas de actividad
       "cor1440_gen/actividadtipo":
+        fechacreacion_localizada: Creación
+        fechadeshabilitacion_localizada: Deshabilitación 
         Actividadtipo: Tipo de actividad de marco lógico
         Actividadtipos: Tipos de actividad de marco lógico
         campoact: Campo
