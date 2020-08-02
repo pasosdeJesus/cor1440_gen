@@ -117,6 +117,8 @@ module Cor1440Gen
             super(c)
           end  
 
+          # API JSON, dado un conjunto de proyectosfinancieros
+          # responde con las actividadespf de sus marcos lógicos
           def actividadespf
             authorize! :read, Cor1440Gen::Proyectofinanciero
             pfl = []
@@ -143,6 +145,8 @@ module Cor1440Gen
             end
           end
 
+          # API JSON, dado un conjunto de proyectosfinancieros
+          # responde con los objetivos de sus marcos lógicos
           def objetivospf
             authorize! :read, Cor1440Gen::Proyectofinanciero
             pfl = []
