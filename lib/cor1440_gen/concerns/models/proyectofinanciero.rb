@@ -177,7 +177,7 @@ module Cor1440Gen
 
           def presenta(atr)
             case atr.to_s
-            when 'proyectofinanciero_usuario'
+            when 'proyectofinanciero_usuario', 'equipotrabajo'
               self.proyectofinanciero_usuario.map {|pu|
                 pu.usuario ? pu.usuario.nusuario : 'Por contratar'
               }.join('; ')

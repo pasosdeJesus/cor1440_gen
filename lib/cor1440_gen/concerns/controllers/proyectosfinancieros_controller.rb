@@ -235,6 +235,10 @@ module Cor1440Gen
             return detalleini == detalle
           end
 
+          def vistas_manejadas
+            ['Proyecto']
+          end
+
           def proyectofinanciero_params_cor1440_gen
             atributos_form + [:responsable_id] + [ 
               :actividadpf_attributes =>  [

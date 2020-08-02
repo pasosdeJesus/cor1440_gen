@@ -125,7 +125,25 @@ module Cor1440Gen
         ],
         controlador: 'Cor1440Gen::ActividadesController',
         ruta: '/actividades'
-      }
+      },
+      'Proyecto' => { 
+        campos: [
+          'compromisos', 
+          'equipotrabajo',
+          'fechainicio_localizada',  
+          'fechacierre_localizada',
+          'fechacreacion_localizada',
+          'fechaactualizacion_localizada',
+          'financiador',
+          'id',
+          'monto', 
+          'nombre', 
+          'observaciones',
+          'responsable',
+        ],
+        controlador: 'Cor1440Gen::Proyectofinanciero',
+        ruta: '/proyectosfinancieros'
+      },
     }
 
     def campos_plantillas 
