@@ -170,7 +170,7 @@ module Cor1440Gen
           end
 
           # Cuenta asistentes a actividades de listado lac 
-          # Retorna listado de ids.  Será únicas si uncas es verdadero diferentes
+          # Retorna listado de ids.  Serán únicas si unicas es verdadero
           def asistencia_por_sexo(idacs, sexo, unicas = false)
             res = Cor1440Gen::Asistencia.joins(:persona).
               where(actividad_id: idacs).
@@ -188,10 +188,11 @@ module Cor1440Gen
           end
 
           # Mide indicador de resultado tipo 2. Suma de poblaciones tomadas
-          # de tablas población de cada actividad. Puede incluir repetidos.
-          # Los datos intermedios que retorna son mujeres, hombres y sin sexo de nacimiento
+          #   de tablas población de cada actividad. Puede incluir repetidos.
+          # Los datos intermedios que retorna son mujeres, hombres y sin 
+          #   sexo de nacimiento
           # No retorna  para esos datos intermedios (serían las
-          # mismas actividades que n el resultado).
+          #   mismas actividades que n el resultado).
           def medir_indicador_res_tipo_2(idacs, mind, fini, ffin)
             datosint = []
             d1 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'fr')
