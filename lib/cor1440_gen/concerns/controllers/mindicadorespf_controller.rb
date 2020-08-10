@@ -47,7 +47,8 @@ module Cor1440Gen
             @contar_pf = Cor1440Gen::Proyectofinanciero.all
             @contar_pfid = params[:filtro] && 
               params[:filtro][:busproyectofinanciero_id] ?  
-              params[:filtro][:busproyectofinanciero_id].to_i : (@contar_pfid or nil)
+              params[:filtro][:busproyectofinanciero_id].to_i : 
+              (@contar_pfid or nil)
 
             return registros.where(proyectofinanciero_id: @contar_pfid).
               reorder(proyectofinanciero_id: :asc, indicadorpf_id: :asc)
@@ -73,6 +74,16 @@ module Cor1440Gen
 
             return lac.pluck(:id).uniq
           end
+
+          def self.calcula_listado_ef(indicadorpf_id, fini, ffin)
+            lef = Cor1440Gen::Efecto.
+              where(indicadorpf_id: indicadorpf_id).
+              where('fecha >= ?', fini).
+              where('fecha <= ?', ffin)
+
+            return lef.pluck(:id).uniq
+          end
+
 
           def create
             def crea_pmindicadorpf(mind, fini, ffin, num, np)
@@ -188,11 +199,11 @@ module Cor1440Gen
           end
 
           # Mide indicador de resultado tipo 2. Suma de poblaciones tomadas
-          #   de tablas población de cada actividad. Puede incluir repetidos.
+          # de tablas población de cada actividad. Puede incluir repetidos.
           # Los datos intermedios que retorna son mujeres, hombres y sin 
-          #   sexo de nacimiento
+          # sexo de nacimiento
           # No retorna  para esos datos intermedios (serían las
-          #   mismas actividades que n el resultado).
+          # mismas actividades que n el resultado).
           def medir_indicador_res_tipo_2(idacs, mind, fini, ffin)
             datosint = []
             d1 = calcula_poblacion_tabla_sexo(idacs, fini, ffin, 'fr')
@@ -268,6 +279,15 @@ module Cor1440Gen
             return {resind: resind, datosint: datosint}
           end
 
+          # Mide indicador de efecto tipo 10. Cantidad de efectos
+          # No retorna datos intermedios
+          # idefs lista con identificación de efectos que aportan en el avance
+          # mind Es objeto Cor1440Gen::Mindicadorpf con medición
+          # fini Es fecha inicial de medición
+          # ffin Es fecha final de medición
+          def medir_indicador_efecto_tipo_10(idefs, mind, fini, ffin)
+            return {resind: idefs.count, datosint: []}
+          end
 
 
           # Recibe medición de indicador por completar
@@ -310,26 +330,24 @@ module Cor1440Gen
                 resf[:rutaevidencia] = cor1440_gen.actividades_path +
                   '?filtro[busid]='+idacs.join(',')
               end
-
             elsif ind.tipoindicador.medircon == 2 # Efectos
-              byebug
-
+              idefs = []
+              idefs = Cor1440Gen::MindicadorespfController::calcula_listado_ef(mind.indicadorpf_id, fini, ffin)
               if self.respond_to?('medir_indicador_efecto_tipo_' + 
                   ind.tipoindicador_id.to_s)
                 resf = self.send('medir_indicador_efecto_tipo_' + 
                                  ind.tipoindicador_id.to_s,
-                                 idacs, mind, fini, ffin)
+                                 idefs, mind, fini, ffin)
                 if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
                   puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
                 end
               end
-              # Evidencia de resultado principal son efectos
-              #
-              if idacs.count > 0
-                resf[:rutaevidencia] = cor1440_gen.actividades_path +
-                  '?filtro[busid]='+idacs.join(',')
+              # Evidencia de resultado principal son efectos con ids idefs
+              if idefs.count > 0
+                resf[:rutaevidencia] = cor1440_gen.efectos_path +
+                  '?filtro[busid]='+idefs.join(',')
               end
-
+             
             elsif ind.tipoindicador.medircon == 3 # Proyectos
               # Medición interna 
               # ...
