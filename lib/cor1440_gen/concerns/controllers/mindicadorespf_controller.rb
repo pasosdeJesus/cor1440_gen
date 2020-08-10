@@ -279,7 +279,8 @@ module Cor1440Gen
             return {resind: resind, datosint: datosint}
           end
 
-          # Mide indicador de efecto tipo 10. Cantidad de efectos
+          # Mide indicador de efecto mediante avance tipo 10. 
+          # Cantidad de avances.
           # No retorna datos intermedios
           # idefs lista con identificación de efectos que aportan en el avance
           # mind Es objeto Cor1440Gen::Mindicadorpf con medición
