@@ -37,4 +37,20 @@ def medir_indicador_res_tipo_4(idacs, mind, fini, ffin)
 
   return {resind: resind, datosint: datosint}
 end
-``` 
+```
+
+
+# Medición de indicadores de efecto mediante avances en efecto
+
+1. Cree un tipo de indicador que se mida con avance en efectos y que describa para usuarios el resultado y los datos intermedios que retorna la función, así como la evidencia para el resultado y la evidencia para los datos intermedios.
+2. En las fuentes de su aplicación en `controllers/cor1440_gen/mindicadorespf_controller.rb` cree una función `medir_indicador_efecto_tipo_x` donde x es el número del tipo de indicador que creó en el punto 1
+
+Tal función es de la forma:
+```rb
+# idefs Es lista con identificación de los efectos que aportan en el avance
+# mind Es objeto Cor1440Gen::Mindicadorpf instanciado a la medición que se hace
+# fini Es fecha inicial de medición
+# ffin Es fecha final de medición
+def medir_indicador_efecto_tipo_10(idefs, mind, fini, ffin)
+ return {resind: idefs.count, datosint: []}
+end
