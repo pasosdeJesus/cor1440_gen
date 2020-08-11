@@ -331,6 +331,7 @@ module Cor1440Gen
                 resf[:rutaevidencia] = cor1440_gen.actividades_path +
                   '?filtro[busid]='+idacs.join(',')
               end
+
             elsif ind.tipoindicador.medircon == 2 # Efectos
               idefs = []
               idefs = Cor1440Gen::MindicadorespfController::calcula_listado_ef(mind.indicadorpf_id, fini, ffin)
@@ -348,10 +349,23 @@ module Cor1440Gen
                 resf[:rutaevidencia] = cor1440_gen.efectos_path +
                   '?filtro[busid]='+idefs.join(',')
               end
-             
-            elsif ind.tipoindicador.medircon == 3 # Proyectos
-              # Medición interna 
-              # ...
+            elsif ind.tipoindicador.medircon == 3 # Otros, e.g encuestas, gestion de proyectos
+              # evidencia de resultado principal debe ser retornada
+              # en resf[:rutaevidencia]
+              if self.respond_to?('medir_indicador_otro_tipo_' + 
+                  ind.tipoindicador_id.to_s)
+                resf = self.send('medir_indicador_otro_tipo_' + 
+                                 ind.tipoindicador_id.to_s,
+                                 mind, fini, ffin)
+                if resf[:datosint].count != ind.tipoindicador.
+                    datointermedioti.count
+                  puts "Error. No coinciden resf.datosint.count " +
+                    "({#resf.datosint.count} y " +
+                    "ind.tipoindicador.datointermedioti.count " +
+                    "(#{ind.tipoindicador.datointermedioti.count})."
+                end
+              end
+
             end
 
             return resf
