@@ -38,11 +38,6 @@ module Cor1440Gen
 
           validate :rol_usuario
           def rol_usuario
-            if oficina && (rol == Ability::ROLADMIN ||
-                           rol == Ability::ROLINV || 
-                           rol == Ability::ROLDIR)
-              errors.add(:oficina, "Oficina debe estar en blanco para el rol elegido")
-            end
             if !oficina && rol != Ability::ROLADMIN && rol != Ability::ROLINV && 
               rol != Ability::ROLDIR
               errors.add(:oficina, "El rol elegido debe tener oficina")
