@@ -235,6 +235,14 @@ module Cor1440Gen
             return detalleini == detalle
           end
 
+          def editar_intermedio(registro, usuario_actual_id)
+            if registro.indicadorpf.where(resultadopf_id: nil).
+                where(objetivopf_id: nil)
+              registro.indicadorpf.where(resultadopf_id: nil).
+                where(objetivopf_id: nil).destroy_all
+            end
+          end
+
           def vistas_manejadas
             ['Proyecto']
           end

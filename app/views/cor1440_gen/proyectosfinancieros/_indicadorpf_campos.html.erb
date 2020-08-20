@@ -13,7 +13,10 @@
     <%= f.input :numero, label: false %>
   </td>
   <td>
+
+    <% coltir = Cor1440Gen::Tipoindicador.where(medircon: 1) %>
     <%= f.association :tipoindicador, 
+      collection: coltir,
       label_method: :nombre,
       label: false %>
   </td>

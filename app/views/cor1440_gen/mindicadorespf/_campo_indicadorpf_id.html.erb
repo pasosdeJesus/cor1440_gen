@@ -3,9 +3,8 @@
 <% if f.object.indicadorpf_id %>
   <% col = col.where(id: f.object.indicadorpf_id) %>
   <% sel = f.object.indicadorpf_id %>
-<% elsif params && params['filtro'] && params['filtro']['busproyectofinanciero_id'] && params['filtro']['busproyectofinanciero_id'] != '' %>
-  <% col = col.where(proyectofinanciero_id: 
-                     params['filtro']['busproyectofinanciero_id'].to_i) %>
+<% elsif params && params['filtro'] && params['filtro']['busproyectofinanciero_id'] && params['filtro']['busproyectofinanciero_id'].to_i > 0 %>
+  <% col = col.where(proyectofinanciero_id: params['filtro']['busproyectofinanciero_id'].to_i) %>
 <% end %>
 
 <%= f.input :indicadorpf_id,
