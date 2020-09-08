@@ -1,33 +1,10 @@
 # encoding: UTF-8
+require_dependency "cor1440_gen/concerns/controllers/financiadores_controller"
+
 module Cor1440Gen
   module Admin
-    class FinanciadoresController < Sip::Admin::BasicasController
-      before_action :set_financiador, 
-        only: [:show, :edit, :update, :destroy]
-      load_and_authorize_resource  class: Cor1440Gen::Financiador
-
-      def clase 
-        "Cor1440Gen::Financiador"
-      end
-
-      def set_financiador
-        @basica = Financiador.find(params[:id])
-      end
-
-      def atributos_index
-        ["id", "nombre", "observaciones", "fechacreacion_localizada", 
-          "habilitado"]
-      end
-
-      # Genero del nombre (F - Femenino, M - Masculino)
-      def genclase
-        return 'M';
-      end
-
-      def financiador_params
-        params.require(:financiador).permit(*atributos_form)
-      end
+    class FinanciadoresController < Sip::ModelosController
+      include Cor1440Gen::Concerns::Controllers::FinanciadoresController
     end
   end
 end
-
