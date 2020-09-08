@@ -8,10 +8,6 @@ module Cor1440Gen
 
         included do
 
-          before_action :set_financiador, 
-            only: [:show, :edit, :update, :destroy]
-          load_and_authorize_resource  class: Cor1440Gen::Financiador
-
           def clase 
             "Cor1440Gen::Financiador"
           end
