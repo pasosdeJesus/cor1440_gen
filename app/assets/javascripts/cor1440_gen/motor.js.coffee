@@ -519,6 +519,8 @@ cor1440_gen_rangoedadc_todos = () ->
     $("form[id^=edit_actividad]").submit(() ->
       $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_proyectofinanciero_id]').removeAttr('disabled')
       $('select[id^=actividad_actividad_rangoedadac_attributes_][id$=_rangoedadac_id]').removeAttr('disabled')
+      $('select[id^=actividad_detallefinanciero_attributes_][id$=_proyectofinanciero_id]').removeAttr('disabled')
+      
     );
     
     # Tras agregar o eliminar actividades de convenio a un convenio
