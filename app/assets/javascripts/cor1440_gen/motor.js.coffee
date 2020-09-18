@@ -272,7 +272,7 @@ cor1440_gen_rangoedadc_todos = () ->
   return
 
 # Elije un asistente en autocompletación
-# Tras autocompletar disprar el evento cor1440gen:autocompletado-asistente
+# Tras autocompletar disparar el evento cor1440gen:autocompletado-asistente
 @cor1440_gen_autocompleta_asistente = (label, id, divcp, root) ->
   sip_arregla_puntomontaje(root)
   cs = id.split(";")
