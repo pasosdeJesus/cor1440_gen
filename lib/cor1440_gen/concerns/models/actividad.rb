@@ -174,6 +174,24 @@ module Cor1440Gen
             resultadopf.numero + nombrecorto + " " + titulo
           end
 
+          def poblacion_cor1440_gen
+            # En cuenta de poblacion no tiene en cuenta locales,
+            # para coincidir con tipo de indicador que cuenta
+            # usando tabla de población
+            actividad_rangoedadac.inject(0) { |memo, r| 
+              #memo += r.ml ? r.ml : 0
+              memo += r.mr ? r.mr : 0
+              #memo += r.fl ? r.fl : 0
+              memo += r.fr ? r.fr : 0
+              memo += r.s ? r.s : 0
+              memo
+            }
+          end
+
+          def poblacion
+            poblacion_cor1440_gen
+          end
+
           def presenta_actividad(atr)
             case atr.to_s
             when /anexo_[0-9]_desc/
@@ -236,19 +254,6 @@ module Cor1440Gen
                 else
                   memo
                 end
-              }
-
-            when 'poblacion'
-              # En cuenta de poblacion no tiene en cuenta locales,
-              # para coincidir con tipo de indicador que cuenta
-              # usando tabla de población
-              actividad_rangoedadac.inject(0) { |memo, r| 
-                #memo += r.ml ? r.ml : 0
-                memo += r.mr ? r.mr : 0
-                #memo += r.fl ? r.fl : 0
-                memo += r.fr ? r.fr : 0
-                memo += r.s ? r.s : 0
-                memo
               }
 
             when 'poblacion_hombres_l'
