@@ -31,7 +31,9 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::ActividadpfMindicadorpf',
             foreign_key: 'actividadpf_id'
 
-          validates :nombrecorto, presence: true, length: {maximum: 15}
+          validates :nombrecorto, presence: true, length: {maximum: 15},
+            format: { with: /\A[_. 0-9a-zA-Z]+\z/, 
+                      message: "Solo digitos, letras, punto y raya al piso" }
           validates :titulo, length: {maximum: 255}
           validates :descripcion, length: {maximum: 5000}
 
@@ -43,7 +45,7 @@ module Cor1440Gen
               end
               r += resultadopf.numero
             end
-            r += nombrecorto + ' ' + titulo
+            r += nombrecorto + ': ' + titulo
             return r
           end
 

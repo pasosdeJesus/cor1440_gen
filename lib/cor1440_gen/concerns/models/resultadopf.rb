@@ -21,7 +21,9 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Indicadorpf', foreign_key: 'resultadopf_id'
 
 
-          validates :numero, presence: true, length: {maximum: 15}
+          validates :numero, presence: true, length: {maximum: 15},
+            format: { with: /\A[_. 0-9a-zA-Z]+\z/, 
+                      message: "Solo digitos, letras, punto y raya al piso" }
           validates :resultado, presence:true, length: {maximum: 5000}
 
           def presenta_nombre
