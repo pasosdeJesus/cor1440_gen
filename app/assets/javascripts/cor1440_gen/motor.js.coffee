@@ -18,6 +18,13 @@
  
 @DEP_INDICADORPF = []
 
+
+# ACTIVIDAD
+# TABLA DE RANGOS DE EDAD
+
+# En tabla de rangos de edad cálcula total de una columna
+# excluyendo eliminados
+# Identifica la columna por el prefijo común ini y el posfijo común col
 cor1440_gen_rangoedadac_uno = (ini, col) ->
   sumc = 0
   $('[id^='+ini+'][id$='+col+']').each( (o) ->
@@ -30,6 +37,8 @@ cor1440_gen_rangoedadac_uno = (ini, col) ->
   $("#tactividad" + col).text(sumc)
   return
 
+
+# Calcula población total sumando totales parciales por sexo y local/externo
 cor1440_gen_rangoedadac_tot = () ->
   fl = parseInt($("#tactividadfl").text())
   fr = parseInt($("#tactividadfr").text())
@@ -39,6 +48,8 @@ cor1440_gen_rangoedadac_tot = () ->
   $("#tactividadtot").text(fl + fr + ml + mr + sr)
   return
 
+
+# Calcula subtotal para una columna y después gran total
 @cor1440_gen_rangoedadac = ($this) ->
   cid = $this.attr('id')
   n = cid.lastIndexOf('_')
@@ -48,6 +59,8 @@ cor1440_gen_rangoedadac_tot = () ->
   cor1440_gen_rangoedadac_tot()
   return
 
+
+# Calcula totales para todas las columnas
 cor1440_gen_rangoedadc_todos = () ->
   ini = 'actividad_actividad_rangoedadac_attributes'
   cor1440_gen_rangoedadac_uno(ini, 'fl')
@@ -56,6 +69,177 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_rangoedadac_uno(ini, 'mr')
   cor1440_gen_rangoedadac_uno(ini, 's')
   cor1440_gen_rangoedadac_tot()
+
+
+# Llena idrf relacionando rangos de edad de base de datos con 
+# Filas de la tabla de rangos de edad
+#
+# resp Objeto JSON con rangosedadac, respuesta de llamada AJAX
+# rangos Por llenar con rangos de edad
+# idrf Por llenar con datos de tabla población (y reordenar tabla si se requiere)
+@cor1440_gen_identifica_ids_rangoedad = (resp, rangos, idrf) ->
+  # idrf[i] será id que rails le asignó al generar HTML a la fila
+  # del rango de edad con id i en la tabla cor1440_gen_rangoedadac
+  for i, r of resp
+    rangos[r.id] = [r.limiteinferior, r.limitesuperior]
+    idrf[r.id] = -1
+
+  # Llena id de elemento en formulario en idrf y borra redundantes
+  # de la tabla de población.
+  $('select[id^=actividad_actividad_rangoedadac_attributes_][id$=_rangoedadac_id]').each((i, v) ->
+    nr = +$(this).val()
+    if idrf[nr] != -1 # Repetido, unir con el inicial
+      fl2 = $(this).parent().parent().find('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_fl]').val()
+      ml2 = $(this).parent().parent().find('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_ml]').val()
+      sl2 = $(this).parent().parent().find('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_sl]').val()
+      $(this).parent().parent().find('a.remove_fields').click()
+      prl = '#actividad_actividad_rangoedadac_attributes_' + idrf[nr] 
+      fl1 = $(prl + '_fl').val()
+      ml1 = $(prl + '_ml').val()
+      sl1 = $(prl + '_sl').val()
+      $(prl + '_fl').val(fl1 + fl2)
+      $(prl + '_ml').val(ml1 + ml2)
+      $(prl + '_sl').val(sl1 + sl2)
+    else
+      idrf[nr] = /actividad_actividad_rangoedadac_attributes_(.*)_rangoedadac_id/.exec($(this).attr('id'))[1]
+  )
+
+
+# Llamada asincronamente después de cor1440_gen_recalcula_poblacion
+# con resultado de respuesta AJAX resp con rangos de edad
+@cor1440_gen_recalcula_poblacion2 = (root, resp, fsig) ->
+  # Identifica rangos de edad en base y en tabla resumiendo tabla si hace falta
+  rangos = {}
+  idrf = {}
+  cor1440_gen_identifica_ids_rangoedad(resp, rangos, idrf)
+
+  # Fecha de la actividad
+  fap = $('#actividad_fecha_localizada').val().split('-')
+  anioref  = +fap[0]
+  mesref  = +fap[1]
+  diaref  = +fap[2]
+
+  # Recorre listado de personas 
+  $('[id^=actividad_asistencia_attributes][id$=_persona_attributes_anionac]').each((i, v) ->
+    # excluye eliminadas
+    if $(this).parent().parent().parent().css('display') != 'none'
+      ida = /actividad_asistencia_attributes_(.*)_persona_attributes_anionac/.exec($(this).attr('id'))[1]
+      anionac = $(this).val()
+      mesnac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_mesnac]').val()
+      dianac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_dianac]').val()
+  
+      e = +sivel2_gen_edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
+      idran = -1  # id del rango en el que está e
+      ransin = -1 # id del rango SIN INFORMACION
+      #debugger
+      for i, r of rangos
+        if (r[0] <= e || r[0] == '' || r[0]  == null) && (e <= r[1] || r[1] == '' || r[1] == null)
+          idran = i
+  #          if idrf[i] == -1
+  #            cor1440_gen_aumenta_fila_poblacion(idrf, i)
+        else if r[0] == -1
+          ransin = i
+      if idran == -1
+        idran = ransin
+      sexo = $(this).parent().parent().parent().find('[id^=actividad_asistencia_attributes][id$=_persona_attributes_sexo]:visible').val()
+      if idran < 0
+        alert('No pudo ponerse en un rango de edad')
+      else
+        cor1440_gen_aumenta_poblacion(idrf, sexo, idran, 1)
+  )
+
+  if fsig != null
+    fsig(rangos, idrf)
+
+
+# Hace petición AJAX para recalcular tabla poblacion en actividad 
+# a partir de listado de personas beneficiarias  y de casos 
+# beneficiarios
+# fsig es función que llamará después de completar con registro con
+#   datos que ha calculado como rangos e idrf
+@cor1440_gen_recalcula_poblacion = (fsig = null) ->
+  if $('[id^=actividad_asistencia_attributes]:visible').length > 0  || $('#actividad_casosjr').find('tr:visible').length > 0  
+    # No permitiria añadir manualmente a población 
+    # $('a[data-association-insertion-node$=actividad_rangoedadac]').hide()
+    # Pone en blanco las cantidades y deshabilita edición
+    $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_fr]').each((i, v) ->
+      $(this).val(0)
+      $(this).prop('readonly', true);
+     )
+    $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_mr]').each((i, v) ->
+      $(this).val(0)
+      $(this).prop('readonly', true);
+    ) 
+    $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_s]').each((i, v) ->
+      $(this).val(0)
+      $(this).prop('readonly', true);
+    ) 
+  else
+    $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_fr]').each((i, v) ->
+      $(this).val(0)
+      $(this).prop('readonly', false);
+    )
+    $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_mr]').each((i, v) ->
+      $(this).val(0)
+      $(this).prop('readonly', false);
+    ) 
+    $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_s]').each((i, v) ->
+      $(this).val(0)
+      $(this).prop('readonly', false);
+    ) 
+
+  sip_funcion_1p_tras_AJAX('admin/rangosedadac.json?filtro[bushabilitado]=Si&filtrar=Filtrar', {}, cor1440_gen_recalcula_poblacion2, fsig, 'solicitando rangos de edad a servidor')
+
+
+
+# Recalcula tabla poblacion en actividad a partir de listado de 
+# asistencia (método 2 con
+# llamada AJAX para recuperar información de rangos de edad)
+@cor1440_gen_super_recalcula_poblacion = () ->
+  cor1440_gen_recalcula_poblacion(null)
+
+# Aumenta una fila a tabla de población y completa idrf
+# Será fila que tendrá rango con id idrango
+# @param idrf relaciona identificaciones en base con identificaciones
+#   en página HTML
+@cor1440_gen_aumenta_fila_poblacion = (idrf, idrango) ->
+  # Agregar rango y actualizar idrf
+  $('a[data-association-insertion-node$=actividad_rangoedadac]').click()
+  uf = $('#actividad_rangoedadac').children().last()
+  e = uf.find('[id^=actividad_actividad_rangoedadac_attributes][id$=_rangoedadac_id]')
+  idrf[idrango] = /actividad_actividad_rangoedadac_attributes_(.*)_rangoedadac_id/.exec(e.attr('id'))[1]
+  $('select[id^=actividad_actividad_rangoedadac_attributes_' + idrf[idrango] + '_rangoedadac_id]').val(idrango)
+
+
+
+# Aumenta valor en tabla población para el sexo y rango de edad 
+# dado en la cantidad dada
+@cor1440_gen_aumenta_poblacion = (idrf, sexo, idran, cantidad) ->
+  if +cantidad == 0 
+    return
+  if idrf[idran] == -1 
+    cor1440_gen_aumenta_fila_poblacion(idrf, idran)
+
+  pref = '#actividad_actividad_rangoedadac_attributes_' + idrf[idran]
+  if sexo == 'F'
+    fr = +$(pref + '_fr').val()
+    $(pref + '_fr').val(fr + (+cantidad))
+    cor1440_gen_rangoedadac($(pref + '_fr'))
+  else if sexo == 'M'    
+    mr = +$(pref + '_mr').val()
+    $(pref + '_mr').val(mr + (+cantidad))
+    cor1440_gen_rangoedadac($(pref + '_mr'))
+  else    
+    sr = +$(pref + '_s').val()
+    $(pref + '_s').val(sr + (+cantidad))
+    cor1440_gen_rangoedadac($(pref + '_s'))
+  $('#actividad_rangoedadac').find('input[id^=actividad_actividad_rangoedadac_attributes]').each () ->
+    if +$(this).val() == 0
+      cor1440_gen_rangoedadac($(this))
+
+
+
+
 
 @cor1440_gen_fun_etiqueta_resultadopf = (jv) ->
    et = jv.find('select[id$=_objetivopf_id] option[selected]').text() + 
@@ -106,6 +290,7 @@ cor1440_gen_rangoedadc_todos = () ->
       $(this).find('select[id$=actividadpf_ids]').val(ac_relacionadas)
       $(this).find('select[id$=actividadpf_ids]').trigger('chosen:updated')
     )
+
 @cor1440_gen_actividad_actualiza_mismotipo = (root, res) ->
   if res.selected?
     acids = ['']
