@@ -192,6 +192,82 @@ module Cor1440Gen
             poblacion_cor1440_gen
           end
 
+
+          def poblacion_hombres_l_solore
+            actividad_rangoedadac.inject(0) { |memo, r| 
+              memo += r.ml ? r.ml : 0
+              memo
+            }
+          end
+
+          def poblacion_hombres_r_solore
+            actividad_rangoedadac.inject(0) { |memo, r| 
+              memo += r.mr ? r.mr : 0
+              memo
+            }
+          end
+
+          def poblacion_mujeres_l_solore
+            actividad_rangoedadac.inject(0) { |memo, r| 
+              memo += r.fl ? r.fl : 0
+              memo
+            }
+          end
+
+          def poblacion_mujeres_r_solore
+            actividad_rangoedadac.inject(0) { |memo, r| 
+              memo += r.fr ? r.fr : 0
+              memo
+            }
+          end
+
+          def poblacion_sinsexo_solore
+            actividad_rangoedadac.inject(0) { |memo, r| 
+              memo += r.s ? r.s : 0
+              memo
+            }
+          end
+
+          def poblacion_hombres_l_g_solore(num)
+            actividad_rangoedadac.where(rangoedadac_id: num).
+              inject(0) { |memo, r| 
+              memo += r.ml ? r.ml : 0
+              memo
+            }
+          end
+
+          def poblacion_hombres_r_g_solore(num)
+            actividad_rangoedadac.where(rangoedadac_id: num).
+              inject(0) { |memo, r| 
+              memo += r.mr ? r.mr : 0
+              memo
+            }
+          end
+
+          def poblacion_mujeres_l_g_solore(num)
+            actividad_rangoedadac.where(rangoedadac_id: num).
+              inject(0) { |memo, r| 
+              memo += r.fl ? r.fl : 0
+              memo
+            }
+          end
+
+          def poblacion_mujeres_r_g_solore(num)
+            actividad_rangoedadac.where(rangoedadac_id: num).
+              inject(0) { |memo, r| 
+              memo += r.fr ? r.fr : 0
+              memo
+            }
+          end
+
+          def poblacion_sinsexo_g_solore(num)
+            actividad_rangoedadac.where(rangoedadac_id: num).
+              inject(0) { |memo, r| 
+              memo += r.s ? r.s : 0
+              memo
+            }
+          end
+
           def presenta_actividad(atr)
             case atr.to_s
             when /anexo_[0-9]_desc/
@@ -219,7 +295,7 @@ module Cor1440Gen
 
             when 'actualizacion'
               updated_at
-              
+
             when 'campos_dinamicos'
               if !respuestafor || respuestafor.count == 0
                 ""
@@ -257,75 +333,39 @@ module Cor1440Gen
               }
 
             when 'poblacion_hombres_l'
-              actividad_rangoedadac.inject(0) { |memo, r| 
-                memo += r.ml ? r.ml : 0
-                memo
-              }
- 
-           
+              poblacion_hombres_l_solore
+
             when 'poblacion_hombres_r'
-              actividad_rangoedadac.inject(0) { |memo, r| 
-                memo += r.mr ? r.mr : 0
-                memo
-              }
+              poblacion_hombres_r_solore
 
             when 'poblacion_mujeres_l'
-              actividad_rangoedadac.inject(0) { |memo, r| 
-                memo += r.fl ? r.fl : 0
-                memo
-              }
+              poblacion_mujeres_l_solore
 
             when 'poblacion_mujeres_r'
-              actividad_rangoedadac.inject(0) { |memo, r| 
-                memo += r.fr ? r.fr : 0
-                memo
-              }
-            
+              poblacion_mujeres_r_solore
+
             when 'poblacion_sinsexo'
-              actividad_rangoedadac.inject(0) { |memo, r| 
-                memo += r.s ? r.s : 0
-                memo
-              }
+              poblacion_sinsexo_solore
 
             when /poblacion_hombres_l_g[0-9]*/
               g = atr[21..-1].to_i
-              actividad_rangoedadac.where(rangoedadac_id: g).
-                  inject(0) { |memo, r| 
-                memo += r.ml ? r.ml : 0
-                memo
-              }
-           
+              poblacion_hombres_l_g_solore(g)
+
             when /poblacion_hombres_r_g[0-9]*/
               g = atr[21..-1].to_i
-              actividad_rangoedadac.where(rangoedadac_id: g).
-                inject(0) { |memo, r| 
-                memo += r.mr ? r.mr : 0
-                memo
-              }
+              poblacion_hombres_r_g_solore(g)
 
             when /poblacion_mujeres_l_g[0-9]*/
               g = atr[21..-1].to_i
-              actividad_rangoedadac.where(rangoedadac_id: g).
-                inject(0) { |memo, r| 
-                memo += r.fl ? r.fl : 0
-                memo
-              }
+              poblacion_mujeres_l_g_solore(g)
 
             when /poblacion_mujeres_r_g[0-9]*/
               g = atr[21..-1].to_i
-              actividad_rangoedadac.where(rangoedadac_id: g).
-                inject(0) { |memo, r| 
-                memo += r.fr ? r.fr : 0
-                memo
-              }
+              poblacion_mujeres_r_g_solore(g)
 
             when /poblacion_sinsexo_g[0-9]*/
               g = atr[21..-1].to_i
-              actividad_rangoedadac.where(rangoedadac_id: g).
-                inject(0) { |memo, r| 
-                memo += r.s ? r.s : 0
-                memo
-              }
+              poblacion_sinsexo_g_solore(g)
 
             when Cor1440Gen::Actividad.human_attribute_name(
               :proyectos).downcase.gsub(' ', '_')
