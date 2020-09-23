@@ -5,9 +5,10 @@ module Cor1440Gen
     module Models
       module Informe
         extend ActiveSupport::Concern
-        include Sip::Localizacion
 
         included do
+          include Sip::Localizacion
+
           belongs_to :proyecto, class_name: 'Cor1440Gen::Proyecto',
             foreign_key: 'filtroproyecto', validate: true, optional: true
           belongs_to :actividadarea, 
@@ -32,6 +33,10 @@ module Cor1440Gen
 
           campofecha_localizado :filtrofechaini
           campofecha_localizado :filtrofechafin
+
+          scope :filtro_nombre, lambda { |n|
+            where("unaccent(#{table_name}.nombre) ILIKE '%' || unaccent(?) || '%'", n)
+          }
 
           def new(*args, &block)
             super(*args, block)
@@ -69,7 +74,7 @@ module Cor1440Gen
             if (actividadarea)
               descfiltro += "De la #{Cor1440Gen::Actividad.human_attribute_name(:actividadarea)} #{actividadarea.nombre}.  "
             end
-            
+
             return gen_descfiltro_post(descfiltro)
           end
         end
