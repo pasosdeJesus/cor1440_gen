@@ -15,11 +15,11 @@
       selected: f.object.rangoedadac_id
     %>
   </td>
-  <td><%= f.number_field :fl, size: "2" %></td>
-  <td><%= f.number_field :fr, size: "2" %></td>
-  <td><%= f.number_field :ml, size: "2" %></td>
-  <td><%= f.number_field :mr, size: "2" %></td>
-  <td><%= f.number_field :s, size: "2" %></td>
+  <td><%= f.number_field :fl, style: "width: 4em" %></td>
+  <td><%= f.number_field :fr, style: "width: 4em" %></td>
+  <td><%= f.number_field :ml, style: "width: 4em" %></td>
+  <td><%= f.number_field :mr, style: "width: 4em" %></td>
+  <td><%= f.number_field :s, style: "width: 4em" %></td>
   <td>
     <%= 
       f.input :id, as: :hidden %><%= link_to_remove_association "Eliminar", f, 

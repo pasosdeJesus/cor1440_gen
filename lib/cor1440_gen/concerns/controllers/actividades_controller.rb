@@ -67,64 +67,65 @@ module Cor1440Gen
             return c
           end
 
-          def fila_comun(actividad)
-           pob = actividad.actividad_rangoedadac.map { |i| 
-              (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
-              (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0) +
-              (i.s ? i.s : 0)
-                
-            } 
-            return [actividad.id,
-                    actividad.fecha , 
-                    actividad.oficina ? actividad.oficina.nombre : "",
-                    actividad.responsable ? actividad.responsable.nusuario : "",
-                    actividad.nombre ? actividad.nombre : "",
-                    actividad.actividadpf.inject("") { |memo, i| 
-                      (memo == "" ? "" : memo + "; ") + i.titulo },
-                    actividad.proyecto.inject("") { |memo, i| 
-                        (memo == "" ? "" : memo + "; ") + i.nombre },
-                    actividad.actividadareas.inject("") { |memo, i| 
-                          (memo == "" ? "" : memo + "; ") + i.nombre },
-                    actividad.proyectofinanciero.inject("") { |memo, i| 
-                            (memo == "" ? "" : memo + "; ") + i.nombre },
-                    actividad.objetivo, 
-                    pob.reduce(:+)
-            ]
-          end
 
-          # transforma un vector devuelto por fila_comun en registro y
-          # lo amplia para devolver todo campo consultable de un actividad
-          def vector_a_registro(a, ac)
-            {
-              id: a[0],
-              fecha: a[1],
-              oficina: a[2],
-              responsable: a[3],
-              nombre: a[4],
-              tipos_de_actividad: a[5],
-              areas: a[6],
-              subareas: a[7],
-              convenios_financieros: a[8],
-              objetivo: a[9],
-              poblacion: a[10],
-              observaciones: ac.observaciones,
-              resultado: ac.resultado,
-              creacion: ac.created_at,
-              actualizacion: ac.updated_at,
-              lugar: ac.lugar,
-              corresponsables: ac.usuario.inject("") { |memo, i| 
-                (memo == "" ? "" : memo + "; ") + i.nusuario },
-            }
-          end
-
-          # Cuerpo de tabla comun para HTML y PDF
-          def cuerpo_comun
-            cuerpo = []
-            @actividades.try(:each) do |actividad|
-              cuerpo += [fila_comun(actividad)]
-            end
-            return cuerpo
-          end
+#          def fila_comun(actividad)
+#           pob = actividad.actividad_rangoedadac.map { |i| 
+#              (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
+#              (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0) +
+#              (i.s ? i.s : 0)
+#                
+#            } 
+#            return [actividad.id,
+#                    actividad.fecha , 
+#                    actividad.oficina ? actividad.oficina.nombre : "",
+#                    actividad.responsable ? actividad.responsable.nusuario : "",
+#                    actividad.nombre ? actividad.nombre : "",
+#                    actividad.actividadpf.inject("") { |memo, i| 
+#                      (memo == "" ? "" : memo + "; ") + i.titulo },
+#                    actividad.proyecto.inject("") { |memo, i| 
+#                        (memo == "" ? "" : memo + "; ") + i.nombre },
+#                    actividad.actividadareas.inject("") { |memo, i| 
+#                          (memo == "" ? "" : memo + "; ") + i.nombre },
+#                    actividad.proyectofinanciero.inject("") { |memo, i| 
+#                            (memo == "" ? "" : memo + "; ") + i.nombre },
+#                    actividad.objetivo, 
+#                    pob.reduce(:+)
+#            ]
+#          end
+#
+#          # transforma un vector devuelto por fila_comun en registro y
+#          # lo amplia para devolver todo campo consultable de un actividad
+#          def vector_a_registro(a, ac)
+#            {
+#              id: a[0],
+#              fecha: a[1],
+#              oficina: a[2],
+#              responsable: a[3],
+#              nombre: a[4],
+#              tipos_de_actividad: a[5],
+#              areas: a[6],
+#              subareas: a[7],
+#              convenios_financieros: a[8],
+#              objetivo: a[9],
+#              poblacion: a[10],
+#              observaciones: ac.observaciones,
+#              resultado: ac.resultado,
+#              creacion: ac.created_at,
+#              actualizacion: ac.updated_at,
+#              lugar: ac.lugar,
+#              corresponsables: ac.usuario.inject("") { |memo, i| 
+#                (memo == "" ? "" : memo + "; ") + i.nusuario },
+#            }
+#          end
+#
+#          # Cuerpo de tabla comun para HTML y PDF
+#          def cuerpo_comun
+#            cuerpo = []
+#            @actividades.try(:each) do |actividad|
+#              cuerpo += [fila_comun(actividad)]
+#            end
+#            return cuerpo
+#          end
 
           # GET /actividades/new
           def new_cor1440_gen
