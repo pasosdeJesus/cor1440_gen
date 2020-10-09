@@ -1,5 +1,4 @@
 <tr class='nested-fields'>
-  
   <% if f.object.persona.nil? %>
     <% f.object.persona = Sip::Persona.new %>
   <% end %>
@@ -19,7 +18,7 @@
         :input_html => ac %>
     </td>
     <td>
-      <%= p.input :apellidos, label: false
+      <%= p.input :apellidos, label: false,
       input_html: { style: 'width: 8em' } %>
     </td>
     <td>
@@ -65,8 +64,7 @@
       label_method: :presenta_nombre,
       value_method: :id,
       label: false,
-      input_html: { style: 'width: 6em' },
-    %>
+      input_html: { style: 'width: 6em' } %>
   </td>
   <td>
     <%= f.association :perfilactorsocial,
