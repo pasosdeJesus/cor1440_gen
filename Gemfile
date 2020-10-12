@@ -103,7 +103,7 @@ group :test do
 
   gem 'rails-controller-testing'
 
-  gem 'simplecov' # Envia resultados de pruebas desde travis a codeclimate
+  gem 'simplecov', '<0.18' # Devido a https://github.com/codeclimate/test-reporter/issues/418
 
   gem 'spring' # Acelera desarrollo ejecutando en fondo
 
