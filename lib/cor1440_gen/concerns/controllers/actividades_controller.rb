@@ -138,7 +138,7 @@ module Cor1440Gen
             @registro.save!(validate: false)
             return @registro
           end
-          
+
           def destroy
             pf_act = Cor1440Gen::ActividadProyectofinanciero.
               where(actividad_id: @registro.id)
