@@ -1,7 +1,7 @@
 language: ruby
 
 rvm:
-        - 2.6.1
+        - 2.7.1
 
 addon:
         postgresql: '10'
