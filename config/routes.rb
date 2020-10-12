@@ -19,8 +19,8 @@ Cor1440Gen::Engine.routes.draw do
 
   get "/actividadespf/" => "proyectosfinancieros#actividadespf", 
     as: :actividadespf
-  resources :actividadespf, only: [:new, :destroy]
 
+  resources :actividadespf, only: [:new, :destroy], path_names: {new: 'nueva'}
 
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 
