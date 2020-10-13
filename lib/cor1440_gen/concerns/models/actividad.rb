@@ -171,7 +171,7 @@ module Cor1440Gen
           end
 
           def presenta_nombre
-            resultadopf.numero + nombrecorto + " " + titulo
+            nombre
           end
 
           def poblacion_cor1440_gen
