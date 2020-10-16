@@ -17,24 +17,8 @@ module Cor1440Gen
           end
 
           def atributos_show
-            [ :id, 
-              :nombres,
-              :apellidos,
-              :anionac,
-              :mesnac,
-              :dianac,
-              :sexo,
-              :pais,
-              :departamento,
-              :municipio,
-              :clase,
-              :nacionalde,
-              :tdocumento,
-              :numerodocumento,
-              :proyectofinanciero_ids,
-              :actividad_ids
-            ]
-          end  
+            self.class.atributos_show_cor1440_gen
+          end
 
           def atributos_form
             a = atributos_show - [:id, :actividad_ids] + [:caracterizaciones]
@@ -214,6 +198,16 @@ module Cor1440Gen
 
 
         end  # included
+
+        class_methods do
+
+          def atributos_show_cor1440_gen
+            Sip::PersonasController.atributos_show_sip +
+              [ :proyectofinanciero_ids, :actividad_ids ]
+          end
+
+        end
+
 
       end
     end
