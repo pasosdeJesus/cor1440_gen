@@ -1,0 +1,20 @@
+<table class='table table-striped'>
+  <thead class='thead-light'>
+    <tr><th>Id Actividad</th><th>Fecha</th><th>Nombre</th></tr>
+  </thead>
+  <tbody>
+    <% @registro.actividad.order(:fecha).each do |a| %>
+      <tr>
+        <td>
+          <%= link_to a.id, cor1440_gen.actividad_path(a), target: '_blank' %>
+        </td>
+        <td>
+          <%= a.fecha %>
+        </td>
+        <td>
+          <%= a.nombre %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

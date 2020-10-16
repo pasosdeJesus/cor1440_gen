@@ -11,6 +11,14 @@ module Cor1440Gen
         included do
           include Sip::Concerns::Models::Persona
 
+
+          has_many :asistencia, dependent: :delete_all,
+            class_name: 'Cor1440Gen::Asistencia',
+            foreign_key: 'persona_id'
+
+          has_many :actividad, through: :asistencia, 
+            class_name: 'Cor1440Gen::Actividad'
+
           has_and_belongs_to_many :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero', 
             foreign_key: 'persona_id',

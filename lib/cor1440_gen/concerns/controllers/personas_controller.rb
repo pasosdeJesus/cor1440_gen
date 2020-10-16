@@ -32,6 +32,7 @@ module Cor1440Gen
               :tdocumento,
               :numerodocumento,
               :proyectofinanciero_ids,
+              :actividad_ids
             ]
           end  
 
