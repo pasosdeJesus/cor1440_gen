@@ -1,6 +1,11 @@
 <table class='table table-striped'>
   <thead class='thead-light'>
-    <tr><th>Id Actividad</th><th>Fecha</th><th>Nombre</th></tr>
+    <tr>
+      <th>Id Actividad</th><th>Fecha</th><th>Nombre</th>
+      <th>
+        <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>
+      </th>
+    </tr>
   </thead>
   <tbody>
     <% @registro.actividad.order(:fecha).each do |a| %>
@@ -13,6 +18,9 @@
         </td>
         <td>
           <%= a.nombre %>
+        </td>
+        <td>
+          <%= a.proyectofinanciero.map(&:nombre).join("; ") %>
         </td>
       </tr>
     <% end %>

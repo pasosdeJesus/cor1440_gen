@@ -169,6 +169,5 @@ es:
         caracterizacion: Caracterizacion de beneficiarios en proyectos
       "sip/persona":
         actividad_ids: Actividades en las que está en listado de asistencia
-        proyectofinanciero_ids: Proyectos de los que es beneficiario(a)
-        proyectofinanciero: Proyectos de los que es beneficiario(a)
-
+        proyectofinanciero_ids: Proyectos que le caracterizan
+        proyectofinanciero: Proyectos que le caracterizan

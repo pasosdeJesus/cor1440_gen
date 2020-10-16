@@ -37,7 +37,7 @@ module Cor1440Gen
           end  
 
           def atributos_form
-            a = atributos_show - [:id] + [:caracterizaciones]
+            a = atributos_show - [:id, :actividad_ids] + [:caracterizaciones]
             a[a.index(:clase)] = :id_clase
             a[a.index(:departamento)] = :id_departamento
             a[a.index(:municipio)] = :id_municipio
