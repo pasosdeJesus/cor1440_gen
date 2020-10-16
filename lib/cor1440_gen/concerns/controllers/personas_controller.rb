@@ -12,12 +12,19 @@ module Cor1440Gen
         included do
           include Sip::Concerns::Controllers::PersonasController
 
-          def atributos_index
-            atributos_show
+          def atributos_show_cor1440_gen
+            atributos_show_sip + [
+              :proyectofinanciero_ids,
+              :actividad_ids
+            ]
           end
 
           def atributos_show
-            self.class.atributos_show_cor1440_gen
+            atributos_show_cor1440_gen
+          end
+
+          def atributos_index
+            atributos_show
           end
 
           def atributos_form
@@ -200,11 +207,6 @@ module Cor1440Gen
         end  # included
 
         class_methods do
-
-          def atributos_show_cor1440_gen
-            Sip::PersonasController.atributos_show_sip +
-              [ :proyectofinanciero_ids, :actividad_ids ]
-          end
 
         end
 
