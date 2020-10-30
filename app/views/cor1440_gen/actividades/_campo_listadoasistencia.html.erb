@@ -1,47 +1,49 @@
-
-<div class="panel-group" id="acordeonla">
-  <div class="panel panel-default" id="panella">
-    <div class="panel-heading">
-      <div class="panel-title">
-        <a data-toggle="collapse" data-target="#colapsala" href="#colapsala">
-          Listado de asistencia
-        </a>
-      </div> <!-- panel-title -->
-    </div> <!-- panel-heading -->
-
-    <div id="colapsala" class="panel-collapse collapse">
-      <div class="panel-body table-responsive" style="overflow-x:scroll;">
-        <table class="tablalistadoasistencia table  table-bordered table-sm ">
-          <thead class="thead-light">
-            <tr>
-              <th>Nombres</th>
-              <th>Apellidos</th>
-              <th colspan="2">Identificación</th>
-              <th>Sexo</th>
-              <th>Año nac.</th>
-              <th>Mes</th>
-              <th>Dia</th>
-              <th>Actor social</th>
-              <th>Perfil</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="asistencia">
-            <%= f.simple_fields_for :asistencia do |a| %>
-              <%= render 'asistencia_campos', f: a %>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="links">
-          <%= link_to_add_association 'Añadir Asistente', f, 
-            :asistencia,
-            :"data-association-insertion-node" => "tbody#asistencia", 
-            :"data-association-insertion-method" => "append", 
-            partial: 'asistencia_campos',
-            :class => 'btn-primary'
-          %>
-        </div>
-      </div> <!-- panel-body -->
-    </div> <!-- colapsala -->
-  </div> <!-- panella -->
-</div> <!-- acordeonla -->
+<div class="panel panel-default">
+  <div id="acordeon_listadoasistencia">
+    <div class="card">
+      <div class="card-header" id="listadoasistencia">
+        <h6 class="mb-0" style='text-align: center'>
+          <a class="collapsed" data-toggle="collapse" data-target="#colapsa_listadoasistencia" aria-expanded= "false" aria-controls="colapsa_listadoasistencia">
+            Listado de asistencia
+          </a>
+        </h6>
+      </div>
+      <div id="colapsa_listadoasistencia" class="collapse" aria-labelledby="encabezado_listadoasistencia" data-parent="#acordeon_listadoasistencia">
+        <div class="card-body">
+          <div class="panel-body table-responsive" style="overflow-x:scroll;">
+            <table class="tablalistadoasistencia table  table-bordered table-sm ">
+              <thead class="thead-light">
+                <tr>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th colspan="2">Identificación</th>
+                  <th>Sexo</th>
+                  <th>Año nac.</th>
+                  <th>Mes</th>
+                  <th>Dia</th>
+                  <th>Actor social</th>
+                  <th>Perfil</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="asistencia">
+                <%= f.simple_fields_for :asistencia do |a| %>
+                  <%= render 'asistencia_campos', f: a %>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="links">
+              <%= link_to_add_association 'Añadir Asistente', f, 
+                :asistencia,
+                :"data-association-insertion-node" => "tbody#asistencia", 
+                :"data-association-insertion-method" => "append", 
+                partial: 'asistencia_campos',
+                :class => 'btn-primary'
+              %>
+            </div>
+          </div> <!-- panel-body -->
+        </div> <!-- card-body-->
+      </div> <!-- colapsa-listadoasistencia-->
+    </div> <!-- card -->
+  </div> <!-- acordeon_listadoasistencia -->
+</div> <!-- panel -->
