@@ -270,7 +270,8 @@ module Cor1440Gen
               render inline: 'No pudo salvar copia con campos'
               return
             end
-            redirect_to cor1440_gen.proyectofinanciero_path(@registro)
+            @registro_orig_id=p.id
+            render :copia, layout: 'application'
           end
 
           def new
