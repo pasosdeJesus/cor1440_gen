@@ -43,6 +43,10 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :pmsindicadorpf, only: [:new, :destroy]
 
+  get '/proyectofinanciero/copia/:proyectofinanciero_id' =>
+    'proyectosfinancieros#copia',
+    as: :copia_proyectofinanciero
+
   get "/proyectosfinancieros/validar" => "proyectosfinancieros#validar", 
     as: :validar_proyectosfinancieros
   resources :proyectosfinancieros, path_names: { new: 'nuevo', edit: 'edita' }
