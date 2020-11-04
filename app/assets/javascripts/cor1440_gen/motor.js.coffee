@@ -479,6 +479,8 @@ cor1440_gen_rangoedadc_todos = () ->
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_nombres]').val(e.nombres)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_apellidos]').val(e.apellidos)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_sexo]').val(e.sexo)
+    tdocid = divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_tdocumento_id] option:contains(' + e.tdocumento + ')').val()
+    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_tdocumento_id]').val(tdocid)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_tdocumento]').val(e.tdocumento)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_numerodocumento]').val(e.numerodocumento)
     divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_anionac]').val(e.anionac)
