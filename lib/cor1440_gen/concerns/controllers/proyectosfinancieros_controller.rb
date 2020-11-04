@@ -35,6 +35,12 @@ module Cor1440Gen
           # exije eliminar primero registros en tablas union
           def destroy
             authorize! :destroy, @registro
+            pmindicadorespf = Cor1440Gen::Pmindicadorpf.where(
+              mindicadorpf_id: @registro.mindicadorpf.ids).ids
+            pmindicadorespf.each do |idpm|
+              Cor1440Gen::DatointermediotiPmindicadorpf.where(
+                pmindicadorpf_id: idpm).destroy_all
+            end
             super("", false)
           end
 
