@@ -4,18 +4,16 @@ module Cor1440Gen
   class Ability < Sip::Ability
 
     ROLADMIN  = 1
-    ROLINV    = 2
     ROLDIR    = 3
-    ROLCOOR   = 4
     #ROLANALI  = 5
     #ROLSIST
     ROLSISTACT   = 7
 
     ROLES = [
       ["Administrador", ROLADMIN], 
-      ["Invitado", ROLINV], 
+      ["", 0], 
       ["Directivo", ROLDIR], 
-      ["Coordinador Proyecto", ROLCOOR], 
+      ["", 0], 
       ["", 0 ],
       ["", 0],
       ["Sistematizador de Actividades", ROLSISTACT]
@@ -157,7 +155,8 @@ module Cor1440Gen
       if !usuario || usuario.fechadeshabilitacion
         return
       end
-      can :nuevo, Cor1440Gen::Actividad
+
+      can [:nuevo, :new], Cor1440Gen::Actividad
   
       can :read, Heb412Gen::Doc
       can :read, Heb412Gen::Plantilladoc
@@ -169,40 +168,43 @@ module Cor1440Gen
       can :buscar, Sip::Ubicacion
       can :lista, Sip::Ubicacion
       can :nuevo, Sip::Ubicacion
-  
+
       if !usuario.nil? && !usuario.rol.nil? then
         case usuario.rol 
         when Ability::ROLSISTACT
-  
-          can :read, Cor1440Gen::Actividad
-          can :new, Cor1440Gen::Actividad
-          can [:update, :create, :edit, :destroy], Cor1440Gen::Actividad, 
-            oficina: { id: usuario.oficina_id}
+
+          can :manage, Cor1440Gen::Proyectofinanciero,
+            responsable: { id: usuario.id}
+
+          # Convención: Los proyectos sin usuarios se suponen como 
+          # institucionales o para todos los usuarios
+          psinusuario = Cor1440Gen::Proyectofinanciero.all.map(&:id) -
+            Cor1440Gen::ProyectofinancieroUsuario.all.map(
+              &:proyectofinanciero_id).uniq
+          can :read, Cor1440Gen::Proyectofinanciero,
+            id: psinusuario
+          penequipo = Cor1440Gen::ProyectofinancieroUsuario.where(
+            usuario_id: usuario.id).map(&:proyectofinanciero_id).uniq
+          # Según
+          # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/Defining-Abilities:-Best-Practices.md
+          # Al poner varios corresponde al OR
+          # Poner varios hashes en una línea es un AND
+          can :read, Cor1440Gen::Proyectofinanciero,
+            id: penequipo
+
+          can :manage, Cor1440Gen::Actividad,
+            responsable: { id: usuario.id}
+          can :read, Cor1440Gen::Actividad,
+            actividad_proyectofinanciero: {proyectofinanciero_id: penequipo}
+
+
           can :read, Cor1440Gen::FormularioTipoindicador
           can :read, Cor1440Gen::Informe
-          can :read, Cor1440Gen::Proyectofinanciero
   
           can [:new, :create, :read, :index, :edit, :update],
             Sip::Actorsocial
           can :manage, Sip::Persona
   
-        when Ability::ROLCOOR
-          can :new, Usuario
-          can [:read, :manage], Usuario, oficina: { id: usuario.oficina_id}
-  
-          can :manage, Cor1440Gen::Actividad
-          can [:update, :create, :destroy], Cor1440Gen::Actividad, 
-            oficina: { id: usuario.oficina_id}
-          can :read, Cor1440Gen::FormularioTipoindicador
-          can :manage, Cor1440Gen::Informe
-          can :read, Cor1440Gen::Proyectofinanciero
-  
-          can [:new, :create, :read, :index, :edit, :update],
-            Sip::Actorsocial
-          can :manage, Sip::Persona
-        when Ability::ROLINV
-          cannot :buscar, Sip::Actividad
-          can :read, Sip::Actividad
         when Ability::ROLADMIN, Ability::ROLDIR
           can :manage, Cor1440Gen::Actividad
           can :manage, Cor1440Gen::Campotind

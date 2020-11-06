@@ -36,26 +36,6 @@ module Cor1440Gen
           has_many :proyectofinanciero, through: :proyectofinanciero_usuario,
             class_name: 'Cor1440Gen::Proyectofinanciero'
 
-          validate :rol_usuario
-          def rol_usuario
-            if !oficina && rol != Ability::ROLADMIN && rol != Ability::ROLINV && 
-              rol != Ability::ROLDIR
-              errors.add(:oficina, "El rol elegido debe tener oficina")
-            end
-            #    if (etiqueta.count == 0 && rol == Ability::ROLINV) 
-            #      errors.add(:etiqueta, "El rol invitado debe tener etiquetas compartir")
-            #    end
-            #if (etiqueta.count != 0 && rol != Ability::ROLINV) 
-            #  errors.add(:etiqueta, "El rol elegido no requiere etiquetas de compartir")
-            #end
-            if (!current_usuario.nil? && current_usuario.rol == Ability::ROLCOOR)
-              if (oficina.nil? || 
-                  oficina.id != current_usuario.oficina_id)
-                errors.add(:oficina, "Solo puede editar usuarios de su oficina")
-              end
-            end
-          end
-
           scope :filtro_oficina_id, lambda {|o|
             where(oficina_id: o)
           }
