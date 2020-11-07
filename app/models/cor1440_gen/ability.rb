@@ -173,7 +173,7 @@ module Cor1440Gen
         case usuario.rol 
         when Ability::ROLSISTACT
 
-          can :manage, Cor1440Gen::Proyectofinanciero,
+          can [:read,:edit,:update], Cor1440Gen::Proyectofinanciero,
             responsable: { id: usuario.id}
 
           # Convención: Los proyectos sin usuarios se suponen como 
