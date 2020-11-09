@@ -7,7 +7,7 @@
       </tr>
     </thead>
     <tbody id="actividad_proyectofinanciero">
-      <%= f.simple_fields_for :actividad_proyectofinanciero do |ap| %>
+      <%= f.simple_fields_for(:actividad_proyectofinanciero, f.object.actividad_proyectofinanciero.order(:id)) do |ap| %>
         <%= render partial: 'actividad_proyectofinanciero_campos',
           locals: {f: ap, ac: f} %>
       <% end %>
