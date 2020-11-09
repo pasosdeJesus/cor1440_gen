@@ -4,14 +4,13 @@
   <% else %>
     <% fr = Time.now.strftime('%Y-%m-%d') %>
   <% end %>
-  <%  lp1 = Cor1440Gen::Proyectofinanciero.where(
-    "fechainicio <= ? AND (? <= fechacierre OR fechacierre IS NULL)", 
-    fr, fr) %>
+  <%  lp1 = controller.proyectos_disponibles_usuario_a_fecha(fr) %>
   <% ids1 = lp1.pluck(:id) %>
   <% ids2 = ac.object.proyectofinanciero.pluck(:id) %>
   <% # Si es uno nuevo excluimos los ya elegidos %>
   <% ids = ids1 | ids2 %>
-  <% col = Cor1440Gen::Proyectofinanciero.where(id: ids) %>
+  <% col = Cor1440Gen::Proyectofinanciero.where(id: ids).
+    reorder('lower(nombre)') %>
   <td>
     <%= f.input :id, as: :hidden %>
 

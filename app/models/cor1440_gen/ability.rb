@@ -173,6 +173,8 @@ module Cor1440Gen
         case usuario.rol 
         when Ability::ROLSISTACT
 
+          presponsable = Cor1440Gen::Proyectofinanciero.where(
+            responsable_id: usuario.id).map(&:id)
           can [:read,:edit,:update], Cor1440Gen::Proyectofinanciero,
             responsable: { id: usuario.id}
 
@@ -183,8 +185,10 @@ module Cor1440Gen
               &:proyectofinanciero_id).uniq
           can :read, Cor1440Gen::Proyectofinanciero,
             id: psinusuario
-          penequipo = Cor1440Gen::ProyectofinancieroUsuario.where(
+          penequipo1 = Cor1440Gen::ProyectofinancieroUsuario.where(
             usuario_id: usuario.id).map(&:proyectofinanciero_id).uniq
+          penequipo = penequipo1 | presponsable
+          penequipo.uniq!
           # Según
           # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/Defining-Abilities:-Best-Practices.md
           # Al poner varios corresponde al OR
@@ -197,6 +201,10 @@ module Cor1440Gen
           can :read, Cor1440Gen::Actividad,
             actividad_proyectofinanciero: {proyectofinanciero_id: penequipo}
 
+          # Responsable de un proyecto puede eliminar  y editar actividades 
+          # del mismo
+          can :manage, Cor1440Gen::Actividad,
+            actividad_proyectofinanciero: {proyectofinanciero_id: presponsable}
 
           can :read, Cor1440Gen::FormularioTipoindicador
           can :read, Cor1440Gen::Informe

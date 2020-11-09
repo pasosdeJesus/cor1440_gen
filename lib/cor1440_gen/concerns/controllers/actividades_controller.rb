@@ -19,11 +19,8 @@ module Cor1440Gen
           def atributos_index
             [ :id, 
               :fecha_localizada, 
-              :oficina, 
-              :responsable,
               :nombre, 
-              :proyecto,
-              :actividadareas,
+              :responsable,
               :proyectofinanciero,
               :actividadpf, 
               :objetivo,
@@ -38,16 +35,12 @@ module Cor1440Gen
 
           def atributos_show
             [ :id, 
-              :nombre, 
               :fecha_localizada, 
+              :nombre, 
               :lugar, 
-              :oficina, 
-              :proyectofinanciero, 
-              :proyectos,
-              :actividadareas, 
               :responsable,
               :corresponsables,
-              :actividadpf, 
+              :proyectofinanciero, 
               :respuestafor,
               :objetivo,
               :resultado, 
@@ -55,12 +48,24 @@ module Cor1440Gen
               :listadoasistencia,
               :poblacion,
               :anexos
-              ]
+            ]
           end
 
           def vistas_manejadas
             ['Actividad']
           end
+
+          # Ids de proyectos que el usuario actual puede leer a cierta
+          # fecha
+          # Usado en formulario actividad en lista de selección de proyectos
+          def proyectos_disponibles_usuario_a_fecha(fr)
+            c1 = Cor1440Gen::Proyectofinanciero.accessible_by(current_ability)
+            c2 = c1.where(
+              "fechainicio <= ? AND (? <= fechacierre OR fechacierre IS NULL)", 
+              fr, fr)
+            return c2.order('lower(nombre)')
+          end
+
 
           def index_reordenar(c)
             c = c.reorder('cor1440_gen_actividad.fecha DESC')
@@ -68,66 +73,6 @@ module Cor1440Gen
           end
 
 
-#          def fila_comun(actividad)
-#           pob = actividad.actividad_rangoedadac.map { |i| 
-#              (i.ml ? i.ml : 0) + (i.mr ? i.mr : 0) +
-#              (i.fl ? i.fl : 0) + (i.fr ? i.fr : 0) +
-#              (i.s ? i.s : 0)
-#                
-#            } 
-#            return [actividad.id,
-#                    actividad.fecha , 
-#                    actividad.oficina ? actividad.oficina.nombre : "",
-#                    actividad.responsable ? actividad.responsable.nusuario : "",
-#                    actividad.nombre ? actividad.nombre : "",
-#                    actividad.actividadpf.inject("") { |memo, i| 
-#                      (memo == "" ? "" : memo + "; ") + i.titulo },
-#                    actividad.proyecto.inject("") { |memo, i| 
-#                        (memo == "" ? "" : memo + "; ") + i.nombre },
-#                    actividad.actividadareas.inject("") { |memo, i| 
-#                          (memo == "" ? "" : memo + "; ") + i.nombre },
-#                    actividad.proyectofinanciero.inject("") { |memo, i| 
-#                            (memo == "" ? "" : memo + "; ") + i.nombre },
-#                    actividad.objetivo, 
-#                    pob.reduce(:+)
-#            ]
-#          end
-#
-#          # transforma un vector devuelto por fila_comun en registro y
-#          # lo amplia para devolver todo campo consultable de un actividad
-#          def vector_a_registro(a, ac)
-#            {
-#              id: a[0],
-#              fecha: a[1],
-#              oficina: a[2],
-#              responsable: a[3],
-#              nombre: a[4],
-#              tipos_de_actividad: a[5],
-#              areas: a[6],
-#              subareas: a[7],
-#              convenios_financieros: a[8],
-#              objetivo: a[9],
-#              poblacion: a[10],
-#              observaciones: ac.observaciones,
-#              resultado: ac.resultado,
-#              creacion: ac.created_at,
-#              actualizacion: ac.updated_at,
-#              lugar: ac.lugar,
-#              corresponsables: ac.usuario.inject("") { |memo, i| 
-#                (memo == "" ? "" : memo + "; ") + i.nusuario },
-#            }
-#          end
-#
-#          # Cuerpo de tabla comun para HTML y PDF
-#          def cuerpo_comun
-#            cuerpo = []
-#            @actividades.try(:each) do |actividad|
-#              cuerpo += [fila_comun(actividad)]
-#            end
-#            return cuerpo
-#          end
-
-          # GET /actividades/new
           def new_cor1440_gen
             @registro = @actividad = Actividad.new
             @registro.current_usuario = current_usuario
@@ -139,6 +84,12 @@ module Cor1440Gen
             return @registro
           end
 
+          # GET /actividades/new
+          def new
+            new_cor1440_gen
+            redirect_to cor1440_gen.edit_actividad_path(@registro)
+          end
+
           def destroy
             pf_act = Cor1440Gen::ActividadProyectofinanciero.
               where(actividad_id: @registro.id)
@@ -148,11 +99,6 @@ module Cor1440Gen
             destroy_gen
             #@registro.destroy!
             #redirect_to cor1440_gen.actividades_path
-          end
-
-          def new
-            new_cor1440_gen
-            redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
 
           def asegura_camposdinamicos(actividad, current_usuario_id)
@@ -236,22 +182,23 @@ module Cor1440Gen
                     a[1][:persona_attributes][:id].to_i > 0 &&
                     Sip::Persona.where(
                       id: a[1][:persona_attributes][:id].to_i).count == 1
-                  ac = Cor1440Gen::Asistencia.create({
-                    actividad_id: @actividad.id,
-                    persona_id: a[1][:persona_attributes][:id]
-                  })
-                  ac.save!(validate: false)
-                  params[:actividad][:asistencia_attributes][a[0].to_s][:id] = ac.id
+                    ac = Cor1440Gen::Asistencia.create({
+                      actividad_id: @actividad.id,
+                      persona_id: a[1][:persona_attributes][:id]
+                    })
+                    ac.save!(validate: false)
+                    params[:actividad][:asistencia_attributes][a[0].to_s][:id] = ac.id
                 end
               end
             end
             update_gen
           end
+
           # Llamado por control para presentar responsables en formulario
           # Para limitar por permisos
           def filtra_usuario_responsable(lista_usuarios)
             if Rails.configuration.x.cor1440_permisos_por_oficina && 
-              current_usuario.oficina_id 
+                current_usuario.oficina_id 
               lista_usuarios = lista_usuarios.
                 where(oficina_id: current_usuario.oficina_id)
             end
@@ -297,7 +244,7 @@ module Cor1440Gen
               params[:filtro][:oficina_id].to_i : @contar_ofi
 
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
-              params[:filtro]['fechaini'] != ""
+                params[:filtro]['fechaini'] != ""
               if !params[:filtro] || !params[:filtro]['fechaini']
                 @fechaini = Sip::FormatoFechaHelper.inicio_semestre_ant
               else
@@ -308,7 +255,7 @@ module Cor1440Gen
             end
 
             if !params[:filtro] || !params[:filtro]['fechafin'] || 
-              params[:filtro]['fechafin'] != ""
+                params[:filtro]['fechafin'] != ""
               if !params[:filtro] || !params[:filtro]['fechafin']
                 @fechafin = Sip::FormatoFechaHelper.fin_semestre_ant
               else
@@ -320,8 +267,8 @@ module Cor1440Gen
 
             if params[:filtro] && params[:filtro]['oficina_id'] && 
                 params[:filtro]['oficina_id'] != ''
-                @contar_actividad = @contar_actividad.where(
-                  'cor1440_gen_actividad.oficina_id = ?', @contar_ofi)
+              @contar_actividad = @contar_actividad.where(
+                'cor1440_gen_actividad.oficina_id = ?', @contar_ofi)
             end
             filtra_contar_por_parametros 
 
@@ -351,11 +298,11 @@ module Cor1440Gen
               'cor1440_gen_actividad.id IN 
                 (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
                   WHERE proyectofinanciero_id=?)',@contarb_pfid).where(
-              'cor1440_gen_actividad.id IN 
+                    'cor1440_gen_actividad.id IN 
                 (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)')
 
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
-              params[:filtro]['fechaini'] != ""
+                params[:filtro]['fechaini'] != ""
               if !params[:filtro] || !params[:filtro]['fechaini']
                 @contarb_fechaini = Sip::FormatoFechaHelper.inicio_semestre_ant
               else
@@ -367,7 +314,7 @@ module Cor1440Gen
             end
 
             if !params[:filtro] || !params[:filtro]['fechafin'] || 
-              params[:filtro]['fechafin'] != ""
+                params[:filtro]['fechafin'] != ""
               if !params[:filtro] || !params[:filtro]['fechafin']
                 @contarb_fechafin = Sip::FormatoFechaHelper.fin_semestre_ant
               else
@@ -410,7 +357,7 @@ module Cor1440Gen
                     presente_otros = Cor1440Gen::Actividadpf.
                       where(actividadtipo_id: tipo).
                       where(proyectofinanciero_id: proyectofinanciero_ids)
-                      actividadpf_ids |= presente_otros.pluck(:id).uniq
+                    actividadpf_ids |= presente_otros.pluck(:id).uniq
                   end
                 end
               end
@@ -425,13 +372,13 @@ module Cor1440Gen
             else
               prob = 'Falla al convertir parametros'
             end
-          respond_to do |format|
-            format.html { render action: "error" }
-            format.json { render json: prob, 
-                          status: :unprocessable_entity 
-            }
+            respond_to do |format|
+              format.html { render action: "error" }
+              format.json { render json: prob, 
+                            status: :unprocessable_entity 
+              }
+            end
           end
-        end
 
           private
 
@@ -530,76 +477,76 @@ module Cor1440Gen
 
 
         class_methods do
-          def param_escapa(par, p)
-            par.nil? ? '' :
-            par[p] ? Sip::Pais.connection.quote_string(par[p].to_s) : 
-              par[p.to_sym] ? Sip::Pais.connection.quote_string(par[p.to_sym].to_s) :
-              par[p.to_s] ? Sip::Pais.connection.quote_string(par[p.to_s].to_s) :  ''
-          end
-
-          def filtra(par, current_usuario = nil)
-            ac = Actividad.order(fecha: :desc)
-            @buscodigo = param_escapa(par, 'buscodigo')
-            if @buscodigo && @buscodigo != '' then
-              ac = ac.where(id: @buscodigo.to_i)
-            end
-            fi = param_escapa(par, 'fechaini')
-            @fechaini = Date.strptime(fi, '%Y-%m-%d').to_s if fi && fi != ''
-            if @fechaini && @fechaini != '' 
-              ac = ac.where("fecha >= '#{@fechaini}'")
-            end
-            ff = param_escapa(par, 'fechafin')
-            @fechafin = Date.strptime(ff, '%Y-%m-%d').to_s if ff && ff != ''
-            if @fechafin && @fechafin != '' then
-              ac = ac.where("fecha <= '#{@fechafin}'")
-            end
-            @busoficina = param_escapa(par, 'busoficina')
-            if @busoficina && @busoficina != '' then
-              ac = ac.where(oficina_id: @busoficina)
-            end
-            @busresponsable = param_escapa(par, 'busresponsable')
-            if @busresponsable && @busresponsable != '' then
-              ac = ac.where(responsable: @busresponsable)
-            end
-            @busnombre = param_escapa(par, 'busnombre')
-            if @busnombre && @busnombre != '' then
-              ac = ac.where("unaccent(nombre) ILIKE unaccent(?)", "%#{@busnombre}%")
-            end
-            @busarea = param_escapa(par, 'busarea')
-            if @busarea && @busarea != '' then
-              ac = ac.joins(:actividadareas_actividad).where(
-                "cor1440_gen_actividadareas_actividad.actividadarea_id = ?",
-                @busarea.to_i
-              )
-            end
-            @busactividadpf= param_escapa(par, 'busactividadpf')
-            if @buscatividadpf && @busactividadpf != '' then
-              ac = ac.joins(:actividadpf).where(
-                "cor1440_gen_actividadpf.id = ?",
-                @busactividadpf.to_i
-              )
-            end
-            @busobjetivo = param_escapa(par, 'busobjetivo')
-            if @busobjetivo && @busobjetivo != '' then
-              ac = ac.where("unaccent(objetivo) ILIKE unaccent(?)", "%#{@busobjetivo}%")
-            end
-            @busproyecto = param_escapa(par, 'busproyecto')
-            if @busproyecto && @busproyecto != '' then
-              ac = ac.joins(:actividad_proyecto).where(
-                "cor1440_gen_actividad_proyecto.proyecto_id= ?",
-                @busproyecto.to_i
-              )
-            end
-            @busproyectofinanciero = param_escapa(par, 'busproyectofinanciero')
-            if @busproyectofinanciero && @busproyectofinanciero != '' then
-              ac = ac.joins(:proyectofinanciero).where(
-                "cor1440_gen_proyectofinanciero.id= ?",
-                @busproyectofinanciero.to_i
-              )
-            end
-            ac = filtramas(par, ac, current_usuario)
-            return ac
-          end
+#          def param_escapa(par, p)
+#            par.nil? ? '' :
+#              par[p] ? Sip::Pais.connection.quote_string(par[p].to_s) : 
+#              par[p.to_sym] ? Sip::Pais.connection.quote_string(par[p.to_sym].to_s) :
+#              par[p.to_s] ? Sip::Pais.connection.quote_string(par[p.to_s].to_s) :  ''
+#          end
+#
+#          def filtra(par, current_usuario = nil)
+#            ac = Actividad.order(fecha: :desc)
+#            @buscodigo = param_escapa(par, 'buscodigo')
+#            if @buscodigo && @buscodigo != '' then
+#              ac = ac.where(id: @buscodigo.to_i)
+#            end
+#            fi = param_escapa(par, 'fechaini')
+#            @fechaini = Date.strptime(fi, '%Y-%m-%d').to_s if fi && fi != ''
+#            if @fechaini && @fechaini != '' 
+#              ac = ac.where("fecha >= '#{@fechaini}'")
+#            end
+#            ff = param_escapa(par, 'fechafin')
+#            @fechafin = Date.strptime(ff, '%Y-%m-%d').to_s if ff && ff != ''
+#            if @fechafin && @fechafin != '' then
+#              ac = ac.where("fecha <= '#{@fechafin}'")
+#            end
+#            @busoficina = param_escapa(par, 'busoficina')
+#            if @busoficina && @busoficina != '' then
+#              ac = ac.where(oficina_id: @busoficina)
+#            end
+#            @busresponsable = param_escapa(par, 'busresponsable')
+#            if @busresponsable && @busresponsable != '' then
+#              ac = ac.where(responsable: @busresponsable)
+#            end
+#            @busnombre = param_escapa(par, 'busnombre')
+#            if @busnombre && @busnombre != '' then
+#              ac = ac.where("unaccent(nombre) ILIKE unaccent(?)", "%#{@busnombre}%")
+#            end
+#            @busarea = param_escapa(par, 'busarea')
+#            if @busarea && @busarea != '' then
+#              ac = ac.joins(:actividadareas_actividad).where(
+#                "cor1440_gen_actividadareas_actividad.actividadarea_id = ?",
+#                @busarea.to_i
+#              )
+#            end
+#            @busactividadpf= param_escapa(par, 'busactividadpf')
+#            if @buscatividadpf && @busactividadpf != '' then
+#              ac = ac.joins(:actividadpf).where(
+#                "cor1440_gen_actividadpf.id = ?",
+#                @busactividadpf.to_i
+#              )
+#            end
+#            @busobjetivo = param_escapa(par, 'busobjetivo')
+#            if @busobjetivo && @busobjetivo != '' then
+#              ac = ac.where("unaccent(objetivo) ILIKE unaccent(?)", "%#{@busobjetivo}%")
+#            end
+#            @busproyecto = param_escapa(par, 'busproyecto')
+#            if @busproyecto && @busproyecto != '' then
+#              ac = ac.joins(:actividad_proyecto).where(
+#                "cor1440_gen_actividad_proyecto.proyecto_id= ?",
+#                @busproyecto.to_i
+#              )
+#            end
+#            @busproyectofinanciero = param_escapa(par, 'busproyectofinanciero')
+#            if @busproyectofinanciero && @busproyectofinanciero != '' then
+#              ac = ac.joins(:proyectofinanciero).where(
+#                "cor1440_gen_proyectofinanciero.id= ?",
+#                @busproyectofinanciero.to_i
+#              )
+#            end
+#            ac = filtramas(par, ac, current_usuario)
+#            return ac
+#          end
 
         end
 
