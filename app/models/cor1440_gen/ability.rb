@@ -206,6 +206,7 @@ module Cor1440Gen
           can :manage, Cor1440Gen::Actividad,
             actividad_proyectofinanciero: {proyectofinanciero_id: presponsable}
 
+          can :read, Cor1440Gen::Efecto
           can :read, Cor1440Gen::FormularioTipoindicador
           can :read, Cor1440Gen::Informe
   
@@ -216,6 +217,7 @@ module Cor1440Gen
         when Ability::ROLADMIN, Ability::ROLDIR
           can :manage, Cor1440Gen::Actividad
           can :manage, Cor1440Gen::Campotind
+          can :manage, Cor1440Gen::Efecto
           can :manage, Cor1440Gen::Financiador
           can :manage, Cor1440Gen::FormularioTipoindicador
           can :manage, Cor1440Gen::Indicadorpf
