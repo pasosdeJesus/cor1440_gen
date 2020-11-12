@@ -55,23 +55,10 @@ module Cor1440Gen
             ['Actividad']
           end
 
-          # Ids de proyectos que el usuario actual puede leer a cierta
-          # fecha
-          # Usado en formulario actividad en lista de selección de proyectos
-          def proyectos_disponibles_usuario_a_fecha(fr)
-            c1 = Cor1440Gen::Proyectofinanciero.accessible_by(current_ability)
-            c2 = c1.where(
-              "fechainicio <= ? AND (? <= fechacierre OR fechacierre IS NULL)", 
-              fr, fr)
-            return c2.order('lower(nombre)')
-          end
-
-
           def index_reordenar(c)
             c = c.reorder('cor1440_gen_actividad.fecha DESC')
             return c
           end
-
 
           def new_cor1440_gen
             @registro = @actividad = Actividad.new

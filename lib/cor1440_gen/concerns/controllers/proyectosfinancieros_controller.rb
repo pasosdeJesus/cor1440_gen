@@ -111,17 +111,10 @@ module Cor1440Gen
 
           def index(c = nil)
             authorize! :read, Cor1440Gen::Proyectofinanciero
-            if c == nil
-              c = Cor1440Gen::Proyectofinanciero.all
-            end
-            if params[:fecha] && params[:fecha] != ''
-              fecha = fecha_local_estandar params[:fecha]
-              c = c.where('fechainicio <= ? AND ' +
-                          '(? <= fechacierre OR fechacierre IS NULL) ', 
-                          fecha, fecha)
-            end
+            c = Cor1440Gen::ProyectosfinancierosController::proyectos_disponibles_usuario_a_fecha(
+              params[:fecha], current_ability, c)
             super(c)
-          end  
+          end
 
           # API JSON, dado un conjunto de proyectosfinancieros
           # responde con las actividadespf de sus marcos lógicos
@@ -425,6 +418,25 @@ module Cor1440Gen
 
 
         end # included
+
+        class_methods do
+          # Ids de proyectos que el usuario actual puede leer a cierta
+          # fecha
+          # Usado en formulario actividad en lista de selección de proyectos
+          def proyectos_disponibles_usuario_a_fecha(fr, ability, c = nil)
+            if c == nil
+              c = Cor1440Gen::Proyectofinanciero.accessible_by(ability)
+            end
+            if fr && fr != ''
+              c2 = c.where(
+                "(fechainicio <= ? OR fechainicio IS NULL) AND " +
+                "(? <= fechacierre OR fechacierre IS NULL)", 
+                fr, fr)
+            end
+            return c2
+          end
+
+        end
 
       end
     end
