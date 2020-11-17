@@ -31,6 +31,56 @@ document.addEventListener('turbolinks:load', function() {
     todayHighlight: true,
     language: 'es'
   })
+
+
+  // En actividad si se cambia sexo de un asistente
+  // recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_sexo]:visible', function (e) {
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') {
+      cor1440_gen_recalcula_poblacion();
+    }
+  })
+
+  // En actividad si se cambia anio de nacimiento de un asistente
+  // recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_anionac]:visible', function (e) {
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') {
+      cor1440_gen_recalcula_poblacion();
+    }
+  })
+
+  // En actividad si se cambia mes de nacimiento de un asistente
+  // recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_mesnac]:visible', function (e) {
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') {
+      cor1440_gen_recalcula_poblacion();
+    }
+  })
+
+  // En actividad si se cambia dia de nacimiento de un asistente
+  // recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_dianac]:visible', function (e) {
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') {
+      cor1440_gen_recalcula_poblacion();
+    }
+  })
+
+
+  // En actividad tras eliminar asistencia recalcular población
+  $('#asistencia').on('cocoon:after-remove', function (e, papa) {
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') {
+      cor1440_gen_recalcula_poblacion();
+    }
+  })
+
+  // Tras autocompletar asistente
+  $(document).on('cor1440gen:autocompletado-asistente', function (e, papa) {
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') {
+      cor1440_gen_recalcula_poblacion();
+    }
+  })
+
+
 });
 
 

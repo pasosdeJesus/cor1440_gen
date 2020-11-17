@@ -128,7 +128,7 @@ cor1440_gen_rangoedadc_todos = () ->
       mesnac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_mesnac]').val()
       dianac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_dianac]').val()
   
-      e = +sivel2_gen_edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
+      e = +sip_edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
       idran = -1  # id del rango en el que está e
       ransin = -1 # id del rango SIN INFORMACION
       #debugger
