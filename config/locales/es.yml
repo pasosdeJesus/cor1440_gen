@@ -164,9 +164,15 @@ es:
         Tipoindicador: Tipo de indicador
         Tiposindicador: Tipos de indicador
       "heb412_gen/plantillahcm":
-        proyectofinanciero: Proyectos que exportan/importan con la plantilla
-      'mr519_gen/formulario':
+        Actoressociales: Organizaciones Sociales
         caracterizacion: Caracterizacion de beneficiarios en proyectos
+        Personas: Beneficiarios
+        Proyectosfinancieros: Proyectos
+        proyectofinanciero: Proyectos que exportan/importan con la plantilla
+      "heb412_gen/plantillahcr":
+        Actorsocial: Organización Social
+        Persona: Beneficiario
+        Proyectofinanciero: Proyecto
       "sip/persona":
         actividad_ids: Actividades en las que está en listado de asistencia
         proyectofinanciero_ids: Proyectos que le caracterizan
