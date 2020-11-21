@@ -41,6 +41,7 @@ module Cor1440Gen
               :responsable,
               :corresponsables,
               :proyectofinanciero, 
+              :actividadpf, 
               :respuestafor,
               :objetivo,
               :resultado, 

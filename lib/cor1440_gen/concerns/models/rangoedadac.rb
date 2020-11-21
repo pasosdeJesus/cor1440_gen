@@ -9,7 +9,8 @@ module Cor1440Gen
 
         included do
 
-          has_many :actividad_rangoedadac, :dependent => :delete_all,
+          has_many :actividad_rangoedadac, dependent: :delete_all,
+            foreign_key: "rangoedadac_id",
             class_name: '::Cor1440Gen::ActividadRangoedadac'
           has_many :actividad, :through => :actividad_rangoedadac,
             class_name: '::Cor1440Gen::Actividad'
