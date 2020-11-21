@@ -4,7 +4,7 @@
 <%= f.association :responsable,
   collection: lus.order(:nusuario),
   include_blank: false,
-  label: "Responsable",
+  label: Cor1440Gen::Proyectofinanciero.human_attribute_name(:responsable),
   label_method: lambda { |t|  t.presenta_nombre },
   value_method: :id,
   selected:  f.object.responsable_id ?  f.object.responsable_id : 

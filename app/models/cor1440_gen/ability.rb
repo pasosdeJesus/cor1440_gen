@@ -5,18 +5,18 @@ module Cor1440Gen
 
     ROLADMIN  = 1
     ROLDIR    = 3
-    #ROLANALI  = 5
-    #ROLSIST
-    ROLSISTACT   = 7
+    ROLOPERADOR = 5 # Analista
+    #ROLSISACT = 7
 
     ROLES = [
       ["Administrador", ROLADMIN], 
       ["", 0], 
       ["Directivo", ROLDIR], 
       ["", 0], 
+      ["Operador", ROLOPERADOR], 
       ["", 0 ],
       ["", 0],
-      ["Sistematizador de Actividades", ROLSISTACT]
+      ["", 0]
     ]
 
     # Tablas básicas
@@ -171,7 +171,7 @@ module Cor1440Gen
 
       if !usuario.nil? && !usuario.rol.nil? then
         case usuario.rol 
-        when Ability::ROLSISTACT
+        when ROLOPERADOR
 
           presponsable = Cor1440Gen::Proyectofinanciero.where(
             responsable_id: usuario.id).map(&:id)
