@@ -8,7 +8,7 @@
     order('sip_grupoper.nombre') %>
 <%= f.association :actorsocial, 
   collection: a2,
-  label: "Actores sociales en listado de asistencia",
+  label: "Organizaciones sociales en listado de asistencia",
   label_method: :presenta_nombre, 
   value_method: :id,
   input_html: { class: 'chosen-select' }

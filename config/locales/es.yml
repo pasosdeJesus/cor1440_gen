@@ -37,7 +37,7 @@ es:
         actividadarea: Subárea
         actividadareas: Subáreas
         actividadpf: Actividad de marco lógico
-        actorsocial: Actores sociales en listado de asistencia
+        actorsocial: Organizaciones sociales sociales en listado de asistencia
         fecha_localizada: Fecha
         objetivo: Objetivo de la actividad
         proyecto: Área
@@ -61,14 +61,14 @@ es:
         Campoact: Campo
         listadoasistencia: Listado de asistencia
       "cor1440_gen/actorsocial":
-        Actorsocial: Actor social
-        Actoressociales: Actores sociales
+        Actorsocial: Organización social
+        Actoressociales: Organizaciones sociales
         direccion: Dirección
       "cor1440_gen/efecto":
         Efecto: 'Avance en indicador de efecto'
         Efectos: 'Avance en indicadores de efecto'
-        actorsocial: Actor(es) social(es)
-        "{:actorsocial_ids=>[]}": Actor(es) social(es)
+        actorsocial: Organización(es) social(es)
+        "{:actorsocial_ids=>[]}": Organización(es) social(es)
         anexo_efecto: Anexos / Medios de verificación
         fecha_localizada: Fecha
         indicadorpf: Indicador
@@ -148,8 +148,8 @@ es:
         numero: Número
         resultado: Descripción del resultado
       "cor1440_gen/sectoractor":
-        Sectoractor: Sector de actor social
-        Sectoresactores: Sectores de actores sociales
+        Sectoractor: Sector de organización social
+        Sectoresactores: Sectores de organizaciones sociales
       "cor1440_gen/tipoindicador":
         nombre: Nombre corto
         campotind: Campo
