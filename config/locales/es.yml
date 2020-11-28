@@ -98,6 +98,8 @@ es:
         objetivopf: Objetivo
         numero: Número
         objetivo: Descripción del objetivo
+      "cor1440_gen/pmindicadorpf":
+        resind: Resultado
       "cor1440_gen/financiador":
         Financiador: Financiador
         Financiadores: Financiadores
