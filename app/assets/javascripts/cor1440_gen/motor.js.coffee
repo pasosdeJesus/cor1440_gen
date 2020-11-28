@@ -114,10 +114,10 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_identifica_ids_rangoedad(resp, rangos, idrf)
 
   # Fecha de la actividad
-  fap = $('#actividad_fecha_localizada').val().split('-')
-  anioref  = +fap[0]
-  mesref  = +fap[1]
-  diaref  = +fap[2]
+  arf = sip_partes_fecha_localizada($('#actividad_fecha_localizada').val(), window.formato_fecha)
+  anioref  = arf[0]
+  mesref  = arf[1]
+  diaref  = arf[2]
 
   # Recorre listado de personas 
   $('[id^=actividad_asistencia_attributes][id$=_persona_attributes_anionac]').each((i, v) ->
@@ -610,6 +610,49 @@ cor1440_gen_rangoedadc_todos = () ->
   }
   sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
+
+
+@cor1440_gen_instala_recalcula_poblacion = () ->
+  # En actividad si se cambia sexo de un asistente
+  #recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_sexo]:visible', (e) ->
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+      cor1440_gen_recalcula_poblacion();
+  )
+
+  # En actividad si se cambia anio de nacimiento de un asistente
+  # recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_anionac]:visible', (e) ->
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+      cor1440_gen_recalcula_poblacion();
+  )
+
+  # En actividad si se cambia mes de nacimiento de un asistente
+  # recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_mesnac]:visible', (e) ->
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+      cor1440_gen_recalcula_poblacion();
+  )
+
+  # En actividad si se cambia dia de nacimiento de un asistente
+  # recalcula tabla de población
+  $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_dianac]:visible', (e) ->
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+      cor1440_gen_recalcula_poblacion();
+  )
+
+
+  # En actividad tras eliminar asistencia recalcular población
+  $('#asistencia').on('cocoon:after-remove', (e, papa) ->
+    if (typeof cor1440_gen_recalcula_poblacion == 'function')
+      cor1440_gen_recalcula_poblacion();
+  )
+
+  # Tras autocompletar asistente
+  $(document).on('cor1440gen:autocompletado-asistente', (e, papa) ->
+    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+      cor1440_gen_recalcula_poblacion();
+  )
 
 
 @cor1440_gen_prepara_eventos_comunes = (root, opciones = {}) ->
