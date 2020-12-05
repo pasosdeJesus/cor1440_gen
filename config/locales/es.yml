@@ -142,6 +142,7 @@ es:
         "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
         "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
         "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
+        sectorapc: Sector APC
       "cor1440_gen/rangoedadac":
         Rangoedadac: Rango de edad en actividades
         Rangosedadac: Rangos de edad en actividades

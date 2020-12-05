@@ -13,6 +13,8 @@ module Cor1440Gen
           campofecha_localizado :fechainicio
           campofecha_localizado :fechacierre
 
+          attr_accessor :duracion 
+
           belongs_to :responsable, class_name: '::Usuario',
             foreign_key: "responsable_id", validate: true, optional: true
 
@@ -124,6 +126,16 @@ module Cor1440Gen
             if fechainicio && fechacierre && fechainicio > fechacierre
               errors.add(:fechacierre, 
                          "La fecha de cierre debe ser posterior a la de inicio")
+            end
+          end
+
+
+
+          def duracion
+            if fechainicio && fechacierre
+              Sip::FormatoFechaHelper.dif_meses_dias(fechainicio, fechacierre)
+            else
+              ''
             end
           end
 

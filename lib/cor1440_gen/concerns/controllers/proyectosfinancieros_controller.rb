@@ -338,6 +338,40 @@ module Cor1440Gen
             ['Proyecto']
           end
 
+          # API calcduracion fechaini fechacierre
+          # Retorna cadena con duracion
+          def duracion
+            prob = ''
+            if params[:fechainicio_localizada] && 
+                params[:fechacierre_localizada]
+              fini = ::Sip::FormatoFechaHelper.fecha_local_estandar(
+                params[:fechainicio_localizada])
+              fini = Date.strptime(fini, '%Y-%m-%d')
+              fcierre = ::Sip::FormatoFechaHelper.fecha_local_estandar(
+                params[:fechacierre_localizada])
+              fcierre = Date.strptime(fcierre, '%Y-%m-%d')
+              if fini && fcierre
+                d = Sip::FormatoFechaHelper.dif_meses_dias(fini, fcierre)
+                respond_to do |format|
+                  format.json { 
+                    render json: {duracion: d.to_s}, status: :ok
+                    return
+                  }
+                end
+              else
+                prob = 'No pudo convertirse una de las fechas'
+              end
+            else
+              prob = 'Indispensables parametros fechaini_localizada y fechacierre_localizada'
+            end
+            respond_to do |format|
+              format.html { render action: "error" }
+              format.json { render json: prob, 
+                            status: :unprocessable_entity 
+              }
+            end
+          end
+
           def proyectofinanciero_params_cor1440_gen
             atributos_form + [
               :responsable_id,
