@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -8,10 +6,6 @@ module Cor1440Gen
 
         included do
           include ActionView::Helpers::AssetUrlHelper
-
-          before_action :set_actividadtipo, 
-            only: [:show, :edit, :update, :destroy]
-          load_and_authorize_resource class: Cor1440Gen::Actividadtipo
 
           def clase 
             "Cor1440Gen::Actividadtipo"

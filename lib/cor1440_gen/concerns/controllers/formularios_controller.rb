@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'mr519_gen/concerns/controllers/formularios_controller'
 
 module Cor1440Gen

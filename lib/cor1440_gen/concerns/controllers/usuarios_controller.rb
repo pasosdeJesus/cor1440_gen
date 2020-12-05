@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'sip/concerns/controllers/usuarios_controller'
 
 module Cor1440Gen

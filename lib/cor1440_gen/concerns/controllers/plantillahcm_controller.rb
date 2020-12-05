@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'heb412_gen/concerns/controllers/plantillahcm_controller'
 
 module Cor1440Gen

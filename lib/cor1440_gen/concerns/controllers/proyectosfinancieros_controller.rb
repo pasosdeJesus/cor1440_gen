@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -9,13 +7,6 @@ module Cor1440Gen
         included do
           include Sip::FormatoFechaHelper
           helper Sip::FormatoFechaHelper
-
-          #load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
-          #  only: [:new, :create, :destroy, :edit, :update, :index, :show,
-          #         :objetivospf]
-          before_action :set_proyectofinanciero,
-            only: [:show, :edit, :update, :destroy]      
-          skip_before_action :set_proyectofinanciero, only: [:validar]
 
           def clase 
             "Cor1440Gen::Proyectofinanciero"

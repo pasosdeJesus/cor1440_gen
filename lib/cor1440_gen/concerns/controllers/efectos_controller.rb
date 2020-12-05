@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -7,12 +5,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          
-          helper ::ApplicationHelper
 
-          before_action :set_efecto, 
-            only: [:show, :edit, :update, :destroy]
-          load_and_authorize_resource class: Cor1440Gen::Efecto
+          helper ::ApplicationHelper
 
           def clase
             'Cor1440Gen::Efecto'

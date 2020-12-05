@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -7,7 +5,6 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-
 
           # GET /objetivopfs/new
           def new

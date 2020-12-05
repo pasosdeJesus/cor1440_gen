@@ -1,6 +1,3 @@
-# encoding: UTF-8
-
-
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -8,8 +5,6 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          before_action :set_informe, only: [:show, :edit, :update, :destroy]
-          load_and_authorize_resource class: Cor1440Gen::Informe
 
           # GET /informes
           def index
