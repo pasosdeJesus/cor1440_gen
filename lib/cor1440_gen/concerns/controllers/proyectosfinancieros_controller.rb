@@ -339,7 +339,10 @@ module Cor1440Gen
           end
 
           def proyectofinanciero_params_cor1440_gen
-            atributos_form + [:responsable_id] + [ 
+            atributos_form + [
+              :responsable_id,
+              :sectorapc_id
+            ] + [ 
               :actividadpf_attributes =>  [
                 :id, 
                 :resultadopf_id,

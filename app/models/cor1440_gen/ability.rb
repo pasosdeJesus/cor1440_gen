@@ -26,6 +26,7 @@ module Cor1440Gen
       ['Cor1440Gen', 'financiador'], 
       ['Cor1440Gen', 'proyecto'], 
       ['Cor1440Gen', 'rangoedadac'],
+      ['Cor1440Gen', 'sectorapc'],
       ['Cor1440Gen', 'tipoindicador']
     ]  
     def tablasbasicas 

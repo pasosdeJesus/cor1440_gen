@@ -26,5 +26,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'pmindicadorpf', 'pmsindicadorpf'
   inflect.irregular 'rangoedadac', 'rangosedadac'
   inflect.irregular 'sectoractor', 'sectoresactores'
+  inflect.irregular 'sectorapc', 'sectoresapc'
   inflect.irregular 'tipoindicador', 'tiposindicador'
 end

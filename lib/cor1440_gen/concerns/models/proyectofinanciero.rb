@@ -16,6 +16,9 @@ module Cor1440Gen
           belongs_to :responsable, class_name: '::Usuario',
             foreign_key: "responsable_id", validate: true, optional: true
 
+          belongs_to :sectorapc, class_name: 'Cor1440Gen::Sectorapc',
+            foreign_key: "sectorapc_id", validate: true, optional: true
+
           has_and_belongs_to_many :actividad, 
             class_name: 'Cor1440Gen::Actividad',
             foreign_key: 'proyectofinanciero_id',

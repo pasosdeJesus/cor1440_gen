@@ -152,6 +152,10 @@ es:
       "cor1440_gen/sectoractor":
         Sectoractor: Sector de organización social
         Sectoresactores: Sectores de organizaciones sociales
+      "cor1440_gen/sectorapc":
+        Sectorapc: Sector APC
+        Sectoresapc: Sectores APC
+      "cor1440_gen/tipoindicador":
       "cor1440_gen/tipoindicador":
         nombre: Nombre corto
         campotind: Campo
