@@ -1,50 +1,66 @@
-<div class="table-responsive" style="overflow-x:scroll;border: 1px solid gray;">
-  <div style="text-align: center">Tabla de beneficiarios por Rango de Edad y Sexo</div>
-  <table class="tablapoblacion table  table-bordered table-sm ">
-    <thead class="thead-light">
-      <tr><th>Rango de Edad</th>
-        <th><%= Cor1440Gen.actividadg1 %></th>
-        <th><%= Cor1440Gen.actividadg2 %></th>
-        <th><%= Cor1440Gen.actividadg3 %></th>
-        <th><%= Cor1440Gen.actividadg4 %></th>
-        <th><%= Cor1440Gen.actividadg5 %></th>
-        <th></th></tr>
-    </thead>
-    <tbody id="actividad_rangoedadac">
-      <tr>
-        <th scope='row'>Total</th>
-        <td id="tactividadfl">
-          <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
-        </td>
-        <td id="tactividadfr">
-          <%= fr = f.object.actividad_rangoedadac.sum(:fr) %>
-        </td>
-        <td id="tactividadml">
-          <%= ml = f.object.actividad_rangoedadac.sum(:ml) %>
-        </td>
-        <td id="tactividadmr">
-          <%= mr = f.object.actividad_rangoedadac.sum(:mr) %>
-        </td>
-        <td id="tactividads">
-          <%= sr = f.object.actividad_rangoedadac.sum(:s) %>
-        </td>
-        <td id="tactividadtot">
-          <%= fr + fl + mr + ml + sr %>
-        </td>
-      </tr>
-      <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
-        <%= render partial: 'actividad_rangoedadac_campos', 
-          locals: {f: s, ac: f} %>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="links">
-    <%= link_to_add_association 'Añadir Rango de Edad', f, 
-      :actividad_rangoedadac, 
-      :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
-      :"data-association-insertion-method" => "append", 
-      :partial => "actividad_rangoedadac_campos", 
-      :class => "btn-primary" 
-    %>
-  </div>
-</div> <!-- table-responsive -->
+
+<div class="panel panel-default">
+  <div id="acordeon_poblacion">
+    <div class="card">
+      <div class="card-header" id="poblacion">
+        <h6 class="mb-0" style='text-align: center'>
+          <a class="collapsed" data-toggle="collapse" data-target="#colapsa_poblacion" aria-expanded= "true" aria-controls="colapsa_poblacion">
+            Cuenta de beneficiarios por Rango de Edad
+          </a>
+        </h6>
+      </div>
+      <div id="colapsa_poblacion" class="collapse show" aria-labelledby="encabezado_poblacion" data-parent="#acordeon_poblacion">
+        <div class="card-body">
+          <div class="panel-body table-responsive" style="overflow-x:scroll;">
+            <table class="tablapoblacion table  table-bordered table-sm ">
+              <thead class="thead-light">
+                <tr><th>Rango de Edad</th>
+                  <th><%= Cor1440Gen.actividadg1 %></th>
+                  <th><%= Cor1440Gen.actividadg2 %></th>
+                  <th><%= Cor1440Gen.actividadg3 %></th>
+                  <th><%= Cor1440Gen.actividadg4 %></th>
+                  <th><%= Cor1440Gen.actividadg5 %></th>
+                  <th></th></tr>
+              </thead>
+              <tbody id="actividad_rangoedadac">
+                <tr>
+                  <th scope='row'>Total</th>
+                  <td id="tactividadfl">
+                    <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
+                  </td>
+                  <td id="tactividadfr">
+                    <%= fr = f.object.actividad_rangoedadac.sum(:fr) %>
+                  </td>
+                  <td id="tactividadml">
+                    <%= ml = f.object.actividad_rangoedadac.sum(:ml) %>
+                  </td>
+                  <td id="tactividadmr">
+                    <%= mr = f.object.actividad_rangoedadac.sum(:mr) %>
+                  </td>
+                  <td id="tactividads">
+                    <%= sr = f.object.actividad_rangoedadac.sum(:s) %>
+                  </td>
+                  <td id="tactividadtot">
+                    <%= fr + fl + mr + ml + sr %>
+                  </td>
+                </tr>
+                <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
+                  <%= render partial: 'actividad_rangoedadac_campos', 
+                    locals: {f: s, ac: f} %>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="links">
+              <%= link_to_add_association 'Añadir Rango de Edad', f, 
+                :actividad_rangoedadac, 
+                :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
+                :"data-association-insertion-method" => "append", 
+                :partial => "actividad_rangoedadac_campos", 
+                :class => "btn-primary" %>
+            </div>
+          </div> <!-- panel-body-->
+        </div> <!-- card-body-->
+      </div> <!-- colapsa-poblacion -->
+    </div> <!-- card -->
+  </div> <!-- acordeon_poblacion -->
+</div> <!-- panel panel-defaull -->

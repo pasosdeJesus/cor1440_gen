@@ -1,18 +1,29 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Medios de Verificación / Anexos</div>
-  <div class="panel-body">
-   
-    <div class="anexos-div anexosdiv">
-      <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
-        <%= render 'actividad_sip_anexo_fields', :f => a %>
-      <% end %>
-      <div class="links">
-        <%= link_to_add_association 'Añadir Anexo', f, 
-          :actividad_sip_anexo, :class => 'btn-primary' 
-        %>
+  <div id="acordeon_secanexos">
+    <div class="card">
+      <div class="card-header" id="secanexos">
+        <h6 class="mb-0" style='text-align: center'>
+          <a class="collapsed" data-toggle="collapse" data-target="#colapsa_secanexos" aria-expanded= "false" aria-controls="colapsa_secanexos">
+            Medios de Verificación / Anexos
+          </a>
+        </h6>
       </div>
-    </div> <!-- anexos-div -->
+      <div id="colapsa_secanexos" class="collapse" aria-labelledby="encabezado_secanexos" data-parent="#acordeon_secanexos">
+        <div class="card-body">
 
-  </div> <!-- panel-body -->
-</div> <!-- panel panel-default -->
- 
+          <div class="anexos-div anexosdiv">
+            <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
+              <%= render 'actividad_sip_anexo_fields', :f => a %>
+            <% end %>
+            <div class="links">
+              <%= link_to_add_association 'Añadir Anexo', f, 
+                :actividad_sip_anexo, :class => 'btn-primary' 
+              %>
+          </div>
+          </div> <!-- anexos-div -->
+
+        </div> <!-- card-body-->
+      </div> <!-- colapsa-secanexos-->
+    </div> <!-- card -->
+  </div> <!-- acordeon_secanexos -->
+</div> <!-- panel -->
