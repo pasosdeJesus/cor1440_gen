@@ -455,16 +455,24 @@ module Cor1440Gen
             if c == nil
               c = Cor1440Gen::Proyectofinanciero.accessible_by(ability)
             end
+            c2 = c
             if fr && fr != ''
-              c2 = c.where(
-                "(fechainicio <= ? OR fechainicio IS NULL) AND " +
-                "(? <= fechacierre OR fechacierre IS NULL)", 
-                fr, fr)
+              menserror=''
+              nfr = Sip::FormatoFechaHelper.reconoce_adivinando_locale(
+                fr, menserror)
+              if menserror != ''
+                puts "** Problema con fecha '#{fr}'. #{menserror}"
+              else
+                c2 = c.where(
+                  "(fechainicio <= ? OR fechainicio IS NULL) AND " +
+                  "(? <= fechacierre OR fechacierre IS NULL)", 
+                  nfr.to_s, nfr.to_s)
+              end
             end
             return c2
           end
 
-        end
+        end # included
 
       end
     end
