@@ -17,9 +17,7 @@
         <% end %>
       <% end %>
       <th>Resultado</th><th>Meta</th><th>Porcentaje</th>
-      <th>
-        <%= render partial: 'show_pmindicaobservacioneshead' %>
-      </th>
+      <%= render partial: 'show_pmindicaobservacionesenc' %>
     </tr>
     <% pms.each do |pm| %>
       <tr>
@@ -66,10 +64,8 @@
             <%= v %>
           </span>
         </td>
-        <td>
-          <%= render partial: 'show_pmindicaobservaciones' %>
-        </td>
-      </tr>
+        <%= render 'show_pmindicaobservaciones', pm: pm %>
+      </tr>|
     <% end %>
   </table>
   </div>

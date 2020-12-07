@@ -52,6 +52,12 @@
       input_html: { readonly: 'readonly' },
       label: false %> 
   </td>
+
+  <th>
+    <%= render partial: 'columnafinal_pmindi',
+     locals: {f: f, con_label: false} %>
+  </th>
+
   <!--td> <%= f.input :analisis, label: false %> </td><td> <%= f.input :acciones, label: false %> </td><td> <%= f.input :responsables, label: false %> </td><td> <%= f.input :plazo, label: false %> </td-->
   <td>
     <%= f.input :id, as: :hidden %>
