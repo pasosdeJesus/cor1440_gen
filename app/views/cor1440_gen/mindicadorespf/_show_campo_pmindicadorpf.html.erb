@@ -16,8 +16,8 @@
             <th><%= di.nombre %></th>
         <% end %>
       <% end %>
-      <th><%= Cor1440Gen::Pmindicadorpf.human_attribute_name(:resind) %></th>
-      <th>Meta</th><th>Porcentaje</th>
+      <th>Resultado</th><th>Meta</th><th>Porcentaje</th>
+      <%= render partial: 'show_pmindicaobservacionesenc' %>
     </tr>
     <% pms.each do |pm| %>
       <tr>
@@ -64,7 +64,8 @@
             <%= v %>
           </span>
         </td>
-      </tr>
+        <%= render 'show_pmindicaobservaciones', pm: pm %>
+      </tr>|
     <% end %>
   </table>
   </div>
