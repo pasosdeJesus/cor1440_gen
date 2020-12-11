@@ -14,7 +14,9 @@
   </td>
   <td>
 
-    <% coltir = Cor1440Gen::Tipoindicador.where(medircon: 1) %>
+    <% tid = Cor1440Gen::Tipoindicador.where(medircon: 1).map(&:id)  %>
+    <% tus = f.object.tipoindicador_id ? [f.object.tipoindicador_id] : []  %>
+    <% coltir = Cor1440Gen::Tipoindicador.where(id: tid | tus)  %>
     <%= f.association :tipoindicador, 
       collection: coltir,
       label_method: :nombre,

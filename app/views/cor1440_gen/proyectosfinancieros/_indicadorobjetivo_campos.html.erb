@@ -14,7 +14,9 @@
     <%= f.input :indicador, as: :text, input_html: { rows: 3 }, label: false %>
   </td>
   <td>
-    <% coltie = Cor1440Gen::Tipoindicador.where(medircon: 2) %>
+    <% tid = Cor1440Gen::Tipoindicador.where(medircon: 2).map(&:id)  %>
+    <% tus = f.object.tipoindicador_id ? [f.object.tipoindicador_id] : []  %>
+    <% coltie = Cor1440Gen::Tipoindicador.where(id: tid | tus) %>
     <%= f.association :tipoindicador, 
       collection: coltie,
       label_method: :nombre,
