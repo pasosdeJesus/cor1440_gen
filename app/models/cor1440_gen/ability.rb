@@ -9,11 +9,11 @@ module Cor1440Gen
     #ROLSISACT = 7
 
     ROLES = [
-      ["Administrador", ROLADMIN], 
-      ["", 0], 
-      ["Directivo", ROLDIR], 
-      ["", 0], 
-      ["Operador", ROLOPERADOR], 
+      ["Administrador", ROLADMIN],
+      ["", 0],
+      ["Directivo", ROLDIR],
+      ["", 0],
+      ["Operador", ROLOPERADOR],
       ["", 0 ],
       ["", 0],
       ["", 0]
@@ -21,27 +21,27 @@ module Cor1440Gen
 
     # Tablas básicas
     BASICAS_PROPIAS= [
-      ['Cor1440Gen', 'actividadarea'], 
-      ['Cor1440Gen', 'actividadtipo'], 
-      ['Cor1440Gen', 'financiador'], 
-      ['Cor1440Gen', 'proyecto'], 
+      ['Cor1440Gen', 'actividadarea'],
+      ['Cor1440Gen', 'actividadtipo'],
+      ['Cor1440Gen', 'financiador'],
+      ['Cor1440Gen', 'proyecto'],
       ['Cor1440Gen', 'rangoedadac'],
       ['Cor1440Gen', 'sectorapc'],
       ['Cor1440Gen', 'tipoindicador']
-    ]  
-    def tablasbasicas 
+    ]
+    def tablasbasicas
       Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
-        ['Sip', 'fuenteprensa'], 
-        ['Sip', 'grupo'], 
-        ['Sip', 'tdocumento'], 
-        ['Sip', 'trelacion'], 
+        ['Sip', 'fuenteprensa'],
+        ['Sip', 'grupo'],
+        ['Sip', 'tdocumento'],
+        ['Sip', 'trelacion'],
         ['Sip', 'tsitio']
       ]
     end
 
     BASICAS_ID_NOAUTO = []
     # Hereda basicas_id_noauto de sip
-   
+
     NOBASICAS_INDSEQID =  [
       ['cor1440_gen', 'actividadpf'],
       ['cor1440_gen', 'indicadorpf'],
@@ -50,40 +50,40 @@ module Cor1440Gen
       ['cor1440_gen', 'resultadopf']
     ]
     # Hereda nobasicas_indice_seq_con_id de sip
-    def nobasicas_indice_seq_con_id 
+    def nobasicas_indice_seq_con_id
       Sip::Ability::NOBASICAS_INDSEQID +
-        Cor1440Gen::Ability::NOBASICAS_INDSEQID 
+        Cor1440Gen::Ability::NOBASICAS_INDSEQID
     end
 
     BASICAS_PRIO = []
     # Hereda tablasbasicas_prio de sip
 
     CAMPOS_PLANTILLAS_PROPIAS = {
-      'Actividad' => { 
+      'Actividad' => {
         campos: [
           Cor1440Gen::Actividad.human_attribute_name(
-            :actividadareas).downcase.gsub(' ', '_'), 
+            :actividadareas).downcase.gsub(' ', '_'),
           Cor1440Gen::Actividad.human_attribute_name(
-            :actividadpf).downcase.gsub(' ', '_'), 
+            :actividadpf).downcase.gsub(' ', '_'),
           'actualizacion',
           'anexo_1_desc',
           'anexo_2_desc',
           'anexo_3_desc',
           'anexo_4_desc',
           'anexo_5_desc',
-          'campos_dinamicos', 
-          'corresponsables', 
-          'creacion', 
-          'fecha', 
-          'fecha_localizada', 
-          'id', 
-          'lugar', 
-          'nombre', 
-          'objetivo', 
-          'observaciones', 
+          'campos_dinamicos',
+          'corresponsables',
+          'creacion',
+          'fecha',
+          'fecha_localizada',
+          'id',
+          'lugar',
+          'nombre',
+          'objetivo',
+          'observaciones',
           'objetivo_convenio_financiero',
-          'oficina', 
-          'poblacion', 
+          'oficina',
+          'poblacion',
           'poblacion_mujeres_l',
           'poblacion_mujeres_r',
           'poblacion_hombres_l',
@@ -120,27 +120,27 @@ module Cor1440Gen
           'poblacion_hombres_r_g6',
           'poblacion_sinsexo_g6',
           Cor1440Gen::Actividad.human_attribute_name(
-            :proyectofinanciero).downcase.gsub(' ', '_'), 
+            :proyectofinanciero).downcase.gsub(' ', '_'),
           Cor1440Gen::Actividad.human_attribute_name(
-            :proyectos).downcase.gsub(' ', '_'), 
-          'responsable', 
-          'resultado', 
+            :proyectos).downcase.gsub(' ', '_'),
+          'responsable',
+          'resultado',
         ],
         controlador: 'Cor1440Gen::ActividadesController',
         ruta: '/actividades'
       },
-      'Proyecto' => { 
+      'Proyecto' => {
         campos: [
-          'compromisos', 
+          'compromisos',
           'equipotrabajo',
-          'fechainicio_localizada',  
+          'fechainicio_localizada',
           'fechacierre_localizada',
           'fechacreacion_localizada',
           'fechaactualizacion_localizada',
           'financiador',
           'id',
-          'monto', 
-          'nombre', 
+          'monto',
+          'nombre',
           'observaciones',
           'responsable',
         ],
@@ -149,25 +149,25 @@ module Cor1440Gen
       },
     }
 
-    def campos_plantillas 
+    def campos_plantillas
       Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS.
         clone.merge(CAMPOS_PLANTILLAS_PROPIAS)
     end
 
     def initialize_cor1440_gen(usuario = nil)
-      # Sin autenticación puede consultarse información geográfica 
+      # Sin autenticación puede consultarse información geográfica
       can :read, [Sip::Pais, Sip::Departamento, Sip::Municipio, Sip::Clase]
       if !usuario || usuario.fechadeshabilitacion
         return
       end
 
       can [:nuevo, :new], Cor1440Gen::Actividad
-  
+
       can :read, Heb412Gen::Doc
       can :read, Heb412Gen::Plantilladoc
       can :read, Heb412Gen::Plantillahcm
       can :read, Heb412Gen::Plantillahcr
-  
+
       can :descarga_anexo, Sip::Anexo
       can :contar, Sip::Ubicacion
       can :buscar, Sip::Ubicacion
@@ -175,7 +175,7 @@ module Cor1440Gen
       can :nuevo, Sip::Ubicacion
 
       if !usuario.nil? && !usuario.rol.nil? then
-        case usuario.rol 
+        case usuario.rol
         when ROLOPERADOR
 
           presponsable = Cor1440Gen::Proyectofinanciero.where(
@@ -183,7 +183,7 @@ module Cor1440Gen
           can [:read,:edit,:update], Cor1440Gen::Proyectofinanciero,
             responsable: { id: usuario.id}
 
-          # Convención: Los proyectos sin usuarios se suponen como 
+          # Convención: Los proyectos sin usuarios se suponen como
           # institucionales o para todos los usuarios
           psinusuario = Cor1440Gen::Proyectofinanciero.all.map(&:id) -
             Cor1440Gen::ProyectofinancieroUsuario.all.map(
@@ -206,7 +206,7 @@ module Cor1440Gen
           can :read, Cor1440Gen::Actividad,
             actividad_proyectofinanciero: {proyectofinanciero_id: penequipo}
 
-          # Responsable de un proyecto puede eliminar  y editar actividades 
+          # Responsable de un proyecto puede eliminar  y editar actividades
           # del mismo
           can :manage, Cor1440Gen::Actividad,
             actividad_proyectofinanciero: {proyectofinanciero_id: presponsable}
@@ -214,11 +214,11 @@ module Cor1440Gen
           can :read, Cor1440Gen::Efecto
           can :read, Cor1440Gen::FormularioTipoindicador
           can :read, Cor1440Gen::Informe
-  
+
           can [:new, :create, :read, :index, :edit, :update],
             Sip::Actorsocial
           can :manage, Sip::Persona
-  
+
         when Ability::ROLADMIN, Ability::ROLDIR
           can :manage, Cor1440Gen::Actividad
           can :manage, Cor1440Gen::Campotind
@@ -231,17 +231,17 @@ module Cor1440Gen
           can :manage, Cor1440Gen::Proyectofinanciero
           can :manage, Cor1440Gen::Sectoractor
           can :manage, Cor1440Gen::Tipoindicador
-  
+
           can :manage, Heb412Gen::Doc
           can :manage, Heb412Gen::Plantilladoc
           can :manage, Heb412Gen::Plantillahcm
           can :manage, Heb412Gen::Plantillahcr
-          
+
           can :manage, Mr519Gen::Formulario
-  
+
           can :manage, Sip::Actorsocial
           can :manage, Sip::Persona
-  
+
           can :manage, Usuario
           can :manage, :tablasbasicas
           tablasbasicas.each do |t|
