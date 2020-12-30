@@ -4,7 +4,7 @@
     :default => 'Conteo de beneficiarios por actividad de convenio' %></h1>
 </div>
 <%= simple_form_for :filtro, 
-  { remote: true, 
+  { remote: false, 
     url: cor1440_gen.contar_actividades_beneficiarios_path,
     method: "get" } do |f| 
 %>
@@ -22,7 +22,6 @@
           placeholder: 'Fecha Inicial',
           input_html: {
             "data-behaviour" => "datepicker",
-            "data-contarautomatico" => "",
             value: fecha_estandar_local(@contarb_fechaini)
           }
         %>
@@ -35,7 +34,6 @@
           placeholder: 'Fecha Final',
           input_html: {
             "data-behaviour" => "datepicker",
-            "data-contarautomatico" => "",
             value: fecha_estandar_local(@contarb_fechafin)
           } %>
       </div>
@@ -56,7 +54,6 @@
           ),
           selected: @contarb_pfid,
           input_html: { 
-              "data-contarautomatico" => "",
               class: 'chosen-select' 
             }
         %>

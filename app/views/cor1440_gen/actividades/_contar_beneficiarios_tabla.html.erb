@@ -20,20 +20,40 @@
     </tr>
   </thead>
   <tbody>
+
+    <% tram = Cor1440Gen::Asistencia.connection.execute(
+      "SELECT asis.id, asis.persona_id, 
+         a.id AS actividad_id, a.fecha as actividad_fecha,
+         public.sip_edad_de_fechanac_fecharef(p.anionac, p.mesnac, p.dianac,
+         EXTRACT(YEAR FROM a.fecha)::integer, 
+         EXTRACT(MONTH from a.fecha)::integer,
+         EXTRACT(DAY FROM a.fecha)::integer) AS edad_en_actividad,
+         apf.id AS actividadpf_id, pf.id AS proyectofinanciero_id  
+       FROM cor1440_gen_asistencia AS asis 
+       JOIN sip_persona AS p ON p.id=asis.persona_id
+       JOIN cor1440_gen_actividad AS a ON asis.actividad_id=a.id
+       JOIN cor1440_gen_actividad_actividadpf AS acapf ON  acapf.actividad_id=a.id
+       JOIN cor1440_gen_actividadpf AS apf ON apf.id=acapf.actividadpf_id
+       JOIN cor1440_gen_proyectofinanciero AS pf ON apf.proyectofinanciero_id=pf.id
+       WHERE a.id IN (#{@contarb_actividad.pluck(:id).join(",")})", ).to_a %>
+ 
     <% @contarb_listabenef.each do |b| %>
-      <% asg = Cor1440Gen::Asistencia.where(
+      <!--% asg = Cor1440Gen::Asistencia.where(
         'persona_id=?', b.id).where(
           'actividad_id IN (?)', @contarb_actividad.select(:id)) 
-        %>
-      <% fechas = Cor1440Gen::Actividad.where(id: asg.select(:actividad_id)).
-        pluck(:fecha).uniq %>
-      <% rangosedad = fechas.map {|f|
+        %-->
+      <% asg2 = tram.select{|r| r['persona_id'] == b.id} %>
+      <% asg2_actividad_ids = asg2.map{|r| r['actividad_id']} %>
+      <!--% fechas = Cor1440Gen::Actividad.where(id: asg.select(:actividad_id)).
+        pluck(:fecha).uniq %-->
+      <% fechas = asg2.map{|r| r['actividad_fecha']}.uniq %>
+      <!--Cor1440Gen::Actividad.where(id: asg2_actividad_ids).
+        pluck(:fecha).uniq -->
+      <% rangosedad = asg2.map{|r| r['edad_actividadactividad_fecha']}.uniq.each {|e|
         cr = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
-          Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
-            b.anionac, b.mesnac, b.dianac,
-            f.year, f.month, f.day), 'Cor1440Gen::Rangoedadac')
+          e, 'Cor1440Gen::Rangoedadac')
         ret = cr>=0 ? Cor1440Gen::Rangoedadac.find(cr).nombre : ''
-        ret }.join("; ") %>
+        ret }.uniq.join("; ") %>
       <tr>
         <td>
           <%= b.presenta_nombre %>
@@ -47,13 +67,14 @@
 
         <% @contarb_listaac.each do |a| %>
           <td>
-            <% consb = @contarb_actividad.where('cor1440_gen_actividad.id IN 
+            <!--% consb = @contarb_actividad.where('cor1440_gen_actividad.id IN 
           (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
-           WHERE actividadpf_id=?)',a.id) %>
-            <% consas = Cor1440Gen::Asistencia.where(
+           WHERE actividadpf_id=?)',a.id) %-->
+            <!--% consas = Cor1440Gen::Asistencia.where(
                'persona_id=?', b.id).where(
-                 'actividad_id IN (?)', consb.select(:id)) %>
-            <% totconsas = consas.count %>
+               'actividad_id IN (?)', consb.select(:id)) %-->
+            <% consas2 = asg2.select{|r| r['actividadpf_id'] == a.id} %>
+            <% totconsas = consas2.count %>
             <% if totconsas > 0 %>
               <% #byebug %>
             <% end %>

@@ -265,6 +265,10 @@ module Cor1440Gen
             end
           end
 
+          # Por sobrecargar
+          def filtra_contarb_actividad_por_parametros(contarb_actividad)
+            contarb_actividad
+          end
 
           # Genera conteo por beneficiario y actividad de convenio
           def contar_beneficiarios
@@ -310,7 +314,8 @@ module Cor1440Gen
               @contarb_actividad = @contarb_actividad.where(
                 'cor1440_gen_actividad.fecha <= ?', @contarb_fechafin)
             end
-            #filtra_contarb_por_parametros 
+            @contarb_actividad = filtra_contarb_actividad_por_parametros(
+              @contarb_actividad)
 
             @contarb_listabenef = Sip::Persona.where('id IN 
               (SELECT persona_id FROM cor1440_gen_asistencia 
