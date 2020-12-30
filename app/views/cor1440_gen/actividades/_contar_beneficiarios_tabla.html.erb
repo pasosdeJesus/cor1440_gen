@@ -21,6 +21,8 @@
   </thead>
   <tbody>
 
+    <% lids = @contarb_actividad.count> 0 ? 
+      @contarb_actividad.pluck(:id).join(",") : "0" %>
     <% tram = Cor1440Gen::Asistencia.connection.execute(
       "SELECT asis.id, asis.persona_id, 
          a.id AS actividad_id, a.fecha as actividad_fecha,
@@ -35,7 +37,7 @@
        JOIN cor1440_gen_actividad_actividadpf AS acapf ON  acapf.actividad_id=a.id
        JOIN cor1440_gen_actividadpf AS apf ON apf.id=acapf.actividadpf_id
        JOIN cor1440_gen_proyectofinanciero AS pf ON apf.proyectofinanciero_id=pf.id
-       WHERE a.id IN (#{@contarb_actividad.pluck(:id).join(",")})", ).to_a %>
+       WHERE a.id IN (#{lids})", ).to_a %>
  
     <% @contarb_listabenef.each do |b| %>
       <!--% asg = Cor1440Gen::Asistencia.where(
