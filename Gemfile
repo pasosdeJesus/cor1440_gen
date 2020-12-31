@@ -23,6 +23,8 @@ gem 'jbuilder'
 
 gem 'libxml-ruby'
 
+gem 'nokogiri', '>=1.11.0.rc4'
+
 gem 'odf-report' # Genera ODT
 
 gem 'paperclip' # Maneja adjuntos
