@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 3a2bbfc35f9a244c6b2a7533159a18159eb9b48c
+  revision: 1d2e5fd0d27ec9c40908158fd40d7b34714905e8
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: eccc7e6dbb17e462fa1be834ecccaf679906dc20
+  revision: 7ff144a994ab632c10640ea3b3645b9507e2ff5b
   specs:
     mr519_gen (0.2.0)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 705cdf550ad5b9604615dbda11130176cc69a28c
+  revision: 2077a936cb53302edcaaac778636145bc01bdce6
   specs:
     sip (2.0.b10)
       cancancan
@@ -125,7 +125,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     camertron-eprun (1.1.1)
-    cancancan (3.2.0)
+    cancancan (3.2.1)
     capybara (3.34.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -287,7 +287,7 @@ GEM
     rspec-expectations (3.10.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.0)
+    rspec-mocks (3.10.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-rails (4.0.2)
@@ -304,7 +304,7 @@ GEM
       rubyzip (>= 1.3)
     ruby-graphviz (1.2.5)
       rexml
-    ruby-progressbar (1.10.1)
+    ruby-progressbar (1.11.0)
     rubyzip (2.3.0)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -336,7 +336,7 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     thor (1.0.1)
     tilt (2.0.10)
-    ttfunk (1.6.2.1)
+    ttfunk (1.7.0)
     twitter_cldr (6.4.0)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.1)
