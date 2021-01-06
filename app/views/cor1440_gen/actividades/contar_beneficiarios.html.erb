@@ -67,8 +67,8 @@
     </div>
 
   </div>
-<% end %>
 
 <div id="resultado">
-  <%= render 'contar_beneficiarios_tabla' %>
+  <%= render partial: 'contar_beneficiarios_tabla', locals: {f: f} %>
 </div> <!-- id: resultado -->
+<% end %>

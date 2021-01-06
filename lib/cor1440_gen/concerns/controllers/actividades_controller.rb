@@ -270,6 +270,48 @@ module Cor1440Gen
             contarb_actividad
           end
 
+          def ini_asistencia_ram(lids)
+            "SELECT sub.*, 
+             ARRAY(SELECT id FROM cor1440_gen_rangoedadac AS red
+              WHERE id=CASE 
+                WHEN (red.limiteinferior IS NULL OR 
+                  red.limiteinferior<=sub.edad_en_actividad) AND 
+                  (red.limitesuperior IS NULL OR
+                  red.limitesuperior>=sub.edad_en_actividad) THEN
+                  red.id
+                ELSE
+                  7 -- SIN INFORMACION
+              END) AS rangoedadac_ids
+            FROM (SELECT asis.id,
+              asis.persona_id,
+              TRIM(TRIM(p.nombres) || ' '  ||
+                TRIM(p.apellidos)) AS persona_nombre,
+              TRIM(COALESCE(td.sigla || ':', '') ||
+                COALESCE(p.numerodocumento, '')) AS persona_identificacion,
+              public.sip_edad_de_fechanac_fecharef(
+                p.anionac, p.mesnac, p.dianac,
+              EXTRACT(YEAR FROM a.fecha)::integer,
+              EXTRACT(MONTH from a.fecha)::integer,
+              EXTRACT(DAY FROM a.fecha)::integer) AS edad_en_actividad,
+              p.sexo AS persona_sexo,
+              a.id AS actividad_id,
+              a.fecha as actividad_fecha,
+              apf.id AS actividadpf_id,
+              pf.id AS proyectofinanciero_id
+            FROM cor1440_gen_asistencia AS asis
+            JOIN sip_persona AS p ON p.id=asis.persona_id
+            LEFT JOIN sip_tdocumento AS td ON td.id=p.tdocumento_id
+            JOIN cor1440_gen_actividad AS a ON asis.actividad_id=a.id
+            JOIN cor1440_gen_actividad_actividadpf AS acapf 
+              ON  acapf.actividad_id=a.id
+            JOIN cor1440_gen_actividadpf AS apf ON apf.id=acapf.actividadpf_id
+            JOIN cor1440_gen_proyectofinanciero AS pf 
+              ON apf.proyectofinanciero_id=pf.id
+            WHERE a.id IN (#{lids})) AS sub WHERE true=true
+            "
+          end
+
+
           # Genera conteo por beneficiario y actividad de convenio
           def contar_beneficiarios
             @contarb_actividad = Cor1440Gen::Actividad.all
@@ -290,6 +332,7 @@ module Cor1440Gen
                   WHERE proyectofinanciero_id=?)',@contarb_pfid).where(
                     'cor1440_gen_actividad.id IN 
                 (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)')
+            byebug
 
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
                 params[:filtro]['fechaini'] != ""
@@ -314,15 +357,40 @@ module Cor1440Gen
               @contarb_actividad = @contarb_actividad.where(
                 'cor1440_gen_actividad.fecha <= ?', @contarb_fechafin)
             end
+
             @contarb_actividad = filtra_contarb_actividad_por_parametros(
               @contarb_actividad)
 
-            @contarb_listabenef = Sip::Persona.where('id IN 
-              (SELECT persona_id FROM cor1440_gen_asistencia 
-                WHERE actividad_id IN (?))', @contarb_actividad.select(:id))
-
             @contarb_listaac = Cor1440Gen::Actividadpf.where(
               proyectofinanciero_id: @contarb_pfid).order(:nombrecorto) 
+
+            mas_where_asistencia_ram = ''
+            if params[:filtro] && params[:filtro]['buspersona_id'] &&
+                params[:filtro]['buspersona_id'] != ""
+              mas_where_asistencia_ram += " AND " +
+                "persona_id = #{params[:filtro]['buspersona_id'].to_i}"
+            end
+            byebug
+            if params[:filtro] && params[:filtro]['bussexo'] &&
+                params[:filtro]['bussexo'] != "" &&
+                Sip::SexoGeneroHelper::SEXO_OPCIONES.map(&:last).include?(
+                  params[:filtro]['bussexo'])
+              mas_where_asistencia_ram += " AND " +
+                "persona_sexo = '#{params[:filtro]['bussexo']}'"
+            end
+            if params[:filtro] && params[:filtro]['busrangoedadac_id'] &&
+                params[:filtro]['busrangoedadac_id'] != ""
+              mas_where_asistencia_ram += " AND " +
+                "p.rangoedadac_id = #{params[:filtro]['busrangoedadac_id']}"
+            end
+
+            lids = @contarb_actividad.count> 0 ?
+              @contarb_actividad.pluck(:id).join(",") : "0"
+            @contarb_asistencia_ram = Cor1440Gen::Asistencia.connection.
+              execute <<-SQL
+              #{ini_asistencia_ram(lids)}
+              #{mas_where_asistencia_ram}
+            SQL
 
             respond_to do |format|
               format.html { render layout: 'application' }
