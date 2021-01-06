@@ -61,16 +61,16 @@ gem 'will_paginate' # Pagina listados
 # Motores que se sobrecargan vistas (deben ponerse en orden de apilamiento 
 # lógico y no alfabetico como las gemas anteriores)
 
-gem 'sip', # Motor generico
-  git: 'https://github.com/pasosdeJesus/sip.git'
+gem 'sip', # Motor generico,
+  git: 'https://github.com/pasosdeJesus/sip.git', branch: :rails60
   #path: '../sip'
 
 gem 'mr519_gen', # Motor de gestion de formularios y encuestas
-  git: 'https://github.com/pasosdeJesus/mr519_gen.git'
+  git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: :rails60
   #path: '../mr519_gen'
 
 gem 'heb412_gen',  # Motor de nube y llenado de plantillas
-  git: 'https://github.com/pasosdeJesus/heb412_gen.git'
+  git: 'https://github.com/pasosdeJesus/heb412_gen.git', branch: :rails60
 
 
 group :development do
