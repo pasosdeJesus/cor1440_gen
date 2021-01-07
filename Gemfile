@@ -64,8 +64,8 @@ gem 'will_paginate' # Pagina listados
 # lógico y no alfabetico como las gemas anteriores)
 
 gem 'sip', # Motor generico,
-  #git: 'https://github.com/pasosdeJesus/sip.git', branch: 'rails6.0'
-  path: '../sip'
+  git: 'https://github.com/pasosdeJesus/sip.git', branch: 'rails6.0'
+  #path: '../sip'
 
 gem 'mr519_gen', # Motor de gestion de formularios y encuestas
   git: 'https://github.com/pasosdeJesus/mr519_gen.git', branch: 'rails6.0'
@@ -86,7 +86,7 @@ end
 
 group :development, :test do
 
-  gem 'byebug', platform: :mri
+  #gem 'byebug', platform: :mri
 
   gem 'colorize' # Colores en Terminl
 
