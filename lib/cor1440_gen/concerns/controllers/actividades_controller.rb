@@ -332,7 +332,6 @@ module Cor1440Gen
                   WHERE proyectofinanciero_id=?)',@contarb_pfid).where(
                     'cor1440_gen_actividad.id IN 
                 (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)')
-            byebug
 
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
                 params[:filtro]['fechaini'] != ""
@@ -370,7 +369,6 @@ module Cor1440Gen
               mas_where_asistencia_ram += " AND " +
                 "persona_id = #{params[:filtro]['buspersona_id'].to_i}"
             end
-            byebug
             if params[:filtro] && params[:filtro]['bussexo'] &&
                 params[:filtro]['bussexo'] != "" &&
                 Sip::SexoGeneroHelper::SEXO_OPCIONES.map(&:last).include?(

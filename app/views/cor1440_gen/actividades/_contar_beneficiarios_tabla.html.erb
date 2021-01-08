@@ -1,5 +1,4 @@
 <% sumcol = {} %>
-    p.sexo AS persona_sexo,
 
 <% cotejador = TwitterCldr::Collation::Collator.new(:es) %>
 <% contarb_personas = @contarb_asistencia_ram.map{|r|
@@ -44,25 +43,15 @@
           {
               class: 'chosen-select',
               name: 'filtro[buspersona_id]',
-              'data-enviarautomatico' => ''
-            })
-          %>
+              'data-enviarautomatico' => '' }
+        ) %>
 
-        <!--%= f.input :buspersona_id,
-          collection: contarb_personas,
-          label: false,
-          include_blank: true,
-          selected: Sip::ModeloHelper.poromision(params, :buspersona_id),
-          input_html: {
-          class: 'chosen-select',
-          'data-enviarautomatico' => ''
-        } %-->
       </th>
       <th>
         <%= collection_select(
           nil,
           'filtro_bussexo',
-          Sip::SexoGeneroHelper::SEXO_OPCIONES,
+          Sip::EdadSexoHelper::SEXO_OPCIONES,
           :last, 
           :first, 
           {
@@ -71,20 +60,8 @@
           {
               class: 'chosen-select',
               name: 'filtro[bussexo]',
-              'data-enviarautomatico' => ''
-            })
-          %>
-
-
-        <!--%= f.input :bussexo,
-          collection: Sip::SexoGeneroHelper::SEXO_OPCIONES,
-          label: false,
-          include_blank: true,
-          selected: Sip::ModeloHelper.poromision(params, :bussexo),
-          input_html: {
-          class: 'chosen-select',
-          'data-enviarautomatico' => ''
-        } %-->
+              'data-enviarautomatico' => '' }
+        ) %>
       </th>
       <th>
         <%= collection_select(
@@ -99,21 +76,8 @@
           {
               class: 'chosen-select',
               name: 'filtro[busrangoedad_id]',
-              'data-enviarautomatico' => ''
-            })
-          %>
-
-        <!--%= f.input :busrangoedad_id,
-          collection: Cor1440Gen::Rangoedadac.habilitados,
-          label: false,
-          value_method: :id,
-          label_method: :presenta_nombre,
-          include_blank: true,
-          selected: Sip::ModeloHelper.poromision(params, :busrangoedad_id),
-          input_html: {
-            class: 'chosen-select',
-            'data-enviarautomatico' => ''
-          } %-->
+              'data-enviarautomatico' => '' }
+        ) %>
       </th>
       <% @contarb_listaac.each do |a| %>
         <th>
@@ -123,7 +87,6 @@
 
   </thead>
   <tbody>
-
 
     <% contarb_personas.each do |b| %>
       <!--% asg = Cor1440Gen::Asistencia.where(
@@ -138,7 +101,7 @@
       <!--Cor1440Gen::Actividad.where(id: asg2_actividad_ids).
         pluck(:fecha).uniq -->
       <% rangosedad = asg2.map{|r| r['edad_actividadactividad_fecha']}.uniq.each {|e|
-        cr = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
+        cr = Sip::EdadSexoHelper.buscar_rango_edad(
           e, 'Cor1440Gen::Rangoedadac')
         ret = cr>=0 ? Cor1440Gen::Rangoedadac.find(cr).nombre : ''
         ret }.uniq.join("; ") %>
