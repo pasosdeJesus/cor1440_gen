@@ -241,8 +241,8 @@ CREATE TABLE public.cor1440_gen_actividad (
 --
 
 CREATE TABLE public.cor1440_gen_actividad_actividadpf (
-    actividad_id integer NOT NULL,
-    actividadpf_id integer NOT NULL
+    actividad_id bigint NOT NULL,
+    actividadpf_id bigint NOT NULL
 );
 
 
@@ -534,7 +534,6 @@ CREATE TABLE public.cor1440_gen_actividadpf (
 --
 
 CREATE SEQUENCE public.cor1440_gen_actividadpf_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2583,8 +2582,8 @@ ALTER SEQUENCE public.sip_grupo_id_seq OWNED BY public.sip_grupo.id;
 --
 
 CREATE TABLE public.sip_grupo_usuario (
-    usuario_id bigint NOT NULL,
-    sip_grupo_id bigint NOT NULL
+    usuario_id integer NOT NULL,
+    sip_grupo_id integer NOT NULL
 );
 
 
@@ -2603,7 +2602,7 @@ CREATE TABLE public.sip_grupoper (
 -- Name: TABLE sip_grupoper; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON TABLE public.sip_grupoper IS 'Creado por sip en cor1440_produccion';
+COMMENT ON TABLE public.sip_grupoper IS 'Creado por sip en cor1440gen_des';
 
 
 --
@@ -3928,6 +3927,14 @@ ALTER TABLE ONLY public.cor1440_gen_proyectofinanciero_usuario
 
 
 --
+-- Name: cor1440_gen_rangoedadac cor1440_gen_rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cor1440_gen_rangoedadac
+    ADD CONSTRAINT cor1440_gen_rangoedadac_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: cor1440_gen_resultadopf cor1440_gen_resultadopf_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4133,14 +4140,6 @@ ALTER TABLE ONLY public.poa
 
 ALTER TABLE ONLY public.proyectoyconvenio
     ADD CONSTRAINT proyectoyconvenio_pkey PRIMARY KEY (id);
-
-
---
--- Name: cor1440_gen_rangoedadac rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cor1440_gen_rangoedadac
-    ADD CONSTRAINT rangoedadac_pkey PRIMARY KEY (id);
 
 
 --
@@ -5891,6 +5890,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20180219032546'),
 ('20180220103644'),
 ('20180220104234'),
+('20180223025142'),
 ('20180223091622'),
 ('20180320230847'),
 ('20180427194732'),
@@ -5985,6 +5985,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200212103617'),
 ('20200228235200'),
 ('20200229005951'),
+('20200229191119'),
 ('20200302194744'),
 ('20200314033958'),
 ('20200319183515'),
@@ -5995,7 +5996,6 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200411095105'),
 ('20200415021859'),
 ('20200415102103'),
-('20200629163734'),
 ('20200706113547'),
 ('20200722210144'),
 ('20200723133542'),
