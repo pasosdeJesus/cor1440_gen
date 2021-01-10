@@ -271,17 +271,27 @@ module Cor1440Gen
           end
 
           def ini_asistencia_ram(lids)
-            "SELECT sub.*, 
-             ARRAY(SELECT id FROM cor1440_gen_rangoedadac AS red
-              WHERE id=CASE 
-                WHEN (red.limiteinferior IS NULL OR 
-                  red.limiteinferior<=sub.edad_en_actividad) AND 
-                  (red.limitesuperior IS NULL OR
-                  red.limitesuperior>=sub.edad_en_actividad) THEN
-                  red.id
-                ELSE
-                  7 -- SIN INFORMACION
-              END) AS rangoedadac_ids
+            "SELECT sub2.* FROM (SELECT sub.*, 
+               (SELECT nombre FROM cor1440_gen_rangoedadac AS red
+                WHERE id=CASE 
+                  WHEN (red.limiteinferior IS NULL OR 
+                    red.limiteinferior<=sub.edad_en_actividad) AND 
+                    (red.limitesuperior IS NULL OR
+                    red.limitesuperior>=sub.edad_en_actividad) THEN
+                    red.id
+                  ELSE
+                    7 -- SIN INFORMACION
+                END LIMIT 1) AS rangoedadac_nombre,
+               (SELECT id FROM cor1440_gen_rangoedadac AS red
+                WHERE id=CASE 
+                  WHEN (red.limiteinferior IS NULL OR 
+                    red.limiteinferior<=sub.edad_en_actividad) AND 
+                    (red.limitesuperior IS NULL OR
+                    red.limitesuperior>=sub.edad_en_actividad) THEN
+                    red.id
+                  ELSE
+                    7 -- SIN INFORMACION
+                END LIMIT 1) AS rangoedadac_id
             FROM (SELECT asis.id,
               asis.persona_id,
               TRIM(TRIM(p.nombres) || ' '  ||
@@ -307,7 +317,7 @@ module Cor1440Gen
             JOIN cor1440_gen_actividadpf AS apf ON apf.id=acapf.actividadpf_id
             JOIN cor1440_gen_proyectofinanciero AS pf 
               ON apf.proyectofinanciero_id=pf.id
-            WHERE a.id IN (#{lids})) AS sub WHERE true=true
+            WHERE a.id IN (#{lids})) AS sub) as sub2 WHERE true=true
             "
           end
 
@@ -379,7 +389,7 @@ module Cor1440Gen
             if params[:filtro] && params[:filtro]['busrangoedadac_id'] &&
                 params[:filtro]['busrangoedadac_id'] != ""
               mas_where_asistencia_ram += " AND " +
-                "p.rangoedadac_id = #{params[:filtro]['busrangoedadac_id']}"
+                "rangoedadac_id = '#{params[:filtro]['busrangoedadac_id']}'"
             end
 
             lids = @contarb_actividad.count> 0 ?

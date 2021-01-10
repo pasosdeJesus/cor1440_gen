@@ -5,7 +5,7 @@
   [r['persona_nombre'] +
    (r['persona_identificacion'] != '' ? ' (' +
     r['persona_identificacion'] + ')' : ''
-   ), r['persona_id'], r['persona_sexo']
+   ), r['persona_id'], r['persona_sexo'], r['rangoedad_nombres']
   ]}.uniq.sort {|a,b| cotejador.compare(a[0].downcase, b[0].downcase)} %>
 
 <table class="table table-striped">
@@ -66,16 +66,16 @@
       <th>
         <%= collection_select(
           nil,
-          'filtro_busrangoedad_id',
+          'filtro_busrangoedadac_id',
           Cor1440Gen::Rangoedadac.habilitados,
           :id, 
           :nombre, 
           {
             include_blank: true,
-            selected: Sip::ModeloHelper.poromision(params, :busrangoedad_id)},
+            selected: Sip::ModeloHelper.poromision(params, :busrangoedadac_id)},
           {
               class: 'chosen-select',
-              name: 'filtro[busrangoedad_id]',
+              name: 'filtro[busrangoedadac_id]',
               'data-enviarautomatico' => '' }
         ) %>
       </th>
@@ -89,22 +89,10 @@
   <tbody>
 
     <% contarb_personas.each do |b| %>
-      <!--% asg = Cor1440Gen::Asistencia.where(
-        'persona_id=?', b.id).where(
-          'actividad_id IN (?)', @contarb_actividad.select(:id))
-        %-->
       <% asg2 = @contarb_asistencia_ram.select{|r| r['persona_id'] == b[1]} %>
       <% asg2_actividad_ids = asg2.map{|r| r['actividad_id']} %>
-      <!--% fechas = Cor1440Gen::Actividad.where(id: asg.select(:actividad_id)).
-        pluck(:fecha).uniq %-->
       <% fechas = asg2.map{|r| r['actividad_fecha']}.uniq %>
-      <!--Cor1440Gen::Actividad.where(id: asg2_actividad_ids).
-        pluck(:fecha).uniq -->
-      <% rangosedad = asg2.map{|r| r['edad_actividadactividad_fecha']}.uniq.each {|e|
-        cr = Sip::EdadSexoHelper.buscar_rango_edad(
-          e, 'Cor1440Gen::Rangoedadac')
-        ret = cr>=0 ? Cor1440Gen::Rangoedadac.find(cr).nombre : ''
-        ret }.uniq.join("; ") %>
+      <% rangosedad = asg2.map{|r| r['rangoedadac_nombre']}.uniq.join("; ") %>
       <tr>
         <td>
           <%= b[0] %> <!-- nombre -->
@@ -118,12 +106,6 @@
 
         <% @contarb_listaac.each do |a| %>
           <td>
-            <!--% consb = @contarb_actividad.where('cor1440_gen_actividad.id IN
-          (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf
-           WHERE actividadpf_id=?)',a.id) %-->
-            <!--% consas = Cor1440Gen::Asistencia.where(
-               'persona_id=?', b.id).where(
-               'actividad_id IN (?)', consb.select(:id)) %-->
             <% consas2 = asg2.select{|r| r['actividadpf_id'] == a.id} %>
             <% totconsas = consas2.count %>
             <% if totconsas > 0 %>
