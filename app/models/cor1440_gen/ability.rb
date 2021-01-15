@@ -190,6 +190,7 @@ module Cor1440Gen
               &:proyectofinanciero_id).uniq
           can :read, Cor1440Gen::Proyectofinanciero,
             id: psinusuario
+          # Puede ver proyectos en cuyo equipo de trabajo este
           penequipo1 = Cor1440Gen::ProyectofinancieroUsuario.where(
             usuario_id: usuario.id).map(&:proyectofinanciero_id).uniq
           penequipo = penequipo1 | presponsable

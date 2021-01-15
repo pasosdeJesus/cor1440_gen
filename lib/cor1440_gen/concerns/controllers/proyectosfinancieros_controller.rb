@@ -12,6 +12,10 @@ module Cor1440Gen
             "Cor1440Gen::Proyectofinanciero"
           end
 
+          def registrar_en_bitacora
+            false
+          end
+
           def new_modelo_path(o)
             return new_proyectofinanciero_path()
           end

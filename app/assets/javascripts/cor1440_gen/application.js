@@ -35,7 +35,6 @@ document.addEventListener('turbolinks:load', function() {
 
   cor1440_gen_instala_recalcula_poblacion()
 
-
 });
 
 
