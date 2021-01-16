@@ -28,4 +28,5 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'sectoractor', 'sectoresactores'
   inflect.irregular 'sectorapc', 'sectoresapc'
   inflect.irregular 'tipoindicador', 'tiposindicador'
+  inflect.irregular 'tipomoneda', 'tiposmoneda'
 end

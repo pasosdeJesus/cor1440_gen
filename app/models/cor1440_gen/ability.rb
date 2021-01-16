@@ -27,7 +27,8 @@ module Cor1440Gen
       ['Cor1440Gen', 'proyecto'],
       ['Cor1440Gen', 'rangoedadac'],
       ['Cor1440Gen', 'sectorapc'],
-      ['Cor1440Gen', 'tipoindicador']
+      ['Cor1440Gen', 'tipoindicador'],
+      ['Cor1440Gen', 'tipomoneda']
     ]
     def tablasbasicas
       Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
@@ -121,6 +122,8 @@ module Cor1440Gen
           'poblacion_sinsexo_g6',
           Cor1440Gen::Actividad.human_attribute_name(
             :proyectofinanciero).downcase.gsub(' ', '_'),
+          Cor1440Gen::Actividad.human_attribute_name(
+            :proyectofinanciero).downcase.gsub(' ', '_') + '_id',
           Cor1440Gen::Actividad.human_attribute_name(
             :proyectos).downcase.gsub(' ', '_'),
           'responsable',

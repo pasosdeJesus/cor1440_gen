@@ -18,6 +18,8 @@ es:
     proyectofinanciero: Proyecto
     tiposindicador: Tipos de indicador
     tipoindicador: Tipo de indicador
+    tiposmoneda: Tipos de moneda
+    tipomoneda: Tipo de moneda
   activerecord:
     models:
       "cor1440_gen/proyectofinanciero": 
@@ -26,6 +28,9 @@ es:
       "cor1440_gen/tipoindicador": 
         one: "Tipo de indicador"
         other: "Tipos de indicador"
+      "cor1440_gen/tipomoneda": 
+        one: "Tipo de moneda"
+        other: "Tipos de moneda"
     attributes:
       "campotind":
         Campotind: Campo
@@ -157,7 +162,6 @@ es:
         Sectorapc: Sector APC
         Sectoresapc: Sectores APC
       "cor1440_gen/tipoindicador":
-      "cor1440_gen/tipoindicador":
         nombre: Nombre corto
         campotind: Campo
         Campotind: Campo
@@ -170,6 +174,11 @@ es:
         medircon: Medir con
         Tipoindicador: Tipo de indicador
         Tiposindicador: Tipos de indicador
+      "cor1440_gen/tipomoneda":
+        Tipomoneda: Tipo de moneda
+        Tiposmoneda: Tipos de moneda
+        fechacreacion_localizada: Creación
+        fechadeshabilitacion_localizada: Deshabilitación 
       "heb412_gen/plantillahcm":
         Actoressociales: Organizaciones Sociales
         caracterizacion: Caracterizacion de beneficiarios en proyectos

@@ -371,14 +371,18 @@ module Cor1440Gen
               :proyectos).downcase.gsub(' ', '_')
               proyecto.inject('') { |memo, r| 
                 memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
-                #memo == '' ? r.nombre : '; ' + r.nombre
               }
 
             when Cor1440Gen::Actividad.human_attribute_name(
               :proyectofinanciero).downcase.gsub(' ', '_')
               proyectofinanciero.inject('') { |memo, r| 
                 memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
-                #memo == '' ? r.nombre : '; ' + r.nombre
+              }
+
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :proyectofinanciero).downcase.gsub(' ', '_') + '_id'
+              proyectofinanciero.inject('') { |memo, r| 
+                memo == '' ? r.id.to_s : '; ' + r.id.to_s
               }
 
             else
