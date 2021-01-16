@@ -5,6 +5,7 @@
 #//= require sip/motor
 #//= require heb412_gen/motor
 #//= require cocoon
+#//= require cor1440_gen/proyectofinanciero
 
 @DEP_OBJETIVOPF = [
     'select[id^=proyectofinanciero_resultadopf_attributes][id$=_objetivopf_id]',
@@ -521,7 +522,8 @@ cor1440_gen_rangoedadc_todos = () ->
     })
   return
 
-# Medicion de indicadores
+
+# MEDICIÓN DE INDICADORES
 
 @cor1440_gen_llena_medicion = (root, res) ->
   hid = res.hmindicadorpf_id
@@ -588,7 +590,7 @@ cor1440_gen_rangoedadc_todos = () ->
     $('#btn-cancelar-actividad').attr('href', purl + '/actividades/' + actividadId)
 
 
-# En formulario persona/beneficiario
+# PERSONAS/BENEFICIARIOS
 
 # Actualiza campos dinámicos cuando hay caracterización
 @cor1440_gen_persona_actualiza_camposdinamicos = (root) ->
