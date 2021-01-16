@@ -10,9 +10,9 @@ module Cor1440Gen
 
           belongs_to :pais, class_name: 'Sip::Pais', foreign_key: 'pais_id'
 
-          has_many :proyectofinanciero, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Proyectofinanciero', 
-            foreign_key: 'tipomoneda_id'
+          #has_many :proyectofinanciero, dependent: :delete_all,
+          #  class_name: 'Cor1440Gen::Proyectofinanciero', 
+          #  foreign_key: 'tipomoneda_id'
 
           validates :codiso4217, length: { maximum: 3}, presence: true
           validates :simbolo, length: { maximum: 10}, presence: true

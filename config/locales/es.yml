@@ -177,8 +177,10 @@ es:
       "cor1440_gen/tipomoneda":
         Tipomoneda: Tipo de moneda
         Tiposmoneda: Tipos de moneda
+        codiso4217: Código ISO 4217
         fechacreacion_localizada: Creación
         fechadeshabilitacion_localizada: Deshabilitación 
+        simbolo: Símbolo
       "heb412_gen/plantillahcm":
         Actoressociales: Organizaciones Sociales
         caracterizacion: Caracterizacion de beneficiarios en proyectos
