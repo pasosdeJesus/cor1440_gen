@@ -362,7 +362,6 @@ module Cor1440Gen
             when Cor1440Gen::Actividad.human_attribute_name(
               :proyectofinanciero).downcase.gsub(' ', '_')
 
-              byebug
               proyectofinanciero.inject('') { |memo, r| 
                 memo + 
                   (memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre)
