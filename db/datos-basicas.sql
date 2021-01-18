@@ -289,3 +289,100 @@ SELECT pg_catalog.setval('public.cor1440_gen_sectorapc_id_seq', 101, true);
 -- PostgreSQL database dump complete
 --
 
+
+
+--
+-- Data for Name: heb412_gen_plantillahcm; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.heb412_gen_plantillahcm (id, ruta, fuente, licencia, vista, nombremenu, filainicial) VALUES (5, 'plantillas/listado_de_actividades.ods', 'Pasos de Jesús', 'Dominio Público', 'Actividad', 'Listado Completo de Actividades', 5);
+INSERT INTO public.heb412_gen_plantillahcm (id, ruta, fuente, licencia, vista, nombremenu, filainicial) VALUES (40, 'plantillas/listado_de_proyectos.ods', 'Pasos de Jesús', 'Dominio público de acuerdo a legislación colombiana', 'Proyecto', 'Listado de proyectos', 5);
+
+--
+-- Data for Name: heb412_gen_campoplantillahcm; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (500, 5, 'id', 'A');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (501, 5, 'nombre', 'B');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (502, 5, 'fecha', 'C');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (503, 5, 'lugar', 'D');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (504, 5, 'oficina', 'E');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (505, 5, 'convenio_financiado', 'F');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (506, 5, 'actividad_de_convenio', 'G');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (507, 5, 'áreas', 'H');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (508, 5, 'subáreas_de_actividad', 'I');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (509, 5, 'responsable', 'J');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (510, 5, 'corresponsables', 'K');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (511, 5, 'objetivo', 'L');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (512, 5, 'resultado', 'M');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (513, 5, 'poblacion', 'N');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (514, 5, 'observaciones', 'O');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (515, 5, 'creacion', 'P');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (516, 5, 'actualizacion', 'Q');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (401, 40, 'id', 'A');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (402, 40, 'nombre', 'B');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (403, 40, 'fechainicio_localizada', 'C');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (404, 40, 'fechacierre_localizada', 'D');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (405, 40, 'financiador', 'E');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (406, 40, 'monto', 'F');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (407, 40, 'responsable', 'G');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (408, 40, 'equipotrabajo', 'H');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (409, 40, 'compromisos', 'I');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (410, 40, 'observaciones', 'J');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (411, 40, 'fechacreacion_localizada', 'K');
+INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, nombrecampo, columna) VALUES (412, 40, 'fechaactualizacion_localizada', 'L');
+
+
+--
+-- Data for Name: heb412_gen_plantillahcr; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.heb412_gen_plantillahcr (id, ruta, fuente, licencia, vista, nombremenu) VALUES (5, 'plantillas/reporte_una_actividad.ods', 'Pasos de Jesús', 'Dominio Público', 'Actividad', 'Reporte de una actividad en hoja de cálculo');
+
+--
+-- Data for Name: heb412_gen_campoplantillahcr; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (1, 5, 'id', 'B', 3);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (2, 5, 'fecha', 'G', 3);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (3, 5, 'nombre', 'B', 4);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (4, 5, 'oficina', 'B', 5);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (5, 5, 'lugar', 'G', 5);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (6, 5, 'áreas', 'B', 6);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (7, 5, 'subáreas_de_actividad', 'G', 6);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (8, 5, 'responsable', 'B', 7);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (9, 5, 'corresponsables', 'G', 7);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (10, 5, 'convenio_financiado', 'B', 9);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (11, 5, 'actividad_de_convenio', 'B', 10);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (12, 5, 'objetivo_convenio_financiero', 'G', 10);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (13, 5, 'objetivo', 'B', 11);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (14, 5, 'poblacion_mujeres_l_g1', 'B', 14);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (15, 5, 'poblacion_hombres_l_g1', 'C', 14);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (16, 5, 'poblacion_mujeres_r_g1', 'D', 14);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (17, 5, 'poblacion_hombres_r_g1', 'E', 14);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (18, 5, 'poblacion_mujeres_l_g2', 'B', 15);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (19, 5, 'poblacion_hombres_l_g2', 'C', 15);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (20, 5, 'poblacion_mujeres_r_g2', 'D', 15);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (21, 5, 'poblacion_hombres_r_g2', 'E', 15);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (30, 5, 'poblacion', 'B', 20);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (31, 5, 'resultado', 'B', 23);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (35, 5, 'poblacion_mujeres_l_g5', 'B', 18);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (36, 5, 'poblacion_hombres_l_g5', 'C', 18);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (37, 5, 'poblacion_mujeres_r_g5', 'D', 18);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (38, 5, 'poblacion_hombres_r_g5', 'E', 18);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (39, 5, 'poblacion_mujeres_l_g6', 'B', 19);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (40, 5, 'poblacion_hombres_l_g6', 'C', 19);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (41, 5, 'poblacion_mujeres_r_g6', 'D', 19);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (42, 5, 'poblacion_hombres_r_g6', 'E', 19);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (33, 5, 'creacion', 'B', 24);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (34, 5, 'actualizacion', 'G', 24);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (25, 5, 'poblacion_hombres_r_g3', 'E', 16);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (29, 5, 'poblacion_hombres_r_g4', 'E', 17);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (24, 5, 'poblacion_mujeres_r_g3', 'D', 16);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (28, 5, 'poblacion_mujeres_r_g4', 'D', 17);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (23, 5, 'poblacion_hombres_l_g3', 'C', 16);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (27, 5, 'poblacion_hombres_l_g4', 'C', 17);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (22, 5, 'poblacion_mujeres_l_g3', 'B', 16);
+INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (26, 5, 'poblacion_mujeres_l_g4', 'B', 17);
+
