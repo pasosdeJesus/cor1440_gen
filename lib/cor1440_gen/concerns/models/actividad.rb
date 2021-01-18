@@ -282,6 +282,9 @@ module Cor1440Gen
             when 'actualizacion'
               updated_at
 
+            when 'anexos_ids'
+              sip_anexo_ids.join(', ')
+
             when 'campos_dinamicos'
               if !respuestafor || respuestafor.count == 0
                 ""
@@ -309,6 +312,9 @@ module Cor1440Gen
                   (memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre)
               }
 
+            when 'numero_anexos'
+              sip_anexo.count
+
             when 'objetivo_convenio_financiero'
               actividadpf.inject('') { |memo, a|
                 memo + 
@@ -316,6 +322,15 @@ module Cor1440Gen
                   (a.resultadopf && a.resultadopf.objetivopf ? 
                    a.resultadopf.objetivopf.numero : '')
               }
+
+            when 'organizaciones_sociales'
+              actorsocial.inject('') { |memo, a|
+                nom = a.grupoper  && a.grupoper.nombre ? a.grupoper.nombre : ''
+                memo + (memo == '' ? '' : '; ') + nom
+              }
+
+            when 'organizaciones_sociales_ids'
+              actorsocial_ids.join(', ')
 
             when 'poblacion_hombres_l'
               poblacion_hombres_l_solore
