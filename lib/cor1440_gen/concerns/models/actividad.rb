@@ -179,12 +179,9 @@ module Cor1440Gen
             # para coincidir con tipo de indicador que cuenta
             # usando tabla de población
             actividad_rangoedadac.inject(0) { |memo, r| 
-              #memo += r.ml ? r.ml : 0
-              memo += r.mr ? r.mr : 0
-              #memo += r.fl ? r.fl : 0
-              memo += r.fr ? r.fr : 0
-              memo += r.s ? r.s : 0
-              memo
+              memo + (r.mr ? r.mr : 0) +
+                (r.fr ? r.fr : 0) +
+                (r.s ? r.s : 0)
             }
           end
 
@@ -195,76 +192,66 @@ module Cor1440Gen
 
           def poblacion_hombres_l_solore
             actividad_rangoedadac.inject(0) { |memo, r| 
-              memo += r.ml ? r.ml : 0
-              memo
+              memo + (r.ml ? r.ml : 0)
             }
           end
 
           def poblacion_hombres_r_solore
             actividad_rangoedadac.inject(0) { |memo, r| 
-              memo += r.mr ? r.mr : 0
-              memo
+              memo + (r.mr ? r.mr : 0)
             }
           end
 
           def poblacion_mujeres_l_solore
             actividad_rangoedadac.inject(0) { |memo, r| 
-              memo += r.fl ? r.fl : 0
-              memo
+              memo + (r.fl ? r.fl : 0)
             }
           end
 
           def poblacion_mujeres_r_solore
             actividad_rangoedadac.inject(0) { |memo, r| 
-              memo += r.fr ? r.fr : 0
-              memo
+              memo + (r.fr ? r.fr : 0)
             }
           end
 
           def poblacion_sinsexo_solore
             actividad_rangoedadac.inject(0) { |memo, r| 
-              memo += r.s ? r.s : 0
-              memo
+              memo + (r.s ? r.s : 0)
             }
           end
 
           def poblacion_hombres_l_g_solore(num)
             actividad_rangoedadac.where(rangoedadac_id: num).
               inject(0) { |memo, r| 
-              memo += r.ml ? r.ml : 0
-              memo
+              memo + (r.ml ? r.ml : 0)
             }
           end
 
           def poblacion_hombres_r_g_solore(num)
             actividad_rangoedadac.where(rangoedadac_id: num).
               inject(0) { |memo, r| 
-              memo += r.mr ? r.mr : 0
-              memo
+              memo + (r.mr ? r.mr : 0)
             }
           end
 
           def poblacion_mujeres_l_g_solore(num)
             actividad_rangoedadac.where(rangoedadac_id: num).
               inject(0) { |memo, r| 
-              memo += r.fl ? r.fl : 0
-              memo
+              memo + (r.fl ? r.fl : 0)
             }
           end
 
           def poblacion_mujeres_r_g_solore(num)
             actividad_rangoedadac.where(rangoedadac_id: num).
               inject(0) { |memo, r| 
-              memo += r.fr ? r.fr : 0
-              memo
+              memo + (r.fr ? r.fr : 0)
             }
           end
 
           def poblacion_sinsexo_g_solore(num)
             actividad_rangoedadac.where(rangoedadac_id: num).
               inject(0) { |memo, r| 
-              memo += r.s ? r.s : 0
-              memo
+              memo + (r.s ? r.s : 0)
             }
           end
 
@@ -281,16 +268,15 @@ module Cor1440Gen
             when Cor1440Gen::Actividad.human_attribute_name(
               :actividadareas).downcase.gsub(' ', '_')
               actividadareas.inject('') { |memo, r| 
-                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                memo + 
+                  (memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre)
               }
 
             when Cor1440Gen::Actividad.human_attribute_name(
               :actividadpf).downcase.gsub(' ', '_')
               actividadpf.inject('') { |memo, r| 
-                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
-                #memo += '; ' if memo != ''
-                #memo += r.nombrecorto + ' ' + r.titulo
-                #memo
+                memo + 
+                  (memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre)
               }
 
             when 'actualizacion'
@@ -319,17 +305,16 @@ module Cor1440Gen
 
             when 'corresponsables'
               usuario.inject('') { |memo, r| 
-                memo == '' ? r.presenta_nombre : memo + '; ' + r.presenta_nombre
+                memo + 
+                  (memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre)
               }
 
             when 'objetivo_convenio_financiero'
               actividadpf.inject('') { |memo, a|
-                sep = memo == '' ? '' : ';'
-                if a.resultadopf && a.resultadopf.objetivopf
-                  memo + sep + a.resultadopf.objetivopf.numero
-                else
-                  memo
-                end
+                memo + 
+                  ( memo == '' ? '' : ';') +
+                  (a.resultadopf && a.resultadopf.objetivopf ? 
+                   a.resultadopf.objetivopf.numero : '')
               }
 
             when 'poblacion_hombres_l'
@@ -370,19 +355,23 @@ module Cor1440Gen
             when Cor1440Gen::Actividad.human_attribute_name(
               :proyectos).downcase.gsub(' ', '_')
               proyecto.inject('') { |memo, r| 
-                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                memo +
+                  (memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre)
               }
 
             when Cor1440Gen::Actividad.human_attribute_name(
               :proyectofinanciero).downcase.gsub(' ', '_')
+
+              byebug
               proyectofinanciero.inject('') { |memo, r| 
-                memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre
+                memo + 
+                  (memo == '' ? r.presenta_nombre : '; ' + r.presenta_nombre)
               }
 
             when Cor1440Gen::Actividad.human_attribute_name(
               :proyectofinanciero).downcase.gsub(' ', '_') + '_id'
               proyectofinanciero.inject('') { |memo, r| 
-                memo == '' ? r.id.to_s : '; ' + r.id.to_s
+                memo + (memo == '' ? r.id.to_s : '; ' + r.id.to_s)
               }
 
             else
