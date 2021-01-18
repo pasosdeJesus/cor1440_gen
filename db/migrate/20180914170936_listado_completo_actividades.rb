@@ -43,7 +43,6 @@ class ListadoCompletoActividades < ActiveRecord::Migration[5.2]
         nombrecampo, columna) VALUES (515, 5, 'creacion', 'P');
       INSERT INTO public.heb412_gen_campoplantillahcm (id, plantillahcm_id, 
         nombrecampo, columna) VALUES (516, 5, 'actualizacion', 'Q');
-     
     SQL
   end
 
