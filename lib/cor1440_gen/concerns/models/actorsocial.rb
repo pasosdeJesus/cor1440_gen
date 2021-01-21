@@ -28,6 +28,11 @@ module Cor1440Gen
           has_many :efecto, through: :actorsocial_efecto,
             class_name: 'Cor1440Gen::Efecto'
 
+
+          def presenta_cor1440_gen(atr)
+            presenta_sip(atr)
+          end
+
         end
 
       end
