@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 852ff65e2db373d19d1efef9ac318f3962b034f2
+  revision: 413adf69c085df223f8e55148bee8e8200bbd967
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 9a6345e2f1091800eb5c64232969a25035040437
+  revision: 377466393d6b6050f065ab340e4869a5ebc269ac
   specs:
     mr519_gen (0.2.0)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: dee5d7db1a7b8ad7d2e23dad117658b8b5319b94
+  revision: 2fbf0acf04ecd5189f1b006122f8b22b56e92dc8
   specs:
     sip (2.0.b10)
       cancancan
@@ -145,7 +145,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     colorize (0.8.1)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     connection_pool (2.2.3)
     crass (1.0.6)
     devise (4.7.3)
@@ -332,7 +332,7 @@ GEM
       sprockets (>= 3.0.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
-    thor (1.0.1)
+    thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
     ttfunk (1.7.0)
