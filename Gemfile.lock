@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 413adf69c085df223f8e55148bee8e8200bbd967
+  revision: 780094695eb6958f44d4fb64726f8b6e1f203528
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 377466393d6b6050f065ab340e4869a5ebc269ac
+  revision: 83ebba0d7d42a42c7b853c5270c5925de1930b36
   specs:
     mr519_gen (0.2.0)
       rails
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 2fbf0acf04ecd5189f1b006122f8b22b56e92dc8
+  revision: bc3b6f17736af5e0e9f32ffc9619e5267a212c84
   specs:
     sip (2.0.b10)
       cancancan
@@ -122,13 +122,13 @@ GEM
     builder (3.2.4)
     camertron-eprun (1.1.1)
     cancancan (3.2.1)
-    capybara (3.34.0)
+    capybara (3.35.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
-      regexp_parser (~> 1.5)
+      regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     choice (0.2.0)
     chosen-rails (1.9.0)
@@ -170,7 +170,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.8.7)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.10.1)
+    jbuilder (2.11.1)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
@@ -195,7 +195,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.5.0)
     minitest (5.14.3)
-    minitest-reporters (1.4.2)
+    minitest-reporters (1.4.3)
       ansi
       builder
       minitest (>= 5.0)
@@ -275,7 +275,7 @@ GEM
       thor (>= 0.20.3, < 2.0)
     rake (13.0.3)
     redcarpet (3.5.1)
-    regexp_parser (1.8.2)
+    regexp_parser (2.0.3)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
