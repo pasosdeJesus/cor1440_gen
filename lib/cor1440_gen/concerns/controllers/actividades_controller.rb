@@ -158,7 +158,7 @@ module Cor1440Gen
             render layout: 'application'
           end
 
-          def update
+          def update_cor1440_gen
             if actividad_params[:asistencia_attributes]
               actividad_params[:asistencia_attributes].each do |a|
                 # Ubicamos los de autocompletacion y para esos creamos un registro 
@@ -178,6 +178,10 @@ module Cor1440Gen
               end
             end
             update_gen
+          end
+
+          def update
+            update_cor1440_gen
           end
 
           # Llamado por control para presentar responsables en formulario
