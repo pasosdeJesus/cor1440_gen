@@ -115,6 +115,7 @@ module Cor1440Gen
 
           validates :nombre, presence: true, allow_blank: false, 
             length: { maximum: 1000 } 
+          validates :titulo, length: { maximum: 1000 } 
           validates :compromisos, length: { maximum: 5000 }, 
             if: :hay_compromisos?
           def hay_compromisos?
@@ -147,8 +148,8 @@ module Cor1440Gen
           end
 
           scope :filtro_compromisos, lambda { |compromisos|
-            where("unaccent(cor1440_gen_proyectofinanciero.compromisos) ILIKE '%' || unaccent(?) || '%'", 
-                  compromisos)
+            where("unaccent(cor1440_gen_proyectofinanciero.compromisos) "\
+                  "ILIKE '%' || unaccent(?) || '%'", compromisos)
           }
 
           scope :filtro_fechainicioini, lambda { |f|
@@ -173,12 +174,13 @@ module Cor1440Gen
           }
 
           scope :filtro_nombre, lambda { |nombre|
-            where("unaccent(cor1440_gen_proyectofinanciero.nombre) ILIKE '%' || unaccent(?) || '%'", 
-                  nombre)
+            where("unaccent(cor1440_gen_proyectofinanciero.nombre) "\
+                  "ILIKE '%' || unaccent(?) || '%'", nombre)
           }
 
           scope :filtro_observaciones, lambda { |observaciones|
-            where("unaccent(cor1440_gen_proyectofinanciero.observaciones) ILIKE '%' || unaccent(?) || '%'", observaciones)
+            where("unaccent(cor1440_gen_proyectofinanciero.observaciones) "\
+                  "ILIKE '%' || unaccent(?) || '%'", observaciones)
           }
 
           scope :filtro_proyecto_ids, lambda { |p|
@@ -189,6 +191,12 @@ module Cor1440Gen
           scope :filtro_responsable_id, lambda { |r|
             where('cor1440_gen_proyectofinanciero.responsable_id=?', r)
           }
+
+          scope :filtro_titulo, lambda { |titulo|
+            where("unaccent(cor1440_gen_proyectofinanciero.titulo) ILIKE '%' "\
+                  "|| unaccent(?) || '%'", titulo)
+          }
+
 
           def presenta(atr)
             case atr.to_s

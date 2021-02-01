@@ -41,8 +41,9 @@ module Cor1440Gen
 
           def atributos_index
             [ 
-              :id, 
-              :nombre 
+              :id,
+              :nombre,
+              :titulo
             ] +
             [ :financiador_ids =>  [] ] +
             [ 
@@ -77,8 +78,9 @@ module Cor1440Gen
 
           def atributos_show
             [ 
-              :id, 
-              :nombre 
+              :id,
+              :nombre,
+              :titulo
             ] +
             [ :financiador_ids =>  [] ] +
             [ 

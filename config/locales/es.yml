@@ -131,6 +131,7 @@ es:
         financiador_ids: Financiadores
         indicador: Indicador
         marcologico: Marco lógico
+        nombre: Nombre interno breve
         objetivopf: Objetivo
         plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este proyecto
         proyecto: Área
@@ -148,6 +149,7 @@ es:
         "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
         "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
         sectorapc: Sector APC
+        titulo: Título largo del proyecto
       "cor1440_gen/rangoedadac":
         Rangoedadac: Rango de edad en actividades
         Rangosedadac: Rangos de edad en actividades
