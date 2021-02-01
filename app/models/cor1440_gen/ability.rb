@@ -169,6 +169,7 @@ module Cor1440Gen
       end
 
       can [:nuevo, :new], Cor1440Gen::Actividad
+      can :read, Cor1440Gen::Rangoedadac
 
       can :read, Heb412Gen::Doc
       can :read, Heb412Gen::Plantilladoc
