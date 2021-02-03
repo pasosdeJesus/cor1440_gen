@@ -255,7 +255,7 @@ module Cor1440Gen
             }
           end
 
-          def presenta_actividad(atr)
+          def presenta_cor1440_gen(atr)
             case atr.to_s
             when /anexo_[0-9]_desc/
               i = atr[6].to_i
@@ -393,8 +393,12 @@ module Cor1440Gen
             end
           end
 
+          def presenta_actividad(atr)
+            presenta_cor1440_gen(atr)
+          end
+
           def presenta(atr)
-            presenta_actividad(atr)
+            presenta_cor1440_gen(atr)
           end
 
           scope :filtro_actividadpf, lambda { |ida|
