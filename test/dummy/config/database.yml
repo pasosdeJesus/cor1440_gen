@@ -2,21 +2,21 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: sipdes
-  password: xyz
+  username: <%= ENV['BD_USUARIO'] || 'sipdes' %>
+  password: <%= ENV['BD_CLAVE'] %>
   host: /var/www/var/run/postgresql
 
 development:
   <<: *default
-  database: cor1440gen_des
+  database: <%= ENV['BD_DES'] || 'cor1440gen_des' %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: cor1440gen_pru
+  database: <%= ENV['BD_PRUEBA'] || 'cor1440gen_pru' %>
 
 production:
   <<: *default
-  database: cor1440gen_prod
+  database: <%= ENV['BD_PRUEBA'] || 'cor1440gen_prod' %>

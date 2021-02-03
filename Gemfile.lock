@@ -158,6 +158,10 @@ GEM
       devise (>= 4.7.1)
     diff-lcs (1.4.4)
     docile (1.3.5)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.7.0)
     factory_girl (4.9.0)
@@ -377,6 +381,7 @@ DEPENDENCIES
   cor1440_gen!
   devise
   devise-i18n
+  dotenv-rails
   factory_girl_rails
   heb412_gen!
   jbuilder
@@ -413,4 +418,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.1.4
+   2.2.3

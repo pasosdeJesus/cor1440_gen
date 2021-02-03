@@ -90,6 +90,8 @@ group :development, :test do
 
   gem 'colorize' # Colores en Terminl
 
+  gem 'dotenv-rails'
+
   gem 'rails-erd' # Para generar modelo entidad asociación 
 
 end
