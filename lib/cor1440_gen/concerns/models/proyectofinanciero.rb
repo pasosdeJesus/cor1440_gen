@@ -149,7 +149,7 @@ module Cor1440Gen
 
           scope :filtro_compromisos, lambda { |compromisos|
             where("unaccent(cor1440_gen_proyectofinanciero.compromisos) "\
-                  "ILIKE '%' || unaccent(?) || '%'", compromisos)
+                  "ILIKE '%' || unaccent(?) || '%'", compromisos.strip)
           }
 
           scope :filtro_fechainicioini, lambda { |f|
@@ -175,12 +175,12 @@ module Cor1440Gen
 
           scope :filtro_nombre, lambda { |nombre|
             where("unaccent(cor1440_gen_proyectofinanciero.nombre) "\
-                  "ILIKE '%' || unaccent(?) || '%'", nombre)
+                  "ILIKE '%' || unaccent(?) || '%'", nombre.strip)
           }
 
           scope :filtro_observaciones, lambda { |observaciones|
             where("unaccent(cor1440_gen_proyectofinanciero.observaciones) "\
-                  "ILIKE '%' || unaccent(?) || '%'", observaciones)
+                  "ILIKE '%' || unaccent(?) || '%'", observaciones.strip)
           }
 
           scope :filtro_proyecto_ids, lambda { |p|
@@ -194,7 +194,7 @@ module Cor1440Gen
 
           scope :filtro_titulo, lambda { |titulo|
             where("unaccent(cor1440_gen_proyectofinanciero.titulo) ILIKE '%' "\
-                  "|| unaccent(?) || '%'", titulo)
+                  "|| unaccent(?) || '%'", titulo.strip)
           }
 
 
