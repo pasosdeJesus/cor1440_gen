@@ -84,7 +84,8 @@ module Cor1440Gen
           'numero_anexos',
           'objetivo',
           'observaciones',
-          'objetivo_convenio_financiero',
+          Cor1440Gen::Actividad.human_attribute_name(
+            :objetivopf).downcase.gsub(' ', '_'),
           'oficina',
           'organizaciones_sociales',
           'organizaciones_sociales_ids',
@@ -131,6 +132,7 @@ module Cor1440Gen
           Cor1440Gen::Actividad.human_attribute_name(
             :proyectos).downcase.gsub(' ', '_'),
           'responsable',
+          'responsable_nombre',
           'resultado',
         ],
         controlador: 'Cor1440Gen::ActividadesController',

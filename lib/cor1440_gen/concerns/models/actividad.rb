@@ -315,12 +315,13 @@ module Cor1440Gen
             when 'numero_anexos'
               sip_anexo.count
 
-            when 'objetivo_convenio_financiero'
+            when Cor1440Gen::Actividad.human_attribute_name(
+              :objetivopf).downcase.gsub(' ', '_')
               actividadpf.inject('') { |memo, a|
                 memo + 
                   ( memo == '' ? '' : ';') +
                   (a.resultadopf && a.resultadopf.objetivopf ? 
-                   a.resultadopf.objetivopf.numero : '')
+                   a.resultadopf.objetivopf.presenta_nombre : '')
               }
 
             when 'organizaciones_sociales'
@@ -387,7 +388,9 @@ module Cor1440Gen
               proyectofinanciero.inject('') { |memo, r| 
                 memo + (memo == '' ? r.id.to_s : '; ' + r.id.to_s)
               }
-
+            when 'responsable_nombre'
+              self.responsable ? self.responsable.nombre : ''
+ 
             else
               presenta_gen(atr)
             end
