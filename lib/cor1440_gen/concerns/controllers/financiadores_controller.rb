@@ -19,7 +19,6 @@ module Cor1440Gen
              "habilitado"]
           end
 
-          # Genero del nombre (F - Femenino, M - Masculino)
           def genclase
             return 'M';
           end

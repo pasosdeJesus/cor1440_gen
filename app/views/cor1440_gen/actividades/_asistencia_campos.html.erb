@@ -37,14 +37,14 @@
     </td>
     <td>
       <%= p.input :sexo, 
-        collection: [["F", :F], ["M", :M], ["S", :S]], 
+        collection: Sip::Persona::SEXO_OPCIONES_CORTAS,
         label: false,
         input_html: { style: 'width: 4em' },
         include_blank: false %>
     </td>
     <td>
       <%= p.input :anionac, 
-        input_html: { style: 'width: 4em', min: 0 },
+        input_html: { style: 'width: 5em', min: 0 },
         label: false %>
     </td>
     <td>

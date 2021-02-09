@@ -385,7 +385,7 @@ module Cor1440Gen
             end
             if params[:filtro] && params[:filtro]['bussexo'] &&
                 params[:filtro]['bussexo'] != "" &&
-                Sip::EdadSexoHelper::SEXO_OPCIONES.map(&:last).include?(
+                Sip::Prsona::SEXO_OPCIONES.map(&:last).include?(
                   params[:filtro]['bussexo'])
               mas_where_asistencia_ram += " AND " +
                 "persona_sexo = '#{params[:filtro]['bussexo']}'"

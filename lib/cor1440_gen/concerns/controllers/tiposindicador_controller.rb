@@ -34,7 +34,6 @@ module Cor1440Gen
             redirect_to cor1440_gen.edit_admin_tipoindicador_path(@registro)
           end
 
-          # Genero del nombre (F - Femenino, M - Masculino)
           def genclase
             return 'M';
           end
