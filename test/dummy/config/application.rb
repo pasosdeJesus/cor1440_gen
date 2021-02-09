@@ -1,46 +1,58 @@
-# encoding: UTF-8
-
 require_relative 'boot'
 
 require 'rails/all'
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
+# Requiere gemas listas en el Gemfile, incluyendo las
+# limitadas a :test, :development, o :production.
 Bundler.require(*Rails.groups)
-
-require 'cor1440_gen'
 
 module Dummy
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
+    # config.load_defaults 6.0
+
+    # Las configuraciones en config/environments/* tiene precedencia sobre
+    # las especificadas aquí.
+    # La configuración de la aplicación puede ir en archivos en
+    # config/initializers
+    # -- todos los archivos .rb en ese directorio se cargan automáticamente
+    # tras cargar el entorno y cualquier gema en su aplicación.
+
+    # Establece Time.zone por defecto en la zona especificada y hace que
+    # Active Record auto-convierta a esta zona.
+    # Ejecute "rake -D time" para ver una lista de tareas para encontrar
+    # nombres de zonas. Por omisión es UTC.
     config.time_zone = 'America/Bogota'
 
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
+    # El locale predeterminado es :en y todas las traducciones de
+    # config/locales/*.rb,yml se cargan automaticamente
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :es
 
+    #config.railties_order = [:main_app, Sip::Engine, :all]
+
+    config.colorize_logging = true
+
     config.active_record.schema_format = :sql
 
-    config.relative_url_root = '/'
+    config.hosts << ENV.fetch('CONFIG_HOSTS', '127.0.0.1')
 
-    config.x.formato_fecha = 'dd-M-yyyy'
+    #config.web_console.whitelisted_ips = ['186.154.35.237']
 
-    config.x.heb412_ruta = Rails.root.join('public', 'heb412')
+    #config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/cor1440')
 
-    config.x.cor1440_permisos_por_oficina = true
+    # sip
+    config.x.formato_fecha = ENV.fetch('SIP_FORMATO_FECHA', 'dd/M/yyyy')
+    # En el momento soporta 3 formatos: yyyy-mm-dd, dd-mm-yyyy y dd/M/yyyy
 
-    config.relative_url_root = '/cor1440'      
+    # heb412
+    config.x.heb412_ruta = Pathname(ENV.fetch(
+      'HEB412_RUTA', Rails.root.join('public', 'heb412').to_s))
 
-    config.hosts << ENV['CONFIG_HOSTS'] || '127.0.0.1'
+    # cor1440
+    config.x.cor1440_permisos_por_oficina = 
+      (ENV['COR1440_PERMISOS_POR_OFICINA'] && ENV['COR1440_PERMISOS_POR_OFICINA'] != '')
 
-    #config.web_console.whitelisted_ips = '190.25.163.93'
   end
 end
+
