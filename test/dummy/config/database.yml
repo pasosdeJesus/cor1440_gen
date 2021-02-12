@@ -19,4 +19,4 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV.fetch('BD_PRO', 'cor1440gen_prod') %>
+  database: <%= ENV.fetch('BD_PRO', 'cor1440gen_pro') %>
