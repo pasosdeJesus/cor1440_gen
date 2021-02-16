@@ -52,6 +52,11 @@ Cor1440Gen::Engine.routes.draw do
   get "/proyectosfinancieros/validar" => "proyectosfinancieros#validar", 
     as: :validar_proyectosfinancieros
   resources :proyectosfinancieros, path_names: { new: 'nuevo', edit: 'edita' }
+  get "/proyectosfinancieros/:id/fichaimp" => "proyectosfinancieros#fichaimp", 
+    as: :proyectofinanciero_fichaimp
+  get "/proyectosfinancieros/:id/fichapdf" => "proyectosfinancieros#fichapdf", 
+    as: :proyectofinanciero_fichapdf
+
 
   resources :resultadospf, only: [:new, :destroy]
 
