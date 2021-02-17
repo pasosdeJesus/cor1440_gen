@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 95f0349813ea8365402af11fa2c237f1eca67f60
+  revision: ea2fc9dc96e37244b2c399af25ba9a50e192a6cb
   branch: main
   specs:
     heb412_gen (1.0.b6)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 32818b861269267d744cfbb9f033c9919231a2d7
+  revision: 533dac71cb8f2431ee16d7243f1870f28310d1d2
   branch: main
   specs:
     sip (2.0.b11)
