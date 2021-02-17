@@ -8,7 +8,7 @@ module Cor1440Gen
           include Sip::FormatoFechaHelper
           helper Sip::FormatoFechaHelper
 
-          def clase 
+          def clase
             "Cor1440Gen::Proyectofinanciero"
           end
 
@@ -24,7 +24,7 @@ module Cor1440Gen
             @registro = Proyectofinanciero.find(params[:id])
           end
 
-          # Redefinimos destroy porque el de tablas basicas 
+          # Redefinimos destroy porque el de tablas basicas
           # (i.e Sip::Admin::BasicasController que debe ser
           # papa de la clase que incluye a esta)
           # exije eliminar primero registros en tablas union
@@ -39,23 +39,23 @@ module Cor1440Gen
             super("", false)
           end
 
-          def atributos_index
-            [ 
+          def atributos_index_cor1440
+            [
               :id,
               :nombre,
               :titulo
             ] +
             [ :financiador_ids =>  [] ] +
-            [ 
+            [
               :fechainicio_localizada,
               :fechacierre_localizada,
               :responsable,
               :proyectofinanciero_usuario,
             ] +
             [ :proyecto_ids =>  [] ] +
-            [ :compromisos, 
-              :monto, 
-              :observaciones, 
+            [ :compromisos,
+              :monto,
+              :observaciones,
               :objetivopf,
               :indicadorobjetivo,
               :resultadopf,
@@ -64,12 +64,16 @@ module Cor1440Gen
             ]
           end
 
+          def atributos_index
+            atributos_index_cor1440
+          end
+
           def atributos_form
             atributos_index +
               [
-                :caracterizacion, 
-                :beneficiario, 
-                :plantillahcm, 
+                :caracterizacion,
+                :beneficiario,
+                :plantillahcm,
                 :anexo_proyectofinanciero
             ] - [
               "id", :id, 'created_at', :created_at, 'updated_at', :updated_at
@@ -77,24 +81,15 @@ module Cor1440Gen
           end
 
           def atributos_show
-            [ 
-              :id,
-              :nombre,
-              :titulo
-            ] +
-            [ :financiador_ids =>  [] ] +
-            [ 
-              :fechainicio_localizada,
-              :fechacierre_localizada,
-              :responsable,
-              :proyectofinanciero_usuario,
-            ] +
-            [ :proyecto_ids =>  [] ] +
-            [ :compromisos, 
-              :monto, 
-              :observaciones, 
+            atributos_index  - [
+              :objetivopf,
+              :indicadorobjetivo,
+              :resultadopf,
+              :indicadorpf,
+              :actividadpf
+            ] + [
               :marcologico,
-              :caracterizacion, 
+              :caracterizacion,
               :beneficiario,
               :plantillahcm,
               :anexo_proyectofinanciero
@@ -134,7 +129,7 @@ module Cor1440Gen
                 render :actividadespf#, json: @registro
               }
               format.html {
-                render inline: @registros.errors, 
+                render inline: @registros.errors,
                 status: :unprocessable_entity
               }
             end
@@ -162,7 +157,7 @@ module Cor1440Gen
                 render :objetivospf
               }
               format.html {
-                render inline: @registros.errors, 
+                render inline: @registros.errors,
                 status: :unprocessable_entity
               }
             end
@@ -170,7 +165,7 @@ module Cor1440Gen
 
 
           def copia
-            if !params || !params[:proyectofinanciero_id] 
+            if !params || !params[:proyectofinanciero_id]
               render inline: 'Falta parámetro proyectofinanciero_id'
               return
             end
@@ -285,20 +280,20 @@ module Cor1440Gen
           def validar
             @validarpf = Cor1440Gen::Validarpf.new
             @registro = Cor1440Gen::Proyectofinanciero.all
-            if params && params[:validarpf] && 
+            if params && params[:validarpf] &&
               params[:validarpf][:fechaini_localizada] &&
               params[:validarpf][:fechaini_localizada] != ''
-              @validarpf.fechaini_localizada = 
+              @validarpf.fechaini_localizada =
                 params[:validarpf][:fechaini_localizada]
-              @registro = @registro.where('fechainicio >= ?', 
+              @registro = @registro.where('fechainicio >= ?',
                                           @validarpf.fechaini)
             end
-            if params && params[:validarpf] && 
+            if params && params[:validarpf] &&
               params[:validarpf][:fechafin_localizada] &&
               params[:validarpf][:fechafin_localizada] != ''
-              @validarpf.fechafin_localizada = 
+              @validarpf.fechafin_localizada =
                 params[:validarpf][:fechafin_localizada]
-              @registro = @registro.where('fechainicio <= ?', 
+              @registro = @registro.where('fechainicio <= ?',
                                           @validarpf.fechafin)
             end
             validar_filtramas
@@ -317,7 +312,7 @@ module Cor1440Gen
           # @param detalle Lista de errores, se agregan si hay
           def validar_registro(registro, detalle)
             detalleini = detalle.clone
-            if !registro.fechainicio 
+            if !registro.fechainicio
               detalle << "No tiene fecha de inicio"
             elsif registro.fechainicio < Date.new(2000, 1, 1)
               detalle << "Fecha de inicio anterior al 1.Ene.2000"
@@ -347,7 +342,7 @@ module Cor1440Gen
           # Retorna cadena con duracion
           def duracion
             prob = ''
-            if params[:fechainicio_localizada] && 
+            if params[:fechainicio_localizada] &&
                 params[:fechacierre_localizada]
               fini = ::Sip::FormatoFechaHelper.fecha_local_estandar(
                 params[:fechainicio_localizada])
@@ -358,7 +353,7 @@ module Cor1440Gen
               if fini && fcierre
                 d = Sip::FormatoFechaHelper.dif_meses_dias(fini, fcierre)
                 respond_to do |format|
-                  format.json { 
+                  format.json {
                     render json: {duracion: d.to_s}, status: :ok
                     return
                   }
@@ -371,8 +366,8 @@ module Cor1440Gen
             end
             respond_to do |format|
               format.html { render action: "error" }
-              format.json { render json: prob, 
-                            status: :unprocessable_entity 
+              format.json { render json: prob,
+                            status: :unprocessable_entity
               }
             end
           end
@@ -381,24 +376,24 @@ module Cor1440Gen
             atributos_form + [
               :responsable_id,
               :sectorapc_id
-            ] + [ 
+            ] + [
               :actividadpf_attributes =>  [
-                :id, 
+                :id,
                 :resultadopf_id,
                 :actividadtipo_id,
-                :nombrecorto, 
-                :titulo, 
-                :descripcion, 
-                :_destroy ] 
+                :nombrecorto,
+                :titulo,
+                :descripcion,
+                :_destroy ]
             ] + [
               :anexo_proyectofinanciero_attributes => [
                 :id,
                 :proyectofinanciero_id,
                 :_destroy,
                 :anexo_attributes => [
-                  :adjunto, 
-                  :descripcion, 
-                  :id, 
+                  :adjunto,
+                  :descripcion,
+                  :id,
                   :_destroy ] ]
             ] + [
               :beneficiario_ids => []
@@ -408,26 +403,26 @@ module Cor1440Gen
               :plantillahcm_ids => []
             ] + [
               :indicadorobjetivo_attributes =>  [
-                :id, 
+                :id,
                 :objetivopf_id,
-                :numero, 
-                :indicador, 
-                :tipoindicador_id, 
-                :_destroy ] 
-            ] + [ 
-              :indicadorpf_attributes =>  [
-                :id, 
-                :resultadopf_id,
-                :numero, 
-                :indicador, 
+                :numero,
+                :indicador,
                 :tipoindicador_id,
-                :_destroy ] 
-            ] + [ 
+                :_destroy ]
+            ] + [
+              :indicadorpf_attributes =>  [
+                :id,
+                :resultadopf_id,
+                :numero,
+                :indicador,
+                :tipoindicador_id,
+                :_destroy ]
+            ] + [
               :objetivopf_attributes =>  [
-                :id, 
-                :numero, 
-                :objetivo, 
-                :_destroy ] 
+                :id,
+                :numero,
+                :objetivo,
+                :_destroy ]
             ] + [
               :proyectofinanciero_usuario_attributes => [
                 :id,
@@ -435,11 +430,11 @@ module Cor1440Gen
                 :_destroy ]
             ] + [
               :resultadopf_attributes =>  [
-                :id, 
+                :id,
                 :objetivopf_id,
-                :numero, 
-                :resultado, 
-                :_destroy ] 
+                :numero,
+                :resultado,
+                :_destroy ]
             ]
           end
 
@@ -470,7 +465,7 @@ module Cor1440Gen
               else
                 c2 = c.where(
                   "(fechainicio <= ? OR fechainicio IS NULL) AND " +
-                  "(? <= fechacierre OR fechacierre IS NULL)", 
+                  "(? <= fechacierre OR fechacierre IS NULL)",
                   nfr.to_s, nfr.to_s)
               end
             end
