@@ -38,3 +38,4 @@ test/dummy/node_modules
 test/dummy/public/cor1440/assets/
 test/dummy/archivos/
 test/dummy/public/
+test/dummy/.env
