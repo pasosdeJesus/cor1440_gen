@@ -1,4 +1,8 @@
 <% col = Cor1440Gen::Actividadpf.all %>
+<% if params[:filtro][:busproyectofinanciero] %>
+  <% col = col.where(
+    proyectofinanciero_id: params[:filtro][:busproyectofinanciero].to_i) %>
+<% end %>
 <%= f.input :busactividadpf,
   collection: col.order(:titulo),
   include_blank: true,
