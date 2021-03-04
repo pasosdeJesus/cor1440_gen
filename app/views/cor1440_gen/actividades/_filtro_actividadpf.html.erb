@@ -1,5 +1,5 @@
 <% col = Cor1440Gen::Actividadpf.all %>
-<% if params[:filtro][:busproyectofinanciero] %>
+<% if params && params[:filtro] && params[:filtro][:busproyectofinanciero] %>
   <% col = col.where(
     proyectofinanciero_id: params[:filtro][:busproyectofinanciero].to_i) %>
 <% end %>
@@ -15,6 +15,6 @@
     'data-enviarautomatico' => ''
   },
   wrapper_html: {
-    style: 'width: 20em'
+    style: 'width: 12em'
   }
 %>
