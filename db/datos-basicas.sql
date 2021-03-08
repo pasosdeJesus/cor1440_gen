@@ -386,3 +386,24 @@ INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecamp
 INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (22, 5, 'poblacion_mujeres_l_g3', 'B', 16);
 INSERT INTO public.heb412_gen_campoplantillahcr (id, plantillahcr_id, nombrecampo, columna, fila) VALUES (26, 5, 'poblacion_mujeres_l_g4', 'B', 17);
 
+
+INSERT INTO public.cor1440_gen_tipoindicador (id, nombre, medircon, espcampos, espvaloresomision, espvalidaciones, esptipometa, espfuncionmedir, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, descd1, descd2, descd3, descd4) VALUES (1, 'CUENTA ACTIVIDADES', 1, NULL, NULL, NULL, 'Numéro de actividades', 'Cuenta actividades', NULL, '2020-03-26', NULL, '2020-03-26', '2020-04-11', NULL, NULL, NULL, NULL);
+INSERT INTO public.cor1440_gen_tipoindicador (id, nombre, medircon, espcampos, espvaloresomision, espvalidaciones, esptipometa, espfuncionmedir, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, descd1, descd2, descd3, descd4) VALUES (2, 'CUENTA POBLACIÓN ACT', 1, NULL, NULL, NULL, 'Número de personas rep.', 'Suma personas contadas en tablas de población de las actividades. Pueden haber repetidas.', NULL, '2020-03-26', NULL, '2020-03-26', '2020-04-11', 'Hombres', 'Mujeres', 'Sin Sexo de Nacimiento', NULL);
+INSERT INTO public.cor1440_gen_tipoindicador (id, nombre, medircon, espcampos, espvaloresomision, espvalidaciones, esptipometa, espfuncionmedir, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, descd1, descd2, descd3, descd4) VALUES (3, 'CUENTA ASISTENTES ACT', 1, NULL, NULL, NULL, 'Número de personas rep.', 'Cuenta personas en listados de asistencia de actividades. Pueden haber repetidas', NULL, '2020-03-26', NULL, '2020-03-26', '2020-04-11', 'Hombres', 'Mujeres', 'Sin Sexo de Nacimiento', NULL);
+INSERT INTO public.cor1440_gen_tipoindicador (id, nombre, medircon, espcampos, espvaloresomision, espvalidaciones, esptipometa, espfuncionmedir, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at, descd1, descd2, descd3, descd4) VALUES (4, 'CUENTA ASIST. ÚNICOS ACT', 1, NULL, NULL, NULL, 'Número de personas únicas', 'Cuenta personas únicas en listados de asistencia de actividades. Un participante que esté en listado de dos o más actividades actividades diferentes cuenta una sóla vez.', NULL, '2020-03-30', NULL, '2020-03-30', '2020-04-11', 'Hombres', 'Mujeres', 'Sin Sexo de Nacimiento', '');
+
+SELECT pg_catalog.setval('public.cor1440_gen_tipoindicador_id_seq', 101, true);
+
+
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (1, 'Mujeres', 2);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (2, 'Hombres', 2);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (3, 'Sin Sexo de Nacimiento', 2);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (4, 'Mujeres', 3);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (5, 'Hombres', 3);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (6, 'Sin Sexo de Nacimiento', 3);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (7, 'Mujeres', 4);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (8, 'Hombres', 4);
+INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (9, 'Sin Sexo de Nacimiento', 4);
+
+
+SELECT pg_catalog.setval('public.cor1440_gen_datointermediot_id_seq', 101, true);
