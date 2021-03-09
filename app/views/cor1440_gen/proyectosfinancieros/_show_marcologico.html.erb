@@ -47,10 +47,20 @@
       <td>
         <% r.actividadpf.order(:id).each do |a| %>
           <li>
-            <%= cr + a.nombrecorto %> <%= a.titulo %>.
-            <% if a.actividadtipo_id %>
-              (Tipo: <%= a.actividadtipo.nombre %>)
-            <% end%>
+            <%= cr + a.nombrecorto %> <%= a.titulo %>
+              <% if a.formulario_id || a.heredade_id || a.actividadtipo_id %>
+                (
+                <% if a.formulario_id then %>
+                  Formulario: <%= a.formulario.presenta_nombre %>.
+                <% end %>
+                <% if a.heredade_id then %>
+                  Hereda de: <%= a.heredade.presenta_nombre %>.
+                <% end %>
+                <% if a.actividadtipo_id then %>
+                  Tipo: <%= a.actividadtipo.nombre %>.
+                <% end %>
+                )
+              <% end %>
             <%= a.descripcion %>
           </li>
         <% end %>
