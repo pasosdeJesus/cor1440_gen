@@ -12,7 +12,10 @@
     <%= f.input :nombrecorto, label: false %>
   </td>
   <td>
-    <%= f.input :titulo, label: false %>
+    <%= f.input :titulo, 
+      as: :text, 
+      input_html: { rows: 3 }, 
+      label: false %>
   </td>
   <td>
     <%= f.input :descripcion, 

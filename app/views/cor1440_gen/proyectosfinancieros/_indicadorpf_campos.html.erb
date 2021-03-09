@@ -12,8 +12,7 @@
   <td>
     <%= f.input :numero, label: false %>
   </td>
-  <td>
-
+  <td style='width: 10rem'>
     <% tid = Cor1440Gen::Tipoindicador.where(medircon: 1).map(&:id)  %>
     <% tus = f.object.tipoindicador_id ? [f.object.tipoindicador_id] : []  %>
     <% coltir = Cor1440Gen::Tipoindicador.where(id: tid | tus)  %>

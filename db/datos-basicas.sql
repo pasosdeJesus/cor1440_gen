@@ -406,4 +406,4 @@ INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) V
 INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) VALUES (9, 'Sin Sexo de Nacimiento', 4);
 
 
-SELECT pg_catalog.setval('public.cor1440_gen_datointermediot_id_seq', 101, true);
+SELECT pg_catalog.setval('public.cor1440_gen_datointermedioti_id_seq', 101, true);
