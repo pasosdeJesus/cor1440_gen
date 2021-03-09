@@ -11,15 +11,23 @@ module Cor1440Gen
           include Sip::Localizacion
           include Sip::FormatoFechaHelper
 
-          belongs_to :proyectofinanciero, 
-            class_name: 'Cor1440Gen::Proyectofinanciero',
-            foreign_key: 'proyectofinanciero_id'
-          belongs_to :resultadopf, 
-            class_name: 'Cor1440Gen::Resultadopf',
-            foreign_key: 'resultadopf_id', optional: true
           belongs_to :actividadtipo, 
             class_name: 'Cor1440Gen::Actividadtipo',
             foreign_key: 'actividadtipo_id', optional: true
+
+          belongs_to :heredade, class_name: 'Cor1440Gen::Actividadpf',
+            foreign_key: :heredade_id, optional: true
+
+          belongs_to :formulario, class_name: 'Mr519Gen::Formulario',
+            foreign_key: :formulario_id, optional: true
+
+          belongs_to :proyectofinanciero, 
+            class_name: 'Cor1440Gen::Proyectofinanciero',
+            foreign_key: 'proyectofinanciero_id'
+
+          belongs_to :resultadopf, 
+            class_name: 'Cor1440Gen::Resultadopf',
+            foreign_key: 'resultadopf_id', optional: true
 
           has_and_belongs_to_many :actividad, 
             class_name: 'Cor1440Gen::Actividad',

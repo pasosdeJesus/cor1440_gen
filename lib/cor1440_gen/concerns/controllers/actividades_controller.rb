@@ -117,6 +117,39 @@ module Cor1440Gen
                   Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
                     ar, current_usuario_id)
                 end
+
+              end
+              # Los tipos de actividad son complejos, puede
+              # ser más simple para el usuario final un formulario
+              # por actividad de marco lógico o el de la actividad
+              # de marco lógico heredada más próxima.
+              ah = apf
+              while ah && !ah.formulario_id
+                ah = ah.heredade
+              end
+              if ah
+                f = ah.formulario
+                vfid << f.id
+                aw = actividad.respuestafor.where(formulario_id: f.id) 
+                if  aw.count == 0
+                  rf = Mr519Gen::Respuestafor.create(
+                    formulario_id: f.id,
+                    fechaini: Date.today,
+                    fechacambio: Date.today)
+                  ar = Cor1440Gen::ActividadRespuestafor.create(
+                    actividad_id: actividad.id,
+                    respuestafor_id: rf.id,
+                  )
+                else # aw.count == 1
+                  r = aw.take
+                  ar = Cor1440Gen::ActividadRespuestafor.where(
+                    actividad_id: actividad.id,
+                    respuestafor_id: r.id,
+                  ).take
+                end
+                Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
+                  ar, current_usuario_id)
+
               end
             end
             if vfid.count > 0

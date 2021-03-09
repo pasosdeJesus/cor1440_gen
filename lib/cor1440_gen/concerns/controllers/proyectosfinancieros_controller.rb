@@ -378,12 +378,14 @@ module Cor1440Gen
               :sectorapc_id
             ] + [
               :actividadpf_attributes =>  [
-                :id,
-                :resultadopf_id,
                 :actividadtipo_id,
-                :nombrecorto,
-                :titulo,
                 :descripcion,
+                :formulario_id,
+                :heredade_id,
+                :id,
+                :nombrecorto,
+                :resultadopf_id,
+                :titulo,
                 :_destroy ]
             ] + [
               :anexo_proyectofinanciero_attributes => [
