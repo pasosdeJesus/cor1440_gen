@@ -27,12 +27,8 @@
     <%= f.association :formulario, 
       collection: Mr519Gen::Formulario.all,
       label_method: :presenta_nombre,
-      input_html: { 
-        class: 'chosen-select'
-      },
-      wrapper_html: {
-        style: 'width: 8rem'
-      },
+      #input_html: { class: 'chosen-select' },
+      wrapper_html: { style: 'width: 8rem' },
       label: false %>
   </td>
   <td>
@@ -47,12 +43,8 @@
       label_method: lambda {|r| 
         r.proyectofinanciero_id.to_s + ' ' + r.presenta_nombre 
       },
-      input_html: { 
-        class: 'chosen-select'
-      },
-      wrapper_html: {
-        style: 'width: 8rem'
-      },
+      # input_html: { class: 'chosen-select' },
+      wrapper_html: { style: 'width: 8rem' },
       label: false %>
   </td>
   <td>
