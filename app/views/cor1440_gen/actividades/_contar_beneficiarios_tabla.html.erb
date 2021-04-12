@@ -95,7 +95,9 @@
       <% rangosedad = asg2.map{|r| r['rangoedadac_nombre']}.uniq.join("; ") %>
       <tr>
         <td>
-          <%= b[0] %> <!-- nombre -->
+          <%= link_to sip.persona_path(b[1]), target: '_blank' do %>
+            <%= b[0] %> <!-- nombre -->
+          <% end %>
         </td>
         <td>
           <%= b[2] %> <!-- sexo -->
