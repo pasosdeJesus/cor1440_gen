@@ -240,7 +240,6 @@ module Cor1440Gen
           can :manage, Cor1440Gen::Informe
           can :manage, Cor1440Gen::Mindicadorpf
           can :manage, Cor1440Gen::Proyectofinanciero
-          can :manage, Cor1440Gen::Sectoractor
           can :manage, Cor1440Gen::Tipoindicador
 
           can :manage, Heb412Gen::Doc
@@ -251,6 +250,7 @@ module Cor1440Gen
           can :manage, Mr519Gen::Formulario
 
           can :manage, Sip::Actorsocial
+          can :manage, Sip::Sectoractor
           can :manage, Sip::Persona
 
           can :manage, Usuario
