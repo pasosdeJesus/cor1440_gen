@@ -277,6 +277,29 @@ module Cor1440Gen
             return {resind: resind, datosint: datosint}
           end
 
+
+          # Mide indicador de resultado tipo 5. Participaciones
+          # de organizaciones en las actividades
+          # No retorna datos intermedios
+          def medir_indicador_res_tipo_5(idacs, mind, fini, ffin)
+            r=Cor1440Gen::ActividadActorsocial.where(actividad_id: idacs).count(:all)
+            byebug
+            return {resind: r, datosint: []}
+          end
+
+          # Mide indicador de resultado tipo 6. Organizaciones diferentes
+          # en las actividades con ids idacs
+          # No retorna datos intermedios
+          def medir_indicador_res_tipo_6(idacs, mind, fini, ffin)
+            r=Cor1440Gen::Actividad.execute(
+              "SELECT COUNT(DISTINCT actorsocial_id) "\
+              "FROM cor1440_gen_actividad_actorsocial "\
+              "WHERE actividad_id IN (?)", idacs)
+            byebug
+            return {resind: r, datosint: []}
+          end
+
+
           # Mide indicador de efecto mediante avance tipo 10. 
           # Cantidad de avances.
           # No retorna datos intermedios
