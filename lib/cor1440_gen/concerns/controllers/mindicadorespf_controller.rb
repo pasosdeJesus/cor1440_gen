@@ -283,7 +283,6 @@ module Cor1440Gen
           # No retorna datos intermedios
           def medir_indicador_res_tipo_5(idacs, mind, fini, ffin)
             r=Cor1440Gen::ActividadActorsocial.where(actividad_id: idacs).count(:all)
-            byebug
             return {resind: r, datosint: []}
           end
 
@@ -295,7 +294,6 @@ module Cor1440Gen
               "SELECT COUNT(DISTINCT actorsocial_id) "\
               "FROM cor1440_gen_actividad_actorsocial "\
               "WHERE actividad_id IN (?)", idacs)
-            byebug
             return {resind: r, datosint: []}
           end
 
