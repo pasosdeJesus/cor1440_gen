@@ -34,11 +34,11 @@
     </td>
   <% end %>
   <td>
-    <%= f.input :resind,
-      input_html: { readonly: 'readonly' },
-      label: false %>
-    <%= f.input :rutaevidencia, 
-      label: false, as: :hidden %>
+    <span>
+      <a class='enlaceevidencia' href='<%= f.object.rutaevidencia %>' target='_blank'><%= f.object.resind %></a>
+    </span>
+    <%= f.input :resind, as: :hidden, label: false %>
+    <%= f.input :rutaevidencia, label: false, as: :hidden %>
   </td>
   <td>
     <%= f.input :meta,

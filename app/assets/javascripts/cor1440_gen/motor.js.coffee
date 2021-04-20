@@ -539,7 +539,9 @@ cor1440_gen_rangoedadc_todos = () ->
   meta = +$('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_meta]').val()
   if ( meta > 0)
     $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_porcump]').val(res.resind*100/meta)
-
+  enlace = $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_resind]').closest('td').find('a.enlaceevidencia')
+  enlace.html(res.resind)
+  enlace.attr('href', res.rutaevidencia)
 
 @cor1440_gen_calcula_pmindicadorpf = (elem, event) ->
   event.stopPropagation() 
