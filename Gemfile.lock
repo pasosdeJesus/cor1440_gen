@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 1b6a94568942230a876509d9747d6dedcef1291a
+  revision: 38fa969b004b6390ec522f8bee460de7335fca8e
   branch: main
   specs:
     sip (2.0.b11)
@@ -124,7 +124,7 @@ GEM
     ansi (1.5.0)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.7.3)
+    bootsnap (1.7.4)
       msgpack (~> 1.0)
     builder (3.2.4)
     camertron-eprun (1.1.1)
