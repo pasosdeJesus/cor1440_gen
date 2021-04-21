@@ -73,6 +73,8 @@ module Cor1440Gen
           'anexo_4_desc',
           'anexo_5_desc',
           'anexos_ids',
+          'asistentes_nombres',
+          'asistentes_ids',
           'campos_dinamicos',
           'corresponsables',
           'creacion',

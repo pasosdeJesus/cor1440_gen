@@ -174,6 +174,35 @@ module Cor1440Gen
             nombre
           end
 
+
+          # Auxiliar que retorna listado de identificaciones de personas del
+          # listado de asistentes que cumplan una condición
+          def personas_asistentes_condicion
+            ids = []
+            self.asistencia.each do |a| 
+              if (yield(a))
+                ids << a.persona_id
+              end
+            end
+            ids
+          end
+
+          def asistentes_ids
+            idp = personas_asistentes_condicion {|a| true}
+            if idp.length > 0
+              return idp.uniq.sort.join(',')
+            else
+              return ''
+            end
+          end
+
+          def asistentes_nombres
+            m = self.asistencia.map { |a| 
+              a.persona ? a.persona.presenta_nombre : ''
+            }
+            m.sort.join('; ')
+          end
+
           def poblacion_cor1440_gen
             # En cuenta de poblacion no tiene en cuenta locales,
             # para coincidir con tipo de indicador que cuenta
