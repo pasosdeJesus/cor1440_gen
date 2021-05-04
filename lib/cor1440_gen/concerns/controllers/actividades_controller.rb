@@ -55,7 +55,8 @@ module Cor1440Gen
           end
 
           def index_reordenar(c)
-            c = c.reorder('cor1440_gen_actividad.fecha DESC')
+            c = c.reorder(['cor1440_gen_actividad.fecha DESC', 
+                          'cor1440_gen_actividad.id'])
             return c
           end
 
