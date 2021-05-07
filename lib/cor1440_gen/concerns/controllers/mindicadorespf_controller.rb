@@ -290,10 +290,14 @@ module Cor1440Gen
           # en las actividades con ids idacs
           # No retorna datos intermedios
           def medir_indicador_res_tipo_6(idacs, mind, fini, ffin)
-            r=Cor1440Gen::Actividad.connection.execute(
-              "SELECT COUNT(DISTINCT actorsocial_id) "\
-              "FROM cor1440_gen_actividad_actorsocial "\
-              "WHERE actividad_id IN (?)", idacs)
+            r = 0
+            if idacs && idacs.count > 0 
+              puts "idacs=#{idacs.inspect}"
+              r=Cor1440Gen::Actividad.connection.execute(
+                "SELECT COUNT(DISTINCT actorsocial_id) "\
+                "FROM cor1440_gen_actividad_actorsocial "\
+                "WHERE actividad_id IN (#{idacs.join(',')})").count
+            end
             return {resind: r, datosint: []}
           end
 
