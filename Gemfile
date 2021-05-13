@@ -19,6 +19,10 @@ gem 'devise'# Autenticación
 
 gem 'devise-i18n'
 
+gem 'execjs', 
+  git: 'https://github.com/vtamara/execjs.git',
+  branch: 'exec-reliable'
+
 gem 'jbuilder'
 
 gem 'libxml-ruby'
