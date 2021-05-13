@@ -1,9 +1,10 @@
 <div class='div_actividad_proyectofinanciero'>
-  <table class="tablapfac table-bordered table-sm ">
+
+  <table class="tablapfac table-sm table-striped">
     <thead>
       <tr>
-        <td> <%= @actividad.class.human_attribute_name(:proyectofinanciero) %> </td>
-        <td> Actividades del marco lógico </td>
+        <th scope='col'> <%= @actividad.class.human_attribute_name(:proyectofinanciero) %> </th>
+        <th scope='col' style='width-min: 30rem'><%= @actividad.class.human_attribute_name(:actividadespf) %></th>
       </tr>
     </thead>
     <tbody id="actividad_proyectofinanciero">

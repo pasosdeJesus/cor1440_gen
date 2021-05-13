@@ -4,7 +4,8 @@
   <% else %>
     <% fr = Time.now.strftime('%Y-%m-%d') %>
   <% end %>
-  <% lp1 = Cor1440Gen::ProyectosfinancierosController::proyectos_disponibles_usuario_a_fecha(fr, current_ability) %>
+  <% lp1 = Cor1440Gen::ProyectosfinancierosController::
+    proyectos_disponibles_usuario_a_fecha(fr, current_ability) %>
   <% ids1 = lp1.pluck(:id) %>
   <% ids2 = ac.object.proyectofinanciero.pluck(:id) %>
   <% # Si es uno nuevo excluimos los ya elegidos %>
@@ -41,7 +42,7 @@
       selected: f.object.actividadpf_ids, 
       input_html: { 
         class: 'chosen-select',
-        style: 'width: 30rem'
+        style: 'width-min: 30rem'
       } 
     %>
   </td>  

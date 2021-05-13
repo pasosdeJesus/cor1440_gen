@@ -41,7 +41,8 @@ es:
       "cor1440_gen/actividad":
         actividadarea: Subárea
         actividadareas: Subáreas
-        actividadpf: Actividad de marco lógico
+        actividadpf: Actividad del marco lógico
+        actividadespf: Actividades del marco lógico
         actorsocial: Organizaciones sociales sociales en listado de asistencia
         fecha_localizada: Fecha
         objetivo: Objetivo de la actividad

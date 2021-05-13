@@ -709,6 +709,9 @@ cor1440_gen_rangoedadc_todos = () ->
       params = {
         fecha: $('#actividad_fecha_localizada').val(),
       }
+      if $('#actividad_grupo_ids').length > 0
+        params['grupo_ids'] = $('#actividad_grupo_ids').val()
+
       sip_funcion_1p_tras_AJAX('proyectosfinancieros', params, 
         cor1440_gen_actividad_actualiza_pf_op, objetivo, 
         'con Convenios Financiados', root)
