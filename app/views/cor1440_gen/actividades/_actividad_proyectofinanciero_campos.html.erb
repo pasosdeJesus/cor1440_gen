@@ -4,8 +4,8 @@
   <% else %>
     <% fr = Time.now.strftime('%Y-%m-%d') %>
   <% end %>
-  <% lp1 = Cor1440Gen::ProyectosfinancierosController::
-    proyectos_disponibles_usuario_a_fecha(fr, current_ability) %>
+  <% lp1 = Cor1440Gen::ProyectosfinancierosController::disponibles(
+    {fecha: fr}, current_ability) %>
   <% ids1 = lp1.pluck(:id) %>
   <% ids2 = ac.object.proyectofinanciero.pluck(:id) %>
   <% # Si es uno nuevo excluimos los ya elegidos %>
@@ -35,7 +35,10 @@
   <td>
     <%= f.association :actividadpf, 
       collection: ::Cor1440Gen::Actividadpf.
-      where( proyectofinanciero_id: f.object.proyectofinanciero_id),
+      where( proyectofinanciero_id: f.object.proyectofinanciero_id).
+      joins(:resultadopf).joins(:objetivopf).
+      order(['cor1440_gen_objetivopf.numero', 'cor1440_gen_resultadopf.numero', 
+             :nombrecorto, :titulo]),
       label_method: lambda { |t| t.presenta_nombre},
       value_method: :id,
       label: false,
