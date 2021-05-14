@@ -29,6 +29,10 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Resultadopf',
             foreign_key: 'resultadopf_id', optional: true
 
+          has_one :objetivopf,
+            class_name: 'Cor1440Gen::Objetivopf',
+            through: :resultadopf
+
           has_and_belongs_to_many :actividad, 
             class_name: 'Cor1440Gen::Actividad',
             foreign_key: 'actividadpf_id',
