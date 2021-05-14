@@ -102,8 +102,8 @@ module Cor1440Gen
 
           def index(c = nil)
             authorize! :read, Cor1440Gen::Proyectofinanciero
-            c = Cor1440Gen::ProyectosfinancierosController::proyectos_disponibles_usuario_a_fecha(
-              params[:fecha], current_ability, c)
+            c = Cor1440Gen::ProyectosfinancierosController::disponibles(
+              params, current_ability, c)
             super(c)
           end
 
@@ -264,11 +264,16 @@ module Cor1440Gen
             render :copia, layout: 'application'
           end
 
-          def new
+          def new_cor1440_gen
             authorize! :new, Cor1440Gen::Proyectofinanciero
             @registro = clase.constantize.new
             @registro.monto = 1
             @registro.nombre = 'N'
+          end
+
+
+          def new
+            new_cor1440_gen
             @registro.save!
             redirect_to cor1440_gen.edit_proyectofinanciero_path(@registro)
           end
@@ -450,22 +455,20 @@ module Cor1440Gen
         end # included
 
         class_methods do
-          # Ids de proyectos que el usuario actual puede leer a cierta
-          # fecha
+          # Retorna ids de proyectos que el usuario actual puede leer con
+          # las restricciones del filtro:
+          #   filtro[:fecha] limita a proyectos vigentes en la fecha
           # Usado en formulario actividad en lista de selección de proyectos
-          def proyectos_disponibles_usuario_a_fecha(fr, ability, c = nil)
-            if c == nil
-              c = Cor1440Gen::Proyectofinanciero.accessible_by(ability)
-            end
-            c2 = c
-            if fr && fr != ''
+          def disponibles_cor1440_gen(filtro, ability, c = nil)
+            c2 = c ? c : Cor1440Gen::Proyectofinanciero.accessible_by(ability)
+            if filtro[:fecha] && filtro[:fecha] != ''
               menserror=''
               nfr = Sip::FormatoFechaHelper.reconoce_adivinando_locale(
-                fr, menserror)
+                filtro[:fecha], menserror)
               if menserror != ''
-                puts "** Problema con fecha '#{fr}'. #{menserror}"
+                puts "** Problema con fecha '#{filtro[:fecha]}'. #{menserror}"
               else
-                c2 = c.where(
+                c2 = c2.where(
                   "(fechainicio <= ? OR fechainicio IS NULL) AND " +
                   "(? <= fechacierre OR fechacierre IS NULL)",
                   nfr.to_s, nfr.to_s)
@@ -473,8 +476,12 @@ module Cor1440Gen
             end
             return c2
           end
+          
+          def disponibles(filtro, ability, c = nil)
+            return disponibles_cor1440_gen(filtro, ability, c)
+          end
 
-        end # included
+        end # class_methods
 
       end
     end
