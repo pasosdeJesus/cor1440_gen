@@ -1,15 +1,7 @@
-<% a1 = Sip::Actorsocial.all %>
-<!--% lg = [] %-->
-<!--% lg += f.object.grupo_ids if f.object.grupo_ids %-->
-<!--% a1 = Sip::ActoressocialesController::filtra_grupos_fecha(
-  a1, lg, f.object.fecha) %-->
-<% a1l = a1.map(&:id) + f.object.actorsocial_ids %>
-<% a2 = Sip::Actorsocial.joins(:grupoper).where(id: a1l).
-    order('sip_grupoper.nombre') %>
-<%= f.association :actorsocial, 
-  collection: a2,
-  label: "Organizaciones sociales en listado de asistencia",
-  label_method: :presenta_nombre, 
-  value_method: :id,
-  input_html: { class: 'chosen-select' }
-%>
+<% if !actoresdisp  %>
+  <% actoresdisp = Sip::Actorsocial.habilitados %>
+<% end %>
+
+<% render partial: '_campo_actorsocial_p2.html.erb', 
+  locals: {f: f, actoresdisp: actoresdisp } %>
+
