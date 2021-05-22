@@ -2,10 +2,9 @@
 <% # actoresdisp son los Sip::Actorsocial disponibles para elegir %>
 <% lids = actoresdisp.map(&:id) | f.object.actorsocial_ids %>
 <% a2 = Sip::Actorsocial.joins(:grupoper).where(id: lids).
-    order('sip_grupoper.nombre') %>
+  order('sip_grupoper.nombre') %>
 <%= f.association :actorsocial, 
   collection: a2,
-  label: "Organizaciones sociales en listado de asistencia",
   label_method: :presenta_nombre, 
   value_method: :id,
   input_html: { class: 'chosen-select' }

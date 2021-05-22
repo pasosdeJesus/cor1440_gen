@@ -60,7 +60,7 @@ gem 'twitter_cldr' # ICU con CLDR
 
 gem 'tzinfo' # Zonas horarias
 
-gem 'webpacker'
+gem 'webpacker', '~> 5.x'
 
 gem 'will_paginate' # Pagina listados
 

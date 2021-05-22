@@ -428,7 +428,7 @@ DEPENDENCIES
   twitter_cldr
   tzinfo
   web-console
-  webpacker
+  webpacker (~> 5.x)
   will_paginate
 
 BUNDLED WITH
