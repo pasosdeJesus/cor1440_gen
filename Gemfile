@@ -33,6 +33,8 @@ gem 'odf-report' # Genera ODT
 
 gem 'paperclip' # Maneja adjuntos
 
+gem 'parslet'
+
 gem 'pg' # Postgresql
 
 gem 'puma'
@@ -60,7 +62,7 @@ gem 'twitter_cldr' # ICU con CLDR
 
 gem 'tzinfo' # Zonas horarias
 
-gem 'webpacker', '~> 5.x'
+gem 'webpacker'
 
 gem 'will_paginate' # Pagina listados
 
