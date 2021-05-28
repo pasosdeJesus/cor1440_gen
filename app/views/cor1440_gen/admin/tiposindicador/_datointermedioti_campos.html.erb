@@ -5,6 +5,14 @@
       label: false %>
   </td>
   <td>
+    <%= f.input :filtro, 
+      label: false %>
+  </td>
+  <td>
+    <%= f.input :funcion, 
+      label: false %>
+  </td>
+  <td>
     <%= f.input :id, as: :hidden %>
     <%= link_to_remove_association "Eliminar", f, 
       :class => 'btn-danger', "data-existing" => true %>
