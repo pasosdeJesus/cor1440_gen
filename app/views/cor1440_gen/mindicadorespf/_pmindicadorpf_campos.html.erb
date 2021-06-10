@@ -28,18 +28,20 @@
       }  %>
   </td>
   <% @datointermedioti.each do |di| %>
-    <% if f.object.datointermedioti_pmindicadorpf.
-        where(datointermedioti_id: di.id).count == 0 && !f.object.id.nil? %>
-      <% Cor1440Gen::DatointermediotiPmindicadorpf.create!(
-        datointermedioti_id: di.id,
-        pmindicadorpf_id: f.object.id) %>
-    <% end %>
-    <%= f.simple_fields_for :datointermedioti_pmindicadorpf,
-      f.object.datointermedioti_pmindicadorpf.
-      where(datointermedioti_id: di.id) do |di| %>
-      <td>
-        <%= render 'datointermedioti_pmindicadorpf_campos', :f => di %>
-      </td>
+    <% if !di.id.nil? %>
+      <% if f.object.datointermedioti_pmindicadorpf.
+          where(datointermedioti_id: di.id).count == 0 && !f.object.id.nil? %>
+        <% Cor1440Gen::DatointermediotiPmindicadorpf.create!(
+          datointermedioti_id: di.id,
+          pmindicadorpf_id: f.object.id) %>
+      <% end %>
+      <%= f.simple_fields_for :datointermedioti_pmindicadorpf,
+        f.object.datointermedioti_pmindicadorpf.
+        where(datointermedioti_id: di.id) do |di| %>
+        <td>
+          <%= render 'datointermedioti_pmindicadorpf_campos', :f => di %>
+        </td>
+      <% end %>
     <% end %>
   <% end %>
   <td>
