@@ -74,9 +74,9 @@
         when "actividades" then (
           window.cor1440_gen_mfun_enlace.value="cuenta(Actividades_contribuyentes)"
         )
-        when "poblacion" then window.cor1440_gen_mfun_enlace.value='suma(mapeaproy(Actividades, poblacion))'
+        when "poblacion" then window.cor1440_gen_mfun_enlace.value='suma(mapeaproy(Actividades_contribuyentes, poblacion))'
         when "asistentes" then window.cor1440_gen_mfun_enlace.value='cuenta(aplana(mapeaproy(Actividades_contribuyentes, Asistentes)))'
-        when "asistentesunicos" then window.cor1440_gen_mfun_enlace.value='cuenta(unicos(aplana(mapeaproy(Actividades_contribuyentes, Asistentes))))'
+        when "asistentesunicos" then window.cor1440_gen_mfun_enlace.value='cuenta(unicos(mapeaproy(aplana(mapeaproy(Actividades_contribuyentes, Asistentes)), persona)))'
         when "organizaciones" then window.cor1440_gen_mfun_enlace.value="cuenta(aplana(mapeaproy(Actividades_contribuyentes, Organizaciones)))"
         when "organizacionesunicas" then window.cor1440_gen_mfun_enlace.value="cuenta(unicas(aplana(mapeaproy(Actividades_contribuyentes, Organizaciones))))"
       $(".cor1440_gen_menucontextual").css("display", "none");

@@ -44,11 +44,23 @@ module Cor1440Gen
 
           has_many :datointermedioti, dependent: :delete_all,
             class_name: 'Cor1440Gen::Datointermedioti',
-            foreign_key: 'mindicadorpf_id'
+            foreign_key: 'mindicadorpf_id',
+            validate: true
           accepts_nested_attributes_for :datointermedioti,
             allow_destroy: true, reject_if: :all_blank
 
           validates :medircon, inclusion: [1,2,3]
+
+          validate :sintaxis_funcionresultado
+          def sintaxis_funcionresultado
+            menserr = ''.html_safe
+            if !Cor1440Gen::MedicionHelper.revisa_sintaxis_expresion(
+                self.funcionresultado, menserr)
+              errors.add(:funcionresultado, menserr)
+              return false
+            end
+            return true
+          end
 
           scope :filtro_proyectofinanciero_id, lambda { |pf|
             where(proyectofinanciero_id: pf)

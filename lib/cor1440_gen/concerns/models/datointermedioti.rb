@@ -13,6 +13,11 @@ module Cor1440Gen
           belongs_to :tipoindicador, class_name: 'Cor1440Gen::Tipoindicador',
             foreign_key: 'tipoindicador_id'
 
+          has_many :datointermedioti_pmindicadorpf,
+            class_name: 'Cor1440Gen::DatointermediotiPmindicadorpf',
+            foreign_key: 'datointermedioti_id',
+            dependent: :delete_all
+
           validates :nombre, length: { maximum: 1024}
           validates :nombreinterno, length: { maximum: 127}
           validates :nombreinterno, format: {with: /\A[a-z_][a-z_]*\z/}

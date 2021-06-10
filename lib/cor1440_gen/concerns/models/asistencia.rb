@@ -24,6 +24,17 @@ module Cor1440Gen
           validates :actividad, presence: true
           validates :persona, presence: true
 
+          def evalua_campo(campo, menserr)
+            case campo
+            when 'persona'
+              return self.persona
+            else
+              menserr = "Campo #{campo} no está en lista blanca de asistencia. "
+              puts menserr
+              return nil
+            end
+          end
+
         end # included
       end
     end

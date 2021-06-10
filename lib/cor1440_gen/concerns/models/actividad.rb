@@ -495,7 +495,23 @@ module Cor1440Gen
           scope :filtro_resultado, lambda { |r|
             where("unaccent(resultado) ILIKE '%' || unaccent(?) || '%'", r)
           }
- 
+
+
+          # En la medición de un indicador evalua un campo
+          def evalua_campo(campo, menserr)
+            case campo
+            when 'Asistentes'
+              return self.asistencia
+            when 'Organizaciones'
+              return self.actorsocial
+            when 'poblacion'
+              self.poblacion
+            else
+              menserr = "Campo #{campo} no está en lista blanca de actividad. "
+              puts menserr
+              return nil
+            end
+          end
         end
       end
     end

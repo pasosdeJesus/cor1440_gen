@@ -255,6 +255,5 @@ module Cor1440Gen
       )
     end
 
-
   end  # class
 end    # module

@@ -87,17 +87,17 @@ module Cor1440Gen
     ###########################################
 
     LitNum= Struct.new(:num) do
-      def eval(contexto); num.to_s.sub(',', '.').to_f; end
+      def eval(contexto, menserror = ''.html_safe); num.to_s.sub(',', '.').to_f; end
     end
 
 
     Menos = Struct.new(:e) do
-      def eval(contexto); 
-        -(e.eval(contexto).to_f); end
+      def eval(contexto, menserror = ''.html_safe); 
+        -(e.eval(contexto, menserror).to_f); end
     end
 
     Ident = Struct.new(:id) do
-      def eval(contexto)
+      def eval(contexto, menserror = ''.html_safe)
         if !contexto
           STDERR.puts "** No se definió contexto"
           return nil
@@ -111,7 +111,7 @@ module Cor1440Gen
     end
 
     ApFun = Struct.new(:fun, :argsp) do
-      def eval(contexto)
+      def eval(contexto, menserror = ''.html_safe)
         # args que siempre sea vector con argumentos
         args = argsp.class.to_s != 'Array' ? [argsp] : argsp
         # argsev contendrá evaluaciónd de los argumentos necesarios
@@ -123,7 +123,7 @@ module Cor1440Gen
             STDERR.puts "** Función #{fun.to_s} requiere un parámetro"
             return nil
           end
-          argsev[0] = args[0].eval(contexto)
+          argsev[0] = args[0].eval(contexto, menserror)
           if !argsev[0].respond_to?(:count)
             STDERR.puts "** Parámetro de función #{fun.to_s} no es vector"
             return nil
@@ -136,7 +136,7 @@ module Cor1440Gen
             STDERR.puts "** Función #{fun.to_s} requiere un parámetro"
             return nil
           end
-          argsev[0] = args[0].eval(contexto)
+          argsev[0] = args[0].eval(contexto, menserror)
           if !argsev[0].respond_to?(:count)
             STDERR.puts "** Parámetro de función #{fun.to_s} no es vector"
             return nil
@@ -148,7 +148,7 @@ module Cor1440Gen
             STDERR.puts "** Función #{fun.to_s} requiere dos parámetros"
             return nil
           end
-          argsev = args.map{|a| a.eval(contexto)}
+          argsev = args.map{|a| a.eval(contexto, menserror)}
           if !argsev[0].respond_to?(:count)
             STDERR.puts "** Primer parámetro de función #{fun.to_s} no es vector"
             return nil
@@ -166,7 +166,7 @@ module Cor1440Gen
             STDERR.puts "** Función #{fun.to_s} requiere dos parámetro"
             return nil
           end
-          argsev[0] = args[0].eval(contexto)
+          argsev[0] = args[0].eval(contexto, menserror)
           if !argsev[0].respond_to?(:count)
             STDERR.puts "** Primer parámetro de función #{fun.to_s} no es vector"
             return nil
@@ -176,16 +176,28 @@ module Cor1440Gen
             return nil
           end
           argsev[1] = args[1].id.to_s
-          return argsev[0].map{|e|
-            e[argsev[1].to_sym] || e[argsev[1].to_s] 
+          menserror = ''
+          m = argsev[0].map{|e|
+            if e[argsev[1].to_sym]
+              e[argsev[1].to_sym]
+            elsif e[argsev[1]]
+              e[argsev[1]]
+            elsif !e.respond_to?(:evalua_campo)
+              STDERR.puts "** La clase #{e.class} no tiene función "\
+                "evalua_campo"
+              nil
+            else
+              e.evalua_campo(argsev[1], menserror)
+            end
           }
+          return m
 
         when 'primera', 'primer', 'primero'
           if args.count != 1
             STDERR.puts "** Función #{fun.to_s} requiere un parámetro"
             return nil
           end
-          argsev[0] = args[0].eval(contexto)
+          argsev[0] = args[0].eval(contexto, menserror)
           if !argsev[0].respond_to?(:count)
             STDERR.puts "** Parámetro de función #{fun.to_s} no es vector"
             return nil
@@ -201,7 +213,7 @@ module Cor1440Gen
             STDERR.puts "** Función #{fun.to_s} requiere un parámetro"
             return nil
           end
-          argsev[0] = args[0].eval(contexto)
+          argsev[0] = args[0].eval(contexto, menserror)
           if !argsev[0].respond_to?(:count)
             STDERR.puts "** Primer parámetro de función #{fun.to_s} no es vector"
             return nil
@@ -216,7 +228,7 @@ module Cor1440Gen
             STDERR.puts "** Función #{fun.to_s} requiere un parámetro"
             return nil
           end
-          argsev[0] = args[0].eval(contexto)
+          argsev[0] = args[0].eval(contexto, menserror)
           if !argsev[0].respond_to?(:uniq)
             STDERR.puts "** Parámetro de función #{fun.to_s} no es vector"
             return nil
@@ -238,10 +250,27 @@ module Cor1440Gen
 
 
     Proy = Struct.new(:registro, :campo) do
-      def eval(contexto)
-        r = registro.eval(contexto)
+      def eval(contexto, menserror = ''.html_safe)
+        r = registro.eval(contexto, menserror)
         c = campo.to_s
-        if r && (r[c] || r[c.to_sym])
+        if r.nil?
+          STDERR.puts "** Evaluacion de registro dió nil"
+          return nil
+        end
+        menserror = ''
+        if r[c]
+          r[c]
+        elsif r[c.to_sym]
+          r[c.to_sym]
+        elsif !r.respond_to?(:evalua_campo)
+          STDERR.puts "** La clase #{e.class} no tiene función "\
+            "evalua_atributo"
+          nil
+        else
+          e.evalua_atributo(argsev[1], menserror)
+        end
+
+        if (r[c] || r[c.to_sym])
           return r[c] ? r[c] : r[c.to_sym]
         else
           STDERR.puts "** #{registro.to_s} no tiene campo #{c}"
@@ -252,9 +281,9 @@ module Cor1440Gen
 
 
     OpBin = Struct.new(:izq, :op, :der) do
-      def eval(contexto)
-        eizq = izq.eval(contexto)
-        eder = der.eval(contexto)
+      def eval(contexto, menserror = ''.html_safe)
+        eizq = izq.eval(contexto, menserror)
+        eder = der.eval(contexto, menserror)
         case op
         when '+'
           return eizq + eder
@@ -296,11 +325,13 @@ module Cor1440Gen
     end
 
 
-    def revisa_sintaxis_expresion(e)
+    def revisa_sintaxis_expresion(e, menserror = ''.html_safe)
       reconocedor = ExpMed.new
       p = reconocedor.parse(e)
       return true
     rescue Parslet::ParseFailed => falla
+      menserror << "Error de sintaxis en expresión '#{e}'. "\
+        "<pre>#{falla.parse_failure_cause.ascii_tree}</pre>.  ".html_safe
       STDERR.puts "** #{e}"
       STDERR.puts falla.parse_failure_cause.ascii_tree
       return false
@@ -314,17 +345,21 @@ module Cor1440Gen
     module_function :revisa_sintaxis_filtro
 
 
-    def evalua_expresion_medicion(e, contexto)
+    # Evalua una expresión en un contexto dado
+    # @return nil si tiene problemas y los describe en menserror
+    def evalua_expresion_medicion(e, contexto, menserror = ''.html_safe)
       r = ExpMed.new
       p = r.parse(e)
       t = ExpMedT.new
       asa = t.apply(p)
-      res = asa.eval(contexto)
+      res = asa.eval(contexto, menserror)
       return res
     rescue Parslet::ParseFailed => falla
+      menserror << "Error de sintaxis en expresión '#{e}'. "\
+        "<pre>#{falla.parse_failure_cause.ascii_tree}</pre>.  ".html_safe
       STDERR.puts "** #{e}"
       STDERR.puts falla.parse_failure_cause.ascii_tree
-      return false
+      return nil
     end
     module_function :evalua_expresion_medicion
 
