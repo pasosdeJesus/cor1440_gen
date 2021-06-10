@@ -1,14 +1,13 @@
-<%= f.association :actividadpf,
-  collection: Cor1440Gen::Actividadpf.
-  where(proyectofinanciero_id: f.object.proyectofinanciero_id).
-  where(resultadopf_id: f.object.indicadorpf.resultadopf_id),
-  value_method: :id,
-  label_method: lambda {|t| t.presenta_nombre },
-  input_html: {
-    class: 'chosen-select'
-  }
-%>
+<% if f.object.medircon == 1 %>
+  <%= f.association :actividadpf,
+    collection: Cor1440Gen::Actividadpf.
+    where(proyectofinanciero_id: f.object.proyectofinanciero_id).
+    where(resultadopf_id: f.object.indicadorpf.resultadopf_id),
+    value_method: :id,
+    label_method: lambda {|t| t.presenta_nombre },
+    input_html: {
+      class: 'chosen-select'
+    }
+  %>
+<% end %>
 
-
-
-    

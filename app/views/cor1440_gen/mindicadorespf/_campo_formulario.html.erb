@@ -1,0 +1,10 @@
+<% if f.object.medircon == 2 %>
+  <%= f.association :formulario,
+    collection: Mr519Gen::Formulario.all,
+    value_method: :id,
+    label_method: :presenta_nombre,
+    input_html: {
+      class: 'chosen-select'
+    } %>
+<% end %>
+

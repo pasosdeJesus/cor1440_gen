@@ -92,9 +92,13 @@ es:
         actividadpf: Actividades de marco lógico relacionadas con el indicador
         cor1440_gen_proyectofinanciero: Proyecto
         cor1440_gen_indicadorpf: 'Indicador'
+        datointermedioti: 'Datos intermedios en cada medición'
+        formulario: 'Formulario adicional de avance en efecto'
         frecuenciaanual: 'Frecuencia de medición anual'
+        funcionresultado: 'Función del resultado'
         indicadorpf: 'Indicador'
         indicadorpf_id: 'Indicador'
+        medircon: 'Aportan en la medición'
         pmindicadorpf: 'Puntos de medición'
         proyectofinanciero: Proyecto
         proyectofinanciero_id: Proyecto

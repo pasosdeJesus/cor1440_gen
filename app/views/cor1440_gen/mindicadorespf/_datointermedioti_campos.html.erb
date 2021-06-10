@@ -5,8 +5,20 @@
       label: false %>
   </td>
   <td>
-    <%= f.input :funcion, 
+    <%= f.input :nombreinterno, 
       label: false %>
+  </td>
+  <td>
+    <%= f.input :funcion, 
+      label: false,
+      as: :text,
+      input_html: 
+      {
+        class: 'cor1440_gen_funcion',
+        'data-toogle' => 'tooltip',
+        :title => 'Si la deja en blanco se especifíca en las fuentes' 
+      }
+    %>
   </td>
   <td>
     <%= f.input :id, as: :hidden %>

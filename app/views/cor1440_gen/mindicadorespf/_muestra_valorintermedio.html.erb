@@ -1,0 +1,12 @@
+<% if pm.datointermedioti_pmindicadorpf.where(
+    datointermedioti_id: di.id).count > 0 %>
+  <% pdi = pm.datointermedioti_pmindicadorpf.where(
+    datointermedioti_id: di.id).take %>
+  <% v = pdi.valor ? pdi.valor.round(1) : '' %>
+  <% if pdi.rutaevidencia && pdi.rutaevidencia != '' &&
+      pdi.rutaevidencia != '#' && pdi.valor %>
+    <%= link_to v, pdi.rutaevidencia, target: '_blank' %>
+  <% else %>
+    <%= v %>
+  <% end %>
+<% end %>

@@ -6,6 +6,7 @@
 #//= require heb412_gen/motor
 #//= require cocoon
 #//= require cor1440_gen/proyectofinanciero
+#//= require cor1440_gen/mindicadorespf
 
 @DEP_OBJETIVOPF = [
     'select[id^=proyectofinanciero_resultadopf_attributes][id$=_objetivopf_id]',
@@ -523,45 +524,6 @@ cor1440_gen_rangoedadc_todos = () ->
   return
 
 
-# MEDICIÓN DE INDICADORES
-
-@cor1440_gen_llena_medicion = (root, res) ->
-  hid = res.hmindicadorpf_id
-  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_fecha_localizada]').val(res.fechaloc)
-  cont = 0
-  res.datosint.forEach((v) ->
-    $('[id$=_' + hid + '_datointermedioti_pmindicadorpf_attributes_' + cont + '_valor]').val(v.valor)
-    $('[id$=_' + hid + '_datointermedioti_pmindicadorpf_attributes_' + cont + '_rutaevidencia]').val(v.rutaevidencia)
-    cont++
-  )
-  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_resind]').val(res.resind)
-  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_rutaevidencia]').val(res.rutaevidencia)
-  meta = +$('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_meta]').val()
-  if ( meta > 0)
-    $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_porcump]').val(res.resind*100/meta)
-  enlace = $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_resind]').closest('td').find('a.enlaceevidencia')
-  enlace.html(res.resind)
-  enlace.attr('href', res.rutaevidencia)
-
-@cor1440_gen_calcula_pmindicadorpf = (elem, event) ->
-  event.stopPropagation() 
-  event.preventDefault() 
-  root =  window
-  r = $(elem).closest('tr')
-  efinicio = r.find('[id$=finicio_localizada]')
-  hid = efinicio.attr('id').replace(/.*_attributes_([0-9]*)_finicio_localizada/, '$1');
-  datos = {
-    finicio_localizada: efinicio.val()
-    ffin_localizada: r.find('[id$=ffin_localizada]').val()
-    indicadorpf_id: $(document).find('#mindicadorpf_indicadorpf_id').val()
-    hmindicadorpf_id: hid
-    mindicadorpf_id: $('form.edit_mindicadorpf')[0].id.split('_')[2]
-  }
-  sip_ajax_recibe_json(root, 'api/cor1440gen/medir_indicador', 
-    datos, cor1440_gen_llena_medicion)  
-  return
-
-
 
 # Cambiar cancelar por eliminar
 
@@ -660,6 +622,9 @@ cor1440_gen_rangoedadc_todos = () ->
 
 
 @cor1440_gen_prepara_eventos_comunes = (root, opciones = {}) ->
+
+  @cor1440_gen_preparamindicadorespf(root)
+
   $(document).on('click', '.envia_filtrar', (e) -> 
     f = e.target.form
     a = f.action

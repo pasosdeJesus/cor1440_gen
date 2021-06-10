@@ -1,7 +1,6 @@
 module Cor1440Gen
   module MedicionHelper
 
-
     # SINTAXIS. Basada en ejemplos:
     #   * https://kschiess.github.io/parslet/get-started.html
     #   * https://github.com/kschiess/parslet/blob/master/example/calc.rb

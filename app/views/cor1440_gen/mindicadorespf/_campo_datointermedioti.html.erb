@@ -8,6 +8,7 @@
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Nombre interno</th>
             <th>Función de medición</th>
             <th>Acciones</th>
           </tr>
@@ -15,7 +16,7 @@
         <tbody id="datointermedioti">
           <%= f.simple_fields_for :datointermedioti, 
             f.object.datointermedioti.order(:id) do |o| %>
-            <%= render 'cor1440_gen/admin/tiposindicador/datointermedioti_campos', f:  o %>
+            <%= render 'cor1440_gen/mindicadorespf/datointermedioti_campos', f:  o %>
           <% end %>
         </tbody>
       </table>
@@ -24,7 +25,7 @@
           :datointermedioti, {
           :"data-association-insertion-node" => "tbody#datointermedioti", 
           :"data-association-insertion-method" => "append", 
-          partial: 'cor1440_gen/admin/tiposindicador/datointermedioti_campos',
+          partial: 'cor1440_gen/mindicadorespf/datointermedioti_campos',
           class: 'btn-primary' } %>
       </div> <!-- links -->
     </div> <!-- .div-campostind -->

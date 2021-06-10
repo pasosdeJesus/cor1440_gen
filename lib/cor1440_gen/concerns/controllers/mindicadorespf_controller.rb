@@ -21,10 +21,15 @@ module Cor1440Gen
 
           def atributos_form
             [ :proyectofinanciero_id,
-              :indicadorpf_id] +
+              :indicadorpf_id,
+              :medircon,
+              :formulario
+            ] +
               (@registro && @registro.indicadorpf && 
                @registro.indicadorpf.resultadopf ? [:actividadpf] : []) +
             [
+              :datointermedioti,
+              :funcionresultado,
               :frecuenciaanual,
               :pmindicadorpf
             ]
@@ -34,8 +39,15 @@ module Cor1440Gen
             [ :id,
               :proyectofinanciero_id,
               :indicadorpf_id,
-              :tipoindicador,
-              :actividadpf,
+              :medircon
+            ] + (
+              @registro.medircon == 1 ? [:actividadpf] :
+              (@registro.medircon == 2 ? [:formulario] :
+               []
+              )
+            ) + [
+              :datointermedioti,
+              :funcionresultado,
               :frecuenciaanual,
               :pmindicadorpf
             ]
@@ -159,14 +171,18 @@ module Cor1440Gen
           end
 
           # Descr
-          def descripciones_datos_intermedios(mindicador)
-            if mindicador.indicadorpf.tipoindicador.nil? || 
-                mindicador.indicadorpf.tipoindicador.datointermedioti.nil? ||
-                mindicador.indicadorpf.tipoindicador.datointermedioti.count == 0
-              return []
+          def descripciones_datos_intermedios(mindicadorpf)
+            if mindicadorpf.datointermedioti
+              return mindicadorpf.datointermedioti.pluck(:nombre)
+            else
+              if mindicadorpf.indicadorpf.tipoindicador.nil? || 
+                mindicadorpf.indicadorpf.tipoindicador.datointermedioti.nil? ||
+                mindicadorpf.indicadorpf.tipoindicador.datointermedioti.count == 0
+                return []
+              end
+              return mindicadorpf.indicadorpf.tipoindicador.datointermedioti.
+                pluck(:nombre)
             end
-            return mindicador.indicadorpf.tipoindicador.datointermedioti.
-              pluck(:nombre)
           end
 
 
@@ -301,6 +317,55 @@ module Cor1440Gen
             return {resind: r, datosint: []}
           end
 
+          # Mide indicador de resultado
+          def medir_indicador_resultado(mind, ind, fini, ffin, resf)
+            idacs = []
+            idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
+            if mind.funcionresultado.to_s != '' # Medir con esp de medicionindicadorpf
+              contexto = {
+                'Actividades_contribuyentes' => 
+                Cor1440Gen::Actividad.where(id: idacs)
+              }
+              mind.datointermedioti.order(:id).each do |di|
+                if di.nombreinterno.nil?
+                  resf[:prob] = "Error: Falta nombre interno de dato intermedio #{di.id}"
+                  puts resf[:prob]
+                  return resf
+                end
+                if di.nombreinterno.nil?
+                  resf[:prob] = "Error: Falta función de dato intermedio #{di.id}"
+                  puts resf[:prob]
+                  return resf
+                end
+                contexto[di.nombreinterno] = Cor1440Gen::MedicionHelper.
+                  evalua_expresion_medicion(di.funcion.to_s,
+                                            contexto)
+                resf[:datosint] << {valor: contexto[di.nombreinterno], 
+                                    rutaevidencia: '#'}
+              end
+              resf[:resind] = Cor1440Gen::MedicionHelper.
+                evalua_expresion_medicion(mind.funcionresultado.to_s,
+                                          contexto)
+
+            else # Medir mediante tipo
+              if self.respond_to?('medir_indicador_res_tipo_' + 
+                  ind.tipoindicador_id.to_s)
+                resf = self.send('medir_indicador_res_tipo_' + 
+                                 ind.tipoindicador_id.to_s,
+                                 idacs, mind, fini, ffin)
+                if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
+                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
+                end
+              end
+            end
+            # Evidencia de resultado principal son actividades con ids idacs
+            if idacs.count > 0
+              resf[:rutaevidencia] = cor1440_gen.actividades_path +
+                '?filtro[busid]='+idacs.join(',')
+            end
+            return resf
+          end
+
 
           # Mide indicador de efecto mediante avance tipo 10. 
           # Cantidad de avances.
@@ -314,50 +379,42 @@ module Cor1440Gen
           end
 
 
-          # Recibe medición de indicador por completar
-          #   y fecha inicial y final de medicion
-          # Retorna objeto con 
-          # {resind: resind, rutaevidencia: rutaevidencia, datosint: datosint}
-          # resind Resultado del indicador
-          # rutaevidencia: Ruta que verificar resultado o '#'
-          # datosint Datos intermedios, arreglo con objetos de la forma
-          # {valor: valor, rutaevidencia: rutaevidencia}
-          # valor es dato intermedio
-          # rutaevidencia es ruta que verifica dato intermedio o '#'
-          def medir_indicador_particular(mind, fini, ffin)
-            resf = {resind: -1.0, rutaevidencia: '#', datosint: []} 
-
-            ind = mind.indicadorpf
-            if ind.nil?
-              puts "Error: Medición sin indicador"
-              return resf
-            end
-            if ind.tipoindicador.nil?
-              puts "Error: Indicador sin tipo"
-              return resf
-            end
-
-            if ind.tipoindicador.medircon == 1 # Actividades
-              idacs = []
-              idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
-              if self.respond_to?('medir_indicador_res_tipo_' + 
-                  ind.tipoindicador_id.to_s)
-                resf = self.send('medir_indicador_res_tipo_' + 
-                                 ind.tipoindicador_id.to_s,
-                                 idacs, mind, fini, ffin)
-                if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
-                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
+          # Mide indicador de efecto
+          def medir_indicador_efecto(mind, ind, fini, ffin, resf)
+            idefs = []
+            idefs = Cor1440Gen::MindicadorespfController::calcula_listado_ef(
+              mind.indicadorpf_id, fini, ffin)
+            if mind.funcionresultado.to_s != '' 
+              # Medir con esp de medicionindicadorpf
+              contexto = {
+                'Efectos_contribuyentes' => 
+                Cor1440Gen::Efecto.where(id: idefs)
+              }
+              mind.datointermedioti.order(:id).each do |di|
+                if di.nombreinterno.nil?
+                  resf[:prob] = "Error: Falta nombre interno de dato "\
+                    "intermedio #{di.id}"
+                  puts resf[:prob]
+                  return resf
                 end
+                if di.nombreinterno.nil?
+                  resf[:prob] = "Error: Falta función de dato "\
+                    "intermedio #{di.id}"
+                  puts resf[:prob]
+                  return resf
+                end
+                contexto[di.nombreinterno] = Cor1440Gen::MedicionHelper.
+                  evalua_expresion_medicion(di.funcion.to_s,
+                                            contexto)
+                resf[:datosint] << {valor: contexto[di.nombreinterno], 
+                                    rutaevidencia: '#'}
               end
-              # Evidencia de resultado principal son actividades con ids idacs
-              if idacs.count > 0
-                resf[:rutaevidencia] = cor1440_gen.actividades_path +
-                  '?filtro[busid]='+idacs.join(',')
-              end
+              resf[:resind] = Cor1440Gen::MedicionHelper.
+                evalua_expresion_medicion(mind.funcionresultado.to_s,
+                                          contexto)
 
-            elsif ind.tipoindicador.medircon == 2 # Efectos
-              idefs = []
-              idefs = Cor1440Gen::MindicadorespfController::calcula_listado_ef(mind.indicadorpf_id, fini, ffin)
+            else # Medir mediante tipo
+
               if self.respond_to?('medir_indicador_efecto_tipo_' + 
                   ind.tipoindicador_id.to_s)
                 resf = self.send('medir_indicador_efecto_tipo_' + 
@@ -367,28 +424,73 @@ module Cor1440Gen
                   puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
                 end
               end
-              # Evidencia de resultado principal son efectos con ids idefs
-              if idefs.count > 0
-                resf[:rutaevidencia] = cor1440_gen.efectos_path +
-                  '?filtro[busid]='+idefs.join(',')
-              end
-            elsif ind.tipoindicador.medircon == 3 # Otros, e.g encuestas, gestion de proyectos
-              # evidencia de resultado principal debe ser retornada
-              # en resf[:rutaevidencia]
-              if self.respond_to?('medir_indicador_otro_tipo_' + 
-                  ind.tipoindicador_id.to_s)
-                resf = self.send('medir_indicador_otro_tipo_' + 
-                                 ind.tipoindicador_id.to_s,
-                                 mind, fini, ffin)
-                if resf[:datosint].count != ind.tipoindicador.
-                    datointermedioti.count
-                  puts "Error. No coinciden resf.datosint.count " +
-                    "({#resf.datosint.count} y " +
-                    "ind.tipoindicador.datointermedioti.count " +
-                    "(#{ind.tipoindicador.datointermedioti.count})."
-                end
-              end
+            end
+            # Evidencia de resultado principal son efectos con ids idefs
+            if idefs.count > 0
+              resf[:rutaevidencia] = cor1440_gen.efectos_path +
+                '?filtro[busid]='+idefs.join(',')
+            end
 
+            return resf
+          end
+
+          # Mide otra clase de indicador (ni efecto, ni resultado)
+          def medir_indicador_otro(mind, ind, fini, ffin, resf)
+            # evidencia de resultado principal debe ser retornada
+            # en resf[:rutaevidencia]
+            if self.respond_to?('medir_indicador_otro_tipo_' + 
+                ind.tipoindicador_id.to_s)
+              resf = self.send('medir_indicador_otro_tipo_' + 
+                               ind.tipoindicador_id.to_s,
+                               mind, fini, ffin)
+              if resf[:datosint].count != ind.tipoindicador.
+                  datointermedioti.count
+                puts "Error. No coinciden resf.datosint.count " +
+                  "({#resf.datosint.count} y " +
+                  "ind.tipoindicador.datointermedioti.count " +
+                  "(#{ind.tipoindicador.datointermedioti.count})."
+              end
+            end
+            return resf
+          end
+
+
+
+          # Recibe medición de indicador por completar
+          #   y fecha inicial y final de medicion
+          # Retorna objeto con 
+          # {resind: resind, rutaevidencia: rutaevidencia, datosint: datosint,
+          # prob: prob}
+          # resind Resultado del indicador
+          # rutaevidencia: Ruta que verificar resultado o '#'
+          # datosint Datos intermedios, arreglo con objetos de la forma
+          # {valor: valor, rutaevidencia: rutaevidencia}
+          # valor es dato intermedio
+          # rutaevidencia es ruta que verifica dato intermedio o '#'
+          # prob es cadena con problemas encontrados
+          def medir_indicador_particular(mind, fini, ffin)
+            resf = {resind: -1.0, rutaevidencia: '#', datosint: [], prob: ''} 
+
+            ind = mind.indicadorpf
+            if ind.nil?
+              resf[:prob] = "Error: Medición sin indicador"
+              puts resf[:prob]
+              return resf[:prob]
+            end
+            if ind.tipoindicador.nil? && 
+                (mind.medircon.nil? || mind.funcionresultado.to_s == '')
+              resf[:prob] = "Error: Medición sin especificar e indicador sin tipo"
+              puts resf[:prob]
+              return resf[:prob]
+            end
+
+            if mind.medircon == 1 || # Actividades
+                (mind.medircon.nil? && ind.tipoindicador.medircon == 1) 
+              resf = medir_indicador_resultado(mind, ind, fini, ffin, resf)
+            elsif ind.tipoindicador.medircon == 2 # Efectos
+              resf = medir_indicador_efecto(mind, ind, fini, ffin, resf)
+            else  # Otros, e.g encuestas, gestion de proyectos
+              resf = medir_indicador_otro(mind, ind, fini, ffin, resf)
             end
 
             return resf
@@ -461,9 +563,23 @@ module Cor1440Gen
           # Never trust parameters from the scary internet, only allow the white list through.
           def mindicadorpf_params
             params.require(:mindicadorpf).permit(
-              atributos_form - ["pmindicadorpf", :actividadpf] +
-              [:actividadpf_ids => []] +
-              [
+              atributos_form - [
+                "pmindicadorpf", 
+                :actividadpf, 
+                :formulario,
+                :datointermedioti
+              ] + [
+                :actividadpf_ids => [],
+                :formulario_ids => []
+              ] + [
+                :datointermedioti_attributes => [ 
+                  :nombre, 
+                  :nombreinterno, 
+                  :funcion,
+                  :id, 
+                  :_destroy 
+                ]
+              ] + [
                 'pmindicadorpf_attributes' => [
                   'fecha_localizada', 
                   'finicio_localizada', 

@@ -9,8 +9,14 @@
     <table border=1>
     <tr>
       <th>Fecha Med.</th>
-      <th>Fecha Inicio</th><th>Fecha Fin</th><th>Tiempo</th>
-      <% if @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
+      <th>Fecha Inicio</th>
+      <th>Fecha Fin</th>
+      <th>Tiempo</th>
+      <% if @registro.datointermedioti %>
+        <% @registro.datointermedioti.each do |di| %>
+          <th><%= di.nombre %></th>
+        <% end %>
+      <% elsif @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
           @registro.indicadorpf.tipoindicador.datointermedioti %>
         <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
             <th><%= di.nombre %></th>
@@ -25,20 +31,20 @@
         <td><%= pm.finicio_localizada %></td>
         <td><%= pm.ffin_localizada %></td>
         <td><%= pm.restiempo %></td>
-        <% if @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
-            @registro.indicadorpf.tipoindicador.datointermedioti %>
+        <% if @registro.datointermedioti %>
+          <% @registro.datointermedioti.each do |di| %>
+            <td>
+              <%= render partial: 'muestra_valorintermedio',
+                locals: {pm: pm, di:di} %>
+            </td>
+          <% end %>
+        <% elsif @registro.indicadorpf && 
+          @registro.indicadorpf.tipoindicador &&
+          @registro.indicadorpf.tipoindicador.datointermedioti %>
           <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
             <td>
-              <% if pm.datointermedioti_pmindicadorpf.where(datointermedioti_id: di.id).count > 0 %>
-                <% pdi = pm.datointermedioti_pmindicadorpf.where(datointermedioti_id: di.id).take %>
-                <% v = pdi.valor ? pdi.valor.round(1) : '' %>
-                <% if pdi.rutaevidencia && pdi.rutaevidencia != '' &&
-                    pdi.rutaevidencia != '#' && pdi.valor %>
-                  <%= link_to v, pdi.rutaevidencia, target: '_blank' %>
-                <% else %>
-                  <%= v %>
-                <% end %>
-              <% end%>
+              <%= render partial: 'muestra_valorintermedio',
+                locals: {pm: pm, di:di} %>
             </td>
           <% end %>
         <% end %>

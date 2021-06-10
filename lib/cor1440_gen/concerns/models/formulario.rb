@@ -27,6 +27,12 @@ module Cor1440Gen
             association_foreign_key: 'proyectofinanciero_id',
             join_table: 'cor1440_gen_caracterizacionpf'
 
+          has_and_belongs_to_many :mindicadorpf, 
+            class_name: 'Cor1440Gen::Mindicadorpf', 
+            foreign_key: 'formulario_id',
+            association_foreign_key: 'mindicadorpf_id',
+            join_table: 'cor1440_gen_formulario_mindicadorpf'
+
 
         end # included
       end

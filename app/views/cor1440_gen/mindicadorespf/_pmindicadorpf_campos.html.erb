@@ -27,15 +27,25 @@
         class: 'em8'
       }  %>
   </td>
-  <%= f.simple_fields_for :datointermedioti_pmindicadorpf,
-    f.object.datointermedioti_pmindicadorpf.order(:datointermedioti_id) do |di| %>
-    <td>
-      <%= render 'datointermedioti_pmindicadorpf_campos', :f => di %>
-    </td>
+  <% @datointermedioti.each do |di| %>
+    <% if f.object.datointermedioti_pmindicadorpf.
+        where(datointermedioti_id: di.id).count == 0 && !f.object.id.nil? %>
+      <% Cor1440Gen::DatointermediotiPmindicadorpf.create!(
+        datointermedioti_id: di.id,
+        pmindicadorpf_id: f.object.id) %>
+    <% end %>
+    <%= f.simple_fields_for :datointermedioti_pmindicadorpf,
+      f.object.datointermedioti_pmindicadorpf.
+      where(datointermedioti_id: di.id) do |di| %>
+      <td>
+        <%= render 'datointermedioti_pmindicadorpf_campos', :f => di %>
+      </td>
+    <% end %>
   <% end %>
   <td>
     <span>
-      <a class='enlaceevidencia' href='<%= f.object.rutaevidencia %>' target='_blank'><%= f.object.resind %></a>
+      <a class='enlaceevidencia' href='<%= f.object.rutaevidencia %>' 
+         target='_blank'><%= f.object.resind %></a>
     </span>
     <%= f.input :resind, as: :hidden, label: false %>
     <%= f.input :rutaevidencia, label: false, as: :hidden %>
