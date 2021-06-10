@@ -479,17 +479,20 @@ module Cor1440Gen
             end
             if ind.tipoindicador.nil? && 
                 (mind.medircon.nil? || mind.funcionresultado.to_s == '')
-              resf[:prob] = "Error: Medición sin especificar e indicador sin tipo"
+              resf[:prob] = "Error: Medición sin especificar.  Iindicador sin tipo"
               puts resf[:prob]
               return resf[:prob]
             end
 
-            if mind.medircon == 1 || # Actividades
-                (mind.medircon.nil? && ind.tipoindicador.medircon == 1) 
+            if mind.medircon == 1 || (
+                mind.funcionresultado.to_s == '' && 
+                ind.tipoindicador.medircon == 1)  # Actividades
               resf = medir_indicador_resultado(mind, ind, fini, ffin, resf)
-            elsif ind.tipoindicador.medircon == 2 # Efectos
+            elsif mind.medircon == 2 || (
+              mind.funcionresultado.to_s == '' && 
+              ind.tipoindicador.medircon == 2) # Efectos
               resf = medir_indicador_efecto(mind, ind, fini, ffin, resf)
-            else  # Otros, e.g encuestas, gestion de proyectos
+            else  # Otros, e.g gestion de proyectos
               resf = medir_indicador_otro(mind, ind, fini, ffin, resf)
             end
 
