@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 55b8af14ca22e228d6b4d3599a238b9f5389e3e4
+  revision: 54c6a14be824c02440db8b4b6e66625bf16f57be
   branch: orgsocial
   specs:
     heb412_gen (1.0.b6)
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 34ba482cbaf8bd540250e09281e73bda242eef19
+  revision: 917450e779fb99a1301e3426530e6cade614a7e8
   branch: orgsocial
   specs:
     mr519_gen (0.2.0)
