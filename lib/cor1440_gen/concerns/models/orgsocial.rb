@@ -22,7 +22,7 @@ module Cor1440Gen
           #  class_name: 'Cor1440Gen::Actividad'
 
           has_many :efecto_orgsocial, dependent: :delete_all,
-            class_name: 'Cor1440Gen::OrgsocialEfecto'
+            class_name: 'Cor1440Gen::EfectoOrgsocial'
           has_many :efecto, through: :efecto_orgsocial,
             class_name: 'Cor1440Gen::Efecto'
 

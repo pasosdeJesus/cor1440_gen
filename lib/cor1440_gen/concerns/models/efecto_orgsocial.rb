@@ -1,7 +1,7 @@
 module Cor1440Gen
   module Concerns
     module Models
-      module OrgsocialEfecto
+      module EfectoOrgsocial
         extend ActiveSupport::Concern
 
         included do
