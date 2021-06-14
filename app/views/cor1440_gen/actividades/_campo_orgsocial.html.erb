@@ -1,0 +1,7 @@
+<% if !defined?(orgsocialesdisp)  %>
+  <% orgsocialesdisp = Sip::Orgsocial.habilitados %>
+<% end %>
+
+<%= render partial: 'campo_orgsocial_p2.html.erb', 
+  locals: {f: f, orgsocialesdisp: orgsocialesdisp } %>
+

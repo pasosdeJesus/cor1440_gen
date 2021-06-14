@@ -59,16 +59,16 @@
     </td>
   <% end %>
   <td>
-    <%= f.association :actorsocial,
-      collection: Sip::Actorsocial.all,
+    <%= f.association :orgsocial,
+      collection: Sip::Orgsocial.all,
       label_method: :presenta_nombre,
       value_method: :id,
       label: false,
       input_html: { style: 'width: 6em' } %>
   </td>
   <td>
-    <%= f.association :perfilactorsocial,
-      collection: Sip::Perfilactorsocial.habilitados,
+    <%= f.association :perfilorgsocial,
+      collection: Sip::Perfilorgsocial.habilitados,
       label_method: :nombre,
       value_method: :id,
       input_html: { style: 'width: 6em' },

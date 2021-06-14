@@ -23,8 +23,8 @@
           desplegable: true %>
         <%= opcion_menu "Informes", cor1440_gen.informes_path,
           desplegable: true %>
-        <% if can? :manage, ::Sip::Actorsocial %>
-          <%= opcion_menu "Organizaciones sociales", sip.actoressociales_path,
+        <% if can? :manage, ::Sip::Orgsocial %>
+          <%= opcion_menu "Organizaciones sociales", sip.orgsociales_path,
             desplegable: true %>
         <% end %>
         <% if can? :manage, ::Sip::Persona %>

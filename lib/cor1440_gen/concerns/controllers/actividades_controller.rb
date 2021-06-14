@@ -43,7 +43,7 @@ module Cor1440Gen
               :respuestafor,
               :objetivo,
               :resultado, 
-              :actorsocial,
+              :orgsocial,
               :listadoasistencia,
               :poblacion,
               :anexos
@@ -543,13 +543,13 @@ module Cor1440Gen
                 :id, :rangoedadac_id, :fl, :fr, :ml, :mr, :s, :_destroy 
               ],
               :actividadtipo_ids => [],
-              :actorsocial_ids => [],
+              :orgsocial_ids => [],
               :asistencia_attributes => [
-                :actorsocial_id,
+                :orgsocial_id,
                 :externo,
                 :id,
                 :rangoedadac_id,
-                :perfilactorsocial_id,
+                :perfilorgsocial_id,
                 :_destroy,
                 :persona_attributes => [
                   :apellidos, 

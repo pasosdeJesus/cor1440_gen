@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   module Concerns
     module Models
@@ -23,10 +21,10 @@ module Cor1440Gen
           accepts_nested_attributes_for :respuestafor, 
             allow_destroy: true, reject_if: :all_blank
 
-          has_many :actorsocial_efecto, class_name: 'Cor1440Gen::ActorsocialEfecto',
+          has_many :efecto_orgsocial, class_name: 'Cor1440Gen::EfectoOrgsocial',
             dependent: :delete_all, foreign_key: 'efecto_id'
-          has_many :actorsocial, class_name: 'Sip::Actorsocial',
-            through: :actorsocial_efecto
+          has_many :orgsocial, class_name: 'Sip::Orgsocial',
+            through: :efecto_orgsocial
 
           has_many :anexo_efecto, dependent: :delete_all,
             class_name: 'Cor1440Gen::AnexoEfecto',
@@ -39,7 +37,7 @@ module Cor1440Gen
 
           campofecha_localizado :fecha
 
-          validates :actorsocial_efecto, presence: true
+          validates :efecto_orgsocial, presence: true
           validates :fecha, presence: true
           validates :nombre, presence: true, length: { maximum: 500} 
           validates :descripcion, length: { maximum: 5000} 
@@ -53,8 +51,8 @@ module Cor1440Gen
             end
           end
 
-          scope :filtro_actorsocial_id, lambda { |a|
-            where('actorsocial_id = ?', a)
+          scope :filtro_orgsocial_id, lambda { |a|
+            where('orgsocial_id = ?', a)
           }
 
           scope :filtro_fechaini, lambda { |f|
