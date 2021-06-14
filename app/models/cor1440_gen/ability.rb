@@ -229,7 +229,7 @@ module Cor1440Gen
           can :read, Cor1440Gen::Informe
 
           can [:new, :create, :read, :index, :edit, :update],
-            Sip::Actorsocial
+            Sip::Orgsocial
           can :manage, Sip::Persona
 
         when Ability::ROLADMIN, Ability::ROLDIR
@@ -251,8 +251,8 @@ module Cor1440Gen
 
           can :manage, Mr519Gen::Formulario
 
-          can :manage, Sip::Actorsocial
-          can :manage, Sip::Sectoractor
+          can :manage, Sip::Orgsocial
+          can :manage, Sip::Sectororgsocial
           can :manage, Sip::Persona
 
           can :manage, Usuario

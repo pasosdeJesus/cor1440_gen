@@ -1,7 +1,0 @@
-<% if !defined?(actoresdisp)  %>
-  <% actoresdisp = Sip::Actorsocial.habilitados %>
-<% end %>
-
-<%= render partial: 'campo_actorsocial_p2.html.erb', 
-  locals: {f: f, actoresdisp: actoresdisp } %>
-

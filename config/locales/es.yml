@@ -43,7 +43,7 @@ es:
         actividadareas: Subáreas
         actividadpf: Actividad del marco lógico
         actividadespf: Actividades del marco lógico
-        actorsocial: Organizaciones sociales sociales en listado de asistencia
+        orgsocial: Organizaciones sociales sociales en listado de asistencia
         fecha_localizada: Fecha
         objetivo: Objetivo de la actividad
         objetivopf: Objetivo de marco lógico
@@ -67,15 +67,15 @@ es:
         campoact: Campo
         Campoact: Campo
         listadoasistencia: Listado de asistencia
-      "cor1440_gen/actorsocial":
-        Actorsocial: Organización social
-        Actoressociales: Organizaciones sociales
+      "cor1440_gen/orgsocial":
+        Orgsocial: Organización social
+        Orgsociales: Organizaciones sociales
         direccion: Dirección
       "cor1440_gen/efecto":
         Efecto: 'Avance en indicador de efecto'
         Efectos: 'Avance en indicadores de efecto'
-        actorsocial: Organización(es) social(es)
-        "{:actorsocial_ids=>[]}": Organización(es) social(es)
+        orgsocial: Organización(es) social(es)
+        "{:orgsocial_ids=>[]}": Organización(es) social(es)
         anexo_efecto: Anexos / Medios de verificación
         fecha_localizada: Fecha
         indicadorpf: Indicador
@@ -163,9 +163,9 @@ es:
         resultadopf: Resultado
         numero: Número
         resultado: Descripción del resultado
-      "cor1440_gen/sectoractor":
-        Sectoractor: Sector de organización social
-        Sectoresactores: Sectores de organizaciones sociales
+      "cor1440_gen/sectororgsocial":
+        Sectororgsocial: Sector de organización social
+        Sectoresorgsociales: Sectores de organizaciones sociales
       "cor1440_gen/sectorapc":
         Sectorapc: Sector APC
         Sectoresapc: Sectores APC
@@ -190,13 +190,13 @@ es:
         fechadeshabilitacion_localizada: Deshabilitación 
         simbolo: Símbolo
       "heb412_gen/plantillahcm":
-        Actoressociales: Organizaciones Sociales
+        Orgsociales: Organizaciones Sociales
         caracterizacion: Caracterizacion de beneficiarios en proyectos
         Personas: Beneficiarios
         Proyectosfinancieros: Proyectos
         proyectofinanciero: Proyectos que exportan/importan con la plantilla
       "heb412_gen/plantillahcr":
-        Actorsocial: Organización Social
+        Orgocial: Organización Social
         Persona: Beneficiario
         Proyectofinanciero: Proyecto
       "sip/persona":

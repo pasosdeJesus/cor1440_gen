@@ -41,7 +41,7 @@
                   <% as = Cor1440Gen::Asistencia.where(
                     actividad_id: a.id,
                     persona_id: @registro.id).take %>
-                  <%= as.perfilactorsocial ? as.perfilactorsocial.nombre :
+                  <%= as.perfilorgsocial ? as.perfilorgsocial.nombre :
                     '' %>
                 </td>
 

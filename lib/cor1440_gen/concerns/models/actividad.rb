@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   module Concerns
     module Models
@@ -34,11 +32,11 @@ module Cor1440Gen
             association_foreign_key: 'actividadtipo_id',
             join_table: 'cor1440_gen_actividad_actividadtipo'
 
-          has_and_belongs_to_many :actorsocial, 
-            class_name: 'Sip::Actorsocial',
+          has_and_belongs_to_many :orgsocial, 
+            class_name: 'Sip::Orgsocial',
             foreign_key: 'actividad_id',
-            association_foreign_key: 'actorsocial_id',
-            join_table: 'cor1440_gen_actividad_actorsocial'
+            association_foreign_key: 'orgsocial_id',
+            join_table: 'cor1440_gen_actividad_orgsocial'
 
           has_and_belongs_to_many :respuestafor, 
             class_name: 'Mr519Gen::Respuestafor',
@@ -354,13 +352,13 @@ module Cor1440Gen
               }
 
             when 'organizaciones_sociales'
-              actorsocial.inject('') { |memo, a|
+              orgsocial.inject('') { |memo, a|
                 nom = a.grupoper  && a.grupoper.nombre ? a.grupoper.nombre : ''
                 memo + (memo == '' ? '' : '; ') + nom
               }
 
             when 'organizaciones_sociales_ids'
-              actorsocial_ids.join(', ')
+              orgsocial_ids.join(', ')
 
             when 'poblacion_hombres_l'
               poblacion_hombres_l_solore
@@ -503,7 +501,7 @@ module Cor1440Gen
             when 'Asistentes'
               return self.asistencia
             when 'Organizaciones'
-              return self.actorsocial
+              return self.orgsocial
             when 'poblacion'
               self.poblacion
             else

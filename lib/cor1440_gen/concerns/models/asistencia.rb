@@ -16,10 +16,10 @@ module Cor1440Gen
           accepts_nested_attributes_for :persona, reject_if: :all_blank
           belongs_to :rangoedadac, class_name: 'Cor1440Gen::Rangoedadac',
             foreign_key: 'rangoedadac_id', optional: true
-          belongs_to :actorsocial, class_name: 'Sip::Actorsocial',
-            foreign_key: 'actorsocial_id', optional: true
-          belongs_to :perfilactorsocial, class_name: 'Sip::Perfilactorsocial',
-            foreign_key: 'perfilactorsocial_id', optional: true
+          belongs_to :orgsocial, class_name: 'Sip::Orgsocial',
+            foreign_key: 'orgsocial_id', optional: true
+          belongs_to :perfilorgsocial, class_name: 'Sip::Perfilorgsocial',
+            foreign_key: 'perfilorgsocial_id', optional: true
 
           validates :actividad, presence: true
           validates :persona, presence: true

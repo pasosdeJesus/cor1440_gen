@@ -15,7 +15,7 @@ module Cor1440Gen
           def atributos_index
             [ :id, 
               :indicadorpf_id] +
-              [ :actorsocial_ids=>[]] +
+              [ :orgsocial_ids=>[]] +
               [ :fecha_localizada,
                 :nombre,
                 :descripcion,
@@ -32,7 +32,7 @@ module Cor1440Gen
 
           def atributos_form
             [ :indicadorpf_id] +
-              [ :actorsocial_ids=>[]] +
+              [ :orgsocial_ids=>[]] +
               [ :fecha_localizada,
                 :nombre,
                 :descripcion,
@@ -119,7 +119,7 @@ module Cor1440Gen
 
           def destroy(mens = '', verifica_tablas_union=true)
             @registro.anexo_efecto = []
-            @registro.actorsocial = []
+            @registro.orgsocial = []
             destroy_gen(mens, verifica_tablas_union)
           end
 

@@ -1,8 +1,8 @@
 <%= 
-  if !registro.actorsocial
+  if !registro.orgsocial
     ''
   else
-    r = registro.actorsocial.inject('') { |memo, a|
+    r = registro.orgsocial.inject('') { |memo, a|
       (memo == '' ? '' : memo + '; ') + a.presenta_nombre
     }
     if r.length < 80

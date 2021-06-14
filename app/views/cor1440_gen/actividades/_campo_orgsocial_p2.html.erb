@@ -1,0 +1,11 @@
+<% # f es el formulario que se presenta %>
+<% # orgsocialesdisp son los Sip::Orgsocial disponibles para elegir %>
+<% lids = orgsocialesdisp.map(&:id) | f.object.orgsocial_ids %>
+<% a2 = Sip::Orgsocial.joins(:grupoper).where(id: lids).
+  order('sip_grupoper.nombre') %>
+<%= f.association :orgsocial, 
+  collection: a2,
+  label_method: :presenta_nombre, 
+  value_method: :id,
+  input_html: { class: 'chosen-select' }
+%>
