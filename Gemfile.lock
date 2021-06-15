@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 54c6a14be824c02440db8b4b6e66625bf16f57be
+  revision: 724260407be0e2c509cca0651be8c99d19a813ce
   branch: orgsocial
   specs:
     heb412_gen (1.0.b6)
