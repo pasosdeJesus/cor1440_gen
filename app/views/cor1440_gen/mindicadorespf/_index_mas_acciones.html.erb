@@ -1,5 +1,4 @@
-<% if registro.medircon == 2 ||
-    (registro.indicadorpf_id && registro.indicadorpf.objetivopf_id) %>
+<% if registro.medircon == 2 %>
   <%= link_to 'Registrar avance',
     cor1440_gen.new_efecto_path(indicadorpf_id: registro.indicadorpf_id), 
     class: 'btn btn-sm' %>

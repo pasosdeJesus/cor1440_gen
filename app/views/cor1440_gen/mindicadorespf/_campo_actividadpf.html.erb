@@ -1,8 +1,11 @@
 <% if f.object.medircon == 1 %>
+  <% byebug %>
   <%= f.association :actividadpf,
     collection: Cor1440Gen::Actividadpf.
     where(proyectofinanciero_id: f.object.proyectofinanciero_id).
-    where(resultadopf_id: f.object.indicadorpf.resultadopf_id),
+    where('resultadopf_id IN (?)', f.object.indicadorpf.resultadopf ? 
+          [f.object.indicadorpf.resultadopf] :
+          f.object.indicadorpf.objetivopf.resultadopf_ids),
     value_method: :id,
     label_method: lambda {|t| t.presenta_nombre },
     input_html: {
