@@ -16,7 +16,8 @@ module Cor1440Gen
             foreign_key: 'objetivopf_id'
 
           has_many :actividadpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Actividadpf', foreign_key: 'resultadopf_id'
+            class_name: 'Cor1440Gen::Actividadpf', 
+            foreign_key: 'resultadopf_id'
           has_many :indicadorpf, dependent: :delete_all,
             class_name: 'Cor1440Gen::Indicadorpf', foreign_key: 'resultadopf_id'
 

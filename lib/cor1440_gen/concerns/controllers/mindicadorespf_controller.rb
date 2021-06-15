@@ -25,8 +25,7 @@ module Cor1440Gen
               :medircon,
               :formulario
             ] +
-              (@registro && @registro.indicadorpf && 
-               @registro.indicadorpf.resultadopf ? [:actividadpf] : []) +
+              (@registro && @registro.indicadorpf ? [:actividadpf] : []) +
             [
               :datointermedioti,
               :funcionresultado,
