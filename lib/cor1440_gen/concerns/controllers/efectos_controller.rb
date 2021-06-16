@@ -56,31 +56,37 @@ module Cor1440Gen
 
           def asegura_camposdinamicos(efecto, current_usuario_id)
             vfid = []  # ids de formularios que deben presentarse
+            
             if efecto.indicadorpf && efecto.indicadorpf.tipoindicador && 
               efecto.indicadorpf.tipoindicador.formulario
+              fids = efecto.indicadorpf.tipoindicador.formulario_ids
+            end
+            if efecto.indicadorpf && efecto.indicadorpf.mindicador 
+              fids += efecto.indicadorpf.mindicador.map(&:formulario_ids).
+                flatten
+            end
 
-              efecto.indicadorpf.tipoindicador.formulario.each do |f|
-                vfid << f.id
-                aw = efecto.respuestafor.where(formulario_id: f.id) 
-                if  aw.count == 0
-                  rf = Mr519Gen::Respuestafor.create(
-                    formulario_id: f.id,
-                    fechaini: Date.today,
-                    fechacambio: Date.today)
-                    er = Cor1440Gen::EfectoRespuestafor.create(
-                      efecto_id: efecto.id,
-                      respuestafor_id: rf.id,
-                    )
-                else # aw.count == 1
-                  r = aw.take
-                  er = Cor1440Gen::EfectoRespuestafor.where(
-                    efecto_id: efecto.id,
-                    respuestafor_id: r.id,
-                  ).take
-                end
-                Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
-                  er, current_usuario_id)
+            Mr519Gen::Formulario.where(id: fids).each do |f|
+              vfid << f.id
+              aw = efecto.respuestafor.where(formulario_id: f.id) 
+              if  aw.count == 0
+                rf = Mr519Gen::Respuestafor.create(
+                  formulario_id: f.id,
+                  fechaini: Date.today,
+                  fechacambio: Date.today)
+                er = Cor1440Gen::EfectoRespuestafor.create(
+                  efecto_id: efecto.id,
+                  respuestafor_id: rf.id,
+                )
+              else # aw.count == 1
+                r = aw.take
+                er = Cor1440Gen::EfectoRespuestafor.where(
+                  efecto_id: efecto.id,
+                  respuestafor_id: r.id,
+                ).take
               end
+              Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
+                er, current_usuario_id)
             end
 
             if vfid.count > 0
@@ -102,7 +108,7 @@ module Cor1440Gen
             end
           end
 
-          def edit
+          def edit_cor1440_gen
             authorize! :edit, Cor1440Gen::Efecto
             @registro = @efecto = Cor1440Gen::Efecto.find(params[:id])
             if @registro.registradopor_id.nil?
@@ -115,6 +121,10 @@ module Cor1440Gen
             end
             asegura_camposdinamicos(@registro, current_usuario.id)
             render layout: 'application'
+          end
+
+          def edit
+            edit_cor1440_gen
           end
 
           def destroy(mens = '', verifica_tablas_union=true)
