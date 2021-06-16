@@ -58,6 +58,25 @@ module Cor1440Gen
       assert_redirected_to actividad_url(@actividad)
     end
 
+    test "debería ubicar plantilla para exportar actividad" do
+      nombres_plantilla = ['Reporte_actividad.odt', 'reporte_una_actividad.ods',
+        'listado_de_actividades.ods']
+      nombres_plantilla.each do |np| 
+        get ENV.fetch('RUTA_RELATIVA', '/cor1440/') +'sis/arch/plantillas?descarga=' + np
+        assert_response :success
+      end
+    end
+
+    test "deberia exportar una actividad a hoja de calculo" do
+      get actividad_path(@actividad) + '/fichaimp.xlsx?genera[plantilla_id]=5.ods&idplantilla=5&formato=ods&formatosalida=xlsx&commit=Enviar'
+      assert_response :success
+    end
+
+    test "deberia exportar un listado  a hoja de calculo" do
+      get actividades_path + '.xlsx?filtro[disgenera]=5&idplantilla=5&formato=xlsx&formatosalida=xlsx&commit=Enviar'
+      assert_redirected_to ENV.fetch('RUTA_RELATIVA', '/cor1440/') + 'sis/arch/generados'
+    end
+
     test "should destroy actividad" do
       assert_difference('Cor1440Gen::Actividad.count', -1) do
         delete actividad_url(@actividad)
