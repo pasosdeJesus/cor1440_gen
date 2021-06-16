@@ -316,6 +316,10 @@ module Cor1440Gen
             return {resind: r, datosint: []}
           end
 
+          def amplia_contexto(contexto)
+            return contexto
+          end
+
           # Mide indicador de resultado
           def medir_indicador_resultado(mind, ind, fini, ffin, resf)
             idacs = []
@@ -325,6 +329,7 @@ module Cor1440Gen
                 'Actividades_contribuyentes' => 
                 Cor1440Gen::Actividad.where(id: idacs)
               }
+              contexto = amplia_contexto(contexto)
               mind.datointermedioti.order(:id).each do |di|
                 if di.nombreinterno.nil?
                   resf[:prob] = "Error: Falta nombre interno de dato intermedio #{di.id}"
@@ -389,6 +394,8 @@ module Cor1440Gen
                 'Efectos_contribuyentes' => 
                 Cor1440Gen::Efecto.where(id: idefs)
               }
+              contexto = amplia_contexto(contexto)
+ 
               mind.datointermedioti.order(:id).each do |di|
                 if di.nombreinterno.nil?
                   resf[:prob] = "Error: Falta nombre interno de dato "\
