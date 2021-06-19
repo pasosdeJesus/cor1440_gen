@@ -70,6 +70,8 @@ module Cor1440Gen
     test "deberia exportar una actividad a hoja de calculo" do
       get actividad_path(@actividad) + '/fichaimp.xlsx?genera[plantilla_id]=5.ods&idplantilla=5&formato=ods&formatosalida=xlsx&commit=Enviar'
       assert_response :success
+      FileUtils.rm('/tmp/reporte_una_actividad.ods')
+      FileUtils.rm('/tmp/reporte_una_actividad.xlsx')
     end
 
     test "deberia exportar un listado  a hoja de calculo" do
