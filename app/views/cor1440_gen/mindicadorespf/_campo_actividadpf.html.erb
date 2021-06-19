@@ -1,10 +1,17 @@
 <% if f.object.medircon == 1 %>
+  <% lresid = [] %>
+  <% if f.object.indicadorpf %>
+    <% if f.object.indicadorpf.resultadopf %>
+      <% lresid = [f.object.indicadorpf.resultadopf_id] %>
+    <% elsif f.object.indicadorpf.objetivopf && f.object.indicadorpf.objetivopf.resultadopf_ids %>
+      <% lresid = f.object.indicadorpf.objetivopf.resultadopf_ids %>
+    <% end %>
+  <% end %>
+
   <%= f.association :actividadpf,
     collection: Cor1440Gen::Actividadpf.
     where(proyectofinanciero_id: f.object.proyectofinanciero_id).
-    where('resultadopf_id IN (?)', f.object.indicadorpf.resultadopf ? 
-          [f.object.indicadorpf.resultadopf] :
-          f.object.indicadorpf.objetivopf.resultadopf_ids),
+    where('resultadopf_id IN (?)', lresid),
     value_method: :id,
     label_method: lambda {|t| t.presenta_nombre },
     input_html: {
