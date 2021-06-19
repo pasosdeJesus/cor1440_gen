@@ -73,28 +73,29 @@ asistencia):
 | [{id: 1, persona: {id:20, nombres: Rosa,apellidos: Pérez …}, perfil: Directivo},{id: 3, persona: {id:30, nombres: Ignacio, apellidos: Gómez …}, perfil: Miembro}, {id: 8, persona: {id:50, nombre: Juan, apellidos: Tamariz…}, perfil: Miembro}] |
 | [{id: 15, persona: {id:80, nombres: Camilo, apellidos: Suárez …}, perfil: Directivo}, {id: 18, persona: {id:20, nombres: Rosa, apellidos: Pérez …}, perfil: Miembro}] |
 
-Si se usa la función aplana en el resultado anterior i.e 
+Si se usa la función `aplana` en el resultado anterior i.e 
 `aplana(mapeaproy(Actividades_contribuyentes, Asistentes))` daría un vector 
 con 5 registros de asistencias:
 
-| --- | --- | --- | --- |
 | id | persona | perfil | ... |
+| --- | --- | --- | --- |
 | 1 | {id:20, nombres: Rosa,apellidos: Pérez …} | Directivo |  |
 | 3 | {id:30, nombres: Ignacio, apellidos: Gómez …} | Miembro |  |
 | 8 | {id:50, nombre: Juan, apellidos: Tamariz…} | Miembro |  |
 | 15 | {id:80, nombres: Camilo, apellidos: Suárez …} | Directivo |  |
 | 18 | {id:20, nombres: Rosa, apellidos: Pérez …} | Miembro |  |
 
-Note que como son asistencias son diferentes los 2 registros de Rosa Pérez.
+Note que por ser asistencias son diferentes los 2 registros de Rosa Pérez.
 
-Si del resultado anterior se extrae la columna persona,
+Si del resultado anterior se extrae la columna `persona`,
 
 `mapeaproy(aplana(mapeaproy(Actividades_contribuyentes, Asistentes)),persona)`
 
-daría un vector con 5 personas:
+daría un vector con 5 personas (cuenta que antes se obtenía con el tipo de
+indicador Cuenta Asistentes):
 
-| --- | --- | --- | --- |
 | id | nombres | apellidos | ... |
+| --- | --- | --- | --- |
 | 20 | Rosa | Pérez |  |
 | 30 | Ignacio | Gómez |  |
 | 50 | Juan | Tamariz |  |
@@ -105,27 +106,29 @@ Y si a ese resultado se aplica la función únicas,
 
 `únicas(mapeaproy(aplana(mapeaproy(Actividades_contribuyentes, Asistentes)),persona))`
 
-quedaría un vector con 4 personas:
+quedaría un vector con 4 personas (cuenta que antes se obtenía con el tipo de
+indicador Cuenta Asistentes Únicos):
 
-| --- | --- | --- | --- |
 | id | nombres | apellidos | ... |
+| --- | --- | --- | --- |
 | 20 | Rosa | Pérez |  |
 | 30 | Ignacio | Gómez |  |
 | 50 | Juan | Tamariz |  |
 | 80 | Camilo | Suárez |  |
 
 Esperamos que los ejemplos presentados faciliten entender la sintaxis para 
-estas funciones de medición y la siguiente tabla de equivalencia de tipos 
+estas fórmula y la siguiente tabla de equivalencia de tipos 
 de indicadores comunes:
 
-| --- | --- |
 | Tipo de indicador común | Función de medición |
-| Cuenta de actividades | cuenta(Actividades_contribuyentes) |
-| Cuenta población | suma( mapeaproy(Actividades_contribuyentes, poblacion)) |
-| Cuenta asistentes | cuenta( aplana( mapeaproy( Actividades_contribuyentes, Asistentes ) )) |
-| Cuenta asistentes únicos | cuenta( únicas( mapeaproy( aplana( mapeaproy( Actividades_contribuyentes, Asistentes ) ), persona ) )) |
-| Cuenta organizaciones | cuenta( aplana( mapeaproy( Actividades_contribuyentes, Organizaciones ) )) |
-| Cuenta organizaciones únicas | cuenta( únicas( aplana( mapeaproy( Actividades_contribuyentes, Organizaciones ) ) )) |
+| --- | --- |
+| Cuenta de actividades | `cuenta(Actividades_contribuyentes)` |
+| Cuenta población | `suma( mapeaproy(Actividades_contribuyentes, poblacion))` |
+| Cuenta asistentes | `cuenta( aplana( mapeaproy( Actividades_contribuyentes, Asistentes ) ))` |
+| Cuenta asistentes únicos | `cuenta( únicas( mapeaproy( aplana( mapeaproy( Actividades_contribuyentes, Asistentes ) ), persona ) ))` |
+| Cuenta organizaciones | `cuenta( aplana( mapeaproy( Actividades_contribuyentes, Organizaciones ) ))` |
+| Cuenta organizaciones únicas | `cuenta( únicas( aplana( mapeaproy( Actividades_contribuyentes, Organizaciones ) ) ))` |
+
 
 # 3. Sintaxis y evaluación de las funciones
 
@@ -134,13 +137,13 @@ constar de:
 
 * Números (por ejemplo 2 23,2 -4,2)
 * Identificadores de datos intermedios o del contexto de evaluación (por 
-  ejemplo Actividades_contribuyentes, num_mujeres)
-* Operaciones aritméticas suma (+), resta (-), multiplicación (*) y 
-  división (/) en la típica notación infija y con la precedencia típica 
-  (* y / tienen más precedencia que + y -). Por ejemplo `2+3` o 
+  ejemplo `Actividades_contribuyentes`, `num_mujeres`)
+* Operaciones aritméticas suma (`+`), resta (`-`), multiplicación (`*`) y 
+  división (`/`) en la típica notación infija y con la precedencia típica 
+  (`*` y `/` tienen más precedencia que `+`  y `-`). Por ejemplo `2+3` o 
   `100*num_mujeres/num_personas`
-* Valor del campo de un registro (o proyección) mediante un punto (.) 
-  infijo, por ejemplo si a es un registro de una actividad con a.población
+* Valor del campo de un registro (o proyección) mediante un punto (`.`) 
+  infijo, por ejemplo si `a` es un registro de una actividad con `a.población`
 * Valor retornado por una función al evaluarla con unos parámetros. Por 
   ejemplo si `v` es un vector de números `suma(v)`.
 
@@ -150,10 +153,11 @@ Excel) y sus signaturas son:
 * `cuenta`: vector de tipo τ → numero
 * `únicos`: vector de tipo τ → vector de tipo τ
 * `suma`: vector de número → número
-* `mapeoproy`: (vector de registro ρ) ⨉ (nombre campo) → vector β
+* `mapeoproy`: (vector de registro ρ) × (nombre campo) → vector β
 * `aplana`: vector de vectores de tipo τ → vector de tipo τ
 
-En la evaluación de una función de medición se comenzará con un contexto, el cual consta de los siguientes identificadores:
+En la evaluación de una función de medición se comenzará con un contexto, 
+el cual consta de los siguientes identificadores:
 
 * `fechaini`: Fecha inicial para la medición
 * `fechafin`: Fecha final para la medición
