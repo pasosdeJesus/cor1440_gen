@@ -16,8 +16,7 @@ module Cor1440Gen
               :nombre,
               :nombreinterno,
               :campos,
-              :caracterizacion,
-              :actividadtipo
+              :caracterizacion
             ]
           end
 
