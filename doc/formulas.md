@@ -24,8 +24,8 @@ fila tiene un registro de una actividad.
 
 Podría comenzar con algo como:
 
-|---|---|---|---|---|---|
 | id | fecha | ubicación | nombre | Asistentes | pob |
+| --- | --- | --- | --- | --- | --- |
 | 2 | 2021-06-20 | {id: 5,nombre: Ovejas/Sucre} | Taller de capacitación | \[{id: 1, persona: Rosa Pérez…}, {id: 3, persona: Ignacio Gómez...},{id: 8, persona: Juan Tamariz…}\] | 3 |
 | 4 | 2021-07-10 | {id: 10,nombre: Acacias/Meta} | Taller de capacitación | \[{id: 15, persona: Camilo Suárez…}{id: 18, persona: Rosa Pérez…}\] | 2 |
 
