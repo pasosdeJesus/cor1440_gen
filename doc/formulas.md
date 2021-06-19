@@ -61,13 +61,14 @@ obtendría un vector de enteros, con los 2 enteros de la columna “población�
 | 3 |
 | 2 |
 
-Por eso al evaluar suma(mapeaproy(Actividades_contribuyentes, poblacion)) se 
-obtendría 5.
+Por eso al evaluar `suma(mapeaproy(Actividades_contribuyentes, poblacion))` se 
+obtendría 5 (lo que antes contaba el tipo de indicador `Cuenta Población`).
 
-Al evaluar la función mapeaproy(Actividades_contribuyentes, Asistentes) se 
+Al evaluar la función `mapeaproy(Actividades_contribuyentes, Asistentes)` se 
 obtiene un vector con 2 hojas de cálculo (cada una sería un listado de 
 asistencia):
 
+| Asistentes |
 | --- |
 | idpersonaperfil...1{id:20, nombres: Rosa,apellidos: Pérez …}Directivo3{id:30, nombres: Ignacio, apellidos: Gómez …}Miembro8{id:50, nombre: Juan, apellidos: Tamariz…}Miembro |
 | idpersonaperfil...15{id:80, nombres: Camilo, apellidos: Suárez …}Directivo18{id:20, nombres: Rosa, apellidos: Pérez …}Miembro |
