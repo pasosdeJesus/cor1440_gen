@@ -56,6 +56,8 @@ en la misma.
 Al evaluar la función `mapeaproy(Actividades_contribuyentes, poblacion)` se 
 obtendría un vector de enteros, con los 2 enteros de la columna “población”:
 
+|   |
+|---|
 | 3 |
 | 2 |
 
