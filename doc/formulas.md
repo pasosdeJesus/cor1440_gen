@@ -70,8 +70,8 @@ asistencia):
 
 | Asistentes |
 | --- |
-| idpersonaperfil...1{id:20, nombres: Rosa,apellidos: Pérez …}Directivo3{id:30, nombres: Ignacio, apellidos: Gómez …}Miembro8{id:50, nombre: Juan, apellidos: Tamariz…}Miembro |
-| idpersonaperfil...15{id:80, nombres: Camilo, apellidos: Suárez …}Directivo18{id:20, nombres: Rosa, apellidos: Pérez …}Miembro |
+| [{id: 1, persona: {id:20, nombres: Rosa,apellidos: Pérez …}, perfil: Directivo},{id: 3, persona: {id:30, nombres: Ignacio, apellidos: Gómez …}, perfil: Miembro}, {id: 8, persona: {id:50, nombre: Juan, apellidos: Tamariz…}, perfil: Miembro}] |
+| [{id: 15, persona: {id:80, nombres: Camilo, apellidos: Suárez …}, perfil: Directivo}, {id: 18, persona: {id:20, nombres: Rosa, apellidos: Pérez …}, perfil: Miembro}] |
 
 Si se usa la función aplana en el resultado anterior i.e 
 `aplana(mapeaproy(Actividades_contribuyentes, Asistentes))` daría un vector 
