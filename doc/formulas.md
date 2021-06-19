@@ -14,11 +14,12 @@ formulas de Excel.
 Cada base de datos puede verse como un hipercubo o cubo OLAP (ver
 [Cubo OLAP en Wikipedia](https://es.wikipedia.org/wiki/Cubo_OLAP)), que es 
 como una hoja de cálculo con celdas que a su vez pueden ser hojas de cálculo. 
-Cada hoja de cálculo del hipercubo corresponde a una tabla en la base de datos.
+Cada hoja de cálculo del hipercubo corresponde a una serie de registros
+de una tabla en la base de datos.
 
 Imagine que para la medición de un indicador de resultado, el hipercubo 
 comienza en una hoja de cálculo con las actividades que contribuyen en 
-la medición (las llamaremos Actividades_contribuyentes). E imagine que 
+la medición (las llamaremos `Actividades_contribuyentes`). E imagine que 
 la primera fila tiene los nombres de los campos, y que después de esta cada 
 fila tiene un registro de una actividad.
 
@@ -38,9 +39,9 @@ En general en cada hoja/tabla, en cada celda de los registros puede tener:
 * Un registro de otra tabla. Por ejemplo ubicación (que consta de 
   departamento y municipio).
 * Un vector (es decir una secuencia de números, o una secuencia de fechas o 
-  una secuencia de cadenas o una hoja de cálculo que sería una secuencia de 
-  registros). Por ejemplo el campo Asistentes de una actividad es un vector 
-  de registros o una hoja de cálculo.
+  una secuencia de cadenas o una secuencia de registros que corresponde a 
+  otra hoja de cálculo). Por ejemplo el campo Asistentes de una actividad es 
+  un vector de registros o una hoja de cálculo.
 
 Suponemos que los indicadores se miden de manera numérica, por lo que la 
 función que da el resultado de un indicador da un número --piense en la 
@@ -52,10 +53,9 @@ Por ejemplo dada la hoja de cálculo de ejemplo, si se evalúa la función
 `cuenta(Actividades_contribuyentes)` daría 2 que es la cantidad de registros 
 en la misma.
 
-Al evaluar la función mapeaproy(Actividades_contribuyentes, poblacion) se 
+Al evaluar la función `mapeaproy(Actividades_contribuyentes, poblacion)` se 
 obtendría un vector de enteros, con los 2 enteros de la columna “población”:
 
-|---|
 | 3 |
 | 2 |
 
