@@ -1,8 +1,9 @@
 <tr class='nested-fields'>
   <td>
     <%= f.association :resultadopf, 
-      collection: Cor1440Gen::Resultadopf.where(proyectofinanciero_id: 
-                                               f.object.proyectofinanciero_id),
+      collection: Cor1440Gen::Resultadopf.joins(:objetivopf).
+      where(proyectofinanciero_id: f.object.proyectofinanciero_id).
+      order(["cor1440_gen_objetivopf.numero", "cor1440_gen_resultadopf.numero"]),
       label: false,
       label_method: lambda {
         |t| (t.objetivopf ? t.objetivopf.numero : '') + t.numero} 
