@@ -421,7 +421,7 @@ cor1440_gen_rangoedadc_todos = () ->
 @cor1440_gen_actividad_actualiza_pf_op = (root, resp, objetivo) ->
   # Determinar nuevas opciones excluyendo las ya elegidas
   otrospfid = []
-  objetivo.siblings().not(':hidden').find('select').each(() -> 
+  objetivo.siblings().not(':hidden').find('select[id$=proyectofinanciero_id]').each(() -> 
     otrospfid.push(+this.value)
   )
   idsel = objetivo.find('select').attr('id')

@@ -10,8 +10,8 @@ es:
     fechacierre_localizada: Fecha de cierre
     actividadarea: Subárea de actividad
     actividadareas: Subáreas de actividad
-    actividadtipo: Tipo de actividad de marco lógico
-    actividadtipos: Tipos de actividad de marco lógico
+    actividadtipo: Tipo de actividad del marco lógico
+    actividadtipos: Tipos de actividad del marco lógico
     proyectos: Áreas
     proyecto: Área
     proyectosfinancieros: Proyectos
@@ -46,12 +46,12 @@ es:
         orgsocial: Organizaciones sociales sociales en listado de asistencia
         fecha_localizada: Fecha
         objetivo: Objetivo de la actividad
-        objetivopf: Objetivo de marco lógico
+        objetivopf: Objetivo del marco lógico
         proyecto: Área
         proyectofinanciero: Proyecto
         valorcampoact: Campos del tipo de actividad
       "cor1440_gen/actividadpf":
-        actividadpf: Actividad de marco lógico
+        actividadpf: Actividad del marco lógico
         descripcion: Descripción
         nombrecorto: Nombre corto
         resultadopf: Resultado
@@ -62,8 +62,8 @@ es:
       "cor1440_gen/actividadtipo":
         fechacreacion_localizada: Creación
         fechadeshabilitacion_localizada: Deshabilitación 
-        Actividadtipo: Tipo de actividad de marco lógico
-        Actividadtipos: Tipos de actividad de marco lógico
+        Actividadtipo: Tipo de actividad del marco lógico
+        Actividadtipos: Tipos de actividad del marco lógico
         campoact: Campo
         Campoact: Campo
         listadoasistencia: Listado de asistencia
@@ -89,7 +89,7 @@ es:
       "cor1440_gen/mindicadorpf":
         Mindicadorpf: Medición de un indicador
         Mindicadorespf: Mediciones de indicadores
-        actividadpf: Actividades de marco lógico relacionadas con el indicador
+        actividadpf: Actividades del marco lógico relacionadas con el indicador
         cor1440_gen_proyectofinanciero: Proyecto
         cor1440_gen_indicadorpf: 'Indicador'
         datointermedioti: 'Datos intermedios en cada medición'
@@ -128,7 +128,7 @@ es:
         Proyecto: Área
         Proyectos: Áreas
       "cor1440_gen/proyectofinanciero":
-        actividadpf: Actividad de marco lógico
+        actividadpf: Actividad del marco lógico
         anexo_proyectofinanciero: "Anexos"
         beneficiario: Beneficiarios con caracterización
         caracterizacion: Caracterización de beneficiarios
@@ -150,7 +150,7 @@ es:
         Proyectosfinancieros: Proyectos
         proyectosfinancieros: Proyectos
         resultadopf: Resultado
-        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad de marco lógico
+        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad del marco lógico
         "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
         "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
         "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
