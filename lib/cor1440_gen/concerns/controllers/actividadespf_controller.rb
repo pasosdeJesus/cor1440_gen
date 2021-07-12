@@ -90,6 +90,29 @@ module Cor1440Gen
 
         end #included
 
+        class_methods do
+          # Retorna ids de actividadespf que el usuario actual puede leer con
+          # las restricciones del filtro:
+          #   filtro[:proyectofinanciero_ids] limita a los proyectos 
+          #   financieros con las ids dadas
+          def disponibles_cor1440_gen(filtro, ability, c = nil)
+            c2 = c ? c : Cor1440Gen::Actividadpf.accessible_by(ability)
+            if filtro[:proyectofinanciero_ids] && 
+                filtro[:proyectofinanciero_ids].count > 0
+              pf_ids = filtro[:proyectofinanciero_ids].map(&:to_i)
+              c2 = c2.where(
+                'cor1440_gen_actividadpf.proyectofinanciero_id IN (?)', 
+                pf_ids)
+            end
+            return c2
+          end
+
+          def disponibles(filtro, ability, c = nil)
+            return disponibles_cor1440_gen(filtro, ability, c)
+          end
+
+        end # class_methods
+
       end
     end
   end

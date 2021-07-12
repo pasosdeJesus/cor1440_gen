@@ -33,21 +33,7 @@
     %>
   </td>
   <td>
-    <%= f.association :actividadpf, 
-      collection: ::Cor1440Gen::Actividadpf.
-      where( proyectofinanciero_id: f.object.proyectofinanciero_id).
-      joins(:resultadopf).joins(:objetivopf).
-      order(['cor1440_gen_objetivopf.numero', 'cor1440_gen_resultadopf.numero', 
-             :nombrecorto, :titulo]),
-      label_method: lambda { |t| t.presenta_nombre},
-      value_method: :id,
-      label: false,
-      selected: f.object.actividadpf_ids, 
-      input_html: { 
-        class: 'chosen-select',
-        style: 'width-min: 30rem'
-      } 
-    %>
+    <%= render partial: 'campo_actividad_proyectofinanciero_actividadpf', locals: {f: f} %>
   </td>  
   <td>
     <%= link_to_remove_association "Eliminar", f, 
