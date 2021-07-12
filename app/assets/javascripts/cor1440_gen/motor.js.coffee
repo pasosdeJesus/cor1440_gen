@@ -313,6 +313,46 @@ cor1440_gen_rangoedadc_todos = () ->
     sip_ajax_recibe_json(root, 'api/actividades/relacionadas', 
       params, cor1440_gen_llena_actividadpf_relacionadas)
 
+
+
+@cor1440_gen_llena_actividadpf_conancestros = (root, res) ->
+  ac_conancestros = res.ac_ids_conancestros
+  $('select[id^=actividad_actividad_proyectofinanciero_attributes][id$=actividadpf_ids]').each(() ->
+    actuales = $(this).val()
+    # ac_conancestros incluye los actuales
+    posibles = []
+    $(this).find('option').each(() ->
+      posibles.push(+this.value)
+    )
+    int = posibles.filter( (v) -> ac_conancestros.includes(v))
+    $(this).val(int)
+    $(this).trigger('chosen:updated')
+    if int.length != actuales.length
+      $(this).trigger('cor1440_gen:conancestros_actualizado')
+  )
+
+
+@cor1440_gen_actividad_actualiza_conancestros = (root, res) ->
+  if res.selected?
+    acids = ['']
+    $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () -> 
+      t = $(this)
+      if t.parent().parent().parent().not(':hidden').length > 0
+        acids = acids.concat(t.val())
+    )
+    prids = []
+    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+      idex = $(this).find('select[id$=proyectofinanciero_id]').val()
+      prids.push(idex) 
+    )
+    params = {
+      actividadpf_ids: acids,
+      proyectofinanciero_ids: prids
+    }
+    sip_ajax_recibe_json(root, 'actividadespf/conancestros', 
+      params, cor1440_gen_llena_actividadpf_conancestros)
+
+
 # Actualiza campos dinámicos cuando hay una tabla de proyectofinanciero
 # y actividades de proyectofinanciero
 @cor1440_gen_actividad_actualiza_camposdinamicos2 = (root) ->
@@ -730,6 +770,9 @@ cor1440_gen_rangoedadc_todos = () ->
     $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
       if typeof root.cor1440_gen_activa_autocompleta_mismotipo != 'undefined' && root.cor1440_gen_activa_autocompleta_mismotipo == true
         cor1440_gen_actividad_actualiza_mismotipo(root, res)
+      if typeof root.cor1440_gen_activa_autocompleta_conancestros != 'undefined' && root.cor1440_gen_activa_autocompleta_conancestros == true
+        cor1440_gen_actividad_actualiza_conancestros(root, res)
+
 
       cor1440_gen_actividad_actualiza_camposdinamicos2(root)
     )

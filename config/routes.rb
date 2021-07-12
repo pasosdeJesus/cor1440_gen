@@ -22,6 +22,10 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :actividadespf, only: [:new, :destroy], path_names: {new: 'nueva'}
 
+  
+  get "/actividadespf/conancestros" => "actividadespf#conancestros", 
+    as: :actividadespf_conancestros
+
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 
   resources :efectos, path_names: { new: 'nuevo', edit: 'edita' }
