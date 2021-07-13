@@ -53,6 +53,8 @@ es:
       "cor1440_gen/actividadpf":
         actividadpf: Actividad del marco lógico
         descripcion: Descripción
+        grupoexclusivo: Exclusiva de grupos
+        heredade: Hereda de
         nombrecorto: Nombre corto
         resultadopf: Resultado
         titulo: Título
