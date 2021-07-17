@@ -248,8 +248,7 @@ cor1440_gen_rangoedadc_todos = () ->
     jv.find('input[id$=_numero]').val()
    return et
 
-@cor1440_gen_actualiza_objetivos = (e, objetivo) ->
-  sip_actualiza_cuadros_seleccion_dependientes('objetivospf', 
+@cor1440_gen_actualiza_objetivos = (e, objetivo) -> sip_actualiza_cuadros_seleccion_dependientes('objetivospf', 
     '_id', '_numero', DEP_OBJETIVOPF, 'id', 'numero')
   sip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
     'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf, 
