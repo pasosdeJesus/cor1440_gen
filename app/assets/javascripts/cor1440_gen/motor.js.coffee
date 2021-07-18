@@ -17,7 +17,7 @@
      'select[id^=proyectofinanciero_indicadorpf_attributes][id$=_resultadopf_id]',
      'select[id^=proyectofinanciero_actividadpf_attributes][id$=_resultadopf_id]'
   ]
- 
+
 @DEP_INDICADORPF = []
 
 
@@ -33,7 +33,7 @@ cor1440_gen_rangoedadac_uno = (ini, col) ->
     v = $(this).val()
     if (v != "")
       ab = $(this).parent().parent().css('display')
-      if (ab != 'none') 
+      if (ab != 'none')
         sumc += parseInt(v)
   )
   $("#tactividad" + col).text(sumc)
@@ -73,7 +73,7 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_rangoedadac_tot()
 
 
-# Llena idrf relacionando rangos de edad de base de datos con 
+# Llena idrf relacionando rangos de edad de base de datos con
 # Filas de la tabla de rangos de edad
 #
 # resp Objeto JSON con rangosedadac, respuesta de llamada AJAX
@@ -95,7 +95,7 @@ cor1440_gen_rangoedadc_todos = () ->
       ml2 = $(this).parent().parent().find('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_ml]').val()
       sl2 = $(this).parent().parent().find('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_sl]').val()
       $(this).parent().parent().find('a.remove_fields').click()
-      prl = '#actividad_actividad_rangoedadac_attributes_' + idrf[nr] 
+      prl = '#actividad_actividad_rangoedadac_attributes_' + idrf[nr]
       fl1 = $(prl + '_fl').val()
       ml1 = $(prl + '_ml').val()
       sl1 = $(prl + '_sl').val()
@@ -121,7 +121,7 @@ cor1440_gen_rangoedadc_todos = () ->
   mesref  = arf[1]
   diaref  = arf[2]
 
-  # Recorre listado de personas 
+  # Recorre listado de personas
   $('[id^=actividad_asistencia_attributes][id$=_persona_attributes_anionac]').each((i, v) ->
     # excluye eliminadas
     if $(this).parent().parent().parent().css('display') != 'none'
@@ -129,7 +129,7 @@ cor1440_gen_rangoedadc_todos = () ->
       anionac = $(this).val()
       mesnac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_mesnac]').val()
       dianac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_dianac]').val()
-  
+
       e = +sip_edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
       idran = -1  # id del rango en el que está e
       ransin = -1 # id del rango SIN INFORMACION
@@ -154,14 +154,14 @@ cor1440_gen_rangoedadc_todos = () ->
     fsig(rangos, idrf)
 
 
-# Hace petición AJAX para recalcular tabla poblacion en actividad 
-# a partir de listado de personas beneficiarias  y de casos 
+# Hace petición AJAX para recalcular tabla poblacion en actividad
+# a partir de listado de personas beneficiarias  y de casos
 # beneficiarios
 # fsig es función que llamará después de completar con registro con
 #   datos que ha calculado como rangos e idrf
 @cor1440_gen_recalcula_poblacion = (fsig = null) ->
-  if $('[id^=actividad_asistencia_attributes]:visible').length > 0  || $('#actividad_casosjr').find('tr:visible').length > 0  
-    # No permitiria añadir manualmente a población 
+  if $('[id^=actividad_asistencia_attributes]:visible').length > 0  || $('#actividad_casosjr').find('tr:visible').length > 0
+    # No permitiria añadir manualmente a población
     # $('a[data-association-insertion-node$=actividad_rangoedadac]').hide()
     # Pone en blanco las cantidades y deshabilita edición
     $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_fr]').each((i, v) ->
@@ -171,11 +171,11 @@ cor1440_gen_rangoedadc_todos = () ->
     $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_mr]').each((i, v) ->
       $(this).val(0)
       $(this).prop('readonly', true);
-    ) 
+    )
     $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_s]').each((i, v) ->
       $(this).val(0)
       $(this).prop('readonly', true);
-    ) 
+    )
   else
     $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_fr]').each((i, v) ->
       $(this).val(0)
@@ -184,17 +184,17 @@ cor1440_gen_rangoedadc_todos = () ->
     $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_mr]').each((i, v) ->
       $(this).val(0)
       $(this).prop('readonly', false);
-    ) 
+    )
     $('input[id^=actividad_actividad_rangoedadac_attributes_][id$=_s]').each((i, v) ->
       $(this).val(0)
       $(this).prop('readonly', false);
-    ) 
+    )
 
   sip_funcion_1p_tras_AJAX('admin/rangosedadac.json?filtro[bushabilitado]=Si&filtrar=Filtrar', {}, cor1440_gen_recalcula_poblacion2, fsig, 'solicitando rangos de edad a servidor')
 
 
 
-# Recalcula tabla poblacion en actividad a partir de listado de 
+# Recalcula tabla poblacion en actividad a partir de listado de
 # asistencia (método 2 con
 # llamada AJAX para recuperar información de rangos de edad)
 @cor1440_gen_super_recalcula_poblacion = () ->
@@ -214,12 +214,12 @@ cor1440_gen_rangoedadc_todos = () ->
 
 
 
-# Aumenta valor en tabla población para el sexo y rango de edad 
+# Aumenta valor en tabla población para el sexo y rango de edad
 # dado en la cantidad dada
 @cor1440_gen_aumenta_poblacion = (idrf, sexo, idran, cantidad) ->
-  if +cantidad == 0 
+  if +cantidad == 0
     return
-  if idrf[idran] == -1 
+  if idrf[idran] == -1
     cor1440_gen_aumenta_fila_poblacion(idrf, idran)
 
   pref = '#actividad_actividad_rangoedadac_attributes_' + idrf[idran]
@@ -227,11 +227,11 @@ cor1440_gen_rangoedadc_todos = () ->
     fr = +$(pref + '_fr').val()
     $(pref + '_fr').val(fr + (+cantidad))
     cor1440_gen_rangoedadac($(pref + '_fr'))
-  else if sexo == 'M'    
+  else if sexo == 'M'
     mr = +$(pref + '_mr').val()
     $(pref + '_mr').val(mr + (+cantidad))
     cor1440_gen_rangoedadac($(pref + '_mr'))
-  else    
+  else
     sr = +$(pref + '_s').val()
     $(pref + '_s').val(sr + (+cantidad))
     cor1440_gen_rangoedadac($(pref + '_s'))
@@ -244,20 +244,21 @@ cor1440_gen_rangoedadc_todos = () ->
 
 
 @cor1440_gen_fun_etiqueta_resultadopf = (jv) ->
-   et = jv.find('select[id$=_objetivopf_id] option[selected]').text() + 
+   et = jv.find('select[id$=_objetivopf_id] option[selected]').text() +
     jv.find('input[id$=_numero]').val()
    return et
 
-@cor1440_gen_actualiza_objetivos = (e, objetivo) -> sip_actualiza_cuadros_seleccion_dependientes('objetivospf', 
+@cor1440_gen_actualiza_objetivos = (e, objetivo) ->
+  sip_actualiza_cuadros_seleccion_dependientes('objetivospf',
     '_id', '_numero', DEP_OBJETIVOPF, 'id', 'numero')
   sip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
-    'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf, 
+    'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
     DEP_RESULTADOPF, 'id', 'numero')
 
 
 @cor1440_gen_actualiza_resultados = (e, resultado) ->
   sip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
-    'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf, 
+    'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
     DEP_RESULTADOPF, 'id', 'numero')
 
 
@@ -295,21 +296,21 @@ cor1440_gen_rangoedadc_todos = () ->
 @cor1440_gen_actividad_actualiza_mismotipo = (root, res) ->
   if res.selected?
     acids = ['']
-    $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () -> 
+    $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () ->
       t = $(this)
       if t.parent().parent().parent().not(':hidden').length > 0
         acids = acids.concat(t.val())
     )
     prids = []
-    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+    $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
       idex = $(this).find('select[id$=proyectofinanciero_id]').val()
-      prids.push(idex) 
+      prids.push(idex)
     )
     params = {
       actividadpf_ids: acids,
       proyectofinanciero_ids: prids
     }
-    sip_ajax_recibe_json(root, 'api/actividades/relacionadas', 
+    sip_ajax_recibe_json(root, 'api/actividades/relacionadas',
       params, cor1440_gen_llena_actividadpf_relacionadas)
 
 
@@ -334,21 +335,21 @@ cor1440_gen_rangoedadc_todos = () ->
 @cor1440_gen_actividad_actualiza_conancestros = (root, res) ->
   if res.selected?
     acids = ['']
-    $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () -> 
+    $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () ->
       t = $(this)
       if t.parent().parent().parent().not(':hidden').length > 0
         acids = acids.concat(t.val())
     )
     prids = []
-    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+    $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
       idex = $(this).find('select[id$=proyectofinanciero_id]').val()
-      prids.push(idex) 
+      prids.push(idex)
     )
     params = {
       actividadpf_ids: acids,
       proyectofinanciero_ids: prids
     }
-    sip_ajax_recibe_json(root, 'actividadespf/conancestros', 
+    sip_ajax_recibe_json(root, 'actividadespf/conancestros',
       params, cor1440_gen_llena_actividadpf_conancestros)
 
 
@@ -363,7 +364,7 @@ cor1440_gen_rangoedadc_todos = () ->
   if ruta[0] == '/'
     ruta = ruta.substr(1)
   acids = ['']
-  $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () -> 
+  $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_actividadpf_ids]').each( () ->
     t = $(this)
     if t.parent().parent().parent().not(':hidden').length > 0
       acids = acids.concat(t.val())
@@ -379,7 +380,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     pfl: [proyectofinanciero_id]
   }
-  sip_llena_select_con_AJAX2('actividadespf', params, 
+  sip_llena_select_con_AJAX2('actividadespf', params,
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
     'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
@@ -388,7 +389,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     pfl: $('#actividad_proyectofinanciero_ids').val(),
   }
-  sip_llena_select_con_AJAX2('actividadespf', params, 
+  sip_llena_select_con_AJAX2('actividadespf', params,
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
     'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
@@ -408,7 +409,7 @@ cor1440_gen_rangoedadc_todos = () ->
   if pfpend != null
     pfpendid = pfpend.map((e) => (e.id))
     pfex = []
-    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+    $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
       idex = $(this).find('select[id$=proyectofinanciero_id]').val()
       if !(pfpendid.includes(+idex))
         $(this).remove()
@@ -417,10 +418,10 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_actividad_actualiza_camposdinamicos2(root)
 
 #  porac = []
-#  $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+#  $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
 #      porac.push({
 #        npf: $(this).find('select[id$=proyectofinanciero_id]').val(),
-#        idac: $(this).find('select[id$=actividadpf_ids]').attr('id') 
+#        idac: $(this).find('select[id$=actividadpf_ids]').attr('id')
 #      })
 #  )
 #
@@ -432,7 +433,7 @@ cor1440_gen_rangoedadc_todos = () ->
 #    params = { pfl: [r.npf] }
 #    f = null
 #    if n == r.length -1
-#    sip_llena_select_con_AJAX2('actividadespf', params, 
+#    sip_llena_select_con_AJAX2('actividadespf', params,
 #        r.idac, 'con Actividades de convenio ' + r.npf, root,
 #        'id', 'nombre', f)
 #    n += 1
@@ -443,29 +444,29 @@ cor1440_gen_rangoedadc_todos = () ->
   if pfpend != null
     pfpendid = pfpend.map((e) => (e.id))
     pfex = []
-    $('#actividad_proyectofinanciero tr').not(':hidden').each(() -> 
+    $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
       idex = $(this).find('select[id$=proyectofinanciero_id]').val()
       if !(pfpendid.includes(+idex))
         $(this).remove()
     )
- 
+
 @cor1440_gen_actividad_actualiza_fecha2 = (root) ->
   params = {
     fecha: $('#actividad_fecha_localizada').val(),
   }
-  sip_funcion_tras_AJAX('proyectosfinancieros', params, 
-    cor1440_gen_actividad_actualiza_pf2, 'con Convenios Financiados', 
+  sip_funcion_tras_AJAX('proyectosfinancieros', params,
+    cor1440_gen_actividad_actualiza_pf2, 'con Convenios Financiados',
     root)
 
 @cor1440_gen_actividad_actualiza_pf_op = (root, resp, objetivo) ->
   # Determinar nuevas opciones excluyendo las ya elegidas
   otrospfid = []
-  objetivo.siblings().not(':hidden').find('select[id$=proyectofinanciero_id]').each(() -> 
+  objetivo.siblings().not(':hidden').find('select[id$=proyectofinanciero_id]').each(() ->
     otrospfid.push(+this.value)
   )
   idsel = objetivo.find('select').attr('id')
   nuevasop = []
-  resp.forEach((r) -> 
+  resp.forEach((r) ->
     if !otrospfid.includes(+r.id)
       nuevasop.push({'id': +r.id, 'nombre': r.nombre})
   )
@@ -478,14 +479,14 @@ cor1440_gen_rangoedadc_todos = () ->
 @cor1440_gen_actividad_actualiza_sel_rango = (root, resp, objetivo) ->
   # Determinar nuevas opciones excluyendo las ya elegidas
   otrospfid = []
-  objetivo.siblings().not(':hidden').find('select').each(() -> 
+  objetivo.siblings().not(':hidden').find('select').each(() ->
     otrospfid.push(+this.value)
   )
   idsel = objetivo.find('select').attr('id')
   valac = +$('#' + idsel).val()
   valsel = 7
   nuevasop = []
-  resp.forEach((r) -> 
+  resp.forEach((r) ->
     if !otrospfid.includes(+r.id)
       nuevasop.push({'id': +r.id, 'nombre': r.nombre})
       if r.id == valac
@@ -541,7 +542,7 @@ cor1440_gen_rangoedadc_todos = () ->
   sip_arregla_puntomontaje(root)
   cnom = s.attr('id')
   v = $("#" + cnom).data('autocompleta')
-  if (v != 1 && v != "no") 
+  if (v != 1 && v != "no")
     $("#" + cnom).data('autocompleta', 1)
     divcp = s.closest('.nested-fields')
     if (typeof divcp == 'undefined')
@@ -554,8 +555,8 @@ cor1440_gen_rangoedadc_todos = () ->
     $("#" + cnom).autocomplete({
       source: root.puntomontaje + "personas.json",
       minLength: 2,
-      select: ( event, ui ) -> 
-        if (ui.item) 
+      select: ( event, ui ) ->
+        if (ui.item)
           cor1440_gen_autocompleta_asistente(ui.item.value, ui.item.id, divcp, root)
           event.stopPropagation()
           event.preventDefault()
@@ -621,28 +622,28 @@ cor1440_gen_rangoedadc_todos = () ->
   # En actividad si se cambia sexo de un asistente
   #recalcula tabla de población
   $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_sexo]:visible', (e) ->
-    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+    if (typeof cor1440_gen_recalcula_poblacion == 'function')
       cor1440_gen_recalcula_poblacion();
   )
 
   # En actividad si se cambia anio de nacimiento de un asistente
   # recalcula tabla de población
   $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_anionac]:visible', (e) ->
-    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+    if (typeof cor1440_gen_recalcula_poblacion == 'function')
       cor1440_gen_recalcula_poblacion();
   )
 
   # En actividad si se cambia mes de nacimiento de un asistente
   # recalcula tabla de población
   $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_mesnac]:visible', (e) ->
-    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+    if (typeof cor1440_gen_recalcula_poblacion == 'function')
       cor1440_gen_recalcula_poblacion();
   )
 
   # En actividad si se cambia dia de nacimiento de un asistente
   # recalcula tabla de población
   $(document).on('change', '[id^=actividad_asistencia_attributes][id$=_persona_attributes_dianac]:visible', (e) ->
-    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+    if (typeof cor1440_gen_recalcula_poblacion == 'function')
       cor1440_gen_recalcula_poblacion();
   )
 
@@ -655,7 +656,7 @@ cor1440_gen_rangoedadc_todos = () ->
 
   # Tras autocompletar asistente
   $(document).on('cor1440gen:autocompletado-asistente', (e, papa) ->
-    if (typeof cor1440_gen_recalcula_poblacion == 'function') 
+    if (typeof cor1440_gen_recalcula_poblacion == 'function')
       cor1440_gen_recalcula_poblacion();
   )
 
@@ -664,24 +665,24 @@ cor1440_gen_rangoedadc_todos = () ->
 
   @cor1440_gen_preparamindicadorespf(root)
 
-  $(document).on('click', '.envia_filtrar', (e) -> 
+  $(document).on('click', '.envia_filtrar', (e) ->
     f = e.target.form
     a = f.action
     if a.endsWith(".pdf")
       $(f).attr("action", a.substr(0, a.length-4))
       $(f).removeAttr("target")
   )
-  $(document).on('click', '.envia_generar_pdf', (e) -> 
+  $(document).on('click', '.envia_generar_pdf', (e) ->
     f = e.target.form
     a = f.action
     if !a.endsWith(".pdf")
       $(f).attr("action", a + ".pdf")
       $(f).attr("target", "_blank")
   )
-  $(document).on('change', 'input[id^=actividad_actividad_rangoedadac_attributes]', (e) -> 
+  $(document).on('change', 'input[id^=actividad_actividad_rangoedadac_attributes]', (e) ->
     cor1440_gen_rangoedadac($(this))
   )
-  $(document).on('cocoon:after-remove', (e) -> 
+  $(document).on('cocoon:after-remove', (e) ->
     cor1440_gen_rangoedadc_todos();
   )
 
@@ -703,10 +704,10 @@ cor1440_gen_rangoedadc_todos = () ->
 #    $('#actividad_actividadpf_ids').chosen().change( (e) ->
 #      cor1440_gen_actividad_actualiza_camposdinamicos(root)
 #    )
-    
-    # Tras añadir una fila a la tabla de proyectosfinancieros y sus 
+
+    # Tras añadir una fila a la tabla de proyectosfinancieros y sus
     # actividadespf, se deja proyecto en blanco y se permite elegir uno de
-    # entre los vigentes pero excluyendos los que ya estuvieran 
+    # entre los vigentes pero excluyendos los que ya estuvieran
     # (para evitar filas repetidas)
     $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
       $('.chosen-select').chosen()
@@ -716,16 +717,16 @@ cor1440_gen_rangoedadc_todos = () ->
       if $('#actividad_grupo_ids').length > 0
         params['grupo_ids'] = $('#actividad_grupo_ids').val()
 
-      sip_funcion_1p_tras_AJAX('proyectosfinancieros', params, 
-        cor1440_gen_actividad_actualiza_pf_op, objetivo, 
+      sip_funcion_1p_tras_AJAX('proyectosfinancieros', params,
+        cor1440_gen_actividad_actualiza_pf_op, objetivo,
         'con Convenios Financiados', root)
     )
 
     $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
       # Si se ha deshabilitado, no operar pero volver a habilitar
       params = {}
-      sip_funcion_1p_tras_AJAX('admin/rangosedadac', params, 
-        cor1440_gen_actividad_actualiza_sel_rango, objetivo, 
+      sip_funcion_1p_tras_AJAX('admin/rangosedadac', params,
+        cor1440_gen_actividad_actualiza_sel_rango, objetivo,
         'con Rangos de edad', root)
     )
 
@@ -740,7 +741,7 @@ cor1440_gen_rangoedadc_todos = () ->
       cor1440_gen_actividad_actualiza_camposdinamicos2(root)
     )
 
-    # Al establecer un proyectofinanciero se deshabilita 
+    # Al establecer un proyectofinanciero se deshabilita
     # posibilidad de edición al mismo y en la celda de actividades
     # de convenio se permite eleir entre las del proyecto elegido
     $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=proyectofinanciero_id]', (e, res) ->
@@ -749,21 +750,21 @@ cor1440_gen_rangoedadc_todos = () ->
       $(e.target).trigger('chosen:updated')
       idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
       params = { pfl: [+res.selected]}
-      sip_llena_select_con_AJAX2('actividadespf', params, 
+      sip_llena_select_con_AJAX2('actividadespf', params,
         idac, 'con Actividades de convenio ' + res.selected, root,
         'id', 'nombre', null)
     )
 
-    # Antes de enviar el formulario de actividad, habilitamos campos 
+    # Antes de enviar el formulario de actividad, habilitamos campos
     # proyectofinanciero, que se habían deshabilitado para simplificar
     # interacción por parte de usuario.
     $("form[id^=edit_actividad]").submit(() ->
       $('select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=_proyectofinanciero_id]').removeAttr('disabled')
       $('select[id^=actividad_actividad_rangoedadac_attributes_][id$=_rangoedadac_id]').removeAttr('disabled')
       $('select[id^=actividad_detallefinanciero_attributes_][id$=_convenioactividad]').removeAttr('disabled')
-      
+
     );
-    
+
     # Tras agregar o eliminar actividades de convenio a un convenio
     # agregare o eliminar subformularios asociados
     $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=actividadpf_ids]', (e, res) ->
@@ -775,67 +776,67 @@ cor1440_gen_rangoedadc_todos = () ->
 
       cor1440_gen_actividad_actualiza_camposdinamicos2(root)
     )
- 
+
   $(document).on('change', '#objetivospf [id$=_numero]', cor1440_gen_actualiza_objetivos)
-  
+
   $(document).on('cocoon:after-remove', '#objetivospf', cor1440_gen_actualiza_objetivos)
-  
+
   $(document).on('cocoon:after-insert', '#objetivospf', cor1440_gen_actualiza_objetivos)
-  
+
   $(document).on('cocoon:before-remove', '#objetivospf', (e, objetivo) ->
     return sip_intenta_eliminar_fila(objetivo, '/objetivospf/', DEP_OBJETIVOPF)
   )
 
   $(document).on('cocoon:before-remove', '#indicadoresobjetivos', (e, indicador) ->
-    sip_intenta_eliminar_fila(indicador, '/indicadorespf/', 
+    sip_intenta_eliminar_fila(indicador, '/indicadorespf/',
         DEP_INDICADORPF
     )
   )
-  
+
   $(document).on('change', '#indicadoresobjetivos [id$=_id]', (e, result) ->
     sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
-  
-  $(document).on('cocoon:after-insert', '#indicadoresobjetivos', 
+
+  $(document).on('cocoon:after-insert', '#indicadoresobjetivos',
     cor1440_gen_actualiza_objetivos)
 
   $(document).on('change', '#resultadospf [id$=_numero]', cor1440_gen_actualiza_resultados)
-  
+
   $(document).on('cocoon:after-remove', '#resultadospf', cor1440_gen_actualiza_resultados)
-  
+
   $(document).on('cocoon:after-insert', '#resultadospf', cor1440_gen_actualiza_objetivos)
-  
+
   $(document).on('cocoon:before-remove', '#resultadospf', (e, resultado) ->
-    sip_intenta_eliminar_fila(resultado, '/resultadospf/', 
+    sip_intenta_eliminar_fila(resultado, '/resultadospf/',
         DEP_RESULTADOPF
     )
   )
-  
+
   $(document).on('change', '#resultadospf [id$=_id]', (e, result) ->
     sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
-  
-  
+
+
   $(document).on('cocoon:before-remove', '#indicadorespf', (e, indicador) ->
-    sip_intenta_eliminar_fila(indicador, '/indicadorespf/', 
+    sip_intenta_eliminar_fila(indicador, '/indicadorespf/',
         DEP_INDICADORPF
     )
   )
-  
+
   $(document).on('change', '#indicadorespf [id$=_id]', (e, result) ->
     sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
-  
+
   $(document).on('cocoon:after-insert', '#indicadorespf', cor1440_gen_actualiza_resultados)
 
   $(document).on('cocoon:after-insert', '#actividadespf', cor1440_gen_actualiza_resultados)
   $(document).on('change', '#actividadespf [id$=_id]', (e, result) ->
     sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
- 
+
   # En listado de asistencia permite autocompletar nombres
-  $(document).on('focusin', 
-  'input[id^=actividad_asistencia_attributes_][id$=_persona_attributes_nombres]', 
+  $(document).on('focusin',
+  'input[id^=actividad_asistencia_attributes_][id$=_persona_attributes_nombres]',
   (e) ->
     cor1440_gen_busca_asistente($(this))
   )
@@ -861,7 +862,7 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('change', 'select[id=persona_proyectofinanciero_ids]', (e, res) ->
     cor1440_gen_persona_actualiza_camposdinamicos(root)
   )
- 
+
 #    $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
 #      cor1440_gen_actividad_actualiza_actividadpf(root, null)
 #    )
