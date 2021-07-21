@@ -101,9 +101,15 @@ module Cor1440Gen
           end
 
           def index(c = nil)
-            authorize! :read, Cor1440Gen::Proyectofinanciero
             c = Cor1440Gen::ProyectosfinancierosController::disponibles(
               params, current_ability, c)
+            if c.count == 0 && 
+                cannot?(:listado, Cor1440Gen::Proyectofinanciero) &&
+                cannot?(:index, Cor1440Gen::Proyectofinanciero)
+              flash[:error] = "No se puede acceder a #{clase}"
+              redirect_to main_app.root_path
+              return
+            end
             super(c)
           end
 
@@ -455,12 +461,17 @@ module Cor1440Gen
         end # included
 
         class_methods do
-          # Retorna ids de proyectos que el usuario actual puede leer con
+          # Retorna ids de proyectos que el usuario actual puede leer de
+          # acuerdo a control de acceso definido con cancancan y con
           # las restricciones del filtro:
           #   filtro[:fecha] limita a proyectos vigentes en la fecha
           # Usado en formulario actividad en lista de selección de proyectos
+          # y en índice de proyectos
           def disponibles_cor1440_gen(filtro, ability, c = nil)
-            c2 = c ? c : Cor1440Gen::Proyectofinanciero.accessible_by(ability)
+            if c == nil
+              c = Cor1440Gen::Proyectofinanciero 
+            end
+            c2 = c.accessible_by(ability)
             if filtro[:fecha] && filtro[:fecha] != ''
               menserror=''
               nfr = Sip::FormatoFechaHelper.reconoce_adivinando_locale(
