@@ -22,6 +22,7 @@ console.log('Hola Mundo desde Webpacker')
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
+import ApexCharts from 'apexcharts'
 
 Rails.start()
 Turbolinks.start()

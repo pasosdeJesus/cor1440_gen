@@ -4,7 +4,33 @@
   <% @descd2 = d[1] %>
   <% @descd3 = d[2] %>
   <% pms = @registro.pmindicadorpf.order(:fecha, :ffin) %>
-  
+  <% res_ini_m = {}
+    res_ini_r = {}
+    res_ini_m[pms[0].finicio_localizada] = 0
+    res_ini_r[pms[0].finicio_localizada] = 0 %>
+  <%
+    series= [
+      {
+       name: "Meta",
+       data: res_ini_m.merge!(pms.map{|pm| [pm.ffin_localizada, pm.meta]}.to_h)
+      },
+      {
+       name: "Resultado",
+       data: res_ini_r.merge!(pms.map{|pm| [pm.ffin_localizada, pm.resind.round(1)]}.to_h)
+      }
+    ]
+    options = {
+    title: 'Medición de indicadores',
+    xtitle: 'Fecha Fin',
+    ytitle: 'Resultado'
+    } 
+  %>
+
+  <div class="row">
+    <div class="col-6">
+      <%= line_chart(series, options) %>  
+    <div>
+  </div>
   <div>
     <table border=1>
     <tr>

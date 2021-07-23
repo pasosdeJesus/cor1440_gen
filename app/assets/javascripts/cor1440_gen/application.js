@@ -14,6 +14,7 @@
 //= require heb412_gen/motor
 //= require mr519_gen/motor
 //= require cor1440_gen/motor
+//= require apexcharts/dist/apexcharts.min
 //= require_tree .
 
 
