@@ -110,8 +110,10 @@ module Cor1440Gen
               Cor1440Gen::ActividadRespuestafor.connection.execute <<-EOF
                 DELETE FROM cor1440_gen_actividad_respuestafor 
                 WHERE actividad_id=#{@registro.id};
+                DELETE FROM mr519_gen_valorcampo 
+                WHERE respuestafor_id IN (#{rpb.join(',')});
                 DELETE FROM mr519_gen_respuestafor 
-                WHERE id in (#{rpb.join(',')});
+                WHERE id IN (#{rpb.join(',')});
               EOF
             end
 
