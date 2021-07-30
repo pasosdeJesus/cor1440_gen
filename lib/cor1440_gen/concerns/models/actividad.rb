@@ -41,6 +41,7 @@ module Cor1440Gen
           has_and_belongs_to_many :respuestafor, 
             class_name: 'Mr519Gen::Respuestafor',
             foreign_key: 'actividad_id',
+            dependent: :delete_all,
             association_foreign_key: 'respuestafor_id', 
             join_table: 'cor1440_gen_actividad_respuestafor'
           accepts_nested_attributes_for :respuestafor, 
