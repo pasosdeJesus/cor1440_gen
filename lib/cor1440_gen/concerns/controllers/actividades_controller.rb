@@ -111,7 +111,7 @@ module Cor1440Gen
                 DELETE FROM cor1440_gen_actividad_respuestafor 
                 WHERE actividad_id=#{@registro.id};
                 DELETE FROM mr519_gen_respuestafor 
-                WHERE id in (#{rpb.join(',')};
+                WHERE id in (#{rpb.join(',')});
               EOF
             end
 
