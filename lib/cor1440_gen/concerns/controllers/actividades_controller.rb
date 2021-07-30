@@ -88,7 +88,7 @@ module Cor1440Gen
           end
 
 
-          # GET /actividades/new
+          # Responde a GET /actividades/new
           def new
             new_cor1440_gen
             new_cor1440_gen_p2
@@ -96,16 +96,35 @@ module Cor1440Gen
             redirect_to cor1440_gen.edit_actividad_path(@registro)
           end
 
-          def destroy
+
+          # Responde a DELETE
+          def destroy_cor1440_gen
             pf_act = Cor1440Gen::ActividadProyectofinanciero.
               where(actividad_id: @registro.id)
             if pf_act.count > 0
               pf_act[0].destroy!
             end
+            rpb = @registro.respuestafor_ids
+            puts "** OJO por borrar respuestafor: #{rpb}"
+            if rpb.count > 0
+              Cor1440Gen::ActividadRespuestafor.connection.execute <<-EOF
+                DELETE FROM cor1440_gen_actividad_respuestafor 
+                WHERE actividad_id=#{@registro.id};
+                DELETE FROM mr519_gen_respuestafor 
+                WHERE id in (#{rpb.join(',')};
+              EOF
+            end
+
             destroy_gen
             #@registro.destroy!
             #redirect_to cor1440_gen.actividades_path
           end
+
+
+          def destroy
+            destroy_cor1440_gen
+          end
+
 
           def asegura_camposdinamicos(actividad, current_usuario_id)
             @listadoasistencia = false
