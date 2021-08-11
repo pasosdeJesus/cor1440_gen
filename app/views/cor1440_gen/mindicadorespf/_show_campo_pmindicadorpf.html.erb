@@ -16,7 +16,8 @@
       },
       {
        name: "Resultado",
-       data: res_ini_r.merge!(pms.map{|pm| [pm.ffin_localizada, pm.resind.round(1)]}.to_h)
+       data: res_ini_r.merge!(pms.map{|pm| [
+         pm.ffin_localizada, pm.resind ? pm.resind.round(1) : 0 ]}.to_h)
       }
     ]
     options = {
