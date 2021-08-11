@@ -4,76 +4,106 @@
   <% @descd2 = d[1] %>
   <% @descd3 = d[2] %>
   <% pms = @registro.pmindicadorpf.order(:fecha, :ffin) %>
-  
-  <div>
-    <table border=1>
-    <tr>
-      <th>Fecha Med.</th>
-      <th>Fecha Inicio</th>
-      <th>Fecha Fin</th>
-      <th>Tiempo</th>
-      <% if @registro.datointermedioti %>
-        <% @registro.datointermedioti.each do |di| %>
-          <th><%= di.nombre %></th>
-        <% end %>
-      <% elsif @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
-          @registro.indicadorpf.tipoindicador.datointermedioti %>
-        <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
+  <% res_ini_m = {}
+    res_ini_r = {}
+    res_ini_m[pms[0].finicio_localizada] = 0
+    res_ini_r[pms[0].finicio_localizada] = 0 %>
+  <%
+    series= [
+      {
+       name: "Meta",
+       data: res_ini_m.merge!(pms.map{|pm| [pm.ffin_localizada, pm.meta]}.to_h)
+      },
+      {
+       name: "Resultado",
+       data: res_ini_r.merge!(pms.map{|pm| [pm.ffin_localizada, pm.resind.round(1)]}.to_h)
+      }
+    ]
+    options = {
+      title: "Puntos de medición del indicador "\
+        "#{@registro.indicadorpf.presenta_codigo}",
+      xtitle: 'Fecha',
+      ytitle: 'Resultado'
+    } 
+  %>
+
+  <div class="row" >
+    <div class="offset-3 col-6" style='border: solid grey 1px'>
+      <%= line_chart(series, options) %>  
+    </div>
+  </div>
+  <p></p>
+  <div class='row' >
+    <div class="offset-3 col-6">
+      <table border=1>
+        <tr>
+          <th>Fecha Med.</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Tiempo</th>
+          <% if @registro.datointermedioti %>
+            <% @registro.datointermedioti.each do |di| %>
+              <th><%= di.nombre %></th>
+            <% end %>
+          <% elsif @registro.indicadorpf && @registro.indicadorpf.tipoindicador &&
+            @registro.indicadorpf.tipoindicador.datointermedioti %>
+          <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
             <th><%= di.nombre %></th>
-        <% end %>
-      <% end %>
-      <th>Resultado</th><th>Meta</th><th>Porcentaje</th>
-      <%= render partial: 'show_pmindicaobservacionesenc' %>
-    </tr>
-    <% pms.each do |pm| %>
-      <tr>
-        <td><%= pm.fecha_localizada %></td>
-        <td><%= pm.finicio_localizada %></td>
-        <td><%= pm.ffin_localizada %></td>
-        <td><%= pm.restiempo %></td>
-        <% if @registro.datointermedioti %>
-          <% @registro.datointermedioti.each do |di| %>
-            <td>
-              <%= render partial: 'muestra_valorintermedio',
-                locals: {pm: pm, di:di} %>
-            </td>
           <% end %>
-        <% elsif @registro.indicadorpf && 
-          @registro.indicadorpf.tipoindicador &&
-          @registro.indicadorpf.tipoindicador.datointermedioti %>
+        <% end %>
+        <th>Resultado</th><th>Meta</th><th>Porcentaje</th>
+        <%= render partial: 'show_pmindicaobservacionesenc' %>
+        </tr>
+        <% pms.each do |pm| %>
+          <tr>
+            <td><%= pm.fecha_localizada %></td>
+            <td><%= pm.finicio_localizada %></td>
+            <td><%= pm.ffin_localizada %></td>
+            <td><%= pm.restiempo %></td>
+            <% if @registro.datointermedioti %>
+              <% @registro.datointermedioti.each do |di| %>
+                <td>
+                  <%= render partial: 'muestra_valorintermedio',
+                    locals: {pm: pm, di:di} %>
+              </td>
+            <% end %>
+          <% elsif @registro.indicadorpf && 
+            @registro.indicadorpf.tipoindicador &&
+            @registro.indicadorpf.tipoindicador.datointermedioti %>
           <% @registro.indicadorpf.tipoindicador.datointermedioti.each do |di| %>
             <td>
               <%= render partial: 'muestra_valorintermedio',
                 locals: {pm: pm, di:di} %>
-            </td>
-          <% end %>
+          </td>
         <% end %>
+      <% end %>
 
-        <td>
-          <% v = pm.resind ? pm.resind.round(1) : '' %>
-          <% if pm.rutaevidencia && pm.resind %>
-            <%= link_to v, pm.rutaevidencia, target: '_blank'  %>
-          <% else %>
-              <%= v %>
-          <% end %>
-        </td>
-        <td><%= pm.meta %></td>
-        <td>
-          <% c = "red" %>
-          <% v = pm.porcump ? pm.porcump.round(1) : '' %>
-          <% if v.to_i > 99 %>
-            <% c = 'green' %>
-          <% elsif v.to_i >= 60 %>
-            <% c = 'orange' %>
-          <% end %>
-          <span style='color: <%= c %>'>
-            <%= v %>
-          </span>
-        </td>
-        <%= render 'show_pmindicaobservaciones', pm: pm %>
-      </tr>
-    <% end %>
-  </table>
+      <td>
+        <% v = pm.resind ? pm.resind.round(1) : '' %>
+        <% if pm.rutaevidencia && pm.resind %>
+          <%= link_to v, pm.rutaevidencia, target: '_blank'  %>
+        <% else %>
+          <%= v %>
+        <% end %>
+      </td>
+      <td><%= pm.meta %></td>
+      <td>
+        <% c = "red" %>
+        <% v = pm.porcump ? pm.porcump.round(1) : '' %>
+        <% if v.to_i > 99 %>
+          <% c = 'green' %>
+        <% elsif v.to_i >= 60 %>
+          <% c = 'orange' %>
+        <% end %>
+        <span style='color: <%= c %>'>
+          <%= v %>
+        </span>
+      </td>
+      <%= render 'show_pmindicaobservaciones', pm: pm %>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 
   <!-- p> <div> <table border='1'> <tr> <th>Tiempo</th><th>Análisis</th><th>Acciones</th><th>Responsables</th><th>Plazo</th> </tr> <% pms.each do |pm| %> <tr> <td><%= pm.restiempo %></td> <td><%= pm.analisis%></td> <td><%= pm.acciones %></td> <td><%= pm.responsables%></td> <td><%= pm.plazo %></td> </tr> <% end %> </table> </div> </p --> 

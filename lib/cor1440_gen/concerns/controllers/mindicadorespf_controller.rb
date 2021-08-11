@@ -35,7 +35,9 @@ module Cor1440Gen
           end
 
           def atributos_show
-            [ :id,
+            [
+              :pmindicadorpf,
+              :id,
               :proyectofinanciero_id,
               :indicadorpf_id,
               :medircon
@@ -48,7 +50,6 @@ module Cor1440Gen
               :datointermedioti,
               :funcionresultado,
               :frecuenciaanual,
-              :pmindicadorpf
             ]
           end
 

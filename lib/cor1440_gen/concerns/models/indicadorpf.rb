@@ -36,7 +36,7 @@ module Cor1440Gen
           validates :numero, presence: true, length: {maximum: 15}
           validates :indicador, presence:true, length: {maximum: 5000}
 
-          def presenta_nombre
+          def presenta_codigo
             r = ''
             if resultadopf
               r = (resultadopf.objetivopf ? 
@@ -45,8 +45,13 @@ module Cor1440Gen
             elsif objetivopf
               r = objetivopf.numero 
             end
-             r += numero + " " + indicador 
+             r += numero
              return r
+          end
+
+
+          def presenta_nombre
+            return presenta_codigo + " " + indicador 
           end
 
         end # included

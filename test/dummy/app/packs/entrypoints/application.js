@@ -21,11 +21,13 @@
 console.log('Hola Mundo desde Webpacker')
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
-
 Rails.start()
+
+  import Turbolinks from "turbolinks"
 Turbolinks.start()
 
+import ApexCharts from 'apexcharts'
+window.ApexCharts = ApexCharts
 
 import $ from "expose-loader?exposes=$,jQuery!jquery";
 
