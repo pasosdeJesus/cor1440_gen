@@ -3,7 +3,7 @@
   <% @descd1 = d[0] %>
   <% @descd2 = d[1] %>
   <% @descd3 = d[2] %>
-  <% pms = @registro.pmindicadorpf.order(:fecha, :ffin) %>
+  <% pms = @registro.pmindicadorpf.order(:ffin, :fecha) %>
   <% res_ini_m = {}
     res_ini_r = {}
     res_ini_m[pms[0].finicio_localizada] = 0
