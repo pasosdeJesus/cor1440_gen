@@ -359,7 +359,7 @@ module Cor1440Gen
                                  ind.tipoindicador_id.to_s,
                                  idacs, mind, fini, ffin)
                 if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
-                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
+                  puts "Error. No coinciden resf.datosint.count (#{resf[:datosint].count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
                 end
               end
             end
@@ -428,7 +428,7 @@ module Cor1440Gen
                                  ind.tipoindicador_id.to_s,
                                  idefs, mind, fini, ffin)
                 if resf[:datosint].count != ind.tipoindicador.datointermedioti.count
-                  puts "Error. No coinciden resf.datosint.count ({#resf.datosint.count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
+                  puts "Error. No coinciden resf.datosint.count (#{resf[:datosint].count} y ind.tipoindicador.datointermedioti.count (#{ind.tipoindicador.datointermedioti.count})."
                 end
               end
             end
@@ -453,7 +453,7 @@ module Cor1440Gen
               if resf[:datosint].count != ind.tipoindicador.
                   datointermedioti.count
                 puts "Error. No coinciden resf.datosint.count " +
-                  "({#resf.datosint.count} y " +
+                  "(#{resf[:datosint].count} y " +
                   "ind.tipoindicador.datointermedioti.count " +
                   "(#{ind.tipoindicador.datointermedioti.count})."
               end
