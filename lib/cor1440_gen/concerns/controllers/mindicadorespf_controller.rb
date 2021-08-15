@@ -486,7 +486,7 @@ module Cor1440Gen
             end
             if ind.tipoindicador.nil? && 
                 (mind.medircon.nil? || mind.funcionresultado.to_s == '')
-              resf[:prob] = "Error: Medición sin especificar.  Iindicador sin tipo"
+              resf[:prob] = "Error: Medición sin especificar.  Indicador sin tipo"
               puts resf[:prob]
               return resf[:prob]
             end
