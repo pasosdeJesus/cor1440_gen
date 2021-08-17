@@ -65,13 +65,6 @@ GIT
   specs:
     cocoon (1.2.11)
 
-GIT
-  remote: https://github.com/vtamara/execjs.git
-  revision: 9e59ac3de88b1f9580e937a54ee763b5f7e89893
-  branch: exec-reliable
-  specs:
-    execjs (2.8.0)
-
 PATH
   remote: .
   specs:
@@ -227,6 +220,7 @@ GEM
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 1.0, >= 1.0.2)
     erubi (1.10.0)
+    execjs (2.8.1)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.9.0)
@@ -443,7 +437,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dotenv-rails
-  execjs!
+  execjs
   factory_girl_rails
   heb412_gen!
   jbuilder
@@ -464,6 +458,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-erd
   rails-i18n
+  redcarpet
   rspec-rails
   rspreadsheet
   rubyzip (>= 2.0.0)

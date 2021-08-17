@@ -20,9 +20,7 @@ gem 'devise'# Autenticación
 
 gem 'devise-i18n'
 
-gem 'execjs', 
-  git: 'https://github.com/vtamara/execjs.git',
-  branch: 'exec-reliable'
+gem 'execjs'
 
 gem 'jbuilder'
 
@@ -51,6 +49,8 @@ gem 'rails', '~> 6.1'
   #git: 'https://github.com/rails/rails.git', branch: '6-1-stable'
 
 gem 'rails-i18n'
+
+gem 'redcarpet'
 
 gem 'rspreadsheet'
 
@@ -86,11 +86,11 @@ gem 'heb412_gen',  # Motor de nube y llenado de plantillas
 
 
 group :development do
-  
+
   gem 'thor' # Requerido por rake
-  
+
   gem 'web-console' # ConSola irb en páginas 
-  
+
 end
 
 
