@@ -1,0 +1,172 @@
+<% tasaej = f.object.tasaej ? f.object.tasaej : 1.0 %>
+<div class='row'>
+  <div class='col-sm-4'>
+    <%= f.label :tipomoneda %>
+  </div>
+  <div class='col-sm-4'>
+    <%= f.association :tipomoneda,
+      collection: Cor1440Gen::Tipomoneda.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      label: false
+    %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-sm-4'>
+    <%= f.label :tasaej %>
+  </div>
+  <div class='col-sm-4'>
+    <%= f.input :tasaej_localizado,
+      input_html: { value: tasaej.a_decimal_localizado },
+      label: false
+    %>
+  </div>
+</div>
+
+<div class="table-responsive-md">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="table-active">
+        <th>Concepto</th>
+        <th colspan='2' style='text-align: center'>Aprobado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th></th>
+        <th>Moneda</th>
+        <th>Pesos</th>
+      </tr>
+
+      <tr>
+        <th><%= f.label :montoej %></th>
+        <td>
+          <%= f.input :montoej_localizado,
+            as: :string,
+            input_html: { value: f.object.montoej_localizado || '0.0' },
+            label: false
+          %>
+        </td>
+        <td>
+          <%= f.input :montoejp_localizado, 
+            input_html: {
+              readonly: 'readonly',
+              value: f.object.montoejp_localizado || '0.0' 
+            },
+            label: false
+          %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :aportepropioej %></th>
+        <td>
+          <%= f.input :aportepropioej_localizado, 
+            input_html: { value: f.object.aportepropioej_localizado || '0.0' },
+            label: false 
+          %>
+        </td>
+        <td>
+          <%= f.input :aportepropioejp_localizado, 
+            label: false ,
+            input_html: {
+              readonly: 'readonly',
+              value: f.object.aportepropioejp_localizado || '0.0' 
+            }
+          %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= f.label :aporteotrosej %></th>
+        <td>
+          <%= f.input :aporteotrosej_localizado, 
+            input_html: { value: f.object.aporteotrosej_localizado || '0.0' },
+            label: false %>
+        </td>
+        <td>
+          <%= f.input :aporteotrosejp_localizado, 
+            label: false,
+            input_html: { 
+              readonly: 'readonly',
+              value: f.object.aporteotrosejp_localizado || '0.0' 
+            }
+          %>
+        </td>
+      </tr>
+
+      <tr class="table-dark">
+        <th><%= f.label :presupuestototalej %></th>
+        <td>
+          <%= f.input :presupuestototalej_localizado,
+            as: :string,
+            input_html: {
+              value: f.object.presupuestototalej_localizado || '0.0',
+              readonly: 'readonly'
+            },
+            label: false
+          %>
+        </td>
+        <td>
+          <%= f.input :presupuestototalejp_localizado,
+            label: false,
+            input_html: { 
+              readonly: 'readonly',
+              value: f.object.presupuestototalejp_localizado || '0.0' 
+            }
+          %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class='row'>
+  <div class='col-sm-4'>
+    <%= f.label :saldoaejecutarp %>
+  </div>
+  <div class='col-sm-8'>
+    <%= f.input :saldoaejecutarp_localizado, 
+      label: false
+    %>
+  </div>
+</div>
+
+
+<div class='row'>
+  <div class='col-sm-4'>
+    <%= f.label :centrocosto %>
+  </div>
+  <div class='col-sm-8'>
+    <%= f.input :centrocosto, 
+      label: false
+    %>
+  </div>
+</div>
+
+
+<table border=1 width="100%">
+  <thead>
+    <tr>
+      <th>Detalle</th>
+      <th>Fecha</th>
+      <th>Valor en Pesos</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="desembolso">
+    <%= f.simple_fields_for :desembolso do |d| %>
+      <%= render 'desembolso_campos', :f => d %>
+    <% end %>
+  </tbody>
+</table>
+<div class="links">
+  <%= link_to_add_association 'Añadir Desembolso', f, 
+    :desembolso,
+    :"data-association-insertion-node" => "tbody#desembolso", 
+    :"data-association-insertion-method" => "append", 
+    partial: 'desembolso_campos',
+    :class => 'btn-primary'
+  %>
+</div>
+

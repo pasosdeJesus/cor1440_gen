@@ -1,0 +1,16 @@
+<p><table border="1">
+  <tr>
+    <th>Detalle</th>
+    <th>Fecha</th>
+    <th>Devoluciones</th>
+    <th>Seguimiento</th>
+  </tr>
+  <% @registro.informefinanciero.each do |i| %>
+    <tr>
+      <td><%= i.detalle if i.detalle %></td>
+      <td><%= i.fecha_localizada %></td>
+      <td><%= i.devoluciones ? 'Si' : 'No' %></td>
+      <td><%= i.seguimiento %></td>
+    </tr>
+  <% end %>
+</table></p>

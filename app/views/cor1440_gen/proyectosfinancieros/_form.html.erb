@@ -1,0 +1,123 @@
+<%- if current_usuario.nil?  %>
+  <li><a href="usuarios/sign_in">Iniciar Sesión</a>
+<%- else  %>
+  <article>
+  <%= simple_form_for @registro, 
+    url: modelo_path(@registro),
+    html: { } do |f| 
+  %>
+    <div data-role="content" class="form-inputs">
+      <div id="errores">
+        <% if f.object.errors.any? %>
+          <div id="error_explanation">
+            <div class="alert alert-error">
+              <!--%= pluralize(f.object.errors.count, "error") %-->.
+            </div>
+            <ul>
+              <% f.object.errors.messages.each do |msg| %>
+                <li>* <%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= f.error_notification %>
+      </div>
+
+      <div role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+          <% if can? :manage, @registro %>
+            <li role="presentation" class="nav-item">
+              <a href="#basicos" class="enviarautomatico_y_repintapf nav-link active" aria-selected="true" aria-controls="basicos" role="tab" data-toggle="tab">
+                Datos básicos
+              </a>
+            </li>
+            <li role="presentation" class="nav-item">
+              <a href="#recursoshumanos" class="enviarautomatico_y_repintapf nav-link" aria-controls="recursoshumanos" role="tab" data-toggle="tab">
+                Recursos humanos
+              </a>
+            </li>
+            <li role="presentation" class="nav-item">
+              <a href="#recursoseconomicos" class="enviarautomatico_y_repintapf nav-link" aria-controls="recursoseconomicos" role="tab" data-toggle="tab">
+                Recursos económicos y desembolsos
+              </a>
+            </li>
+            <li role="presentation" class="nav-item">
+              <a href="#informes" class="enviarautomatico_y_repintapf nav-link" aria-controls="informes" role="tab" data-toggle="tab">
+                Informes y auditorias
+              </a>
+            </li>
+          <% end %>
+          <% if can? :edit, @registro %>
+            <li role="presentation" class="nav-item">
+              <a href="#marcologico" class="enviarautomatico_y_repintapf nav-link" aria-controls="marcologico" role="tab" data-toggle="tab">
+                Marco Lógico
+              </a>
+            </li>
+          <% end %>
+          <% if can? :manage, @registro%>
+            <li role="presentation" class="nav-item">
+              <a href="#anexos" class="enviarautomatico_y_repintapf nav-link" aria-controls="anexos" role="tab" data-toggle="tab">
+                Anexos
+              </a>
+            </li>
+          <% end %>
+        </ul>
+        <div class="tab-content">
+          <% if can? :manage, @registro%>
+            <div role="tabpanel" class="tab-pane fade active show" id="basicos">
+              <%= render 'basicos', :f => f %>
+            </div> 
+
+            <div role="tabpanel" class="tab-pane fade" id="recursoshumanos">
+              <%= render 'recursoshumanos', :f => f %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="recursoseconomicos">
+              <%= render 'recursoseconomicos', :f => f %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="informes">
+              <%= render 'informes', :f => f %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="contabilidad">
+              <%= render 'contabilidad', :f => f %>
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="datosfinanciador">
+              <%= render 'datosfinanciador', :f => f %>
+            </div>
+          <% end %> 
+          <% if can? :edit, @registro %>
+            <div role="tabpanel" class="tab-pane fade" id="marcologico">
+              <%= render 'marcologico', :f => f %>
+            </div>
+          <% end %> 
+          <% if can? :manage, @registro%>
+            <div role="tabpanel" class="tab-pane fade" id="anexos">
+              <% if f.object.id.nil? %>
+                <p>Antes de agregar anexos se debe guardar el compromiso institucional</p>
+              <% else %>
+                <%= render 'anexos', :f => f %> 
+              <% end %>
+            </div>
+          <% end %> 
+
+        </div> <!-- tab-content -->
+      </div> <!-- tabpanel -->
+    </div> <!-- form-inputs -->
+
+    <div class="form-actions" style="text-align: center">
+      <% if controller.registrar_en_bitacora %>
+        <input class='bitacora_cambio' id='proyectofinanciero_bictacora_cambio' 
+               name='proyectofinanciero[bitacora_cambio]' type='hidden'>
+      <% end %>
+      <%= f.button :submit, 'Validar y Guardar', :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+        proyectosfinancieros_path, :class => 'btn' 
+      %>
+    </div> <!-- form-action -->
+  <% end %> <!-- simple_form_for @proyectofinanciero -->
+  </article>
+<% end -%> <!-- else -->
+

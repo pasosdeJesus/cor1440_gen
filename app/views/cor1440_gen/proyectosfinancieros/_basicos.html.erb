@@ -1,0 +1,108 @@
+<%= f.input :nombre %>
+
+<%= f.input :titulo %>
+
+<div class='row'>
+  <div class="offset-sm-0 col-sm-6">
+    <%= f.association :financiador,
+      collection: Cor1440Gen::Financiador.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: { class: 'chosen-select' }
+    %>
+  </div>
+  <div class="col-sm-6">
+    <%= f.association :sectorapc,
+      collection: Cor1440Gen::Sectorapc.habilitados,
+      label_method: :nombre,
+      value_method: :id,
+      input_html: { class: 'chosen-select' }
+    %>
+
+  </div>
+
+</div>
+
+
+<div class='row'>
+  <div class="offset-sm-0 col-sm-4">
+    <%= f.input :fechainicio_localizada, :input_html => { 
+      "data-behaviour" => "datepicker" },
+      :as => :string
+    %>
+  </div>
+
+  <div class="col-sm-4">
+    <%= f.input :fechacierre_localizada, :input_html => { 
+      "data-behaviour" => "datepicker" },
+      :as => :string
+    %>
+  </div>
+  <div class="col-sm-4">
+    <%
+      f.object.duracion = ''
+      if f.object.fechainicio && f.object.fechacierre then
+        f.object.duracion = Sip::FormatoFechaHelper.dif_meses_dias(
+          f.object.fechainicio, f.object.fechacierre
+        )
+      end
+    %>
+    <%= f.input :duracion,
+      :input_html => { 'readonly' => 'readonly' }
+    %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class="offset-sm-0 col-sm-4">
+    <%= f.input :fechaformulacion_anio, as: :integer %>
+  </div>
+  <div class="offset-sm-0 col-sm-4">
+    <%= f.input :fechaformulacion_mes,
+      collection: Sip::ModeloHelper::MESES
+    %>
+  </div>
+  <div class="offset-sm-0 col-sm-4">
+    <%= f.input :semestreformulacion, 
+      :input_html => { 'readonly' => 'readonly' } %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class="col-sm-6">
+    <%= f.input :fechaaprobacion_localizada, :input_html => { 
+      "data-behaviour" => "datepicker" },
+      :as => :string
+    %>
+  </div>
+  <div class="col-sm-6">
+    <%= f.input :fechaliquidacion_localizada, :input_html => { 
+      "data-behaviour" => "datepicker" },
+      :as => :string
+    %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class="offset-sm-0 col-sm-6">
+    <%= f.input :estado, 
+      collection: Cor1440Gen::ApplicationHelper::ESTADO,
+      include_blank: false,
+      input_html: {
+        value: f.object.estado ? f.object.estado : 'E',
+        class: 'chosen-select' 
+      } 
+    %>
+  </div>
+  <div class="col-sm-6">
+    <%= f.input :dificultad, 
+      collection: Cor1440Gen::ApplicationHelper::DIFICULTAD,
+      include_blank: false,
+      input_html: {
+        value: f.object.estado ? f.object.estado : 'N',
+        class: 'chosen-select' 
+      }
+    %>
+  </div>
+</div>
+

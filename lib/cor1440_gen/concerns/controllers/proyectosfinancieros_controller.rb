@@ -68,31 +68,46 @@ module Cor1440Gen
             atributos_index_cor1440
           end
 
-          def atributos_form
-            atributos_index +
-              [
-                :caracterizacion,
-                :beneficiario,
-                :plantillahcm,
-                :anexo_proyectofinanciero
-            ] - [
-              "id", :id, 'created_at', :created_at, 'updated_at', :updated_at
+          def atributos_show
+            [ 
+              :id,
+              :nombre,
+              :titulo 
+            ] +
+            [ :financiador_ids =>  [] ] + [
+              :sectorapc,
+              :fechainicio_localizada,
+              :fechacierre_localizada,
+              :duracion,
+              :anioformulacion,
+              :mesformulacion,
+              :fechaaprobacion_localizada,
+              :fechaliquidacion_localizada,
+              :estado,
+              :dificultad,
+              :responsable,
+              :aprobadoobs,
+              :proyectofinanciero_usuario,
+            ] +
+            [ :tipomoneda,
+              :tasaej,
+              :desembolso, 
+              :informenarrativo,
+              :informefinanciero,
+              :informeauditoria,
+              :marcologico,
+              :anexo_proyectofinanciero,
+              :observaciones, 
+              :caracterizacion, 
+              :beneficiario,
+              :plantillahcm,
             ]
           end
 
-          def atributos_show
-            atributos_index  - [
-              :objetivopf,
-              :indicadorobjetivo,
-              :resultadopf,
-              :indicadorpf,
-              :actividadpf
-            ] + [
-              :marcologico,
-              :caracterizacion,
-              :beneficiario,
-              :plantillahcm,
-              :anexo_proyectofinanciero
+
+          def atributos_form
+            atributos_show - [
+              "id", :id, 'created_at', :created_at, 'updated_at', :updated_at
             ]
           end
 
@@ -323,19 +338,23 @@ module Cor1440Gen
           # @param detalle Lista de errores, se agregan si hay
           def validar_registro(registro, detalle)
             detalleini = detalle.clone
-            if !registro.fechainicio
+            if !registro.fechainicio && 
+                ::ApplicationHelper::ESTADOS_APROBADO.include?(registro.estado)
               detalle << "No tiene fecha de inicio"
-            elsif registro.fechainicio < Date.new(2000, 1, 1)
+            elsif registro.fechainicio && registro.fechainicio < Date.new(2000, 1, 1)
               detalle << "Fecha de inicio anterior al 1.Ene.2000"
             end
-            if !registro.fechacierre
+            if !registro.fechacierre && 
+                ::ApplicationHelper::ESTADOS_APROBADO.include?(registro.estado)
               detalle << "No tiene fecha de terminación"
-            elsif registro.fechacierre <= registro.fechainicio
+            elsif registro.fechacierre && registro.fechainicio &&
+              registro.fechacierre <= registro.fechainicio
               detalle << "Fecha de terminación posterior o igual a la de inicio"
             end
             validar_mas_registro(registro, detalle)
             return detalleini == detalle
           end
+
 
           def editar_intermedio(registro, usuario_actual_id)
             if registro.indicadorpf.where(resultadopf_id: nil).
@@ -385,9 +404,24 @@ module Cor1440Gen
 
           def proyectofinanciero_params_cor1440_gen
             atributos_form + [
+              :centrocosto,
+              :estado,
+              :dificultad,
+              :fechaaprobacion_localizada,
+              :fechacierre_localizada,
+              :fechaformulacion_localizada,
+              :fechaformulacion_anio,
+              :fechaformulacion_mes,
+              :fechaliquidacion_localizada,
+              :tasaej_localizado,
+              :montoej_localizado,
+              :aportepropioej_localizado,
+              :aporteotrosej_localizado,
+              :presupuestototalej_localizado,
               :responsable_id,
-              :sectorapc_id
-            ] + [
+              :saldoaejecutarp_localizado,
+              :sectorapc_id,
+              :tipomoneda_id,
               :actividadpf_attributes =>  [
                 :actividadtipo_id,
                 :descripcion,
@@ -397,8 +431,7 @@ module Cor1440Gen
                 :nombrecorto,
                 :resultadopf_id,
                 :titulo,
-                :_destroy ]
-            ] + [
+                :_destroy ],
               :anexo_proyectofinanciero_attributes => [
                 :id,
                 :proyectofinanciero_id,
@@ -407,56 +440,79 @@ module Cor1440Gen
                   :adjunto,
                   :descripcion,
                   :id,
-                  :_destroy ] ]
-            ] + [
-              :beneficiario_ids => []
-            ] + [
-              :caracterizacion_ids => []
-            ] + [
-              :plantillahcm_ids => []
-            ] + [
+                  :_destroy ] ],
+              :beneficiario_ids => [],
+              :caracterizacion_ids => [],
+              :desembolso_attributes => [
+                :id,
+                :detalle,
+                :fecha_localizada,
+                :valorpesos_localizado,
+                :_destroy
+              ],
               :indicadorobjetivo_attributes =>  [
                 :id,
                 :objetivopf_id,
                 :numero,
                 :indicador,
                 :tipoindicador_id,
-                :_destroy ]
-            ] + [
+                :_destroy ],
               :indicadorpf_attributes =>  [
                 :id,
                 :resultadopf_id,
                 :numero,
                 :indicador,
                 :tipoindicador_id,
-                :_destroy ]
-            ] + [
+                :_destroy ],
+
+              :informeauditoria_attributes => [
+                :detalle,
+                :fecha_localizada,
+                :devoluciones,
+                :seguimiento,
+                :id,
+                :_destroy
+              ],
+              :informefinanciero_attributes => [
+                :detalle,
+                :fecha_localizada,
+                :devoluciones,
+                :seguimiento,
+                :id,
+                :_destroy
+              ],
+              :informenarrativo_attributes => [
+                :detalle,
+                :fecha_localizada,
+                :devoluciones,
+                :seguimiento,
+                :id,
+                :_destroy
+              ],
               :objetivopf_attributes =>  [
                 :id,
                 :numero,
                 :objetivo,
-                :_destroy ]
-            ] + [
+                :_destroy ],
+              :plantillahcm_ids => [],
               :proyectofinanciero_usuario_attributes => [
                 :id,
                 :usuario_id,
-                :_destroy ]
-            ] + [
+                :_destroy ],
               :resultadopf_attributes =>  [
                 :id,
                 :objetivopf_id,
                 :numero,
                 :resultado,
-                :_destroy ]
+                :_destroy ],
             ]
           end
+
 
           def proyectofinanciero_params
             params.require(:proyectofinanciero).permit(
               proyectofinanciero_params_cor1440_gen)
           end
-
-
 
         end # included
 

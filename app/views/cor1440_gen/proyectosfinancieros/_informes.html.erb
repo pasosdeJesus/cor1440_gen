@@ -1,0 +1,83 @@
+<p>
+<table border=1 width="100%">
+  <thead>
+    <tr>
+      <th>Informe Narrativo / Planificación / POA</th>
+      <th>Fecha</th>
+      <th>Devoluciones</th>
+      <th>Seguimiento</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="informenarrativo">
+    <%= f.simple_fields_for :informenarrativo do |d| %>
+      <%= render 'informenarrativo_campos', :f => d %>
+    <% end %>
+  </tbody>
+</table>
+<div class="links">
+  <%= link_to_add_association 'Añadir Informe Narrativo', f, 
+    :informenarrativo,
+    :"data-association-insertion-node" => "tbody#informenarrativo", 
+    :"data-association-insertion-method" => "append", 
+    partial: 'informenarrativo_campos',
+    :class => 'btn-primary'
+  %>
+</div>
+</p>
+
+<p>
+<table border=1 width="100%">
+  <thead>
+    <tr>
+      <th>Informe Financiero</th>
+      <th>Fecha </th>
+      <th>Devoluciones</th>
+      <th>Seguimiento</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="informefinanciero">
+    <%= f.simple_fields_for :informefinanciero do |d| %>
+      <%= render 'informefinanciero_campos', :f => d %>
+    <% end %>
+  </tbody>
+</table>
+<div class="links">
+  <%= link_to_add_association 'Añadir Informe Financiero', f, 
+    :informefinanciero,
+    :"data-association-insertion-node" => "tbody#informefinanciero", 
+    :"data-association-insertion-method" => "append", 
+    partial: 'informefinanciero_campos',
+    :class => 'btn-primary'
+  %>
+</div>
+</p>
+
+<p>
+<table border=1 width="100%">
+  <thead>
+    <tr>
+      <th>Informe auditoría</th>
+      <th>Fecha</th>
+      <th>Devoluciones</th>
+      <th>Seguimiento</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="informeauditoria">
+    <%= f.simple_fields_for :informeauditoria do |d| %>
+      <%= render 'informeauditoria_campos', :f => d %>
+    <% end %>
+  </tbody>
+</table>
+<div class="links">
+  <%= link_to_add_association 'Añadir Informe Auditoría', f, 
+    :informeauditoria,
+    :"data-association-insertion-node" => "tbody#informeauditoria", 
+    :"data-association-insertion-method" => "append", 
+    partial: 'informeauditoria_campos',
+    :class => 'btn-primary'
+  %>
+</div>
+</p>

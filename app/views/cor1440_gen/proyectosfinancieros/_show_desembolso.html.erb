@@ -1,0 +1,19 @@
+<%
+  tm = @proyectofinanciero.tipomoneda &&
+  @proyectofinanciero.tipomoneda.nombre ?
+  @proyectofinanciero.tipomoneda.codiso4217 : ''
+%>
+<p><table border="1">
+  <tr>
+    <th>Descripción</th>
+    <th>Fecha planeada</th>
+    <th>Valor planeado</th>
+  </tr>
+  <% @registro.desembolso.each do |d| %>
+    <tr>
+      <td><%= d.detalle if d.detalle %></td>
+      <td><%= d.fecha_localizada %></td>
+      <td><%= d.valorpesos_localizado %></td>
+    </tr>
+  <% end %>
+</table></p>

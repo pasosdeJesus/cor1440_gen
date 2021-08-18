@@ -1,0 +1,8 @@
+<% if can? :manage, Cor1440Gen::Proyectofinanciero %>
+  <%= link_to 'Prototipo de matriz de seguimiento', 
+    main_app.matrizseguimiento_path(@registro.id),
+    class: 'btn btn-default' 
+  %>
+<% end %>
+
+
