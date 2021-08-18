@@ -50,7 +50,6 @@ module Cor1440Gen
               :fechainicio_localizada,
               :fechacierre_localizada,
               :responsable,
-              :proyectofinanciero_usuario,
             ] +
             [ :proyecto_ids =>  [] ] +
             [ :compromisos,
@@ -403,7 +402,38 @@ module Cor1440Gen
           end
 
           def proyectofinanciero_params_cor1440_gen
-            atributos_form + [
+            [ 
+              :id,
+              :nombre,
+              :titulo 
+            ] +
+            [ :financiador_ids =>  [] ] + [
+              :sectorapc,
+              :fechainicio_localizada,
+              :fechacierre_localizada,
+              :duracion,
+              :anioformulacion,
+              :mesformulacion,
+              :fechaaprobacion_localizada,
+              :fechaliquidacion_localizada,
+              :estado,
+              :dificultad,
+              :responsable,
+              :aprobadoobs,
+              :proyectofinanciero_usuario,
+              :tipomoneda,
+              :tasaej,
+              :desembolso, 
+              :informenarrativo,
+              :informefinanciero,
+              :informeauditoria,
+              :marcologico,
+              :anexo_proyectofinanciero,
+              :observaciones, 
+              :caracterizacion, 
+              :beneficiario,
+              :plantillahcm,
+
               :centrocosto,
               :estado,
               :dificultad,
@@ -421,7 +451,8 @@ module Cor1440Gen
               :responsable_id,
               :saldoaejecutarp_localizado,
               :sectorapc_id,
-              :tipomoneda_id,
+              :tipomoneda_id
+            ] + [
               :actividadpf_attributes =>  [
                 :actividadtipo_id,
                 :descripcion,
@@ -431,7 +462,8 @@ module Cor1440Gen
                 :nombrecorto,
                 :resultadopf_id,
                 :titulo,
-                :_destroy ],
+                :_destroy ]
+            ] + [
               :anexo_proyectofinanciero_attributes => [
                 :id,
                 :proyectofinanciero_id,
@@ -440,65 +472,73 @@ module Cor1440Gen
                   :adjunto,
                   :descripcion,
                   :id,
-                  :_destroy ] ],
-              :beneficiario_ids => [],
-              :caracterizacion_ids => [],
+                  :_destroy ] ]
+            ] + [
+              :beneficiario_ids => []
+            ] + [
+              :caracterizacion_ids => []
+            ] + [
               :desembolso_attributes => [
                 :id,
                 :detalle,
                 :fecha_localizada,
                 :valorpesos_localizado,
                 :_destroy
-              ],
+              ]
+            ] + [
               :indicadorobjetivo_attributes =>  [
                 :id,
                 :objetivopf_id,
                 :numero,
                 :indicador,
                 :tipoindicador_id,
-                :_destroy ],
+                :_destroy ]
+            ] + [
               :indicadorpf_attributes =>  [
                 :id,
                 :resultadopf_id,
                 :numero,
                 :indicador,
                 :tipoindicador_id,
-                :_destroy ],
-
+                :_destroy ]
+            ] + [
               :informeauditoria_attributes => [
                 :detalle,
                 :fecha_localizada,
                 :devoluciones,
                 :seguimiento,
                 :id,
-                :_destroy
-              ],
+                :_destroy ]
+            ] + [
               :informefinanciero_attributes => [
                 :detalle,
                 :fecha_localizada,
                 :devoluciones,
                 :seguimiento,
                 :id,
-                :_destroy
-              ],
+                :_destroy ]
+            ] + [
               :informenarrativo_attributes => [
                 :detalle,
                 :fecha_localizada,
                 :devoluciones,
                 :seguimiento,
                 :id,
-                :_destroy
-              ],
+                :_destroy ]
+            ] + [
               :objetivopf_attributes =>  [
                 :id,
                 :numero,
                 :objetivo,
-                :_destroy ],
+                :_destroy ]
+            ] + [
               :plantillahcm_ids => [],
+            ] + [
               :proyectofinanciero_usuario_attributes => [
                 :id,
                 :usuario_id,
-                :_destroy ],
+                :_destroy ]
+            ] + [
               :resultadopf_attributes =>  [
                 :id,
                 :objetivopf_id,

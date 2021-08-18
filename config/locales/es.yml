@@ -132,16 +132,30 @@ es:
       "cor1440_gen/proyectofinanciero":
         actividadpf: Actividad del marco lógico
         anexo_proyectofinanciero: "Anexos"
+        aportepropioej: Aporte Propio
+        aporteotrosej: Aporte de otros donantes
+        aprobadoobs: Aprobado por directivos
         beneficiario: Beneficiarios con caracterización
         caracterizacion: Caracterización de beneficiarios
-        fechainicio_localizada: Fecha de inicio
-        fechacierre_localizada: Fecha de cierre
+        centrocosto: Centro de costos
+        fechaaprobacion: "Fecha de aprobación"
+        fechaaprobacion_localizada: "Fecha de aprobación"
+        fechaliquidacion: "Fecha de liquidación"
+        fechaliquidacion_localizada: "Fecha de liquidación"
+        fechaformulacion: "Fecha de formulación"
+        fechaformulacion_anio: "Año de formulación"
+        fechaformulacion_mes: "Mes de formulación"
+        fechaformulacion_localizada: "Fecha de formulación"
+        fechaliquidacion: "Fecha de liquidación"
+        fechaliquidacion_localizada: "Fecha de liquidación"
         financiador_ids: Financiadores
         indicador: Indicador
         marcologico: Marco lógico
+        montoej: Aporte del financiador
         nombre: Nombre interno breve
         objetivopf: Objetivo
         plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este proyecto
+        presupuestototalej: Presupuesto total
         proyecto: Área
         proyectos: Área
         proyecto_ids: Áreas
@@ -151,12 +165,17 @@ es:
         proyectofinanciero: Proyecto
         Proyectosfinancieros: Proyectos
         proyectosfinancieros: Proyectos
+        responsable_id: Coordinador
+        responsable: Coordinador
         resultadopf: Resultado
         "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad del marco lógico
         "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
         "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
         "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
+        saldoaejecutarp: Saldo por ejecutar en pesos
         sectorapc: Sector APC
+        semestreformulacion: Semestre de formulación
+        tasaej: Tasa de cambio
         titulo: Título largo del proyecto
       "cor1440_gen/rangoedadac":
         Rangoedadac: Rango de edad en actividades
