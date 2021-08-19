@@ -66,17 +66,6 @@ module Cor1440Gen
           accepts_nested_attributes_for :informenarrativo, 
             allow_destroy: true, reject_if: :all_blank
 
-          has_many :observacion_proyectofinanciero, dependent: :delete_all,
-            class_name: 'ObservacionProyectofinanciero',
-            foreign_key: 'proyectofinanciero_id'
-          has_many :observacion, through: :observacion_proyectofinanciero, 
-            dependent: :delete_all,
-            class_name: 'Observacion'
-          accepts_nested_attributes_for :observacion,
-            allow_destroy: true, reject_if: :all_blank
-          accepts_nested_attributes_for :observacion_proyectofinanciero,
-            allow_destroy: true, reject_if: :all_blank
-
 
 
           belongs_to :responsable, class_name: '::Usuario',
