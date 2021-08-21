@@ -44,19 +44,16 @@ module Cor1440Gen
 
           private
 
+          def lista_params_cor1440_gen
+            r = lista_params_sip 
+          end
+
+          def lista_params
+            lista_params_cor1440_gen
+          end
+
           def usuario_params
-            p = params.require(:usuario).permit(
-              :id, :nusuario, :password, 
-              :nombre, :descripcion, :oficina_id,
-              :rol, :idioma, :email, :encrypted_password, 
-              :fechacreacion_localizada, :fechadeshabilitacion_localizada, 
-              :tema_id,
-              :reset_password_token, 
-              :reset_password_sent_at, :remember_created_at, :sign_in_count, 
-              :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, 
-              :failed_attempts, :unlock_token, :locked_at,
-              :last_sign_in_ip, :etiqueta_ids => []
-            )
+            p = params.require(:usuario).permit(lista_params)
             return p
           end
 
