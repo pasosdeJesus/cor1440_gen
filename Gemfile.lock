@@ -11,8 +11,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 6e5b3d14381fd2f5141164adc01e97750ead6f07
-  branch: main
+  revision: 62fb3a391b914e9deb0a80be81ae026d0caa7018
+  branch: bs5
   specs:
     heb412_gen (1.0.b6)
       mr519_gen
@@ -22,8 +22,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 0a5b922b45b972f509e58db31066b20bd5eaa9af
-  branch: main
+  revision: 39886b937b03ccd8dc7d14cb587a74ddb70ff3fa
+  branch: bs5
   specs:
     mr519_gen (0.2.0)
       rails
@@ -31,8 +31,8 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 8555a0a937f7f1bfbe74057a0e57ea316eb0640e
-  branch: main
+  revision: 075750060540d8f01ad6d1ff15d990e4a9ec42b4
+  branch: bs5
   specs:
     sip (2.0.b12)
       cancancan
