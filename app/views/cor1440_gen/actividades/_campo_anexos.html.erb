@@ -1,29 +1,31 @@
-<div class="panel panel-default">
-  <div id="acordeon_secanexos">
-    <div class="card">
-      <div class="card-header" id="secanexos">
-        <h6 class="mb-0" style='text-align: center'>
-          <a class="collapsed" data-toggle="collapse" data-target="#colapsa_secanexos" aria-expanded= "false" aria-controls="colapsa_secanexos">
-            Medios de Verificación / Anexos
-          </a>
-        </h6>
-      </div>
-      <div id="colapsa_secanexos" class="collapse" aria-labelledby="encabezado_secanexos" data-parent="#acordeon_secanexos">
-        <div class="card-body">
-
-          <div class="anexos-div anexosdiv">
-            <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
-              <%= render 'actividad_sip_anexo_fields', :f => a %>
-            <% end %>
-            <div class="links">
-              <%= link_to_add_association 'Añadir Anexo', f, 
-                :actividad_sip_anexo, :class => 'btn-primary' 
-              %>
-          </div>
-          </div> <!-- anexos-div -->
-
-        </div> <!-- card-body-->
-      </div> <!-- colapsa-secanexos-->
-    </div> <!-- card -->
-  </div> <!-- acordeon_secanexos -->
-</div> <!-- panel -->
+<div class='accordion' id="acordeon_secanexos">
+  <div class="accordion-item">
+    <h6 class="accordion-header mb-0"
+        id="encabezado-secanexos"
+        style='text-align: center'>
+      <button class="accordion-button collapsed" 
+              type="button"
+              data-bs-toggle="collapse" 
+              data-bs-target="#colapsa_secanexos" 
+              aria-expanded= "false" 
+              aria-controls="colapsa_secanexos">
+        Medios de Verificación / Anexos
+      </button>
+    </h6>
+    <div class="accordion-collapse collapse" 
+         id="colapsa_secanexos" 
+         aria-labelledby="encabezado_secanexos" 
+         data-bs-parent="#acordeon_secanexos">
+      <div class="accordion-body anexos-div anexosdiv">
+        <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
+          <%= render 'actividad_sip_anexo_fields', :f => a %>
+        <% end %>
+        <div class="links">
+          <%= link_to_add_association 'Añadir Anexo', f, 
+            :actividad_sip_anexo, :class => 'btn-primary' 
+          %>
+        </div>
+      </div> <!-- accordion-body -->
+    </div> <!-- accordion-collapse -->
+  </div> <!-- accordion-item -->
+</div> <!-- accordion -->

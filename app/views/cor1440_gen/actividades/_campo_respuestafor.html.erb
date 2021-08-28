@@ -1,24 +1,27 @@
-<div id="camposdinamicos">
+<div class="accordion" id="camposdinamicos">
   <%= f.simple_fields_for :respuestafor, f.object.respuestafor.order(:id) do |r| %>
-    <div class="panel panel-default">
-      <div id="accordion">
-        <div class="card">
-          <div class="card-header" id="<%= "encabezado" + r.object.formulario.id.to_s %>" >
-            <h6 class="mb-0" style='text-align: center'>
-              <a class="collapsed" data-toggle="collapse" data-target="<%= "#colapsa" + r.object.formulario.id.to_s %>" aria-expanded= "false" aria-controls="<%= "colapsa" + r.object.formulario.id.to_s %>">
-                <%= r.object.formulario.nombre %>
-              </a>
-            </h6>
-          </div>
-          <div id="<%= "colapsa" + r.object.formulario.id.to_s %>" class="collapse" aria-labelledby="<%= "encabezado" + r.object.formulario.id.to_s %>" data-parent="#accordion">
-            <div class="card-body">
-                <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
-                  locals: {f: r} 
-                %>
-            </div>
-          </div>
-        </div>
+    <div class="accordion-item">
+      <h6 id="encabezado<%= r.object.formulario.id.to_s %>"
+        class="mb-0 accordion-header" style='text-align: center'>
+        <button class="accordion-button collapsed" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#colapsa<%= r.object.formulario.id.to_s %>"
+          aria-expanded="false" 
+          aria-controls="colapsa<%= r.object.formulario.id.to_s %>" >
+          <%= r.object.formulario.nombre %>
+        </button>
+      </h6>
+      <div id="colapsa<%= r.object.formulario.id.to_s %>" 
+           class="accordion-collapse collapse" 
+           aria-labelledby="encabezado<%= r.object.formulario.id.to_s %>" 
+           data-bs-parent="#camposdinamicos">
+           <div class="accordion-body">
+             <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
+               locals: {f: r} 
+             %>
+           </div>
       </div>
-    </div>
+    </div> <!-- accordion-item -->
   <% end %>
 </div>
