@@ -1,57 +1,48 @@
-<div class="panel-group" id="acordeon_acids">
-  <div class="panel panel-default" id="panel_acids">
-    <div class="panel-heading">
-      <div class="panel-title" style='text-align: center'>
-        <a data-toggle="collapse" data-target="#colapsa_acids" href="#colapsa_acids">
-          Expandir / colapsar
-        </a>
-      </div> <!-- panel-title -->
-    </div> <!-- panel-heading -->
+<div class="accordion" id="acordeon_acids">
+  <%= item_acordeon_bs(
+    'acordeon_acids', 'colapsa-acids', 
+    "Expandir / colapsar",
+    false, {"clase_accordion-body" => 'table-responsive',
+            "estilo_accordion-body" => 'overflow-x:scroll'
+    }) do %>
+    <table class='table table-bordered table-sm'>
+      <thead class='thead-light'>
+        <tr>
+          <th>Id Actividad</th>
+          <th>Fecha</th>
+          <th>Nombre</th>
+          <th>
+            <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>
+          </th>
+          <th>Perfil</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @registro.actividad.order(:fecha).each do |a| %>
+          <tr>
+            <td>
+              <%= link_to a.id, cor1440_gen.actividad_path(a), target: '_blank' %>
+            </td>
+            <td>
+              <%= a.fecha %>
+            </td>
+            <td>
+              <%= a.nombre %>
+            </td>
+            <td>
+              <%= a.proyectofinanciero.map(&:nombre).join("; ") %>
+            </td>
+            <td>
+              <% as = Cor1440Gen::Asistencia.where(
+                actividad_id: a.id,
+                persona_id: @registro.id).take %>
+              <%= as.perfilorgsocial ? as.perfilorgsocial.nombre :
+                '' %>
+            </td>
 
-    <div id="colapsa_acids" class="panel-collapse collapse">
-      <div class="panel-body table-responsive" style="overflow-x:scroll;">
-        <table class='table table-bordered table-sm'>
-          <thead class='thead-light'>
-            <tr>
-              <th>Id Actividad</th>
-              <th>Fecha</th>
-              <th>Nombre</th>
-              <th>
-                <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>
-              </th>
-              <th>Perfil</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @registro.actividad.order(:fecha).each do |a| %>
-              <tr>
-                <td>
-                  <%= link_to a.id, cor1440_gen.actividad_path(a), target: '_blank' %>
-                </td>
-                <td>
-                  <%= a.fecha %>
-                </td>
-                <td>
-                  <%= a.nombre %>
-                </td>
-                <td>
-                  <%= a.proyectofinanciero.map(&:nombre).join("; ") %>
-                </td>
-                <td>
-                  <% as = Cor1440Gen::Asistencia.where(
-                    actividad_id: a.id,
-                    persona_id: @registro.id).take %>
-                  <%= as.perfilorgsocial ? as.perfilorgsocial.nombre :
-                    '' %>
-                </td>
-
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
 </div>
-
-

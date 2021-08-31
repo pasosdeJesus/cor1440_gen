@@ -1,27 +1,16 @@
 <div class="accordion" id="camposdinamicos">
   <%= f.simple_fields_for :respuestafor, f.object.respuestafor.order(:id) do |r| %>
-    <div class="accordion-item">
-      <h6 id="encabezado<%= r.object.formulario.id.to_s %>"
-        class="mb-0 accordion-header" style='text-align: center'>
-        <button class="accordion-button collapsed" 
-          type="button" 
-          data-bs-toggle="collapse" 
-          data-bs-target="#colapsa<%= r.object.formulario.id.to_s %>"
-          aria-expanded="false" 
-          aria-controls="colapsa<%= r.object.formulario.id.to_s %>" >
-          <%= r.object.formulario.nombre %>
-        </button>
-      </h6>
-      <div id="colapsa<%= r.object.formulario.id.to_s %>" 
-           class="accordion-collapse collapse" 
-           aria-labelledby="encabezado<%= r.object.formulario.id.to_s %>" 
-           data-bs-parent="#camposdinamicos">
-           <div class="accordion-body">
-             <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
-               locals: {f: r} 
-             %>
-           </div>
-      </div>
-    </div> <!-- accordion-item -->
-  <% end %>
+    <%= item_acordeon_bs(
+      'camposdinamicos', "f#{r.object.formulario.id.to_s}", 
+      r.object.formulario.nombre, false, {
+        'estilo_accordion-header': 'text-align: center',
+        'clase_accordion-body': 'table-responsive',
+        'estilo_accordion-body': 'overflow-x:scroll'
+      }) do %>
+      <%= render 'asistencia_cuerpo_panel', f: f %>
+      <%= render partial: 'mr519_gen/encuestasusuario/campo_valorcampo', 
+        locals: {f: r} 
+      %>
+  <% end # :item_acorden_bs %>
+<% end # :respuestafor %>
 </div>

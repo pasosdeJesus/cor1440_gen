@@ -1,71 +1,58 @@
 <div class='accordion' id="acordeon-poblacion">
-  <div class="accordion-item">
-    <h6 id='encabezado-poblacion' 
-        class="mb-0" 
-        style='text-align: center'>
-      <button class="accordion-button collapsed" 
-              type="button"
-              data-bs-toggle="collapse" 
-              data-bs-target="#colapsa-poblacion" 
-              aria-expanded= "true" 
-              aria-controls="colapsa-poblacion">
-        Cuenta de beneficiarios por Rango de Edad
-      </button>
-    </h6>
-    <div id="colapsa-poblacion" 
-         class="accordion-collapse collapse show" 
-         aria-labelledby="encabezado-poblacion" 
-         data-bs-parent="#acordeon-poblacion">
-      <div class="accordion-body table-responsive" style="overflow-x:scroll;">
-        <table class="tablapoblacion table table-bordered table-sm">
-          <thead class="thead-light">
-            <tr>
-              <th>Rango de Edad</th>
-              <th><%= Cor1440Gen.actividadg1 %></th>
-              <th><%= Cor1440Gen.actividadg2 %></th>
-              <th><%= Cor1440Gen.actividadg3 %></th>
-              <th><%= Cor1440Gen.actividadg4 %></th>
-              <th><%= Cor1440Gen.actividadg5 %></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="actividad_rangoedadac">
-            <tr>
-              <th scope='row'>Total</th>
-              <td id="tactividadfl">
-                <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
-              </td>
-              <td id="tactividadfr">
-                <%= fr = f.object.actividad_rangoedadac.sum(:fr) %>
-              </td>
-              <td id="tactividadml">
-                <%= ml = f.object.actividad_rangoedadac.sum(:ml) %>
-              </td>
-              <td id="tactividadmr">
-                <%= mr = f.object.actividad_rangoedadac.sum(:mr) %>
-              </td>
-              <td id="tactividads">
-                <%= sr = f.object.actividad_rangoedadac.sum(:s) %>
-              </td>
-              <td id="tactividadtot">
-                <%= fr + fl + mr + ml + sr %>
-              </td>
-            </tr>
-            <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
-              <%= render partial: 'actividad_rangoedadac_campos', 
-                locals: {f: s, ac: f} %>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="links">
-          <%= link_to_add_association 'Añadir Rango de Edad', f, 
-            :actividad_rangoedadac, 
-            :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
-            :"data-association-insertion-method" => "append", 
-            :partial => "actividad_rangoedadac_campos", 
-            :class => "btn-primary" %>
-        </div>
-      </div> <!-- accordion-body-->
-    </div> <!-- accordion-collapse -->
-  </div> <!-- accordion-item -->
+  <%= item_acordeon_bs(
+    'acordeon-poblacion', 'poblacion', 
+    'Cuenta de beneficiarios por Rango de Edad', true, {
+      'estilo_accordion-header': 'text-align: center',
+      'clase_accordion-body': 'table-responsive',
+      'estilo_accordion-body': 'overflow-x:scroll'
+    }) do %>
+    <table class="tablapoblacion table table-bordered table-sm">
+      <thead class="thead-light">
+        <tr>
+          <th>Rango de Edad</th>
+          <th><%= Cor1440Gen.actividadg1 %></th>
+          <th><%= Cor1440Gen.actividadg2 %></th>
+          <th><%= Cor1440Gen.actividadg3 %></th>
+          <th><%= Cor1440Gen.actividadg4 %></th>
+          <th><%= Cor1440Gen.actividadg5 %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="actividad_rangoedadac">
+        <tr>
+          <th scope='row'>Total</th>
+          <td id="tactividadfl">
+            <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
+          </td>
+          <td id="tactividadfr">
+            <%= fr = f.object.actividad_rangoedadac.sum(:fr) %>
+          </td>
+          <td id="tactividadml">
+            <%= ml = f.object.actividad_rangoedadac.sum(:ml) %>
+          </td>
+          <td id="tactividadmr">
+            <%= mr = f.object.actividad_rangoedadac.sum(:mr) %>
+          </td>
+          <td id="tactividads">
+            <%= sr = f.object.actividad_rangoedadac.sum(:s) %>
+          </td>
+          <td id="tactividadtot">
+            <%= fr + fl + mr + ml + sr %>
+          </td>
+        </tr>
+        <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
+          <%= render partial: 'actividad_rangoedadac_campos', 
+            locals: {f: s, ac: f} %>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="links">
+      <%= link_to_add_association 'Añadir Rango de Edad', f, 
+        :actividad_rangoedadac, 
+        :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
+        :"data-association-insertion-method" => "append", 
+        :partial => "actividad_rangoedadac_campos", 
+        :class => "btn-primary" %>
+    </div>
+  <% end %>
 </div> <!-- accordion -->

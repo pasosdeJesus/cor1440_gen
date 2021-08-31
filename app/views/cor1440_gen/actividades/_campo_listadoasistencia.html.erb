@@ -1,25 +1,12 @@
 <input id='actividad_id' type='hidden' value='<%= f.object.id %>' %>
 <div class="accordion" id="acordeon-listadoasistencia">
-  <div class="accordion-item">
-    <h6 id="encabezado-listadoasistencia" 
-      class="mb-0 accordion-header" 
-      style='text-align: center'>
-      <button class="accordion-button collapsed" 
-              type="button"
-              data-bs-toggle="collapse" 
-              data-bs-target="#colapsa-listadoasistencia" 
-              aria-expanded= "false" 
-              aria-controls="colapsa-listadoasistencia">
-        Listado de asistencia
-      </button>
-    </h6>
-    <div id="colapsa-listadoasistencia" 
-         class="accordion-collapse collapse" 
-         aria-labelledby="encabezado-listadoasistencia" 
-         data-bs-parent="#acordeon-listadoasistencia">
-      <div class="accordion-body table-responsive" style="overflow-x:scroll;">
-        <%= render 'asistencia_cuerpo_panel', f: f %>
-      </div> <!-- accordion-body -->
-    </div> <!-- colapsa-listadoasistencia -->
-  </div> <!-- accordion_item -->
+  <%= item_acordeon_bs(
+    'acordeon-listadoasistencia', 'listadoasistencia', 
+    'Listado de asistencia', false, {
+      'estilo_accordion-header': 'text-align: center',
+      'clase_accordion-body': 'table-responsive',
+      'estilo_accordion-body': 'overflow-x:scroll'
+    }) do %>
+    <%= render 'asistencia_cuerpo_panel', f: f %>
+  <% end %>
 </div> <!-- accordion -->
