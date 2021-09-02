@@ -1,0 +1,33 @@
+.proyectofinanciero_actividadpf_actividadtipo {
+  width: 10em;
+}
+
+.div_actividad_proyectofinanciero {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.tablapfac {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.agregar-proyectofinanciero {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.actividad_actividad_proyectofinanciero_proyectofinanciero_id {
+  width: 20em;
+}
+
+.actividad_actividad_proyectofinanciero_actividadpf {
+  width: 20em;
+}
+
+.actividad_actividad_rangoedadac_rangoedadac_id {
+  width: 10em;
+}
