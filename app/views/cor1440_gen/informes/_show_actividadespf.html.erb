@@ -6,7 +6,7 @@
     <% lac = @actividades.where( "cor1440_gen_actividad.id IN 
       (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf 
        WHERE actividadpf_id=?)", apf.id).reorder(:fecha) %>
-    <table border='1' width='100%'>
+    <table class='table table-bordered' border='1' width='100%'>
       <tr>
         <th><%= apf.nombrecorto %></th>
         <th><%= apf.titulo %></th>
