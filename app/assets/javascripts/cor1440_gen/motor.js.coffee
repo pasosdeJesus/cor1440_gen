@@ -615,7 +615,7 @@ cor1440_gen_rangoedadc_todos = () ->
     proyectofinanciero_ids: pfids
   }
   sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
-    '#camposdinamicos', '#camposdinamicos')
+    '#acordeon-caracterizacion', '#acordeon-caracterizacion')
 
 
 @cor1440_gen_instala_recalcula_poblacion = () ->
