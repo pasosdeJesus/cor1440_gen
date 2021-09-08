@@ -4,10 +4,12 @@
   <% @descd2 = d[1] %>
   <% @descd3 = d[2] %>
   <% pms = @registro.pmindicadorpf.order(:ffin, :fecha) %>
-  <% res_ini_m = {}
-    res_ini_r = {}
-    res_ini_m[pms[0].finicio_localizada] = 0
-    res_ini_r[pms[0].finicio_localizada] = 0 %>
+  <% res_ini_m = {} %>
+  <% res_ini_r = {} %>
+  <% if pms.count > 0 %>
+    <% res_ini_m[pms[0].finicio_localizada] = 0 %>
+    <% res_ini_r[pms[0].finicio_localizada] = 0 %> 
+  <% end %>
   <%
     series= [
       {
