@@ -416,3 +416,20 @@ INSERT INTO public.cor1440_gen_datointermedioti (id, nombre, tipoindicador_id) V
 
 
 SELECT pg_catalog.setval('public.cor1440_gen_datointermedioti_id_seq', 101, true);
+
+
+INSERT INTO public.cor1440_gen_tipomoneda (id, nombre, codiso4217, simbolo, pais_id, fechacreacion, created_at, updated_at) 
+VALUES (1, 'PESO', 'COP', '$', 170, '2016-02-18', '2016-02-18', '2016-02-18');
+INSERT INTO public.cor1440_gen_tipomoneda (id, nombre, codiso4217, simbolo, fechacreacion, created_at, updated_at) 
+VALUES (2, 'EURO', 'EUR', '€', '2016-02-18', '2016-02-18', '2016-02-18');
+INSERT INTO public.cor1440_gen_tipomoneda (id, nombre, codiso4217, simbolo, pais_id, fechacreacion, created_at, updated_at) 
+VALUES (3, 'DOLAR', 'USD', '$', 840, '2016-02-18', '2016-02-18', '2016-02-18');
+INSERT INTO public.cor1440_gen_tipomoneda (id, nombre, codiso4217, simbolo, pais_id, fechacreacion, created_at, updated_at) 
+VALUES (4, 'FRANCO SUIZO', 'CHF', 'CHF', 756, '2016-02-18', '2016-02-18', '2016-02-18');
+INSERT INTO public.cor1440_gen_tipomoneda (id, nombre, codiso4217, simbolo, pais_id, fechacreacion, created_at, updated_at) 
+VALUES (5, 'LIBRA INGLESA', 'GBP', '£', 826, '2016-02-18', '2016-02-18', '2016-02-18');
+INSERT INTO public.cor1440_gen_tipomoneda (id, nombre, codiso4217, simbolo, pais_id, fechacreacion, created_at, updated_at) 
+VALUES (6, 'CORONA SUECA', 'SEK', 'kr', 752, '2016-02-18', '2016-02-18', '2016-02-18');
+
+
+SELECT setval('public.cor1440_gen_tipomoneda_id_seq', 100);

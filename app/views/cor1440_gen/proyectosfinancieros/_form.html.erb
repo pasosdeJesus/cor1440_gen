@@ -23,140 +23,81 @@
         <%= f.error_notification %>
       </div>
 
-      <div role="tabpanel">
-        <ul class="nav nav-tabs" role="tablist">
-          <% if can? :manage, @registro %>
-            <li role="presentation" class="nav-item">
-              <button id="basicos-tab" 
-                      class="enviarautomatico_y_repintapf nav-link active" 
-                      aria-selected="true" aria-controls="basicos" 
-                      role="tab" data-bs-toggle="tab"
-                      data-bs-target="#basicos" type="button">
-                Datos básicos
-              </button>
-            </li>
-            <li role="presentation" class="nav-item">
-              <button id="recursoshumanos-tab"
-                      class="enviarautomatico_y_repintapf nav-link" 
-                      aria-controls="recursoshumanos" 
-                      role="tab" data-bs-toggle="tab"
-                      data-bs-target="#recursoshumanos" type="button">
-                Recursos humanos
-              </button>
-            </li>
-            <li role="presentation" class="nav-item">
-              <button id="recursoseconomicos-tab"
-                      data-bs-target="#recursoseconomicos" 
-                      type="button" 
-                      class="enviarautomatico_y_repintapf nav-link" 
-                      aria-controls="recursoseconomicos" role="tab" 
-                      data-bs-toggle="tab">
-                Recursos económicos y desembolsos
-              </button>
-            </li>
-            <li role="presentation" class="nav-item">
-              <button id="informes-tab"
-                      data-bs-target="#informes" 
-                      type="button"
-                      class="enviarautomatico_y_repintapf nav-link" 
-                      aria-controls="informes" role="tab" 
-                      data-bs-toggle="tab">
-                Informes y auditorias
-              </button>
-            </li>
+      <ul class="nav nav-tabs" role="tablist">
+        <% if can? :manage, @registro %>
+          <%= item_nav_pestaña_bs(
+            'basicos', 'Datos básicos',
+            true, 'enviarautomatico_y_repintapf')
+          %>
+          <%= item_nav_pestaña_bs(
+            'recursoshumanos', 'Recursos humanos',
+            false, 'enviarautomatico_y_repintapf')
+          %>
+          <%= item_nav_pestaña_bs(
+            'recursoseconomicos', 'Recursos económicos',
+            false, 'enviarautomatico_y_repintapf')
+          %>
+          <%= item_nav_pestaña_bs(
+            'informes', 'Informes y auditorias',
+            false, 'enviarautomatico_y_repintapf')
+          %>
+        <% end %>
+        <% if can? :edit, @registro %>
+          <%= item_nav_pestaña_bs(
+            'marcologico', 'Marco Lógico',
+            false, 'enviarautomatico_y_repintapf')
+          %>
+        <% end %>
+        <% if can? :manage, @registro%>
+          <%= item_nav_pestaña_bs(
+            'anexos', 'Anexos',
+            false, 'enviarautomatico_y_repintapf')
+          %>
+        <% end %>
+      </ul>
+      <div class="tab-content">
+        <% if can? :manage, @registro%>
+          <%= contenido_pestaña_bs('basicos', true) do %>
+            <%= render 'basicos', :f => f %>
           <% end %>
-          <% if can? :edit, @registro %>
-            <li role="presentation" class="nav-item">
-              <button id="marcologico-tab"
-                      data-bs-target="#marcologico" 
-                      type="button"
-                      class="enviarautomatico_y_repintapf nav-link" 
-                      aria-controls="marcologico" role="tab" 
-                      data-bs-toggle="tab">
-                Marco Lógico
-              </button>
-            </li>
+
+          <%= contenido_pestaña_bs('recursoshumanos', false) do %>
+            <%= render 'recursoshumanos', :f => f %>
           <% end %>
-          <% if can? :manage, @registro%>
-            <li role="presentation" class="nav-item">
-              <button id="anexos-tab"
-                      data-bs-target="#anexos" 
-                      type="button"
-                      class="enviarautomatico_y_repintapf nav-link" 
-                      aria-controls="anexos" role="tab" 
-                      data-bs-toggle="tab">
-                Anexos
-              </button>
-            </li>
+
+          <%= contenido_pestaña_bs('recursoseconomicos', false) do %>
+            <%= render 'recursoseconomicos', :f => f %>
           <% end %>
-        </ul>
-        <div class="tab-content">
-          <% if can? :manage, @registro%>
-            <div role="tabpanel" 
-                 class="tab-pane fade active show" 
-                 id="basicos"
-                 aria-labelledby="basicos-tab">
-              <%= render 'basicos', :f => f %>
-            </div> 
 
-            <div role="tabpanel" 
-                 class="tab-pane fade" 
-                 aria-labelledby="recursoshumanos-tab"
-                 id="recursoshumanos">
-              <%= render 'recursoshumanos', :f => f %>
-            </div>
+          <%= contenido_pestaña_bs('informes', false) do %>
+            <%= render 'informes', :f => f %>
+          <% end %>
 
-            <div role="tabpanel" 
-                 class="tab-pane fade" 
-                 aria-labelledby="recursoseconomicos-tab"
-                 id="recursoseconomicos">
-              <%= render 'recursoseconomicos', :f => f %>
-            </div>
+          <%= contenido_pestaña_bs('contabilidad', false) do %>
+            <%= render 'contabilidad', :f => f %>
+          <% end %>
 
-            <div role="tabpanel" 
-                 class="tab-pane fade" 
-                 aria-labelledby="informes-tab"
-                 id="informes">
-              <%= render 'informes', :f => f %>
-            </div>
+          <%= contenido_pestaña_bs('datosfinanciador', false) do %>
+            <%= render 'datosfinanciador', :f => f %>
+          <% end %>
 
-            <div role="tabpanel" 
-                 class="tab-pane fade" 
-                 aria-labelledby="contabilidad-tab"
-                 id="contabilidad">
-              <%= render 'contabilidad', :f => f %>
-            </div>
+        <% end %> 
+        <% if can? :edit, @registro %>
+          <%= contenido_pestaña_bs('marcologico', false) do %>
+            <%= render 'marcologico', :f => f %>
+          <% end %>
+        <% end %> 
+        <% if can? :manage, @registro%>
+          <%= contenido_pestaña_bs('anexos', false) do %>
+            <% if f.object.id.nil? %>
+              <p>Antes de agregar anexos se debe guardar el compromiso institucional</p>
+            <% else %>
+              <%= render 'anexos', :f => f %> 
+            <% end %>
+          <% end %>
+        <% end %> 
 
-            <div role="tabpanel" 
-                 class="tab-pane fade" 
-                 aria-labelledby="datosfinanciador-tab"
-                 id="datosfinanciador">
-              <%= render 'datosfinanciador', :f => f %>
-            </div>
-          <% end %> 
-          <% if can? :edit, @registro %>
-            <div role="tabpanel" 
-                 class="tab-pane fade" 
-                 aria-labelledby="marcologico-tab"
-                 id="marcologico">
-              <%= render 'marcologico', :f => f %>
-            </div>
-          <% end %> 
-          <% if can? :manage, @registro%>
-            <div role="tabpanel" 
-                 class="tab-pane fade" 
-                 aria-labelledby="anexos-tab"
-                 id="anexos">
-              <% if f.object.id.nil? %>
-                <p>Antes de agregar anexos se debe guardar el compromiso institucional</p>
-              <% else %>
-                <%= render 'anexos', :f => f %> 
-              <% end %>
-            </div>
-          <% end %> 
-
-        </div> <!-- tab-content -->
-      </div> <!-- tabpanel -->
+      </div> <!-- tab-content -->
     </div> <!-- form-inputs -->
 
     <div class="form-actions" style="text-align: center">
