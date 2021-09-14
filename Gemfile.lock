@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 56f002c22a9d41947618d32b5733f9b2544fa138
+  revision: 8b8d162027ad1629558a656835f03960702ac5c4
   branch: main
   specs:
     heb412_gen (1.0.b7)
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: db065c5355f2d1d36ecfd251ee83c5d0ea263f4f
+  revision: 2a57fde4367fb8a0f261c887729513a3e89b0ba3
   branch: main
   specs:
     mr519_gen (0.2.1)
@@ -30,14 +30,9 @@ GIT
       sip
 
 GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 9f1892403c3dbdb8f7d457a06f237ff58e7dfb07
-  branch: new_id_with_ajax
-  specs:
-    cocoon (1.2.11)
-
-PATH
-  remote: ../sip
+  remote: https://github.com/pasosdeJesus/sip.git
+  revision: 9774c28fc292a1cb88256903afccdb9fe99cf02a
+  branch: main
   specs:
     sip (2.0.b12)
       cancancan
@@ -52,6 +47,13 @@ PATH
       simple_form
       twitter_cldr
       will_paginate
+
+GIT
+  remote: https://github.com/vtamara/cocoon.git
+  revision: 9f1892403c3dbdb8f7d457a06f237ff58e7dfb07
+  branch: new_id_with_ajax
+  specs:
+    cocoon (1.2.11)
 
 PATH
   remote: .
