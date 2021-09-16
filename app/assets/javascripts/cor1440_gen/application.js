@@ -33,7 +33,6 @@ document.addEventListener('turbolinks:load', function() {
     language: 'es'
   })
 
-  cor1440_gen_instala_recalcula_poblacion()
 
 });
 

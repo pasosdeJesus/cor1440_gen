@@ -112,7 +112,7 @@
   )
 
   $.each ['monto', 'aportepropio', 'aporteotros', 
-    'montoej', 'aportepropioeej', 'aporteotrosej'], (i, c) ->
+    'montoej', 'aportepropioej', 'aporteotrosej'], (i, c) ->
     $(document).on('change', '#proyectofinanciero_' + c + '_localizado', (e) ->
       cor1440_gen_recalcula_montospesos_localizado(root)
     )
