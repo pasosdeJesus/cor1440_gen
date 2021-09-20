@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 8b8d162027ad1629558a656835f03960702ac5c4
+  revision: 2fd5658af944af408d4865e0ecacc853e76cfce2
   branch: main
   specs:
     heb412_gen (1.0.b7)
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 2a57fde4367fb8a0f261c887729513a3e89b0ba3
+  revision: 7592d1dde9911269b3d306acc2c863a10cf27a98
   branch: main
   specs:
     mr519_gen (0.2.1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 9774c28fc292a1cb88256903afccdb9fe99cf02a
+  revision: 17055e8656f2f0a8ae5718ac8c0bdfdeaaf436b8
   branch: main
   specs:
     sip (2.0.b12)
@@ -46,7 +46,6 @@ GIT
       rails-i18n
       simple_form
       twitter_cldr
-      will_paginate
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
@@ -138,7 +137,7 @@ GEM
       smart_kv (~> 0.2.8)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    bootsnap (1.8.1)
+    bootsnap (1.9.0)
       msgpack (~> 1.0)
     builder (3.2.4)
     camertron-eprun (1.1.1)
@@ -280,7 +279,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (5.4.0)
+    puma (5.5.0)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
