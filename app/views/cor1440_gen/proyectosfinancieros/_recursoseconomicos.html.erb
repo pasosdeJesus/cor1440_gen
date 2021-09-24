@@ -45,7 +45,7 @@
         <td>
           <%= f.input :montoej_localizado,
             as: :string,
-            input_html: { value: f.object.montoej_localizado || '0.0' },
+            input_html: { value: f.object.montoej_localizado || '0,0' },
             label: false
           %>
         </td>
@@ -53,7 +53,7 @@
           <%= f.input :montoejp_localizado, 
             input_html: {
               readonly: 'readonly',
-              value: f.object.montoejp_localizado || '0.0' 
+              value: f.object.montoejp_localizado || '0,0' 
             },
             label: false
           %>
@@ -63,7 +63,7 @@
         <th><%= f.label :aportepropioej %></th>
         <td>
           <%= f.input :aportepropioej_localizado, 
-            input_html: { value: f.object.aportepropioej_localizado || '0.0' },
+            input_html: { value: f.object.aportepropioej_localizado || '0,0' },
             label: false 
           %>
         </td>
@@ -72,7 +72,7 @@
             label: false ,
             input_html: {
               readonly: 'readonly',
-              value: f.object.aportepropioejp_localizado || '0.0' 
+              value: f.object.aportepropioejp_localizado || '0,0' 
             }
           %>
         </td>
@@ -81,7 +81,7 @@
         <th><%= f.label :aporteotrosej %></th>
         <td>
           <%= f.input :aporteotrosej_localizado, 
-            input_html: { value: f.object.aporteotrosej_localizado || '0.0' },
+            input_html: { value: f.object.aporteotrosej_localizado || '0,0' },
             label: false %>
         </td>
         <td>
@@ -89,7 +89,7 @@
             label: false,
             input_html: { 
               readonly: 'readonly',
-              value: f.object.aporteotrosejp_localizado || '0.0' 
+              value: f.object.aporteotrosejp_localizado || '0,0' 
             }
           %>
         </td>
@@ -101,7 +101,7 @@
           <%= f.input :presupuestototalej_localizado,
             as: :string,
             input_html: {
-              value: f.object.presupuestototalej_localizado || '0.0',
+              value: f.object.presupuestototalej_localizado || '0,0',
               readonly: 'readonly'
             },
             label: false
@@ -112,7 +112,7 @@
             label: false,
             input_html: { 
               readonly: 'readonly',
-              value: f.object.presupuestototalejp_localizado || '0.0' 
+              value: f.object.presupuestototalejp_localizado || '0,0' 
             }
           %>
         </td>
