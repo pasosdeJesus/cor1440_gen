@@ -481,6 +481,12 @@ module Cor1440Gen
                   'proyecto_id = ?)',idp)
           }
 
+          scope :filtro_proyecto, lambda { |idp|
+            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                  'cor1440_gen_actividad_proyecto WHERE ' +
+                  'proyecto_id = ?)',idp)
+          }
+
           scope :filtro_proyectofinanciero, lambda { |pid|
             where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
                   'cor1440_gen_actividad_proyectofinanciero WHERE ' +
