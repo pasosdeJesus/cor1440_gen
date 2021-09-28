@@ -5,12 +5,22 @@
         Resultados
       </th>
       <th rowspan='2'>
-        Actividades
+        Actividades del marco lógico
       </th>
       <th rowspan='2'>
         Total<br>Actividades
       </th>
-      <th colspan='4'><span data-toggle='tooltip' title="Número de veces que los beneficiarios (posiblemente repetidos) se beneficiarion de una actividad">Participaciones</span></th>
+      <th colspan='5'>
+        <span data-toggle='tooltip' title="Número de beneficiarios (posiblemente repetidos) contados en la tabla de población por rangos de edad.">Participaciones</span>
+      </th>
+      <th colspan='3'>
+        <span data-toggle='tooltip' title="Número de asistentes (posiblemente repetidos) según listado de asistencia">Participaciones asistentes</span>
+      </th>
+      <th colspan='3'>
+        <span data-toggle='tooltip' title="Número de asistentes únicos de los listados de asistencia">Asistentes únicos</span>
+      </th>
+      <th colspan='3'>
+        <span data-toggle='tooltip' title="Tasa 'Participaciones asistentes' / 'Asistentes únicos'">Frecuencia de asistencia</span>
       </th>
     </tr>
     <tr>
@@ -19,12 +29,21 @@
         <th><%= Cor1440Gen.actividadg3 %></th>
         <th><%= Cor1440Gen.actividadg4 %></th>
         <th><%= Cor1440Gen.actividadg5 %></th>
+        <th>F</th>
+        <th>M</th>
+        <th>S</th>
+        <th>F</th>
+        <th>M</th>
+        <th>S</th>
+        <th>F</th>
+        <th>M</th>
+        <th>S</th>
     </tr>
   </thead>
   <tbody>
     <% a = Cor1440Gen::Actividadpf.where(
       proyectofinanciero_id: @contar_pfid).
-      joins('JOIN cor1440_gen_resultadopf as rpf on cor1440_gen_actividadpf.resultadopf_id=rpf.id').
+      joins('JOIN cor1440_gen_resultadopf as rpf ON cor1440_gen_actividadpf.resultadopf_id=rpf.id').
       order('rpf.numero, nombrecorto')%>
     <% a.each do |a| %>
       <tr>
@@ -42,7 +61,13 @@
         <td><%= a.nombrecorto %> <%= a.titulo%></td>
         <td>
           <% tot = consb.count %>
-          <%= tot %>
+          <% if tot > 0 %>
+            <% evtot = consb.pluck(:id).join(",") %>
+            <%= link_to tot, cor1440_gen.actividades_path + 
+              "?filtro[busid]=" + evtot, target: '_blank'  %>
+          <% else %>
+            <%= 0 %>
+          <% end %>
         </td>
         <td>
           <% consbr = consb.joins(:actividad_rangoedadac) %> 
@@ -65,6 +90,65 @@
           <% sr = consbr.sum(:s) %>
           <%= sr %>
         </td>
+        <td>
+          <% asistentes = consb.joins(:persona) %>
+          <% af = asistentes.where('sip_persona.sexo': :F).select(
+            'cor1440_gen_asistencia.persona_id') %>
+          <%= af.count %>
+        </td>
+        <td>
+          <% am = asistentes.where('sip_persona.sexo': :M).select(
+            'cor1440_gen_asistencia.persona_id')%>
+          <%= am.count %>
+        </td>
+        <td>
+          <% as = asistentes.where('sip_persona.sexo': :S).select(
+            'cor1440_gen_asistencia.persona_id') %>
+          <%= as.count %>
+        </td>
+        <td>
+          <% asistunicos = consb.joins(:persona).
+            select('distinct cor1440_gen_asistencia.persona_id').
+            pluck('cor1440_gen_asistencia.persona_id') %> 
+          <% uf = Sip::Persona.where(id: asistunicos).where(sexo: :F) %>
+          <% if uf.count > 0 %>
+            <% ev = uf.pluck('id').join(",") %>
+            <%= link_to uf.count, sip.personas_path + 
+              "?filtro[busid]=" + ev, target: '_blank'  %>
+          <% else %>
+            <%= 0 %>
+          <% end %>
+        </td>
+        <td>
+          <% um = Sip::Persona.where(id: asistunicos).where(sexo: :M) %>
+          <% if um.count > 0 %>
+            <% ev = um.pluck('id').join(",") %>
+            <%= link_to um.count, sip.personas_path + 
+              "?filtro[busid]=" + ev, target: '_blank'  %>
+          <% else %>
+            <%= 0 %>
+          <% end %>
+        </td>
+        <td>
+          <% us = Sip::Persona.where(id: asistunicos).where(sexo: :S) %>
+          <% if us.count > 0 %>
+            <% ev = us.pluck('id').join(",") %>
+            <%= link_to us.count, sip.personas_path + 
+              "?filtro[busid]=" + ev, target: '_blank'  %>
+          <% else %>
+            <%= 0 %>
+          <% end %>
+        </td>
+        <td>
+          <%= if uf.count > 0 then f =af.count.to_f/uf.count; f.round(1); end %>
+        </td>
+        <td>
+          <%= if um.count > 0 then f =am.count.to_f/um.count; f.round(1); end %>
+        </td>
+        <td>
+          <%= if us.count > 0 then f =as.count.to_f/us.count; f.round(1); end %>
+        </td>
+
       </tr>
     <% end %>
     <tr>
@@ -80,37 +164,49 @@
          %>
        <td> </td>
        <td><em>Sin actividad de convenio</em><br>
-        <% sep = '' %>
-        <% consb.each do |a| %>
-          <%= sep %><%= link_to(a.id, cor1440_gen.actividad_path(a.id)) %> 
-          <% sep = ", " %>
-        <% end %>
-      </td>
-      <td>
-        <% tot = consb.count %>
-        <%= tot %>
-      </td>
-      <td>
-        <% consbr = consb.joins(:actividad_rangoedadac) %> 
-        <% fl = consbr.sum(:fl) %>
-        <%= fl %>
-      </td>
-      <td>
-        <% fr = consbr.sum(:fr) %>
-        <%= fr %>
-      </td>
-      <td>
-        <% ml = consbr.sum(:ml) %>
-        <%= ml %>
-      </td>
-      <td>
-        <% mr = consbr.sum(:mr) %>
-        <%= mr %>
-      </td>
-      <td>
-        <% sr = consbr.sum(:s) %>
-        <%= sr %>
-      </td>
+       </td>
+       <td>
+         <% tot = consb.count %>
+         <% if tot > 0 then %>
+           <% evtot = consb.pluck(:id).join(",") %>
+           <%= link_to tot, cor1440_gen.actividades_path + 
+             "?filtro[busid]=" + evtot, target: '_blank' %>
+         <% else %>
+           <%= 0 %>
+         <% end %>
+       </td>
+       <td>
+         <% consbr = consb.joins(:actividad_rangoedadac) %> 
+         <% fl = consbr.sum(:fl) %>
+         <%= fl %>
+       </td>
+       <td>
+         <% fr = consbr.sum(:fr) %>
+         <%= fr %>
+       </td>
+       <td>
+         <% ml = consbr.sum(:ml) %>
+         <%= ml %>
+       </td>
+       <td>
+         <% mr = consbr.sum(:mr) %>
+         <%= mr %>
+       </td>
+       <td>
+         <% sr = consbr.sum(:s) %>
+         <%= sr %>
+       </td>
+       <td></td>
+       <td></td>
+       <td></td>
+
+       <td></td>
+       <td></td>
+       <td></td>
+
+       <td></td>
+       <td></td>
+       <td></td>
     </tr>
   </tbody>
   <tfoot>
