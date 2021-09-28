@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 2f46ce0b2ae542f03bc5ae21fc4582bbbc9b09ce
+  revision: 5a7680b6f66258dce6e5243d8c3f9880610e5bd6
   branch: main
   specs:
     sip (2.0.b12)
@@ -253,7 +253,7 @@ GEM
       ruby-progressbar
     msgpack (1.4.2)
     nio4r (2.5.8)
-    nokogiri (1.12.4)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     odf-report (0.7.2)
