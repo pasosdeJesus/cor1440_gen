@@ -117,9 +117,11 @@ module Cor1440Gen
               EOF
             end
 
+            re = Cor1440Gen::ActividadRangoedadac.where(
+              actividad_id: @registro.id)
+            re.destroy_all
+
             destroy_gen
-            #@registro.destroy!
-            #redirect_to cor1440_gen.actividades_path
           end
 
 
