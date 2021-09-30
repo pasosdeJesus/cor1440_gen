@@ -2,6 +2,10 @@
 
 Cor1440Gen::Engine.routes.draw do
 
+  get '/actividad/copia/:actividad_id' =>
+    'actividades#copia',
+    as: :copia_actividad
+
   # Poner antes de resources :actividads
   get "/actividades/contar" => "actividades#contar", 
     as: :contar_actividades

@@ -130,6 +130,49 @@ module Cor1440Gen
           end
 
 
+          def copia
+            if !params || !params[:actividad_id]
+              render inline: 'Falta parámetro actividad_id'
+              return
+            end
+            if Cor1440Gen::Actividad.where(
+                id: params[:actividad_id].to_i).count != 1
+              render inline: 'No existe actividad con la id actividad_id dada'
+              return
+            end
+            a = Cor1440Gen::Actividad.find(
+              params[:actividad_id].to_i)
+            authorize! :create, Cor1440Gen::Actividad
+            @registro = a.dup
+            #@registro.nombre += ' ' + Time.now.to_i.to_s
+            if !@registro.save(validate: false)  # Elegir otra id
+              render inline: 'No pudo salvar copia sin campos'
+              return
+            end
+            # no se copian anexos
+
+            [['Cor1440Gen::ActividadProyectofinanciero', 'actividad_proyectofinanciero'],
+             ['Cor1440Gen::ActividadActividadpf', 'actividad_actividadpf'],
+            ].each do |par|
+              par[0].constantize.where(actividad_id: a.id).
+                each do |tr|
+                ntr= tr.dup
+                ntr.actividad_id = @registro.id
+                if !ntr.save
+                  render inline: "No pudo salvar copia de #{par[1]}"
+                  return
+                end
+              end #tr
+            end #par
+
+            if !@registro.save  # Elegir otra id
+              render inline: 'No pudo salvar copia con campos'
+              return
+            end
+            @registro_orig_id=a.id
+            render :copia, layout: 'application'
+          end
+
           def asegura_camposdinamicos(actividad, current_usuario_id)
             @listadoasistencia = false
             vfid = []  # ids de formularios que deben presentarse
