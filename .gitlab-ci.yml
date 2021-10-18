@@ -34,8 +34,10 @@ test:
     - which ruby
     - ruby -v
     - export APT_CACHE_DIR=`pwd`/apt-cache && mkdir -pv $APT_CACHE_DIR
-    - apt-get update -yy && apt-get install build-essential libpq-dev postgresql-client -y
+    - apt-get update -yy && apt-get install build-essential libpq-dev postgresql-client lsb-release -y
+    - lsb_release --all
     - apt-get install -y -qq nodejs
+    - node -v
     - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
     - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
     - apt-get update -qq && apt-get -o dir::cache::archives="$APT_CACHE_DIR" install -yqq yarn
