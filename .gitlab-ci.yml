@@ -34,7 +34,7 @@ test:
     - which ruby
     - ruby -v
     - export APT_CACHE_DIR=`pwd`/apt-cache && mkdir -pv $APT_CACHE_DIR
-    - apt-get update -yy && apt-get install build-essential libpq-dev postgresql-client lsb-release -y
+    - apt-get update -yy && apt-get install build-essential libpq-dev postgresql-client lsb-release libreoffice -y
     - lsb_release --all
     - apt-get install -y -qq nodejs
     - node -v
