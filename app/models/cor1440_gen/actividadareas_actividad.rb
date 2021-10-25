@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'cor1440_gen/concerns/models/actividadareas_actividad'
 
 module Cor1440Gen

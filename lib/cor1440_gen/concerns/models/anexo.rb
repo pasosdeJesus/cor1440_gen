@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'sip/concerns/models/anexo'
 
 module Cor1440Gen

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class CreaAnexoEfecto < ActiveRecord::Migration[6.0]
 
   def up

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class ActividadActorsocialDeCinep < ActiveRecord::Migration[5.2]
   def up
     if table_exists? :actividad_actorsocial

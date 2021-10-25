@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 Cor1440Gen::Engine.routes.draw do
 
   get '/actividad/copia/:actividad_id' =>

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 module Cor1440Gen
   module Admin
     class ProyectosController < Sip::Admin::BasicasController

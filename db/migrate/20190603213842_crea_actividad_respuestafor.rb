@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class CreaActividadRespuestafor < ActiveRecord::Migration[6.0]
   def change
     create_table :cor1440_gen_actividad_respuestafor, id: false do |t|

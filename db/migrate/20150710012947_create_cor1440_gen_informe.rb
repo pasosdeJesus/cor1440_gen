@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class CreateCor1440GenInforme < ActiveRecord::Migration[4.2]
   def change
     create_table :cor1440_gen_informe do |t|

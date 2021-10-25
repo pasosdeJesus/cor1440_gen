@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'cor1440_gen/concerns/models/actividadtipo_formulario'
 
 module Cor1440Gen

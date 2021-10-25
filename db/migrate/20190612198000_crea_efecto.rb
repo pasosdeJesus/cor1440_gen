@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class CreaEfecto < ActiveRecord::Migration[6.0]
   def up
     if !ActiveRecord::Base.connection.table_exists?(:cor1440_gen_efecto)

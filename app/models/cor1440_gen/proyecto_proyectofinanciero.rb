@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   class ProyectoProyectofinanciero < ActiveRecord::Base
     belongs_to :proyecto, class_name: 'Cor1440Gen::Proyecto', 

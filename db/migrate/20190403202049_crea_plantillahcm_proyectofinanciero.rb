@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class CreaPlantillahcmProyectofinanciero < ActiveRecord::Migration[5.2]
   def change
     create_table :cor1440_gen_plantillahcm_proyectofinanciero do |t|

@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module Cor1440Gen
   class Ability < Sip::Ability
 
@@ -173,6 +171,7 @@ module Cor1440Gen
       end
 
       can [:nuevo, :new], Cor1440Gen::Actividad
+      can [:nuevo, :new], Cor1440Gen::Actividadpf
       can :read, Cor1440Gen::Rangoedadac
 
       can :read, Heb412Gen::Doc
@@ -190,6 +189,7 @@ module Cor1440Gen
         case usuario.rol
         when ROLOPERADOR
 
+          can :manage, Cor1440Gen::Actividadpf
           presponsable = Cor1440Gen::Proyectofinanciero.where(
             responsable_id: usuario.id).map(&:id)
           can [:read,:edit,:update], Cor1440Gen::Proyectofinanciero,
@@ -233,7 +233,9 @@ module Cor1440Gen
           can :manage, Sip::Persona
 
         when Ability::ROLADMIN, Ability::ROLDIR
+          can :manage, Cor1440Gen::Pmindicadorpf
           can :manage, Cor1440Gen::Actividad
+          can :manage, Cor1440Gen::Actividadpf
           can :manage, Cor1440Gen::Campotind
           can :manage, Cor1440Gen::Efecto
           can :manage, Cor1440Gen::Financiador

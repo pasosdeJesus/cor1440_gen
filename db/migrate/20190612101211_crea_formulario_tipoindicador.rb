@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class CreaFormularioTipoindicador < ActiveRecord::Migration[6.0]
   def change
 

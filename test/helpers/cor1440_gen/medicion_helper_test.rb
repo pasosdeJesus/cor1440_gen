@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require_relative '../../test_helper'
 require 'cor1440_gen/medicion_helper'
 

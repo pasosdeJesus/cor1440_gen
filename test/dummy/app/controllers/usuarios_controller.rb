@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'cor1440_gen/concerns/controllers/usuarios_controller'
 
 class UsuariosController < Sip::ModelosController

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class CreaCaracterizacionpf < ActiveRecord::Migration[5.2]
   def change
     create_table :cor1440_gen_caracterizacionpf, id: false do |t|

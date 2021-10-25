@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require_relative '../../test_helper'
 require_relative '../../models/cor1440_gen/proyectofinanciero_test.rb'
 

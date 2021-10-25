@@ -1,8 +1,3 @@
-# encoding: UTF-8
-
-#require 'sip/engine'
-#require 'font-awesome-rails'
-
 module Cor1440Gen
   class Engine < ::Rails::Engine
 
