@@ -7,7 +7,6 @@ module Cor1440Gen
       before_action :set_actividadtipo, 
         only: [:show, :edit, :update, :destroy]
       load_and_authorize_resource class: Cor1440Gen::Actividadtipo
-
       include Cor1440Gen::Concerns::Controllers::ActividadtiposController
     end
   end
