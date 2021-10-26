@@ -163,6 +163,12 @@ module Cor1440Gen
         clone.merge(CAMPOS_PLANTILLAS_PROPIAS)
     end
 
+    # Se definen habilidades con cancancan
+    # Util en motores y aplicaciones de prueba
+    # En aplicaciones es mejor escribir completo el modelo de autorización
+    # para facilitar su análisis y evitar cambios inesperados al actualizar
+    # motores
+    # @usuario Usuario que hace petición
     def initialize_cor1440_gen(usuario = nil)
       # Sin autenticación puede consultarse información geográfica
       can :read, [Sip::Pais, Sip::Departamento, Sip::Municipio, Sip::Clase]
