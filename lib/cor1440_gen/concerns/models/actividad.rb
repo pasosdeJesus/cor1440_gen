@@ -393,7 +393,7 @@ module Cor1440Gen
               poblacion_mujeres_r_g_solore(g)
 
             when /poblacion_sinsexo_g[0-9]*/
-              g = atr[21..-1].to_i
+              g = atr[19..-1].to_i
               poblacion_sinsexo_g_solore(g)
 
             when Cor1440Gen::Actividad.human_attribute_name(
