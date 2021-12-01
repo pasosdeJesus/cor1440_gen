@@ -87,17 +87,17 @@ module Cor1440Gen
     ###########################################
 
     LitNum= Struct.new(:num) do
-      def eval(contexto, menserror = ''.html_safe); num.to_s.sub(',', '.').to_f; end
+      def eval(contexto, menserror = ''); num.to_s.sub(',', '.').to_f; end
     end
 
 
     Menos = Struct.new(:e) do
-      def eval(contexto, menserror = ''.html_safe); 
+      def eval(contexto, menserror = ''); 
         -(e.eval(contexto, menserror).to_f); end
     end
 
     Ident = Struct.new(:id) do
-      def eval(contexto, menserror = ''.html_safe)
+      def eval(contexto, menserror = '')
         if !contexto
           STDERR.puts "** No se definió contexto"
           return nil
@@ -111,7 +111,7 @@ module Cor1440Gen
     end
 
     ApFun = Struct.new(:fun, :argsp) do
-      def eval(contexto, menserror = ''.html_safe)
+      def eval(contexto, menserror = '')
         # args que siempre sea vector con argumentos
         args = argsp.class.to_s != 'Array' ? [argsp] : argsp
         # argsev contendrá evaluaciónd de los argumentos necesarios
@@ -250,7 +250,7 @@ module Cor1440Gen
 
 
     Proy = Struct.new(:registro, :campo) do
-      def eval(contexto, menserror = ''.html_safe)
+      def eval(contexto, menserror = '')
         r = registro.eval(contexto, menserror)
         c = campo.to_s
         if r.nil?
@@ -281,7 +281,7 @@ module Cor1440Gen
 
 
     OpBin = Struct.new(:izq, :op, :der) do
-      def eval(contexto, menserror = ''.html_safe)
+      def eval(contexto, menserror = '')
         eizq = izq.eval(contexto, menserror)
         eder = der.eval(contexto, menserror)
         case op
@@ -325,13 +325,13 @@ module Cor1440Gen
     end
 
 
-    def revisa_sintaxis_expresion(e, menserror = ''.html_safe)
+    def revisa_sintaxis_expresion(e, menserror = '')
       reconocedor = ExpMed.new
       p = reconocedor.parse(e)
       return true
     rescue Parslet::ParseFailed => falla
-      menserror << "Error de sintaxis en expresión '#{e}'. "\
-        "<pre>#{falla.parse_failure_cause.ascii_tree}</pre>.  ".html_safe
+      menserror << ("Error de sintaxis en expresión '#{e}'. " +
+        "<pre>#{falla.parse_failure_cause.ascii_tree}</pre>.  ".html_safe)
       STDERR.puts "** #{e}"
       STDERR.puts falla.parse_failure_cause.ascii_tree
       return false
@@ -347,7 +347,7 @@ module Cor1440Gen
 
     # Evalua una expresión en un contexto dado
     # @return nil si tiene problemas y los describe en menserror
-    def evalua_expresion_medicion(e, contexto, menserror = ''.html_safe)
+    def evalua_expresion_medicion(e, contexto, menserror = '')
       r = ExpMed.new
       p = r.parse(e)
       t = ExpMedT.new
@@ -355,8 +355,8 @@ module Cor1440Gen
       res = asa.eval(contexto, menserror)
       return res
     rescue Parslet::ParseFailed => falla
-      menserror << "Error de sintaxis en expresión '#{e}'. "\
-        "<pre>#{falla.parse_failure_cause.ascii_tree}</pre>.  ".html_safe
+      menserror << ("Error de sintaxis en expresión '#{e}'. " +
+        "<pre>#{falla.parse_failure_cause.ascii_tree}</pre>.  ".html_safe)
       STDERR.puts "** #{e}"
       STDERR.puts falla.parse_failure_cause.ascii_tree
       return nil

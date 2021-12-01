@@ -53,7 +53,7 @@ module Cor1440Gen
 
           validate :sintaxis_funcionresultado
           def sintaxis_funcionresultado
-            menserr = ''.html_safe
+            menserr = ''
             if self.funcionresultado.to_s != '' &&
               !Cor1440Gen::MedicionHelper.revisa_sintaxis_expresion(
                 self.funcionresultado, menserr)
