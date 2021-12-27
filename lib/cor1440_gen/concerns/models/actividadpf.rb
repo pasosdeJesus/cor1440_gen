@@ -21,7 +21,7 @@ module Cor1440Gen
 
           belongs_to :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero',
-            foreign_key: 'proyectofinanciero_id'
+            foreign_key: 'proyectofinanciero_id', optional: false
 
           belongs_to :resultadopf, 
             class_name: 'Cor1440Gen::Resultadopf',

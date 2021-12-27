@@ -1,4 +1,4 @@
-require_dependency "cor1440_gen/concerns/controllers/mindicadorespf_controller"
+require "cor1440_gen/concerns/controllers/mindicadorespf_controller"
 
 module Cor1440Gen
   class MindicadorespfController < Heb412Gen::ModelosController

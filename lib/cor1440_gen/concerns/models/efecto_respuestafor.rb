@@ -7,9 +7,9 @@ module Cor1440Gen
         included do
 
           belongs_to :respuestafor, class_name: 'Mr519Gen::Respuestafor',
-            foreign_key: 'respuestafor_id'
+            foreign_key: 'respuestafor_id', optional: false
           belongs_to :efecto, class_name: 'Cor1440Gen::Efecto',
-            foreign_key: 'efecto_id'
+            foreign_key: 'efecto_id', optional: false
 
         end
       end

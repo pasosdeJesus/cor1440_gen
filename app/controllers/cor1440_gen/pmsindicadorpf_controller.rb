@@ -1,4 +1,4 @@
-require_dependency "cor1440_gen/concerns/controllers/pmsindicadorpf_controller"
+require "cor1440_gen/concerns/controllers/pmsindicadorpf_controller"
 
 module Cor1440Gen
   class PmsindicadorpfController < Heb412Gen::ModelosController

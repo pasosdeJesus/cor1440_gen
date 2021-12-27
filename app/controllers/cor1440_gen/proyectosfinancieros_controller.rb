@@ -1,4 +1,4 @@
-require_dependency "cor1440_gen/concerns/controllers/proyectosfinancieros_controller"
+require "cor1440_gen/concerns/controllers/proyectosfinancieros_controller"
 
 module Cor1440Gen
   class ProyectosfinancierosController < Heb412Gen::ModelosController
