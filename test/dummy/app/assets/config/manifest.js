@@ -3,4 +3,5 @@
 //= link_directory ../stylesheets .css
 //= link_directory ../../../../../app/assets/stylesheets/cor1440_gen .css
 //= link application.css
+//= link_tree ../builds
 
