@@ -1,3 +1,3 @@
 module Cor1440Gen
-  VERSION = "1.0b5"
+  VERSION = "2.0"
 end
