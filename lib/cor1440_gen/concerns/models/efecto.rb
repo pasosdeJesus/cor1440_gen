@@ -9,7 +9,7 @@ module Cor1440Gen
           include Sip::Localizacion
 
           belongs_to :indicadorpf, class_name: 'Cor1440Gen::Indicadorpf',
-            foreign_key: "indicadorpf_id", validate: true
+            foreign_key: "indicadorpf_id", validate: true, optional: false
           belongs_to :registradopor, class_name: '::Usuario',
             foreign_key: "registradopor_id", validate: true, optional: true
 

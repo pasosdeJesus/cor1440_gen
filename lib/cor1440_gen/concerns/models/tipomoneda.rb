@@ -8,7 +8,8 @@ module Cor1440Gen
 
         included do
 
-          belongs_to :pais, class_name: 'Sip::Pais', foreign_key: 'pais_id'
+          belongs_to :pais, class_name: 'Sip::Pais', foreign_key: 'pais_id', 
+            optional: false
 
           #has_many :proyectofinanciero, dependent: :delete_all,
           #  class_name: 'Cor1440Gen::Proyectofinanciero', 

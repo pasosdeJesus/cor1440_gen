@@ -5,8 +5,10 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          belongs_to :actividad, class_name: 'Cor1440Gen::Actividad'
-          belongs_to :rangoedadac, class_name: 'Cor1440Gen::Rangoedadac'
+          belongs_to :actividad, class_name: 'Cor1440Gen::Actividad', 
+            optional: false
+          belongs_to :rangoedadac, class_name: 'Cor1440Gen::Rangoedadac', 
+            optional: false
         end
       end
     end

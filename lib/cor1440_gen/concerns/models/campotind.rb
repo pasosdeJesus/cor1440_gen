@@ -8,7 +8,7 @@ module Cor1440Gen
           include Sip::Modelo 
 
           belongs_to :tipoindicador, class_name: 'Cor1440Gen::Tipoindicador',
-            foreign_key: 'tipoindicador_id'
+            foreign_key: 'tipoindicador_id', optional: false
 
           has_many :valorcampotind, 
             class_name: 'Cor1440Gen::Valorcampotind',

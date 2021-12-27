@@ -7,9 +7,9 @@ module Cor1440Gen
         included do
 
           belongs_to :actividad, class_name: 'Cor1440Gen::Actividad', 
-            foreign_key: 'actividad_id'
+            foreign_key: 'actividad_id', optional: false
           belongs_to :orgsocial, class_name: 'Sip::Orgsocial',
-            foreign_key: 'orgsocial_id'
+            foreign_key: 'orgsocial_id', optional: false
 
         end # included
       end

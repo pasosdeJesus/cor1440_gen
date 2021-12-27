@@ -1,4 +1,4 @@
-require_dependency 'cor1440_gen/concerns/controllers/formularios_controller'
+require 'cor1440_gen/concerns/controllers/formularios_controller'
 
 module Mr519Gen
   class FormulariosController < Sip::ModelosController

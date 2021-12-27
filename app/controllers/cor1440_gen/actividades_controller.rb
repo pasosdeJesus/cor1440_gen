@@ -1,4 +1,4 @@
-require_dependency "cor1440_gen/concerns/controllers/actividades_controller"
+require "cor1440_gen/concerns/controllers/actividades_controller"
 
 module Cor1440Gen
   class ActividadesController < Heb412Gen::ModelosController

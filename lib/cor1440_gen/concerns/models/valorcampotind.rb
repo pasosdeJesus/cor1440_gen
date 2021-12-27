@@ -8,7 +8,7 @@ module Cor1440Gen
           include Sip::Modelo 
 
           belongs_to :campotind, class_name: '::Cor1440Gen::Campotind',
-            foreign_key: 'campotind_id'
+            foreign_key: 'campotind_id', optional: false
 
           validates :valor, length: { maximum: 5000}
 

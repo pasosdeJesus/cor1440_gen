@@ -11,7 +11,7 @@ module Cor1440Gen
 
           belongs_to :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero',
-            foreign_key: 'proyectofinanciero_id'
+            foreign_key: 'proyectofinanciero_id', optional: false
 
           has_many :indicadorpf, dependent: :delete_all,
             class_name: 'Cor1440Gen::Indicadorpf', 

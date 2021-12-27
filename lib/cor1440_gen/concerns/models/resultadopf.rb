@@ -11,7 +11,7 @@ module Cor1440Gen
 
           belongs_to :objetivopf, 
             class_name: 'Cor1440Gen::Objetivopf',
-            foreign_key: 'objetivopf_id'
+            foreign_key: 'objetivopf_id', optional: false
 
           has_many :actividadpf, dependent: :delete_all,
             class_name: 'Cor1440Gen::Actividadpf', 

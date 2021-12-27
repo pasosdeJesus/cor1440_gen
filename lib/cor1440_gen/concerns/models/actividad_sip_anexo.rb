@@ -10,9 +10,9 @@ module Cor1440Gen
 
           belongs_to :actividad, class_name: 'Cor1440Gen::Actividad',
             foreign_key: "actividad_id", validate: true,
-            inverse_of: :actividad_sip_anexo
+            inverse_of: :actividad_sip_anexo, optional: false
           belongs_to :sip_anexo, class_name: 'Sip::Anexo',
-            foreign_key: "anexo_id", validate: true
+            foreign_key: "anexo_id", validate: true, optional: false
           accepts_nested_attributes_for :sip_anexo, reject_if: :all_blank
 
           validates :actividad, presence: true

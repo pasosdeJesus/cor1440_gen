@@ -8,10 +8,10 @@ module Cor1440Gen
         included do
 
           belongs_to :mindicadorpf, class_name: 'Cor1440Gen::Mindicadorpf',
-            foreign_key: 'mindicadorpf_id'
+            foreign_key: 'mindicadorpf_id', optional: false
 
           belongs_to :tipoindicador, class_name: 'Cor1440Gen::Tipoindicador',
-            foreign_key: 'tipoindicador_id'
+            foreign_key: 'tipoindicador_id', optional: false
 
           has_many :datointermedioti_pmindicadorpf,
             class_name: 'Cor1440Gen::DatointermediotiPmindicadorpf',

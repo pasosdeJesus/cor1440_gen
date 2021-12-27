@@ -1,4 +1,4 @@
-require_dependency "cor1440_gen/concerns/controllers/informes_controller"
+require "cor1440_gen/concerns/controllers/informes_controller"
 
 module Cor1440Gen
   class InformesController < ApplicationController

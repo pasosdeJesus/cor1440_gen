@@ -1,4 +1,4 @@
-require_dependency "cor1440_gen/concerns/controllers/personas_controller"
+require "cor1440_gen/concerns/controllers/personas_controller"
 
 module Sip
   class PersonasController < Heb412Gen::ModelosController

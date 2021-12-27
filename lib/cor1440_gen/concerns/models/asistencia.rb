@@ -8,9 +8,9 @@ module Cor1440Gen
           include Sip::Modelo 
 
           belongs_to :actividad, class_name: 'Cor1440Gen::Actividad',
-            validate: true, foreign_key: 'actividad_id'
+            validate: true, foreign_key: 'actividad_id', optional: false
           belongs_to :persona, class_name: 'Sip::Persona', validate: true,
-            foreign_key: 'persona_id'
+            foreign_key: 'persona_id', optional: false
           accepts_nested_attributes_for :persona, reject_if: :all_blank
           belongs_to :rangoedadac, class_name: 'Cor1440Gen::Rangoedadac',
             foreign_key: 'rangoedadac_id', optional: true

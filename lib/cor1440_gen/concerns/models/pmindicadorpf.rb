@@ -15,7 +15,7 @@ module Cor1440Gen
 
           belongs_to :mindicadorpf, 
             class_name: 'Cor1440Gen::Mindicadorpf', 
-            foreign_key: 'mindicadorpf_id'
+            foreign_key: 'mindicadorpf_id', optional: false
 
           has_many :datointermedioti_pmindicadorpf,
             class_name: 'Cor1440Gen::DatointermediotiPmindicadorpf',

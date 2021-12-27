@@ -1,5 +1,5 @@
 class CreaTipomoneda < ActiveRecord::Migration[6.0]
-  include Sip::MigracionHelper
+  include Sip::SqlHelper
 
   def up
     create_table :cor1440_gen_tipomoneda do |t|
