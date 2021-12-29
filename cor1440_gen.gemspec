@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "rails"
   s.add_runtime_dependency "devise"
-  s.add_runtime_dependency "paperclip"
+  s.add_runtime_dependency "kt-paperclip"
   s.add_runtime_dependency "sip"
   s.add_runtime_dependency "heb412_gen"
   s.add_runtime_dependency "mr519_gen"
