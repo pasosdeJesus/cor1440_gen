@@ -1,0 +1,226 @@
+en:
+  attributes:
+    fechacreacion: Creación
+    fechacreacion_localizada: Creación
+    fechadeshabilitacion: Deshabilitación 
+    fechadeshabilitacion_localizada: Deshabilitación 
+    fechainicio: Fecha de inicio
+    fechainicio_localizada: Fecha de inicio
+    fechacierre: Fecha de cierre
+    fechacierre_localizada: Fecha de cierre
+    actividadarea: Subárea de actividad
+    actividadareas: Subáreas de actividad
+    actividadtipo: Tipo de actividad del marco lógico
+    actividadtipos: Tipos de actividad del marco lógico
+    proyectos: Áreas
+    proyecto: Área
+    proyectosfinancieros: Proyectos
+    proyectofinanciero: Proyecto
+    tiposindicador: Tipos de indicador
+    tipoindicador: Tipo de indicador
+    tiposmoneda: Tipos de moneda
+    tipomoneda: Tipo de moneda
+  activerecord:
+    models:
+      "cor1440_gen/proyectofinanciero": 
+        one: "Proyecto"
+        other: "Proyectos"
+      "cor1440_gen/tipoindicador": 
+        one: "Tipo de indicador"
+        other: "Tipos de indicador"
+      "cor1440_gen/tipomoneda": 
+        one: "Tipo de moneda"
+        other: "Tipos de moneda"
+    attributes:
+      "campotind":
+        Campotind: Campo
+        Campostind: Campos
+      "campoact":
+        Campoact: Campo
+        Camposact: Campos
+      "cor1440_gen/actividad":
+        actividadarea: Subárea
+        actividadareas: Subáreas
+        actividadpf: Actividad del marco lógico
+        actividadespf: Actividades del marco lógico
+        orgsocial: Organizaciones sociales sociales en listado de asistencia
+        fecha_localizada: Fecha
+        objetivo: Objetivo de la actividad
+        objetivopf: Objetivo del marco lógico
+        proyecto: Área
+        proyectofinanciero: Proyecto
+        valorcampoact: Campos del tipo de actividad
+      "cor1440_gen/actividadpf":
+        actividadpf: Actividad del marco lógico
+        descripcion: Descripción
+        grupoexclusivo: Exclusiva de grupos
+        heredade: Hereda de
+        nombrecorto: Nombre corto
+        resultadopf: Resultado
+        titulo: Título
+      "cor1440_gen/actividadarea":
+        Actividadarea: Subárea de actividad
+        Actividadareas: Subáreas de actividad
+      "cor1440_gen/actividadtipo":
+        fechacreacion_localizada: Creación
+        fechadeshabilitacion_localizada: Deshabilitación 
+        Actividadtipo: Tipo de actividad del marco lógico
+        Actividadtipos: Tipos de actividad del marco lógico
+        campoact: Campo
+        Campoact: Campo
+        listadoasistencia: Listado de asistencia
+      "cor1440_gen/orgsocial":
+        Orgsocial: Organización social
+        Orgsociales: Organizaciones sociales
+        direccion: Dirección
+      "cor1440_gen/efecto":
+        Efecto: 'Avance en indicador de efecto'
+        Efectos: 'Avance en indicadores de efecto'
+        orgsocial: Organización(es) social(es)
+        "{:orgsocial_ids=>[]}": Organización(es) social(es)
+        anexo_efecto: Anexos / Medios de verificación
+        fecha_localizada: Fecha
+        indicadorpf: Indicador
+        indicadorpf_id: Indicador
+        registradopor: Registrado por
+        registradopor_id: Registrado por
+      "cor1440_gen/indicadorpf":
+        indicadorpf: Indicador
+        numero: Número
+        indicador: Descripción del indicador
+      "cor1440_gen/mindicadorpf":
+        Mindicadorpf: Medición de un indicador
+        Mindicadorespf: Mediciones de indicadores
+        actividadpf: Actividades del marco lógico relacionadas con el indicador
+        cor1440_gen_proyectofinanciero: Proyecto
+        cor1440_gen_indicadorpf: 'Indicador'
+        datointermedioti: 'Datos intermedios en cada medición'
+        formulario: 'Formulario adicional de avance en efecto'
+        frecuenciaanual: 'Frecuencia de medición anual'
+        funcionresultado: 'Función del resultado'
+        indicadorpf: 'Indicador'
+        indicadorpf_id: 'Indicador'
+        medircon: 'Aportan en la medición'
+        pmindicadorpf: 'Puntos de medición'
+        proyectofinanciero: Proyecto
+        proyectofinanciero_id: Proyecto
+        descd1: Descripción de dato intermedio 1
+        descd2: Descripción de dato intermedio 2
+        descd3: Descripción de dato intermedio 3
+      "cor1440_gen/objetivopf":
+        objetivopf: Objetivo
+        numero: Número
+        objetivo: Descripción del objetivo
+      "cor1440_gen/pmindicadorpf":
+        resind: Resultado
+      "cor1440_gen/financiador":
+        Financiador: Financiador
+        Financiadores: Financiadores
+      "cor1440_gen/informe":
+        filtrofechaini:  Fecha inicial
+        filtrofechaini_localizada:  Fecha inicial
+        filtrofechafin:  Fecha final
+        filtrofechafin_localizada:  Fecha final
+        filtroproyecto: Área
+        filtroproyectofinanciero: Proyecto
+        filtroactividadarea: Subárea 
+        columnafecha: Fecha
+        columnaresponsable: Responsable
+      "cor1440_gen/proyecto":
+        Proyecto: Área
+        Proyectos: Áreas
+      "cor1440_gen/proyectofinanciero":
+        actividadpf: Activity in logical framework
+        anexo_proyectofinanciero: Attachments
+        aportepropioej: Own contribution
+        aporteotrosej: Contribution of other donors
+        aprobadoobs: Approved by managers
+        beneficiario: Beneficiaries with characterization
+        caracterizacion: Characterization form of beneficiaries
+        centrocosto: Accounting Cost Center
+        fechaaprobacion: Approval date
+        fechaaprobacion_localizada: Approval date
+        fechaliquidacion: Settlement date
+        fechaliquidacion_localizada: Settlement date
+        fechaformulacion: Formulation date
+        fechaformulacion_anio: "Año de formulación"
+        fechaformulacion_mes: "Mes de formulación"
+        fechaformulacion_localizada: "Fecha de formulación"
+        fechaliquidacion: "Fecha de liquidación"
+        fechaliquidacion_localizada: "Fecha de liquidación"
+        financiador_ids: Financiadores
+        indicador: Indicador
+        marcologico: Marco lógico
+        montoej: Aporte del financiador
+        nombre: Nombre interno breve
+        objetivopf: Objetivo
+        plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este proyecto
+        presupuestototalej: Presupuesto total
+        proyecto: Área
+        proyectos: Área
+        proyecto_ids: Áreas
+        proyectofinanciero_usuario: Equipo de trabajo
+        "{:proyecto_ids=>[]}": Áreas
+        Proyectofinanciero: Proyecto
+        proyectofinanciero: Proyecto
+        Proyectosfinancieros: Proyectos
+        proyectosfinancieros: Proyectos
+        responsable_id: Coordinador
+        responsable: Coordinador
+        resultadopf: Resultado
+        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad del marco lógico
+        "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
+        "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
+        "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
+        saldoaejecutarp: Saldo por ejecutar en pesos
+        sectorapc: Sector APC
+        semestreformulacion: Semestre de formulación
+        tasaej: Tasa de cambio
+        titulo: Título largo del proyecto
+      "cor1440_gen/rangoedadac":
+        Rangoedadac: Rango de edad en actividades
+        Rangosedadac: Rangos de edad en actividades
+      "cor1440_gen/resultadopf":
+        resultadopf: Resultado
+        numero: Número
+        resultado: Descripción del resultado
+      "cor1440_gen/sectororgsocial":
+        Sectororgsocial: Sector de organización social
+        Sectoresorgsociales: Sectores de organizaciones sociales
+      "cor1440_gen/sectorapc":
+        Sectorapc: Sector APC
+        Sectoresapc: Sectores APC
+      "cor1440_gen/tipoindicador":
+        nombre: Nombre corto
+        campotind: Campo
+        Campotind: Campo
+        datointermedioti: Datos intermedios
+        esptipometa: Especificación del tipo de meta
+        espcampos: Especificación de campos por añadir a actividad/efecto
+        espvaloresomision: Especificación de valores por omisión
+        espvalidaciones: Especificación de validaciones
+        espfuncionmedir: Especificación de función para medir indicador
+        medircon: Medir con
+        Tipoindicador: Tipo de indicador
+        Tiposindicador: Tipos de indicador
+      "cor1440_gen/tipomoneda":
+        Tipomoneda: Tipo de moneda
+        Tiposmoneda: Tipos de moneda
+        codiso4217: Código ISO 4217
+        fechacreacion_localizada: Creación
+        fechadeshabilitacion_localizada: Deshabilitación 
+        simbolo: Símbolo
+      "heb412_gen/plantillahcm":
+        Orgsociales: Organizaciones Sociales
+        caracterizacion: Caracterizacion de beneficiarios en proyectos
+        Personas: Beneficiarios
+        Proyectosfinancieros: Proyectos
+        proyectofinanciero: Proyectos que exportan/importan con la plantilla
+      "heb412_gen/plantillahcr":
+        Orgocial: Organización Social
+        Persona: Beneficiario
+        Proyectofinanciero: Proyecto
+      "sip/persona":
+        actividad_ids: Actividades en las que está en listado de asistencia
+        proyectofinanciero_ids: Proyectos que le caracterizan
+        proyectofinanciero: Proyectos que le caracterizan
