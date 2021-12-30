@@ -19,17 +19,11 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
 
-  s.add_dependency "jquery-rails"
-
   s.add_runtime_dependency "rails"
   s.add_runtime_dependency "devise"
   s.add_runtime_dependency "kt-paperclip"
   s.add_runtime_dependency "sip"
   s.add_runtime_dependency "heb412_gen"
   s.add_runtime_dependency "mr519_gen"
-
-  s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "capybara"
-  s.add_development_dependency "factory_girl_rails"
 
 end
