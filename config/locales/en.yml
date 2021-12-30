@@ -1,226 +1,226 @@
 en:
   attributes:
-    fechacreacion: Creación
-    fechacreacion_localizada: Creación
-    fechadeshabilitacion: Deshabilitación 
-    fechadeshabilitacion_localizada: Deshabilitación 
-    fechainicio: Fecha de inicio
-    fechainicio_localizada: Fecha de inicio
-    fechacierre: Fecha de cierre
-    fechacierre_localizada: Fecha de cierre
-    actividadarea: Subárea de actividad
-    actividadareas: Subáreas de actividad
-    actividadtipo: Tipo de actividad del marco lógico
-    actividadtipos: Tipos de actividad del marco lógico
-    proyectos: Áreas
-    proyecto: Área
-    proyectosfinancieros: Proyectos
-    proyectofinanciero: Proyecto
-    tiposindicador: Tipos de indicador
-    tipoindicador: Tipo de indicador
-    tiposmoneda: Tipos de moneda
-    tipomoneda: Tipo de moneda
+    fechacreacion: Creation
+    fechacreacion_localizada: Creation
+    fechadeshabilitacion: Disabling
+    fechadeshabilitacion_localizada: Disabling
+    fechainicio: Start date
+    fechainicio_localizada: Start date
+    fechacierre: Deadline
+    fechacierre_localizada: Deadline
+    actividadarea: Activity subarea
+    actividadareas: Subareas of activity
+    actividadtipo: Logical framework activity type
+    actividadtipos: Logical framework activity types
+    proyectos: Areas
+    proyecto: Area
+    proyectosfinancieros: Projects
+    proyectofinanciero: Project
+    tiposindicador: Indicator types
+    tipoindicador: Indicator type
+    tiposmoneda: Currency types
+    tipomoneda: Type of currency
   activerecord:
     models:
       "cor1440_gen/proyectofinanciero": 
-        one: "Proyecto"
-        other: "Proyectos"
+        one: "Project"
+        other: "Projects"
       "cor1440_gen/tipoindicador": 
-        one: "Tipo de indicador"
-        other: "Tipos de indicador"
+        one: "Type of indicator"
+        other: "Indicator types"
       "cor1440_gen/tipomoneda": 
-        one: "Tipo de moneda"
-        other: "Tipos de moneda"
+        one: "Type of currency"
+        other: "Types of currency"
     attributes:
       "campotind":
-        Campotind: Campo
-        Campostind: Campos
+        Campotind: Field
+        Campostind: Fields
       "campoact":
-        Campoact: Campo
-        Camposact: Campos
+        Campoact: Field
+        Camposact: Fields
       "cor1440_gen/actividad":
-        actividadarea: Subárea
-        actividadareas: Subáreas
-        actividadpf: Actividad del marco lógico
-        actividadespf: Actividades del marco lógico
-        orgsocial: Organizaciones sociales sociales en listado de asistencia
-        fecha_localizada: Fecha
-        objetivo: Objetivo de la actividad
-        objetivopf: Objetivo del marco lógico
-        proyecto: Área
-        proyectofinanciero: Proyecto
-        valorcampoact: Campos del tipo de actividad
+        actividadarea: Subarea
+        actividadareas: Subareas
+        actividadpf: Logical framework activity
+        actividadespf: Logical framework activities
+        orgsocial: Social organizations in attendance list
+        fecha_localizada: Date
+        objetivo: Objective of the activity
+        objetivopf: Objective of the logical framework
+        proyecto: Area
+        proyectofinanciero: Project
+        valorcampoact: Activity type fields
       "cor1440_gen/actividadpf":
-        actividadpf: Actividad del marco lógico
-        descripcion: Descripción
-        grupoexclusivo: Exclusiva de grupos
-        heredade: Hereda de
-        nombrecorto: Nombre corto
-        resultadopf: Resultado
-        titulo: Título
+        actividadpf: Logical framework activity
+        descripcion: Description
+        grupoexclusivo: Exclusive for groups
+        heredade: Inherits from
+        nombrecorto: Short name
+        resultadopf: Result
+        titulo: Title
       "cor1440_gen/actividadarea":
-        Actividadarea: Subárea de actividad
-        Actividadareas: Subáreas de actividad
+        Actividadarea: Activity subarea
+        Actividadareas: Subareas of activity
       "cor1440_gen/actividadtipo":
-        fechacreacion_localizada: Creación
-        fechadeshabilitacion_localizada: Deshabilitación 
-        Actividadtipo: Tipo de actividad del marco lógico
-        Actividadtipos: Tipos de actividad del marco lógico
-        campoact: Campo
-        Campoact: Campo
-        listadoasistencia: Listado de asistencia
+        fechacreacion_localizada: Creation
+        fechadeshabilitacion_localizada: Disabling
+        Actividadtipo: Logical framework activity type
+        Actividadtipos: Logical framework activity types
+        campoact: Field
+        Campoact: Field
+        listadoasistencia: Attendance list
       "cor1440_gen/orgsocial":
-        Orgsocial: Organización social
-        Orgsociales: Organizaciones sociales
-        direccion: Dirección
+        Orgsocial: Social organization
+        Orgsociales: Social organizations
+        direccion: Address
       "cor1440_gen/efecto":
-        Efecto: 'Avance en indicador de efecto'
-        Efectos: 'Avance en indicadores de efecto'
-        orgsocial: Organización(es) social(es)
-        "{:orgsocial_ids=>[]}": Organización(es) social(es)
-        anexo_efecto: Anexos / Medios de verificación
-        fecha_localizada: Fecha
-        indicadorpf: Indicador
-        indicadorpf_id: Indicador
-        registradopor: Registrado por
-        registradopor_id: Registrado por
+        Efecto: 'Advance in effect indicator'
+        Efectos: 'Progress in effect indicators'
+        orgsocial: Social Organization(s)
+        "{:orgsocial_ids=>[]}": Social Organization(s)
+        anexo_efecto: Annexes / Evidences
+        fecha_localizada: Date
+        indicadorpf: Indicator
+        indicadorpf_id: Indicator
+        registradopor: Registered by
+        registradopor_id: Registered by
       "cor1440_gen/indicadorpf":
-        indicadorpf: Indicador
-        numero: Número
-        indicador: Descripción del indicador
+        indicadorpf: Indicator
+        numero: Number
+        indicador: Description of the indicator
       "cor1440_gen/mindicadorpf":
-        Mindicadorpf: Medición de un indicador
-        Mindicadorespf: Mediciones de indicadores
-        actividadpf: Actividades del marco lógico relacionadas con el indicador
-        cor1440_gen_proyectofinanciero: Proyecto
-        cor1440_gen_indicadorpf: 'Indicador'
-        datointermedioti: 'Datos intermedios en cada medición'
-        formulario: 'Formulario adicional de avance en efecto'
-        frecuenciaanual: 'Frecuencia de medición anual'
-        funcionresultado: 'Función del resultado'
-        indicadorpf: 'Indicador'
-        indicadorpf_id: 'Indicador'
-        medircon: 'Aportan en la medición'
-        pmindicadorpf: 'Puntos de medición'
-        proyectofinanciero: Proyecto
-        proyectofinanciero_id: Proyecto
-        descd1: Descripción de dato intermedio 1
-        descd2: Descripción de dato intermedio 2
-        descd3: Descripción de dato intermedio 3
+        Mindicadorpf: Measurement of an indicator
+        Mindicadorespf: Indicator measurements
+        actividadpf: Logical framework activities related to the indicator
+        cor1440_gen_proyectofinanciero: Project
+        cor1440_gen_indicadorpf: 'Indicator'
+        datointermedioti: 'Intermediate data in each measurement'
+        formulario: 'Additional advance form in effect'
+        frecuenciaanual: 'Annual measurement frequency'
+        funcionresultado: 'Result function'
+        indicadorpf: 'Indicator'
+        indicadorpf_id: 'Indicator'
+        medircon: 'They contribute to the measurement'
+        pmindicadorpf: 'Measuring points'
+        proyectofinanciero: Project
+        proyectofinanciero_id: Project
+        descd1: Description of intermediate data 1
+        descd2: Description of intermediate data 2
+        descd3: Description of intermediate data 3
       "cor1440_gen/objetivopf":
-        objetivopf: Objetivo
-        numero: Número
-        objetivo: Descripción del objetivo
+        objetivopf: Objective of the logical framework
+        numero: Number
+        objetivo: Objective description
       "cor1440_gen/pmindicadorpf":
-        resind: Resultado
+        resind: Result
       "cor1440_gen/financiador":
-        Financiador: Financiador
-        Financiadores: Financiadores
+        Financiador: Funder
+        Financiadores: Funders
       "cor1440_gen/informe":
-        filtrofechaini:  Fecha inicial
-        filtrofechaini_localizada:  Fecha inicial
-        filtrofechafin:  Fecha final
-        filtrofechafin_localizada:  Fecha final
-        filtroproyecto: Área
-        filtroproyectofinanciero: Proyecto
-        filtroactividadarea: Subárea 
-        columnafecha: Fecha
+        filtrofechaini:  Initial date
+        filtrofechaini_localizada:  Initial date
+        filtrofechafin:  Final date
+        filtrofechafin_localizada:  Final date
+        filtroproyecto: Area
+        filtroproyectofinanciero: Project
+        filtroactividadarea: Subarea
+        columnafecha: Date
         columnaresponsable: Responsable
       "cor1440_gen/proyecto":
-        Proyecto: Área
-        Proyectos: Áreas
+        Proyecto: Area
+        Proyectos: Areas
       "cor1440_gen/proyectofinanciero":
-        actividadpf: Activity in logical framework
-        anexo_proyectofinanciero: Attachments
-        aportepropioej: Own contribution
-        aporteotrosej: Contribution of other donors
-        aprobadoobs: Approved by managers
+        actividadpf: Logical framework activity
+        anexo_proyectofinanciero: "Annexes"
+        aportepropioej: Own Contribution
+        aporteotrosej: Contribution from other donors
+        aprobadoobs: Board approved
         beneficiario: Beneficiaries with characterization
-        caracterizacion: Characterization form of beneficiaries
-        centrocosto: Accounting Cost Center
-        fechaaprobacion: Approval date
-        fechaaprobacion_localizada: Approval date
-        fechaliquidacion: Settlement date
-        fechaliquidacion_localizada: Settlement date
-        fechaformulacion: Formulation date
-        fechaformulacion_anio: "Año de formulación"
-        fechaformulacion_mes: "Mes de formulación"
-        fechaformulacion_localizada: "Fecha de formulación"
-        fechaliquidacion: "Fecha de liquidación"
-        fechaliquidacion_localizada: "Fecha de liquidación"
-        financiador_ids: Financiadores
-        indicador: Indicador
-        marcologico: Marco lógico
-        montoej: Aporte del financiador
-        nombre: Nombre interno breve
-        objetivopf: Objetivo
-        plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este proyecto
-        presupuestototalej: Presupuesto total
-        proyecto: Área
-        proyectos: Área
-        proyecto_ids: Áreas
-        proyectofinanciero_usuario: Equipo de trabajo
-        "{:proyecto_ids=>[]}": Áreas
-        Proyectofinanciero: Proyecto
-        proyectofinanciero: Proyecto
-        Proyectosfinancieros: Proyectos
-        proyectosfinancieros: Proyectos
-        responsable_id: Coordinador
-        responsable: Coordinador
-        resultadopf: Resultado
-        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Actividad del marco lógico
-        "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicador
-        "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objetivo
-        "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Resultado
-        saldoaejecutarp: Saldo por ejecutar en pesos
-        sectorapc: Sector APC
-        semestreformulacion: Semestre de formulación
-        tasaej: Tasa de cambio
-        titulo: Título largo del proyecto
+        caracterizacion: Beneficiary characterization form
+        centrocosto: Cost center
+        fechaaprobacion: "Approval date"
+        fechaaprobacion_localizada: "Approval date"
+        fechaliquidacion: "Settlement date"
+        fechaliquidacion_localizada: "Settlement date"
+        fechaformulacion: "Formulation date"
+        fechaformulacion_anio: "Year of formulation"
+        fechaformulacion_mes: "Formulation month"
+        fechaformulacion_localizada: "Formulation date"
+        fechaliquidacion: "Settlement date"
+        fechaliquidacion_localizada: "Settlement date"
+        financiador_ids: Funders
+        indicador: Indicator
+        marcologico: Logical framework
+        montoej: Funder's contribution
+        nombre: Short internal name
+        objetivopf: Objective of the logical framework
+        plantillahcm: Templates for lists that export / import characterizations of this project
+        presupuestototalej: Total budget
+        proyecto: Area
+        proyectos: Area
+        proyecto_ids: Areas
+        proyectofinanciero_usuario: Work team
+        "{:proyecto_ids=>[]}": Areas
+        Proyectofinanciero: Project
+        proyectofinanciero: Project
+        Proyectosfinancieros: Projects
+        proyectosfinancieros: Projects
+        responsable_id: Coordinator
+        responsable: Coordinator
+        resultadopf: Result
+        "{:actividadpf_attributes=>[:id, :resultadopf_id, :nombrecorto, :titulo, :descripcion, :_destroy]}": Logical framework activity
+        "{:indicadorpf_attributes=>[:id, :resultadopf_id, :numero, :indicador, :tipoindicador_id, :_destroy]}": Indicator
+        "{:objetivopf_attributes=>[:id, :numero, :objetivo, :_destroy]}": Objective of the logical framework
+        "{:resultadopf_attributes=>[:id, :objetivopf_id, :numero, :resultado, :_destroy]}": Result
+        saldoaejecutarp: Balance to be executed in local currency
+        sectorapc: APC sector
+        semestreformulacion: Formulation semester
+        tasaej: Exchange rate
+        titulo: Long title of the project
       "cor1440_gen/rangoedadac":
-        Rangoedadac: Rango de edad en actividades
-        Rangosedadac: Rangos de edad en actividades
+        Rangoedadac: Age range in activities
+        Rangosedadac: Age ranges in activities
       "cor1440_gen/resultadopf":
-        resultadopf: Resultado
-        numero: Número
-        resultado: Descripción del resultado
+        resultadopf: Result
+        numero: Number
+        resultado: Description of the result
       "cor1440_gen/sectororgsocial":
-        Sectororgsocial: Sector de organización social
-        Sectoresorgsociales: Sectores de organizaciones sociales
+        Sectororgsocial: Social organization sector
+        Sectoresorgsociales: Sectors of social organizations
       "cor1440_gen/sectorapc":
-        Sectorapc: Sector APC
-        Sectoresapc: Sectores APC
+        Sectorapc: APC sector
+        Sectoresapc: APC sectors
       "cor1440_gen/tipoindicador":
-        nombre: Nombre corto
-        campotind: Campo
-        Campotind: Campo
-        datointermedioti: Datos intermedios
-        esptipometa: Especificación del tipo de meta
-        espcampos: Especificación de campos por añadir a actividad/efecto
-        espvaloresomision: Especificación de valores por omisión
-        espvalidaciones: Especificación de validaciones
-        espfuncionmedir: Especificación de función para medir indicador
-        medircon: Medir con
-        Tipoindicador: Tipo de indicador
-        Tiposindicador: Tipos de indicador
+        nombre: Short name
+        campotind: Field
+        Campotind: Field
+        datointermedioti: Intermediate data
+        esptipometa: Goal type specification
+        espcampos: Specification of fields to add to activity / effect
+        espvaloresomision: Specifying default values
+        espvalidaciones: Specification of validations
+        espfuncionmedir: Function specification for measuring indicator
+        medircon: Measure with
+        Tipoindicador: Indicator type
+        Tiposindicador: Indicator types
       "cor1440_gen/tipomoneda":
-        Tipomoneda: Tipo de moneda
-        Tiposmoneda: Tipos de moneda
-        codiso4217: Código ISO 4217
-        fechacreacion_localizada: Creación
-        fechadeshabilitacion_localizada: Deshabilitación 
-        simbolo: Símbolo
+        Tipomoneda: Type of currency
+        Tiposmoneda: Currency types
+        codiso4217: ISO 4217 code
+        fechacreacion_localizada: Creation
+        fechadeshabilitacion_localizada: Disabling
+        simbolo: Symbol
       "heb412_gen/plantillahcm":
-        Orgsociales: Organizaciones Sociales
-        caracterizacion: Caracterizacion de beneficiarios en proyectos
-        Personas: Beneficiarios
-        Proyectosfinancieros: Proyectos
-        proyectofinanciero: Proyectos que exportan/importan con la plantilla
+        Orgsociales: Social Organizations
+        caracterizacion: Characterization of beneficiaries in projects
+        Personas: Beneficiaries
+        Proyectosfinancieros: Projects
+        proyectofinanciero: Projects that export / import with the template
       "heb412_gen/plantillahcr":
-        Orgocial: Organización Social
-        Persona: Beneficiario
-        Proyectofinanciero: Proyecto
+        Orgocial: Social organization
+        Persona: Beneficiary
+        Proyectofinanciero: Project
       "sip/persona":
-        actividad_ids: Actividades en las que está en listado de asistencia
-        proyectofinanciero_ids: Proyectos que le caracterizan
-        proyectofinanciero: Proyectos que le caracterizan
+        actividad_ids: Activities in which it is on the attendance list
+        proyectofinanciero_ids: Projects that characterize it
+        proyectofinanciero: Projects that characterize it
