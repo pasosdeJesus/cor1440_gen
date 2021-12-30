@@ -1,7 +1,6 @@
 
 <div class="page-header">
-  <h1><%=t '.title', 
-    :default => 'Conteo de beneficiarios por actividad de convenio' %></h1>
+  <h1><%= Cor1440Gen::Actividad.human_attribute_name('Conteo por beneficiarios') %></h1>
 </div>
 <%= simple_form_for :filtro, 
   { remote: false, 
@@ -12,14 +11,15 @@
   <div class="container">
     <div class="row filtro-fila">
       <div class="offset-sm-0 col-sm-4 offset-md-1 col-md-1">
-        Filtrar por:
+        <%= t('Filtrar por') %>:
       </div>
       <div class="offset-sm-0 col-sm-4">
         <%= f.input :fechaini,
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Fecha Inicial',
+          placeholder: Cor1440Gen::Actividad.human_attribute_name(
+            'Fecha Inicial'),
           input_html: {
             "data-behaviour" => "datepicker",
             value: fecha_estandar_local(@contarb_fechaini)
@@ -31,7 +31,8 @@
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Fecha Final',
+          placeholder: Cor1440Gen::Actividad.human_attribute_name(
+            'Fecha Final'),
           input_html: {
             "data-behaviour" => "datepicker",
             value: fecha_estandar_local(@contarb_fechafin)
@@ -62,7 +63,7 @@
 
     <div class="row filtro-fila">
       <div class="offset-md-5 col-md-3">
-        <%= f.button :submit, 'Contar', class: 'btn btn-default' %>
+        <%= f.button :submit,t('Contar'), class: 'btn btn-default' %>
       </div>
     </div>
 

@@ -1,6 +1,6 @@
 
 <div class="page-header">
-  <h1><%=t '.title', :default => 'Conteo de actividades' %></h1>
+  <h1><%= t 'Conteo de actividades' %></h1>
 </div>
 <%= simple_form_for :filtro, 
   { remote: true, 
@@ -11,14 +11,14 @@
   <div class="container">
     <div class="row filtro-fila">
       <div class="offset-sm-0 col-sm-4 offset-md-1 col-md-1">
-        Filtrar por:
+        <%= t('Filtrar por') %>:
       </div>
       <div class="offset-sm-0 col-sm-4">
         <%= f.input :fechaini,
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Fecha Inicial',
+          placeholder: t('Fecha Inicial'),
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "",
@@ -31,7 +31,7 @@
           maxlength: 10, 
           size: 10,
           label: false,
-          placeholder: 'Fecha Final',
+          placeholder: t('Fecha Final'),
           input_html: {
             "data-behaviour" => "datepicker",
             "data-contarautomatico" => "",
@@ -64,7 +64,7 @@
 
     <div class="row filtro-fila">
       <div class="offset-md-5 col-md-3">
-        <%= f.button :submit, 'Contar', class: 'btn btn-default' %>
+        <%= f.button :submit, t('Contar'), class: 'btn btn-default' %>
       </div>
     </div>
 

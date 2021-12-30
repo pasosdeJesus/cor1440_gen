@@ -1,16 +1,16 @@
 <p></p>
 <%= f.input :id, as: :hidden %>
 <div class="panel panel-default">
-  <div class="panel-heading">Objetivos / Efectos</div>
+  <div class="panel-heading"><%= t('Objetivos / Efectos') %></div>
   <div class="panel-body">
 
     <div class="div-objetivospf">
       <table class='table table-bordered' border=1 width="100%">
         <thead>
           <tr>
-            <th width="25%">Código</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
+            <th width="25%"><%= t('Código') %></th>
+            <th><%= t('Descripción') %></th>
+            <th><%= t('Acciones') %></th>
           </tr>
         </thead>
         <tbody id="objetivospf">
@@ -20,7 +20,7 @@
         </tbody>
       </table>
       <div class="links">
-        <%= link_to_add_association 'Agregar objetivo / efecto', f, :objetivopf, {
+        <%= link_to_add_association t('Añadir objetivo / efecto'), f, :objetivopf, {
           :"data-association-insertion-node" => "tbody#objetivospf", 
           :"data-association-insertion-method" => "append", 
           partial: 'objetivopf_campos',

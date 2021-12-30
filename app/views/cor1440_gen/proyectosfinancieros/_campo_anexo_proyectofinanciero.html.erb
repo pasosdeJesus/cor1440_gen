@@ -3,7 +3,7 @@
     <%= render 'anexo_proyectofinanciero_campos', :f => a %>
   <% end %>
   <div class="links">
-    <%= link_to_add_association 'Añadir Anexo', f, 
+    <%= link_to_add_association t('Añadir anexo'), f, 
       :anexo_proyectofinanciero, :class => 'btn-primary',
       partial: 'anexo_proyectofinanciero_campos' %>
   </div>

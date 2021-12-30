@@ -149,6 +149,9 @@ es:
         fechaliquidacion: "Fecha de liquidación"
         fechaliquidacion_localizada: "Fecha de liquidación"
         financiador_ids: Financiadores
+        financiador: Financiador
+        "{:financiador_ids=>[]}": Funders
+        indicador: Indicator
         indicador: Indicador
         marcologico: Marco lógico
         montoej: Aporte del financiador

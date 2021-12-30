@@ -1,8 +1,8 @@
 <p>
 <table class='table table-bordered table-sm' border="1">
   <tr>
-    <th>Objetivos/Efectos</th>
-    <th>Indicadores de Objetivo/Efecto</th>
+    <th><%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Objetivos/Efectos') %></th>
+    <th><%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Indicadores de objetivo/efecto') %></th>
   </tr>
   <% @registro.objetivopf.order(:id).each do |o| %>
     <tr>
@@ -17,8 +17,8 @@
     </tr>
   <% end %>
   <tr>
-    <th>Resultados/Productos</th>
-    <th>Indicadores de Resultado</th>
+    <th><%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Resultados/Productos') %></th>
+    <th><%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Indicadores de resultado') %></th>
   </tr>
   <% @registro.resultadopf.order(:id).each do |r| %>
     <tr>
@@ -36,7 +36,7 @@
 </table>
 <table class="table table-bordered table-sm" border="1">
   <tr>
-    <th>Resultado</th><th>Actividades de Marco Lógico</th>
+    <th><%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Resultado') %></th><th><%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Actividades de marco lógico') %></th>
   </tr>
   <% @registro.resultadopf.order(:id).each do |r| %>
     <tr>
@@ -51,13 +51,13 @@
               <% if a.formulario_id || a.heredade_id || a.actividadtipo_id %>
                 (
                 <% if a.formulario_id then %>
-                  Formulario: <%= a.formulario.presenta_nombre %>.
+                  <%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Formulario') %>: <%= a.formulario.presenta_nombre %>.
                 <% end %>
                 <% if a.heredade_id then %>
-                  Hereda de: <%= a.heredade.presenta_nombre %>.
+                  <%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Hereda de') %>: <%= a.heredade.presenta_nombre %>.
                 <% end %>
                 <% if a.actividadtipo_id then %>
-                  Tipo: <%= a.actividadtipo.nombre %>.
+                  <%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Tipo') %>: <%= a.actividadtipo.nombre %>.
                 <% end %>
                 )
               <% end %>

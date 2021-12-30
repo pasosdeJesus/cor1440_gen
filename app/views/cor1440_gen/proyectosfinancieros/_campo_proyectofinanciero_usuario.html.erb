@@ -1,10 +1,10 @@
 <p>
-Equipo de trabajo:
+<%= t('Equipo de trabajo') %>:
 <table class='table table-bordered' border=1 width="100%">
   <thead>
     <tr>
-      <th>Persona</th>
-      <th>Acciones</th>
+      <th><%= t('Persona') %></th>
+      <th><%= t('Acciones') %></th>
     </tr>
   </thead>
   <tbody id="proyectofinanciero_usuario">
@@ -14,7 +14,7 @@ Equipo de trabajo:
   </tbody>
 </table>
 <div class="links">
-  <%= link_to_add_association 'Añadir Funcionario', f, 
+  <%= link_to_add_association t('Añadir funcionario'), f, 
     :proyectofinanciero_usuario,
     :"data-association-insertion-node" => "tbody#proyectofinanciero_usuario", 
     :"data-association-insertion-method" => "append", 
