@@ -6,7 +6,7 @@
     <% end %>
   </div>
   <div class="col-sm-2">
-    <% ng = (!genclase.nil? && genclase == 'F') ? 'Nueva' : 'Nuevo' %>
+    <% ng = (!genclase.nil? && genclase == 'F') ? t('Nueva') : t('Nuevo') %>
     <% if can?(:new, clase.constantize) && @registros %>
       <%= link_to t('.new', default: [ng, t("helpers.links.new")]),
         new_modelo_path(@registros), 

@@ -2,10 +2,10 @@
 <table class='table table-bordered' border=1 width="100%">
   <thead>
     <tr>
-      <th>Informe Narrativo / Planificación / POA</th>
-      <th>Fecha</th>
-      <th>Devoluciones</th>
-      <th>Seguimiento</th>
+      <th><%= t('Informe narrativo / Planificación / POA') %></th>
+      <th><%= t('Fecha') %></th>
+      <th><%= t('Devoluciones') %></th>
+      <th><%= t('Seguimiento') %></th>
       <th></th>
     </tr>
   </thead>
@@ -16,7 +16,7 @@
   </tbody>
 </table>
 <div class="links">
-  <%= link_to_add_association 'Añadir Informe Narrativo', f, 
+  <%= link_to_add_association t('Añadir informe narrativo'), f, 
     :informenarrativo,
     :"data-association-insertion-node" => "tbody#informenarrativo", 
     :"data-association-insertion-method" => "append", 
@@ -30,10 +30,10 @@
 <table class='table table-bordered' border=1 width="100%">
   <thead>
     <tr>
-      <th>Informe Financiero</th>
-      <th>Fecha </th>
-      <th>Devoluciones</th>
-      <th>Seguimiento</th>
+      <th><%= t('Informe financiero') %></th>
+      <th><%= t('Fecha') %></th>
+      <th><%= t('Devoluciones') %></th>
+      <th><%= t('Seguimiento') %></th>
       <th></th>
     </tr>
   </thead>
@@ -44,7 +44,7 @@
   </tbody>
 </table>
 <div class="links">
-  <%= link_to_add_association 'Añadir Informe Financiero', f, 
+  <%= link_to_add_association t('Añadir informe financiero'), f, 
     :informefinanciero,
     :"data-association-insertion-node" => "tbody#informefinanciero", 
     :"data-association-insertion-method" => "append", 
@@ -58,10 +58,10 @@
 <table class='table table-bordered' border=1 width="100%">
   <thead>
     <tr>
-      <th>Informe auditoría</th>
-      <th>Fecha</th>
-      <th>Devoluciones</th>
-      <th>Seguimiento</th>
+      <th><%= t('Informe de auditoría') %></th>
+      <th><%= t('Fecha') %></th>
+      <th><%= t('Devoluciones') %></th>
+      <th><%= t('Seguimiento') %></th>
       <th></th>
     </tr>
   </thead>
@@ -72,7 +72,7 @@
   </tbody>
 </table>
 <div class="links">
-  <%= link_to_add_association 'Añadir Informe Auditoría', f, 
+  <%= link_to_add_association t('Añadir informe de auditoría'), f, 
     :informeauditoria,
     :"data-association-insertion-node" => "tbody#informeauditoria", 
     :"data-association-insertion-method" => "append", 

@@ -338,14 +338,14 @@ module Cor1440Gen
         class_methods do
 
           def human_attribute_name(atr, poromision = "")
-            if (atr.to_s == "{:proyecto_ids=>[]}")
-              "Proyectos"
-            elsif (atr.to_s == "{:financiador_ids=>[]}")
-              "Financiadores"
-            else
+            #if (atr.to_s == "{:proyecto_ids=>[]}")
+            #  "Proyectos"
+            #elsif (atr.to_s == "{:financiador_ids=>[]}")
+            #  "Financiadores"
+            #else
               super(atr)
-            end
-          end
+            #end
+          end  
         end # class_methods
 
       end

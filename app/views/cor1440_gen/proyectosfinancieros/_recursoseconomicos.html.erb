@@ -29,15 +29,15 @@
   <table class="table table-bordered">
     <thead>
       <tr class="table-active">
-        <th>Concepto</th>
-        <th colspan='2' style='text-align: center'>Aprobado</th>
+        <th><%= t('Concepto') %></th>
+        <th colspan='2' style='text-align: center'><%= t('Aprobado') %></th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <th></th>
-        <th>Moneda</th>
-        <th>Pesos</th>
+        <th><%= t('Moneda') %></th>
+        <th><%= t('Pesos') %></th>
       </tr>
 
       <tr>
@@ -148,9 +148,9 @@
 <table border=1 width="100%">
   <thead>
     <tr>
-      <th>Detalle</th>
-      <th>Fecha</th>
-      <th>Valor en Pesos</th>
+      <th><%= t('Detalle') %></th>
+      <th><%= t('Fecha') %></th>
+      <th><%= t('Valor en pesos') %></th>
       <th></th>
     </tr>
   </thead>
@@ -161,7 +161,7 @@
   </tbody>
 </table>
 <div class="links">
-  <%= link_to_add_association 'Añadir Desembolso', f, 
+  <%= link_to_add_association t('Añadir desembolso'), f, 
     :desembolso,
     :"data-association-insertion-node" => "tbody#desembolso", 
     :"data-association-insertion-method" => "append", 

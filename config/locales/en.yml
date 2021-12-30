@@ -1,4 +1,69 @@
 en:
+  Acciones: Actions
+  Actividades: Activities
+  "Actividad de marco lógico": Activity of logical framework
+  "Actividad del marco lógico": Activity of logical framework
+  "Actividades de marco lógico": Activities of logical framework
+  "Actividades del marco lógico": Activities of logical framework
+  "Añadir actividad": Add activity
+  "Añadir anexo": Add attachment
+  "Añadir desembolso": Add disbursment
+  "Añadir funcionario": Add official
+  "Añadir indicador": Add indicator
+  "Añadir informe de auditoria": Add audit report
+  "Añadir informe narrativo": Add narrative report
+  "Añadir informe financiero": Add financial report
+  "Añadir objetivo / efecto": Add objective / effect
+  "Añadir resultado": Add result
+  Aprobado: Approved
+  Beneficiarios: Beneficiaries
+  Código: Code
+  Concepto: Concept
+  Contar: Count
+  "Contar por actividad de marco lógico": Counting by activity of logical framework
+  "Contar por beneficiario y actividad de marco lógico": Counting by beneficiary and activity of logical framework
+  "Conteo de actividades": Activities counting
+  "Descripción": Description
+  "Detalle": Notes
+  "Devoluciones": Devolutions
+  "Eliminar": Delete
+  "Eliminar anexo": Delete attachment
+  "Estado": State
+  "Equipo de trabajo": Work team
+  "Fecha": Date
+  "Fecha inicio": Starting date
+  "Filtrar por": Filter by
+  "Final": Ending
+  Formulario: Form
+  "Hereda de": Inherits from
+  Indicador: Indicator
+  "Indicadores de resultado": Result indicators
+  "Indicadores de objetivo/efecto": Indicators of objective/effect
+  "Informe de auditoría": Audit report
+  "Informes y auditorias": Reports and audits
+  "Informe narrativo / Planificación / POA": Narrative report / Planning
+  "Informe financiero": Financial report
+  "Inicial": Starting
+  "Marco lógico": Logical framework
+  "Medir indicadores": Indicators measurements
+  Moneda: Currency of project
+  Pesos: Local currency
+  Monitoreo: Monitoring
+  "Objetivos / Efectos": Objectives / Effects
+  Persona: Person
+  Proyectofinanciero: Project
+  Proyectosfinancieros: Projects
+  "Rango para fecha de inicio": Date range for starting date
+  "Recursos humanos": Human resources
+  "Recursos económicos": Economical resources
+  "Ref. a objetivo": Ref. to objective
+  "Ref. a objetivo/efecto": Ref. to objective/effect
+  "Ref. a resultado ": Ref. to result 
+  "Resultado": Result
+  "Resultados": Results
+  "Seguimiento": Follow up
+  "Validar y Guardar": Validate and Save
+  "Valor en pesos": Value in local currency
   attributes:
     fechacreacion: Creation
     fechacreacion_localizada: Creation
@@ -39,14 +104,43 @@ en:
         Campoact: Field
         Camposact: Fields
       "cor1440_gen/actividad":
+        Actividades: Activities
+        Actividad: Activity
+        Actividades del marco lógico: Activities of logical framework
+        Anexos: Attachments
+        "Asistentes únicos": Unique attendents
+        Beneficiario: Beneficiary
+        "Conteo por beneficiarios": Counting by beneficiaries
+        "Externos sin sexo": External withouth sex
+        "Frecuencia de asistencia": Attendance frequency 
+        "Hombres organización": Men of the organization
+        "Hombres externos": External men
+        "Mujeres organización": Women of the organization
+        "Mujeres externas": External women
+        "No se hacen sumas verticales por columna porque una actividad puede tener varías actividades de marco lógico": We don't do vertical sums by column because one activity can have several activities of logical framework
+        "Número de beneficiarios (posiblemente repetidos) contados en la tabla de población por rangos de edad": Amount of beneficiaries (may be repeated) counted in the table o population by age ranges
+        "Número de asistentes (posiblemente repetidos) según listado de asistencia": Amount of attendendants (may be repeated) according to the attendance list
+        "Número de asistentes únicos de los listados de asistencia": Amount of unique attendants in the attendance list
+        "Tasa 'Participaciones asistentes' / 'Asistentes únicos'": Rate 'Attendants Participations' / 'Unique Attendants' 
+        "Totales": Totals
+        Nombre: Name
+        Participaciones: Participations
+        "Participaciones asistentes": Participations of attendents
+        Poblacion: Population
+        "Rango(s) de edad": Age ranges
+        Resultados: Results
+        Sexo: Sex
+        "Sin actividad de marco lógico": Without activity of logical framework
+        "Total<br>Actividades": Total of activities
         actividadarea: Subarea
         actividadareas: Subareas
         actividadpf: Logical framework activity
         actividadespf: Logical framework activities
-        orgsocial: Social organizations in attendance list
+        beneficiarios: Beneficiaries
         fecha_localizada: Date
         objetivo: Objective of the activity
         objetivopf: Objective of the logical framework
+        orgsocial: Social organizations in attendance list
         proyecto: Area
         proyectofinanciero: Project
         valorcampoact: Activity type fields
@@ -89,28 +183,31 @@ en:
         numero: Number
         indicador: Description of the indicator
       "cor1440_gen/mindicadorpf":
+        "Frecuencia de medición anual": Frequency of measurement
         Mindicadorpf: Measurement of an indicator
         Mindicadorespf: Indicator measurements
+        "Última medición": Last measurement
         actividadpf: Logical framework activities related to the indicator
         cor1440_gen_proyectofinanciero: Project
         cor1440_gen_indicadorpf: 'Indicator'
         datointermedioti: 'Intermediate data in each measurement'
+        descd1: Description of intermediate data 1
+        descd2: Description of intermediate data 2
+        descd3: Description of intermediate data 3
         formulario: 'Additional advance form in effect'
         frecuenciaanual: 'Annual measurement frequency'
         funcionresultado: 'Result function'
+        Indicador: Indicator
         indicadorpf: 'Indicator'
         indicadorpf_id: 'Indicator'
         medircon: 'They contribute to the measurement'
         pmindicadorpf: 'Measuring points'
         proyectofinanciero: Project
         proyectofinanciero_id: Project
-        descd1: Description of intermediate data 1
-        descd2: Description of intermediate data 2
-        descd3: Description of intermediate data 3
       "cor1440_gen/objetivopf":
-        objetivopf: Objective of the logical framework
         numero: Number
         objetivo: Objective description
+        objetivopf: Objective of the logical framework
       "cor1440_gen/pmindicadorpf":
         resind: Result
       "cor1440_gen/financiador":
@@ -130,6 +227,15 @@ en:
         Proyecto: Area
         Proyectos: Areas
       "cor1440_gen/proyectofinanciero":
+        "Actividades de marco lógico": Activities of logical framework
+        "Financiadores": Funders
+        "Formulario": Form
+        "Hereda de": Inherits from
+        "Objetivos/Efectos": Objectives/Effects
+        "Resultados": Results
+        "Resultados/Productos": Results/Products
+        "Resultado": Result
+        "Tipo": Type
         actividadpf: Logical framework activity
         anexo_proyectofinanciero: "Annexes"
         aportepropioej: Own Contribution
@@ -138,6 +244,10 @@ en:
         beneficiario: Beneficiaries with characterization
         caracterizacion: Beneficiary characterization form
         centrocosto: Cost center
+        compromisos: Commmitments
+        duracion: Duration
+        dificultad: Difficulty
+        estado: State
         fechaaprobacion: "Approval date"
         fechaaprobacion_localizada: "Approval date"
         fechaliquidacion: "Settlement date"
@@ -148,12 +258,18 @@ en:
         fechaformulacion_localizada: "Formulation date"
         fechaliquidacion: "Settlement date"
         fechaliquidacion_localizada: "Settlement date"
+        financiador: Funder
         financiador_ids: Funders
+        "{:financiador_ids=>[]}": Funders
         indicador: Indicator
+        indicadorobjetivo: Indicator for objective
+        indicadorpf: Indicator
         marcologico: Logical framework
+        monto: Amount
         montoej: Funder's contribution
         nombre: Short internal name
         objetivopf: Objective of the logical framework
+        observaciones: Notes
         plantillahcm: Templates for lists that export / import characterizations of this project
         presupuestototalej: Total budget
         proyecto: Area

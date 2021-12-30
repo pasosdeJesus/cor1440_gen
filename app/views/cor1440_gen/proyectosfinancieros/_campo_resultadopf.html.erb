@@ -1,15 +1,15 @@
 <p></p>
 <div class="panel panel-default">
-  <div class="panel-heading">Resultados</div>
+  <div class="panel-heading"><%= t('Resultados') %></div>
   <div class="panel-body">
     <div class="div-resultadospf">
       <table class='table table-bordered' border=1 width="100%">
         <thead>
           <tr>
-            <th>Ref. Objetivo</th>
-            <th width="10%">Código</th>
-            <th>Resultado</th>
-            <th>Acciones</th>
+            <th><%= t('Ref. a objetivo') %></th>
+            <th width="10%"><%= t('Código') %></th>
+            <th><%= t('Resultado') %></th>
+            <th><%= t('Acciones') %></th>
           </tr>
         </thead>
         <tbody id="resultadospf">
@@ -19,7 +19,7 @@
         </tbody>
       </table>
       <div class="links">
-        <%= link_to_add_association 'Agregar resultado', f, :resultadopf, {
+        <%= link_to_add_association t('Añadir resultado'), f, :resultadopf, {
           :"data-association-insertion-node" => "tbody#resultadospf", 
           :"data-association-insertion-method" => "append", 
           partial: 'resultadopf_campos',

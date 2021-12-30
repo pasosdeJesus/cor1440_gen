@@ -1,15 +1,15 @@
 <p></p>
 <div class="panel panel-default">
-  <div class="panel-heading">Indicadores de Objetivos/Efectos</div>
+  <div class="panel-heading"><%= t('Indicadores de objetivo/efecto') %></div>
   <div class="panel-body">
     <div class="div-indicadoresobjetivos">
       <table class='table table-bordered' border=1 width="100%">
         <thead>
           <tr>
-            <th>Ref. Objetivo/Efecto</th>
-            <th width="10%">Código</th>
-            <th>Indicador</th>
-            <th>Acciones</th>
+            <th><%= t('Ref. a objetivo/efecto') %></th>
+            <th width="10%"><%= t('Código') %></th>
+            <th><%= t('Indicador') %></th>
+            <th><%= t('Acciones') %></th>
           </tr>
         </thead>
         <tbody id="indicadoresobjetivos">
@@ -20,8 +20,8 @@
         </tbody>
       </table>
       <div class="links">
-        <%= link_to_add_association 'Agregar indicador de objetivo/efecto', f, 
-          :indicadorobjetivo, {
+        <%= link_to_add_association t('Agregar indicador de objetivo/efecto'), 
+          f, :indicadorobjetivo, {
           :"data-association-insertion-node" => "tbody#indicadoresobjetivos", 
           :"data-association-insertion-method" => "append", 
           partial: 'indicadorobjetivo_campos',

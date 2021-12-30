@@ -1,18 +1,18 @@
 <p></p>
 <div class="panel panel-default">
-  <div class="panel-heading">Actividades del marco lógico</div>
+  <div class="panel-heading"><%= t('Actividades del marco lógico') %></div>
   <div class="panel-body table-responsive" style='overflow-x:scroll;'>
     <div class="div-actividadespf">
       <table class='table table-bordered' border=1 width="100%">
         <thead>
           <tr>
-            <th style='min-width: 8rem'>Ref. Resultado</th>
-            <th style='min-width: 4rem'>Código</th>
-            <th style='min-width: 18rem'>Actividad del marco lógico</th>
-            <th style='min-width: 18rem'>Detalle</th>
-            <th style='min-width: 8rem'>Formulario</th>
-            <th style='min-width: 14rem'>Hereda de</th>
-            <th style='min-width: 4rem'>Acciones</th>
+            <th style='min-width: 8rem'><%= t('Ref. a resultado') %></th>
+            <th style='min-width: 4rem'><%= t('Código') %></th>
+            <th style='min-width: 18rem'><%= t('Actividad del marco lógico') %></th>
+            <th style='min-width: 18rem'><%= t('Detalle') %></th>
+            <th style='min-width: 8rem'><%= t('Formulario') %></th>
+            <th style='min-width: 14rem'><%= t('Hereda de') %></th>
+            <th style='min-width: 4rem'><%= t('Acciones') %></th>
           </tr>
         </thead>
         <tbody id="actividadespf">
@@ -23,7 +23,7 @@
         </tbody>
       </table>
       <div class="links">
-        <%= link_to_add_association 'Agregar actividad', f, :actividadpf, {
+        <%= link_to_add_association t('Añadir actividad'), f, :actividadpf, {
           :"data-association-insertion-node" => "tbody#actividadespf", 
           :"data-association-insertion-method" => "append", 
           partial: 'actividadpf_campos',
