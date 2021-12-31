@@ -26,7 +26,7 @@
       value_method: :id,
       selected: f.object.proyectofinanciero_id,
       input_html: { 
-        "title" => 'Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)',
+        "title" => t('Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)'),
         class: 'chosen-select' 
       }
     %>
@@ -35,7 +35,7 @@
     <%= render partial: 'campo_actividad_proyectofinanciero_actividadpf', locals: {f: f} %>
   </td>  
   <td>
-    <%= link_to_remove_association "Eliminar", f, 
+    <%= link_to_remove_association t("Eliminar"), f, 
       :class => 'btn-danger' 
     %>
   </td>

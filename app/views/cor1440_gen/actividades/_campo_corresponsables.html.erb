@@ -11,9 +11,9 @@
 <% end %>
 <% lus = Usuario.where("#{condr}") %>
 <% if defined? con_label %>
-  <% l = con_label ? 'Corresponsable(s)' : false %>
+  <% l = con_label ? t('Corresponsable(s)') : false %>
 <% else %>
-  <% l = 'Corresponsable(s)' %>
+  <% l = t('Corresponsable(s)') %>
 <% end %>
 <%= f.association :usuario,
   collection: lus,

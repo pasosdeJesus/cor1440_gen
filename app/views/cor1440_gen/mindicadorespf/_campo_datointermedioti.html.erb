@@ -1,16 +1,16 @@
 <%= f.input :id, as: :hidden %>
 <div class="panel panel-default">
-  <div class="panel-heading">Datos intermedios</div>
+  <div class="panel-heading"><%= t('Datos intermedios') %></div>
   <div class="panel-body">
 
     <div class="div-campostind">
       <table class='table table-bordered' border=1 width="100%">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Nombre interno</th>
-            <th>Función de medición</th>
-            <th>Acciones</th>
+            <th><%= t('Nombre') %></th>
+            <th><%= t('Nombre interno') %></th>
+            <th><%= t('Función de medición') %></th>
+            <th><%= t('Acciones') %></th>
           </tr>
         </thead>
         <tbody id="datointermedioti">
@@ -21,7 +21,7 @@
         </tbody>
       </table>
       <div class="links">
-        <%= link_to_add_association 'Agregar dato intermedio', f, 
+        <%= link_to_add_association t('Añadir dato intermedio'), f, 
           :datointermedioti, {
           :"data-association-insertion-node" => "tbody#datointermedioti", 
           :"data-association-insertion-method" => "append", 

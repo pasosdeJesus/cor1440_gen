@@ -1,15 +1,15 @@
 <table class="tablalistadoasistencia table table-bordered table-sm ">
   <thead class="thead-light">
     <tr>
-      <th>Nombres</th>
-      <th>Apellidos</th>
-      <th colspan="2">Identificación</th>
-      <th>Sexo</th>
-      <th>Año nac.</th>
-      <th>Mes</th>
-      <th>Dia</th>
-      <th>Org. social</th>
-      <th>Perfil</th>
+      <th><%= t('Nombres') %></th>
+      <th><%= t('Apellidos') %></th>
+      <th colspan="2"><%= t('Identificación') %></th>
+      <th><%= t('Sexo') %></th>
+      <th><%= t('añonac') %></th>
+      <th><%= t('Mes') %></th>
+      <th><%= t('Día') %></th>
+      <th><%= t('orgsocial') %></th>
+      <th><%= t('Perfil') %></th>
       <th></th>
     </tr>
   </thead>
@@ -20,7 +20,7 @@
   </tbody>
 </table>
 <div class="links">
-  <%= link_to_add_association 'Añadir Asistente', f, 
+  <%= link_to_add_association t('Añadir asistente'), f, 
     :asistencia,
     :"data-association-insertion-node" => "tbody#asistencia", 
     :"data-association-insertion-method" => "append", 
