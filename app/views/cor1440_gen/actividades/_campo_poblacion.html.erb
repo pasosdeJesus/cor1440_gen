@@ -1,7 +1,7 @@
 <div class='accordion' id="acordeon-poblacion">
   <%= item_acordeon_bs(
     'acordeon-poblacion', 'poblacion', 
-    'Cuenta de beneficiarios por Rango de Edad', true, {
+    t('Cuenta de beneficiarios por rango de edad'), true, {
       'estilo_accordion-header': 'text-align: center',
       'clase_accordion-body': 'table-responsive',
       'estilo_accordion-body': 'overflow-x:scroll'
@@ -9,18 +9,18 @@
     <table class="tablapoblacion table table-bordered table-sm">
       <thead class="thead-light">
         <tr>
-          <th>Rango de Edad</th>
-          <th><%= Cor1440Gen.actividadg1 %></th>
-          <th><%= Cor1440Gen.actividadg2 %></th>
-          <th><%= Cor1440Gen.actividadg3 %></th>
-          <th><%= Cor1440Gen.actividadg4 %></th>
-          <th><%= Cor1440Gen.actividadg5 %></th>
+          <th><%= t('Rango de edad') %></th>
+          <th><%= t('Cor1440Gen.actividadg1') %></th>
+          <th><%= t('Cor1440Gen.actividadg2') %></th>
+          <th><%= t('Cor1440Gen.actividadg3') %></th>
+          <th><%= t('Cor1440Gen.actividadg4') %></th>
+          <th><%= t('Cor1440Gen.actividadg5') %></th>
           <th></th>
         </tr>
       </thead>
       <tbody id="actividad_rangoedadac">
         <tr>
-          <th scope='row'>Total</th>
+          <th scope='row'><%= t('Total') %></th>
           <td id="tactividadfl">
             <%= fl = f.object.actividad_rangoedadac.sum(:fl) %>
           </td>
@@ -47,7 +47,7 @@
       </tbody>
     </table>
     <div class="links">
-      <%= link_to_add_association 'Añadir Rango de Edad', f, 
+      <%= link_to_add_association t('Añadir rango de edad'), f, 
         :actividad_rangoedadac, 
         :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
         :"data-association-insertion-method" => "append", 

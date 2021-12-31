@@ -1,20 +1,20 @@
 <div class="accordion" id="acordeon_acids">
   <%= item_acordeon_bs(
     'acordeon_acids', 'colapsa-acids', 
-    "Expandir / colapsar",
+    t("Expandir / colapsar"),
     false, {"clase_accordion-body" => 'table-responsive',
             "estilo_accordion-body" => 'overflow-x:scroll'
     }) do %>
     <table class='table table-bordered table-sm'>
       <thead class='thead-light'>
         <tr>
-          <th>Id Actividad</th>
-          <th>Fecha</th>
-          <th>Nombre</th>
+          <th><%= t('Id Actividad') %></th>
+          <th><%= t('Fecha') %></th>
+          <th><%= t('Nombre') %></th>
           <th>
             <%= Cor1440Gen::Actividad.human_attribute_name(:proyectofinanciero) %>
           </th>
-          <th>Perfil</th>
+          <th><%= t('Perfil') %></th>
         </tr>
       </thead>
       <tbody>

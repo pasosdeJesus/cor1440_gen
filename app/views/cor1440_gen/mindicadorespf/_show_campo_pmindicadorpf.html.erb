@@ -13,20 +13,20 @@
   <%
     series= [
       {
-       name: "Meta",
+       name: t("Meta"),
        data: res_ini_m.merge!(pms.map{|pm| [pm.ffin_localizada, pm.meta]}.to_h)
       },
       {
-       name: "Resultado",
+       name: t("Resultado"),
        data: res_ini_r.merge!(pms.map{|pm| [
          pm.ffin_localizada, pm.resind ? pm.resind.round(1) : 0 ]}.to_h)
       }
     ]
     options = {
-      title: "Puntos de medición del indicador "\
+      title: t("Puntos de medición del indicador") + ' ' +
         "#{@registro.indicadorpf.presenta_codigo}",
-      xtitle: 'Fecha',
-      ytitle: 'Resultado'
+      xtitle: t('Fecha'),
+      ytitle: t('Resultado')
     } 
   %>
 
@@ -40,10 +40,10 @@
     <div class="offset-3 col-6">
       <table class='table table-bordered' border=1>
         <tr>
-          <th>Fecha Med.</th>
-          <th>Fecha Inicio</th>
-          <th>Fecha Fin</th>
-          <th>Tiempo</th>
+          <th><%= t('fechamed') %></th>
+          <th><%= t('Fecha de inicio') %></th>
+          <th><%= t('Fecha de finalización') %></th>
+          <th><%= t('Intervalo') %></th>
           <% if @registro.datointermedioti %>
             <% @registro.datointermedioti.each do |di| %>
               <th><%= di.nombre %></th>
@@ -54,7 +54,7 @@
             <th><%= di.nombre %></th>
           <% end %>
         <% end %>
-        <th>Resultado</th><th>Meta</th><th>Porcentaje</th>
+        <th><%= t('Resultado') %></th><th><%= t('Meta') %></th><th><%= t('Porcentaje') %></th>
         <%= render partial: 'show_pmindicaobservacionesenc' %>
         </tr>
         <% pms.each do |pm| %>

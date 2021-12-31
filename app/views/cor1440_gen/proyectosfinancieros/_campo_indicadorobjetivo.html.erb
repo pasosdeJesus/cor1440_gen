@@ -6,7 +6,7 @@
       <table class='table table-bordered' border=1 width="100%">
         <thead>
           <tr>
-            <th><%= t('Ref. a objetivo/efecto') %></th>
+            <th><%= t('refobjetivo') %></th>
             <th width="10%"><%= t('Código') %></th>
             <th><%= t('Indicador') %></th>
             <th><%= t('Acciones') %></th>
@@ -20,7 +20,7 @@
         </tbody>
       </table>
       <div class="links">
-        <%= link_to_add_association t('Agregar indicador de objetivo/efecto'), 
+        <%= link_to_add_association t('Añadir indicador de objetivo/efecto'), 
           f, :indicadorobjetivo, {
           :"data-association-insertion-node" => "tbody#indicadoresobjetivos", 
           :"data-association-insertion-method" => "append", 

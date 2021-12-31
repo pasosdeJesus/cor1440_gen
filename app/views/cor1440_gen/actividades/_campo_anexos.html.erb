@@ -1,7 +1,7 @@
 <div class='accordion' id="acordeon_secanexos">
   <%= item_acordeon_bs(
     'acordeon_secanexos', 'secanexos', 
-    'Medios de Verificación / Anexos', false, {
+    t('Medios de verificación / Anexos'), false, {
       'estilo_accordion-header' => 'text-align: center',
       'estilo_accordion-body' => 'anexos-div anexosdiv'
     })  do %>
@@ -10,7 +10,7 @@
     <% end %>
   <% end %>
   <div class="links">
-    <%= link_to_add_association 'Añadir Anexo', f, 
+    <%= link_to_add_association t('Añadir anexo'), f, 
       :actividad_sip_anexo, :class => 'btn-primary' 
     %>
   </div>

@@ -1,4 +1,9 @@
 es:
+  añonac: Año de nacimiento
+  orgsocial: Org. Social
+  refobjetivo: Ref. a objetivo
+  refobjetivoefecto: Ref. a objetivo/efecto
+  refresultado: Ref. a resultado
   attributes:
     fechacreacion: Creación
     fechacreacion_localizada: Creación
@@ -57,6 +62,7 @@ es:
         heredade: Hereda de
         nombrecorto: Nombre corto
         resultadopf: Resultado
+        respuestafor: Formularios incrustados
         titulo: Título
       "cor1440_gen/actividadarea":
         Actividadarea: Subárea de actividad

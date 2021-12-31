@@ -5,16 +5,23 @@ en:
   "Actividad del marco lógico": Activity of logical framework
   "Actividades de marco lógico": Activities of logical framework
   "Actividades del marco lógico": Activities of logical framework
+  Añadir: Add
   "Añadir actividad": Add activity
   "Añadir anexo": Add attachment
+  "Añadir asistente": Add attendant
+  "Añadir dato intermedio": Add intermediate data
   "Añadir desembolso": Add disbursment
   "Añadir funcionario": Add official
   "Añadir indicador": Add indicator
-  "Añadir informe de auditoria": Add audit report
+  "Añadir indicador de objetivo/efecto": Add indicator of objective/effect
+  "Añadir informe de auditoría": Add audit report
   "Añadir informe narrativo": Add narrative report
   "Añadir informe financiero": Add financial report
   "Añadir objetivo / efecto": Add objective / effect
+  "Añadir rango de edad": Add result
   "Añadir resultado": Add result
+  añonac: Birth year
+  Apellidos: Lastname
   Aprobado: Approved
   Beneficiarios: Beneficiaries
   Código: Code
@@ -23,19 +30,27 @@ en:
   "Contar por actividad de marco lógico": Counting by activity of logical framework
   "Contar por beneficiario y actividad de marco lógico": Counting by beneficiary and activity of logical framework
   "Conteo de actividades": Activities counting
+  "Cuenta de beneficiarios por rango de edad": Counting of beneficiaries by age range
+  "Corresponsable(s)": Co-responsable
+  "Datos intermedios": Intermediate data
   "Descripción": Description
   "Detalle": Notes
   "Devoluciones": Devolutions
+  Día: Day
   "Eliminar": Delete
   "Eliminar anexo": Delete attachment
   "Estado": State
   "Equipo de trabajo": Work team
   "Fecha": Date
-  "Fecha inicio": Starting date
+  "Fecha de inicio": Starting date
+  "Fecha de finalización": Ending date
+  fechamed: Date of Measurement.
   "Filtrar por": Filter by
   "Final": Ending
   Formulario: Form
+  "Función de medición": Measurement function
   "Hereda de": Inherits from
+  Identificación: Identification
   Indicador: Indicator
   "Indicadores de resultado": Result indicators
   "Indicadores de objetivo/efecto": Indicators of objective/effect
@@ -44,27 +59,45 @@ en:
   "Informe narrativo / Planificación / POA": Narrative report / Planning
   "Informe financiero": Financial report
   "Inicial": Starting
+  "Intervalo": Interval
+  "Listado de asistencia": Attendance list
+  "Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)": The projects presented are active in the date of the activity (change the date to update the options)
   "Marco lógico": Logical framework
   "Medir indicadores": Indicators measurements
+  "Medios de verificación / Anexos": Evidences / Attachments
+  Meta: Target
   Moneda: Currency of project
-  Pesos: Local currency
+  Month: Mes
   Monitoreo: Monitoring
+  Nombre: Name
+  "Nombre interno": Internal name
+  Nombres: Names
   "Objetivos / Efectos": Objectives / Effects
+  orgsocial: Social Org.
+  Perfil: Profile
   Persona: Person
+  Pesos: Local currency
+  Porcentaje: Percentage
   Proyectofinanciero: Project
   Proyectosfinancieros: Projects
   "Rango para fecha de inicio": Date range for starting date
+  "Rango de edad": Age range
   "Recursos humanos": Human resources
   "Recursos económicos": Economical resources
-  "Ref. a objetivo": Ref. to objective
-  "Ref. a objetivo/efecto": Ref. to objective/effect
-  "Ref. a resultado ": Ref. to result 
+  refobjetivo: Ref. to objective
+  refobjetivoefecto: Ref. to objective/effect
+  refresultado: Ref. to result
   "Resultado": Result
   "Resultados": Results
   "Seguimiento": Follow up
+  Sexo: Sex
   "Validar y Guardar": Validate and Save
   "Valor en pesos": Value in local currency
   attributes:
+    actividadarea: Activity subarea
+    actividadareas: Subareas of activity
+    actividadtipo: Logical framework activity type
+    actividadtipos: Logical framework activity types
     fechacreacion: Creation
     fechacreacion_localizada: Creation
     fechadeshabilitacion: Disabling
@@ -73,10 +106,12 @@ en:
     fechainicio_localizada: Start date
     fechacierre: Deadline
     fechacierre_localizada: Deadline
-    actividadarea: Activity subarea
-    actividadareas: Subareas of activity
-    actividadtipo: Logical framework activity type
-    actividadtipos: Logical framework activity types
+    formulario: Form
+    habilitado: Active
+    nombre: Name
+    observaciones: Notes
+    paris: Country
+    pais_id: Country
     proyectos: Areas
     proyecto: Area
     proyectosfinancieros: Projects
@@ -107,27 +142,32 @@ en:
         Actividades: Activities
         Actividad: Activity
         Actividades del marco lógico: Activities of logical framework
-        Anexos: Attachments
-        "Asistentes únicos": Unique attendents
+        anexos: Attachments
+        "Asistentes únicos": Unique attendants
         Beneficiario: Beneficiary
         "Conteo por beneficiarios": Counting by beneficiaries
         "Externos sin sexo": External withouth sex
         "Frecuencia de asistencia": Attendance frequency 
+        lugar: Location
         "Hombres organización": Men of the organization
         "Hombres externos": External men
         "Mujeres organización": Women of the organization
         "Mujeres externas": External women
         "No se hacen sumas verticales por columna porque una actividad puede tener varías actividades de marco lógico": We don't do vertical sums by column because one activity can have several activities of logical framework
+        nombre: Name
         "Número de beneficiarios (posiblemente repetidos) contados en la tabla de población por rangos de edad": Amount of beneficiaries (may be repeated) counted in the table o population by age ranges
-        "Número de asistentes (posiblemente repetidos) según listado de asistencia": Amount of attendendants (may be repeated) according to the attendance list
+        "Número de asistentes (posiblemente repetidos) según listado de asistencia": Amount of attendants (may be repeated) according to the attendance list
         "Número de asistentes únicos de los listados de asistencia": Amount of unique attendants in the attendance list
         "Tasa 'Participaciones asistentes' / 'Asistentes únicos'": Rate 'Attendants Participations' / 'Unique Attendants' 
         "Totales": Totals
         Nombre: Name
         Participaciones: Participations
-        "Participaciones asistentes": Participations of attendents
-        Poblacion: Population
+        "Participaciones asistentes": Participations of attendants
+        Población: Population
+        poblacion: Population
         "Rango(s) de edad": Age ranges
+        respuestafor: Forms embedded
+        resultado: Result
         Resultados: Results
         Sexo: Sex
         "Sin actividad de marco lógico": Without activity of logical framework
@@ -201,7 +241,7 @@ en:
         indicadorpf: 'Indicator'
         indicadorpf_id: 'Indicator'
         medircon: 'They contribute to the measurement'
-        pmindicadorpf: 'Measuring points'
+        pmindicadorpf: 'Measurement points'
         proyectofinanciero: Project
         proyectofinanciero_id: Project
       "cor1440_gen/objetivopf":
@@ -296,6 +336,11 @@ en:
       "cor1440_gen/rangoedadac":
         Rangoedadac: Age range in activities
         Rangosedadac: Age ranges in activities
+        habilitado: Active
+        limiteinferior: Lower limit
+        limitesuperior: Upper limit
+        nombre: Name
+        observaciones: Notes
       "cor1440_gen/resultadopf":
         resultadopf: Result
         numero: Number

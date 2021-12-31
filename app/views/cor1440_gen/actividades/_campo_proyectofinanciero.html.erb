@@ -15,7 +15,7 @@
     </tbody>
   </table>
   <div class="agregar-proyectofinanciero">
-    <%= link_to_add_association "Añadir #{@actividad.class.human_attribute_name(:proyectofinanciero)}", f, 
+    <%= link_to_add_association "#{t('Añadir')} #{@actividad.class.human_attribute_name(:proyectofinanciero)}", f, 
       :actividad_proyectofinanciero,
       render_options: {locals: { ac: f }},
       :"data-association-insertion-node" => "tbody#actividad_proyectofinanciero", 
