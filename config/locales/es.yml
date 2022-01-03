@@ -1,9 +1,98 @@
 es:
+  Acciones: Acciones
+  Actividades: Actividades
+  "Actividad de marco lógico": Actividad de marco lógico
+  "Actividad del marco lógico": Actividad del marco lógico
+  "Actividades de marco lógico": Actividades de marco lógico
+  "Actividades del marco lógico": Actividades del marco lógico
+  Añadir: Añadir
+  "Añadir actividad": Añadir actividad
+  "Añadir anexo": Añadir anexo
+  "Añadir asistente": Añadir asistente
+  "Añadir dato intermedio": Añadir dato intermedio
+  "Añadir desembolso": Añadir desembolso
+  "Añadir funcionario": Añadir funcionario
+  "Añadir indicador": Añadir indicador
+  "Añadir indicador de objetivo/efecto": Añadir indicador de objetivo/efecto
+  "Añadir informe de auditoría": Añadir informe de auditoría
+  "Añadir informe narrativo": Añadir informe narrativo
+  "Añadir informe financiero": Añadir informe financiero
+  "Añadir objetivo / efecto": Añadir objetivo / efecto
+  "Añadir rango de edad": Añadir rango de edad
+  "Añadir resultado": Añadir resultado
   añonac: Año de nacimiento
+  Apellidos: Apellidos
+  Aprobado: Aprobado
+  Beneficiarios: Beneficiarios
+  Código: Código
+  Concepto: Concepto
+  Contar: Contar
+  "Contar por actividad de marco lógico": Contar por actividad de marco lógico
+  "Contar por beneficiario y actividad de marco lógico": Contar por beneficiario y actividad de marco lógico
+  "Conteo de actividades": Conteo de actividades
+  "Cuenta de beneficiarios por rango de edad": Cuenta de beneficiarios por rango de edad
+  "Corresponsable(s)": Corresponsable(s)
+  "Datos intermedios": Datos intermedios
+  "Descripción": Descripción
+  "Detalle": Detalle
+  "Devoluciones": Devoluciones
+  Día: Día
+  "Eliminar": Eliminar
+  "Eliminar anexo": Eliminar anexo
+  "Estado": Estado
+  "Equipo de trabajo": Equipo de trabajo
+  "Fecha": Fecha
+  "Fecha de inicio": Fecha de inicio
+  "Fecha de finalización": Fecha de finalización
+  fechamed: fechamed
+  "Filtrar por": Filtrar por
+  "Final": Final
+  Formulario: Formulario
+  "Función de medición": Función de medición
+  "Hereda de": Hereda de
+  Identificación: Identificación
+  Indicador: Indicador
+  "Indicadores de resultado": Indicadores de resultado
+  "Indicadores de objetivo/efecto": Indicadores de objetivo/efecto
+  "Informe de auditoría": Informe de auditoría
+  "Informes y auditorias": Informes y auditorias
+  "Informe narrativo / Planificación / POA": Informe narrativo / Planificación / POA
+  "Informe financiero": Informe financiero
+  "Inicial": Inicial
+  "Intervalo": Intervalo
+  "Listado de asistencia": Listado de asistencia
+  "Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)": Los proyectos presentados son los vigentes en la fecha de la actividad (cambie la fecha para actualizar estas opciones)
+  "Marco lógico": Marco lógico
+  "Medir indicadores": Medir indicadores
+  "Medios de verificación / Anexos": Medios de verificación / Anexos
+  Meta: Meta
+  Moneda: Moneda
+  Month: Month
+  Monitoreo: Monitoreo
+  Nombre: Nombre
+  "Nombre interno": Nombre interno
+  Nombres: Nombres
+  "Objetivos / Efectos": Objetivos / Efectos
   orgsocial: Org. Social
+  Perfil: Perfil
+  Persona: Persona
+  Pesos: Pesos
+  Porcentaje: Porcentaje
+  Proyectofinanciero: Proyectofinanciero
+  Proyectosfinancieros: Proyectosfinancieros
+  "Rango para fecha de inicio": Rango para fecha de inicio
+  "Rango de edad": Rango de edad
+  "Recursos humanos": Recursos humanos
+  "Recursos económicos": Recursos económicos
   refobjetivo: Ref. a objetivo
   refobjetivoefecto: Ref. a objetivo/efecto
   refresultado: Ref. a resultado
+  "Resultado": Resultado
+  "Resultados": Resultados
+  "Seguimiento": Seguimiento
+  Sexo: Sexo
+  "Validar y Guardar": Validar y Guardar
+  "Valor en pesos": Valor en pesos
   attributes:
     fechacreacion: Creación
     fechacreacion_localizada: Creación
