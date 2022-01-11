@@ -258,6 +258,7 @@ module Cor1440Gen
           can :manage, Heb412Gen::Plantillahcr
 
           can :manage, Mr519Gen::Formulario
+          can :manage, Mr519Gen::Encuestausuario
 
           can :manage, Sip::Orgsocial
           can :manage, Sip::Sectororgsocial

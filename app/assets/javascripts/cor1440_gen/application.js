@@ -17,10 +17,9 @@
 //= require_tree .
 
 
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener('turbo:load', function() {
   var root;
-  root = typeof exports !== "undefined" && exports !== null ? 
-    exports : window;
+  root = window
   root.cor1440_gen_activa_autocompleta_mismotipo = true
   sip_prepara_eventos_comunes(root);
   heb412_gen_prepara_eventos_comunes(root);

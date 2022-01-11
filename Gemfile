@@ -6,6 +6,8 @@ gemspec
 
 gem 'apexcharts'
 
+gem 'babel-transpiler'
+
 gem 'bcrypt'
 
 gem 'bootsnap', '>=1.1.0', require: false
@@ -64,6 +66,10 @@ gem 'simple_form' # Formularios simples
 
 gem 'sprockets-rails'
 
+gem 'stimulus-rails'
+
+gem 'turbo-rails'
+
 gem 'twitter_cldr' # ICU con CLDR
 
 gem 'tzinfo' # Zonas horarias
@@ -98,7 +104,7 @@ end
 
 group :development, :test do
 
-  #gem 'byebug', platform: :mri
+  gem 'debug'
 
   gem 'colorize' # Colores en Terminl
 
