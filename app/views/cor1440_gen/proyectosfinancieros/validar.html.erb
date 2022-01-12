@@ -62,7 +62,8 @@
 
       <div class="row filtro-fila">
         <div class="offset-md-5 col-md-2">
-          <%= f.button :submit, t('Filtrar'), class: 'btn btn-default' %>
+          <%= f.button :submit, t('Filtrar'), class: 'btn btn-default',
+            'data-turbo' => false %>
         </div>
       </div> <!-- class: row -->
 
