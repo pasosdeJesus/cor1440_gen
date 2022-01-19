@@ -397,7 +397,7 @@ GEM
     ttfunk (1.7.0)
     turbo-rails (7.1.1)
       rails (>= 6.0.0)
-    twitter_cldr (6.11.0)
+    twitter_cldr (6.11.1)
       camertron-eprun
       cldr-plurals-runtime-rb (~> 1.1)
       tzinfo
