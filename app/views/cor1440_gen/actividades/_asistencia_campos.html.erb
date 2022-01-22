@@ -10,7 +10,10 @@
       ac = {'data-autocompleta' => 'no', style: 'width: 8em' }
       if (!p.object.nombres || p.object.nombres == 'N' || p.object.nombres == '')
         ph = 'Buscar'
-        ac = { style: 'width: 8em' }
+        ac = { 
+          autocomplete: 'off',
+          list: 'fuente-asistentes',
+          style: 'width: 8em' }
       end %>
       <%= p.input :nombres, placeholder: ph,
         value_method: lambda {|t| '' if t.nombres == 'N'},

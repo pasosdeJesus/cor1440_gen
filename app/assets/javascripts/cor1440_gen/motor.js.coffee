@@ -7,6 +7,7 @@
 #//= require cocoon
 #//= require cor1440_gen/proyectofinanciero
 #//= require cor1440_gen/mindicadorespf
+#//= require cor1440_gen/AutocompletaAjaxAsistentes
 
 @DEP_OBJETIVOPF = [
     'select[id^=proyectofinanciero_resultadopf_attributes][id$=_objetivopf_id]',
@@ -498,75 +499,9 @@ cor1440_gen_rangoedadc_todos = () ->
 
   return
 
-# Elije un asistente en autocompletación
-# Tras autocompletar disparar el evento cor1440gen:autocompletado-asistente
-@cor1440_gen_autocompleta_asistente = (label, id, divcp, root) ->
-  sip_arregla_puntomontaje(root)
-  cs = id.split(";")
-  id_persona = cs[0]
-  pl = []
-  ini = 0
-  for i in [0..cs.length] by 1
-     t = parseInt(cs[i])
-     pl[i] = label.substring(ini, ini + t)
-     ini = ini + t + 1
-  # pl[1] cnom, pl[2] es cape, pl[3] es cdoc
-  d = "&id_persona=" + id_persona
-  a = root.puntomontaje + 'personas/datos'
-  $.ajax(url: a, data: d, dataType: "json").fail( (jqXHR, texto) ->
-    alert("Error con ajax " + texto)
-  ).done( (e, r) ->
-    #debugger
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_id]').val(e.id)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_nombres]').val(e.nombres)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_apellidos]').val(e.apellidos)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_sexo]').val(e.sexo)
-    tdocid = divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_tdocumento_id] option:contains(' + e.tdocumento + ')').val()
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_tdocumento_id]').val(tdocid)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_tdocumento]').val(e.tdocumento)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_numerodocumento]').val(e.numerodocumento)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_anionac]').val(e.anionac)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_mesnac]').val(e.mesnac)
-    divcp.find('[id^=actividad_asistencia_attributes][id$=persona_attributes_dianac]').val(e.dianac)
-    #if typeof jrs_recalcula_poblacion == 'function'
-    #  jrs_recalcula_poblacion()
-    $(document).trigger("cor1440gen:autocompletado-asistente")
-    return
-  )
-  return
-
-# Busca persona por nombre, apellido o identificación
-# s es objeto con foco donde se busca persona
-@cor1440_gen_busca_asistente = (s) ->
-  root = window
-  sip_arregla_puntomontaje(root)
-  cnom = s.attr('id')
-  v = $("#" + cnom).data('autocompleta')
-  if (v != 1 && v != "no")
-    $("#" + cnom).data('autocompleta', 1)
-    divcp = s.closest('.nested-fields')
-    if (typeof divcp == 'undefined')
-      alert('No se ubico .nested-fields')
-      return
-    idaa = divcp.parent().find('.actividad_asistencia_id').find('input').val()
-    if (typeof idaa == 'undefined')
-      alert('No se ubico actividad_asistencia_id')
-      return
-    $("#" + cnom).autocomplete({
-      source: root.puntomontaje + "personas.json",
-      minLength: 2,
-      select: ( event, ui ) ->
-        if (ui.item)
-          cor1440_gen_autocompleta_asistente(ui.item.value, ui.item.id, divcp, root)
-          event.stopPropagation()
-          event.preventDefault()
-    })
-  return
-
 
 
 # Cambiar cancelar por eliminar
-
 @cor1440_gen_cancelar_pf_eliminar_vacio = (proyectofinanciero) ->
   nombre=$('#proyectofinanciero_nombre').val()
   fechainicio = $('#proyectofinanciero_fechainicio_localizada').val()
@@ -834,12 +769,10 @@ cor1440_gen_rangoedadc_todos = () ->
     sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
+
+  
   # En listado de asistencia permite autocompletar nombres
-  $(document).on('focusin',
-  'input[id^=actividad_asistencia_attributes_][id$=_persona_attributes_nombres]',
-  (e) ->
-    cor1440_gen_busca_asistente($(this))
-  )
+  Cor1440GenAutocompletaAjaxAsistentes.iniciar()
 
   # En medición de indicadores, elegir convenio hace click
   $(document).on('change', '[data-enviar-haciendo-click]', (e, result) ->

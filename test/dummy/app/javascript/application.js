@@ -22,3 +22,6 @@ window.ApexCharts = ApexCharts
 
 import 'gridstack'
 
+import {AutocompletaAjaxExpreg} from '@pasosdejesus/autocompleta_ajax'
+window.AutocompletaAjaxExpreg = AutocompletaAjaxExpreg
+
