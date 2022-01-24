@@ -80,7 +80,7 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
     console.log("AutocompletaAjaxAsistente cor1440")
     let url = window.puntomontaje + 'personas.json'
     var asistentes = new window.AutocompletaAjaxExpreg(
-      /^actividad_asistencia_attributes_[0-9]*_persona_attributes_nombres$/,
+      [/^actividad_asistencia_attributes_[0-9]*_persona_attributes_nombres$/],
       url,
       Cor1440GenAutocompletaAjaxAsistentes.idDatalist,
       Cor1440GenAutocompletaAjaxAsistentes.operarElegida
