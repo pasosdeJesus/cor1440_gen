@@ -25,3 +25,36 @@ import 'gridstack'
 import {AutocompletaAjaxExpreg} from '@pasosdejesus/autocompleta_ajax'
 window.AutocompletaAjaxExpreg = AutocompletaAjaxExpreg
 
+
+function otrosRecursosCargados(resolver) {
+  if (typeof window.puntomontaje == 'undefined') {
+    setTimeout(otrosRecursosCargados, 250, resolver)
+    return false
+  }
+  resolver("otros recursos cargados")
+  return true
+}
+
+let promesaOtrosRecursosCargados = new Promise((resolver, rechazar) => {
+  otrosRecursosCargados(resolver)
+})
+
+promesaOtrosRecursosCargados.then((mensaje) => {
+  // Lo que se necesita inicializar después de cargar recursos manejados por
+  // sprockets
+  console.log('Ejecutando inicialización de otros recursos manejados por sprockets')
+  var root = window 
+  root.cor1440_gen_activa_autocompleta_mismotipo = true
+  sip_prepara_eventos_comunes(root);
+  heb412_gen_prepara_eventos_comunes(root);
+  mr519_gen_prepara_eventos_comunes(root);
+  cor1440_gen_prepara_eventos_comunes(root);
+  $("input[data-behaviour='datepicker']").datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    todayHighlight: true,
+    language: 'es'
+  })
+
+})
+
