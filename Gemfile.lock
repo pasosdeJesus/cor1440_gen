@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: d3b46b61ffbdf844103271c2bf544c09c8d8efb1
+  revision: f4d0b2343f9a066d899a04fd75bd44ddea46dcba
   branch: main
   specs:
     heb412_gen (2.1a1)
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: b2b7baac88c0a178a1eac3da6c8598487e5b21b2
+  revision: 77570a9fddf5219f4874facc0919881bab2421e8
   branch: main
   specs:
     mr519_gen (2.1a1)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/sip.git
-  revision: 42e4e7d7c65fc36f5b8ca8b5e7e6cb4f08b9011b
+  revision: 95f8624c80b0063293eda8a282d8ee3b1444dfe0
   branch: main
   specs:
     sip (2.1a1)
@@ -231,7 +231,7 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    i18n (1.8.11)
+    i18n (1.9.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
     io-wait (0.2.1)
@@ -300,7 +300,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     public_suffix (4.0.6)
-    puma (5.5.2)
+    puma (5.6.1)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)

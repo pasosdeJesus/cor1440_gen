@@ -26,24 +26,27 @@ import {AutocompletaAjaxExpreg} from '@pasosdejesus/autocompleta_ajax'
 window.AutocompletaAjaxExpreg = AutocompletaAjaxExpreg
 
 
-function otrosRecursosCargados(resolver) {
+let esperarRecursosSprocketsYDocumento = function (resolver) {
   if (typeof window.puntomontaje == 'undefined') {
-    setTimeout(otrosRecursosCargados, 250, resolver)
+    setTimeout(esperarRecursosSprocketsYDocumento, 100, resolver)
     return false
   }
-  resolver("otros recursos cargados")
-  return true
-}
+  if (document.readyState !== 'complete') {
+    setTimeout(esperarRecursosSprocketsYDocumento, 100, resolver)
+    return false
+  }
+  resolver("otros recursos manejados con sprockets cargados y documento presentado en navegador")
+    return true
+  }
 
-let promesaOtrosRecursosCargados = new Promise((resolver, rechazar) => {
-  otrosRecursosCargados(resolver)
+let promesaRecursosSprocketsYDocumento = new Promise((resolver, rechazar) => {
+  esperarRecursosSprocketsYDocumento(resolver)
 })
 
-promesaOtrosRecursosCargados.then((mensaje) => {
-  // Lo que se necesita inicializar después de cargar recursos manejados por
-  // sprockets
-  console.log('Ejecutando inicialización de otros recursos manejados por sprockets')
-  var root = window 
+promesaRecursosSprocketsYDocumento.then((mensaje) => {
+  console.log('Cargando recursos sprockets')
+  var root;
+  root = window;
   root.cor1440_gen_activa_autocompleta_mismotipo = true
   sip_prepara_eventos_comunes(root);
   heb412_gen_prepara_eventos_comunes(root);
@@ -55,6 +58,4 @@ promesaOtrosRecursosCargados.then((mensaje) => {
     todayHighlight: true,
     language: 'es'
   })
-
 })
-
