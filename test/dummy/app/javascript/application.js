@@ -59,3 +59,16 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
     language: 'es'
   })
 })
+
+
+document.addEventListener('turbo:load', (e) => {
+ /* Lo que debe ejecutarse cada vez que turbo cargue una página,
+ * tener cuidado porque puede dispararse el evento turbo varias
+ * veces consecutivas al cargar una página.
+ */
+  
+  console.log('Escuchador turbo:load')
+
+  sip_ejecutarAlCargarPagina(window)
+})
+

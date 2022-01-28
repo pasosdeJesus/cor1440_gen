@@ -12,6 +12,8 @@
       <th><%= t('Día') %></th>
       <th><%= t('orgsocial') %></th>
       <th><%= t('Perfil') %></th>
+      <%= render partial: 'asistencia_cuerpo_panel_if',
+        locals: { fasistencia: f} %>
       <th></th>
     </tr>
   </thead>
