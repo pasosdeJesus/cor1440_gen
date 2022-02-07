@@ -678,10 +678,17 @@ cor1440_gen_rangoedadc_todos = () ->
 
     # Al establecer un proyectofinanciero se deshabilita
     # posibilidad de edición al mismo y en la celda de actividades
-    # de convenio se permite eleir entre las del proyecto elegido
+    # de convenio se permite elegir entre las del proyecto elegido
     $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=proyectofinanciero_id]', (e, res) ->
       # Deshabilitar edición y dejar disponibles actividades de convenio
       $(e.target).attr('disabled', true)
+      # Como deshabilitamos un select, creamos un input con el mismo nombre y
+      # valor para que al enviar el formulario no se pierda la información
+      el = document.createElement('input')
+      el.setAttribute('name', e.target.name)
+      el.setAttribute('type', 'hidden')
+      el.setAttribute('value', e.target.value)
+      e.target.parentNode.append(el)
       $(e.target).trigger('chosen:updated')
       idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
       params = { pfl: [+res.selected]}

@@ -12,7 +12,8 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Proyectofinanciero',
             foreign_key: 'proyectofinanciero_id', optional: false
           attr_accessor :actividadpf_ids
-          has_many :actividadpf, 
+          has_many :actividadpf,
+            foreign_key: 'proyectofinanciero_id',
             class_name: 'Cor1440Gen::Actividadpf', 
             through: :actividad
 

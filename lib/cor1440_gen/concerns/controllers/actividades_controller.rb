@@ -602,7 +602,10 @@ module Cor1440Gen
               ],
               :actividadarea_ids => [],
               :actividad_proyectofinanciero_attributes => [
-                :id, :proyectofinanciero_id, :_destroy,
+                :id, 
+                :actividad_id,
+                :proyectofinanciero_id, 
+                :_destroy,
                 :actividadpf_ids => []
               ],
               :actividad_rangoedadac_attributes => [

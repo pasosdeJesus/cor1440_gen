@@ -13,6 +13,7 @@
   <% col = Cor1440Gen::Proyectofinanciero.where(id: ids).
     reorder('lower(nombre)') %>
   <td>
+    <%= f.input :actividad_id, as: :hidden # rails7 requiere identificaciones más explícitas %> 
     <%= f.input :id, as: :hidden %>
     <% vdis = false %>
     <% if f.object.proyectofinanciero_id %>
