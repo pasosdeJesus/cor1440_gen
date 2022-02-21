@@ -1,6 +1,14 @@
-<%= f.input :nombre %>
+<%= f.input :nombre,
+  input_html: { 
+    'data-sip--cancelar-vacio-es-eliminar-target' => 'determinador'
+  }
+%>
 
-<%= f.input :titulo %>
+<%= f.input :titulo, 
+  input_html: { 
+    'data-sip--cancelar-vacio-es-eliminar-target' => 'determinador'
+  }
+%>
 
 <div class='row'>
   <div class="offset-sm-0 col-sm-6">
@@ -8,7 +16,9 @@
       collection: Cor1440Gen::Financiador.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: { class: 'chosen-select' }
+      input_html: { 
+        class: 'chosen-select'
+      }
     %>
   </div>
   <div class="col-sm-6">
@@ -26,8 +36,11 @@
 
 <div class='row'>
   <div class="offset-sm-0 col-sm-4">
-    <%= f.input :fechainicio_localizada, :input_html => { 
-      "data-behaviour" => "datepicker" },
+    <%= f.input :fechainicio_localizada, 
+      :input_html => { 
+        "data-behaviour" => "datepicker",
+        'data-sip--cancelar-vacio-es-eliminar-target' => 'determinador'
+      },
       :as => :string
     %>
   </div>

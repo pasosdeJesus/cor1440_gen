@@ -361,6 +361,9 @@ module Cor1440Gen
               registro.indicadorpf.where(resultadopf_id: nil).
                 where(objetivopf_id: nil).destroy_all
             end
+            if @registro.nombre == 'N'
+              @registro.nombre = ''
+            end
           end
 
           def vistas_manejadas

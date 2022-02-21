@@ -500,22 +500,6 @@ cor1440_gen_rangoedadc_todos = () ->
   return
 
 
-# Cambiar cancelar por eliminar
-@cor1440_gen_cancelar_pf_eliminar_vacio = (proyectofinanciero) ->
-  nombre=$('#proyectofinanciero_nombre').val()
-  fechainicio = $('#proyectofinanciero_fechainicio_localizada').val()
-  fechacierre = $('#proyectofinanciero_fechacierre_localizada').val()
-  monto = $('#proyectofinanciero_monto').val()
-  proyectoId = proyectofinanciero
-  root = window
-  purl = root.puntomontaje
-  if purl == '/'
-    purl = ''
-  if (nombre == 'N' && fechainicio == '' && fechacierre == '' && monto == '1')
-    $('#btn-cancelar-pf').attr('data-method', 'delete')
-    $('#btn-cancelar-pf').attr('href', purl + '/proyectosfinancieros/' + proyectoId)
-
-
 # PERSONAS/BENEFICIARIOS
 
 # Actualiza campos dinámicos cuando hay caracterización
