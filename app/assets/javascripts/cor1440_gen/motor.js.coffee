@@ -500,7 +500,6 @@ cor1440_gen_rangoedadc_todos = () ->
   return
 
 
-
 # Cambiar cancelar por eliminar
 @cor1440_gen_cancelar_pf_eliminar_vacio = (proyectofinanciero) ->
   nombre=$('#proyectofinanciero_nombre').val()
@@ -515,18 +514,6 @@ cor1440_gen_rangoedadc_todos = () ->
   if (nombre == 'N' && fechainicio == '' && fechacierre == '' && monto == '1')
     $('#btn-cancelar-pf').attr('data-method', 'delete')
     $('#btn-cancelar-pf').attr('href', purl + '/proyectosfinancieros/' + proyectoId)
-
-
-@cor1440_gen_cancelar_actividad_eliminar_vacio = (actividad) ->
-  nombre=$('#actividad_nombre').val()
-  root = window
-  purl = root.puntomontaje
-  if purl == '/'
-    purl = ''
-  if (nombre == '')
-    actividadId = actividad
-    $('#btn-cancelar-actividad').attr('data-method', 'delete')
-    $('#btn-cancelar-actividad').attr('href', purl + '/actividades/' + actividadId)
 
 
 # PERSONAS/BENEFICIARIOS

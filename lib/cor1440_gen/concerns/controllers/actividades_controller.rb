@@ -269,6 +269,9 @@ module Cor1440Gen
             end
             asegura_camposdinamicos(@registro, current_usuario.id)
             @registro.save!(validate: false)
+            @encform_html = {
+              'data-controller': 'sip--cancelar-vacio-es-eliminar'
+            }
           end
 
           # GET /actividades/1/edit

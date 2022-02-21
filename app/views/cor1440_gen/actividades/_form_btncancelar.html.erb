@@ -1,6 +1,8 @@
-<% id = @registro.id.to_s%>
+<% id = !@registro.nil? ? @registro.id.to_s : '' %>
 <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
   modelos_path(@registro), :class => 'btn', id: 'btn-cancelar-actividad', 
-  onclick: 'javascript: cor1440_gen_cancelar_actividad_eliminar_vacio(' + 
-  id +')'
-  %>
+  'data-sip--cancelar-vacio-es-eliminar-target' => 'boton',
+  'data-sip--cancelar-vacio-es-eliminar-id-param' => id,
+  'data-sip--cancelar-vacio-es-eliminar-urlparcial-param' => '/actividades/',
+  'data-action' => 'click->sip--cancelar-vacio-es-eliminar#talvezEliminar'
+%>
