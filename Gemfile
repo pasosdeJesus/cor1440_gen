@@ -33,6 +33,8 @@ gem 'kt-paperclip',                 # Anexos
 
 gem 'libxml-ruby'
 
+gem 'net-smtp'
+
 gem 'nokogiri', '>=1.11.1'
 
 gem 'odf-report' # Genera ODT
