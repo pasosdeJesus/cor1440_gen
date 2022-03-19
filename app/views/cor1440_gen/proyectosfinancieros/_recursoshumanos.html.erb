@@ -1,7 +1,4 @@
 <%= render 'campo_responsable', f: f %>
 <%= render 'campo_proyectofinanciero_usuario', f: f %>
-<% atr = 'beneficiario' %>
-<%= render partial: 'sip/modelos/sip_campo_aut', 
-  locals: {f: f, atr: 'beneficiario'} %>
 <%= render partial: 'sip/modelos/sip_campo_aut', 
   locals: {f: f, atr: 'caracterizacion'} %>

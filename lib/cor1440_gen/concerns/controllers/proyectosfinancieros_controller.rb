@@ -104,11 +104,9 @@ module Cor1440Gen
           end
 
 
-          def atributos_form
-            atributos_show - [
-              "id", :id, 'created_at', :created_at, 'updated_at', :updated_at
-            ]
-          end
+          j
+#          def atributos_form
+#          No usado porque el formulario es a mano
 
           def genclase
             return 'M';
