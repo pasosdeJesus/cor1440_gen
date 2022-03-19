@@ -14,13 +14,15 @@ module Cor1440Gen
 
           def atributos_index
             [ :id, 
-              :indicadorpf_id] +
-              [ :orgsocial_ids=>[]] +
-              [ :fecha_localizada,
-                :nombre,
-                :descripcion,
-                :registradopor_id,
-                :anexo_efecto
+              :indicadorpf_id
+            ] + [ 
+              :orgsocial_ids => []
+            ] + [ 
+              :fecha_localizada,
+              :nombre,
+              :descripcion,
+              :registradopor_id,
+              :anexo_efecto
             ] 
           end
 
