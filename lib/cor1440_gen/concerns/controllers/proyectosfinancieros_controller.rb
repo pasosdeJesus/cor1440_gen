@@ -355,13 +355,14 @@ module Cor1440Gen
 
           def editar_intermedio(registro, usuario_actual_id)
             if registro.indicadorpf.where(resultadopf_id: nil).
-                where(objetivopf_id: nil)
+                where(objetivopf_id: nil).count > 0
               registro.indicadorpf.where(resultadopf_id: nil).
                 where(objetivopf_id: nil).destroy_all
             end
             if @registro.nombre == 'N'
               @registro.nombre = ''
             end
+            return true
           end
 
           def vistas_manejadas
