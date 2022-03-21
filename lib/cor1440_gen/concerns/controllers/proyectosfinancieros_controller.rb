@@ -24,11 +24,7 @@ module Cor1440Gen
             @registro = Proyectofinanciero.find(params[:id])
           end
 
-          # Redefinimos destroy porque el de tablas basicas
-          # (i.e Sip::Admin::BasicasController que debe ser
-          # papa de la clase que incluye a esta)
-          # exije eliminar primero registros en tablas union
-          def destroy
+          def destroy_cor1440_gen
             authorize! :destroy, @registro
             pmindicadorespf = Cor1440Gen::Pmindicadorpf.where(
               mindicadorpf_id: @registro.mindicadorpf.ids).ids
@@ -36,6 +32,14 @@ module Cor1440Gen
               Cor1440Gen::DatointermediotiPmindicadorpf.where(
                 pmindicadorpf_id: idpm).destroy_all
             end
+          end
+
+          # Redefinimos destroy porque el de tablas basicas
+          # (i.e Sip::Admin::BasicasController que debe ser
+          # papa de la clase que incluye a esta)
+          # exije eliminar primero registros en tablas union
+          def destroy
+            destroy_cor1440_gen
             super("", false)
           end
 
