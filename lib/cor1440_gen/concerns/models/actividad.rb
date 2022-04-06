@@ -169,6 +169,31 @@ module Cor1440Gen
             end
           end
 
+          validate :identificacion_no_repetida
+          def identificacion_no_repetida
+            if self.asistencia
+              self.asistencia.each do |a|
+                if a.persona && a.persona.numerodocumento != nil
+                  pr = Sip::Persona.
+                    where(tdocumento_id: a.persona.tdocumento_id).
+                    where(numerodocumento: a.persona.numerodocumento).
+                    where('id <> ?', a.persona.id)
+                  if (pr.count) > 0
+                    ids = pr.map(&:id)
+                    tdoc = a.persona.tdocumento_id ? 
+                      a.persona.tdocumento.sigla : ''
+                    errors.add(
+                      :asistencia, 
+                      "Hay #{pr.count} beneficiarios (#{ids.join(', ')}) "\
+                      "con tipo de documento '#{tdoc}' y "\
+                      "número de documento '#{pr.take.numerodocumento}'"
+                    )
+                  end
+                end
+              end
+            end
+          end
+
           def presenta_nombre
             nombre
           end
