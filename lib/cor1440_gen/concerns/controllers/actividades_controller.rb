@@ -280,22 +280,66 @@ module Cor1440Gen
             render layout: 'application'
           end
 
+
+          # Retorna verdadero si hay impedimentos extra para borrar una
+          # persona registrada como asistente en una actividad y que
+          # el usuario está eliminando del listado de asistencia
+          def otros_impedimentos_para_borrar_persona_ex_asistente(a)
+            return false
+          end
+
+
+          def intentar_eliminar_asistente(params_a)
+            # Se está eliminando?
+            if !params_a || !params_a['_destroy'] || 
+                params_a['_destroy'].to_i != 1
+              return false
+            end
+            # Ya se registró en la actividad?
+            if !params_a['id'] || Cor1440Gen::Asistencia.where(
+                id: params_a['id'].to_i, actividad_id: @registro.id).count == 0
+              return false
+            end
+            a = Cor1440Gen::Asistencia.find(params_a['id'])
+            # La persona no está en otras actividades?
+            if Cor1440Gen::Asistencia.where(persona_id: a.persona_id).
+                where('actividad_id<>?', @registro.id).count > 0
+              return false
+            end
+            if otros_impedimentos_para_borrar_persona_ex_asistente(a)
+              return false
+            end
+            # Eliminar de tabla persona (esto eliminará de asistente también)
+            Sip::Persona.find(a.persona_id).destroy
+            return true
+          end
+
+
           def update_cor1440_gen
             if actividad_params[:asistencia_attributes]
-              actividad_params[:asistencia_attributes].each do |a|
-                # Ubicamos los de autocompletacion y para esos creamos un registro 
-                if a[1] && a[1][:id] && a[1][:id] == '' && 
-                    a[1][:persona_attributes] && 
-                    a[1][:persona_attributes][:id] &&
-                    a[1][:persona_attributes][:id].to_i > 0 &&
+              actividad_params[:asistencia_attributes].each do |llavea, a|
+                if a['_destroy'].to_i == 1
+                  if intentar_eliminar_asistente(a)
+                    puts "** Eliminando parametro de asistencia #{llavea} "\
+                      "porque ya se debió eliminar asistencia de base"
+                    flash[:notice] ||= ''
+                    flash[:notice] << "Se eliminó beneficiario(a) #{a[:persona_id]}"
+                    params[:actividad][:asistencia_attributes].delete(llavea)
+                  end
+                  # Ubicamos los de autocompletacion y para esos creamos un registro 
+                  # si hace falta
+                elsif a && a[:id] && a[:id] == '' && 
+                    a[:persona_attributes] && 
+                    a[:persona_attributes][:id] &&
+                    a[:persona_attributes][:id].to_i > 0 &&
                     Sip::Persona.where(
-                      id: a[1][:persona_attributes][:id].to_i).count == 1
+                      id: a[:persona_attributes][:id].to_i).count == 1
                     ac = Cor1440Gen::Asistencia.create({
                       actividad_id: @actividad.id,
-                      persona_id: a[1][:persona_attributes][:id]
+                      persona_id: a[:persona_attributes][:id]
                     })
                     ac.save!(validate: false)
-                    params[:actividad][:asistencia_attributes][a[0].to_s][:id] = ac.id
+                    params[:actividad][:asistencia_attributes][llave_a.to_s][:id] = ac.id
                 end
               end
             end
