@@ -45,23 +45,10 @@
         <%= cr %>
       </td>
       <td>
-        <% r.actividadpf.order(:id).each do |a| %>
+        <% r.actividadpf.order(:id).each do |aml| %>
           <li>
-            <%= cr + a.nombrecorto %> <%= a.titulo %>
-              <% if a.formulario_id || a.heredade_id || a.actividadtipo_id %>
-                (
-                <% if a.formulario_id then %>
-                  <%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Formulario') %>: <%= a.formulario.presenta_nombre %>.
-                <% end %>
-                <% if a.heredade_id then %>
-                  <%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Hereda de') %>: <%= a.heredade.presenta_nombre %>.
-                <% end %>
-                <% if a.actividadtipo_id then %>
-                  <%= Cor1440Gen::Proyectofinanciero.human_attribute_name('Tipo') %>: <%= a.actividadtipo.nombre %>.
-                <% end %>
-                )
-              <% end %>
-            <%= a.descripcion %>
+            <%= render partial: 'show_marcologico_aml', 
+              locals: {prefijo_codigo: cr, aml: aml} %>
           </li>
         <% end %>
       </td>
