@@ -15,26 +15,7 @@
 %>
 <p><%= @informe.gen_descfiltro %></p>
 
-<table class="table table-striped" border='1'>
-  <thead>
-    <tr>
-      <% @enctabla.each do |c| %>
-        <th><%= c %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody id="index_tabla">
-    <% @cuerpotabla.try(:each) do |fila| %>
-      <tr>
-        <% for i in 0..(fila.length-1) %>
-          <td>
-            <%= fila[i] %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'show_tabla_actividades', locals: {f: @informe} %>
 
 <%= render partial: 'show_actividadespf', locals: {f: @informe} %>
 
