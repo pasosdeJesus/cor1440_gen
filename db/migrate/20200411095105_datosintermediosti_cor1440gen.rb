@@ -14,42 +14,51 @@ class DatosintermediostiCor1440gen < ActiveRecord::Migration[6.0]
         SET esptipometa='Número de personas únicas',
         espfuncionmedir='Cuenta personas únicas en listados de asistencia de actividades. Un participante que esté en listado de dos o más actividades actividades diferentes cuenta una sóla vez.' WHERE id=4;
     SQL
-    Cor1440Gen::Datointermedioti.create(
+    d = Cor1440Gen::Datointermedioti.new(
       id: 1, tipoindicador_id: 2,
       nombre: 'Mujeres'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 2, tipoindicador_id: 2,
       nombre: 'Hombres'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 3, tipoindicador_id: 2,
       nombre: 'Sin Sexo de Nacimiento'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 4, tipoindicador_id: 3,
       nombre: 'Mujeres'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 5, tipoindicador_id: 3,
       nombre: 'Hombres'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 6, tipoindicador_id: 3,
       nombre: 'Sin Sexo de Nacimiento'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 7, tipoindicador_id: 4,
       nombre: 'Mujeres'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 8, tipoindicador_id: 4,
       nombre: 'Hombres'
     )
-    Cor1440Gen::Datointermedioti.create(
+    d.save(validate: false)
+    d = Cor1440Gen::Datointermedioti.new(
       id: 9, tipoindicador_id: 4,
       nombre: 'Sin Sexo de Nacimiento'
     )
+    d.save(validate: false)
   end
 
   def down

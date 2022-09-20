@@ -169,36 +169,36 @@ module Cor1440Gen
     # para facilitar su análisis y evitar cambios inesperados al actualizar
     # motores
     # @usuario Usuario que hace petición
-    def initialize_cor1440_gen(usuario = nil)
+    def self.initialize_cor1440_gen(habilidad, usuario = nil)
       # Sin autenticación puede consultarse información geográfica
-      can :read, [Sip::Pais, Sip::Departamento, Sip::Municipio, Sip::Clase]
+      habilidad.can :read, [Sip::Pais, Sip::Departamento, Sip::Municipio, Sip::Clase]
       if !usuario || usuario.fechadeshabilitacion
         return
       end
 
-      can [:nuevo, :new], Cor1440Gen::Actividad
-      can [:nuevo, :new], Cor1440Gen::Actividadpf
-      can :read, Cor1440Gen::Rangoedadac
+      habilidad.can [:nuevo, :new], Cor1440Gen::Actividad
+      habilidad.can [:nuevo, :new], Cor1440Gen::Actividadpf
+      habilidad.can :read, Cor1440Gen::Rangoedadac
 
-      can :read, Heb412Gen::Doc
-      can :read, Heb412Gen::Plantilladoc
-      can :read, Heb412Gen::Plantillahcm
-      can :read, Heb412Gen::Plantillahcr
+      habilidad.can :read, Heb412Gen::Doc
+      habilidad.can :read, Heb412Gen::Plantilladoc
+      habilidad.can :read, Heb412Gen::Plantillahcm
+      habilidad.can :read, Heb412Gen::Plantillahcr
 
-      can :descarga_anexo, Sip::Anexo
-      can :contar, Sip::Ubicacion
-      can :buscar, Sip::Ubicacion
-      can :lista, Sip::Ubicacion
-      can :nuevo, Sip::Ubicacion
+      habilidad.can :descarga_anexo, Sip::Anexo
+      habilidad.can :contar, Sip::Ubicacion
+      habilidad.can :buscar, Sip::Ubicacion
+      habilidad.can :lista, Sip::Ubicacion
+      habilidad.can :nuevo, Sip::Ubicacion
 
       if !usuario.nil? && !usuario.rol.nil? then
         case usuario.rol
         when ROLOPERADOR
 
-          can :manage, Cor1440Gen::Actividadpf
+          habilidad.can :manage, Cor1440Gen::Actividadpf
           presponsable = Cor1440Gen::Proyectofinanciero.where(
             responsable_id: usuario.id).map(&:id)
-          can [:read,:edit,:update], Cor1440Gen::Proyectofinanciero,
+          habilidad.can [:read,:edit,:update], Cor1440Gen::Proyectofinanciero,
             responsable: { id: usuario.id}
 
           # Convención: Los proyectos sin usuarios se suponen como
@@ -206,7 +206,7 @@ module Cor1440Gen
           psinusuario = Cor1440Gen::Proyectofinanciero.all.map(&:id) -
             Cor1440Gen::ProyectofinancieroUsuario.all.map(
               &:proyectofinanciero_id).uniq
-          can :read, Cor1440Gen::Proyectofinanciero,
+          habilidad.can :read, Cor1440Gen::Proyectofinanciero,
             id: psinusuario
           # Puede ver proyectos en cuyo equipo de trabajo este
           penequipo1 = Cor1440Gen::ProyectofinancieroUsuario.where(
@@ -217,62 +217,65 @@ module Cor1440Gen
           # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/Defining-Abilities:-Best-Practices.md
           # Al poner varios corresponde al OR
           # Poner varios hashes en una línea es un AND
-          can :read, Cor1440Gen::Proyectofinanciero,
+          habilidad.can :read, Cor1440Gen::Proyectofinanciero,
             id: penequipo
 
-          can :manage, Cor1440Gen::Actividad,
+          habilidad.can :manage, Cor1440Gen::Actividad,
             responsable: { id: usuario.id}
-          can :read, Cor1440Gen::Actividad,
+          habilidad.can :read, Cor1440Gen::Actividad,
             actividad_proyectofinanciero: {proyectofinanciero_id: penequipo}
 
           # Responsable de un proyecto puede eliminar  y editar actividades
           # del mismo
-          can :manage, Cor1440Gen::Actividad,
+          habilidad.can :manage, Cor1440Gen::Actividad,
             actividad_proyectofinanciero: {proyectofinanciero_id: presponsable}
 
-          can :read, Cor1440Gen::Efecto
-          can :read, Cor1440Gen::FormularioTipoindicador
-          can :read, Cor1440Gen::Informe
+          habilidad.can :read, Cor1440Gen::Efecto
+          habilidad.can :read, Cor1440Gen::FormularioTipoindicador
+          habilidad.can :read, Cor1440Gen::Informe
 
-          can [:new, :create, :read, :index, :edit, :update],
+          habilidad.can [:new, :create, :read, :index, :edit, :update],
             Sip::Orgsocial
-          can :manage, Sip::Persona
+          habilidad.can :manage, Sip::Persona
 
         when Ability::ROLADMIN, Ability::ROLDIR
-          can :manage, Cor1440Gen::Pmindicadorpf
-          can :manage, Cor1440Gen::Actividad
-          can :manage, Cor1440Gen::Actividadpf
-          can :manage, Cor1440Gen::Campotind
-          can :manage, Cor1440Gen::Efecto
-          can :manage, Cor1440Gen::Financiador
-          can :manage, Cor1440Gen::FormularioTipoindicador
-          can :manage, Cor1440Gen::Indicadorpf
-          can :manage, Cor1440Gen::Informe
-          can :manage, Cor1440Gen::Mindicadorpf
-          can :manage, Cor1440Gen::Proyectofinanciero
-          can :manage, Cor1440Gen::Tipoindicador
+          habilidad.can :manage, Cor1440Gen::Pmindicadorpf
+          habilidad.can :manage, Cor1440Gen::Actividad
+          habilidad.can :manage, Cor1440Gen::Actividadpf
+          habilidad.can :manage, Cor1440Gen::Campotind
+          habilidad.can :manage, Cor1440Gen::Efecto
+          habilidad.can :manage, Cor1440Gen::Financiador
+          habilidad.can :manage, Cor1440Gen::FormularioTipoindicador
+          habilidad.can :manage, Cor1440Gen::Indicadorpf
+          habilidad.can :manage, Cor1440Gen::Informe
+          habilidad.can :manage, Cor1440Gen::Mindicadorpf
+          habilidad.can :manage, Cor1440Gen::Proyectofinanciero
+          habilidad.can :manage, Cor1440Gen::Tipoindicador
 
-          can :manage, Heb412Gen::Doc
-          can :manage, Heb412Gen::Plantilladoc
-          can :manage, Heb412Gen::Plantillahcm
-          can :manage, Heb412Gen::Plantillahcr
+          habilidad.can :manage, Heb412Gen::Doc
+          habilidad.can :manage, Heb412Gen::Plantilladoc
+          habilidad.can :manage, Heb412Gen::Plantillahcm
+          habilidad.can :manage, Heb412Gen::Plantillahcr
 
-          can :manage, Mr519Gen::Formulario
-          can :manage, Mr519Gen::Encuestausuario
+          habilidad.can :manage, Mr519Gen::Formulario
+          habilidad.can :manage, Mr519Gen::Encuestausuario
 
-          can :manage, Sip::Orgsocial
-          can :manage, Sip::Sectororgsocial
-          can :manage, Sip::Persona
+          habilidad.can :manage, Sip::Orgsocial
+          habilidad.can :manage, Sip::Sectororgsocial
+          habilidad.can :manage, Sip::Persona
 
-          can :manage, Usuario
-          can :manage, :tablasbasicas
-          tablasbasicas.each do |t|
+          habilidad.can :manage, Usuario
+          habilidad.can :manage, :tablasbasicas
+          habilidad.tablasbasicas.each do |t|
             c = Ability.tb_clase(t)
-            can :manage, c
+            habilidad.can :manage, c
           end
         end
       end
     end # initialize_cor1440_gen
 
+    def initialize_cor1440_gen(usuario = nil)
+      Cor1440Gen::Ability.initialize_cor1440_gen(self, usuario)
+    end
   end # class
 end   # module
