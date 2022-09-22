@@ -12,6 +12,8 @@
         <%= render partial: 'actividad_proyectofinanciero_campos',
           locals: {f: ap, ac: f} %>
       <% end %>
+      <%= render partial: 'complemento_filas_proyectofinanciero',
+        locals: {f: f} %>
     </tbody>
   </table>
   <div class="agregar-proyectofinanciero">
