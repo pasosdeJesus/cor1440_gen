@@ -8,9 +8,9 @@
         <%= Cor1440Gen::Actividad.human_attribute_name('Actividades del marco lógico') %>
       </th>
       <th rowspan='2'>
-        <%= Cor1440Gen::Actividad.human_attribute_name('Total<br>Actividades') %>
+        <%= Cor1440Gen::Actividad.human_attribute_name('Total Actividades') %>
       </th>
-      <th colspan='5'>
+      <th colspan='<%= @contarfuncionarios ? 5 : 3 %>'>
         <span data-toggle='tooltip' title="<%= Cor1440Gen::Actividad.human_attribute_name('Número de beneficiarios (posiblemente repetidos) contados en la tabla de población por rangos de edad') %>"><%= Cor1440Gen::Actividad.human_attribute_name('Participaciones') %></span>
       </th>
       <th colspan='3'>
@@ -24,25 +24,30 @@
       </th>
     </tr>
     <tr>
+      <% if @contarfuncionarios %>
         <th><%= Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg1) %></th>
-        <th><%= Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg2) %></th>
+      <% end %>
+      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg2) : 'F' %></th>
+      <% if @contarfuncionarios %>
         <th><%= Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg3) %></th>
-        <th><%= Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg4) %></th>
-        <th><%= Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg5) %></th>
-        <th>F</th>
-        <th>M</th>
-        <th>S</th>
-        <th>F</th>
-        <th>M</th>
-        <th>S</th>
-        <th>F</th>
-        <th>M</th>
-        <th>S</th>
+      <% end %>
+      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg4) : 'M' %></th>
+      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg5) : 'S' %></th>
+      <th>F</th>
+      <th>M</th>
+      <th>S</th>
+      <th>F</th>
+      <th>M</th>
+      <th>S</th>
+      <th>F</th>
+      <th>M</th>
+      <th>S</th>
     </tr>
   </thead>
   <tbody>
     <% a = Cor1440Gen::Actividadpf.where(
       proyectofinanciero_id: @contar_pfid).
+      where(id: 683).
       joins('JOIN cor1440_gen_resultadopf as rpf ON cor1440_gen_actividadpf.resultadopf_id=rpf.id').
       order('rpf.numero, nombrecorto')%>
     <% a.each do |a| %>
@@ -57,7 +62,7 @@
           (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero
            WHERE proyectofinanciero_id=?)',@contar_pfid)
          %>
-       <td><%= a.resultadopf.codigo_completo if a.resultadopf %></td>
+        <td><%= a.resultadopf.codigo_completo if a.resultadopf %></td>
         <td><%= a.nombrecorto %> <%= a.titulo%></td>
         <td>
           <% tot = consb.count %>
@@ -69,19 +74,23 @@
             <%= 0 %>
           <% end %>
         </td>
-        <td>
-          <% consbr = consb.joins(:actividad_rangoedadac) %> 
-          <% fl = consbr.sum(:fl) %>
-          <%= fl %>
-        </td>
+        <% consbr = consb.joins(:actividad_rangoedadac) %> 
+        <% if @contarfuncionarios %>
+          <td>
+            <% fl = consbr.sum(:fl) %>
+            <%= fl %>
+          </td>
+        <% end %>
         <td>
           <% fr = consbr.sum(:fr) %>
           <%= fr %>
         </td>
-        <td>
-          <% ml = consbr.sum(:ml) %>
-          <%= ml %>
-        </td>
+        <% if @contarfuncionarios %>
+          <td>
+            <% ml = consbr.sum(:ml) %>
+            <%= ml %>
+          </td>
+        <% end %>
         <td>
           <% mr = consbr.sum(:mr) %>
           <%= mr %>
@@ -95,6 +104,7 @@
           <% af = asistentes.where('sip_persona.sexo': :F).select(
             'cor1440_gen_asistencia.persona_id') %>
           <%= af.count %>
+          <% debugger %>
         </td>
         <td>
           <% am = asistentes.where('sip_persona.sexo': :M).select(
@@ -176,19 +186,23 @@
            <%= 0 %>
          <% end %>
        </td>
-       <td>
-         <% consbr = consb.joins(:actividad_rangoedadac) %> 
-         <% fl = consbr.sum(:fl) %>
-         <%= fl %>
-       </td>
+       <% consbr = consb.joins(:actividad_rangoedadac) %> 
+       <% if @contarfuncionarios %>
+         <td>
+           <% fl = consbr.sum(:fl) %>
+           <%= fl %>
+         </td>
+       <% end %>
        <td>
          <% fr = consbr.sum(:fr) %>
          <%= fr %>
        </td>
-       <td>
-         <% ml = consbr.sum(:ml) %>
-         <%= ml %>
-       </td>
+       <% if @contarfuncionarios %>
+         <td>
+           <% ml = consbr.sum(:ml) %>
+           <%= ml %>
+         </td>
+       <% end %>
        <td>
          <% mr = consbr.sum(:mr) %>
          <%= mr %>
