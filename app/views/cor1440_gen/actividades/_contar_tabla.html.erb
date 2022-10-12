@@ -47,7 +47,6 @@
   <tbody>
     <% a = Cor1440Gen::Actividadpf.where(
       proyectofinanciero_id: @contar_pfid).
-      where(id: 683).
       joins('JOIN cor1440_gen_resultadopf as rpf ON cor1440_gen_actividadpf.resultadopf_id=rpf.id').
       order('rpf.numero, nombrecorto')%>
     <% a.each do |a| %>
@@ -104,7 +103,6 @@
           <% af = asistentes.where('sip_persona.sexo': :F).select(
             'cor1440_gen_asistencia.persona_id') %>
           <%= af.count %>
-          <% debugger %>
         </td>
         <td>
           <% am = asistentes.where('sip_persona.sexo': :M).select(
