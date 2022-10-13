@@ -30,6 +30,9 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 
+  get "/conteos/benefactividadpf" => 'benefactividadpf#index',
+    as: :benefactividadpf
+
   resources :efectos, path_names: { new: 'nuevo', edit: 'edita' }
 
   resources :indicadorespf, only: [:new, :destroy]
@@ -62,6 +65,7 @@ Cor1440Gen::Engine.routes.draw do
     as: :proyectofinanciero_fichaimp
   get "/proyectosfinancieros/:id/fichapdf" => "proyectosfinancieros#fichapdf", 
     as: :proyectofinanciero_fichapdf
+
 
 
   resources :resultadospf, only: [:new, :destroy]
