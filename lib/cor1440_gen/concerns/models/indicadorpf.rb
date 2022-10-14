@@ -31,7 +31,9 @@ module Cor1440Gen
             dependent: :destroy, 
             class_name: 'Cor1440Gen::Mindicadorpf'
 
-          validates :numero, presence: true, length: {maximum: 15}
+          validates :numero, presence: true, length: {maximum: 15},
+            format: { without: /\s/,
+                      message: "No usar espacio en código de resultado" }
           validates :indicador, presence:true, length: {maximum: 5000}
 
           def presenta_codigo

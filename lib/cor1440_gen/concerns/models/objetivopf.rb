@@ -22,7 +22,9 @@ module Cor1440Gen
             foreign_key: 'objetivopf_id'
 
 
-          validates :numero, presence: true, length: {maximum: 15}
+          validates :numero, presence: true, length: {maximum: 15},
+            format: { without: /\s/,
+                      message: "No usar espacio en código de objetivo" }
           validates :objetivo, presence: true, length: {maximum: 5000}
 
           def presenta_nombre

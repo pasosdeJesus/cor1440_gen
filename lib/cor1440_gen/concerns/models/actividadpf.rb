@@ -42,8 +42,8 @@ module Cor1440Gen
             foreign_key: 'actividadpf_id'
 
           validates :nombrecorto, presence: true, length: {maximum: 15},
-            format: { with: /\A[_. 0-9a-zA-Z]+\z/, 
-                      message: "Solo digitos, letras, punto y raya al piso" }
+            format: { without: /\s/,
+                      message: "No usar espacio en código de actividad" }
           validates :titulo, length: {maximum: 255}
           validates :descripcion, length: {maximum: 5000}
 
