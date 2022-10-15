@@ -1,6 +1,6 @@
 <tr class='nested-fields'>
   <td>
-    <% col = ::Usuario.order(:nombre).habilitados %>
+    <% col = Sip::ModeloHelper.opciones_tabla_basica(::Usuario, f, :usuario) %>
     <%= f.association :usuario,
       collection: col,
       label: false,
