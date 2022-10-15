@@ -286,6 +286,28 @@ module Cor1440Gen
             render :copia, layout: 'application'
           end
 
+          # Validamos en controlador que no haya repetidos en equipo de trabajo
+          #
+          # No se logró hacer en modelo seguramente por coccoon 
+          # (cuando había un usuario del equipo de trabajo 2 veces 
+          # y se eliminaba el segundo, seguía presentando error de validación).
+          def validaciones(registro)
+            @validaciones_error = ''
+            fus = []
+            params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |l, v|
+              if v[:_destroy] != 'true' && v[:_destroy] != '1'
+                if fus.include?(v[:usuario_id].to_i)
+                  @validaciones_error << "El usuario "\
+                    "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
+                    "está repetido en el equipo de trabajo"
+                else
+                  fus << v[:usuario_id].to_i
+                end
+              end
+            end
+            return @validaciones_error == ''
+          end
+
           def new_cor1440_gen
             authorize! :new, Cor1440Gen::Proyectofinanciero
             @registro = clase.constantize.new
