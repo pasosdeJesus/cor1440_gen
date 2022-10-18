@@ -294,14 +294,16 @@ module Cor1440Gen
           def validaciones(registro)
             @validaciones_error = ''
             fus = []
-            params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |l, v|
-              if v[:_destroy] != 'true' && v[:_destroy] != '1'
-                if fus.include?(v[:usuario_id].to_i)
-                  @validaciones_error << "El usuario "\
-                    "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
-                    "está repetido en el equipo de trabajo"
-                else
-                  fus << v[:usuario_id].to_i
+            if params && params[:proyectofinanciero] && params[:proyectofinanciero][:proyectofinanciero_usuario_attributes]
+              params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |l, v|
+                if v[:_destroy] != 'true' && v[:_destroy] != '1'
+                  if fus.include?(v[:usuario_id].to_i)
+                    @validaciones_error << "El usuario "\
+                      "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
+                      "está repetido en el equipo de trabajo"
+                  else
+                    fus << v[:usuario_id].to_i
+                  end
                 end
               end
             end
