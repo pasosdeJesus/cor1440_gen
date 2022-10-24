@@ -55,6 +55,9 @@ module Dummy
     config.x.cor1440_permisos_por_oficina = 
       (ENV['COR1440_PERMISOS_POR_OFICINA'] && ENV['COR1440_PERMISOS_POR_OFICINA'] != '')
 
+    config.x.cor1440_edita_poblacion = 
+      ENV.fetch('COR1440_EDITA_POBLACION', '') != ''
+
   end
 end
 

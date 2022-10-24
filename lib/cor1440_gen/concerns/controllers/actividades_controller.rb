@@ -28,7 +28,11 @@ module Cor1440Gen
           end
 
           def atributos_form
-            atributos_show - [:id, :actividadpf]
+            a = atributos_show - [:id, :actividadpf]
+            if !Rails.configuration.x.cor1440_edita_poblacion
+              a -= [:poblacion]
+            end
+            return a
           end
 
           def atributos_show

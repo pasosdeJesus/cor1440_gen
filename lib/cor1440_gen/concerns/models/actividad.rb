@@ -194,6 +194,81 @@ module Cor1440Gen
             end
           end
 
+          validate :asistentes_no_repetidos
+          def asistentes_no_repetidos
+            asistentes = []
+            self.asistencia.map{ |as| asistentes.push(as.persona_id) }
+            if asistentes.length != asistentes.uniq.length
+              asrepetidos = []
+              asrepetidos.push(asistentes.detect{ |e| asistentes.count(e) > 1 })
+              nombres =  Sip::Persona.where(id: asrepetidos).map{
+                |n| n.nombres + " " + n.apellidos
+              }
+              errors.add(:asistencia, "En listado de asistencia se encuentra " +
+                         "repetido: " + nombres.join(", ")) 
+            end 
+          end
+
+
+          validate :asistentes_habian_nacido
+          def asistentes_habian_nacido
+            self.asistencia.each do |a|
+              p = a.persona
+              if (p.anionac && p.anionac > self.fecha.year) ||
+                  (p.anionac == self.fecha.year && p.mesnac && 
+                   p.mesnac > self.fecha.month) ||
+                  (p.anionac == self.fecha.year && 
+                   p.mesnac == self.fecha.month &&
+                   p.dianac && p.dianac > self.fecha.day)
+              errors.add(:asistentes, "El asistente con identificación "\
+                         "#{p.tdocumento.sigla} #{p.numerodocumento} tiene "\
+                         "fecha de nacimiento posterior a la de la actividad")
+              end
+            end
+          end
+
+          def recalcula_poblacion
+            if Rails.configuration.x.cor1440_edita_poblacion
+              puts "La función recalcula_poblacion solo debería llamarse cuando no está deshabilitada la edición de la tabla de población"
+              exit 1
+            end
+            rangoedad = {}
+            Cor1440Gen::ActividadRangoedadac.
+              where(actividad_id: self.id).delete_all
+            self.asistencia.each do |asis|
+              per = asis.persona
+              puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
+              re = Sip::EdadSexoHelper.buscar_rango_edad(
+                Sip::EdadSexoHelper.edad_de_fechanac_fecha(
+                  per.anionac, per.mesnac, per.dianac,
+                  self.fecha.year, self.fecha.month, self.fecha.day), 
+                  'Cor1440Gen::Rangoedadac')
+              #puts "OJO re=#{re}"
+              if !rangoedad[re]
+                rangoedad[re] = {}
+              end
+              if !rangoedad[re][per.sexo]
+                rangoedad[re][per.sexo] = 0
+              end
+              rangoedad[re][per.sexo] += 1
+            end
+            rangoedad.each do |re, vs|
+              Cor1440Gen::ActividadRangoedadac.create(
+                actividad_id: self.id,
+                rangoedadac_id: re,
+                mr: vs['M'].to_i,
+                fr: vs['F'].to_i,
+                s: vs['S'].to_i
+              )
+            end
+          end
+
+          after_commit do |actividad|
+            if !Rails.configuration.x.cor1440_edita_poblacion
+              actividad.recalcula_poblacion
+            end
+          end
+
           def presenta_nombre
             nombre
           end
