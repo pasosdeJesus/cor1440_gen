@@ -214,15 +214,17 @@ module Cor1440Gen
           def asistentes_habian_nacido
             self.asistencia.each do |a|
               p = a.persona
-              if (p.anionac && p.anionac > self.fecha.year) ||
-                  (p.anionac == self.fecha.year && p.mesnac && 
-                   p.mesnac > self.fecha.month) ||
-                  (p.anionac == self.fecha.year && 
-                   p.mesnac == self.fecha.month &&
-                   p.dianac && p.dianac > self.fecha.day)
-              errors.add(:asistentes, "El asistente con identificación "\
-                         "#{p.tdocumento.sigla} #{p.numerodocumento} tiene "\
-                         "fecha de nacimiento posterior a la de la actividad")
+              if p.anionac && (p.anionac > self.fecha.year ||
+                  (p.mesnac && p.anionac == self.fecha.year &&
+                   (p.mesnac > self.fecha.month ||
+                    (p.dianac && p.mesnac == self.fecha.month &&
+                     p.dianac > self.fecha.day)
+                   )
+                  ))
+                errors.add(:asistentes, "El asistente con identificación "\
+                           "#{p.tdocumento.sigla} #{p.numerodocumento} "\
+                           "tiene fecha de nacimiento posterior "\
+                           "a la de la actividad")
               end
             end
           end
