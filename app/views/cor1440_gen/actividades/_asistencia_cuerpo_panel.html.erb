@@ -1,28 +1,30 @@
-<table class="tablalistadoasistencia table table-bordered table-sm ">
-  <datalist id='fuente-asistentes'>
-  </datalist>
-  <thead class="thead-light">
-    <tr>
-      <th><%= t('Nombres') %></th>
-      <th><%= t('Apellidos') %></th>
-      <th colspan="2"><%= t('Identificación') %></th>
-      <th><%= t('Sexo') %></th>
-      <th><%= t('añonac') %></th>
-      <th><%= t('Mes') %></th>
-      <th><%= t('Día') %></th>
-      <th><%= t('orgsocial') %></th>
-      <th><%= t('Perfil') %></th>
-      <%= render partial: 'asistencia_cuerpo_panel_if',
-        locals: { fasistencia: f} %>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="asistencia">
-    <%= f.simple_fields_for :asistencia do |a| %>
-      <%= render 'asistencia_campos', f: a %>
-    <% end %>
-  </tbody>
-</table>
+<div class='table-responsive'>
+  <table class="tablalistadoasistencia table table-bordered table-sm ">
+    <datalist id='fuente-asistentes'>
+    </datalist>
+    <thead class="thead-light">
+      <tr>
+        <th><%= t('Nombres') %></th>
+        <th><%= t('Apellidos') %></th>
+        <th colspan="2"><%= t('Identificación') %></th>
+        <th><%= t('Sexo') %></th>
+        <th><%= t('añonac') %></th>
+        <th><%= t('Mes') %></th>
+        <th><%= t('Día') %></th>
+        <th><%= t('orgsocial') %></th>
+        <th><%= t('Perfil') %></th>
+        <%= render partial: 'asistencia_cuerpo_panel_if',
+          locals: { fasistencia: f} %>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="asistencia">
+      <%= f.simple_fields_for :asistencia do |a| %>
+        <%= render 'asistencia_campos', f: a %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <div class="links">
   <%= link_to_add_association t('Añadir asistente'), f, 
     :asistencia,
@@ -32,3 +34,4 @@
     :class => 'btn-primary'
   %>
 </div>
+
