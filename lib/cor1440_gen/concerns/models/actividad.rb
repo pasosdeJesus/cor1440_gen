@@ -237,7 +237,7 @@ module Cor1440Gen
               where(actividad_id: self.id).delete_all
             self.asistencia.each do |asis|
               per = asis.persona
-              puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
+              #puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
               re = Sip::EdadSexoHelper.buscar_rango_edad(
                 Sip::EdadSexoHelper.edad_de_fechanac_fecha(
                   per.anionac, per.mesnac, per.dianac,
