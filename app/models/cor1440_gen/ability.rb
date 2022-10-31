@@ -42,11 +42,30 @@ module Cor1440Gen
     # Hereda basicas_id_noauto de sip
 
     NOBASICAS_INDSEQID =  [
+      ['cor1440_gen', 'actividad'],
+      ['cor1440_gen', 'actividad_sip_anexo'],
       ['cor1440_gen', 'actividadpf'],
+      ['cor1440_gen', 'asistencia'],
+      ['cor1440_gen', 'asistencia_opcioncaracterizacion'],
+      ['cor1440_gen', 'anexo_efecto'],
+      ['cor1440_gen', 'anexo_proyectofinanciero'],
+      ['cor1440_gen', 'caracterizacionpersona'],
+      ['cor1440_gen', 'datointermedio'],
+      ['cor1440_gen', 'datointermedio_pmindicadorpf'],
+      ['cor1440_gen', 'desembolso'],
+      ['cor1440_gen', 'efecto'],
       ['cor1440_gen', 'indicadorpf'],
+      ['cor1440_gen', 'informe'],
+      ['cor1440_gen', 'informeauditoria'],
+      ['cor1440_gen', 'informefinanciero'],
+      ['cor1440_gen', 'informenarrativo'],
+      ['cor1440_gen', 'mindicadorpf'],
       ['cor1440_gen', 'objetivopf'],
+      ['cor1440_gen', 'pmindicadorpf'],
+      ['cor1440_gen', 'proyectofinanciero'],
       ['cor1440_gen', 'proyectofinanciero_usuario'],
-      ['cor1440_gen', 'resultadopf']
+      ['cor1440_gen', 'rangoedadac'],
+      ['cor1440_gen', 'resultadopf'],
     ]
     # Hereda nobasicas_indice_seq_con_id de sip
     def nobasicas_indice_seq_con_id
