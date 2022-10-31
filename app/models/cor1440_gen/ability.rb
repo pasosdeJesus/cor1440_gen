@@ -69,8 +69,8 @@ module Cor1440Gen
     # Hereda nobasicas_indice_seq_con_id de sip
     def nobasicas_indice_seq_con_id
       Sip::Ability::NOBASICAS_INDSEQID +
-        Mr519Gen::Ability::NOBASICAS_INDSEQID
-        Heb412Gen::Ability::NOBASICAS_INDSEQID
+        Mr519Gen::Ability::NOBASICAS_INDSEQID +
+        Heb412Gen::Ability::NOBASICAS_INDSEQID +
         Cor1440Gen::Ability::NOBASICAS_INDSEQID
     end
 
