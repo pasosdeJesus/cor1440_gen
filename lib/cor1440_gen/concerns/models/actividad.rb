@@ -214,7 +214,7 @@ module Cor1440Gen
           def asistentes_habian_nacido
             self.asistencia.each do |a|
               p = a.persona
-              if p.anionac && (p.anionac > self.fecha.year ||
+              if p && p.anionac && (p.anionac > self.fecha.year ||
                   (p.mesnac && p.anionac == self.fecha.year &&
                    (p.mesnac > self.fecha.month ||
                     (p.dianac && p.mesnac == self.fecha.month &&
@@ -239,20 +239,22 @@ module Cor1440Gen
               where(actividad_id: self.id).delete_all
             self.asistencia.each do |asis|
               per = asis.persona
-              #puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
-              re = Sip::EdadSexoHelper.buscar_rango_edad(
-                Sip::EdadSexoHelper.edad_de_fechanac_fecha(
-                  per.anionac, per.mesnac, per.dianac,
-                  self.fecha.year, self.fecha.month, self.fecha.day), 
-                  'Cor1440Gen::Rangoedadac')
-              #puts "OJO re=#{re}"
-              if !rangoedad[re]
-                rangoedad[re] = {}
+              if per
+                #puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
+                re = Sip::EdadSexoHelper.buscar_rango_edad(
+                  Sip::EdadSexoHelper.edad_de_fechanac_fecha(
+                    per.anionac, per.mesnac, per.dianac,
+                    self.fecha.year, self.fecha.month, self.fecha.day), 
+                    'Cor1440Gen::Rangoedadac')
+                #puts "OJO re=#{re}"
+                if !rangoedad[re]
+                  rangoedad[re] = {}
+                end
+                if !rangoedad[re][per.sexo]
+                  rangoedad[re][per.sexo] = 0
+                end
+                rangoedad[re][per.sexo] += 1
               end
-              if !rangoedad[re][per.sexo]
-                rangoedad[re][per.sexo] = 0
-              end
-              rangoedad[re][per.sexo] += 1
             end
             rangoedad.each do |re, vs|
               Cor1440Gen::ActividadRangoedadac.create(
