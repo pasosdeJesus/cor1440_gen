@@ -748,7 +748,6 @@ cor1440_gen_rangoedadc_todos = () ->
   )
 
 
-  
   # En listado de asistencia permite autocompletar nombres
   Cor1440GenAutocompletaAjaxAsistentes.iniciar()
 

@@ -28,6 +28,9 @@ Cor1440Gen::Engine.routes.draw do
   get "/actividadespf/conancestros" => "actividadespf#conancestros", 
     as: :actividadespf_conancestros
 
+  get '/asistencia/nueva' => 'actividades#nueva_asistencia',
+    as: :nueva_asistencia
+
   resources :campostind, path_names: { new: 'nuevo', edit: 'edita' }
 
   get "/conteos/benefactividadpf" => 'benefactividadpf#index',

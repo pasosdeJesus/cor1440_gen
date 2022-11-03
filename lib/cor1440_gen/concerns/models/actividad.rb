@@ -10,6 +10,8 @@ module Cor1440Gen
           @current_usuario = -1
           attr_accessor :current_usuario
 
+          attr_accessor :controlador
+
           belongs_to :oficina, class_name: 'Sip::Oficina', 
             foreign_key: 'oficina_id', validate: true, optional: true
 

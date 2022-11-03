@@ -67,6 +67,7 @@ module Cor1440Gen
           def new_cor1440_gen
             @registro = @actividad = Actividad.new
             @registro.current_usuario = current_usuario
+            @registro.controlador = self
             @registro.oficina_id = current_usuario && 
               current_usuario.oficina_id ? current_usuario.oficina_id : 1
             @registro.fecha = Date.today
@@ -176,6 +177,7 @@ module Cor1440Gen
             @registro_orig_id=a.id
             render :copia, layout: 'application'
           end
+
 
           def asegura_camposdinamicos(actividad, current_usuario_id)
             @listadoasistencia = false
@@ -319,6 +321,75 @@ module Cor1440Gen
           end
 
 
+          # Responde con mensaje de error
+          def resp_error(m)
+            respond_to do |format|
+              format.html { 
+                render inline: m
+              }
+              format.json { 
+                render json: m, status: :unprocessable_entity 
+              }
+            end
+          end
+
+
+          # Responde a requerimiento AJAX generado por cocoon creando una
+          # nueva persona como nuevo asistente para la actividad que recibe 
+          # por parámetro  params[:actividad_id].  
+          # Pone valores simples en los campos requeridos
+          # Como crea personas que podrían ser remplazadas por otras por 
+          # autocompletación debería ejecutarse con periodicidad un proceso que
+          # elimine todas las personas de nombres N, apellidos N, sexo N, que
+          # no este en listado de asistencia ni en casos
+          def nueva_asistencia
+            authorize! :new, Sip::Persona
+            if params[:actividad_id].nil?
+              resp_error 'Falta parámetro actividad_id'
+              return
+            end
+            puts "** cuenta: #{Cor1440Gen::Actividad.where(id: params[:actividad_id].to_i).count.to_s}"
+            if Cor1440Gen::Actividad.where(id: params[:actividad_id].to_i).count == 0
+              reps_error 'No se encontró actividad ' + 
+                params[:actividad_id].to_i.to_s
+              return
+            end
+            act = Cor1440Gen::Actividad.find(params[:actividad_id].to_i)
+            @persona = Sip::Persona.create(
+              nombres: 'N',
+              apellidos: 'N',
+              sexo: 'S',
+              tdocumento_id: 11,
+              numerodocumento: 'AAA'
+            )
+            if !@persona.save
+              resp_error 'No pudo crear persona' 
+              return
+            end
+            @persona.numerodocumento = @persona.id
+            @persona.save
+            @asistencia = Cor1440Gen::Asistencia.create(
+              actividad_id: act.id,
+              persona_id: @persona.id
+            )
+            if !@asistencia.save
+              resp_error 'No pudo crear asistencia' 
+              @persona.destroy
+              return
+            end
+            res = {
+              'asistencia': @asistencia.id.to_s,
+              'persona': @persona.id.to_s
+            }.to_json
+            respond_to do |format|
+              format.js { render text: res }
+              format.json { render json: res,
+                            status: :created }
+              format.html { render inline: res }
+            end
+          end # def nueva_asistencia
+
+
           def update_cor1440_gen
             if actividad_params[:asistencia_attributes]
               actividad_params[:asistencia_attributes].each do |llavea, a|
@@ -343,16 +414,51 @@ module Cor1440Gen
                       persona_id: a[:persona_attributes][:id]
                     })
                     ac.save!(validate: false)
-                    params[:actividad][:asistencia_attributes][llave_a.to_s][:id] = ac.id
+                    params[:actividad][:asistencia_attributes][llavea.to_s][:id] = ac.id
                 end
               end
             end
             update_gen
           end
 
+          #def update
+          #  update_cor1440_gen
+          #end
+
+
           def update
+            @pf_respaldo = {}
+            # para no perder proyectos financieros sin actividad de marco lógico
+            # en caso de errores de validación
+            if actividad_params && actividad_params[:actividad_proyectofinanciero_attributes]
+              actividad_params[:actividad_proyectofinanciero_attributes].each do |l,v|
+                if v[:_destroy] == 'false' && v[:proyectofinanciero_id].to_i > 0
+                  @pf_respaldo[v[:proyectofinanciero_id].to_i] = v[:actividadpf_ids]
+                end
+              end
+            end
+
             update_cor1440_gen
+
+            if @registro.valid?
+              # Tras arreglar proyecto financiero que no tenía actividad de marco
+              # lógico y que no esté en base suele no almacenar la actividad 
+              # así que la agregamos
+              ar = @pf_respaldo.values.flatten.select {|x| x != ''}.
+                map(&:to_i).uniq.sort
+              ag = @registro.actividadpf_ids.uniq.sort
+              if ar != ag 
+                f = ar - ag
+                f.each do |apfid|
+                  p = Cor1440Gen::ActividadActividadpf.new(
+                    actividad_id: @registro.id,
+                    actividadpf_id: apfid)
+                  p.save!(validate: false)
+                end
+              end
+            end
           end
+
 
           # Llamado por control para presentar responsables en formulario
           # Para limitar por permisos
@@ -383,6 +489,55 @@ module Cor1440Gen
           def filtra_contar_por_parametros
 
           end
+
+
+          # Sobrecarga de modelos_controller para sanear parámetros
+          # Pero usaremos para sanear datos cuando hay nuevas
+          # filas en listado de asistencia
+          def filtra_contenido_params
+            if !params || !params[:actividad] 
+              return
+            end
+
+            # Deben eliminarse asistentes creados con AJAX
+            if params[:actividad][:asistencia_attributes]
+              porelim = []
+              params[:actividad][:asistencia_attributes].each do |l, v|
+                if Cor1440Gen::Asistencia.where(id: v[:id].to_i).count == 0 ||
+                    !v[:persona_attributes] || 
+                    !v[:persona_attributes][:id] || v[:persona_attributes][:id] == '' ||
+                    Sip::Persona.where(id: v[:persona_attributes][:id].to_i).count == 0
+                  next
+                end
+                asi = Cor1440Gen::Asistencia.find(v[:id].to_i)
+                #Solo esto al eliminar asistencia que existia produce:
+                #Couldn't find Cor1440Gen::Asistencia with ID=84 for Cor1440Gen::Actividad with ID=287
+                if v['_destroy'] == "1" || v['_destroy'] == "true"
+                  asi.actividad.asistencia_ids -= [asi.id]
+                  asi.actividad.save(validate: false)
+                  asi.destroy
+                  # Quitar de los parámetros
+                  porelim.push(l)  
+                  next
+                end
+                per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
+                if asi.persona_id != per.id && asi.persona.nombres == 'N' && 
+                    asi.persona.apellidos == 'N'
+                  # Era nueva asistencia cuya nueva persona se remplazó tras 
+                  # autocompletar. Dejar asignada la remplazada y borrar la vacia
+                  op = asi.persona
+                  asi.persona_id = per.id
+                  asi.save
+                  op.destroy
+                end
+              end
+              porelim.each do |l|
+                params[:actividad][:asistencia_attributes].delete(l)
+              end
+            end
+
+          end
+
 
           # Genera conteo por actividad de convenio
           def contar

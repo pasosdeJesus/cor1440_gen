@@ -1,28 +1,16 @@
-<tr class='nested-fields'>
+<tr class='nested-fields campos_asistente' data-controller='sindocaut'>
   <% if f.object.persona.nil? %>
     <% f.object.persona = Sip::Persona.new %>
   <% end %>
 
   <%= f.simple_fields_for :persona do |p| %>
     <td>
-      <%= p.input :id, as: :hidden %>
-      <% ph = 'N'
-      ac = {'data-autocompleta' => 'no', style: 'width: 8em' }
-      if (!p.object.nombres || p.object.nombres == 'N' || p.object.nombres == '')
-        ph = 'Buscar'
-        ac = { 
-          autocomplete: 'off',
-          list: 'fuente-asistentes',
-          style: 'width: 8em' }
-      end %>
-      <%= p.input :nombres, placeholder: ph,
+      <%= p.input :nombres,
         value_method: lambda {|t| '' if t.nombres == 'N'},
-        label: false,
-        :input_html => ac %>
+        label: false %>
     </td>
     <td>
-      <%= p.input :apellidos, label: false,
-      input_html: { style: 'width: 8em' } %>
+      <%= p.input :apellidos, label: false %>
     </td>
     <td>
       <%= p.input :tdocumento_id,
@@ -30,62 +18,74 @@
         label_method: :sigla,
         value_method: :id ,
         label: false,
-        input_html: { style: 'width: 5em' }
+        input_html: {
+          style: 'width: 5em',
+          "data-action": "change->sindocaut#cambia_tdocumento"
+        }
       %>
     </td>
     <td>
-      <%= p.input :numerodocumento, 
-        input_html: { style: 'width: 6em' },
-        label: false %>
+      <%= p.input :id,
+        as: :hidden,
+        input_html: {
+          "data-sindocaut-target": "id"
+        } %>
+      <% ph = 'N'
+      ac = {'data-autocompleta' => 'no'}
+      if (!p.object.numerodocumento || p.object.numerodocumento == 'N' || p.object.numerodocumento == '')
+        ph = 'Buscar'
+        ac =  { autocomplete:  'off',
+                list: 'fuente-asistentes'
+        }
+      end %>
+      <%
+          if (p.object.tdocumento)
+            td = p.object.tdocumento.ayuda
+          else
+            td = "Si el tipo de documento es cédula de ciudadania teclee solo dígitos"
+          end
+        %>
+      <%= p.input :numerodocumento, placeholder: ph,
+        input_html: ac.merge!(
+          style: 'width: 6em',
+          "data-sindocaut-target": "numerodocumento",
+          title: td),
+          label: false %>
     </td>
     <td>
-      <%= p.input :sexo, 
+      <%= p.input :sexo,
         collection: Sip::Persona::sexo_opciones_cortas,
         label: false,
         input_html: { style: 'width: 4em' },
         include_blank: false %>
     </td>
     <td>
-      <%= p.input :anionac, 
+      <%= p.input :anionac,
         input_html: { style: 'width: 5em', min: 0 },
         label: false %>
     </td>
     <td>
-      <%= p.input :mesnac, 
+      <%= p.input :mesnac,
         input_html: { style: 'width: 4em', min: 0 },
         label: false %>
     </td>
     <td>
-      <%= p.input :dianac, 
+      <%= p.input :dianac,
         input_html: { style: 'width: 4em', min: 0 },
         label: false %>
     </td>
   <% end %>
-  <td>
-    <%= f.association :orgsocial,
-      collection: Sip::Orgsocial.all,
-      label_method: :presenta_nombre,
-      value_method: :id,
-      label: false,
-      input_html: { style: 'width: 6em' } %>
-  </td>
-  <td>
-    <%= f.association :perfilorgsocial,
-      collection: Sip::Perfilorgsocial.habilitados,
-      label_method: :nombre,
-      value_method: :id,
-      input_html: { style: 'width: 6em' },
-      label: false
-    %>
-  </td>
 
-  <%= render partial: 'asistencia_campos_if', 
+  <%= render partial: 'asistencia_campos_orgsocial',
+    locals: {fasistencia: f, fpersona: p} %>
+
+  <%= render partial: 'asistencia_campos_if',
     locals: {fasistencia: f, fpersona: p} %>
 
   <td>
     <%= f.input :id, as: :hidden %>
-    <%= link_to_remove_association t("Eliminar"), f, 
-        :class => 'btn-danger' 
+    <%= link_to_remove_association t("Eliminar"), f,
+      :class => 'btn-danger'
     %>
     <div><%= f.error_notification %></div>
   </td>

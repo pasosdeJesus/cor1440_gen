@@ -6,3 +6,7 @@ Desarrollo: Vladimir Támara del proyecto Pasos de Jesús, quien ha
   sido financiado para desarrollos de dominio público de personalizaciones
   de dominio público por el SJR LAC, SJR Colombia, el Banco de Datos del 
   CINEP y CINEP.
+
+Historias de usuario y requerimientos: Merlyn Mosquera del JRS-LAC, 
+  Marcela Salazar Posada de CINEP, Vera Samudio, Juana Potes y
+  Alex Linares  de JRS-Colombia.

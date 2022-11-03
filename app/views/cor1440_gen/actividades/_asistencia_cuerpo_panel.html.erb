@@ -11,8 +11,8 @@
         <th><%= t('añonac') %></th>
         <th><%= t('Mes') %></th>
         <th><%= t('Día') %></th>
-        <th><%= t('orgsocial') %></th>
-        <th><%= t('Perfil') %></th>
+        <%= render partial: 'asistencia_cuerpo_panel_orgsocial',
+          locals: { fasistencia: f} %>
         <%= render partial: 'asistencia_cuerpo_panel_if',
           locals: { fasistencia: f} %>
         <th></th>
@@ -31,6 +31,10 @@
     :"data-association-insertion-node" => "tbody#asistencia", 
     :"data-association-insertion-method" => "append", 
     partial: 'asistencia_campos',
+    'data-ajax' => File.join(
+      Rails.configuration.relative_url_root, 'asistencia/nueva'
+    ),
+    'data-ajaxdata' => 'actividad_id',
     :class => 'btn-primary'
   %>
 </div>

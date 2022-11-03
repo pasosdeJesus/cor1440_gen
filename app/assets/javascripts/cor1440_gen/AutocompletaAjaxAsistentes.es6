@@ -13,6 +13,7 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
     const cs = id.split(';')
     const idPersona = cs[0]
     let d = '&id_persona=' + idPersona
+    d += '&ac_asistente_persona=true'
     const a = root.puntomontaje + 'personas/datos'
 
     window.Rails.ajax({
@@ -21,6 +22,10 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
       data: d,
       success: (resp, estado, xhr) => {
         const divcp = eorig.target.closest('.' + Cor1440GenAutocompletaAjaxAsistentes.claseEnvoltura)
+        if (divcp == null) {
+          alert('No se encontró elmento con clase ' + 
+            Cor1440GenAutocompletaAjaxAsistentes.claseEnvoltura)
+        }
         divcp.querySelector('[id$=_attributes_id]').value = resp.id
         divcp.querySelector('[id$=_attributes_nombres]').value = resp.nombres
         divcp.querySelector('[id$=_attributes_apellidos]').value = resp.apellidos
@@ -64,8 +69,7 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
         }
         eorig.target.setAttribute('data-autocompleta', 'no')
         eorig.target.removeAttribute('list')
-        const sel = document.getElementById(
-          Cor1440GenAutocompletaAjaxAsistentes.idDatalist)
+        const sel = document.getElementById(Cor1440GenAutocompletaAjaxAsistentes.idDatalist)
         sel.innerHTML = ''
         // $(document).trigger('cor1440gen:autocompletado-asistente')
         document.dispatchEvent(new Event('cor1440gen:autocompletado-asistente'))
@@ -77,10 +81,10 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
   }
 
   static iniciar() {
-    console.log("AutocompletaAjaxAsistente cor1440")
+    console.log("Cor1440GenAutocompletaAjaxAsistentes cor1440_gen")
     let url = window.puntomontaje + 'personas.json'
     var asistentes = new window.AutocompletaAjaxExpreg(
-      [/^actividad_asistencia_attributes_[0-9]*_persona_attributes_nombres$/],
+      [/^actividad_asistencia_attributes_[0-9]*_persona_attributes_numerodocumento$/],
       url,
       Cor1440GenAutocompletaAjaxAsistentes.idDatalist,
       Cor1440GenAutocompletaAjaxAsistentes.operarElegida
@@ -91,5 +95,5 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
 }
 
 // Queriamos hacer dentro de Cor1440GenAutocompletaAjaxAsistentes static claseEnvoltura = 'campos_asistente' pero la versión de bable usada por babel-transpiler, usado por sprockets4 no lo soporta así que:
-Cor1440GenAutocompletaAjaxAsistentes.claseEnvoltura = 'nested-fields'
+Cor1440GenAutocompletaAjaxAsistentes.claseEnvoltura = 'campos_asistente'
 Cor1440GenAutocompletaAjaxAsistentes.idDatalist = 'fuente-asistentes'
