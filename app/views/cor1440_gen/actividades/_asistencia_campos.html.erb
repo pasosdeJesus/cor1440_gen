@@ -1,4 +1,4 @@
-<tr class='nested-fields campos_asistente' data-controller='sindocaut'>
+<tr class='nested-fields campos_asistente' data-controller='sip--sindocaut'>
   <% if f.object.persona.nil? %>
     <% f.object.persona = Sip::Persona.new %>
   <% end %>
@@ -20,7 +20,7 @@
         label: false,
         input_html: {
           style: 'width: 5em',
-          "data-action": "change->sindocaut#cambia_tdocumento"
+          "data-action": "change->sip--sindocaut#cambia_tdocumento"
         }
       %>
     </td>
@@ -28,7 +28,7 @@
       <%= p.input :id,
         as: :hidden,
         input_html: {
-          "data-sindocaut-target": "id"
+          "data-sip--sindocaut-target": "id"
         } %>
       <% ph = 'N'
       ac = {'data-autocompleta' => 'no'}
@@ -48,7 +48,7 @@
       <%= p.input :numerodocumento, placeholder: ph,
         input_html: ac.merge!(
           style: 'width: 6em',
-          "data-sindocaut-target": "numerodocumento",
+          "data-sip--sindocaut-target": "numerodocumento",
           title: td),
           label: false %>
     </td>

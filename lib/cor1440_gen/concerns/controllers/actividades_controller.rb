@@ -521,6 +521,7 @@ module Cor1440Gen
                   next
                 end
                 per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
+                debugger
                 if asi.persona_id != per.id && asi.persona.nombres == 'N' && 
                     asi.persona.apellidos == 'N'
                   # Era nueva asistencia cuya nueva persona se remplazó tras 
