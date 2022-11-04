@@ -521,15 +521,16 @@ module Cor1440Gen
                   next
                 end
                 per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
-                debugger
-                if asi.persona_id != per.id && asi.persona.nombres == 'N' && 
-                    asi.persona.apellidos == 'N'
+                if asi.persona_id != per.id && (!asi.persona || (
+                    asi.persona.nombres == 'N' && asi.persona.apellidos == 'N'))
                   # Era nueva asistencia cuya nueva persona se remplazó tras 
                   # autocompletar. Dejar asignada la remplazada y borrar la vacia
                   op = asi.persona
                   asi.persona_id = per.id
                   asi.save
-                  op.destroy
+                  if op
+                    op.destroy
+                  end
                 end
               end
               porelim.each do |l|
