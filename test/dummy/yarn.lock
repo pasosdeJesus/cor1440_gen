@@ -59,8 +59,8 @@
   integrity sha512-c3xlOroHp/cCZHDOuLp6uzQYEbvXBUVaal0puXoGJ9M8L/KHwZ3hQozD4dVeSN9msHWLxxtmPT1TlCN7gFhj4w==
 
 "@pasosdejesus/autocompleta_ajax@https://gitlab.com/pasosdeJesus/autocompleta_ajax.git":
-  version "0.9.9-a29"
-  resolved "https://gitlab.com/pasosdeJesus/autocompleta_ajax.git#2324d3df4cc56dd2fd42dd7025afda73c1bf4012"
+  version "0.9.9-a30"
+  resolved "https://gitlab.com/pasosdeJesus/autocompleta_ajax.git#16ccf327765973c03836d0913a2e1441fc6c3451"
 
 "@popperjs/core@^2.9.3":
   version "2.11.6"
@@ -90,9 +90,9 @@ ansi-styles@^3.2.1:
     color-convert "^1.9.0"
 
 apexcharts@^3.27.2:
-  version "3.36.1"
-  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.36.1.tgz#fa2b12380231a39c940f9a1e989bc467b831dc2c"
-  integrity sha512-jXSEVfG1IoSkE0oFPqcK+1qMZBSuqrPwAaeRsgSJdfk9BgGnHgESgydQgJ5Vu8KZFuoXdJQdJgzCY8nsntBopw==
+  version "3.36.3"
+  resolved "https://registry.yarnpkg.com/apexcharts/-/apexcharts-3.36.3.tgz#debd58ded07163d51e00aeb15827d594e0cc8129"
+  integrity sha512-8/FXEs0ohXMff07Gv28XjhPwEJphIUdq2/wii/pcvi54Tw6z1mjrV8ydN8rlWi/ve8BAPBefJkLmRWv7UOBsLw==
   dependencies:
     svg.draggable.js "^2.2.2"
     svg.easing.js "^2.0.0"
