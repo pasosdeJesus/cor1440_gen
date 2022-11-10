@@ -355,12 +355,12 @@ module Cor1440Gen
 
           # Responde a requerimiento AJAX generado por cocoon creando una
           # nueva persona como nuevo asistente para la actividad que recibe 
-          # por parámetro  params[:actividad_id].  
-          # Pone valores simples en los campos requeridos
+          # por parámetro  params[:actividad_id].
+          # Pone valores NN en los campos requeridos.
+          #
           # Como crea personas que podrían ser remplazadas por otras por 
-          # autocompletación debería ejecutarse con periodicidad un proceso que
-          # elimine todas las personas de nombres N, apellidos N, sexo N, que
-          # no este en listado de asistencia ni en casos
+          # autocompletación. Los NN creados son eliminados
+          # en filtra_contenido_params
           def nueva_asistencia
             authorize! :new, Sip::Persona
             if params[:actividad_id].nil?
