@@ -410,6 +410,7 @@ module Cor1440Gen
 
 
           def update_cor1440_gen
+            actividades_en_tabla = []
             if actividad_params[:asistencia_attributes]
               actividad_params[:asistencia_attributes].each do |llavea, a|
                 if a['_destroy'].to_i == 1
@@ -436,17 +437,23 @@ module Cor1440Gen
                     })
                     ac.save!(validate: false)
                     params[:actividad][:asistencia_attributes][llavea.to_s][:id] = ac.id
+                    actividades_en_tabla << ac.id
+                elsif a[:id].to_i > 0
+                  actividades_en_tabla << a[:id].to_i
                 end
               end
-            else # sin asistentes en HTML
-              # cocoon pudo haber quitado del HTML entrada de la tabla de 
-              # asistentes en blanco, aún cuando mediante llamada ajax
-              # se hubieran creado.  En tal caso eliminar asistentes
-              # parcialmente creados
-              Cor1440Gen::Asistencia.where(actividad_id: @actividad.id).each do |a|
+            end
+
+            # cocoon pudo haber quitado del HTML entrada de la tabla de 
+            # asistentes en blanco, aún cuando mediante llamada ajax
+            # se hubieran creado.  En tal caso eliminar asistentes
+            # parcialmente creados
+            Cor1440Gen::Asistencia.where(actividad_id: @actividad.id).each do |a|
+              if !actividades_en_tabla.include?(a.id)
                 intentar_eliminar_registro_asistente(a)
               end
             end
+
             update_gen
           end
 
