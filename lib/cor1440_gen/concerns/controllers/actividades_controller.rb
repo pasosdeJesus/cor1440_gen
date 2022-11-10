@@ -294,8 +294,35 @@ module Cor1440Gen
             return false
           end
 
+          def otras_acciones_antes_eliminar_asistencia(a)
+            return
+          end
 
-          def intentar_eliminar_asistente(params_a)
+          # @return veradero sii lo logra
+          def intentar_eliminar_registro_asistente(a)
+            if Cor1440Gen::Asistencia.where(persona_id: a.persona_id).
+                where('actividad_id<>?', @registro.id).count > 0
+              return false
+            end
+            # Está como contacto de alguna organización
+            if Sip::OrgsocialPersona.where(persona_id: a.persona_id).count > 0
+              return false
+            end
+            if otros_impedimentos_para_borrar_persona_ex_asistente(a)
+              return false
+            end
+            # La forma de eliminar asistencia como resultado
+            # de eliminar persona, no opera con before_destroy en asistencia.
+            # De requerirse usar la siguiente
+            otras_acciones_antes_eliminar_asistencia(a)
+            # Eliminar de tabla persona (esto eliminará de asistente también)
+            Sip::Persona.find(a.persona_id).destroy
+            return true
+
+          end
+
+          # @return veradero sii lo logra
+          def intentar_eliminar_asistente_de_params(params_a)
             # Se está eliminando?
             if !params_a || !params_a['_destroy'] || 
                 params_a['_destroy'].to_i != 1
@@ -308,16 +335,8 @@ module Cor1440Gen
             end
             a = Cor1440Gen::Asistencia.find(params_a['id'])
             # La persona no está en otras actividades?
-            if Cor1440Gen::Asistencia.where(persona_id: a.persona_id).
-                where('actividad_id<>?', @registro.id).count > 0
-              return false
-            end
-            if otros_impedimentos_para_borrar_persona_ex_asistente(a)
-              return false
-            end
-            # Eliminar de tabla persona (esto eliminará de asistente también)
-            Sip::Persona.find(a.persona_id).destroy
-            return true
+            
+            intentar_eliminar_registro_asistente(a)
           end
 
 
@@ -394,21 +413,23 @@ module Cor1440Gen
             if actividad_params[:asistencia_attributes]
               actividad_params[:asistencia_attributes].each do |llavea, a|
                 if a['_destroy'].to_i == 1
-                  if intentar_eliminar_asistente(a)
+                  if intentar_eliminar_asistente_de_params(a)
                     puts "** Eliminando parametro de asistencia #{llavea} "\
                       "porque ya se debió eliminar asistencia de base"
                     flash[:notice] ||= ''
                     flash[:notice] << "Se eliminó beneficiario(a) #{a[:persona_id]}"
                     params[:actividad][:asistencia_attributes].delete(llavea)
                   end
-                  # Ubicamos los de autocompletacion y para esos creamos un registro 
-                  # si hace falta
+                  # Si no se debía eliminar persona sino sólo asistente
+                  # lo maneja rails(?)
                 elsif a && a[:id] && a[:id] == '' && 
                     a[:persona_attributes] && 
                     a[:persona_attributes][:id] &&
                     a[:persona_attributes][:id].to_i > 0 &&
                     Sip::Persona.where(
                       id: a[:persona_attributes][:id].to_i).count == 1
+                  # Ubicamos los de autocompletacion y para esos creamos un registro 
+                  # si hace falta
                     ac = Cor1440Gen::Asistencia.create({
                       actividad_id: @actividad.id,
                       persona_id: a[:persona_attributes][:id]
@@ -416,6 +437,14 @@ module Cor1440Gen
                     ac.save!(validate: false)
                     params[:actividad][:asistencia_attributes][llavea.to_s][:id] = ac.id
                 end
+              end
+            else # sin asistentes en HTML
+              # cocoon pudo haber quitado del HTML entrada de la tabla de 
+              # asistentes en blanco, aún cuando mediante llamada ajax
+              # se hubieran creado.  En tal caso eliminar asistentes
+              # parcialmente creados
+              Cor1440Gen::Asistencia.where(actividad_id: @actividad.id).each do |a|
+                intentar_eliminar_registro_asistente(a)
               end
             end
             update_gen
