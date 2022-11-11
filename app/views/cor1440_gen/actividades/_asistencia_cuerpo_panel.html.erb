@@ -1,41 +1,44 @@
-<div class='table-responsive'>
-  <table class="tablalistadoasistencia table table-bordered table-sm ">
-    <datalist id='fuente-asistentes'>
-    </datalist>
-    <thead class="thead-light">
-      <tr>
-        <th><%= t('Nombres') %></th>
-        <th><%= t('Apellidos') %></th>
-        <th colspan="2"><%= t('Identificación') %></th>
-        <th><%= t('Sexo') %></th>
-        <th><%= t('añonac') %></th>
-        <th><%= t('Mes') %></th>
-        <th><%= t('Día') %></th>
-        <%= render partial: 'asistencia_cuerpo_panel_orgsocial',
-          locals: { fasistencia: f} %>
-        <%= render partial: 'asistencia_cuerpo_panel_if',
+<turbo-frame id="marco-listadoasistencia" data-controller="rapidobenefcaso">
+  <div class='table-responsive'>
+    <table class="tablalistadoasistencia table table-bordered table-sm ">
+      <datalist id='fuente-asistentes'>
+      </datalist>
+      <thead class="thead-light">
+        <tr>
+          <th><%= t('Nombres') %></th>
+          <th><%= t('Apellidos') %></th>
+          <th colspan="2"><%= t('Identificación') %></th>
+          <th><%= t('Sexo') %></th>
+          <th><%= t('añonac') %></th>
+          <th><%= t('Mes') %></th>
+          <th><%= t('Día') %></th>
+          <%= render partial: 'asistencia_cuerpo_panel_orgsocial',
+            locals: { fasistencia: f} %>
+          <%= render partial: 'asistencia_cuerpo_panel_if',
           locals: { fasistencia: f} %>
         <th></th>
-      </tr>
-    </thead>
-    <tbody id="asistencia">
-      <%= f.simple_fields_for :asistencia do |a| %>
-        <%= render 'asistencia_campos', f: a %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-<div class="links">
-  <%= link_to_add_association t('Añadir asistente'), f, 
-    :asistencia,
-    :"data-association-insertion-node" => "tbody#asistencia", 
-    :"data-association-insertion-method" => "append", 
-    partial: 'asistencia_campos',
-    'data-ajax' => File.join(
-      Rails.configuration.relative_url_root, 'asistencia/nueva'
-    ),
-    'data-ajaxdata' => 'actividad_id',
-    :class => 'btn-primary'
-  %>
-</div>
-
+        </tr>
+      </thead>
+      <tbody id="asistencia">
+        <%= f.simple_fields_for :asistencia do |a| %>
+          <%= render 'asistencia_campos', f: a %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="links">
+    <%= link_to_add_association t('Añadir asistente'), f, 
+      :asistencia,
+      :"data-association-insertion-node" => "tbody#asistencia", 
+      :"data-association-insertion-method" => "append", 
+      partial: 'asistencia_campos',
+      'data-ajax' => File.join(
+        Rails.configuration.relative_url_root, 'asistencia/nueva'
+      ),
+      'data-ajaxdata' => 'actividad_id',
+      :class => 'btn bnt-sm btn-primary'
+    %>
+  </div>
+  <%= render partial: 'asistencia_cuerpo_panel_pie', 
+    locals: { fasistencia: f} %>
+</turbo-frame>
