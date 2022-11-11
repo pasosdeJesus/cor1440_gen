@@ -85,7 +85,8 @@
   <td>
     <%= f.input :id, as: :hidden %>
     <%= link_to_remove_association t("Eliminar"), f,
-      :class => 'btn-danger'
+      class: "btn-danger",
+      "data-existing": true
     %>
     <div><%= f.error_notification %></div>
   </td>

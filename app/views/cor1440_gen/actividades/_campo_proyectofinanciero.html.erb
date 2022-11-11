@@ -1,14 +1,19 @@
 <div class='div_actividad_proyectofinanciero'>
-
   <table class="tablapfac table-sm table-striped">
     <thead>
       <tr>
-        <th scope='col'> <%= @actividad.class.human_attribute_name(:proyectofinanciero) %> </th>
-        <th scope='col' style='width-min: 30rem'><%= @actividad.class.human_attribute_name(:actividadespf) %></th>
+        <th scope='col'>
+          <%= @actividad.class.human_attribute_name(:proyectofinanciero) %>
+        </th>
+        <th scope='col' style='width-min: 30rem'>
+          <%= @actividad.class.human_attribute_name(:actividadespf) %>
+        </th>
       </tr>
     </thead>
     <tbody id="actividad_proyectofinanciero">
-      <%= f.simple_fields_for(:actividad_proyectofinanciero, f.object.actividad_proyectofinanciero.order(:id)) do |ap| %>
+      <%= f.simple_fields_for(
+        :actividad_proyectofinanciero, 
+        f.object.actividad_proyectofinanciero.order(:id)) do |ap| %>
         <%= render partial: 'actividad_proyectofinanciero_campos',
           locals: {f: ap, ac: f} %>
       <% end %>
@@ -17,13 +22,14 @@
     </tbody>
   </table>
   <div class="agregar-proyectofinanciero">
-    <%= link_to_add_association "#{t('Añadir')} #{@actividad.class.human_attribute_name(:proyectofinanciero)}", f, 
-      :actividad_proyectofinanciero,
+    <%= link_to_add_association(
+      "#{t('Añadir')} #{@actividad.class.human_attribute_name(:proyectofinanciero)}", 
+      f, :actividad_proyectofinanciero,
       render_options: {locals: { ac: f }},
-      :"data-association-insertion-node" => "tbody#actividad_proyectofinanciero", 
-      :"data-association-insertion-method" => "append", 
-      :partial => "actividad_proyectofinanciero_campos", 
-      :class => "btn-primary" 
-    %>
+      "data-association-insertion-node": "tbody#actividad_proyectofinanciero", 
+      "data-association-insertion-method": "append", 
+      partial: "actividad_proyectofinanciero_campos", 
+      class: "btn-primary" 
+    ) %>
   </div>
 </div>
