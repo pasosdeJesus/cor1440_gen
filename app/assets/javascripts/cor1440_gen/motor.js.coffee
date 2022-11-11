@@ -466,6 +466,15 @@ cor1440_gen_rangoedadc_todos = () ->
     otrospfid.push(+this.value)
   )
   idsel = objetivo.find('select').attr('id')
+  resp.sort((a,b) -> 
+    if a.nombre.toLowerCase() < b.nombre.toLowerCase() 
+      return -1
+    else if a.nombre.toLowerCase() > a.nombre.toLowerCase()
+      return 1
+    else
+      return 0
+  )
+
   nuevasop = []
   resp.forEach((r) ->
     if !otrospfid.includes(+r.id)
