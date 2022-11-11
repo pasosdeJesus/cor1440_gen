@@ -13,7 +13,7 @@
   <% col = Cor1440Gen::Proyectofinanciero.where(id: ids).
     reorder('lower(nombre)') %>
   <td>
-    <%= f.input :actividad_id, as: :hidden %> 
+    <% # Inexcplicable que no opere coccoon:after-insert si se agrega: f.input :actividad_id, as: :hidden %> 
     <%= f.input :id, as: :hidden %>
     <% vdis = false %>
     <% if f.object.proyectofinanciero_id %>
@@ -45,7 +45,6 @@
     <% elestilo = "display: block" %>
   <% end%>
   <td style="<%= elestilo %>">
-  <td>
     <%= link_to_remove_association t("Eliminar"), f, 
       :class => 'btn-danger' 
     %>

@@ -2,7 +2,6 @@
 
 console.log('Hola Mundo desde ESM')
 
-
 import Rails from "@rails/ujs";
 Rails.start();
 window.Rails = Rails
