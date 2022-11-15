@@ -1,4 +1,6 @@
-class OptimizaNuevosBenGifmm < ActiveRecord::Migration[7.0]
+class OptimizaNuevosBen < ActiveRecord::Migration[7.0]
+
+  include Sip::SqlHelper
 
   def elimina_pares_duplicados(tabla, campo1, campo2)
     prep = execute <<-SQL
@@ -26,9 +28,15 @@ class OptimizaNuevosBenGifmm < ActiveRecord::Migration[7.0]
   end
  
   def up
-    execute <<-SQL
-      ALTER TABLE cor1440_gen_actividad RENAME CONSTRAINT sivel2_gen_actividad_pkey TO cor1440_gen_actividad_pkey;
-    SQL
+    if existe_restricción_pg?('sivel2_gen_actividad_pkey')
+      execute <<-SQL
+        ALTER TABLE cor1440_gen_actividad RENAME CONSTRAINT sivel2_gen_actividad_pkey TO cor1440_gen_actividad_pkey;
+      SQL
+    elsif existe_restricción_pg?('actividad_pkey')
+      execute <<-SQL
+        ALTER TABLE cor1440_gen_actividad RENAME CONSTRAINT actividad_pkey TO cor1440_gen_actividad_pkey;
+      SQL
+    end
 
     elimina_pares_duplicados('cor1440_gen_actividad_actividadpf', 'actividad_id', 'actividadpf_id')
     execute <<-SQL
@@ -49,7 +57,7 @@ class OptimizaNuevosBenGifmm < ActiveRecord::Migration[7.0]
     execute <<-SQL
       DROP INDEX IF EXISTS cor1440_gen_actividad_id_persona_id_idx;
       DROP INDEX IF EXISTS cor1440_gen_actividad_id_actividadpf_id_idx;
-      ALTER TABLE cor1440_gen_actividad RENAME CONSTRAINT cor1440_gen_actividad_pkey TO sivel2_gen_actividad_pkey;
+      ALTER TABLE cor1440_gen_actividad RENAME CONSTRAINT cor1440_gen_actividad_pkey TO actividad_pkey;
     SQL
   end
 end
