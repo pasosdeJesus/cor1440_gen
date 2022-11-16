@@ -130,10 +130,6 @@ module Cor1440Gen
         end
 
         if tf != df 
-          if a.actividad_rangoedadac[re.id]
-            a.actividad_rangoedadac[re.id].fr = df
-          a.actividad_rangoedadac[
-
           STDERR.puts "** Diferencia en actividad #{a.id}, "\
             "rango de edad #{re.id}, sexo #{convF}. "\
               "Tabla dice #{tf} y cuenta de asistentes da #{df}."
