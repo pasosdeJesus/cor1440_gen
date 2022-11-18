@@ -243,7 +243,6 @@ module Cor1440Gen
       c = 0
       ultp = -1
       puts "Por revisar #{univ} actividades"
-      debugger
       actividades.each do |a|
         c += 1
         por = c*100/univ
@@ -344,14 +343,50 @@ module Cor1440Gen
       ;
       SQL
       ids = resc.pluck('actividad_id')
-      debugger
       ap = Cor1440Gen::Actividad.where(id: ids)
       return arregla_tablas_poblacion(ap, resultado)
     end
     module_function :arregla_tablas_poblacion_desde_2020
 
 
-
+    # Elimina tabla de población de una actividad y la recalcula con
+    # listado de asistencia
+    #
+    # @param actividad
+    def recalcula_poblacion(actividad)
+      rangoedad = {}
+      Cor1440Gen::ActividadRangoedadac.
+        where(actividad_id: actividad.id).delete_all
+      actividad.asistencia.each do |asis|
+        per = asis.persona
+        if per
+          #puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
+          re = Sip::EdadSexoHelper.buscar_rango_edad(
+            Sip::EdadSexoHelper.edad_de_fechanac_fecha(
+              per.anionac, per.mesnac, per.dianac,
+              actividad.fecha.year, actividad.fecha.month, actividad.fecha.day), 
+              'Cor1440Gen::Rangoedadac')
+          #puts "OJO re=#{re}"
+          if !rangoedad[re]
+            rangoedad[re] = {}
+          end
+          if !rangoedad[re][per.sexo]
+            rangoedad[re][per.sexo] = 0
+          end
+          rangoedad[re][per.sexo] += 1
+        end
+      end
+      rangoedad.each do |re, vs|
+        Cor1440Gen::ActividadRangoedadac.create(
+          actividad_id: actividad.id,
+          rangoedadac_id: re,
+          mr: vs['M'].to_i,
+          fr: vs['F'].to_i,
+          s: vs['S'].to_i
+        )
+      end
+    end
+    module_function :recalcula_poblacion
 
 
   end
