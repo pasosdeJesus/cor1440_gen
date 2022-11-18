@@ -212,8 +212,8 @@ module Cor1440Gen
           end
 
 
-          validate :asistentes_habian_nacido
-          def asistentes_habian_nacido
+          validate :asistentes_con_buena_edad
+          def asistentes_con_buena_edad
             self.asistencia.each do |a|
               p = a.persona
               if p && p.anionac && (p.anionac > self.fecha.year ||
@@ -227,46 +227,21 @@ module Cor1440Gen
                            "#{p.tdocumento.sigla} #{p.numerodocumento} "\
                            "tiene fecha de nacimiento posterior "\
                            "a la de la actividad")
+              elsif p && p.anionac && (self.fecha.year - p.anionac)>119
+                errors.add(:asistentes, "El asistente con identificación "\
+                           "#{p.tdocumento.sigla} #{p.numerodocumento} "\
+                           "tendría más de 120 años en la actividad")
               end
             end
           end
 
           def recalcula_poblacion
             if Rails.configuration.x.cor1440_edita_poblacion
-              puts "La función recalcula_poblacion solo debería llamarse cuando no está deshabilitada la edición de la tabla de población"
+              puts "El método recalcula_poblacion solo debería llamarse "\
+                "cuando está deshabilitada la edición de la tabla de población"
               exit 1
             end
-            rangoedad = {}
-            Cor1440Gen::ActividadRangoedadac.
-              where(actividad_id: self.id).delete_all
-            self.asistencia.each do |asis|
-              per = asis.persona
-              if per
-                #puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
-                re = Sip::EdadSexoHelper.buscar_rango_edad(
-                  Sip::EdadSexoHelper.edad_de_fechanac_fecha(
-                    per.anionac, per.mesnac, per.dianac,
-                    self.fecha.year, self.fecha.month, self.fecha.day), 
-                    'Cor1440Gen::Rangoedadac')
-                #puts "OJO re=#{re}"
-                if !rangoedad[re]
-                  rangoedad[re] = {}
-                end
-                if !rangoedad[re][per.sexo]
-                  rangoedad[re][per.sexo] = 0
-                end
-                rangoedad[re][per.sexo] += 1
-              end
-            end
-            rangoedad.each do |re, vs|
-              Cor1440Gen::ActividadRangoedadac.create(
-                actividad_id: self.id,
-                rangoedadac_id: re,
-                mr: vs['M'].to_i,
-                fr: vs['F'].to_i,
-                s: vs['S'].to_i
-              )
-            end
+            ConteosHelper.recalcula_poblacion(self)
           end
 
           after_commit do |actividad|
