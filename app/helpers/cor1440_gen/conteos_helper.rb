@@ -11,11 +11,15 @@ module Cor1440Gen
       personas = {}
       a.asistencia.each do |asist|
         if !asist.persona
-          STDERR.puts "Persona en NULL en asistencia #{asist.id} "\
+          merr = "Persona en NULL en asistencia #{asist.id} "\
             "de actividad #{a.id}"
+          puts merr
+          STDERR.puts merr
         elsif personas[asist.persona.id]
-          STDERR.puts "Persona #{asist.persona.id} repetida en "\
+          merr = "Persona #{asist.persona.id} repetida en "\
             "listado de asistencia de la actividad #{a.id}"
+          puts merr
+          STDERR.puts  merr
         else
           personas[asist.persona.id] = 1
         end
@@ -231,7 +235,7 @@ module Cor1440Gen
 
 
 
-    # Arregla tablas de población de todas las actividades desde 2020
+    # Arregla tablas de población de las actividades que recibe
     # con conteos generados de asistentes
     #
     # @parama actividades
@@ -242,13 +246,13 @@ module Cor1440Gen
       univ = actividades.count
       c = 0
       ultp = -1
-      puts "Por revisar #{univ} actividades"
+      STDERR.puts "Por revisar #{univ} actividades"
       actividades.each do |a|
         c += 1
         por = c*100/univ
         if por / 10 != ultp / 10
           ultp = por
-          puts "#{por}%"
+          STDERR.puts "#{por}%"
         end
         numdif += arregla_tabla_poblacion_de_asistentes_actividad(a, resultado)
       end
@@ -333,16 +337,17 @@ module Cor1440Gen
       SQL
 
       resc = ActiveRecord::Base.connection.execute <<-SQL
-      SELECT * FROM cor1440_gen_vista_resumentpob AS r1
-      JOIN cor1440_gen_vista_resumentpob2 AS r2
-        ON r1.actividad_id=r2.actividad_id
-      JOIN cor1440_gen_actividad AS a ON r1.actividad_id=a.id
-      WHERE r1.tpob<>r2.tpob
-        AND a.fecha >='2020-01-01'
+      SELECT * FROM cor1440_gen_actividad AS a
+      LEFT JOIN cor1440_gen_vista_resumentpob AS r1
+        ON a.id=r1.actividad_id
+      LEFT JOIN cor1440_gen_vista_resumentpob2 AS r2
+        ON a.id=r2.actividad_id
+      WHERE a.fecha >='2020-01-01'
+        AND coalesce(r1.tpob, '')<>coalesce(r2.tpob, '')
       ORDER BY a.id
       ;
       SQL
-      ids = resc.pluck('actividad_id')
+      ids = resc.pluck('id')
       ap = Cor1440Gen::Actividad.where(id: ids)
       return arregla_tablas_poblacion(ap, resultado)
     end
