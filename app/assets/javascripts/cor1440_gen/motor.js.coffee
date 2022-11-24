@@ -209,9 +209,10 @@ cor1440_gen_rangoedadc_todos = () ->
   # Agregar rango y actualizar idrf
   $('a[data-association-insertion-node$=actividad_rangoedadac]').click()
   uf = $('#actividad_rangoedadac').children().last()
-  e = uf.find('[id^=actividad_actividad_rangoedadac_attributes][id$=_rangoedadac_id]')
-  idrf[idrango] = /actividad_actividad_rangoedadac_attributes_(.*)_rangoedadac_id/.exec(e.attr('id'))[1]
-  $('select[id^=actividad_actividad_rangoedadac_attributes_' + idrf[idrango] + '_rangoedadac_id]').val(idrango)
+  if uf.length > 0 
+    e = uf.find('[id^=actividad_actividad_rangoedadac_attributes][id$=_rangoedadac_id]')
+    idrf[idrango] = /actividad_actividad_rangoedadac_attributes_(.*)_rangoedadac_id/.exec(e.attr('id'))[1]
+    $('select[id^=actividad_actividad_rangoedadac_attributes_' + idrf[idrango] + '_rangoedadac_id]').val(idrango)
 
 
 
