@@ -55,11 +55,12 @@ cor1440_gen_rangoedadac_tot = () ->
 # Calcula subtotal para una columna y después gran total
 @cor1440_gen_rangoedadac = ($this) ->
   cid = $this.attr('id')
-  n = cid.lastIndexOf('_')
-  col = cid.slice(n+1)
-  ini = cid.slice(0, cid.indexOf("attributes") + 10)
-  cor1440_gen_rangoedadac_uno(ini, col)
-  cor1440_gen_rangoedadac_tot()
+  if typeof cid != "undefined"
+    n = cid.lastIndexOf('_')
+    col = cid.slice(n+1)
+    ini = cid.slice(0, cid.indexOf("attributes") + 10)
+    cor1440_gen_rangoedadac_uno(ini, col)
+    cor1440_gen_rangoedadac_tot()
   return
 
 
