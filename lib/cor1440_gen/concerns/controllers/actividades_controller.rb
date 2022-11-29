@@ -466,7 +466,8 @@ module Cor1440Gen
             @pf_respaldo = {}
             # para no perder proyectos financieros sin actividad de marco lógico
             # en caso de errores de validación
-            if actividad_params && actividad_params[:actividad_proyectofinanciero_attributes]
+            if actividad_params && 
+                actividad_params[:actividad_proyectofinanciero_attributes]
               actividad_params[:actividad_proyectofinanciero_attributes].each do |l,v|
                 if v[:_destroy] == 'false' && v[:proyectofinanciero_id].to_i > 0
                   @pf_respaldo[v[:proyectofinanciero_id].to_i] = v[:actividadpf_ids]
