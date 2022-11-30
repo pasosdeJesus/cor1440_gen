@@ -57,7 +57,7 @@ module Cor1440Gen
             ] +
             [ :proyecto_ids =>  [] ] +
             [ :compromisos,
-              :monto,
+              :montoejp_localizado,
               :observaciones,
               :objetivopf,
               :indicadorobjetivo,
@@ -94,6 +94,7 @@ module Cor1440Gen
             ] +
             [ :tipomoneda,
               :tasaej,
+              :montoejp_localizado,
               :desembolso, 
               :informenarrativo,
               :informefinanciero,

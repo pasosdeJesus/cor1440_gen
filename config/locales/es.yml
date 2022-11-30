@@ -251,6 +251,7 @@ es:
         indicador: Indicador
         marcologico: Marco lógico
         montoej: Aporte del financiador
+        montoejp_localizado: Aporte del financiador
         nombre: Nombre interno breve
         objetivopf: Objetivo
         plantillahcm: Plantillas para listados que exportan/importan a caracterizaciones de este proyecto
