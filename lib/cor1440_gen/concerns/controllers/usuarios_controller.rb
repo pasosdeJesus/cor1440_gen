@@ -1,4 +1,4 @@
-require 'sip/concerns/controllers/usuarios_controller'
+require 'msip/concerns/controllers/usuarios_controller'
 
 module Cor1440Gen
   module Concerns
@@ -8,7 +8,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Controllers::UsuariosController
+          include Msip::Concerns::Controllers::UsuariosController
 
           def atributos_index
             [ :id,
@@ -45,7 +45,7 @@ module Cor1440Gen
           private
 
           def lista_params_cor1440_gen
-            r = lista_params_sip 
+            r = lista_params_msip 
           end
 
           def lista_params

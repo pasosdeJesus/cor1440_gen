@@ -93,7 +93,7 @@ module Cor1440Gen
           end
 
           def atributos_html_encabezado_formulario
-             { 'data-controller': 'sip--cancelar-vacio-es-eliminar' }
+             { 'data-controller': 'msip--cancelar-vacio-es-eliminar' }
           end
 
           # Responde a GET /actividades/new
@@ -332,7 +332,7 @@ module Cor1440Gen
               return false
             end
             # Está como contacto de alguna organización
-            if Sip::OrgsocialPersona.where(persona_id: a.persona_id).count > 0
+            if Msip::OrgsocialPersona.where(persona_id: a.persona_id).count > 0
               return false
             end
             if otros_impedimentos_para_borrar_persona_ex_asistente(a)
@@ -343,7 +343,7 @@ module Cor1440Gen
             # De requerirse usar la siguiente
             otras_acciones_antes_eliminar_asistencia(a)
             # Eliminar de tabla persona (esto eliminará de asistente también)
-            Sip::Persona.find(a.persona_id).destroy
+            Msip::Persona.find(a.persona_id).destroy
             return true
 
           end
@@ -389,7 +389,7 @@ module Cor1440Gen
           # autocompletación. Los NN creados son eliminados
           # en filtra_contenido_params
           def nueva_asistencia
-            authorize! :new, Sip::Persona
+            authorize! :new, Msip::Persona
             if params[:actividad_id].nil?
               resp_error 'Falta parámetro actividad_id'
               return
@@ -401,7 +401,7 @@ module Cor1440Gen
               return
             end
             act = Cor1440Gen::Actividad.find(params[:actividad_id].to_i)
-            @persona = Sip::Persona.create(
+            @persona = Msip::Persona.create(
               nombres: 'N',
               apellidos: 'N',
               sexo: 'S',
@@ -454,7 +454,7 @@ module Cor1440Gen
                     a[:persona_attributes] && 
                     a[:persona_attributes][:id] &&
                     a[:persona_attributes][:id].to_i > 0 &&
-                    Sip::Persona.where(
+                    Msip::Persona.where(
                       id: a[:persona_attributes][:id].to_i).count == 1
                     # Ubicamos los de autocompletacion y para esos creamos 
                     # un registro si hace falta
@@ -570,7 +570,7 @@ module Cor1440Gen
                 if Cor1440Gen::Asistencia.where(id: v[:id].to_i).count == 0 ||
                     !v[:persona_attributes] || 
                     !v[:persona_attributes][:id] || v[:persona_attributes][:id] == '' ||
-                    Sip::Persona.where(id: v[:persona_attributes][:id].to_i).count == 0
+                    Msip::Persona.where(id: v[:persona_attributes][:id].to_i).count == 0
                   next
                 end
                 asi = Cor1440Gen::Asistencia.find(v[:id].to_i)
@@ -584,7 +584,7 @@ module Cor1440Gen
                   porelim.push(l)  
                   next
                 end
-                per = Sip::Persona.find(v[:persona_attributes][:id].to_i)
+                per = Msip::Persona.find(v[:persona_attributes][:id].to_i)
                 if asi.persona_id != per.id && (!asi.persona || (
                     asi.persona.nombres == 'N' && asi.persona.apellidos == 'N'))
                   # Era nueva asistencia cuya nueva persona se remplazó tras 
@@ -627,9 +627,9 @@ module Cor1440Gen
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
                 params[:filtro]['fechaini'] != ""
               if !params[:filtro] || !params[:filtro]['fechaini']
-                @fechaini = Sip::FormatoFechaHelper.inicio_semestre_ant
+                @fechaini = Msip::FormatoFechaHelper.inicio_semestre_ant
               else
-                @fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechaini'])
+                @fechaini = Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechaini'])
               end
               @contar_actividad = @contar_actividad.where(
                 'cor1440_gen_actividad.fecha >= ?', @fechaini)
@@ -638,9 +638,9 @@ module Cor1440Gen
             if !params[:filtro] || !params[:filtro]['fechafin'] || 
                 params[:filtro]['fechafin'] != ""
               if !params[:filtro] || !params[:filtro]['fechafin']
-                @fechafin = Sip::FormatoFechaHelper.fin_semestre_ant
+                @fechafin = Msip::FormatoFechaHelper.fin_semestre_ant
               else
-                @fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechafin'])
+                @fechafin = Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro]['fechafin'])
               end
               @contar_actividad = @contar_actividad.where(
                 'cor1440_gen_actividad.fecha <= ?', @fechafin)
@@ -693,7 +693,7 @@ module Cor1440Gen
                 TRIM(p.apellidos)) AS persona_nombre,
               TRIM(COALESCE(td.sigla || ':', '') ||
                 COALESCE(p.numerodocumento, '')) AS persona_identificacion,
-              public.sip_edad_de_fechanac_fecharef(
+              public.msip_edad_de_fechanac_fecharef(
                 p.anionac, p.mesnac, p.dianac,
               EXTRACT(YEAR FROM a.fecha)::integer,
               EXTRACT(MONTH from a.fecha)::integer,
@@ -704,8 +704,8 @@ module Cor1440Gen
               apf.id AS actividadpf_id,
               pf.id AS proyectofinanciero_id
             FROM cor1440_gen_asistencia AS asis
-            JOIN sip_persona AS p ON p.id=asis.persona_id
-            LEFT JOIN sip_tdocumento AS td ON td.id=p.tdocumento_id
+            JOIN msip_persona AS p ON p.id=asis.persona_id
+            LEFT JOIN msip_tdocumento AS td ON td.id=p.tdocumento_id
             JOIN cor1440_gen_actividad AS a ON asis.actividad_id=a.id
             JOIN cor1440_gen_actividad_actividadpf AS acapf 
               ON  acapf.actividad_id=a.id
@@ -741,9 +741,9 @@ module Cor1440Gen
             if !params[:filtro] || !params[:filtro]['fechaini'] || 
                 params[:filtro]['fechaini'] != ""
               if !params[:filtro] || !params[:filtro]['fechaini']
-                @contarb_fechaini = Sip::FormatoFechaHelper.inicio_semestre_ant
+                @contarb_fechaini = Msip::FormatoFechaHelper.inicio_semestre_ant
               else
-                @contarb_fechaini = Sip::FormatoFechaHelper.fecha_local_estandar(
+                @contarb_fechaini = Msip::FormatoFechaHelper.fecha_local_estandar(
                   params[:filtro]['fechaini'])
               end
               @contarb_actividad = @contarb_actividad.where(
@@ -753,9 +753,9 @@ module Cor1440Gen
             if !params[:filtro] || !params[:filtro]['fechafin'] || 
                 params[:filtro]['fechafin'] != ""
               if !params[:filtro] || !params[:filtro]['fechafin']
-                @contarb_fechafin = Sip::FormatoFechaHelper.fin_semestre_ant
+                @contarb_fechafin = Msip::FormatoFechaHelper.fin_semestre_ant
               else
-                @contarb_fechafin = Sip::FormatoFechaHelper.fecha_local_estandar(
+                @contarb_fechafin = Msip::FormatoFechaHelper.fecha_local_estandar(
                   params[:filtro]['fechafin'])
               end
               @contarb_actividad = @contarb_actividad.where(
@@ -776,7 +776,7 @@ module Cor1440Gen
             end
             if params[:filtro] && params[:filtro]['bussexo'] &&
                 params[:filtro]['bussexo'] != "" &&
-                Sip::Persona::sexo_opciones.map(&:last).include?(
+                Msip::Persona::sexo_opciones.map(&:last).include?(
                   params[:filtro]['bussexo'].to_sym)
               mas_where_asistencia_ram += " AND " +
                 "persona_sexo = '#{params[:filtro]['bussexo']}'"
@@ -864,11 +864,11 @@ module Cor1440Gen
               :proyecto, 
               :resultado,
               :usuario_id,
-              :actividad_sip_anexo_attributes => [
+              :actividad_anexo_attributes => [
                 :id,
                 :id_actividad, 
                 :_destroy,
-                :sip_anexo_attributes => [
+                :anexo_attributes => [
                   :id, :descripcion, :adjunto, :_destroy
                 ]
               ],

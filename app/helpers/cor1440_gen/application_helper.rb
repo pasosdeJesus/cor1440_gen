@@ -1,7 +1,7 @@
 module Cor1440Gen
   module ApplicationHelper
 
-    include Sip::PaginacionAjaxHelper
+    include Msip::PaginacionAjaxHelper
 
     #TIPO_CAMPODIN = [ ['Texto', 1],
     #                  ['Texto largo', 2],

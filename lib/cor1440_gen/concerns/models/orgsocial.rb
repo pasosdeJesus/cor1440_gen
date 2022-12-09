@@ -1,4 +1,4 @@
-require 'sip/concerns/models/orgsocial'
+require 'msip/concerns/models/orgsocial'
 
 module Cor1440Gen
   module Concerns
@@ -7,7 +7,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Models::Orgsocial
+          include Msip::Concerns::Models::Orgsocial
 
           has_and_belongs_to_many :actividad, 
             class_name: 'Cor1440Gen::Actividad',
@@ -28,7 +28,7 @@ module Cor1440Gen
 
 
           def presenta_cor1440_gen(atr)
-            presenta_sip(atr)
+            presenta_msip(atr)
           end
 
         end

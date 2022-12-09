@@ -12,7 +12,7 @@ module Cor1440Gen
             reject_if: :all_blank
 
           belongs_to :persona, 
-            class_name: 'Sip::Persona',
+            class_name: 'Msip::Persona',
             foreign_key: 'persona_id', optional: false
 
           belongs_to :ulteditor, 

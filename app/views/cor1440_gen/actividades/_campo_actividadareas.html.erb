@@ -4,7 +4,7 @@
   <% l = nil %>
 <% end %>
 <%= f.association :actividadareas, 
-  collection: Sip::ModeloHelper.coleccion_basica(
+  collection: Msip::ModeloHelper.coleccion_basica(
     Cor1440Gen::Actividadarea.all, f.object.actividadareas.map(&:id)),
   label_method: :presenta_nombre, 
   value_method: :id,

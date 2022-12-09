@@ -1,6 +1,6 @@
 <tr class='nested-fields'>
   <td>
-    <% col = Sip::ModeloHelper.opciones_tabla_basica(::Usuario, f, :usuario) %>
+    <% col = Msip::ModeloHelper.opciones_tabla_basica(::Usuario, f, :usuario) %>
     <%= f.association :usuario,
       collection: col,
       label: false,

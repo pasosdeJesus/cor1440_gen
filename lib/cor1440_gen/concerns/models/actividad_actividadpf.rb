@@ -5,9 +5,9 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo
-          include Sip::Localizacion
-          include Sip::FormatoFechaHelper
+          include Msip::Modelo
+          include Msip::Localizacion
+          include Msip::FormatoFechaHelper
 
           belongs_to :actividad, class_name: 'Cor1440Gen::Actividad', 
             foreign_key: 'actividad_id', optional: false

@@ -5,7 +5,7 @@
 <% end %>
 <%= f.association :oficina,
   collection: current_usuario.oficina_id ? [current_usuario.oficina] : 
-    Sip::ModeloHelper.coleccion_basica(Sip::Oficina.all, f.object.oficina_id),
+    Msip::ModeloHelper.coleccion_basica(Msip::Oficina.all, f.object.oficina_id),
   label_method: :presenta_nombre, 
   value_method: :id,
   include_blank: false,

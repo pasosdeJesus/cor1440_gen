@@ -2,7 +2,7 @@ require 'cor1440_gen/concerns/controllers/sectoresapc_controller'
 
 module Cor1440Gen
   module Admin
-    class SectoresapcController < Sip::Admin::BasicasController
+    class SectoresapcController < Msip::Admin::BasicasController
 
       before_action :set_sectorapc, 
         only: [:show, :edit, :update, :destroy]

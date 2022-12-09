@@ -5,7 +5,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo 
+          include Msip::Modelo 
 
           belongs_to :tipoindicador, class_name: 'Cor1440Gen::Tipoindicador',
             foreign_key: 'tipoindicador_id', optional: false

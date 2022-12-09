@@ -1,6 +1,6 @@
 module Cor1440Gen
   module Admin
-    class ActividadareasController < Sip::Admin::BasicasController
+    class ActividadareasController < Msip::Admin::BasicasController
       before_action :set_actividadarea, only: [:show, :edit, :update, :destroy]
       load_and_authorize_resource class: Cor1440Gen::Actividadarea
 

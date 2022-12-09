@@ -1,9 +1,9 @@
 <%= f.input :busoficina_id,
-  collection: Sip::Oficina.habilitados,
+  collection: Msip::Oficina.habilitados,
   label: false,
   label_method: :nombre,
   value_method: :id,
-  selected: Sip::ModeloHelper.poromision(params, :busoficina_id),
+  selected: Msip::ModeloHelper.poromision(params, :busoficina_id),
   input_html: {
     class: 'chosen-select',
     'data-enviarautomatico' => ''

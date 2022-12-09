@@ -4,7 +4,7 @@ module Cor1440Gen
       module Actividadarea
         extend ActiveSupport::Concern
 
-        include Sip::Basica
+        include Msip::Basica
         included do
           has_many :informe, dependent: :delete_all,
             class_name: 'Cor1440Gen::Informe',

@@ -5,9 +5,9 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo
-          include Sip::Localizacion
-          include Sip::FormatoFechaHelper
+          include Msip::Modelo
+          include Msip::Localizacion
+          include Msip::FormatoFechaHelper
 
           belongs_to :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero',

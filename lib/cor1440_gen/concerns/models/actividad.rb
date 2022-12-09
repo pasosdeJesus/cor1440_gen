@@ -6,13 +6,13 @@ module Cor1440Gen
 
         included do
           include Mr519Gen::Modelo 
-          include Sip::Localizacion
+          include Msip::Localizacion
           @current_usuario = -1
           attr_accessor :current_usuario
 
           attr_accessor :controlador
 
-          belongs_to :oficina, class_name: 'Sip::Oficina', 
+          belongs_to :oficina, class_name: 'Msip::Oficina', 
             foreign_key: 'oficina_id', validate: true, optional: true
 
           belongs_to :responsable, 
@@ -35,7 +35,7 @@ module Cor1440Gen
             join_table: 'cor1440_gen_actividad_actividadtipo'
 
           has_and_belongs_to_many :orgsocial, 
-            class_name: 'Sip::Orgsocial',
+            class_name: 'Msip::Orgsocial',
             foreign_key: 'actividad_id',
             association_foreign_key: 'orgsocial_id',
             join_table: 'cor1440_gen_actividad_orgsocial'
@@ -81,11 +81,11 @@ module Cor1440Gen
             dependent: :delete_all, 
             class_name: 'Cor1440Gen::ActividadRangoedadac'
          
-          has_many :actividad_sip_anexo, foreign_key: "actividad_id", 
+          has_many :actividad_anexo, foreign_key: "actividad_id", 
             validate: true, dependent: :destroy, 
-            class_name: 'Cor1440Gen::ActividadSipAnexo',
+            class_name: 'Cor1440Gen::ActividadAnexo',
             inverse_of: :actividad
-          accepts_nested_attributes_for :actividad_sip_anexo, 
+          accepts_nested_attributes_for :actividad_anexo, 
             allow_destroy: true, reject_if: :all_blank
  
           has_many :actividad_valorcampotind, dependent: :delete_all,
@@ -98,7 +98,7 @@ module Cor1440Gen
             class_name: 'Cor1440Gen::Asistencia',
             foreign_key: 'actividad_id'
 
-          has_many :persona, through: :asistencia, class_name: 'Sip::Persona'
+          has_many :persona, through: :asistencia, class_name: 'Msip::Persona'
           accepts_nested_attributes_for :persona, reject_if: :all_blank
           accepts_nested_attributes_for :asistencia,
             allow_destroy: true, reject_if: :all_blank
@@ -112,9 +112,9 @@ module Cor1440Gen
           accepts_nested_attributes_for :actividad_rangoedadac, 
             allow_destroy: true, reject_if: :all_blank
 
-          has_many :sip_anexo, through: :actividad_sip_anexo,
-            class_name: 'Sip::Anexo'
-          accepts_nested_attributes_for :sip_anexo, 
+          has_many :anexo, through: :actividad_anexo,
+            class_name: 'Msip::Anexo'
+          accepts_nested_attributes_for :anexo, 
             reject_if: :all_blank
 
           has_many :valorcampotind, through: :actividad_valorcampotind,
@@ -176,7 +176,7 @@ module Cor1440Gen
             if self.asistencia
               self.asistencia.each do |a|
                 if a.persona && a.persona.numerodocumento != nil
-                  pr = Sip::Persona.
+                  pr = Msip::Persona.
                     where(tdocumento_id: a.persona.tdocumento_id).
                     where(numerodocumento: a.persona.numerodocumento).
                     where('id <> ?', a.persona.id)
@@ -203,7 +203,7 @@ module Cor1440Gen
             if asistentes.length != asistentes.uniq.length
               asrepetidos = []
               asrepetidos.push(asistentes.detect{ |e| asistentes.count(e) > 1 })
-              nombres =  Sip::Persona.where(id: asrepetidos).map{
+              nombres =  Msip::Persona.where(id: asrepetidos).map{
                 |n| n.nombres + " " + n.apellidos
               }
               errors.add(:asistencia, "En listado de asistencia se encuentra " +
@@ -368,8 +368,8 @@ module Cor1440Gen
             case atr.to_s
             when /anexo_[0-9]_desc/
               i = atr[6].to_i
-              if sip_anexo.count >= i
-                sip_anexo.order(:id)[i-1].descripcion
+              if anexo.count >= i
+                anexo.order(:id)[i-1].descripcion
               else 
                 ''
               end
@@ -392,7 +392,7 @@ module Cor1440Gen
               updated_at
 
             when 'anexos_ids'
-              sip_anexo_ids.join(', ')
+              anexo_ids.join(', ')
 
             when 'campos_dinamicos'
               if !respuestafor || respuestafor.count == 0
@@ -422,7 +422,7 @@ module Cor1440Gen
               }
 
             when 'numero_anexos'
-              sip_anexo.count
+              anexo.count
 
             when Cor1440Gen::Actividad.human_attribute_name(
               :objetivopf).downcase.gsub(' ', '_')

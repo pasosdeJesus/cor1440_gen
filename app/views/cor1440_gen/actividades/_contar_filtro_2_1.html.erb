@@ -1,6 +1,6 @@
-<% if can? :read, Sip::Oficina %>
+<% if can? :read, Msip::Oficina %>
   <%= f.input :oficina_id,
-    collection: Sip::Oficina.all,
+    collection: Msip::Oficina.all,
     label_method: :nombre,
     value_method: :id,
     label: false,

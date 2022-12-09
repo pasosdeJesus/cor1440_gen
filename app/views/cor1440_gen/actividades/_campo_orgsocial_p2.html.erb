@@ -1,8 +1,8 @@
 <% # f es el formulario que se presenta %>
-<% # orgsocialesdisp son los Sip::Orgsocial disponibles para elegir %>
+<% # orgsocialesdisp son los Msip::Orgsocial disponibles para elegir %>
 <% lids = orgsocialesdisp.map(&:id) | f.object.orgsocial_ids %>
-<% a2 = Sip::Orgsocial.joins(:grupoper).where(id: lids).
-  order('sip_grupoper.nombre') %>
+<% a2 = Msip::Orgsocial.joins(:grupoper).where(id: lids).
+  order('msip_grupoper.nombre') %>
 <%= f.association :orgsocial, 
   collection: a2,
   label_method: :presenta_nombre, 

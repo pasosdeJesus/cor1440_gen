@@ -18,16 +18,16 @@ personalizaciones en <https://github.com/pasosdeJesus/cor1440_cinep> y
 ## Diseño, Uso, Pruebas y Desarrollo
 
 Este motor incluye 
-* Uso del motor sip (que a su vez maneja devise, cancancan, rspec, tablas 
+* Uso del motor msip (que a su vez maneja devise, cancancan, rspec, tablas 
   básicas con datos geográficos para varios paises, manejo de anexos con 
   paperclip, facilidades de configuracion como puede ver en 
-  https://github.com/pasosdeJesus/sip )
+  https://github.com/pasosdeJesus/msip )
 * Aplicación de prueba completa en spec/dummy con diseño adaptable a
   dispositivos moviles o de escritorio (responsive) que permite modificar
   las tablas básicas y manejar actividades mínimas con anexos.
 
-Sigue los mismos lineamientos del motor sip, cuyas instrucciones
-generales puede consultar en https://github.com/pasosdeJesus/sip
+Sigue los mismos lineamientos del motor msip, cuyas instrucciones
+generales puede consultar en https://github.com/pasosdeJesus/msip
 
 Los cambios a esas instrucciones son:
 

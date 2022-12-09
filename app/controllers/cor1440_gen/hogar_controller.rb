@@ -1,5 +1,5 @@
 module Cor1440Gen
-  class HogarController < Sip::HogarController
+  class HogarController < Msip::HogarController
 
     # Sin autorización porque es para no autenticados
    

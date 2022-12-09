@@ -5,7 +5,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Localizacion
+          include Msip::Localizacion
 
           belongs_to :proyecto, class_name: 'Cor1440Gen::Proyecto',
             foreign_key: 'filtroproyecto', validate: true, optional: true
@@ -20,7 +20,7 @@ module Cor1440Gen
             class_name: '::Usuario', 
             foreign_key: 'filtroresponsable', validate: true, optional: true
           belongs_to :oficina, 
-            class_name: 'Sip::Oficina', 
+            class_name: 'Msip::Oficina', 
             foreign_key: 'filtrooficina', validate: true, optional: true
 
 

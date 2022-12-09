@@ -5,7 +5,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::FormatoFechaHelper
+          include Msip::FormatoFechaHelper
 
           def clase 
             "Cor1440Gen::Tipoindicador"

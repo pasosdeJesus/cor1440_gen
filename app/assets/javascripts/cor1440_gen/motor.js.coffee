@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-#//= require sip/motor
+#//= require msip/motor
 #//= require heb412_gen/motor
 #//= require cocoon
 #//= require cor1440_gen/proyectofinanciero
@@ -118,7 +118,7 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_identifica_ids_rangoedad(resp, rangos, idrf)
 
   # Fecha de la actividad
-  arf = sip_partes_fecha_localizada($('#actividad_fecha_localizada').val(), window.formato_fecha)
+  arf = msip_partes_fecha_localizada($('#actividad_fecha_localizada').val(), window.formato_fecha)
   anioref  = arf[0]
   mesref  = arf[1]
   diaref  = arf[2]
@@ -132,7 +132,7 @@ cor1440_gen_rangoedadc_todos = () ->
       mesnac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_mesnac]').val()
       dianac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_dianac]').val()
 
-      e = +sip_edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
+      e = +msip_edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
       idran = -1  # id del rango en el que está e
       ransin = -1 # id del rango SIN INFORMACION
       #debugger
@@ -192,7 +192,7 @@ cor1440_gen_rangoedadc_todos = () ->
       $(this).prop('readonly', false);
     )
 
-  sip_funcion_1p_tras_AJAX('admin/rangosedadac.json?filtro[bushabilitado]=Si&filtrar=Filtrar', {}, cor1440_gen_recalcula_poblacion2, fsig, 'solicitando rangos de edad a servidor')
+  msip_funcion_1p_tras_AJAX('admin/rangosedadac.json?filtro[bushabilitado]=Si&filtrar=Filtrar', {}, cor1440_gen_recalcula_poblacion2, fsig, 'solicitando rangos de edad a servidor')
 
 
 
@@ -252,15 +252,15 @@ cor1440_gen_rangoedadc_todos = () ->
    return et
 
 @cor1440_gen_actualiza_objetivos = (e, objetivo) ->
-  sip_actualiza_cuadros_seleccion_dependientes('objetivospf',
+  msip_actualiza_cuadros_seleccion_dependientes('objetivospf',
     '_id', '_numero', DEP_OBJETIVOPF, 'id', 'numero')
-  sip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
+  msip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
     'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
     DEP_RESULTADOPF, 'id', 'numero')
 
 
 @cor1440_gen_actualiza_resultados = (e, resultado) ->
-  sip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
+  msip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
     'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
     DEP_RESULTADOPF, 'id', 'numero')
 
@@ -279,7 +279,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     actividadpf_ids: $('#actividad_actividadpf_ids').val()
   }
-  sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+  msip_envia_ajax_datos_ruta_y_pinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
 
 @cor1440_gen_llena_actividadpf_relacionadas = (root, res) ->
@@ -313,7 +313,7 @@ cor1440_gen_rangoedadc_todos = () ->
       actividadpf_ids: acids,
       proyectofinanciero_ids: prids
     }
-    sip_ajax_recibe_json(root, 'api/actividades/relacionadas',
+    msip_ajax_recibe_json(root, 'api/actividades/relacionadas',
       params, cor1440_gen_llena_actividadpf_relacionadas)
 
 
@@ -352,7 +352,7 @@ cor1440_gen_rangoedadc_todos = () ->
       actividadpf_ids: acids,
       proyectofinanciero_ids: prids
     }
-    sip_ajax_recibe_json(root, 'actividadespf/conancestros',
+    msip_ajax_recibe_json(root, 'actividadespf/conancestros',
       params, cor1440_gen_llena_actividadpf_conancestros)
 
 
@@ -376,14 +376,14 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     actividadpf_ids: acids
   }
-  sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+  msip_envia_ajax_datos_ruta_y_pinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
 
 @cor1440_gen_actividad_actualiza_actividadpf_pf =  (root, proyectofinanciero_id) ->
   params = {
     pfl: [proyectofinanciero_id]
   }
-  sip_llena_select_con_AJAX2('actividadespf', params,
+  msip_llena_select_con_AJAX2('actividadespf', params,
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
     'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
@@ -392,7 +392,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     pfl: $('#actividad_proyectofinanciero_ids').val(),
   }
-  sip_llena_select_con_AJAX2('actividadespf', params,
+  msip_llena_select_con_AJAX2('actividadespf', params,
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
     'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
@@ -401,7 +401,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     fecha: $('#actividad_fecha_localizada').val(),
   }
-  sip_llena_select_con_AJAX2('proyectosfinancieros', params,
+  msip_llena_select_con_AJAX2('proyectosfinancieros', params,
     'actividad_proyectofinanciero_ids', 'con Convenios financiados',
     root, 'id', 'nombre',
     cor1440_gen_actividad_actualiza_actividadpf)
@@ -436,7 +436,7 @@ cor1440_gen_rangoedadc_todos = () ->
 #    params = { pfl: [r.npf] }
 #    f = null
 #    if n == r.length -1
-#    sip_llena_select_con_AJAX2('actividadespf', params,
+#    msip_llena_select_con_AJAX2('actividadespf', params,
 #        r.idac, 'con Actividades de convenio ' + r.npf, root,
 #        'id', 'nombre', f)
 #    n += 1
@@ -457,7 +457,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     fecha: $('#actividad_fecha_localizada').val(),
   }
-  sip_funcion_tras_AJAX('proyectosfinancieros', params,
+  msip_funcion_tras_AJAX('proyectosfinancieros', params,
     cor1440_gen_actividad_actualiza_pf2, 'con Convenios Financiados',
     root)
 
@@ -482,7 +482,7 @@ cor1440_gen_rangoedadc_todos = () ->
     if !otrospfid.includes(+r.id)
       nuevasop.push({'id': +r.id, 'nombre': r.nombre})
   )
-  sip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', true)
+  msip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', true)
   $('#' + idsel).val('')
   $('#' + idsel).trigger('chosen:updated')
 
@@ -504,7 +504,7 @@ cor1440_gen_rangoedadc_todos = () ->
       if r.id == valac
         valsel = valac
   )
-  sip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', false)
+  msip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', false)
   $('#' + idsel).val(valsel)
   $('#' + idsel).trigger('chosen:updated')
 
@@ -531,7 +531,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     proyectofinanciero_ids: pfids
   }
-  sip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+  msip_envia_ajax_datos_ruta_y_pinta(ruta, params,
     '#acordeon-caracterizacion', '#acordeon-caracterizacion')
 
 
@@ -634,7 +634,7 @@ cor1440_gen_rangoedadc_todos = () ->
       if $('#actividad_grupo_ids').length > 0
         params['grupo_ids'] = $('#actividad_grupo_ids').val()
 
-      sip_funcion_1p_tras_AJAX('proyectosfinancieros', params,
+      msip_funcion_1p_tras_AJAX('proyectosfinancieros', params,
         cor1440_gen_actividad_actualiza_pf_op, objetivo,
         'con Convenios Financiados', root)
     )
@@ -642,7 +642,7 @@ cor1440_gen_rangoedadc_todos = () ->
     $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
       # Si se ha deshabilitado, no operar pero volver a habilitar
       params = {}
-      sip_funcion_1p_tras_AJAX('admin/rangosedadac', params,
+      msip_funcion_1p_tras_AJAX('admin/rangosedadac', params,
         cor1440_gen_actividad_actualiza_sel_rango, objetivo,
         'con Rangos de edad', root)
     )
@@ -674,7 +674,7 @@ cor1440_gen_rangoedadc_todos = () ->
       $(e.target).trigger('chosen:updated')
       idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
       params = { pfl: [+res.selected]}
-      sip_llena_select_con_AJAX2('actividadespf', params,
+      msip_llena_select_con_AJAX2('actividadespf', params,
         idac, 'con Actividades de convenio ' + res.selected, root,
         'id', 'nombre', null)
     )
@@ -708,17 +708,17 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('cocoon:after-insert', '#objetivospf', cor1440_gen_actualiza_objetivos)
 
   $(document).on('cocoon:before-remove', '#objetivospf', (e, objetivo) ->
-    return sip_intenta_eliminar_fila(objetivo, '/objetivospf/', DEP_OBJETIVOPF)
+    return msip_intenta_eliminar_fila(objetivo, '/objetivospf/', DEP_OBJETIVOPF)
   )
 
   $(document).on('cocoon:before-remove', '#indicadoresobjetivos', (e, indicador) ->
-    sip_intenta_eliminar_fila(indicador, '/indicadorespf/',
+    msip_intenta_eliminar_fila(indicador, '/indicadorespf/',
         DEP_INDICADORPF
     )
   )
 
   $(document).on('change', '#indicadoresobjetivos [id$=_id]', (e, result) ->
-    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
   $(document).on('cocoon:after-insert', '#indicadoresobjetivos',
@@ -731,31 +731,31 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('cocoon:after-insert', '#resultadospf', cor1440_gen_actualiza_objetivos)
 
   $(document).on('cocoon:before-remove', '#resultadospf', (e, resultado) ->
-    sip_intenta_eliminar_fila(resultado, '/resultadospf/',
+    msip_intenta_eliminar_fila(resultado, '/resultadospf/',
         DEP_RESULTADOPF
     )
   )
 
   $(document).on('change', '#resultadospf [id$=_id]', (e, result) ->
-    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
 
   $(document).on('cocoon:before-remove', '#indicadorespf', (e, indicador) ->
-    sip_intenta_eliminar_fila(indicador, '/indicadorespf/',
+    msip_intenta_eliminar_fila(indicador, '/indicadorespf/',
         DEP_INDICADORPF
     )
   )
 
   $(document).on('change', '#indicadorespf [id$=_id]', (e, result) ->
-    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
   $(document).on('cocoon:after-insert', '#indicadorespf', cor1440_gen_actualiza_resultados)
 
   $(document).on('cocoon:after-insert', '#actividadespf', cor1440_gen_actualiza_resultados)
   $(document).on('change', '#actividadespf [id$=_id]', (e, result) ->
-    sip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
 

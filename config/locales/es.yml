@@ -320,7 +320,7 @@ es:
         Orgocial: Organización Social
         Persona: Beneficiario
         Proyectofinanciero: Proyecto
-      "sip/persona":
+      "msip/persona":
         actividad_ids: Actividades en las que está en listado de asistencia
         proyectofinanciero_ids: Proyectos que le caracterizan
         proyectofinanciero: Proyectos que le caracterizan

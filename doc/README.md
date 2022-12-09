@@ -23,15 +23,15 @@ def medir_indicador_res_tipo_4(idacs, mind, fini, ffin)
   datosint << {valor: hombres.count, rutaevidencia: '#'}
   datosint << {valor: sinsexo.count, rutaevidencia: '#'}
   if datosint[0][:valor] > 0 # mujeres
-      datosint[0][:] = sip.personas_path+ '?filtro[busid]=' +
+      datosint[0][:] = msip.personas_path+ '?filtro[busid]=' +
         mujeres.join(',')
     end
     if datosint[1][:valor] > 0 # hombres
-      datosint[1][:] = sip.personas_path+ '?filtro[busid]=' +
+      datosint[1][:] = msip.personas_path+ '?filtro[busid]=' +
         hombres.join(',')
     end
     if datosint[2][:valor] > 0 # sin sexo nac
-      datosint[2][:] = sip.personas_path+ '?filtro[busid]=' +
+      datosint[2][:] = msip.personas_path+ '?filtro[busid]=' +
         sinsexo.join(',')
     end
 

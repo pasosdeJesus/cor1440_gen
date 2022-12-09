@@ -5,7 +5,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Basica
+          include Msip::Basica
   
           has_many :cor1440_gen_proyectofinanciero, 
             class_name: "Cor1440Gen::Proyectofinanciero",  

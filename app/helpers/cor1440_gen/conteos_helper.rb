@@ -25,12 +25,12 @@ module Cor1440Gen
         end
       end
 
-      convF = Sip::Persona.convencion_sexo_abreviada[0]
-      convM = Sip::Persona.convencion_sexo_abreviada[1]
-      convS = Sip::Persona.convencion_sexo_abreviada[2]
+      convF = Msip::Persona.convencion_sexo_abreviada[0]
+      convM = Msip::Persona.convencion_sexo_abreviada[1]
+      convS = Msip::Persona.convencion_sexo_abreviada[2]
       rangoedadsexo = {}
       personas.keys.sort.each do |pid|
-        p = Sip::Persona.find(pid)
+        p = Msip::Persona.find(pid)
         edad = Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
           p.anionac, p.mesnac, p.dianac,
           a.fecha.year, a.fecha.month, a.fecha.day)
@@ -58,9 +58,9 @@ module Cor1440Gen
 
       numdif = 0
 
-      convF = Sip::Persona.convencion_sexo_abreviada[0]
-      convM = Sip::Persona.convencion_sexo_abreviada[1]
-      convS = Sip::Persona.convencion_sexo_abreviada[2]
+      convF = Msip::Persona.convencion_sexo_abreviada[0]
+      convM = Msip::Persona.convencion_sexo_abreviada[1]
+      convS = Msip::Persona.convencion_sexo_abreviada[2]
 
       res = Cor1440Gen::Rangoedadac.habilitados
       res.each do |re|
@@ -150,9 +150,9 @@ module Cor1440Gen
 
       numdif = 0
 
-      convF = Sip::Persona.convencion_sexo_abreviada[0]
-      convM = Sip::Persona.convencion_sexo_abreviada[1]
-      convS = Sip::Persona.convencion_sexo_abreviada[2]
+      convF = Msip::Persona.convencion_sexo_abreviada[0]
+      convM = Msip::Persona.convencion_sexo_abreviada[1]
+      convS = Msip::Persona.convencion_sexo_abreviada[2]
 
       res = Cor1440Gen::Rangoedadac.habilitados
       res.each do |re|
@@ -287,12 +287,12 @@ module Cor1440Gen
       SELECT actividad_id, rangoedadac_id, sexo, count(persona_id) AS cuenta
       FROM (SELECT sub.actividad_id, sub.persona_id, sexo, re.id AS rangoedadac_id
       FROM (SELECT asi.actividad_id, persona_id, p.sexo,
-        sip_edad_de_fechanac_fecharef(p.anionac, p.mesnac, p.dianac,
+        msip_edad_de_fechanac_fecharef(p.anionac, p.mesnac, p.dianac,
           extract(year from a.fecha)::integer,
           extract(month from a.fecha)::integer,
           extract(day from a.fecha)::integer
         ) AS edad FROM  cor1440_gen_asistencia AS asi
-        JOIN sip_persona AS p ON p.id=asi.persona_id
+        JOIN msip_persona AS p ON p.id=asi.persona_id
         JOIN cor1440_gen_actividad AS a ON a.id=asi.actividad_id) AS sub
       JOIN cor1440_gen_rangoedadac AS re ON (re.id = 7 AND sub.edad IS NULL) OR
         (re.id <> 7 AND re.limiteinferior<= sub.edad AND
@@ -366,8 +366,8 @@ module Cor1440Gen
         per = asis.persona
         if per
           #puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
-          re = Sip::EdadSexoHelper.buscar_rango_edad(
-            Sip::EdadSexoHelper.edad_de_fechanac_fecha(
+          re = Msip::EdadSexoHelper.buscar_rango_edad(
+            Msip::EdadSexoHelper.edad_de_fechanac_fecha(
               per.anionac, per.mesnac, per.dianac,
               actividad.fecha.year, actividad.fecha.month, actividad.fecha.day), 
               'Cor1440Gen::Rangoedadac')

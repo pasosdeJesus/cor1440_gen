@@ -199,7 +199,7 @@ module Cor1440Gen
           def asistencia_por_sexo(idacs, sexo, unicas = false)
             res = Cor1440Gen::Asistencia.joins(:persona).
               where(actividad_id: idacs).
-              where('sip_persona.sexo = ?', sexo).pluck(:persona_id)
+              where('msip_persona.sexo = ?', sexo).pluck(:persona_id)
             if unicas
               res = res.uniq
             end
@@ -247,15 +247,15 @@ module Cor1440Gen
             datosint << {valor: hombres.count, rutaevidencia: '#'}
             datosint << {valor: sinsexo.count, rutaevidencia: '#'}
             if datosint[0][:valor] > 0 # mujeres
-                datosint[0][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
+                datosint[0][:rutaevidencia] = msip.personas_path+ '?filtro[busid]=' + 
                   mujeres.join(',')
             end
             if datosint[1][:valor] > 0 # hombres
-              datosint[1][:rutaevidencia] = sip.personas_path + 
+              datosint[1][:rutaevidencia] = msip.personas_path + 
                 '?filtro[busid]=' + hombres.join(',')
             end
             if datosint[2][:valor] > 0 # sin sexo nac
-              datosint[2][:rutaevidencia] = sip.personas_path + 
+              datosint[2][:rutaevidencia] = msip.personas_path + 
                 '?filtro[busid]=' + sinsexo.join(',')
             end
 
@@ -278,15 +278,15 @@ module Cor1440Gen
             datosint << {valor: hombres.count, rutaevidencia: '#'}
             datosint << {valor: sinsexo.count, rutaevidencia: '#'}
             if datosint[0][:valor] > 0 # mujeres
-                datosint[0][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
+                datosint[0][:rutaevidencia] = msip.personas_path+ '?filtro[busid]=' + 
                   mujeres.join(',')
               end
               if datosint[1][:valor] > 0 # hombres
-                datosint[1][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
+                datosint[1][:rutaevidencia] = msip.personas_path+ '?filtro[busid]=' + 
                   hombres.join(',')
               end
               if datosint[2][:valor] > 0 # sin sexo nac
-                datosint[2][:rutaevidencia] = sip.personas_path+ '?filtro[busid]=' + 
+                datosint[2][:rutaevidencia] = msip.personas_path+ '?filtro[busid]=' + 
                   sinsexo.join(',')
               end
 
@@ -519,10 +519,10 @@ module Cor1440Gen
               params[:indicadorpf_id] != '' &&
               params[:hmindicadorpf_id] && params[:mindicadorpf_id] &&
               params[:mindicadorpf_id].to_i > 0
-              fini = Sip::FormatoFechaHelper.fecha_local_estandar(
+              fini = Msip::FormatoFechaHelper.fecha_local_estandar(
                 params[:finicio_localizada])
               fini = Date.strptime(fini, '%Y-%m-%d')
-              ffin = Sip::FormatoFechaHelper.fecha_local_estandar(
+              ffin = Msip::FormatoFechaHelper.fecha_local_estandar(
                 params[:ffin_localizada])
               ffin = Date.strptime(ffin, '%Y-%m-%d')
               indid = params[:indicadorpf_id].to_i
@@ -535,7 +535,7 @@ module Cor1440Gen
                 respond_to do |format|
                   format.json { 
                     render json: { 
-                      fechaloc:  Sip::FormatoFechaHelper.fecha_estandar_local(
+                      fechaloc:  Msip::FormatoFechaHelper.fecha_estandar_local(
                         Date.today),
                       hmindicadorpf_id: hmi, 
                       datosint: rl[:datosint],

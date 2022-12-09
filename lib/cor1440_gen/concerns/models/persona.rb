@@ -1,4 +1,4 @@
-require 'sip/concerns/models/persona'
+require 'msip/concerns/models/persona'
 
 module Cor1440Gen
   module Concerns
@@ -7,7 +7,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Models::Persona
+          include Msip::Concerns::Models::Persona
 
 
           has_many :asistencia, dependent: :delete_all,
@@ -74,7 +74,7 @@ module Cor1440Gen
                 end
 
               when 'fecha_ultimaedicion'
-                fult = Sip::FormatoFechaHelper.reconoce_adivinando_locale(
+                fult = Msip::FormatoFechaHelper.reconoce_adivinando_locale(
                   datosent[ll])
                 respuestafor[f.id].fechacambio = fult
               else
@@ -124,7 +124,7 @@ module Cor1440Gen
             datossal[:caracterizacion] = caracterizacion # Caracterizaciones, llave es id de formu.
             datossal[:valorcampo] = valorcampo # Valores llave 1 es id formu. llave 2 es id campo
 
-            return importa_sip(ndatosent, datossal, menserror, opciones)
+            return importa_msip(ndatosent, datossal, menserror, opciones)
           end
 
           def complementa_importa(ulteditor_id, datossal, menserror, opciones)

@@ -8,13 +8,13 @@ module Cor1440Gen
     
           belongs_to :efecto, class_name: 'Cor1440Gen::Efecto',
             foreign_key: 'efecto_id', optional: false
-          belongs_to :sip_anexo, class_name: 'Sip::Anexo', 
+          belongs_to :anexo, class_name: 'Msip::Anexo', 
             foreign_key: 'anexo_id', validate: true, optional: false
 
-          accepts_nested_attributes_for :sip_anexo, reject_if: :all_blank 
+          accepts_nested_attributes_for :anexo, reject_if: :all_blank 
 
           validates :efecto, presence: true
-          validates :sip_anexo, presence: true
+          validates :anexo, presence: true
 
         end
       end

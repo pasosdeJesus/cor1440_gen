@@ -35,7 +35,7 @@
     hmindicadorpf_id: hid
     mindicadorpf_id: $('form.edit_mindicadorpf')[0].id.split('_')[2]
   }
-  sip_ajax_recibe_json(root, 'api/cor1440gen/medir_indicador', 
+  msip_ajax_recibe_json(root, 'api/cor1440gen/medir_indicador', 
     datos, cor1440_gen_llena_medicion)  
   return
 
@@ -62,7 +62,7 @@
   
   $("#cor1440_gen_mfun").click((e) ->
     root = window
-    sip_arregla_puntomontaje(root)
+    msip_arregla_puntomontaje(root)
     t = Date.now()
     d = -1
     if (root.cor1440_gen_mcarc_t)

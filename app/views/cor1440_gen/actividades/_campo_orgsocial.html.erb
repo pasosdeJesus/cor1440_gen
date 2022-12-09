@@ -1,5 +1,5 @@
 <% if !defined?(orgsocialesdisp)  %>
-  <% orgsocialesdisp = Sip::Orgsocial.habilitados %>
+  <% orgsocialesdisp = Msip::Orgsocial.habilitados %>
 <% end %>
 
 <%= render partial: 'campo_orgsocial_p2', 

@@ -5,8 +5,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo
-          include Sip::Localizacion
+          include Msip::Modelo
+          include Msip::Localizacion
 
           belongs_to :indicadorpf, class_name: 'Cor1440Gen::Indicadorpf',
             foreign_key: "indicadorpf_id", validate: true, optional: false
@@ -23,7 +23,7 @@ module Cor1440Gen
 
           has_many :efecto_orgsocial, class_name: 'Cor1440Gen::EfectoOrgsocial',
             dependent: :delete_all, foreign_key: 'efecto_id'
-          has_many :orgsocial, class_name: 'Sip::Orgsocial',
+          has_many :orgsocial, class_name: 'Msip::Orgsocial',
             through: :efecto_orgsocial
 
           has_many :anexo_efecto, dependent: :delete_all,
@@ -31,9 +31,9 @@ module Cor1440Gen
             foreign_key: 'efecto_id', validate: true
           accepts_nested_attributes_for :anexo_efecto, 
             allow_destroy: true, reject_if: :all_blank
-          has_many :sip_anexo, :through => :anexo_efecto, 
-            class_name: 'Sip::Anexo'
-          accepts_nested_attributes_for :sip_anexo,  reject_if: :all_blank
+          has_many :anexo, :through => :anexo_efecto, 
+            class_name: 'Msip::Anexo'
+          accepts_nested_attributes_for :anexo,  reject_if: :all_blank
 
           campofecha_localizado :fecha
 
