@@ -1,12 +1,12 @@
 <%= f.input :nombre,
   input_html: { 
-    'data-sip--cancelar-vacio-es-eliminar-target' => 'determinador'
+    'data-msip--cancelar-vacio-es-eliminar-target' => 'determinador'
   }
 %>
 
 <%= f.input :titulo, 
   input_html: { 
-    'data-sip--cancelar-vacio-es-eliminar-target' => 'determinador'
+    'data-msip--cancelar-vacio-es-eliminar-target' => 'determinador'
   }
 %>
 
@@ -39,7 +39,7 @@
     <%= f.input :fechainicio_localizada, 
       :input_html => { 
         "data-behaviour" => "datepicker",
-        'data-sip--cancelar-vacio-es-eliminar-target' => 'determinador'
+        'data-msip--cancelar-vacio-es-eliminar-target' => 'determinador'
       },
       :as => :string
     %>
@@ -55,7 +55,7 @@
     <%
       f.object.duracion = ''
       if f.object.fechainicio && f.object.fechacierre then
-        f.object.duracion = Sip::FormatoFechaHelper.dif_meses_dias(
+        f.object.duracion = Msip::FormatoFechaHelper.dif_meses_dias(
           f.object.fechainicio, f.object.fechacierre
         )
       end
@@ -72,7 +72,7 @@
   </div>
   <div class="offset-sm-0 col-sm-4">
     <%= f.input :fechaformulacion_mes,
-      collection: Sip::ModeloHelper::MESES
+      collection: Msip::ModeloHelper::MESES
     %>
   </div>
   <div class="offset-sm-0 col-sm-4">

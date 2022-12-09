@@ -2,7 +2,7 @@ require "cor1440_gen/concerns/controllers/tiposindicador_controller"
 
 module Cor1440Gen
   module Admin
-    class TiposindicadorController < Sip::ModelosController
+    class TiposindicadorController < Msip::ModelosController
 
       before_action :set_tipoindicador, 
         only: [:show, :edit, :update, :destroy]

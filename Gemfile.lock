@@ -11,41 +11,23 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/heb412_gen.git
-  revision: 88815bbc7a145fd223b34deecd3cbefc7d088447
-  branch: main
+  revision: ee22d8b89dba34d1ca177c63de39ec77c520f003
+  branch: msip
   specs:
     heb412_gen (2.1.0.beta1)
       mr519_gen
+      msip
       redcarpet
       rspreadsheet
-      sip
 
 GIT
   remote: https://github.com/pasosdeJesus/mr519_gen.git
-  revision: 7900efc9b0ecafe4a56125129d163cd61b478c3a
-  branch: main
+  revision: eb974f91789ba5dd1f5a442d845b105ada7a2de5
+  branch: msip
   specs:
     mr519_gen (2.1.0.beta1)
+      msip
       rails
-      sip
-
-GIT
-  remote: https://github.com/pasosdeJesus/sip.git
-  revision: 554c4eab9b3c6afca9917f35ad915b6095878deb
-  branch: main
-  specs:
-    sip (2.1.0.beta1)
-      cancancan
-      coffee-rails
-      devise
-      devise-i18n
-      kt-paperclip
-      minitest
-      rails
-      rails-i18n
-      sassc-rails
-      simple_form
-      twitter_cldr
 
 GIT
   remote: https://github.com/vtamara/cocoon.git
@@ -55,6 +37,24 @@ GIT
     cocoon (1.2.11)
 
 PATH
+  remote: ../msip
+  specs:
+    msip (2.2.0.alfa3)
+      cancancan (~> 3)
+      devise (~> 4)
+      devise-i18n (~> 1)
+      kt-paperclip (~> 7)
+      pg (~> 1)
+      rails (~> 7.0)
+      rails-i18n (~> 7)
+      sassc-rails (~> 2)
+      simple_form (~> 5)
+      sprockets-rails (~> 3)
+      stimulus-rails (~> 1)
+      twitter_cldr (~> 6)
+      will_paginate (~> 3)
+
+PATH
   remote: .
   specs:
     cor1440_gen (2.1a1)
@@ -62,8 +62,8 @@ PATH
       heb412_gen
       kt-paperclip
       mr519_gen
+      msip
       rails
-      sip
 
 GEM
   remote: https://rubygems.org/
@@ -175,6 +175,7 @@ GEM
     cuprite (0.14.3)
       capybara (~> 3.0)
       ferrum (~> 0.13.0)
+    date (3.3.1)
     debug (1.7.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -204,7 +205,7 @@ GEM
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
-    irb (1.5.1)
+    irb (1.6.0)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -236,7 +237,8 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     msgpack (1.6.0)
-    net-imap (0.3.1)
+    net-imap (0.3.2)
+      date
       net-protocol
     net-pop (0.1.2)
       net-protocol
@@ -412,6 +414,7 @@ DEPENDENCIES
   minitest
   minitest-reporters
   mr519_gen!
+  msip!
   net-smtp
   nokogiri (>= 1.11.1)
   odf-report
@@ -431,7 +434,6 @@ DEPENDENCIES
   sassc-rails
   simple_form
   simplecov (< 0.18)
-  sip!
   spork
   spring
   sprockets-rails

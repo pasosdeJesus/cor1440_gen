@@ -8,7 +8,7 @@
       <td><%= ap.anexo.descripcion %></td>
       <td>
         <%= link_to(ap.anexo.adjunto_file_name, 
-                    sip.descarga_anexo_path(ap.anexo.id),
+                    msip.descarga_anexo_path(ap.anexo.id),
                     {"data-turbo" => false }) %>
       </td>
     </tr>

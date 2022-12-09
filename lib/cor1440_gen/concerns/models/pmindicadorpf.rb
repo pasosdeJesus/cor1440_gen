@@ -6,8 +6,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo 
-          include Sip::Localizacion
+          include Msip::Modelo 
+          include Msip::Localizacion
 
           campofecha_localizado :fecha
           campofecha_localizado :finicio

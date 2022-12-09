@@ -39,7 +39,7 @@
           :first,
           {
             include_blank: true,
-            selected: Sip::ModeloHelper.poromision(params, :buspersona_id) },
+            selected: Msip::ModeloHelper.poromision(params, :buspersona_id) },
           {
               class: 'chosen-select',
               name: 'filtro[buspersona_id]',
@@ -51,12 +51,12 @@
         <%= collection_select(
           nil,
           'filtro_bussexo',
-          Sip::Persona::sexo_opciones,
+          Msip::Persona::sexo_opciones,
           :last, 
           :first, 
           {
             include_blank: true,
-            selected: Sip::ModeloHelper.poromision(params, :bussexo) },
+            selected: Msip::ModeloHelper.poromision(params, :bussexo) },
           {
               class: 'chosen-select',
               name: 'filtro[bussexo]',
@@ -72,7 +72,7 @@
           :nombre, 
           {
             include_blank: true,
-            selected: Sip::ModeloHelper.poromision(params, :busrangoedadac_id)},
+            selected: Msip::ModeloHelper.poromision(params, :busrangoedadac_id)},
           {
               class: 'chosen-select',
               name: 'filtro[busrangoedadac_id]',
@@ -95,7 +95,7 @@
       <% rangosedad = asg2.map{|r| r['rangoedadac_nombre']}.uniq.join("; ") %>
       <tr>
         <td>
-          <%= link_to sip.persona_path(b[1]), target: '_blank' do %>
+          <%= link_to msip.persona_path(b[1]), target: '_blank' do %>
             <%= b[0] %> <!-- nombre -->
           <% end %>
         </td>

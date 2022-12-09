@@ -9,7 +9,7 @@ module Cor1440Gen
           belongs_to :proyectofinanciero, 
             class_name: 'Cor1440Gen::Proyectofinanciero',
             foreign_key: 'proyectofinanciero_id', optional: false
-          belongs_to :anexo, class_name: 'Sip::Anexo', 
+          belongs_to :anexo, class_name: 'Msip::Anexo', 
             foreign_key: 'anexo_id', validate: true, optional: false
 
           accepts_nested_attributes_for :anexo, reject_if: :all_blank 

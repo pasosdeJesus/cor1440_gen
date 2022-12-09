@@ -5,7 +5,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo 
+          include Msip::Modelo 
 
           belongs_to :campotind, class_name: '::Cor1440Gen::Campotind',
             foreign_key: 'campotind_id', optional: false

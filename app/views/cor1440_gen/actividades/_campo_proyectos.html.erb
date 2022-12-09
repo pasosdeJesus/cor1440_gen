@@ -4,7 +4,7 @@
   <% l = nil %>
 <% end %>
 <%= f.association :proyecto,
-  collection: Sip::ModeloHelper.coleccion_basica(
+  collection: Msip::ModeloHelper.coleccion_basica(
     Cor1440Gen::Proyecto, f.object.proyecto.map(&:id)),
   label_method: :presenta_nombre, 
   value_method: :id,

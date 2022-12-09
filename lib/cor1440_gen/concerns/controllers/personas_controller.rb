@@ -1,4 +1,4 @@
-require 'sip/concerns/controllers/personas_controller'
+require 'msip/concerns/controllers/personas_controller'
 
 module Cor1440Gen
   module Concerns
@@ -8,10 +8,10 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Concerns::Controllers::PersonasController
+          include Msip::Concerns::Controllers::PersonasController
 
           def atributos_show_cor1440_gen
-            atributos_show_sip + [
+            atributos_show_msip + [
               :proyectofinanciero_ids,
               :actividad_ids
             ]

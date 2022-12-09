@@ -10,7 +10,7 @@ module Cor1440Gen
         included do
           include Mr519Gen::Concerns::Models::Usuario
 
-          belongs_to :oficina, class_name: 'Sip::Oficina',
+          belongs_to :oficina, class_name: 'Msip::Oficina',
             foreign_key: "oficina_id", validate: true, optional: true
 
           has_and_belongs_to_many :actividad, 

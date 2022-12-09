@@ -1,5 +1,5 @@
 module Cor1440Gen
-  class Ability < Sip::Ability
+  class Ability < Msip::Ability
 
     ROLADMIN  = 1
     ROLDIR    = 3
@@ -29,21 +29,21 @@ module Cor1440Gen
       ['Cor1440Gen', 'tipomoneda']
     ]
     def tablasbasicas
-      Sip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
-        ['Sip', 'fuenteprensa'],
-        ['Sip', 'grupo'],
-        ['Sip', 'tdocumento'],
-        ['Sip', 'trelacion'],
-        ['Sip', 'tsitio']
+      Msip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
+        ['Msip', 'fuenteprensa'],
+        ['Msip', 'grupo'],
+        ['Msip', 'tdocumento'],
+        ['Msip', 'trelacion'],
+        ['Msip', 'tsitio']
       ]
     end
 
     BASICAS_ID_NOAUTO = []
-    # Hereda basicas_id_noauto de sip
+    # Hereda basicas_id_noauto de msip
 
     NOBASICAS_INDSEQID =  [
       ['cor1440_gen', 'actividad'],
-      ['cor1440_gen', 'actividad_sip_anexo'],
+      ['cor1440_gen', 'actividad_anexo'],
       ['cor1440_gen', 'actividadpf'],
       ['cor1440_gen', 'asistencia'],
       ['cor1440_gen', 'anexo_efecto'],
@@ -66,16 +66,16 @@ module Cor1440Gen
       ['cor1440_gen', 'rangoedadac'],
       ['cor1440_gen', 'resultadopf'],
     ]
-    # Hereda nobasicas_indice_seq_con_id de sip
+    # Hereda nobasicas_indice_seq_con_id de msip
     def nobasicas_indice_seq_con_id
-      Sip::Ability::NOBASICAS_INDSEQID +
+      Msip::Ability::NOBASICAS_INDSEQID +
         Mr519Gen::Ability::NOBASICAS_INDSEQID +
         Heb412Gen::Ability::NOBASICAS_INDSEQID +
         Cor1440Gen::Ability::NOBASICAS_INDSEQID
     end
 
     BASICAS_PRIO = []
-    # Hereda tablasbasicas_prio de sip
+    # Hereda tablasbasicas_prio de msip
 
     CAMPOS_PLANTILLAS_PROPIAS = {
       'Actividad' => {
@@ -191,7 +191,7 @@ module Cor1440Gen
     # @usuario Usuario que hace petición
     def self.initialize_cor1440_gen(habilidad, usuario = nil)
       # Sin autenticación puede consultarse información geográfica
-      habilidad.can :read, [Sip::Pais, Sip::Departamento, Sip::Municipio, Sip::Clase]
+      habilidad.can :read, [Msip::Pais, Msip::Departamento, Msip::Municipio, Msip::Clase]
       if !usuario || usuario.fechadeshabilitacion
         return
       end
@@ -205,11 +205,11 @@ module Cor1440Gen
       habilidad.can :read, Heb412Gen::Plantillahcm
       habilidad.can :read, Heb412Gen::Plantillahcr
 
-      habilidad.can :descarga_anexo, Sip::Anexo
-      habilidad.can :contar, Sip::Ubicacion
-      habilidad.can :buscar, Sip::Ubicacion
-      habilidad.can :lista, Sip::Ubicacion
-      habilidad.can :nuevo, Sip::Ubicacion
+      habilidad.can :descarga_anexo, Msip::Anexo
+      habilidad.can :contar, Msip::Ubicacion
+      habilidad.can :buscar, Msip::Ubicacion
+      habilidad.can :lista, Msip::Ubicacion
+      habilidad.can :nuevo, Msip::Ubicacion
 
       if !usuario.nil? && !usuario.rol.nil? then
         case usuario.rol
@@ -255,8 +255,8 @@ module Cor1440Gen
           habilidad.can :read, Cor1440Gen::Informe
 
           habilidad.can [:new, :create, :read, :index, :edit, :update],
-            Sip::Orgsocial
-          habilidad.can :manage, Sip::Persona
+            Msip::Orgsocial
+          habilidad.can :manage, Msip::Persona
 
         when Ability::ROLADMIN, Ability::ROLDIR
           habilidad.can :manage, Cor1440Gen::Pmindicadorpf
@@ -280,9 +280,9 @@ module Cor1440Gen
           habilidad.can :manage, Mr519Gen::Formulario
           habilidad.can :manage, Mr519Gen::Encuestausuario
 
-          habilidad.can :manage, Sip::Orgsocial
-          habilidad.can :manage, Sip::Sectororgsocial
-          habilidad.can :manage, Sip::Persona
+          habilidad.can :manage, Msip::Orgsocial
+          habilidad.can :manage, Msip::Sectororgsocial
+          habilidad.can :manage, Msip::Persona
 
           habilidad.can :manage, Usuario
           habilidad.can :manage, :tablasbasicas

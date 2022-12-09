@@ -5,12 +5,12 @@
       'estilo_accordion-header' => 'text-align: center',
       'estilo_accordion-body' => 'anexos-div anexosdiv'
     })  do %>
-    <%= f.simple_fields_for :actividad_sip_anexo do |a| %>
-      <%= render 'actividad_sip_anexo_fields', :f => a %>
+    <%= f.simple_fields_for :actividad_anexo do |a| %>
+      <%= render 'actividad_anexo_fields', :f => a %>
     <% end %>
     <div class="links">
       <%= link_to_add_association t('Añadir anexo'), f, 
-        :actividad_sip_anexo, 
+        :actividad_anexo, 
         class: 'btn btn-sm btn-primary',
         style: 'margin-top: 1em'
       %>

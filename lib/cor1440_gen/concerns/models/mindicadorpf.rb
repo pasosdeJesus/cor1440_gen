@@ -5,8 +5,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo 
-          include Sip::Localizacion
+          include Msip::Modelo 
+          include Msip::Localizacion
 
           MEDIRCON_OPCIONES = [
             ['Actividades', 1], 

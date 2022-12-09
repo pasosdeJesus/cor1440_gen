@@ -1,6 +1,6 @@
-<tr class='nested-fields campos_asistente' data-controller='sip--sindocaut'>
+<tr class='nested-fields campos_asistente' data-controller='msip--sindocaut'>
   <% if f.object.persona.nil? %>
-    <% f.object.persona = Sip::Persona.new %>
+    <% f.object.persona = Msip::Persona.new %>
   <% end %>
 
   <%= f.simple_fields_for :persona do |p| %>
@@ -14,13 +14,13 @@
     </td>
     <td>
       <%= p.input :tdocumento_id,
-        collection: Sip::Tdocumento.habilitados,
+        collection: Msip::Tdocumento.habilitados,
         label_method: :sigla,
         value_method: :id ,
         label: false,
         input_html: {
           style: 'width: 5em',
-          "data-action": "change->sip--sindocaut#cambia_tdocumento"
+          "data-action": "change->msip--sindocaut#cambia_tdocumento"
         }
       %>
     </td>
@@ -28,7 +28,7 @@
       <%= p.input :id,
         as: :hidden,
         input_html: {
-          "data-sip--sindocaut-target": "id"
+          "data-msip--sindocaut-target": "id"
         } %>
       <% ph = 'N'
       ac = {'data-autocompleta' => 'no'}
@@ -48,13 +48,13 @@
       <%= p.input :numerodocumento, placeholder: ph,
         input_html: ac.merge!(
           style: 'width: 6em',
-          "data-sip--sindocaut-target": "numerodocumento",
+          "data-msip--sindocaut-target": "numerodocumento",
           title: td),
           label: false %>
     </td>
     <td>
       <%= p.input :sexo,
-        collection: Sip::Persona::sexo_opciones_cortas,
+        collection: Msip::Persona::sexo_opciones_cortas,
         label: false,
         input_html: { style: 'width: 4em' },
         include_blank: false %>

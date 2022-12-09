@@ -6,7 +6,7 @@ module Cor1440Gen
 
         included do
           include ActiveModel::Model
-          include Sip::Localizacion
+          include Msip::Localizacion
 
           attr_accessor :fechaini
           attr_accessor :fechafin

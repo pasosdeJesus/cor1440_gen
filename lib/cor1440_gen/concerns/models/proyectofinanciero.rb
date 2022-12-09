@@ -5,9 +5,9 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::Modelo
-          include Sip::Localizacion
-          include Sip::FormatoFechaHelper
+          include Msip::Modelo
+          include Msip::Localizacion
+          include Msip::FormatoFechaHelper
 
 
           campofecha_localizado :fechainicio
@@ -79,7 +79,7 @@ module Cor1440Gen
             join_table: 'cor1440_gen_actividad_proyectofinanciero'
 
           has_and_belongs_to_many :beneficiario,
-            class_name: 'Sip::Persona',
+            class_name: 'Msip::Persona',
             foreign_key: 'proyectofinanciero_id',
             association_foreign_key: 'persona_id',
             join_table: 'cor1440_gen_beneficiariopf'
@@ -120,7 +120,7 @@ module Cor1440Gen
           accepts_nested_attributes_for :anexo_proyectofinanciero, 
             allow_destroy: true, reject_if: :all_blank
           has_many :anexo, :through => :anexo_proyectofinanciero, 
-            class_name: '::Sip::Anexo'
+            class_name: '::Msip::Anexo'
           accepts_nested_attributes_for :anexo,  reject_if: :all_blank
 
           has_many :indicadorobjetivo, foreign_key: 'proyectofinanciero_id',
@@ -249,7 +249,7 @@ module Cor1440Gen
 
           def duracion
             if fechainicio && fechacierre
-              Sip::FormatoFechaHelper.dif_meses_dias(fechainicio, fechacierre)
+              Msip::FormatoFechaHelper.dif_meses_dias(fechainicio, fechacierre)
             else
               ''
             end

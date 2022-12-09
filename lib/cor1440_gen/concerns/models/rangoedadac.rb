@@ -3,7 +3,7 @@ module Cor1440Gen
     module Models
       module Rangoedadac
         extend ActiveSupport::Concern
-        include Sip::Basica
+        include Msip::Basica
 
         included do
 

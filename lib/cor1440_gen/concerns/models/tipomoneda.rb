@@ -4,11 +4,11 @@ module Cor1440Gen
     module Models
       module Tipomoneda
         extend ActiveSupport::Concern
-        include Sip::Basica
+        include Msip::Basica
 
         included do
 
-          belongs_to :pais, class_name: 'Sip::Pais', foreign_key: 'pais_id', 
+          belongs_to :pais, class_name: 'Msip::Pais', foreign_key: 'pais_id', 
             optional: false
 
           #has_many :proyectofinanciero, dependent: :delete_all,

@@ -1,6 +1,6 @@
 <% # Usuarios activos en el tiempo de la actividad %>
 
-<% col = Sip::ModeloHelper.opciones_tabla_basica(::Usuario, f, :usuario) %>
+<% col = Msip::ModeloHelper.opciones_tabla_basica(::Usuario, f, :usuario) %>
 <%= f.association :responsable,
   collection: col.order(:nusuario),
   include_blank: false,

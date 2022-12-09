@@ -1,11 +1,11 @@
-<% col = Sip::Oficina.all %>
+<% col = Msip::Oficina.all %>
 <%= f.input :busoficina,
   collection: col.order(:nombre),
   include_blank: true,
   label_method: :presenta_nombre,
   value_method: :id,
   label: false,
-  selected: Sip::ModeloHelper.poromision(params, :busoficina),
+  selected: Msip::ModeloHelper.poromision(params, :busoficina),
   input_html: {
     class: 'chosen-select',
     'data-enviarautomatico' => ''

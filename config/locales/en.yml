@@ -382,7 +382,7 @@ en:
         Orgocial: Social organization
         Persona: Beneficiary
         Proyectofinanciero: Project
-      "sip/persona":
+      "msip/persona":
         actividad_ids: Activities in which it is on the attendance list
         proyectofinanciero_ids: Projects that characterize it
         proyectofinanciero: Projects that characterize it

@@ -5,8 +5,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::FormatoFechaHelper
-          helper Sip::FormatoFechaHelper
+          include Msip::FormatoFechaHelper
+          helper Msip::FormatoFechaHelper
 
           def clase
             "Cor1440Gen::Proyectofinanciero"
@@ -35,7 +35,7 @@ module Cor1440Gen
           end
 
           # Redefinimos destroy porque el de tablas basicas
-          # (i.e Sip::Admin::BasicasController que debe ser
+          # (i.e Msip::Admin::BasicasController que debe ser
           # papa de la clase que incluye a esta)
           # exije eliminar primero registros en tablas union
           def destroy
@@ -404,14 +404,14 @@ module Cor1440Gen
             prob = ''
             if params[:fechainicio_localizada] &&
                 params[:fechacierre_localizada]
-              fini = ::Sip::FormatoFechaHelper.fecha_local_estandar(
+              fini = ::Msip::FormatoFechaHelper.fecha_local_estandar(
                 params[:fechainicio_localizada])
               fini = Date.strptime(fini, '%Y-%m-%d')
-              fcierre = ::Sip::FormatoFechaHelper.fecha_local_estandar(
+              fcierre = ::Msip::FormatoFechaHelper.fecha_local_estandar(
                 params[:fechacierre_localizada])
               fcierre = Date.strptime(fcierre, '%Y-%m-%d')
               if fini && fcierre
-                d = Sip::FormatoFechaHelper.dif_meses_dias(fini, fcierre)
+                d = Msip::FormatoFechaHelper.dif_meses_dias(fini, fcierre)
                 respond_to do |format|
                   format.json {
                     render json: {duracion: d.to_s}, status: :ok
@@ -601,7 +601,7 @@ module Cor1440Gen
             c2 = c.accessible_by(ability)
             if filtro[:fecha] && filtro[:fecha] != ''
               menserror=''
-              nfr = Sip::FormatoFechaHelper.reconoce_adivinando_locale(
+              nfr = Msip::FormatoFechaHelper.reconoce_adivinando_locale(
                 filtro[:fecha], menserror)
               if menserror != ''
                 puts "** Problema con fecha '#{filtro[:fecha]}'. #{menserror}"

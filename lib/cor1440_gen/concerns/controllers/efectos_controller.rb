@@ -159,7 +159,7 @@ module Cor1440Gen
                   :id,
                   :efecto_id,
                   :_destroy,
-                  sip_anexo_attributes: [ 
+                  anexo_attributes: [ 
                     :id, :descripcion, :adjunto, :_destroy ] 
                 ],
                 respuestafor_attributes: [

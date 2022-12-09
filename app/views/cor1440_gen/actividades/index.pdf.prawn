@@ -1,8 +1,8 @@
 font_families.update("Tuffy" => {
-		:normal => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy.ttf'),
-		:italic => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Italic.ttf'),
-		:bold => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold.ttf'),
-		:bold_italic => Sip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold_Italic.ttf')
+		:normal => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy.ttf'),
+		:italic => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Italic.ttf'),
+		:bold => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold.ttf'),
+		:bold_italic => Msip::Engine.root.join('app', 'assets', 'fonts', 'tuffy', 'Tuffy_Bold_Italic.ttf')
 		})
 font "Tuffy"
 font_size 16

@@ -5,8 +5,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          include Sip::FormatoFechaHelper
-          helper Sip::FormatoFechaHelper
+          include Msip::FormatoFechaHelper
+          helper Msip::FormatoFechaHelper
 
           def clase 
             "Cor1440Gen::Pmsindicadorpf"
