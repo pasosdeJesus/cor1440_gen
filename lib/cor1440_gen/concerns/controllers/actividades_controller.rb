@@ -429,8 +429,8 @@ module Cor1440Gen
                     a[:persona_attributes][:id].to_i > 0 &&
                     Sip::Persona.where(
                       id: a[:persona_attributes][:id].to_i).count == 1
-                  # Ubicamos los de autocompletacion y para esos creamos un registro 
-                  # si hace falta
+                    # Ubicamos los de autocompletacion y para esos creamos 
+                    # un registro si hace falta
                     ac = Cor1440Gen::Asistencia.create({
                       actividad_id: @actividad.id,
                       persona_id: a[:persona_attributes][:id]

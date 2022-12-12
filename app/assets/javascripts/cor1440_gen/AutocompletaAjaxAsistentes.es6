@@ -12,6 +12,12 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
     sip_arregla_puntomontaje(root)
     const cs = id.split(';')
     const idPersona = cs[0]
+    if ([...document.querySelector('#asistencia').
+        querySelectorAll('[id$=_attributes_id]')].filter(
+          e => e.value==idPersona).length > 0) {
+      window.alert("La misma persona ya está en el listado de asistencia");
+      return
+    }
     let d = '&id_persona=' + idPersona
     d += '&ac_asistente_persona=true'
     const a = root.puntomontaje + 'personas/datos'
