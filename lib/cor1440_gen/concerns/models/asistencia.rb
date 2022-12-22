@@ -27,7 +27,7 @@ module Cor1440Gen
             }
 
 
-          after_save do |asistencia|
+          after_commit do |asistencia|
             if !Rails.configuration.x.cor1440_edita_poblacion
               asistencia.actividad.recalcula_poblacion
             end
