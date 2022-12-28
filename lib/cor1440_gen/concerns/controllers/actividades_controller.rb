@@ -148,22 +148,32 @@ module Cor1440Gen
               render inline: 'No existe actividad con la id actividad_id dada'
               return
             end
-            a = Cor1440Gen::Actividad.find(
-              params[:actividad_id].to_i)
+            a = Cor1440Gen::Actividad.find(params[:actividad_id].to_i)
             authorize! :create, Cor1440Gen::Actividad
             @registro = a.dup
+            @registro.fecha = Date.today
             #@registro.nombre += ' ' + Time.now.to_i.to_s
             if !@registro.save(validate: false)  # Elegir otra id
-              render inline: 'No pudo salvar copia sin campos'
+              render inline: 'No pudo duplicar actividad'
               return
             end
             # no se copian anexos
 
-            [['Cor1440Gen::ActividadProyectofinanciero', 'actividad_proyectofinanciero'],
-             ['Cor1440Gen::ActividadActividadpf', 'actividad_actividadpf'],
-            ].each do |par|
-              par[0].constantize.where(actividad_id: a.id).
-                each do |tr|
+            la = Cor1440Gen::Actividad.reflect_on_all_associations.select {|ua| 
+              ua.macro == :has_many && !ua.options[:through] &&
+                ua.name != :actividad_sip_anexo
+            }.map {|ua| 
+              [ua.class_name, ua.name.to_s]
+            }
+            la += Cor1440Gen::Actividad.reflect_on_all_associations.select {|ua| 
+              ua.macro == :has_and_belongs_to_many  && ua.name != :respuestafor
+            }.map {|ua| 
+              [ua.join_table.classify.sub('Cor1440Gen', 'Cor1440Gen::'),
+               ua.join_table]
+            }
+
+            la.each do |par|
+              par[0].constantize.where(actividad_id: a.id).each do |tr|
                 ntr= tr.dup
                 ntr.actividad_id = @registro.id
                 if !ntr.save
@@ -173,7 +183,24 @@ module Cor1440Gen
               end #tr
             end #par
 
-            if !@registro.save  # Elegir otra id
+            # Respuestafor es especial
+            arfs = Cor1440Gen::ActividadRespuestafor.where(actividad_id: a.id)
+            arfs.each do |arf|
+              nr = arf.respuestafor.dup()
+              nr.save(validate: false)
+              narf = arf.dup()
+              narf.respuestafor_id = nr.id
+              narf.actividad_id = @registro.id
+              narf.save(validate: false)
+              arf.respuestafor.valorcampo.each do |v|
+                nv = v.dup();
+                nv.respuestafor_id = nr.id
+                nv.save(validate: false)
+              end
+            end
+          
+            #copia_especializada(a, @registro)
+            if !@registro.save(validate: false)  
               render inline: 'No pudo salvar copia con campos'
               return
             end
