@@ -26,6 +26,14 @@ module Cor1440Gen
               message: "El listado de actividades no puede tener personas repetidas"
             }
 
+
+          after_save do |asistencia|
+            if !Rails.configuration.x.cor1440_edita_poblacion
+              asistencia.actividad.recalcula_poblacion
+            end
+          end
+
+
           def evalua_campo(campo, menserr)
             case campo
             when 'persona'
