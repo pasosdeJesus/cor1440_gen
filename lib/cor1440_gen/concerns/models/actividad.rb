@@ -244,7 +244,7 @@ module Cor1440Gen
             ConteosHelper.recalcula_poblacion(self)
           end
 
-          after_save do |actividad|
+          after_commit do |actividad|
             if !Rails.configuration.x.cor1440_edita_poblacion
               actividad.recalcula_poblacion
             end
