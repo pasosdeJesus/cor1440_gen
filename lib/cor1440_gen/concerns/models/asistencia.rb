@@ -20,7 +20,11 @@ module Cor1440Gen
             foreign_key: 'perfilorgsocial_id', optional: true
 
           validates :actividad, presence: true
-          validates :persona, presence: true
+          validates :persona, presence: true, 
+            uniqueness: { 
+              scope: :actividad_id, 
+              message: "El listado de actividades no puede tener personas repetidas"
+            }
 
           def evalua_campo(campo, menserr)
             case campo
