@@ -161,7 +161,7 @@ module Cor1440Gen
 
             la = Cor1440Gen::Actividad.reflect_on_all_associations.select {|ua| 
               ua.macro == :has_many && !ua.options[:through] &&
-                ua.name != :actividad_sip_anexo
+                ua.name != :actividad_msip_anexo
             }.map {|ua| 
               [ua.class_name, ua.name.to_s]
             }
