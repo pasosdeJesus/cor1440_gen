@@ -5,6 +5,14 @@ SimpleCov.start
 require_relative 'dummy/config/environment'
 require 'rails/test_help'
 
+
+PRUEBA_ACTIVIDAD = {
+  nombre:'n',
+  fecha:'2017-03-02',
+  oficina_id:1,
+  usuario_id:1,
+}
+
 # Usuario para ingresar y hacer pruebas
 PRUEBA_USUARIO = {
   nusuario: "admin",
