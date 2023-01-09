@@ -1,14 +1,7 @@
-require_relative '../../test_helper'
+require 'test_helper'
 
 module Cor1440Gen
   class ActividadTest < ActiveSupport::TestCase
-    PRUEBA_ACTIVIDAD = {
-      nombre:'n',
-      fecha:'2017-03-02',
-      oficina_id:1,
-      usuario_id:1,
-    }
-
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
     end
