@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "cor1440_gen/concerns/controllers/personas_controller"
 
 module Msip

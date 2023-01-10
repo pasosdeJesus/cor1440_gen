@@ -1,32 +1,36 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 module Cor1440Gen
   class InformefinancieroTest < ActiveSupport::TestCase
     setup do
-      Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
+      Rails.application.config.x.formato_fecha = "yyyy-mm-dd"
     end
 
     test "valido" do
       proyectofinanciero = Cor1440Gen::Proyectofinanciero.create(
-        PRUEBA_PROYECTOFINANCIERO
+        PRUEBA_PROYECTOFINANCIERO,
       )
-      assert proyectofinanciero.valid?
+
+      assert_predicate proyectofinanciero, :valid?
 
       i = Cor1440Gen::Informefinanciero.create(
         proyectofinanciero_id: proyectofinanciero.id,
-        detalle: 'x',
-        fecha: '2023-03-03'
+        detalle: "x",
+        fecha: "2023-03-03",
       )
-      assert i.valid?
+
+      assert_predicate i, :valid?
 
       i.destroy
       proyectofinanciero.destroy
     end
 
     test "no valido" do
-      i = Cor1440Gen::Informefinanciero.create()
+      i = Cor1440Gen::Informefinanciero.create
+
       assert_not i.valid?
     end
-
   end
 end

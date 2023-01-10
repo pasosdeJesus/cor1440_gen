@@ -1,10 +1,11 @@
-require 'msip/concerns/controllers/personas_controller'
+# frozen_string_literal: true
+
+require "msip/concerns/controllers/personas_controller"
 
 module Cor1440Gen
   module Concerns
     module Controllers
       module PersonasController
-
         extend ActiveSupport::Concern
 
         included do
@@ -13,7 +14,7 @@ module Cor1440Gen
           def atributos_show_cor1440_gen
             atributos_show_msip + [
               :proyectofinanciero_ids,
-              :actividad_ids
+              :actividad_ids,
             ]
           end
 
@@ -34,7 +35,7 @@ module Cor1440Gen
             if a.index(:tdocumento)
               a[a.index(:tdocumento)] = :tdocumento_id
             end
-            return a
+            a
           end
 
           def self.asegura_camposdinamicos(persona, current_usuario_id)
@@ -42,40 +43,44 @@ module Cor1440Gen
               persona.proyectofinanciero.each do |pf|
                 pf.caracterizacion.each do |ca|
                   cp = Cor1440Gen::Caracterizacionpersona.where(
-                    persona_id: persona.id).where('respuestafor_id IN
+                    persona_id: persona.id,
+                  ).where('respuestafor_id IN
                   (SELECT id FROM mr519_gen_respuestafor WHERE
-                     formulario_id=?)', ca.id)
+                     formulario_id=?)',
+                    ca.id)
                   if cp.count == 0
                     rf = Mr519Gen::Respuestafor.create(
                       formulario_id: ca.id,
                       fechaini: Date.today,
-                      fechacambio: Date.today)
+                      fechacambio: Date.today,
+                    )
                     car = Cor1440Gen::Caracterizacionpersona.create(
                       persona_id: persona.id,
                       respuestafor_id: rf.id,
-                      ulteditor_id: current_usuario_id
+                      ulteditor_id: current_usuario_id,
                     )
                   elsif cp.count > 1
-                    flash.now[:notice] = "Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
-                    car= cp.take
+                    flash.now[:notice] =
+"Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
+                    car = cp.take
                   else # cp.count == 1
                     car = cp.take
                   end
-                  Mr519Gen::ApplicationHelper::asegura_camposdinamicos(
-                    car, current_usuario_id)
+                  Mr519Gen::ApplicationHelper.asegura_camposdinamicos(
+                    car, current_usuario_id
+                  )
                 end
               end
             end
           end
 
           def editar_intermedio(registro, usuario_actual_id)
-            if params['proyectofinanciero_ids']
-              if params['proyectofinanciero_ids'] == ['-1'] # Convención vacio
-                # Si la llamada AJAC se hace con [] ese parametro no llega 
-                registro.proyectofinanciero_ids = []
+            if params["proyectofinanciero_ids"]
+              registro.proyectofinanciero_ids = if params["proyectofinanciero_ids"] == ["-1"] # Convención vacio
+                # Si la llamada AJAC se hace con [] ese parametro no llega
+                []
               else
-                registro.proyectofinanciero_ids = 
-                  params['proyectofinanciero_ids']
+                params["proyectofinanciero_ids"]
               end
             end
             self.class.asegura_camposdinamicos(registro, usuario_actual_id)
@@ -85,61 +90,66 @@ module Cor1440Gen
           # proyectos de los cuales la persona ya no sea beneficiario
           def actualizar_intermedio
             quedan = @registro.caracterizacionpersona.where(
-              'respuestafor_id IN (SELECT id ' +
-              'FROM mr519_gen_respuestafor AS rf ' +
-              'JOIN cor1440_gen_caracterizacionpf AS cpf ON ' +
-              'rf.formulario_id=cpf.formulario_id JOIN ' +
-              'cor1440_gen_beneficiariopf AS bpf ON ' +
-              'bpf.proyectofinanciero_id=cpf.proyectofinanciero_id ' +
-              'WHERE bpf.persona_id=?)', @registro.id).pluck(:id)
+              "respuestafor_id IN (SELECT id " +
+              "FROM mr519_gen_respuestafor AS rf " +
+              "JOIN cor1440_gen_caracterizacionpf AS cpf ON " +
+              "rf.formulario_id=cpf.formulario_id JOIN " +
+              "cor1440_gen_beneficiariopf AS bpf ON " +
+              "bpf.proyectofinanciero_id=cpf.proyectofinanciero_id " +
+              "WHERE bpf.persona_id=?)",
+              @registro.id,
+            ).pluck(:id)
             elim = @registro.caracterizacionpersona_ids - quedan
             if elim != []
               Cor1440Gen::Caracterizacionpersona.where(id: elim).delete_all
             end
-            return true 
+            true
           end
 
-
           def vistas_manejadas
-            ['Persona']
+            ["Persona"]
           end
 
           def actualiza_especial(registro, paramf, paramsf)
-            return true
+            true
           end
 
-
           def self.valor_campo_compuesto(registro, campo)
-            p = campo.split('.')
+            p = campo.split(".")
             if Mr519Gen::Formulario.where(nombreinterno: p[0]).count == 0
               return "No se encontró formulario con nombreinterno #{p[0]}"
             end
+
             f = Mr519Gen::Formulario.where(nombreinterno: p[0]).take
 
             car = Cor1440Gen::Caracterizacionpersona.where(
-              persona_id: registro.id).where('respuestafor_id IN
-              (SELECT id FROM mr519_gen_respuestafor 
-              WHERE formulario_id=?)', f.id)
+              persona_id: registro.id,
+            ).where('respuestafor_id IN
+              (SELECT id FROM mr519_gen_respuestafor
+              WHERE formulario_id=?)',
+              f.id)
             if car.count == 0
-              return "" #No se encontró caracterización para persona #{registro.id} con formulario #{f.id}
+              return "" # No se encontró caracterización para persona #{registro.id} con formulario #{f.id}
             elsif car.count > 1
               return "Hay #{car.count} caracterizaciones para la persona #{registro.id} con formulario #{f.id}"
             end
+
             car = car.take
 
-            if p[1] == 'ultimo_editor' 
+            if p[1] == "ultimo_editor"
               return car.ulteditor.nusuario
             end
 
             rf = car.respuestafor
-            
-            if p[1] == 'fecha_ultimaedicion'
+
+            if p[1] == "fecha_ultimaedicion"
               return rf.fechacambio
             end
 
             if f.campo.where(nombreinterno: p[1]).count == 0
               return "En formulario #{f.id} no se encontró campo con nombre interno #{p[2]}"
             end
+
             campo = f.campo.where(nombreinterno: p[1]).take
             op = []
             ope = nil
@@ -151,6 +161,7 @@ module Cor1440Gen
                 elsif op.where(valor: p[2]).count > 1
                   return "En formulario #{f.id}, el campo con nombre interno #{p[1]} tiene más de una opción con valor #{p[2]}"
                 end
+
                 ope = op.where(valor: p[2]).take
               end
             end
@@ -159,15 +170,19 @@ module Cor1440Gen
             end
 
             vc = rf.valorcampo.where(campo_id: campo.id).take
-            if !ope.nil?
+            unless ope.nil?
               return vc.valorjson.include?(ope.id.to_s) ? 1 : 0
             end
+
             if campo.tipo == Mr519Gen::ApplicationHelper::SELECCIONMULTIPLE
-              cop = vc.valorjson.select{|i| i != ''}.map {|idop|
+              cop = vc.valorjson.select { |i| i != "" }.map do |idop|
                 ope = Mr519Gen::Opcioncs.where(id: idop.to_i)
-                ope.count == 0  ?  "No hay opcion con id #{idop}" :
+                if ope.count == 0
+                  "No hay opcion con id #{idop}"
+                else
                   ope.take.nombre
-              }
+                end
+              end
               return cop.join(". ")
             end
 
@@ -177,20 +192,21 @@ module Cor1440Gen
           private
 
           def lista_params_cor1440
-            atributos_form + 
-              [ "caracterizacionpersona_attributes" =>
-                [ :id,
+            atributos_form +
+              ["caracterizacionpersona_attributes" =>
+                [
+                  :id,
                   "respuestafor_attributes" => [
                     :id,
                     "valorcampo_attributes" => [
                       :valor,
                       :campo_id,
-                      :id 
-                     ] + [:valor_ids => []],
-                ] ]
-            ] + [ 
-              'proyectofinanciero_ids' => [] 
-            ]
+                      :id,
+                    ] + [valor_ids: []],
+                  ],
+                ]] + [
+                  "proyectofinanciero_ids" => [],
+                ]
           end
 
           def lista_params
@@ -199,18 +215,13 @@ module Cor1440Gen
 
           def persona_params
             p = params.require(:persona)
-            p= p.permit(lista_params)
-            return p
+            p = p.permit(lista_params)
+            p
           end
-
-
         end  # included
 
         class_methods do
-
         end
-
-
       end
     end
   end

@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/orgsocial'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/orgsocial"
 
 module Msip
   class Orgsocial < ActiveRecord::Base

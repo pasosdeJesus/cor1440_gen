@@ -1,1 +1,3 @@
-Rails.application.config.assets.precompile += %w( cor1440_gen/clip.svg )
+# frozen_string_literal: true
+
+Rails.application.config.assets.precompile += ["cor1440_gen/clip.svg"]

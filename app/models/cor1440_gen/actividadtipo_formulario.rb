@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/actividadtipo_formulario'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/actividadtipo_formulario"
 
 module Cor1440Gen
   class ActividadtipoFormulario < ActiveRecord::Base

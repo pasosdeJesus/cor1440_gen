@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/informefinanciero'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/informefinanciero"
 
 module Cor1440Gen
   class Informefinanciero < ActiveRecord::Base

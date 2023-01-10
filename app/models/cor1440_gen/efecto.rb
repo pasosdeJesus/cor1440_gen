@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/efecto'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/efecto"
 
 module Cor1440Gen
   class Efecto < ActiveRecord::Base

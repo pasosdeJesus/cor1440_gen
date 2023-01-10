@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/informeauditoria'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/informeauditoria"
 
 module Cor1440Gen
   class Informeauditoria < ActiveRecord::Base

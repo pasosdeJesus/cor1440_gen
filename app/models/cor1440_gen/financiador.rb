@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/financiador'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/financiador"
 
 module Cor1440Gen
   class Financiador < ActiveRecord::Base

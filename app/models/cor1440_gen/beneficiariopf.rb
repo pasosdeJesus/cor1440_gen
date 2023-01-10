@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/beneficiariopf'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/beneficiariopf"
 
 module Cor1440Gen
   class Beneficiariopf < ActiveRecord::Base

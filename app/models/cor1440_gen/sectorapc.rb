@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/sectorapc'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/sectorapc"
 
 module Cor1440Gen
   class Sectorapc < ActiveRecord::Base

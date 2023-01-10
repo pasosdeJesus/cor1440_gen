@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Models
@@ -9,15 +11,13 @@ module Cor1440Gen
           include Msip::Localizacion
           include Msip::FormatoFechaHelper
 
-          belongs_to :proyectofinanciero, 
-            class_name: 'Cor1440Gen::Proyectofinanciero', 
-            foreign_key: 'proyectofinanciero_id', optional: false
-          belongs_to :usuario, class_name: '::Usuario',
-            foreign_key: 'usuario_id', optional: true
-
-
+          belongs_to :proyectofinanciero,
+            class_name: "Cor1440Gen::Proyectofinanciero",
+            optional: false
+          belongs_to :usuario,
+            class_name: "::Usuario",
+            optional: true
         end # included
-
       end
     end
   end

@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/informe'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/informe"
 
 module Cor1440Gen
   class Informe < ActiveRecord::Base

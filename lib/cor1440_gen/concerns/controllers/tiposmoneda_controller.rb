@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -5,8 +7,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-
-          def clase 
+          def clase
             "Cor1440Gen::Tipomoneda"
           end
 
@@ -16,27 +17,25 @@ module Cor1440Gen
 
           def atributos_index
             [
-              :id, 
-              :nombre, 
-              :codiso4217, 
-              :simbolo, 
-              :pais_id, 
-              :observaciones, 
-              :fechacreacion_localizada, 
-              :habilitado
+              :id,
+              :nombre,
+              :codiso4217,
+              :simbolo,
+              :pais_id,
+              :observaciones,
+              :fechacreacion_localizada,
+              :habilitado,
             ]
           end
 
           def genclase
-            'M'
+            "M"
           end
 
           def tipomoneda_params
             params.require(:tipomoneda).permit(*atributos_form)
           end
-
         end # included
-
       end
     end
   end

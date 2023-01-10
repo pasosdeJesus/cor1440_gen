@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -5,8 +7,7 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-
-          def clase 
+          def clase
             "Cor1440Gen::Financiador"
           end
 
@@ -15,22 +16,24 @@ module Cor1440Gen
           end
 
           def atributos_index
-            ["id", "nombre", "observaciones", "fechacreacion_localizada", 
-             "habilitado"]
+            [
+              "id",
+              "nombre",
+              "observaciones",
+              "fechacreacion_localizada",
+              "habilitado",
+            ]
           end
 
           def genclase
-            return 'M';
+            "M"
           end
 
           def financiador_params
             params.require(:financiador).permit(*atributos_form)
           end
-
         end # included
-
       end
     end
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -7,7 +9,7 @@ module Cor1440Gen
         included do
           include Msip::FormatoFechaHelper
 
-          def clase 
+          def clase
             "Cor1440Gen::Tipoindicador"
           end
 
@@ -16,33 +18,34 @@ module Cor1440Gen
           end
 
           def atributos_index
-            [ :id, 
+            [
+              :id,
               :nombre,
               :medircon,
               :esptipometa,
               :espfuncionmedir,
               :datointermedioti,
-              :formulario
+              :formulario,
             ]
           end
 
           def new
             @registro = clase.constantize.new
-            @registro.nombre = 'I'
+            @registro.nombre = "I"
             @registro.fechacreacion = Date.today
             @registro.save!(validate: false)
-            redirect_to cor1440_gen.edit_admin_tipoindicador_path(@registro)
+            redirect_to(cor1440_gen.edit_admin_tipoindicador_path(@registro))
           end
 
           def genclase
-            return 'M';
+            "M"
           end
 
           def lista_params_cor1440_gen
             p = atributos_form - [:formulario, :datointermedioti] +
-              [:formulario_ids => [] ] +
-              [:datointermedioti_attributes => [ :nombre, :id, :_destroy ] ] 
-            return p
+              [formulario_ids: []] +
+              [datointermedioti_attributes: [:nombre, :id, :_destroy]]
+            p
           end
 
           def lista_params
@@ -53,12 +56,8 @@ module Cor1440Gen
             p = lista_params
             params.require(:tipoindicador).permit(p)
           end
-
-
         end # included
-
       end
     end
   end
 end
-

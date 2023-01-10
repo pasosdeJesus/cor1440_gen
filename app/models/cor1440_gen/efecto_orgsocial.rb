@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/efecto_orgsocial'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/efecto_orgsocial"
 
 module Cor1440Gen
   class EfectoOrgsocial < ActiveRecord::Base

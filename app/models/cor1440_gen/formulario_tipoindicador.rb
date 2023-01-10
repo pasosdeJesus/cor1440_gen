@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/formulario_tipoindicador'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/formulario_tipoindicador"
 
 module Cor1440Gen
   class FormularioTipoindicador < ActiveRecord::Base

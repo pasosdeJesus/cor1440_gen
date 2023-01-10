@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/pmindicadorpf'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/pmindicadorpf"
 
 module Cor1440Gen
   class Pmindicadorpf < ActiveRecord::Base

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Models
@@ -9,34 +11,37 @@ module Cor1440Gen
           include Msip::Localizacion
           include Msip::FormatoFechaHelper
 
-          belongs_to :objetivopf, 
-            class_name: 'Cor1440Gen::Objetivopf',
-            foreign_key: 'objetivopf_id', optional: false
+          belongs_to :objetivopf,
+            class_name: "Cor1440Gen::Objetivopf",
+            optional: false
 
-          has_many :actividadpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Actividadpf', 
-            foreign_key: 'resultadopf_id'
-          has_many :indicadorpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Indicadorpf', 
-            foreign_key: 'resultadopf_id'
+          has_many :actividadpf,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Actividadpf",
+            foreign_key: "resultadopf_id"
+          has_many :indicadorpf,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Indicadorpf",
+            foreign_key: "resultadopf_id"
 
-          validates :numero, presence: true, length: {maximum: 15},
-            format: { without: /\s/,
-                      message: "No usar espacio en código de resultado" }
-          validates :resultado, presence:true, length: {maximum: 5000}
+          validates :numero,
+            presence: true,
+            length: { maximum: 15 },
+            format: {
+              without: /\s/,
+              message: "No usar espacio en código de resultado",
+            }
+          validates :resultado, presence: true, length: { maximum: 5000 }
 
           def presenta_nombre
-            (objetivopf ? objetivopf.numero : '') + numero + " " + resultado
+            (objetivopf ? objetivopf.numero : "") + numero + " " + resultado
           end
 
           def codigo_completo
-            (objetivopf ? objetivopf.numero : '') + numero
+            (objetivopf ? objetivopf.numero : "") + numero
           end
-
-        end #included
-
+        end # included
       end
     end
   end
 end
-

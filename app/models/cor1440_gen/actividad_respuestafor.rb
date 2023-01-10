@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/actividad_respuestafor'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/actividad_respuestafor"
 
 module Cor1440Gen
   class ActividadRespuestafor < ActiveRecord::Base
