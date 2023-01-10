@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Models
@@ -10,6 +12,7 @@ module Cor1440Gen
 
           attr_accessor :fechaini
           attr_accessor :fechafin
+
           campofecha_localizado :fechaini
           campofecha_localizado :fechafin
 
@@ -21,7 +24,7 @@ module Cor1440Gen
               return @fechafin
             end
             puts a
-            return nil
+            nil
           end
 
           def write_attribute(a, v)
@@ -34,12 +37,9 @@ module Cor1440Gen
               return v
             end
             puts a, v
-            return nil
+            nil
           end
-
-
         end
-
       end
     end
   end

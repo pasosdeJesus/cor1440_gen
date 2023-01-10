@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/datointermedioti'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/datointermedioti"
 
 module Cor1440Gen
   class Datointermedioti < ActiveRecord::Base

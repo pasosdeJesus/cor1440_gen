@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/desembolso'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/desembolso"
 
 module Cor1440Gen
   class Desembolso < ActiveRecord::Base

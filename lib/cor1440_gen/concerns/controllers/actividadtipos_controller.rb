@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
-      module ActividadtiposController 
+      module ActividadtiposController
         extend ActiveSupport::Concern
 
         included do
           include ActionView::Helpers::AssetUrlHelper
 
-          def clase 
+          def clase
             "Cor1440Gen::Actividadtipo"
           end
 
@@ -16,34 +18,34 @@ module Cor1440Gen
           end
 
           def atributos_index
-            [:id, 
-             :nombre, 
-             :observaciones, 
-             :formulario,
-             :listadoasistencia,
-             :fechacreacion_localizada, 
-             :habilitado
+            [
+              :id,
+              :nombre,
+              :observaciones,
+              :formulario,
+              :listadoasistencia,
+              :fechacreacion_localizada,
+              :habilitado,
             ]
           end
 
           def new
             @registro = clase.constantize.new
-            @registro.nombre = 'A'
+            @registro.nombre = "A"
             @registro.fechacreacion = Date.today
             @registro.listadoasistencia = false
             @registro.save!(validate: false)
-            redirect_to cor1440_gen.edit_admin_actividadtipo_path(@registro)
+            redirect_to(cor1440_gen.edit_admin_actividadtipo_path(@registro))
           end
 
           def genclase
-            'M'
+            "M"
           end
-
 
           def lista_params_cor1440_gen
             p = atributos_form - [:formulario] +
-              [:formulario_ids => [] ] 
-            return p
+              [formulario_ids: []]
+            p
           end
 
           def lista_params
@@ -51,14 +53,11 @@ module Cor1440Gen
           end
 
           def actividadtipo_params
-            l =  lista_params
+            l = lista_params
             params.require(:actividadtipo).permit(l)
           end
-
         end
-
       end
     end
   end
 end
-

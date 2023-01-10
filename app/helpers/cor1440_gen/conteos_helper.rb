@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module ConteosHelper
-
     # Da conteo de asistentes a un actividad como una tabla
     # por Rango de Edad y Sexo
     # @return diccionario primer índice es id de rango de edad,
     #         segundo índice es sexo ('F', 'M' o 'S')  (o el de
     #         la convención de la base de datos en ese orden).
     def genera_dicc_poblacion_de_asistentes(a)
-
       personas = {}
       a.asistencia.each do |asist|
         if !asist.persona
@@ -19,7 +19,7 @@ module Cor1440Gen
           merr = "Persona #{asist.persona.id} repetida en "\
             "listado de asistencia de la actividad #{a.id}"
           puts merr
-          STDERR.puts  merr
+          STDERR.puts merr
         else
           personas[asist.persona.id] = 1
         end
@@ -32,11 +32,17 @@ module Cor1440Gen
       personas.keys.sort.each do |pid|
         p = Msip::Persona.find(pid)
         edad = Sivel2Gen::RangoedadHelper.edad_de_fechanac_fecha(
-          p.anionac, p.mesnac, p.dianac,
-          a.fecha.year, a.fecha.month, a.fecha.day)
+          p.anionac,
+          p.mesnac,
+          p.dianac,
+          a.fecha.year,
+          a.fecha.month,
+          a.fecha.day,
+        )
         re = Sivel2Gen::RangoedadHelper.buscar_rango_edad(
-          edad, 'Cor1440Gen::Rangoedadac')
-        if !rangoedadsexo[re]
+          edad, "Cor1440Gen::Rangoedadac"
+        )
+        unless rangoedadsexo[re]
           rangoedadsexo[re] = {}
           rangoedadsexo[re][convF] = 0
           rangoedadsexo[re][convM] = 0
@@ -45,10 +51,9 @@ module Cor1440Gen
         rangoedadsexo[re][p.sexo] += 1
       end
 
-      return rangoedadsexo
+      rangoedadsexo
     end
     module_function :genera_dicc_poblacion_de_asistentes
-
 
     # Compara talba de población almacenada en base con la
     # que se genera del listado de asistencia
@@ -86,7 +91,7 @@ module Cor1440Gen
         if tf != df
           STDERR.puts "** Diferencia en actividad #{a.id}, "\
             "rango de edad #{re.id}, sexo #{convF}. "\
-              "Tabla dice #{tf} y cuenta de asistentes da #{df}."
+            "Tabla dice #{tf} y cuenta de asistentes da #{df}."
           numdif += 1
         end
         if tm != dm
@@ -95,18 +100,17 @@ module Cor1440Gen
             "Tabla dice #{tm} y cuenta de asistentes da #{dm}."
           numdif += 1
         end
-        if ts != ds
-          STDERR.puts "** Diferencia en actividad #{a.id}, "\
-            "rango de edad #{re.id}, sexo #{convS}. "\
-            "Tabla dice #{ts} y cuenta de asistentes da #{ds}."
-          numdif += 1
-        end
+        next unless ts != ds
+
+        STDERR.puts "** Diferencia en actividad #{a.id}, "\
+          "rango de edad #{re.id}, sexo #{convS}. "\
+          "Tabla dice #{ts} y cuenta de asistentes da #{ds}."
+        numdif += 1
       end
 
-      return numdif
+      numdif
     end
     module_function :compara_tabla_poblacion_asistentes_actividad
-
 
     # Cambia cantidades en un registro de rango de edad en una actividad
     # @param a Actividad
@@ -115,8 +119,8 @@ module Cor1440Gen
     # @param m Cantidad de hombres beneficiarios
     # @param s Cantidad de beneficiarios sin sexo
     def cambia_actividad_rangoedadac(actividad, rangoedadac, f, m, s)
-      acrs = Cor1440Gen::ActividadRangoedadac.where(actividad_id: actividad.id).
-          where(rangoedadac_id: rangoedadac.id)
+      acrs = Cor1440Gen::ActividadRangoedadac.where(actividad_id: actividad.id)
+        .where(rangoedadac_id: rangoedadac.id)
       STDERR.puts "Cambiando actividad_id: #{actividad.id}, "\
         "rangoedadac_id: #{rangoedadac.id}, f: #{f}, m: #{m}, s: #{s}"
       if acrs.count > 0
@@ -131,13 +135,12 @@ module Cor1440Gen
           rangoedadac_id: rangoedadac.id,
           fr: f,
           mr: m,
-          s: s
+          s: s,
         )
         acr.save
       end
     end
     module_function :cambia_actividad_rangoedadac
-
 
     # Arregla tabla de población almacenada en base a partir
     # del listado de asistencia.
@@ -176,7 +179,7 @@ module Cor1440Gen
         end
 
         pref = "* Cambiando tabla de población de actividad '#{a.id}', "\
-            "fila con rango de edad '#{re.nombre}': "
+          "fila con rango de edad '#{re.nombre}': "
 
         numdifpre = numdif
         if tf != df
@@ -194,46 +197,41 @@ module Cor1440Gen
           resultado << "#{pref} #{convS} #{ts}->#{ds}"
           pref = ", "
         end
-        if (numdif-numdifpre) > 0
+        if (numdif - numdifpre) > 0
           cambia_actividad_rangoedadac(a, re, df, dm, ds)
           resultado << ".\n"
         end
 
         # Optimizamos eliminando filas en ceros
-        if a.actividad_rangoedadac &&
-            a.actividad_rangoedadac.where(rangoedadac_id: re.id).count > 0
-          are = a.actividad_rangoedadac.where(rangoedadac_id: re.id).take
-          tm = are.mr
-          tf = are.fr
-          ts = are.s
-          if tm == 0 && tf == 0 && ts == 0
-            are.destroy
-          end
-        end
+        next unless a.actividad_rangoedadac &&
+          a.actividad_rangoedadac.where(rangoedadac_id: re.id).count > 0
 
+        are = a.actividad_rangoedadac.where(rangoedadac_id: re.id).take
+        tm = are.mr
+        tf = are.fr
+        ts = are.s
+        if tm == 0 && tf == 0 && ts == 0
+          are.destroy
+        end
       end
 
-      return numdif
+      numdif
     end
     module_function :arregla_tabla_poblacion_de_asistentes_actividad
-
-
 
     # Compara tablas de población de todas las actividaddes
     # con conteos generados de asistentes
     # @return número de diferencias encontradas
-    def compara_tablas_poblacion_asistentes()
+    def compara_tablas_poblacion_asistentes
       numdif = 0
       Cor1440Gen::Actividad.all.each do |a|
         numdif += compara_tabla_poblacion_asistentes_actividad(a)
       end
 
       STDERR.puts "Total de diferencias: #{numdif}"
-      return numdif
+      numdif
     end
     module_function :compara_tablas_poblacion_asistentes
-
-
 
     # Arregla tablas de población de las actividades que recibe
     # con conteos generados de asistentes
@@ -249,7 +247,7 @@ module Cor1440Gen
       STDERR.puts "Por revisar #{univ} actividades"
       actividades.each do |a|
         c += 1
-        por = c*100/univ
+        por = c * 100 / univ
         if por / 10 != ultp / 10
           ultp = por
           STDERR.puts "#{por}%"
@@ -257,10 +255,9 @@ module Cor1440Gen
         numdif += arregla_tabla_poblacion_de_asistentes_actividad(a, resultado)
       end
       resultado << "\nEn #{univ} actividades revisadas se realizaron #{numdif} cambios"
-      return numdif
+      numdif
     end
     module_function :arregla_tablas_poblacion
-
 
     # Arregla tablas de población de las actividades desde 2020
     # con conteos generados de asistentes
@@ -268,7 +265,7 @@ module Cor1440Gen
     # @param resultado Colchón donde escribir resultados del arreglo
     # @return número de diferencias encontradas
     def arregla_tablas_poblacion_desde_2020(resultado)
-      ActiveRecord::Base.connection.execute <<-SQL
+      ActiveRecord::Base.connection.execute(<<-SQL)
       DROP VIEW IF EXISTS cor1440_gen_vista_resumentpob CASCADE;
       CREATE VIEW cor1440_gen_vista_resumentpob AS (
       SELECT * FROM (SELECT a.id AS actividad_id, ARRAY_TO_STRING(ARRAY(
@@ -336,7 +333,7 @@ module Cor1440Gen
       );
       SQL
 
-      resc = ActiveRecord::Base.connection.execute <<-SQL
+      resc = ActiveRecord::Base.connection.execute(<<-SQL)
       SELECT * FROM cor1440_gen_actividad AS a
       LEFT JOIN cor1440_gen_vista_resumentpob AS r1
         ON a.id=r1.actividad_id
@@ -347,12 +344,11 @@ module Cor1440Gen
       ORDER BY a.id
       ;
       SQL
-      ids = resc.pluck('id')
+      ids = resc.pluck("id")
       ap = Cor1440Gen::Actividad.where(id: ids)
-      return arregla_tablas_poblacion(ap, resultado)
+      arregla_tablas_poblacion(ap, resultado)
     end
     module_function :arregla_tablas_poblacion_desde_2020
-
 
     # Elimina tabla de población de una actividad y la recalcula con
     # listado de asistencia
@@ -360,39 +356,43 @@ module Cor1440Gen
     # @param actividad
     def recalcula_poblacion(actividad)
       rangoedad = {}
-      Cor1440Gen::ActividadRangoedadac.
-        where(actividad_id: actividad.id).delete_all
+      Cor1440Gen::ActividadRangoedadac
+        .where(actividad_id: actividad.id).delete_all
       actividad.asistencia.each do |asis|
         per = asis.persona
-        if per
-          #puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
-          re = Msip::EdadSexoHelper.buscar_rango_edad(
-            Msip::EdadSexoHelper.edad_de_fechanac_fecha(
-              per.anionac, per.mesnac, per.dianac,
-              actividad.fecha.year, actividad.fecha.month, actividad.fecha.day), 
-              'Cor1440Gen::Rangoedadac')
-          #puts "OJO re=#{re}"
-          if !rangoedad[re]
-            rangoedad[re] = {}
-          end
-          if !rangoedad[re][per.sexo]
-            rangoedad[re][per.sexo] = 0
-          end
-          rangoedad[re][per.sexo] += 1
+        next unless per
+
+        # puts "OJO per.id=#{per.id}, per.sexo=#{per.sexo}, per.fechanac=#{per.anionac.to_s}-#{per.mesnac.to_s}-#{per.dianac.to_s}"
+        re = Msip::EdadSexoHelper.buscar_rango_edad(
+          Msip::EdadSexoHelper.edad_de_fechanac_fecha(
+            per.anionac,
+            per.mesnac,
+            per.dianac,
+            actividad.fecha.year,
+            actividad.fecha.month,
+            actividad.fecha.day,
+          ),
+          "Cor1440Gen::Rangoedadac",
+        )
+        # puts "OJO re=#{re}"
+        unless rangoedad[re]
+          rangoedad[re] = {}
         end
+        unless rangoedad[re][per.sexo]
+          rangoedad[re][per.sexo] = 0
+        end
+        rangoedad[re][per.sexo] += 1
       end
       rangoedad.each do |re, vs|
         Cor1440Gen::ActividadRangoedadac.create(
           actividad_id: actividad.id,
           rangoedadac_id: re,
-          mr: vs['M'].to_i,
-          fr: vs['F'].to_i,
-          s: vs['S'].to_i
+          mr: vs["M"].to_i,
+          fr: vs["F"].to_i,
+          s: vs["S"].to_i,
         )
       end
     end
     module_function :recalcula_poblacion
-
-
   end
 end

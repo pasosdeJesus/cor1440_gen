@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/indicadorpf'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/indicadorpf"
 
 module Cor1440Gen
   class Indicadorpf < ActiveRecord::Base

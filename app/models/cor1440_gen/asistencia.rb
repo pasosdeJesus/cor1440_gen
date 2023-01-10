@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/asistencia'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/asistencia"
 
 module Cor1440Gen
   class Asistencia < ActiveRecord::Base

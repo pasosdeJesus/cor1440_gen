@@ -1,17 +1,19 @@
-require 'msip/concerns/controllers/usuarios_controller'
+# frozen_string_literal: true
+
+require "msip/concerns/controllers/usuarios_controller"
 
 module Cor1440Gen
   module Concerns
     module Controllers
       module UsuariosController
-
         extend ActiveSupport::Concern
 
         included do
           include Msip::Concerns::Controllers::UsuariosController
 
           def atributos_index
-            [ :id,
+            [
+              :id,
               :nusuario,
               :nombre,
               :rol,
@@ -19,12 +21,12 @@ module Cor1440Gen
               :email,
               :tema,
               :created_at_localizada,
-              :habilitado
+              :habilitado,
             ]
           end
 
           def atributos_form
-            [ 
+            [
               :nusuario,
               :nombre,
               :descripcion,
@@ -38,14 +40,14 @@ module Cor1440Gen
               :fechadeshabilitacion_localizada,
               :failed_attempts,
               :unlock_token,
-              :locked_at
+              :locked_at,
             ]
           end
 
           private
 
           def lista_params_cor1440_gen
-            r = lista_params_msip 
+            lista_params_msip
           end
 
           def lista_params
@@ -54,12 +56,9 @@ module Cor1440Gen
 
           def usuario_params
             p = params.require(:usuario).permit(lista_params)
-            return p
+            p
           end
-
-
         end  # included
-
       end
     end
   end

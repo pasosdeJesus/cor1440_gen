@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/informenarrativo'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/informenarrativo"
 
 module Cor1440Gen
   class Informenarrativo < ActiveRecord::Base

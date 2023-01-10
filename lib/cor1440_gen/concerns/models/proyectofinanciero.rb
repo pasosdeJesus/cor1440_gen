@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Models
@@ -8,7 +10,6 @@ module Cor1440Gen
           include Msip::Modelo
           include Msip::Localizacion
           include Msip::FormatoFechaHelper
-
 
           campofecha_localizado :fechainicio
           campofecha_localizado :fechacierre
@@ -25,7 +26,7 @@ module Cor1440Gen
 
           campofecha_mesanio :fechaformulacion
 
-          attr_accessor :duracion 
+          attr_accessor :duracion
 
           attr_accessor :semestreformulacion
           attr_accessor :montoejp_localizado
@@ -35,139 +36,178 @@ module Cor1440Gen
 
           cattr_accessor :current_usuario
 
-          belongs_to :tipomoneda, class_name: 'Cor1440Gen::Tipomoneda',
-            foreign_key: 'tipomoneda_id', optional: true
+          belongs_to :tipomoneda,
+            class_name: "Cor1440Gen::Tipomoneda",
+            optional: true
 
+          has_many :desembolso,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Desembolso",
+            foreign_key: "proyectofinanciero_id",
+            validate: true
+          accepts_nested_attributes_for :desembolso,
+            allow_destroy: true,
+            reject_if: :all_blank
 
-          has_many :desembolso, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Desembolso',
-            foreign_key: 'proyectofinanciero_id', validate: true
-          accepts_nested_attributes_for :desembolso, 
-            allow_destroy: true, reject_if: :all_blank
+          has_many :informeauditoria,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Informeauditoria",
+            foreign_key: "proyectofinanciero_id",
+            validate: true
+          accepts_nested_attributes_for :informeauditoria,
+            allow_destroy: true,
+            reject_if: :all_blank
 
+          has_many :informefinanciero,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Informefinanciero",
+            foreign_key: "proyectofinanciero_id",
+            validate: true
+          accepts_nested_attributes_for :informefinanciero,
+            allow_destroy: true,
+            reject_if: :all_blank
 
-          has_many :informeauditoria, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Informeauditoria',
-            foreign_key: 'proyectofinanciero_id', validate: true
-          accepts_nested_attributes_for :informeauditoria, 
-            allow_destroy: true, reject_if: :all_blank
+          has_many :informenarrativo,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Informenarrativo",
+            foreign_key: "proyectofinanciero_id",
+            validate: true
+          accepts_nested_attributes_for :informenarrativo,
+            allow_destroy: true,
+            reject_if: :all_blank
 
-          has_many :informefinanciero, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Informefinanciero',
-            foreign_key: 'proyectofinanciero_id', validate: true
-          accepts_nested_attributes_for :informefinanciero, 
-            allow_destroy: true, reject_if: :all_blank
+          belongs_to :responsable,
+            class_name: "::Usuario",
+            validate: true,
+            optional: true
 
-          has_many :informenarrativo, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Informenarrativo',
-            foreign_key: 'proyectofinanciero_id', validate: true
-          accepts_nested_attributes_for :informenarrativo, 
-            allow_destroy: true, reject_if: :all_blank
+          belongs_to :sectorapc,
+            class_name: "Cor1440Gen::Sectorapc",
+            validate: true,
+            optional: true
 
-
-
-          belongs_to :responsable, class_name: '::Usuario',
-            foreign_key: "responsable_id", validate: true, optional: true
-
-          belongs_to :sectorapc, class_name: 'Cor1440Gen::Sectorapc',
-            foreign_key: "sectorapc_id", validate: true, optional: true
-
-          has_and_belongs_to_many :actividad, 
-            class_name: 'Cor1440Gen::Actividad',
-            foreign_key: 'proyectofinanciero_id',
-            association_foreign_key: 'actividad_id',
-            join_table: 'cor1440_gen_actividad_proyectofinanciero'
+          has_and_belongs_to_many :actividad,
+            class_name: "Cor1440Gen::Actividad",
+            foreign_key: "proyectofinanciero_id",
+            association_foreign_key: "actividad_id",
+            join_table: "cor1440_gen_actividad_proyectofinanciero"
 
           has_and_belongs_to_many :beneficiario,
-            class_name: 'Msip::Persona',
-            foreign_key: 'proyectofinanciero_id',
-            association_foreign_key: 'persona_id',
-            join_table: 'cor1440_gen_beneficiariopf'
+            class_name: "Msip::Persona",
+            foreign_key: "proyectofinanciero_id",
+            association_foreign_key: "persona_id",
+            join_table: "cor1440_gen_beneficiariopf"
 
           has_and_belongs_to_many :caracterizacion,
-            class_name: '::Mr519Gen::Formulario',
-            foreign_key: 'proyectofinanciero_id',
-            association_foreign_key: 'formulario_id',
-            join_table: 'cor1440_gen_caracterizacionpf'
+            class_name: "::Mr519Gen::Formulario",
+            foreign_key: "proyectofinanciero_id",
+            association_foreign_key: "formulario_id",
+            join_table: "cor1440_gen_caracterizacionpf"
 
-          has_and_belongs_to_many :financiador, 
-            class_name: 'Cor1440Gen::Financiador',
-            foreign_key: 'proyectofinanciero_id',
-            association_foreign_key: 'financiador_id',
-            join_table: 'cor1440_gen_financiador_proyectofinanciero'
+          has_and_belongs_to_many :financiador,
+            class_name: "Cor1440Gen::Financiador",
+            foreign_key: "proyectofinanciero_id",
+            association_foreign_key: "financiador_id",
+            join_table: "cor1440_gen_financiador_proyectofinanciero"
 
           has_and_belongs_to_many :plantillahcm,
-            class_name: '::Heb412Gen::Plantillahcm',
-            foreign_key: 'proyectofinanciero_id',
-            association_foreign_key: 'plantillahcm_id',
-            join_table: 'cor1440_gen_plantillahcm_proyectofinanciero'
+            class_name: "::Heb412Gen::Plantillahcm",
+            foreign_key: "proyectofinanciero_id",
+            association_foreign_key: "plantillahcm_id",
+            join_table: "cor1440_gen_plantillahcm_proyectofinanciero"
 
-          has_and_belongs_to_many :proyecto, 
-            class_name: 'Cor1440Gen::Proyecto',
-            foreign_key: 'proyectofinanciero_id',
-            association_foreign_key: 'proyecto_id',
-            join_table: 'cor1440_gen_proyecto_proyectofinanciero'
+          has_and_belongs_to_many :proyecto,
+            class_name: "Cor1440Gen::Proyecto",
+            foreign_key: "proyectofinanciero_id",
+            association_foreign_key: "proyecto_id",
+            join_table: "cor1440_gen_proyecto_proyectofinanciero"
 
-          has_many :actividadpf, foreign_key: 'proyectofinanciero_id',
-            validate: true, dependent: :destroy, 
-            class_name: 'Cor1440Gen::Actividadpf'
+          has_many :actividadpf,
+            foreign_key: "proyectofinanciero_id",
+            validate: true,
+            dependent: :destroy,
+            class_name: "Cor1440Gen::Actividadpf"
           accepts_nested_attributes_for :actividadpf,
-            allow_destroy: true, reject_if: :all_blank
+            allow_destroy: true,
+            reject_if: :all_blank
 
-          has_many :anexo_proyectofinanciero, dependent: :delete_all,
-            class_name: '::Cor1440Gen::AnexoProyectofinanciero',
-            foreign_key: 'proyectofinanciero_id', validate: true
-          accepts_nested_attributes_for :anexo_proyectofinanciero, 
-            allow_destroy: true, reject_if: :all_blank
-          has_many :anexo, :through => :anexo_proyectofinanciero, 
-            class_name: '::Msip::Anexo'
-          accepts_nested_attributes_for :anexo,  reject_if: :all_blank
+          has_many :anexo_proyectofinanciero,
+            dependent: :delete_all,
+            class_name: "::Cor1440Gen::AnexoProyectofinanciero",
+            foreign_key: "proyectofinanciero_id",
+            validate: true
+          accepts_nested_attributes_for :anexo_proyectofinanciero,
+            allow_destroy: true,
+            reject_if: :all_blank
+          has_many :anexo,
+            through: :anexo_proyectofinanciero,
+            class_name: "::Msip::Anexo"
+          accepts_nested_attributes_for :anexo, reject_if: :all_blank
 
-          has_many :indicadorobjetivo, foreign_key: 'proyectofinanciero_id',
-            validate: true, dependent: :destroy, 
-            class_name: 'Cor1440Gen::Indicadorpf'
+          has_many :indicadorobjetivo,
+            foreign_key: "proyectofinanciero_id",
+            validate: true,
+            dependent: :destroy,
+            class_name: "Cor1440Gen::Indicadorpf"
           accepts_nested_attributes_for :indicadorobjetivo,
-            allow_destroy: true, reject_if: :all_blank
+            allow_destroy: true,
+            reject_if: :all_blank
 
-          has_many :indicadorpf, foreign_key: 'proyectofinanciero_id',
-            validate: true, dependent: :destroy, 
-            class_name: 'Cor1440Gen::Indicadorpf'
+          has_many :indicadorpf,
+            foreign_key: "proyectofinanciero_id",
+            validate: true,
+            dependent: :destroy,
+            class_name: "Cor1440Gen::Indicadorpf"
           accepts_nested_attributes_for :indicadorpf,
-            allow_destroy: true, reject_if: :all_blank
+            allow_destroy: true,
+            reject_if: :all_blank
 
-          has_many :informe, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Informe',
-            foreign_key: 'filtroproyectofinanciero'
+          has_many :informe,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Informe",
+            foreign_key: "filtroproyectofinanciero"
 
-          has_many :mindicadorpf, dependent: :delete_all,
-            class_name: 'Cor1440Gen::Mindicadorpf',
-            foreign_key: 'proyectofinanciero_id'
+          has_many :mindicadorpf,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::Mindicadorpf",
+            foreign_key: "proyectofinanciero_id"
 
-          has_many :objetivopf, foreign_key: 'proyectofinanciero_id',
-            validate: true, dependent: :destroy, 
-            class_name: 'Cor1440Gen::Objetivopf'
+          has_many :objetivopf,
+            foreign_key: "proyectofinanciero_id",
+            validate: true,
+            dependent: :destroy,
+            class_name: "Cor1440Gen::Objetivopf"
           accepts_nested_attributes_for :objetivopf,
-            allow_destroy: true, reject_if: :all_blank
+            allow_destroy: true,
+            reject_if: :all_blank
 
-          has_many :proyectofinanciero_usuario, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ProyectofinancieroUsuario',
-            foreign_key: 'proyectofinanciero_id', validate: true
-          accepts_nested_attributes_for :proyectofinanciero_usuario, 
-            allow_destroy: true#, reject_if: :all_blank
-          has_many :usuario, through: :proyectofinanciero_usuario,
-            class_name: '::Usuario'
+          has_many :proyectofinanciero_usuario,
+            dependent: :delete_all,
+            class_name: "Cor1440Gen::ProyectofinancieroUsuario",
+            foreign_key: "proyectofinanciero_id",
+            validate: true
+          accepts_nested_attributes_for :proyectofinanciero_usuario,
+            allow_destroy: true # , reject_if: :all_blank
+          has_many :usuario,
+            through: :proyectofinanciero_usuario,
+            class_name: "::Usuario"
 
-          has_many :resultadopf, foreign_key: 'proyectofinanciero_id',
-            validate: true, dependent: :destroy, 
-            class_name: 'Cor1440Gen::Resultadopf'
+          has_many :resultadopf,
+            foreign_key: "proyectofinanciero_id",
+            validate: true,
+            dependent: :destroy,
+            class_name: "Cor1440Gen::Resultadopf"
           accepts_nested_attributes_for :resultadopf,
-            allow_destroy: true, reject_if: :all_blank
+            allow_destroy: true,
+            reject_if: :all_blank
 
-
-          validates :nombre, presence: true, allow_blank: false, 
-            length: { maximum: 1000 } 
-          validates :titulo, length: { maximum: 1000 } 
-          validates :compromisos, length: { maximum: 5000 }, 
+          validates :nombre,
+            presence: true,
+            allow_blank: false,
+            length: { maximum: 1000 }
+          validates :titulo, length: { maximum: 1000 }
+          validates :compromisos,
+            length: { maximum: 5000 },
             if: :hay_compromisos?
           def hay_compromisos?
             respond_to?(:compromisos)
@@ -176,40 +216,42 @@ module Cor1440Gen
           validate :fechas_ordenadas
           def fechas_ordenadas
             if fechainicio && fechacierre && fechainicio > fechacierre
-              errors.add(:fechacierre, 
-                         "La fecha de cierre debe ser posterior a la de inicio")
+              errors.add(
+                :fechacierre,
+                "La fecha de cierre debe ser posterior a la de inicio",
+              )
             end
           end
 
-          validate :fechainicio_posterior2000 
+          validate :fechainicio_posterior2000
           def fechainicio_posterior2000
-            if fechainicio && fechainicio < Date.new(2000,1,1)
-              errors.add(:fechainicio, 'Fecha de inicio debe ser posterior a 1/Ene/2000')
+            if fechainicio && fechainicio < Date.new(2000, 1, 1)
+              errors.add(:fechainicio, "Fecha de inicio debe ser posterior a 1/Ene/2000")
             end
           end
 
           validate :dificultad_valida
           def dificultad_valida
-            cv = Cor1440Gen::ApplicationHelper::DIFICULTAD.map {|r| r[1].to_s}
-            if !cv.include?(dificultad)
-              errors.add(:dificultad, 'Dificultad no es válida')
+            cv = Cor1440Gen::ApplicationHelper::DIFICULTAD.map { |r| r[1].to_s }
+            unless cv.include?(dificultad)
+              errors.add(:dificultad, "Dificultad no es válida")
             end
           end
 
           validate :estado_valido
           def estado_valido
-            cv = Cor1440Gen::ApplicationHelper::ESTADO.map {|r| r[1].to_s}
-            if !cv.include?(estado)
-              errors.add(:estado, 'Estado no es válido')
+            cv = Cor1440Gen::ApplicationHelper::ESTADO.map { |r| r[1].to_s }
+            unless cv.include?(estado)
+              errors.add(:estado, "Estado no es válido")
             end
           end
 
           def semestreformulacion
             if fechaformulacion
-              if fechaformulacion.month<=6
-                '1'
+              if fechaformulacion.month <= 6
+                "1"
               else
-                '2'
+                "2"
               end
             end
           end
@@ -234,9 +276,9 @@ module Cor1440Gen
 
           def presupuestototalej_localizado=(val)
             self[:presupuestototalej] = 0
-            if self.montoej && self.aportepropioej && self.aporteotrosej
-              self[:presupuestototalej] = self.montoej + self.aportepropioej +
-                self.aporteotrosej 
+            if montoej && aportepropioej && aporteotrosej
+              self[:presupuestototalej] = montoej + aportepropioej +
+                aporteotrosej
             end
           end
 
@@ -246,83 +288,92 @@ module Cor1440Gen
             r.a_decimal_localizado
           end
 
-
           def duracion
             if fechainicio && fechacierre
               Msip::FormatoFechaHelper.dif_meses_dias(fechainicio, fechacierre)
             else
-              ''
+              ""
             end
           end
 
-          # Recibe un grupo de proyectosfinancieros y los filtra 
+          # Recibe un grupo de proyectosfinancieros y los filtra
           # de acuerdo al control de acceso del usuario o a otros parametros
           # recibidos
           def filtra_acceso(current_usuario, pf, params = nil)
-            return pf
+            pf
           end
 
           scope :filtro_compromisos, lambda { |compromisos|
-            where("unaccent(cor1440_gen_proyectofinanciero.compromisos) "\
-                  "ILIKE '%' || unaccent(?) || '%'", compromisos.strip)
+            where(
+              "unaccent(cor1440_gen_proyectofinanciero.compromisos) "\
+                "ILIKE '%' || unaccent(?) || '%'",
+              compromisos.strip,
+            )
           }
 
           scope :filtro_fechainicioini, lambda { |f|
-            where('cor1440_gen_proyectofinanciero.fechainicio >= ?', f)
+            where("cor1440_gen_proyectofinanciero.fechainicio >= ?", f)
           }
 
           scope :filtro_fechainiciofin, lambda { |f|
-            where('cor1440_gen_proyectofinanciero.fechainicio <= ?', f)
+            where("cor1440_gen_proyectofinanciero.fechainicio <= ?", f)
           }
 
           scope :filtro_fechacierreini, lambda { |f|
-            where('cor1440_gen_proyectofinanciero.fechacierre >= ?',  f)
+            where("cor1440_gen_proyectofinanciero.fechacierre >= ?", f)
           }
 
           scope :filtro_fechacierrefin, lambda { |f|
-            where('cor1440_gen_proyectofinanciero.fechacierre <= ?', f)
+            where("cor1440_gen_proyectofinanciero.fechacierre <= ?", f)
           }
 
           scope :filtro_financiador_ids, lambda { |f|
-            joins(:financiador).
-              where('cor1440_gen_financiador.id=?', f)
+            joins(:financiador)
+              .where("cor1440_gen_financiador.id=?", f)
           }
 
           scope :filtro_nombre, lambda { |nombre|
-            where("unaccent(cor1440_gen_proyectofinanciero.nombre) "\
-                  "ILIKE '%' || unaccent(?) || '%'", nombre.strip)
+            where(
+              "unaccent(cor1440_gen_proyectofinanciero.nombre) "\
+                "ILIKE '%' || unaccent(?) || '%'",
+              nombre.strip,
+            )
           }
 
           scope :filtro_observaciones, lambda { |observaciones|
-            where("unaccent(cor1440_gen_proyectofinanciero.observaciones) "\
-                  "ILIKE '%' || unaccent(?) || '%'", observaciones.strip)
+            where(
+              "unaccent(cor1440_gen_proyectofinanciero.observaciones) "\
+                "ILIKE '%' || unaccent(?) || '%'",
+              observaciones.strip,
+            )
           }
 
           scope :filtro_proyecto_ids, lambda { |p|
-            joins(:proyecto).
-              where('cor1440_gen_proyecto.id=?', p)
+            joins(:proyecto)
+              .where("cor1440_gen_proyecto.id=?", p)
           }
 
           scope :filtro_responsable_id, lambda { |r|
-            where('cor1440_gen_proyectofinanciero.responsable_id=?', r)
+            where("cor1440_gen_proyectofinanciero.responsable_id=?", r)
           }
 
           scope :filtro_titulo, lambda { |titulo|
-            where("unaccent(cor1440_gen_proyectofinanciero.titulo) ILIKE '%' "\
-                  "|| unaccent(?) || '%'", titulo.strip)
+            where(
+              "unaccent(cor1440_gen_proyectofinanciero.titulo) ILIKE '%' "\
+                "|| unaccent(?) || '%'",
+              titulo.strip,
+            )
           }
 
           scope :filtro_fechaformulacionini, lambda { |f|
-            where('cor1440_gen_proyectofinanciero.fechaformulacion >= ?', f)
+            where("cor1440_gen_proyectofinanciero.fechaformulacion >= ?", f)
           }
 
           scope :filtro_fechaformulacionfin, lambda { |f|
-            where('cor1440_gen_proyectofinanciero.fechaformulacion <= ?', f)
+            where("cor1440_gen_proyectofinanciero.fechaformulacion <= ?", f)
           }
 
-
           def presenta(atr)
-
             ## 4 Primeros Indicadores de objetivo
             cindob = /indicadorobj(.*)$/.match(atr.to_s)
             if cindob
@@ -330,21 +381,21 @@ module Cor1440Gen
               numero = cindob[1].split("_")[0]
               campo = cindob[1].split("_")[1]
               if indobs.count >= numero.to_i
-                indicadorob = indobs[numero.to_i-1]
+                indicadorob = indobs[numero.to_i - 1]
                 if indicadorob
                   case campo
-                  when 'refobj'
-                    return indicadorob.objetivopf ? indicadorob.objetivopf.numero : ''
-                  when 'codigo'
-                    return indicadorob.numero ? indicadorob.numero : ''
-                  when 'nombre'
-                    return indicadorob.indicador ? indicadorob.indicador : ''
-                  when 'tipo'
-                    return indicadorob.tipoindicador ? indicadorob.tipoindicador.nombre : ''
+                  when "refobj"
+                    return indicadorob.objetivopf ? indicadorob.objetivopf.numero : ""
+                  when "codigo"
+                    return indicadorob.numero ? indicadorob.numero : ""
+                  when "nombre"
+                    return indicadorob.indicador ? indicadorob.indicador : ""
+                  when "tipo"
+                    return indicadorob.tipoindicador ? indicadorob.tipoindicador.nombre : ""
                   end
                 end
               else
-                return ''
+                return ""
               end
             end
             ## 4 Primeros Resultados
@@ -354,19 +405,19 @@ module Cor1440Gen
               numero = cres[1].split("_")[0]
               campo = cres[1].split("_")[1]
               if resultados.count >= numero.to_i
-                resultado = resultados[numero.to_i-1]
+                resultado = resultados[numero.to_i - 1]
                 if resultado
                   case campo
-                  when 'refobj'
-                    return resultado.objetivopf ? resultado.objetivopf.numero : ''
-                  when 'codigo'
-                    return resultado.numero ? resultado.numero : ''
-                  when 'resultado'
-                    return resultado.resultado ? resultado.resultado : ''
+                  when "refobj"
+                    return resultado.objetivopf ? resultado.objetivopf.numero : ""
+                  when "codigo"
+                    return resultado.numero ? resultado.numero : ""
+                  when "resultado"
+                    return resultado.resultado ? resultado.resultado : ""
                   end
                 end
               else
-                return ''
+                return ""
               end
             end
             ## 6 Primeros indicadores de resultados
@@ -376,22 +427,22 @@ module Cor1440Gen
               numero = cinres[1].split("_")[0]
               campo = cinres[1].split("_")[1]
               if indiresultados.count >= numero.to_i
-                indicador = indiresultados[numero.to_i-1]
+                indicador = indiresultados[numero.to_i - 1]
                 if indicador
                   case campo
-                  when 'refres'
+                  when "refres"
                     ref = indicador.resultadopf
-                    return ref ? ref.numero + ref.objetivopf.numero : ''
-                  when 'codigo'
-                    return indicador.numero ? indicador.numero : ''
-                  when 'tipo'
-                    return indicador.tipoindicador ? indicador.tipoindicador.nombre : ''
-                  when 'indicador'
-                    return indicador.indicador ? indicador.indicador : ''
+                    return ref ? ref.numero + ref.objetivopf.numero : ""
+                  when "codigo"
+                    return indicador.numero ? indicador.numero : ""
+                  when "tipo"
+                    return indicador.tipoindicador ? indicador.tipoindicador.nombre : ""
+                  when "indicador"
+                    return indicador.indicador ? indicador.indicador : ""
                   end
                 end
               else
-                return ''
+                return ""
               end
             end
             ## 8 Primeras Actividades
@@ -401,73 +452,96 @@ module Cor1440Gen
               numero = cact[1].split("_")[0]
               campo = cact[1].split("_")[1]
               if actividades.count >= numero.to_i
-                actividad = actividades[numero.to_i-1]
+                actividad = actividades[numero.to_i - 1]
                 if actividad
                   case campo
-                  when 'refresultado'
+                  when "refresultado"
                     ref = actividad.resultadopf
-                    return ref ? ref.numero + ref.objetivopf.numero : ''
-                  when 'codigo'
-                    return actividad.nombrecorto ? actividad.nombrecorto : ''
-                  when 'tipo'
-                    return actividad.actividadtipo ? actividad.actividadtipo.nombre : ''
-                  when 'actividad'
-                    return actividad.titulo ? actividad.titulo : ''
-                  when 'descripcion'
-                    return actividad.descripcion ? actividad.descripcion : ''
-                  when 'indicadoresgifmm'
-                    return actividad.indicadorgifmm ? actividad.indicadorgifmm.nombre : ''
+                    return ref ? ref.numero + ref.objetivopf.numero : ""
+                  when "codigo"
+                    return actividad.nombrecorto ? actividad.nombrecorto : ""
+                  when "tipo"
+                    return actividad.actividadtipo ? actividad.actividadtipo.nombre : ""
+                  when "actividad"
+                    return actividad.titulo ? actividad.titulo : ""
+                  when "descripcion"
+                    return actividad.descripcion ? actividad.descripcion : ""
+                  when "indicadoresgifmm"
+                    return actividad.indicadorgifmm ? actividad.indicadorgifmm.nombre : ""
                   end
                 end
               else
-                return ''
+                return ""
               end
             end
-            #Exporta Campos básicos de Convenios Financiados
+            # Exporta Campos básicos de Convenios Financiados
             case atr.to_s
-            when 'nombres'
+            when "nombres"
               nombre
-            when 'financiador'
-              financiador ? financiador.pluck(:nombre).join(',') : ''
-            when 'area'
-              proyecto ? proyecto.pluck(:nombre).join(',') : ''
-            when 'responsable'
-              responsable ? responsable.nusuario : ''
-            when 'equipotrabajo'
-              self.proyectofinanciero_usuario.map {|pu|
-                pu.usuario ? pu.usuario.nusuario : 'Por contratar'
-              }.join('; ')
-            when 'objetivos'
-              objetivopf ? objetivopf.pluck(:numero, :objetivo).map{|e| e.join(': ')}.join('. ') : ''
-            when 'obj1_texto'
-              objetivopf.order(:id)[0] ? objetivopf.order(:id)[0].objetivo : ''
-            when 'obj1_cod'
-              objetivopf.order(:id)[0] ? objetivopf.order(:id)[0].numero : ''
-            when 'obj2_texto'
-              objetivopf.order(:id)[1] ? objetivopf.order(:id)[1].objetivo : ''
-            when 'obj2_cod'
-              objetivopf.order(:id)[1] ? objetivopf.order(:id)[1].numero : ''
-            when 'indicadores_obj'
-              inds = indicadorpf.where(resultadopf_id: nil).pluck(:numero, :indicador, :tipoindicador_id, :objetivopf_id)
-              indicadores = inds.map{|indi| (indi[3] ? Cor1440Gen::Objetivopf.find(indi[3]).numero : '') + ':' + (indi[0] ? indi[0] : '') + ': ' + (indi[1] ? indi[1] : '') + ', ' + (indi[2] ? Cor1440Gen::Tipoindicador.find(indi[2]).nombre : '')}.join('. ')
-              indicadorobjetivo ? indicadores : ''
-            when 'indicadoresres'
-              indres = indicadorpf.where(objetivopf: nil).order(:id).pluck(:resultadopf_id, :numero, :indicador, :tipoindicador_id)
-              indicadores = indres.map{|indi| (indi[0] ? (Cor1440Gen::Resultadopf.find(indi[0]).objetivopf.numero + ':' + Cor1440Gen::Resultadopf.find(indi[0]).numero) : '') + '. ' + (indi[1] ? indi[1] : '') + ': ' + (indi[2] ? indi[2] : '') + ', ' + (indi[3] ? Cor1440Gen::Tipoindicador.find(indi[3]).nombre : '')}.join('. ')
-              indicadorpf.where(objetivopf: nil) ? indicadores : ''
-            when 'resultados'
+            when "financiador"
+              financiador ? financiador.pluck(:nombre).join(",") : ""
+            when "area"
+              proyecto ? proyecto.pluck(:nombre).join(",") : ""
+            when "responsable"
+              responsable ? responsable.nusuario : ""
+            when "equipotrabajo"
+              proyectofinanciero_usuario.map do |pu|
+                pu.usuario ? pu.usuario.nusuario : "Por contratar"
+              end.join("; ")
+            when "objetivos"
+              objetivopf ? objetivopf.pluck(:numero, :objetivo).map { |e| e.join(": ") }.join(". ") : ""
+            when "obj1_texto"
+              objetivopf.order(:id)[0] ? objetivopf.order(:id)[0].objetivo : ""
+            when "obj1_cod"
+              objetivopf.order(:id)[0] ? objetivopf.order(:id)[0].numero : ""
+            when "obj2_texto"
+              objetivopf.order(:id)[1] ? objetivopf.order(:id)[1].objetivo : ""
+            when "obj2_cod"
+              objetivopf.order(:id)[1] ? objetivopf.order(:id)[1].numero : ""
+            when "indicadores_obj"
+              inds = indicadorpf.where(resultadopf_id: nil).pluck(
+                :numero,
+                :indicador,
+                :tipoindicador_id,
+                :objetivopf_id,
+              )
+              indicadores = inds.map do |indi|
+                (indi[3] ? Cor1440Gen::Objetivopf.find(indi[3]).numero : "") + ":" + (indi[0] ? indi[0] : "") + ": " + (indi[1] ? indi[1] : "") + ", " + (indi[2] ? Cor1440Gen::Tipoindicador.find(indi[2]).nombre : "")
+              end.join(". ")
+              indicadorobjetivo ? indicadores : ""
+            when "indicadoresres"
+              indres = indicadorpf.where(objetivopf: nil).order(:id).pluck(
+                :resultadopf_id,
+                :numero,
+                :indicador,
+                :tipoindicador_id,
+              )
+              indicadores = indres.map do |indi|
+                (indi[0] ? (Cor1440Gen::Resultadopf.find(indi[0]).objetivopf.numero + ":" + Cor1440Gen::Resultadopf.find(indi[0]).numero) : "") + ". " + (indi[1] ? indi[1] : "") + ": " + (indi[2] ? indi[2] : "") + ", " + (indi[3] ? Cor1440Gen::Tipoindicador.find(indi[3]).nombre : "")
+              end.join(". ")
+              indicadorpf.where(objetivopf: nil) ? indicadores : ""
+            when "resultados"
               ress = resultadopf.pluck(:numero, :objetivopf_id, :resultado)
-              resultados = ress.map{|res| (res[0] ? res[0] : '') + ': ' + (res[1] ? Cor1440Gen::Objetivopf.find(res[1]).numero : '') + ', ' + (res[2] ? res[2] : '')}.join('. ')
-              resultadopf ? resultados : ''
-            when 'actividadespf'
-              acts = actividadpf.order(:id).pluck(:resultadopf_id, :nombrecorto, :actividadtipo_id, :titulo, :descripcion, :indicadorgifmm_id)
-              actividades = acts.map{|act| (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).objetivopf.numero : '') + (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).numero : '') + ': ' + (act[1] ? act[1] : '') + ', ' + (act[2] ? Cor1440Gen::Actividadtipo.find(act[2]).nombre : '') + ', ' + (act[3] ? act[3] : '') + ', ' + (act[4] ? act[4] : '') + ', ' + (act[5] ? Indicadorgifmm.find(act[5]).nombre : '')}.join('. ')
+              resultados = ress.map do |res|
+                (res[0] ? res[0] : "") + ": " + (res[1] ? Cor1440Gen::Objetivopf.find(res[1]).numero : "") + ", " + (res[2] ? res[2] : "")
+              end.join(". ")
+              resultadopf ? resultados : ""
+            when "actividadespf"
+              acts = actividadpf.order(:id).pluck(
+                :resultadopf_id,
+                :nombrecorto,
+                :actividadtipo_id,
+                :titulo,
+                :descripcion,
+                :indicadorgifmm_id,
+              )
+              actividades = acts.map do |act|
+                (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).objetivopf.numero : "") + (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).numero : "") + ": " + (act[1] ? act[1] : "") + ", " + (act[2] ? Cor1440Gen::Actividadtipo.find(act[2]).nombre : "") + ", " + (act[3] ? act[3] : "") + ", " + (act[4] ? act[4] : "") + ", " + (act[5] ? Indicadorgifmm.find(act[5]).nombre : "")
+              end.join(". ")
             else
               presenta_gen(atr)
             end
-
           end
-
 
           # Id del proyecto con actividades comunes vigente
           # nil significa que no hay.
@@ -480,23 +554,19 @@ module Cor1440Gen
           def self.en_toda_actividad_id
             nil
           end
-
-
-        end #included
+        end # included
 
         class_methods do
-
           def human_attribute_name(atr, poromision = "")
-            #if (atr.to_s == "{:proyecto_ids=>[]}")
+            # if (atr.to_s == "{:proyecto_ids=>[]}")
             #  "Proyectos"
-            #elsif (atr.to_s == "{:financiador_ids=>[]}")
+            # elsif (atr.to_s == "{:financiador_ids=>[]}")
             #  "Financiadores"
-            #else
-              super(atr)
-            #end
-          end  
+            # else
+            super(atr)
+            # end
+          end
         end # class_methods
-
       end
     end
   end

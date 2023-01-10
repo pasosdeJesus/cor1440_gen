@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Admin
     class ActividadareasController < Msip::Admin::BasicasController
       before_action :set_actividadarea, only: [:show, :edit, :update, :destroy]
       load_and_authorize_resource class: Cor1440Gen::Actividadarea
 
-      def clase 
+      def clase
         "Cor1440Gen::Actividadarea"
       end
 
@@ -13,8 +15,13 @@ module Cor1440Gen
       end
 
       def atributos_index
-        ["id", "nombre", "observaciones", "fechacreacion_localizada", 
-          "habilitado"]
+        [
+          "id",
+          "nombre",
+          "observaciones",
+          "fechacreacion_localizada",
+          "habilitado",
+        ]
       end
 
       def actividadarea_params

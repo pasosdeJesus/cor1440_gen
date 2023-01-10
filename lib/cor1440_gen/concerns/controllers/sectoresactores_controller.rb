@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
-      module SectoresactoresController 
+      module SectoresactoresController
         extend ActiveSupport::Concern
 
         included do
           include ActionView::Helpers::AssetUrlHelper
 
-          def clase 
+          def clase
             "Cor1440Gen::Sectoractor"
           end
 
@@ -17,24 +19,22 @@ module Cor1440Gen
 
           def atributos_index
             [
-              "id", 
-              "nombre", 
-              "observaciones", 
-              "fechacreacion_localizada", 
-              "habilitado"
+              "id",
+              "nombre",
+              "observaciones",
+              "fechacreacion_localizada",
+              "habilitado",
             ]
           end
 
           def genclase
-            'M'
+            "M"
           end
 
           def sectoractor_params
             params.require(:sectoractor).permit(*atributos_form)
           end
-
         end
-
       end
     end
   end

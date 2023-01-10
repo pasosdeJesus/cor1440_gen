@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Add new inflection rules using the following format. Inflections
@@ -15,19 +17,19 @@
 #   inflect.acronym 'RESTful'
 # end
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'asistencia', 'asistencias'
-  inflect.irregular 'actividad', 'actividades'
-  inflect.irregular 'actividadarea', 'actividadareas'
-  inflect.irregular 'campotind', 'campostind'
-  inflect.irregular 'informeauditoria', 'informeauditorias'
-  inflect.irregular 'financiador', 'financiadores'
-  inflect.irregular 'mindicadorpf', 'mindicadorespf'
-  inflect.irregular 'orgsocial', 'orgsociales'
-  inflect.irregular 'proyectofinanciero', 'proyectosfinancieros'
-  inflect.irregular 'pmindicadorpf', 'pmsindicadorpf'
-  inflect.irregular 'rangoedadac', 'rangosedadac'
-  inflect.irregular 'sectororgsocial', 'sectoresorgsocial'
-  inflect.irregular 'sectorapc', 'sectoresapc'
-  inflect.irregular 'tipoindicador', 'tiposindicador'
-  inflect.irregular 'tipomoneda', 'tiposmoneda'
+  inflect.irregular("asistencia", "asistencias")
+  inflect.irregular("actividad", "actividades")
+  inflect.irregular("actividadarea", "actividadareas")
+  inflect.irregular("campotind", "campostind")
+  inflect.irregular("informeauditoria", "informeauditorias")
+  inflect.irregular("financiador", "financiadores")
+  inflect.irregular("mindicadorpf", "mindicadorespf")
+  inflect.irregular("orgsocial", "orgsociales")
+  inflect.irregular("proyectofinanciero", "proyectosfinancieros")
+  inflect.irregular("pmindicadorpf", "pmsindicadorpf")
+  inflect.irregular("rangoedadac", "rangosedadac")
+  inflect.irregular("sectororgsocial", "sectoresorgsocial")
+  inflect.irregular("sectorapc", "sectoresapc")
+  inflect.irregular("tipoindicador", "tiposindicador")
+  inflect.irregular("tipomoneda", "tiposmoneda")
 end

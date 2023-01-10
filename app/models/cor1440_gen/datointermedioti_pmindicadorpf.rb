@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/datointermedioti_pmindicadorpf'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/datointermedioti_pmindicadorpf"
 
 module Cor1440Gen
   class DatointermediotiPmindicadorpf < ActiveRecord::Base

@@ -1,5 +1,7 @@
-require 'cor1440_gen/concerns/models/usuario'
+# frozen_string_literal: true
 
-class Usuario < ActiveRecord::Base 
+require "cor1440_gen/concerns/models/usuario"
+
+class Usuario < ActiveRecord::Base
   include Cor1440Gen::Concerns::Models::Usuario
 end

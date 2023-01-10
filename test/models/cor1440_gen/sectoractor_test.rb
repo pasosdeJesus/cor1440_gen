@@ -1,4 +1,6 @@
-require_relative '../../test_helper'
+# frozen_string_literal: true
+
+require_relative "../../test_helper"
 
 module Cor1440Gen
   class SectoractorTest < ActiveSupport::TestCase

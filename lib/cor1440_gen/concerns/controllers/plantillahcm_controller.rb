@@ -1,10 +1,11 @@
-require 'heb412_gen/concerns/controllers/plantillahcm_controller'
+# frozen_string_literal: true
+
+require "heb412_gen/concerns/controllers/plantillahcm_controller"
 
 module Cor1440Gen
   module Concerns
     module Controllers
       module PlantillahcmController
-
         extend ActiveSupport::Concern
 
         included do
@@ -17,34 +18,32 @@ module Cor1440Gen
               :nombremenu,
               :ruta,
               :proyectofinanciero,
-              :filainicial
+              :filainicial,
             ]
           end
 
           def atributos_show
-            [ :id, 
+            [
+              :id,
               :ruta,
               :fuente,
               :licencia,
               :vista,
               :nombremenu,
               :proyectofinanciero,
-              :filainicial
+              :filainicial,
             ]
-          end  
+          end
 
           def lista_params_cor1440
-            lista_params_heb412 + 
-              [ :proyectofinanciero_ids => [] ]
+            lista_params_heb412 +
+              [proyectofinanciero_ids: []]
           end
 
           def plantillahcm_params
             params.require(:plantillahcm).permit(lista_params_cor1440)
           end
-
         end  # included
-
-
       end
     end
   end

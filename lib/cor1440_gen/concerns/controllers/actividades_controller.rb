@@ -412,12 +412,13 @@ module Cor1440Gen
               tdocumento_id: 11,
               numerodocumento: "AAA",
             )
+            @persona.save(validate: false)
+            @persona.numerodocumento = @persona.id
             unless @persona.save
               resp_error("No pudo crear persona")
               return
             end
-            @persona.numerodocumento = @persona.id
-            @persona.save
+
             @asistencia = Cor1440Gen::Asistencia.create(
               actividad_id: act.id,
               persona_id: @persona.id,

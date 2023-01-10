@@ -1,4 +1,6 @@
-require 'msip/concerns/models/anexo'
+# frozen_string_literal: true
+
+require "msip/concerns/models/anexo"
 
 module Cor1440Gen
   module Concerns
@@ -8,15 +10,17 @@ module Cor1440Gen
         include Msip::Concerns::Models::Anexo
 
         included do
-          has_many :actividad_anexo, foreign_key: "anexo_id", 
-            validate: true, class_name: 'Cor1440Gen::ActividadAnexo'
-          has_many :actividad, class_name: 'Cor1440Gen::Actividad',
+          has_many :actividad_anexo,
+            foreign_key: "anexo_id",
+            validate: true,
+            class_name: "Cor1440Gen::ActividadAnexo"
+          has_many :actividad,
+            class_name: "Cor1440Gen::Actividad",
             through: :actividad_anexo
         end
 
         module ClassMethods
         end
-
       end
     end
   end

@@ -1,4 +1,6 @@
-require 'cor1440_gen/concerns/models/actividadpf_mindicadorpf'
+# frozen_string_literal: true
+
+require "cor1440_gen/concerns/models/actividadpf_mindicadorpf"
 
 module Cor1440Gen
   class ActividadpfMindicadorpf < ActiveRecord::Base

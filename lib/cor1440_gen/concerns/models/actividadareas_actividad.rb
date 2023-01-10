@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Models
@@ -5,13 +7,14 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-          belongs_to :actividad, class_name: "Cor1440Gen::Actividad", 
+          belongs_to :actividad,
+            class_name: "Cor1440Gen::Actividad",
             optional: false
-          belongs_to :actividadarea, class_name: "Cor1440Gen::Actividadarea", 
+          belongs_to :actividadarea,
+            class_name: "Cor1440Gen::Actividadarea",
             optional: false
         end
       end
     end
   end
 end
-

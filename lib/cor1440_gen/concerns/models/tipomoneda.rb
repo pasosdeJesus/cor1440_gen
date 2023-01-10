@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module Cor1440Gen
   module Concerns
@@ -7,25 +8,22 @@ module Cor1440Gen
         include Msip::Basica
 
         included do
-
-          belongs_to :pais, class_name: 'Msip::Pais', foreign_key: 'pais_id', 
+          belongs_to :pais,
+            class_name: "Msip::Pais",
             optional: false
 
-          #has_many :proyectofinanciero, dependent: :delete_all,
-          #  class_name: 'Cor1440Gen::Proyectofinanciero', 
+          # has_many :proyectofinanciero, dependent: :delete_all,
+          #  class_name: 'Cor1440Gen::Proyectofinanciero',
           #  foreign_key: 'tipomoneda_id'
 
-          validates :codiso4217, length: { maximum: 3}, presence: true
-          validates :simbolo, length: { maximum: 10}, presence: true
+          validates :codiso4217, length: { maximum: 3 }, presence: true
+          validates :simbolo, length: { maximum: 10 }, presence: true
 
           def codiso4217=(val)
             self[:codiso4217] = val.upcase.squish if val
           end
-
         end # included
-
       end
     end
   end
 end
-

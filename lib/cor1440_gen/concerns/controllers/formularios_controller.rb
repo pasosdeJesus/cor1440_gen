@@ -1,10 +1,11 @@
-require 'mr519_gen/concerns/controllers/formularios_controller'
+# frozen_string_literal: true
+
+require "mr519_gen/concerns/controllers/formularios_controller"
 
 module Cor1440Gen
   module Concerns
     module Controllers
       module FormulariosController
-
         extend ActiveSupport::Concern
 
         included do
@@ -16,20 +17,16 @@ module Cor1440Gen
               :nombre,
               :nombreinterno,
               :campos,
-              :caracterizacion
+              :caracterizacion,
             ]
           end
 
-            
           def lista_params
             mr519_gen_params +
-            [ :caracterizacion_ids => [] ] +
-            [ :actividadtipo_ids => [] ] 
+              [caracterizacion_ids: []] +
+              [actividadtipo_ids: []]
           end
-
         end  # included
-
-
       end
     end
   end
