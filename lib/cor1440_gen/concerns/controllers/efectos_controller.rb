@@ -119,7 +119,6 @@ module Cor1440Gen
             end
             if params['indicadorpf_id'] && params['indicadorpf_id'].to_i > 0
               @registro.indicadorpf_id = params['indicadorpf_id'].to_i
-              @registro.valorcampotind = []
             end
             asegura_camposdinamicos(@registro, current_usuario.id)
             render layout: 'application'
