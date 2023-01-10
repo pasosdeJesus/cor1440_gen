@@ -88,12 +88,6 @@ module Cor1440Gen
           accepts_nested_attributes_for :actividad_anexo, 
             allow_destroy: true, reject_if: :all_blank
  
-          has_many :actividad_valorcampotind, dependent: :delete_all,
-            class_name: 'Cor1440Gen::ActividadValorcampotind',
-            foreign_key: 'actividad_id', validate: true
-          accepts_nested_attributes_for :actividad_valorcampotind,
-            allow_destroy: true, reject_if: :all_blank
-
           has_many :asistencia, dependent: :delete_all,
             class_name: 'Cor1440Gen::Asistencia',
             foreign_key: 'actividad_id'
@@ -116,10 +110,6 @@ module Cor1440Gen
             class_name: 'Msip::Anexo'
           accepts_nested_attributes_for :anexo, 
             reject_if: :all_blank
-
-          has_many :valorcampotind, through: :actividad_valorcampotind,
-            class_name: 'Cor1440Gen::Valorcampotind'
-          accepts_nested_attributes_for :valorcampotind,  reject_if: :all_blank
 
           campofecha_localizado :fecha
 
