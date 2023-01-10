@@ -1,35 +1,28 @@
-require_relative '../../test_helper'
+require 'test_helper'
 
 module Cor1440Gen
   class RangoedadactTest < ActiveSupport::TestCase
-
-    PRUEBA_RANGOEDADAC = {
-      id: 1000,
-      nombre: "Rangoedadac",
-      fechacreacion: "2014-09-09",
-      created_at: "2014-09-09"
-    }
 
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
     end
 
     test "valido" do
-      re = Rangoedadac.create PRUEBA_RANGOEDADAC
-      assert re.valid?
-      re.destroy
+      rangoedadac = Rangoedadac.create PRUEBA_RANGOEDADAC
+      assert rangoedadac.valid?
+      rangoedadac.destroy
     end
 
     test "no valido" do
-      re = Rangoedadac.new PRUEBA_RANGOEDADAC
-      re.nombre=""
-      assert_not re.valid?
-      re.destroy
+      rangoedadac = Rangoedadac.new PRUEBA_RANGOEDADAC
+      rangoedadac.nombre =""
+      assert_not rangoedadac.valid?
+      rangoedadac.destroy
     end
 
     test "existente" do
-      re = Cor1440Gen::Rangoedadac.where(id: 6).take
-      assert_equal 'De 61 en adelante', re.nombre
+      rangoedadac = Cor1440Gen::Rangoedadac.where(id: 6).take
+      assert_equal 'De 61 en adelante', rangoedadac.nombre
     end
 
   end
