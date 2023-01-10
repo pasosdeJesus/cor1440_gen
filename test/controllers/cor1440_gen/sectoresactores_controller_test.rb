@@ -1,7 +1,6 @@
 # enconding: UTF-8
 
-require_relative '../../test_helper'
-require_relative '../../models/cor1440_gen/proyectofinanciero_test.rb'
+require 'test_helper'
 
 module Cor1440Gen
   class SectoresactoresControllerTest < ActionController::TestCase

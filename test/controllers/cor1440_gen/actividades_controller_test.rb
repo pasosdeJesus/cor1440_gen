@@ -1,5 +1,4 @@
-require_relative '../../test_helper'
-require_relative '../../models/cor1440_gen/actividad_test.rb'
+require 'test_helper'
 
 module Cor1440Gen
   class ActividadesControllerTest < ActionDispatch::IntegrationTest
@@ -8,9 +7,7 @@ module Cor1440Gen
     
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
-      @actividad = Actividad.create(
-        Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD
-      )
+      @actividad = Actividad.create(PRUEBA_ACTIVIDAD)
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO) 
       sign_in @current_usuario
     end
@@ -26,11 +23,11 @@ module Cor1440Gen
     end
 
     test "should create actividad" do
-      a = Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD
+      a = PRUEBA_ACTIVIDAD
       a[:fecha_localizada] = a[:fecha]
       assert_difference('Cor1440Gen::Actividad.count') do
         post actividades_url, params: { 
-          actividad: Cor1440Gen::ActividadTest::PRUEBA_ACTIVIDAD
+          actividad: PRUEBA_ACTIVIDAD
         }
       end
 

@@ -87,6 +87,15 @@ PRUEBA_INDICADORPF = {
   indicador: 'Exp I1'
 }
 
+PRUEBA_INFORME={
+  titulo: "Informe",
+  filtrofechaini: "2014-09-09",
+  filtrofechafin: "2014-09-09",
+  recomendaciones: 'Recomendaciones',
+  created_at: "2014-09-09",
+  updated_at: "2014-09-09"
+}
+
 PRUEBA_MINDICADORPF = {
   id: 1,
   proyectofinanciero_id: 1,
