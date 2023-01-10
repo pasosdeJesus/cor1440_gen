@@ -1,20 +1,21 @@
 require 'test_helper'
 
-module Cor1440Gen
-  class Cor1440GenTipomonedaTest < ActiveSupport::TestCase
+module Mr519Gen
+  class FormularioTest < ActiveSupport::TestCase
+
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
     end
 
     test "valido" do
-      f = Tipomoneda.create PRUEBA_TIPOMONEDA
+      f = Mr519Gen::Formulario.create PRUEBA_FORMULARIO
       assert f.valid?
       f.destroy
     end
 
     test "no valido" do
-      f = Tipomoneda.new PRUEBA_TIPOMONEDA
-      f.nombre=''
+      f = Mr519Gen::Formulario.new PRUEBA_FORMULARIO
+      f.nombre = nil
       assert_not f.valid?
       f.destroy
     end

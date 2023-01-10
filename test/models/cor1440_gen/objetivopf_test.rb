@@ -1,7 +1,7 @@
 require_relative '../../test_helper'
 
 module Cor1440Gen
-  class ProyectofinancieroTest < ActiveSupport::TestCase
+  class ObjetivopfTest < ActiveSupport::TestCase
 
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
@@ -10,14 +10,17 @@ module Cor1440Gen
     test "valido" do
       pf = Proyectofinanciero.create PRUEBA_PROYECTOFINANCIERO
       assert pf.valid?
+      o = Objetivopf.create PRUEBA_OBJETIVOPF
+      assert o.valid?
+      o.destroy
       pf.destroy
     end
 
     test "no valido" do
-      pf = Proyectofinanciero.new PRUEBA_PROYECTOFINANCIERO
-      pf.nombre=""
-      assert_not pf.valid?
-      pf.destroy
+      o = Objetivopf.new PRUEBA_OBJETIVOPF
+      o.objetivo=""
+      assert_not o.valid?
+      o.destroy
     end
 
   end

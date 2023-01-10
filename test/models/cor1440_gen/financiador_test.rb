@@ -2,14 +2,6 @@ require_relative '../../test_helper'
 
 module Cor1440Gen
   class Cor1440GenFinanciadorTest < ActiveSupport::TestCase
-  
-    PRUEBA_FINANCIADOR={
-      id: 1000 ,
-      nombre: "Cor1440_gen_financiador",
-      fechacreacion: "2015-04-20",
-      created_at: "2015-04-20"
-    } 
-
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
     end

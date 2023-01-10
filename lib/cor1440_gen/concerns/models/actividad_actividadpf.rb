@@ -6,8 +6,6 @@ module Cor1440Gen
 
         included do
           include Msip::Modelo
-          include Msip::Localizacion
-          include Msip::FormatoFechaHelper
 
           belongs_to :actividad, class_name: 'Cor1440Gen::Actividad', 
             foreign_key: 'actividad_id', optional: false

@@ -3,13 +3,6 @@ require_relative '../../test_helper'
 module Cor1440Gen
   class ActividadareaTest < ActiveSupport::TestCase
 
-    PRUEBA_ACTIVIDADAREA = {
-      id: 1000,
-      nombre: "Actividarea",
-      fechacreacion: "2014-09-09",
-      created_at: "2014-09-09"
-    }
-
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
     end
