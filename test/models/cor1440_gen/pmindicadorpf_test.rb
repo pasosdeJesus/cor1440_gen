@@ -9,16 +9,26 @@ module Cor1440Gen
     test "valido" do
       pf = Proyectofinanciero.create PRUEBA_PROYECTOFINANCIERO
       assert pf.valid?
-      o = Objetivopf.create PRUEBA_OBJETIVOPF
+      o = Objetivopf.create PRUEBA_OBJETIVOPF.merge(
+        proyectofinanciero_id: pf.id
+      )
       assert o.valid?
-      r = Resultadopf.create PRUEBA_RESULTADOPF
+      r = Resultadopf.create PRUEBA_RESULTADOPF.merge(
+        proyectofinanciero_id: pf.id
+      )
       assert r.valid?
-      i = Indicadorpf.create PRUEBA_INDICADORPF
+      i = Indicadorpf.create PRUEBA_INDICADORPF.merge(
+        proyectofinanciero_id: pf.id
+      )
       assert i.valid?
-      mindicadorpf = Mindicadorpf.create PRUEBA_MINDICADORPF
+      mindicadorpf = Mindicadorpf.create PRUEBA_MINDICADORPF.merge(
+        proyectofinanciero_id: pf.id
+      )
       assert mindicadorpf.valid?
 
-      pmindicadorpf = Pmindicadorpf.create PRUEBA_PMINDICADORPF
+      pmindicadorpf = Pmindicadorpf.create PRUEBA_PMINDICADORPF.merge(
+        mindicadorpf_id: mindicadorpf.id
+      )
       assert pmindicadorpf.valid?
       pmindicadorpf.destroy
 

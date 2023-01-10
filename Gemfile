@@ -105,15 +105,25 @@ end
 
 
 group :development, :test do
+  gem "brakeman"
 
-  gem 'debug'
+  gem "bundler-audit"
 
-  gem 'colorize' # Colores en Terminl
+  gem "code-scanning-rubocop"
 
-  gem 'dotenv-rails'
+  gem "colorize"
 
-  gem 'rails-erd' # Para generar modelo entidad asociación 
+  gem "debug", ">= 1.0.0", platforms: [:mri, :mingw, :x64_mingw]
 
+  gem "dotenv-rails"
+
+  gem "rails-erd"
+
+  gem "rubocop-minitest"
+
+  gem "rubocop-rails"
+
+  gem "rubocop-shopify"
 end
 
 
@@ -128,7 +138,7 @@ group :test do
 
   gem 'rails-controller-testing'
 
-  gem 'simplecov', '<0.18' # Devido a https://github.com/codeclimate/test-reporter/issues/418
+  gem 'simplecov'
 
   gem 'spring' # Acelera desarrollo ejecutando en fondo
 

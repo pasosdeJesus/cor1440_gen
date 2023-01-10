@@ -10,9 +10,17 @@ if (test -f "test/dummy/config/application.rb")  then {
   rutaap="./"
 } fi;
 if (test -f $rutaap/.env) then {
-  (cd $rutaap; . ./.env)
+  dirac=`pwd`
+  cd $rutaap
+  . ./.env
+  cd $dirac
 } else {
   echo "No existe $rutaap/.env";
+} fi;
+
+if (test "$RUTA_RELATIVA" = "") then {
+  echo "No leyó RUTA_RELATIVA de archivo .env"
+  exit 1
 } fi;
 
 echo "== Prepara"
@@ -71,10 +79,14 @@ if (test -f "test/dummy/config/application.rb") then {
 echo "== Unificando resultados de pruebas en directorio clásico coverage"
 mkdir -p coverage/
 rm -rf coverage/{*,.*}
-${RAILS} msip:reporteregresion
+if (test "$RUTA_RELATIVA" = "/msip/") then {
+  ${RAILS} app:msip:reporteregresion
+} else {
+  ${RAILS} msip:reporteregresion
+} fi;
 
 echo "== Copiando resultados para hacerlos visibles en el web en ruta cobertura"
 # Copiar resultados para hacerlos visibles en web
-mkdir -p test/dummy/public/msip/cobertura/
-cp -rf coverage/* test/dummy/public/msip/cobertura/
-cp -rf coverage/assets/* test/dummy/public/msip/assets/
+mkdir -p $rutaap/public/${RUTA_RELATIVA}cobertura/
+cp -rf coverage/* $rutaap/public/${RUTA_RELATIVA}cobertura/
+cp -rf coverage/assets/* $rutaap/public/${RUTA_RELATIVA}assets/

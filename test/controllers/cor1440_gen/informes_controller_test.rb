@@ -1,4 +1,4 @@
-require_relative '../../test_helper'
+require 'test_helper'
 
 module Cor1440Gen
   class InformesControllerTest < ActionDispatch::IntegrationTest
@@ -6,16 +6,7 @@ module Cor1440Gen
     include Engine.routes.url_helpers
     include Devise::Test::IntegrationHelpers
 
-    PRUEBA_INFORME={
-      titulo: "Informe",
-      filtrofechaini: "2014-09-09",
-      filtrofechafin: "2014-09-09",
-      recomendaciones: 'Recomendaciones',
-      created_at: "2014-09-09",
-      updated_at: "2014-09-09"
-    }
-
-    setup do
+     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
       @informe = Informe.create(PRUEBA_INFORME)
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO) 

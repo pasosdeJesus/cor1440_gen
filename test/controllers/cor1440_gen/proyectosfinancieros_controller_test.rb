@@ -8,25 +8,24 @@ module Cor1440Gen
 
     setup do
       Rails.application.config.x.formato_fecha = 'yyyy-mm-dd'
-      @proyectofinanciero = Proyectofinanciero.create(
-        Cor1440Gen::ProyectofinancieroTest::PRUEBA_PROYECTOFINANCIERO
-      )
+      @proyectofinanciero = Proyectofinanciero.create(PRUEBA_PROYECTOFINANCIERO)
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO) 
       sign_in @current_usuario
     end
 
-    test "should get index" do
+    test "debe listar" do
       get proyectosfinancieros_url
       assert_response :success
     end
 
-    test "should get new" do
+    test "debe presentar formulario para nuevo" do
       get new_proyectofinanciero_url
       assert_response 302
     end
 
-    test "should create proyectofinanciero" do
-      p = Cor1440Gen::ProyectofinancieroTest::PRUEBA_PROYECTOFINANCIERO
+    test "debe crear proyectofinanciero" do
+      p = PRUEBA_PROYECTOFINANCIERO
+      p[:id] = nil
       p[:nombre] = 'norepetido'
       p[:fechainicio_localizada] = p[:fechainicio]
       p[:fechacierre_localizada] = p[:fechacierre]
@@ -38,17 +37,17 @@ module Cor1440Gen
       assert_redirected_to proyectofinanciero_url(Proyectofinanciero.last)
     end
 
-    test "should show proyectofinanciero" do
+    test "debe presentar resumen de proyectofinanciero" do
       get proyectofinanciero_url(@proyectofinanciero)
       assert_response :success
     end
 
-    test "should get edit" do
+    test "debe presentar formulario de edición" do
       get edit_proyectofinanciero_url(@proyectofinanciero)
       assert_response :success
     end
 
-    test "should update proyectofinanciero" do
+    test "debe actualizar proyectofinanciero" do
       patch proyectofinanciero_url(@proyectofinanciero), params: { 
         proyectofinanciero: {  
           nombre: 'otro'
@@ -57,7 +56,7 @@ module Cor1440Gen
       assert_redirected_to proyectofinanciero_url(@proyectofinanciero)
     end
 
-    test "should destroy proyectofinanciero" do
+    test "debe eliminar proyectofinanciero" do
       assert_difference('Proyectofinanciero.count', -1) do
         delete proyectofinanciero_url(@proyectofinanciero)
       end
