@@ -47,6 +47,151 @@ CREATE FUNCTION public.completa_obs(obs character varying, nuevaobs character va
 
 
 --
+-- Name: cor1440_gen_actividad_cambiada(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.cor1440_gen_actividad_cambiada() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+          BEGIN
+            ASSERT(TG_OP = 'UPDATE');
+            ASSERT(NEW.id = OLD.id);
+            CALL cor1440_gen_recalcular_poblacion_actividad(NEW.id);
+            RETURN NULL;
+          END ;
+        $$;
+
+
+--
+-- Name: cor1440_gen_asistencia_cambiada_creada_eliminada(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.cor1440_gen_asistencia_cambiada_creada_eliminada() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+          BEGIN
+            CASE
+              WHEN (TG_OP = 'UPDATE') THEN
+                ASSERT(NEW.id = OLD.id);
+                CALL cor1440_gen_recalcular_poblacion_actividad(NEW.actividad_id);
+              WHEN (TG_OP = 'INSERT') THEN
+                CALL cor1440_gen_recalcular_poblacion_actividad(NEW.actividad_id);
+              ELSE -- DELETE
+                CALL cor1440_gen_recalcular_poblacion_actividad(OLD.actividad_id);
+            END CASE;
+            RETURN NULL;
+          END;
+        $$;
+
+
+--
+-- Name: cor1440_gen_persona_cambiada(); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION public.cor1440_gen_persona_cambiada() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+        DECLARE
+          aid INTEGER;
+        BEGIN
+          ASSERT(TG_OP = 'UPDATE');
+          ASSERT(NEW.id = OLD.id);
+          FOR aid IN 
+            SELECT actividad_id FROM cor1440_gen_asistencia 
+              WHERE persona_id=NEW.id
+          LOOP
+            CALL cor1440_gen_recalcular_poblacion_actividad(aid);
+          END LOOP;
+          RETURN NULL;
+        END ;
+        $$;
+
+
+--
+-- Name: cor1440_gen_recalcular_poblacion_actividad(bigint); Type: PROCEDURE; Schema: public; Owner: -
+--
+
+CREATE PROCEDURE public.cor1440_gen_recalcular_poblacion_actividad(IN par_actividad_id bigint)
+    LANGUAGE plpgsql
+    AS $$
+        DECLARE
+          rangos INTEGER ARRAY;
+          idrangos INTEGER ARRAY;
+          i INTEGER;
+          a_dia INTEGER;
+          a_mes INTEGER;
+          a_anio INTEGER;
+          asistente RECORD;
+          edad INTEGER;
+          rango_id INTEGER;
+        BEGIN
+          RAISE NOTICE 'actividad_id es %', par_actividad_id;
+          SELECT EXTRACT(DAY FROM fecha) INTO a_dia FROM cor1440_gen_actividad
+            WHERE id=par_actividad_id LIMIT 1;
+          RAISE NOTICE 'a_dia es %', a_dia;
+          SELECT EXTRACT(MONTH FROM fecha) INTO a_mes FROM cor1440_gen_actividad
+            WHERE id=par_actividad_id;
+          RAISE NOTICE 'a_mes es %', a_mes;
+          SELECT EXTRACT(YEAR FROM fecha) INTO a_anio FROM cor1440_gen_actividad
+            WHERE id=par_actividad_id;
+          RAISE NOTICE 'a_anio es %', a_anio;
+
+          DELETE FROM cor1440_gen_actividad_rangoedadac
+            WHERE actividad_id=par_actividad_id
+          ;
+
+          FOR rango_id IN SELECT id FROM cor1440_gen_rangoedadac
+            WHERE fechadeshabilitacion IS NULL
+          LOOP
+            INSERT INTO cor1440_gen_actividad_rangoedadac
+              (actividad_id, rangoedadac_id, mr, fr, s, created_at, updated_at)
+              (SELECT par_actividad_id, rango_id, 0, 0, 0, NOW(), NOW());
+          END LOOP;
+
+          FOR asistente IN SELECT p.id, p.anionac, p.mesnac, p.dianac, p.sexo
+            FROM cor1440_gen_asistencia AS asi
+            JOIN cor1440_gen_actividad AS ac ON ac.id=asi.actividad_id
+            JOIN msip_persona AS p ON p.id=asi.persona_id
+            WHERE ac.id=par_actividad_id
+          LOOP
+            RAISE NOTICE 'persona_id es %', asistente.id;
+            edad = msip_edad_de_fechanac_fecharef(asistente.anionac, asistente.mesnac,
+              asistente.dianac, a_anio, a_mes, a_dia);
+            RAISE NOTICE 'edad es %', edad;
+            SELECT id INTO rango_id FROM cor1440_gen_rangoedadac WHERE
+              fechadeshabilitacion IS NULL AND
+              limiteinferior <= edad AND edad <= limitesuperior LIMIT 1;
+            IF rango_id IS NULL THEN
+              rango_id := 7;
+            END IF;
+            RAISE NOTICE 'rango_id es %', rango_id;
+
+            CASE asistente.sexo
+              WHEN 'F' THEN
+                UPDATE cor1440_gen_actividad_rangoedadac SET fr = fr + 1
+                  WHERE actividad_id=par_actividad_id
+                  AND rangoedadac_id=rango_id;
+              WHEN 'M' THEN
+                UPDATE cor1440_gen_actividad_rangoedadac SET mr = mr + 1
+                  WHERE actividad_id=par_actividad_id
+                  AND rangoedadac_id=rango_id;
+              ELSE
+                UPDATE cor1440_gen_actividad_rangoedadac SET s = s + 1
+                  WHERE actividad_id=par_actividad_id
+                  AND rangoedadac_id=rango_id;
+            END CASE;
+          END LOOP;
+
+          DELETE FROM cor1440_gen_actividad_rangoedadac
+            WHERE actividad_id = par_actividad_id
+            AND mr = 0 AND fr = 0 AND s = 0
+          ;
+          RETURN;
+        END;
+        $$;
+
+
+--
 -- Name: f_unaccent(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -5222,6 +5367,27 @@ CREATE UNIQUE INDEX usuario_nusuario ON public.usuario USING btree (nusuario);
 
 
 --
+-- Name: cor1440_gen_actividad cor1440_gen_recalcular_tras_cambiar_actividad; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER cor1440_gen_recalcular_tras_cambiar_actividad AFTER UPDATE ON public.cor1440_gen_actividad FOR EACH ROW EXECUTE FUNCTION public.cor1440_gen_actividad_cambiada();
+
+
+--
+-- Name: cor1440_gen_asistencia cor1440_gen_recalcular_tras_cambiar_asistencia; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER cor1440_gen_recalcular_tras_cambiar_asistencia AFTER INSERT OR DELETE OR UPDATE ON public.cor1440_gen_asistencia FOR EACH ROW EXECUTE FUNCTION public.cor1440_gen_asistencia_cambiada_creada_eliminada();
+
+
+--
+-- Name: msip_persona cor1440_gen_recalcular_tras_cambiar_persona; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER cor1440_gen_recalcular_tras_cambiar_persona AFTER UPDATE ON public.msip_persona FOR EACH ROW EXECUTE FUNCTION public.cor1440_gen_persona_cambiada();
+
+
+--
 -- Name: cor1440_gen_actividad actividad_regionsjr_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6792,6 +6958,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20221211141207'),
 ('20221211141208'),
 ('20221211141209'),
-('20221212021533');
+('20221212021533'),
+('20230113133200');
 
 

@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/pasosdeJesus/msip.git
-  revision: afd94328d09d101a50e3c69d4456ba61ddbeb169
+  revision: 95b70d07336a4823cd49efff1f412ec92823bb4b
   branch: main
   specs:
     msip (2.2.0.alfa3)
@@ -226,7 +226,7 @@ GEM
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.8.0)
+    mail (2.8.0.1)
       mini_mime (>= 0.1.1)
       net-imap
       net-pop
@@ -256,7 +256,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.13.10)
+    nokogiri (1.14.0)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     odf-report (0.7.3)

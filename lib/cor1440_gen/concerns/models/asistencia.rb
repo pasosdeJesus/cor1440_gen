@@ -36,10 +36,6 @@ module Cor1440Gen
               message: "El listado de actividades no puede tener personas repetidas",
             }
 
-         after_commit do |asistencia|
-           asistencia.actividad.recalcula_poblacion
-         end
-
           def evalua_campo(campo, menserr)
             case campo
             when "persona"
