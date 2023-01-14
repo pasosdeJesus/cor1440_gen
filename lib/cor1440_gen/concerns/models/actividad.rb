@@ -229,10 +229,6 @@ module Cor1440Gen
             ConteosHelper.recalcula_poblacion(self)
           end
 
-          after_commit do |actividad|
-            actividad.recalcula_poblacion
-          end
-
           def presenta_nombre
             nombre
           end
