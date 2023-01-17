@@ -38,7 +38,6 @@ FileUtils.chdir(RAIZ_AP) do
     ENV["RC"] = nap.strip
   end
   puts "\n== Ejecutando aplicacion #{ENV["RC"]} =="
-
   unless File.exist?("/tmp/node")
     puts "\n== Enlace a /usr/local/bin/node desde /tmp =="
     system! "doas ln -s /usr/local/bin/node /tmp"
