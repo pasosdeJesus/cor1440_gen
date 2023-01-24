@@ -452,7 +452,7 @@ module Cor1440Gen
                   if intentar_eliminar_asistente_de_params(a)
                     puts "** Eliminando parametro de asistencia #{llavea} "\
                       "porque ya se debió eliminar asistencia de base"
-                    flash[:notice] ||= ""
+                    flash[:notice] ||= "".dup
                     flash[:notice] << "Se eliminó beneficiario(a) #{a[:persona_id]}"
                     params[:actividad][:asistencia_attributes].delete(llavea)
                   end
@@ -791,7 +791,7 @@ module Cor1440Gen
               proyectofinanciero_id: @contarb_pfid,
             ).order(:nombrecorto)
 
-            mas_where_asistencia_ram = ""
+            mas_where_asistencia_ram = "".dup
             if params[:filtro] && params[:filtro]["buspersona_id"] &&
                 params[:filtro]["buspersona_id"] != ""
               mas_where_asistencia_ram += " AND " +
@@ -830,7 +830,7 @@ module Cor1440Gen
           end
 
           def relacionadas
-            prob = ""
+            prob = "".dup
             actividadpf_ids = []
             proyectofinanciero_ids = []
             if params[:proyectofinanciero_ids]
