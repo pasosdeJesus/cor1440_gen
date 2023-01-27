@@ -129,6 +129,9 @@ module Cor1440Gen
             end
           end
 
+          # Se quería validar duplicidad de actividadpf pero aquí
+          # se ven sin duplicados, tocaría en el controlador
+
           validate :fecha_concuerda_corresponsables_habilitados
           def fecha_concuerda_corresponsables_habilitados
             if fecha && usuario && usuario.length > 0
