@@ -444,7 +444,21 @@ module Cor1440Gen
             end
           end # def nueva_asistencia
 
+
           def update_cor1440_gen
+            @pf_respaldo = {}
+            # para no perder proyectos financieros sin actividad de marco lógico
+            # en caso de errores de validación
+            if actividad_params &&
+                actividad_params[:actividad_proyectofinanciero_attributes]
+              actividad_params[:actividad_proyectofinanciero_attributes].each do |_l, v|
+                if v[:_destroy] == "false" && v[:proyectofinanciero_id].to_i > 0
+                  @pf_respaldo[v[:proyectofinanciero_id].to_i] = v[:actividadpf_ids]
+                end
+              end
+            end
+
+
             actividades_en_tabla = []
             if actividad_params[:asistencia_attributes]
               actividad_params[:asistencia_attributes].each do |llavea, a|
@@ -491,31 +505,11 @@ module Cor1440Gen
             end
 
             update_gen
-          end
-
-          # def update
-          #  update_cor1440_gen
-          # end
-
-          def update
-            @pf_respaldo = {}
-            # para no perder proyectos financieros sin actividad de marco lógico
-            # en caso de errores de validación
-            if actividad_params &&
-                actividad_params[:actividad_proyectofinanciero_attributes]
-              actividad_params[:actividad_proyectofinanciero_attributes].each do |_l, v|
-                if v[:_destroy] == "false" && v[:proyectofinanciero_id].to_i > 0
-                  @pf_respaldo[v[:proyectofinanciero_id].to_i] = v[:actividadpf_ids]
-                end
-              end
-            end
-
-            update_cor1440_gen
 
             if @registro.valid?
-              # Tras arreglar proyecto financiero que no tenía actividad de marco
-              # lógico y que no esté en base suele no almacenar la actividad
-              # así que la agregamos
+              # Tras arreglar proyecto financiero que no tenía actividad de 
+              # marco lógico y que no esté en base suele no almacenar la 
+              # actividad así que la agregamos
               ar = @pf_respaldo.values.flatten.select { |x| x != "" }
                 .map(&:to_i).uniq.sort
               ag = @registro.actividadpf_ids.uniq.sort
@@ -530,6 +524,10 @@ module Cor1440Gen
                 end
               end
             end
+          end
+
+          def update
+            update_cor1440_gen
           end
 
           # Llamado por control para presentar responsables en formulario
