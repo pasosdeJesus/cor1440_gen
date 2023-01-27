@@ -14,8 +14,11 @@ module Cor1440Gen
 
     # Si hace falta instalamos calculo de poblacion automatico con PostgreSQL
     # Probamos agregar, modificar, eliminar asistentes en una actividad
-    # Asi como modificar la fecha de la actividad --que implica cambio en 
+    # Así como:
+    # * Modificar la fecha de la actividad --que implica cambio en 
     #   rangos de edad de todos los asistentes.
+    # * Modificar fecha de nacimiento de una persona --que implica calculo
+    #   de rangos edad en todas las actividades donde esté.
     test "calculo de poblacion en PostgreSQL" do
       if !Msip::SqlHelper.existe_función_pg?('cor1440_gen_actividad_cambiada')
         instala_calculo_poblacion_pg
@@ -45,6 +48,15 @@ module Cor1440Gen
 
       assert_predicate asistencia, :valid?
       assert_equal([3], asistencia.actividad.rangoedadac_ids)
+
+      actividad.fecha = '2063-01-13'
+      actividad.save
+
+      actividad.reload
+      asistencia.reload
+      assert_predicate asistencia, :valid?
+      assert_equal([6], actividad.rangoedadac_ids)
+
 
       actividad.fecha = '2033-01-13'
       actividad.save

@@ -449,7 +449,8 @@ module Cor1440Gen
             RAISE NOTICE 'edad es %', edad;
             SELECT id INTO rango_id FROM cor1440_gen_rangoedadac WHERE
               fechadeshabilitacion IS NULL AND
-              limiteinferior <= edad AND edad <= limitesuperior LIMIT 1;
+              limiteinferior <= edad AND 
+                (limitesuperior IS NULL OR edad <= limitesuperior) LIMIT 1;
             IF rango_id IS NULL THEN
               rango_id := 7;
             END IF;
