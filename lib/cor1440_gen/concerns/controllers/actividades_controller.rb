@@ -452,6 +452,17 @@ module Cor1440Gen
             if actividad_params &&
                 actividad_params[:actividad_proyectofinanciero_attributes]
               actividad_params[:actividad_proyectofinanciero_attributes].each do |_l, v|
+                if v[:id].to_s == ""
+                  pap = Cor1440Gen::ActividadProyectofinanciero.where(
+                    actividad_id: @registro.id,
+                    proyectofinanciero_id: v[:proyectofinanciero_id].to_i
+                  )
+                  if pap.count >= 1
+                    upap = pap.take
+                    v[:id] = upap.id
+                    params[:actividad][:actividad_proyectofinanciero_attributes][_l][:id] = upap.id
+                  end
+                end
                 if v[:_destroy] == "false" && v[:proyectofinanciero_id].to_i > 0
                   @pf_respaldo[v[:proyectofinanciero_id].to_i] = v[:actividadpf_ids]
                 end
