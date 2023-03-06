@@ -90,7 +90,8 @@ module Cor1440Gen
 
           has_many :asistencia, dependent: :delete_all,
             class_name: 'Cor1440Gen::Asistencia',
-            foreign_key: 'actividad_id'
+            foreign_key: 'actividad_id',
+            validate: true
 
           has_many :persona, through: :asistencia, class_name: 'Msip::Persona'
           accepts_nested_attributes_for :persona, reject_if: :all_blank
