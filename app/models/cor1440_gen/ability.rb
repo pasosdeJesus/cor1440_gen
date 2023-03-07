@@ -307,6 +307,7 @@ module Cor1440Gen
           habilidad.can(:manage, Heb412Gen::Plantillahcm)
           habilidad.can(:manage, Heb412Gen::Plantillahcr)
 
+          habilidad.can(:manage, Mr519Gen::Campo)
           habilidad.can(:manage, Mr519Gen::Formulario)
           habilidad.can(:manage, Mr519Gen::Encuestausuario)
 
