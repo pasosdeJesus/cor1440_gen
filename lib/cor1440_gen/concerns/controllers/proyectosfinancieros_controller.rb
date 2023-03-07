@@ -114,7 +114,6 @@ module Cor1440Gen
               ]
           end
 
-          j
           #          def atributos_form
           #          No usado porque el formulario es a mano
 
