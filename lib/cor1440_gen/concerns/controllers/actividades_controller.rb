@@ -384,6 +384,10 @@ module Cor1440Gen
             end
           end
 
+          # Completa nuevo registro asistencia de @asistencia
+          def nueva_asistencia_completa_asistencia
+          end
+
           # Responde a requerimiento AJAX generado por cocoon creando una
           # nueva persona como nuevo asistente para la actividad que recibe
           # por parámetro  params[:actividad_id].
@@ -423,6 +427,7 @@ module Cor1440Gen
               actividad_id: act.id,
               persona_id: @persona.id,
             )
+            nueva_asistencia_completa_asistencia
             unless @asistencia.save
               resp_error("No pudo crear asistencia")
               @persona.destroy
