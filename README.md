@@ -2,16 +2,16 @@
 
 [![Revisado por Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com) Pruebas y seguridad:[![Estado Construcción](https://gitlab.com/pasosdeJesus/cor1440_gen/badges/main/pipeline.svg)](https://gitlab.com/pasosdeJesus/cor1440_gen/-/pipelines?page=1&scope=all&ref=main) [![Clima del Código](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/gpa.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen) [![Cobertura de Pruebas](https://codeclimate.com/github/pasosdeJesus/cor1440_gen/badges/coverage.svg)](https://codeclimate.com/github/pasosdeJesus/cor1440_gen)
 
-![Logo de cor1440](https://raw.githubusercontent.com/pasosdeJesus/cor1440_gen/master/test/dummy/app/assets/images/logo.jpg)
+![Logo de cor1440](https://gitlab.com/pasosdeJesus/cor1440_gen/-/raw/main/test/dummy/app/assets/images/logo.jpg)
 
 Este es un motor para sistemas de información de planeación y seguimiento de 
 actividades en ONGs. Opera sobre Ruby on Rails 5 y PostgreSQL (preferiblemente 
 cifrado como en adJ).
 
 La aplicación ```cor1440``` disponible en 
-<https://github.com/pasosdeJesus/cor1440>
+<https://gitlab.com/pasosdeJesus/cor1440>
 utiliza este motor sin personalización alguna.  Puede ver ejemplos de 
-personalizaciones en <https://github.com/pasosdeJesus/cor1440_cinep> y 
+personalizaciones en <https://gitlab.com/pasosdeJesus/cor1440_cinep> y 
 <https://github.com/pasosdeJesus/cor1440_sjrlac>
 
 
@@ -21,13 +21,13 @@ Este motor incluye
 * Uso del motor msip (que a su vez maneja devise, cancancan, rspec, tablas 
   básicas con datos geográficos para varios paises, manejo de anexos con 
   paperclip, facilidades de configuracion como puede ver en 
-  https://github.com/pasosdeJesus/msip )
+  https://gitlab.com/pasosdeJesus/msip )
 * Aplicación de prueba completa en spec/dummy con diseño adaptable a
   dispositivos moviles o de escritorio (responsive) que permite modificar
   las tablas básicas y manejar actividades mínimas con anexos.
 
 Sigue los mismos lineamientos del motor msip, cuyas instrucciones
-generales puede consultar en https://github.com/pasosdeJesus/msip
+generales puede consultar en https://gitlab.com/pasosdeJesus/msip
 
 Los cambios a esas instrucciones son:
 
