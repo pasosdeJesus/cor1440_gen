@@ -37,6 +37,12 @@ module Cor1440Gen
       ))
 
       assert actividad.valid?
+      # Por extraño motivo actividad.fecha aquí en
+      # ocasiones es '2017-03-02'
+      actividad.fecha = '2023-01-13'
+      actividad.save!
+      assert actividad.valid?
+      assert_equal actividad.fecha.to_s, '2023-01-13'
 
       assert_equal 0, ActividadRangoedadac.where(
         actividad_id: actividad.id).count
@@ -47,6 +53,9 @@ module Cor1440Gen
       ))
 
       assert_predicate asistencia, :valid?
+      if asistencia.actividad.rangoedadac_ids == [2]
+        debugger
+      end
       assert_equal([3], asistencia.actividad.rangoedadac_ids)
 
       actividad.fecha = '2063-01-13'
