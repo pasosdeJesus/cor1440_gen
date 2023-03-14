@@ -26,7 +26,7 @@ module Cor1440Gen
             atributos_show
           end
 
-          def atributos_form
+          def atributos_form_cor1440_gen
             a = atributos_show - [:actividad_ids] + [:caracterizaciones]
             a[a.index(:clase)] = :id_clase
             a[a.index(:departamento)] = :id_departamento
@@ -36,6 +36,10 @@ module Cor1440Gen
               a[a.index(:tdocumento)] = :tdocumento_id
             end
             a
+          end
+
+          def atributos_form
+            atributos_form_cor1440_gen
           end
 
           def self.asegura_camposdinamicos(persona, current_usuario_id)
