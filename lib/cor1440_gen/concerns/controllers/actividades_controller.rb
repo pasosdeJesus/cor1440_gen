@@ -412,7 +412,7 @@ module Cor1440Gen
             @persona = Msip::Persona.create(
               nombres: "N",
               apellidos: "N",
-              sexo: "S",
+              sexo: Msip::Persona.convencion_sexo[:sexo_sininformacion],
               tdocumento_id: 11,
               numerodocumento: "AAA",
             )
