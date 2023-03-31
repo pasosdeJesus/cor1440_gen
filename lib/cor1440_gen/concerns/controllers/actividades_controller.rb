@@ -384,6 +384,11 @@ module Cor1440Gen
             end
           end
 
+          # Completa nuevo registro persona de @asistencia
+          def nueva_asistencia_completa_persona
+          end
+
+
           # Completa nuevo registro asistencia de @asistencia
           def nueva_asistencia_completa_asistencia
           end
@@ -414,8 +419,9 @@ module Cor1440Gen
               apellidos: "N",
               sexo: Msip::Persona.convencion_sexo[:sexo_sininformacion],
               tdocumento_id: 11,
-              numerodocumento: "AAA",
+              numerodocumento: rand(10000).to_s + "AAA",
             )
+            nueva_asistencia_completa_persona
             @persona.save(validate: false)
             @persona.numerodocumento = @persona.id
             unless @persona.save
