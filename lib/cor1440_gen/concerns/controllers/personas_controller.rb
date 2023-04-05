@@ -28,10 +28,10 @@ module Cor1440Gen
 
           def atributos_form_cor1440_gen
             a = atributos_show - [:actividad_ids] + [:caracterizaciones]
-            a[a.index(:clase)] = :id_clase
-            a[a.index(:departamento)] = :id_departamento
-            a[a.index(:municipio)] = :id_municipio
-            a[a.index(:pais)] = :id_pais
+            a[a.index(:clase)] = :clase_id
+            a[a.index(:departamento)] = :departamento_id
+            a[a.index(:municipio)] = :municipio_id
+            a[a.index(:pais)] = :pais_id
             if a.index(:tdocumento)
               a[a.index(:tdocumento)] = :tdocumento_id
             end

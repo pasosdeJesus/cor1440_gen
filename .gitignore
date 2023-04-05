@@ -38,3 +38,4 @@ test/dummy/app/javascript/controllers/msip
 test/dummy/app/javascript/controllers/cor1440_gen
 cobertura-unitarias
 test/dummy/cobertura-sistema
+*cp
