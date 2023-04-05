@@ -3627,7 +3627,6 @@ CREATE TABLE public.msip_ubicacion (
     lugar character varying(500) COLLATE public.es_co_utf_8,
     sitio character varying(500) COLLATE public.es_co_utf_8,
     tsitio_id integer DEFAULT 1 NOT NULL,
-    id_caso integer NOT NULL,
     latitud double precision,
     longitud double precision,
     created_at timestamp without time zone,
@@ -6980,6 +6979,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20230127123623'),
 ('20230301145222'),
 ('20230301212546'),
-('20230404025025');
+('20230404025025'),
+('20230405012229');
 
 
