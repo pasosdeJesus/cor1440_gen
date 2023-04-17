@@ -505,10 +505,12 @@ module Cor1440Gen
             presenta_cor1440_gen(atr)
           end
 
-          scope :filtro_actividadpf, lambda { |ida|
-            where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
-                  'cor1440_gen_actividad_actividadpf WHERE ' +
-                  'actividadpf_id = ?)', ida)
+          scope :filtro_actividadpf, lambda { |ids|
+            if ids != [""]
+              where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
+                    'cor1440_gen_actividad_actividadpf WHERE ' +
+                    'actividadpf_id IN (?))', ids.map(&:to_i))
+            end
           }
 
           scope :filtro_actividadareas, lambda { |ida|
@@ -560,10 +562,10 @@ module Cor1440Gen
                   'proyecto_id = ?)', idp)
           }
 
-          scope :filtro_proyectofinanciero, lambda { |pid|
+          scope :filtro_proyectofinanciero, lambda { |ids|
             where('cor1440_gen_actividad.id IN (SELECT actividad_id FROM ' +
                   'cor1440_gen_actividad_proyectofinanciero WHERE ' +
-                  'proyectofinanciero_id = ?)', pid)
+                  'proyectofinanciero_id IN (?))', ids.map(&:to_i))
           }
 
           scope :filtro_responsable, lambda { |uid|

@@ -1,16 +1,18 @@
-<% col = Cor1440Gen::Proyectofinanciero.all %>
+<% sel = [] %>
+<% if params && params[:filtro] && 
+    params[:filtro][:busproyectofinanciero] %>
+  <% sel = params[:filtro][:busproyectofinanciero] %>
+<% end %>
 <%= f.input :busproyectofinanciero,
-  collection: col,
-  include_blank: true,
-  label_method: :presenta_nombre,
+  collection: Cor1440Gen::Proyectofinanciero.order('fechacierre DESC'),
+  label_method: :nombre,
   value_method: :id,
-  label: false,
-  selected: Msip::ModeloHelper.poromision(params, :busproyectofinanciero),
-  input_html: {
-    class: 'chosen-select',
+  include_hidden: false,
+  selected: sel,
+  input_html: { 
+    class: "chosen-select", 
+    multiple: true, 
     'data-enviarautomatico' => ''
   },
-  wrapper_html: {
-    style: 'width: 20em'
-  }
+  label: false
 %>

@@ -1,7 +1,14 @@
 <% col = Cor1440Gen::Actividadpf.all %>
 <% if params && params[:filtro] && params[:filtro][:busproyectofinanciero] %>
   <% col = col.where(
-    proyectofinanciero_id: params[:filtro][:busproyectofinanciero].to_i) %>
+    'proyectofinanciero_id IN (?)', 
+    params[:filtro][:busproyectofinanciero].map(&:to_i))
+  %>
+<% end %>
+<% sel = [] %>
+<% if params && params[:filtro] && 
+    params[:filtro][:busactividadpf] %>
+  <% sel = params[:filtro][:busactividadpf] %>
 <% end %>
 <%= f.input :busactividadpf,
   collection: col.order(:titulo),
@@ -9,9 +16,10 @@
   label_method: :presenta_nombre,
   value_method: :id,
   label: false,
-  selected: Msip::ModeloHelper.poromision(params, :busactividadpf),
+  selected: sel,
   input_html: {
     class: 'chosen-select',
+    multiple: true,
     'data-enviarautomatico' => ''
   },
   wrapper_html: {
