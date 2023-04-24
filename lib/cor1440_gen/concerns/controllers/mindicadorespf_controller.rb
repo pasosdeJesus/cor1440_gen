@@ -248,9 +248,12 @@ module Cor1440Gen
           # lista de hombres y de sin sexo de nacimiento.
           def medir_indicador_res_tipo_3(idacs, mind, fini, ffin)
             datosint = []
-            mujeres = asistencia_por_sexo(idacs, "F", false)
-            hombres = asistencia_por_sexo(idacs, "M", false)
-            sinsexo = asistencia_por_sexo(idacs, "S", false)
+            mujeres = asistencia_por_sexo(
+              idacs, Msip::Persona::convecion_sexo[:sexo_femenino], false)
+            hombres = asistencia_por_sexo(
+              idacs, Msip::Persona::convecion_sexo[:sexo_masculino], false)
+            sinsexo = asistencia_por_sexo(
+              idacs, Msip::Persona::convecion_sexo[:sexo_sininformacion], false)
             resind =  mujeres.count + hombres.count + sinsexo.count
             datosint << { valor: mujeres.count, rutaevidencia: "#" }
             datosint << { valor: hombres.count, rutaevidencia: "#" }
@@ -279,9 +282,12 @@ module Cor1440Gen
           # lista de hombres y lista de sin sexo de nacimiento.
           def medir_indicador_res_tipo_4(idacs, mind, fini, ffin)
             datosint = []
-            mujeres = asistencia_por_sexo(idacs, "F", true)
-            hombres = asistencia_por_sexo(idacs, "M", true)
-            sinsexo = asistencia_por_sexo(idacs, "S", true)
+            mujeres = asistencia_por_sexo(
+              idacs, Msip::Persona::convecion_sexo[:sexo_femenino], true)
+            hombres = asistencia_por_sexo(
+              idacs, Msip::Persona::convecion_sexo[:sexo_masculino], true)
+            sinsexo = asistencia_por_sexo(
+              idacs, Msip::Persona::convecion_sexo[:sexo_sininformacion], true)
             resind =  mujeres.count + hombres.count + sinsexo.count
             datosint << { valor: mujeres.count, rutaevidencia: "#" }
             datosint << { valor: hombres.count, rutaevidencia: "#" }
