@@ -34,11 +34,13 @@ module Cor1440Gen
   mattr_accessor(:actividadg3)
   mattr_accessor(:actividadg4)
   mattr_accessor(:actividadg5)
+  mattr_accessor(:actividadg6)
   self.actividadg1 = "Mujeres organización"
   self.actividadg2 = "Mujeres externas"
   self.actividadg3 = "Hombres organización"
   self.actividadg4 = "Hombres externos"
   self.actividadg5 = "Externos sin sexo"
+  self.actividadg6 = "Externos intersexuales"
 
   def self.setup(&block)
     yield self

@@ -298,6 +298,13 @@ module Cor1440Gen
             end
           end
 
+          def poblacion_intersexuales_solore
+            actividad_rangoedadac.inject(0) do |memo, r|
+              memo + (r.i ? r.i : 0)
+            end
+          end
+
+
           def poblacion_mujeres_r_solore
             actividad_rangoedadac.inject(0) do |memo, r|
               memo + (r.fr ? r.fr : 0)
@@ -321,6 +328,13 @@ module Cor1440Gen
             actividad_rangoedadac.where(rangoedadac_id: num)
               .inject(0) do |memo, r|
               memo + (r.mr ? r.mr : 0)
+            end
+          end
+
+          def poblacion_intersexuales_g_solore(num)
+            actividad_rangoedadac.where(rangoedadac_id: num)
+              .inject(0) do |memo, r|
+              memo + (r.i ? r.i : 0)
             end
           end
 
