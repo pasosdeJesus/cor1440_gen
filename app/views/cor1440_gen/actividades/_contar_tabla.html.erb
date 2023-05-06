@@ -1,3 +1,11 @@
+<% convsexo = Msip::Persona.convencion_sexo %>
+<% colsexo = convsexo.length / 2 %>
+<% sexof = convsexo[:sexo_femenino] %>
+<% sexom = convsexo[:sexo_masculino] %>
+<% sexos = convsexo[:sexo_sininformacion] %>
+<% if colsexo == 4 %>
+  <% sexoi = convsexo[:sexo_intersexual] %>
+<% end %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -10,16 +18,16 @@
       <th rowspan='2'>
         <%= Cor1440Gen::Actividad.human_attribute_name('Total Actividades') %>
       </th>
-      <th colspan='<%= @contarfuncionarios ? 5 : 3 %>'>
+      <th colspan='<%= @contarfuncionarios ? 5 : colsexo %>'>
         <span data-toggle='tooltip' title="<%= Cor1440Gen::Actividad.human_attribute_name('Número de beneficiarios (posiblemente repetidos) contados en la tabla de población por rangos de edad') %>"><%= Cor1440Gen::Actividad.human_attribute_name('Participaciones') %></span>
       </th>
-      <th colspan='3'>
+      <th colspan='<%= colsexo %>'>
         <span data-toggle='tooltip' title="<%= Cor1440Gen::Actividad.human_attribute_name('Número de asistentes (posiblemente repetidos) según listado de asistencia') %>"><%= Cor1440Gen::Actividad.human_attribute_name('Participaciones asistentes') %></span>
       </th>
-      <th colspan='3'>
+      <th colspan='<%= colsexo %>'>
         <span data-toggle='tooltip' title="<%= Cor1440Gen::Actividad.human_attribute_name('Número de asistentes únicos de los listados de asistencia') %>"><%= Cor1440Gen::Actividad.human_attribute_name('Asistentes únicos') %></span>
       </th>
-      <th colspan='3'>
+      <th colspan='<%= colsexo %>'>
         <span data-toggle='tooltip' title="<%= Cor1440Gen::Actividad.human_attribute_name('Tasa \'Participaciones asistentes\' / \'Asistentes únicos\'') %>"><%= Cor1440Gen::Actividad.human_attribute_name('Frecuencia de asistencia') %></span>
       </th>
     </tr>
@@ -27,21 +35,33 @@
       <% if @contarfuncionarios %>
         <th><%= Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg1) %></th>
       <% end %>
-      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg2) : 'F' %></th>
+      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg2) : sexof %></th>
       <% if @contarfuncionarios %>
         <th><%= Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg3) %></th>
       <% end %>
-      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg4) : 'M' %></th>
-      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg5) : 'S' %></th>
-      <th>F</th>
-      <th>M</th>
-      <th>S</th>
-      <th>F</th>
-      <th>M</th>
-      <th>S</th>
-      <th>F</th>
-      <th>M</th>
-      <th>S</th>
+      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg4) : sexom %></th>
+      <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg5) : sexos %></th>
+      <% if colsexo == 4 %>
+        <th><%= @contarfuncionarios ? Cor1440Gen::Actividad.human_attribute_name(Cor1440Gen.actividadg6) : sexoi %></th>
+      <% end %>
+      <th><%= sexof %></th>
+      <th><%= sexom %></th>
+      <th><%= sexos %></th>
+      <% if colsexo == 4 %>
+        <th><%= sexoi %></th>
+      <% end %>
+      <th><%= sexof %></th>
+      <th><%= sexom %></th>
+      <th><%= sexos %></th>
+      <% if colsexo == 4 %>
+        <th><%= sexoi %></th>
+      <% end %>
+      <th><%= sexof %></th>
+      <th><%= sexom %></th>
+      <th><%= sexos %></th>
+      <% if colsexo == 4 %>
+        <th><%= sexoi %></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -98,27 +118,41 @@
           <% sr = consbr.sum(:s) %>
           <%= sr %>
         </td>
+        <% if colsexo == 4 %>
+          <td>
+            <% si = consbr.sum(:i) %>
+            <%= si %>
+          </td>
+        <% end %>
+
         <td>
           <% asistentes = consb.joins(:persona) %>
-          <% af = asistentes.where('msip_persona.sexo': :F).select(
+          <% af = asistentes.where('msip_persona.sexo': sexof).select(
             'cor1440_gen_asistencia.persona_id') %>
           <%= af.count %>
         </td>
         <td>
-          <% am = asistentes.where('msip_persona.sexo': :M).select(
+          <% am = asistentes.where('msip_persona.sexo': sexom).select(
             'cor1440_gen_asistencia.persona_id')%>
           <%= am.count %>
         </td>
         <td>
-          <% as = asistentes.where('msip_persona.sexo': :S).select(
+          <% as = asistentes.where('msip_persona.sexo': sexos).select(
             'cor1440_gen_asistencia.persona_id') %>
           <%= as.count %>
         </td>
+        <% if colsexo == 4 %>
+          <td>
+            <% ai = asistentes.where('msip_persona.sexo': sexoi).select(
+              'cor1440_gen_asistencia.persona_id') %>
+            <%= ai.count %>
+          </td>
+        <% end %>
         <td>
           <% asistunicos = consb.joins(:persona).
             select('distinct cor1440_gen_asistencia.persona_id').
             pluck('cor1440_gen_asistencia.persona_id') %> 
-          <% uf = Msip::Persona.where(id: asistunicos).where(sexo: :F) %>
+          <% uf = Msip::Persona.where(id: asistunicos).where(sexo: sexof) %>
           <% if uf.count > 0 %>
             <% ev = uf.pluck('id').join(",") %>
             <%= link_to uf.count, msip.personas_path + 
@@ -128,7 +162,7 @@
           <% end %>
         </td>
         <td>
-          <% um = Msip::Persona.where(id: asistunicos).where(sexo: :M) %>
+          <% um = Msip::Persona.where(id: asistunicos).where(sexo: sexom) %>
           <% if um.count > 0 %>
             <% ev = um.pluck('id').join(",") %>
             <%= link_to um.count, msip.personas_path + 
@@ -138,7 +172,7 @@
           <% end %>
         </td>
         <td>
-          <% us = Msip::Persona.where(id: asistunicos).where(sexo: :S) %>
+          <% us = Msip::Persona.where(id: asistunicos).where(sexo: sexos) %>
           <% if us.count > 0 %>
             <% ev = us.pluck('id').join(",") %>
             <%= link_to us.count, msip.personas_path + 
@@ -147,6 +181,18 @@
             <%= 0 %>
           <% end %>
         </td>
+        <% if colsexo == 4 %>
+          <td>
+            <% ui = Msip::Persona.where(id: asistunicos).where(sexo: sexoi) %>
+            <% if ui.count > 0 %>
+              <% ev = ui.pluck('id').join(",") %>
+              <%= link_to ui.count, msip.personas_path + 
+                "?filtro[busid]=" + ev, target: '_blank'  %>
+            <% else %>
+              <%= 0 %>
+            <% end %>
+          </td>
+        <% end %>
         <td>
           <%= if uf.count > 0 then f =af.count.to_f/uf.count; f.round(1); end %>
         </td>
@@ -154,9 +200,13 @@
           <%= if um.count > 0 then f =am.count.to_f/um.count; f.round(1); end %>
         </td>
         <td>
-          <%= if us.count > 0 then f =as.count.to_f/us.count; f.round(1); end %>
+          <%= if us.count > 0 then f = as.count.to_f/us.count; f.round(1); end %>
         </td>
-
+        <% if colsexo == 4 %>
+          <td>
+            <%= if ui.count > 0 then f = ai.count.to_f/ui.count; f.round(1); end %>
+          </td>
+        <% end %>
       </tr>
     <% end %>
     <tr>
@@ -209,17 +259,35 @@
          <% sr = consbr.sum(:s) %>
          <%= sr %>
        </td>
-       <td></td>
-       <td></td>
-       <td></td>
+       <% if colsexo == 4 %>
+         <td>
+           <% si = consbr.sum(:i) %>
+           <%= si %>
+         </td>
+       <% end %>
 
        <td></td>
        <td></td>
        <td></td>
+       <% if colsexo == 4 %>
+         <td></td>
+       <% end %>
 
        <td></td>
        <td></td>
        <td></td>
+       <% if colsexo == 4 %>
+         <td></td>
+       <% end %>
+
+
+       <td></td>
+       <td></td>
+       <td></td>
+       <% if colsexo == 4 %>
+         <td></td>
+       <% end %>
+
     </tr>
   </tbody>
   <tfoot>
