@@ -431,7 +431,7 @@ module Cor1440Gen
             nueva_asistencia_completa_persona
             @persona.save(validate: false)
             @persona.numerodocumento = @persona.id
-            unless @persona.save
+            unless @persona.save(validate: false)
               resp_error("No pudo crear persona")
               return
             end
@@ -441,7 +441,7 @@ module Cor1440Gen
               persona_id: @persona.id,
             )
             nueva_asistencia_completa_asistencia
-            unless @asistencia.save
+            unless @asistencia.save(validate: false)
               resp_error("No pudo crear asistencia")
               @persona.destroy
               return
@@ -519,6 +519,21 @@ module Cor1440Gen
                   actividades_en_tabla << ac.id
                 elsif a[:id].to_i > 0
                   actividades_en_tabla << a[:id].to_i
+                  # En caso de que se haya autocompletado una persona remplazamos
+                  # nueva id en base antes de guardar de manera tipica
+                  ab = Cor1440Gen::Asistencia.find(a[:id])
+                  if ab && 
+                      a[:persona_attributes][:id].to_i != ab.persona_id.to_i &&
+                      Msip::Persona.where(
+                        id: a[:persona_attributes][:id].to_i).count == 1
+                    # Persona autocompletada
+                    op = ab.persona
+                    ab.persona_id = a[:persona_attributes][:id].to_i
+                    ab.save(validate: false)
+                    if op.en_blanco?
+                      op.destroy
+                    end
+                  end
                 end
               end
             end
