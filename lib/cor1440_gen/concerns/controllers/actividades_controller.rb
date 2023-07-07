@@ -463,6 +463,9 @@ module Cor1440Gen
           end # def nueva_asistencia
 
 
+          def nuevo_asistente_antes_de_actualizar(asistente, atr_asistente)
+          end
+
           def update_cor1440_gen
             @pf_respaldo = {}
             # para no perder proyectos financieros sin actividad de marco lógico
@@ -534,6 +537,13 @@ module Cor1440Gen
                       op.destroy
                     end
                   end
+                  if ab && 
+                      a[:persona_attributes][:id].to_i == ab.persona_id.to_i &&
+                      ab.persona.nombres == "N" &&
+                      ab.persona.apellidos == "N" 
+                    nuevo_asistente_antes_de_actualizar(ab, a)
+                  end
+
                 end
               end
             end
