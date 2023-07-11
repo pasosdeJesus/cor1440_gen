@@ -1,18 +1,38 @@
+<% col = Cor1440Gen::Proyectofinanciero.all %>
+<% if params && params[:filtro] && params[:filtro][:busfechaini] && 
+    params[:filtro][:busfechaini] != '' %>
+  <% col = col.where(
+    '(fechacierre IS NULL OR fechacierre>=?)', 
+    params[:filtro][:busfechaini])
+  %>
+<% end %>
+<% if params && params[:filtro] && params[:filtro][:busfechafin] &&
+    params[:filtro][:busfechafin] != '' %>
+  <% col = col.where(
+    '(fechainicio IS NULL OR fechainicio<=?)', 
+    params[:filtro][:busfechafin])
+  %>
+<% end %>
+
 <% sel = [] %>
 <% if params && params[:filtro] && 
     params[:filtro][:busproyectofinanciero] %>
   <% sel = params[:filtro][:busproyectofinanciero] %>
 <% end %>
 <%= f.input :busproyectofinanciero,
-  collection: Cor1440Gen::Proyectofinanciero.order('fechacierre DESC'),
+  collection: col.order('fechacierre DESC'),
   label_method: :nombre,
   value_method: :id,
   include_hidden: false,
   selected: sel,
+  label: false,
   input_html: { 
     class: "chosen-select", 
     multiple: true, 
     'data-enviarautomatico' => ''
   },
-  label: false
+  wrapper_html: {
+    style: 'width: 10em'
+  }
 %>
+
