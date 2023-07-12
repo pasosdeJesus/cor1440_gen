@@ -198,10 +198,25 @@ module Cor1440Gen
             end
           end
 
+
           scope :filtro_proyectofinanciero_ids, lambda { |p|
             joins(:proyectofinanciero)
               .where("cor1440_gen_proyectofinanciero.id=?", p)
           }
+
+
+          def en_blanco?
+            self.nombres == 'N' &&
+              self.apellidos == 'N' &&
+              self.anionac.nil? &&
+              self.mesnac.nil? &&
+              self.dianac.nil? &&
+              self.pais_id.nil? &&
+              self.departamento_id.nil? &&
+              self.municipio_id.nil? &&
+              self.clase_id.nil?
+          end
+
         end # included
       end
     end
