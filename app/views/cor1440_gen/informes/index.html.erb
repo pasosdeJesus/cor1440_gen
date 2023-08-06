@@ -61,7 +61,9 @@
         <td><%= truncate(informe.dificultades, length: 50) %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-            cor1440_gen.edit_informe_path(informe.id), :class => 'btn btn-sm' 
+            cor1440_gen.edit_informe_path(informe.id),
+            "data-turbo": false,
+            :class => 'btn btn-sm' 
           %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
             cor1440_gen.informe_path(informe.id),

@@ -26,7 +26,9 @@
     cor1440_gen.informes_path, :class => 'btn'  
   %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-    cor1440_gen.edit_informe_path(h @informe.id), :class => 'btn' 
+    cor1440_gen.edit_informe_path(h @informe.id),
+    "data-turbo": false,
+    :class => 'btn' 
   %>
   <%= link_to t('Generar Documento'),
     cor1440_gen.informe_path(h @informe.id) + '/impreso', :class => 'btn',
