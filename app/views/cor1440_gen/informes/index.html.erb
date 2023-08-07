@@ -60,22 +60,10 @@
         <td><%= truncate(informe.logros, lenght: 50) %></td>
         <td><%= truncate(informe.dificultades, length: 50) %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-            cor1440_gen.edit_informe_path(informe.id),
-            "data-turbo": false,
-            :class => 'btn btn-sm' 
-          %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-            cor1440_gen.informe_path(informe.id),
-            :method => :delete,
-            :data => { :confirm => t(
-              '.confirm', 
-              :default => t(
-                "helpers.links.confirm", 
-                :default => 'Are you sure?')) 
-          },
-            :class => 'btn btn-sm btn-danger' 
-          %>
+          <%= render partial: 'msip/modelos/boton_editar',
+            locals: {registro: informe, mas_clases: 'btn-sm'} %>
+          <%= render partial: 'msip/modelos/boton_eliminar',
+            locals: {registro: informe, mas_clases: 'btn-sm'} %>
         </td>
       </tr>
     <% end %>
@@ -86,8 +74,6 @@
 </table>
 
 <%= will_paginate @informes, { param_name: :pagina }  %>
-<%= link_to t('.new', :default => 'Nuevo'),
-  cor1440_gen.new_informe_path,
-  :class => 'btn btn-primary' 
-%>
+<%= render partial: 'msip/modelos/boton_nuevo',
+  locals: {ruta: cor1440_gen.new_informe_path} %>
 
