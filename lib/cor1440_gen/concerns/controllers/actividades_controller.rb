@@ -348,7 +348,13 @@ module Cor1440Gen
             # De requerirse usar la siguiente
             otras_acciones_antes_eliminar_asistencia(a)
             # Eliminar de tabla persona (esto eliminará de asistente también)
-            Msip::Persona.find(a.persona_id).destroy
+            if Msip::Persona.where(id: a.persona_id).count > 0
+              Msip::Persona.find(a.persona_id).destroy
+            elsif Cor1440Gen::Asistencia.where(persona_id: a.persona_id).
+              where(actividad_id: @registro.id).count > 0
+              Cor1440Gen::Asistencia.where(persona_id: a.persona_id).
+                where(actividad_id: @registro.id).destroy_all
+            end
             true
           end
 
