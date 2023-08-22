@@ -415,22 +415,15 @@ module Cor1440Gen
             end
             act = Cor1440Gen::Actividad.find(params[:actividad_id].to_i)
             menserror = "".dup
-            @persona = Msip::PersonasController.nueva_persona_valores_predeterminados(
-              menserror)
-            #@persona = Msip::Persona.create(
-            #  nombres: "N",
-            #  apellidos: "N",
-            #  sexo: nueva_persona_sexo_predeterminado,
-            #  tdocumento_id: 11,
-            #  numerodocumento: rand(10000).to_s + "AAA",
-            #)
+            @persona = Msip::PersonasController.
+              nueva_persona_valores_predeterminados(menserror)
+            # Asigna incluso numerodocumento que no falla
             if menserror != ""
               resp_error("No pudo crear persona")
               return
             end
             nueva_asistencia_completa_persona
-            @persona.save(validate: false)
-            @persona.numerodocumento = @persona.id
+            #@persona.save(validate: false)
             unless @persona.save(validate: false)
               resp_error("No pudo crear persona")
               return
