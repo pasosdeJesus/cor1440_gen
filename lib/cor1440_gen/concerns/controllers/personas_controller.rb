@@ -22,12 +22,19 @@ module Cor1440Gen
             atributos_show_cor1440_gen
           end
 
+          def atributos_index_cor1440_gen
+            atributos_index_msip + [
+              :proyectofinanciero_ids,
+              :actividad_ids,
+            ]
+          end
+
           def atributos_index
-            atributos_show
+            atributos_index_cor1440_gen
           end
 
           def atributos_form_cor1440_gen
-            a = atributos_show - [:actividad_ids] + [:caracterizaciones]
+            a = atributos_form_msip - [:actividad_ids] + [:caracterizaciones]
             a[a.index(:clase)] = :clase_id
             a[a.index(:departamento)] = :departamento_id
             a[a.index(:municipio)] = :municipio_id
