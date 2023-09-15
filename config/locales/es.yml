@@ -75,7 +75,7 @@ es:
   "Objetivos / Efectos": Objetivos / Efectos
   orgsocial: Org. Social
   perfilorgsocial: Perfil
-  Persona: Persona
+  Persona: Beneficiario
   Pesos: Pesos
   Porcentaje: Porcentaje
   Proyectofinanciero: Proyectofinanciero
@@ -324,3 +324,5 @@ es:
         actividad_ids: Actividades en las que está en listado de asistencia
         proyectofinanciero_ids: Proyectos que le caracterizan
         proyectofinanciero: Proyectos que le caracterizan
+        Persona: Beneficiario
+        Personas: Beneficiarios
