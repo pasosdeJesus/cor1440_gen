@@ -10,6 +10,10 @@
     params[:filtro][:busactividadpf] %>
   <% sel = params[:filtro][:busactividadpf] %>
 <% end %>
+<% multiple = true %>
+<% if defined?(sencillo) && sencillo %>
+  <% multiple =  false %>
+<% end %>
 <%= f.input :busactividadpf,
   collection: col.order(:titulo),
   include_blank: true,
@@ -19,7 +23,7 @@
   selected: sel,
   input_html: {
     class: 'chosen-select',
-    multiple: true,
+    multiple: multiple,
     'data-enviarautomatico' => ''
   },
   wrapper_html: {

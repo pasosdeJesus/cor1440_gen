@@ -19,6 +19,10 @@
     params[:filtro][:busproyectofinanciero] %>
   <% sel = params[:filtro][:busproyectofinanciero] %>
 <% end %>
+<% multiple = true %>
+<% if defined?(sencillo) && sencillo %>
+  <% multiple =  false %>
+<% end %>
 <%= f.input :busproyectofinanciero,
   collection: col.order('fechacierre DESC'),
   label_method: :nombre,
@@ -28,7 +32,7 @@
   label: false,
   input_html: { 
     class: "chosen-select", 
-    multiple: true, 
+    multiple: multiple, 
     'data-enviarautomatico' => ''
   },
   wrapper_html: {
