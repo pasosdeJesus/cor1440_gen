@@ -3,8 +3,12 @@
 console.log('Hola Mundo desde ESM')
 
 import Rails from "@rails/ujs";
-Rails.start();
-window.Rails = Rails
+if (typeof window.Rails == 'undefined') {
+  Rails.start();
+  window.Rails = Rails;
+}
+
+import "@hotwired/turbo-rails";
 
 import './jquery'
 import '../../vendor/assets/javascripts/jquery-ui'
