@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 3c7ff10983be04653c0bc1094df3c76a30d96712
+  revision: 4cade209a8067e168485b7e5fa105fbea29e8b62
   branch: rails7.1
   specs:
     heb412_gen (2.2.0.beta4)
@@ -518,4 +518,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.4.20
+   2.4.21

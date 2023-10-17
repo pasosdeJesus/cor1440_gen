@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "test_helper"
-require "cor1440_gen/conteos_helper"
 
 module Cor1440Gen
   class ConteosHelperTest < ActionView::TestCase
