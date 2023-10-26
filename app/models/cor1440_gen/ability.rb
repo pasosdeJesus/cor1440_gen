@@ -185,7 +185,7 @@ module Cor1440Gen
       },
     }
 
-    def self.campos_plantillas
+    def campos_plantillas
       Heb412Gen::Ability::CAMPOS_PLANTILLAS_PROPIAS
         .clone.merge(CAMPOS_PLANTILLAS_PROPIAS)
     end
