@@ -1,18 +1,19 @@
-<tr class='nested-fields campos_asistente' data-controller='msip--sindocaut persona-huella'>
+<%= turbo_frame_tag "asistencia_#{f.index}",
+  class: 'div-tabla-fila nested-fields campos_asistente',
+  data: { controller: 'msip--sindocaut persona-huella'} do %>
   <% if f.object.persona.nil? %>
     <% f.object.persona = Msip::Persona.new %>
   <% end %>
-
-  <%= f.simple_fields_for :persona do |p| %>
-    <td>
+  <%= f.simple_fields_for :persona do |p| %>  
+    <div class="div-tabla-celda">
       <%= p.input :nombres,
         value_method: lambda {|t| '' if t.nombres == 'N'},
         label: false %>
-    </td>
-    <td>
+    </div>
+    <div class="div-tabla-celda">
       <%= p.input :apellidos, label: false %>
-    </td>
-    <td>
+    </div>
+    <div class="div-tabla-celda">
       <%= p.input :tdocumento_id,
         collection: Msip::Tdocumento.habilitados,
         label_method: :sigla,
@@ -23,28 +24,24 @@
           "data-action": "change->msip--sindocaut#cambia_tdocumento"
         }
       %>
-    </td>
-    <td>
+    </div>
+    <div class="div-tabla-celda">
       <%= p.input :id,
         as: :hidden,
         input_html: {
           "data-msip--sindocaut-target": "id"
         } %>
-      <% ph = 'N'
-      ac = {'data-autocompleta' => 'no'}
-      if (!p.object.numerodocumento || p.object.numerodocumento == 'N' || p.object.numerodocumento == '')
-        ph = 'Buscar'
-        ac =  { autocomplete:  'off',
-                list: 'fuente-asistentes'
-        }
-      end %>
-      <%
-          if (p.object.tdocumento)
-            td = p.object.tdocumento.ayuda
-          else
-            td = "Si el tipo de documento es cédula de ciudadania teclee solo dígitos"
-          end
-        %>
+      <% ph = 'N' %>
+      <% ac = {'data-autocompleta' => 'no'} %>
+      <% if (!p.object.numerodocumento || p.object.numerodocumento == 'N' || p.object.numerodocumento == '') %>
+        <% ph = 'Buscar' %>
+        <% ac =  { autocomplete:  'off', list: 'fuente-asistentes' } %>
+      <% end %>
+      <% if (p.object.tdocumento) %>
+        <% td = p.object.tdocumento.ayuda %>
+      <% else %>
+        <% td = "Si el tipo de documento es cédula de ciudadania teclee solo dígitos" %>
+      <% end %>
       <div style="display: flex">
         <%= p.input :numerodocumento, placeholder: ph,
           input_html: ac.merge!(
@@ -65,29 +62,29 @@
           </button>
         <% end %>
       </div>
-    </td> 
-    <td>
+    </div> 
+    <div class="div-tabla-celda">
       <%= p.input :sexo,
         collection: Msip::Persona::sexo_opciones_cortas,
         label: false,
         input_html: { style: 'width: 4em' },
         include_blank: false %>
-    </td>
-    <td>
+    </div>
+    <div class="div-tabla-celda">
       <%= p.input :anionac,
         input_html: { style: 'width: 5em', min: 0 },
         label: false %>
-    </td>
-    <td>
+    </div>
+    <div class="div-tabla-celda">
       <%= p.input :mesnac,
         input_html: { style: 'width: 5em', min: 0 },
         label: false %>
-    </td>
-    <td>
+    </div>
+    <div class="div-tabla-celda">
       <%= p.input :dianac,
         input_html: { style: 'width: 5em', min: 0 },
         label: false %>
-    </td>
+    </div>
 
     <%= render partial: 'asistencia_campos_orgsocial',
       locals: {fasistencia: f, fpersona: p} %>

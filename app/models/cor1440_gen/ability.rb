@@ -223,6 +223,7 @@ module Cor1440Gen
         when ROLOPERADOR
 
           habilidad.can(:manage, Cor1440Gen::Actividadpf)
+          habilidad.can :manage, Cor1440Gen::Asistencia
           presponsable = Cor1440Gen::Proyectofinanciero.where(
             responsable_id: usuario.id,
           ).map(&:id)
@@ -269,6 +270,7 @@ module Cor1440Gen
             Cor1440Gen::Actividad,
             actividad_proyectofinanciero: { proyectofinanciero_id: penequipo },
           )
+          habilidad.can :manage, Cor1440Gen::Asistencia
 
           # Responsable de un proyecto puede eliminar  y editar actividades
           # del mismo
@@ -291,6 +293,7 @@ module Cor1440Gen
         when Ability::ROLADMIN, Ability::ROLDIR
           habilidad.can(:manage, Cor1440Gen::Pmindicadorpf)
           habilidad.can(:manage, Cor1440Gen::Actividad)
+          habilidad.can :manage, Cor1440Gen::Asistencia
           habilidad.can(:manage, Cor1440Gen::Actividadpf)
           habilidad.can(:manage, Cor1440Gen::Campotind)
           habilidad.can(:manage, Cor1440Gen::Efecto)

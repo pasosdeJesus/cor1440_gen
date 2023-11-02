@@ -30,6 +30,13 @@ Cor1440Gen::Engine.routes.draw do
   get "/asistencia/nueva" => "actividades#nueva_asistencia",
     as: :nueva_asistencia
 
+  resources :asistencias, only: [], param: :index do
+    member do
+      delete '(:id)', to: "asistencias#destroy", as: "eliminar"
+      post '/' => "asistencias#create", as: "crear"
+    end
+  end
+
   resources :campostind, path_names: { new: "nuevo", edit: "edita" }
 
   get "/conteos/benefactividadpf" => "benefactividadpf#index",
