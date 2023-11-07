@@ -10,5 +10,11 @@ module Cor1440Gen
     load_and_authorize_resource class: Cor1440Gen::Actividad
 
     include Cor1440Gen::Concerns::Controllers::ActividadesController
+
+    def datos_boton_envio
+      debugger
+      { 'disable_with': false }
+    end
+
   end
 end

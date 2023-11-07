@@ -33,9 +33,6 @@ module Cor1440Gen
       Msip::Ability::BASICAS_PROPIAS + BASICAS_PROPIAS - [
         ["Msip", "fuenteprensa"],
         ["Msip", "grupo"],
-        ["Msip", "tdocumento"],
-        ["Msip", "trelacion"],
-        ["Msip", "tsitio"],
       ]
     end
 

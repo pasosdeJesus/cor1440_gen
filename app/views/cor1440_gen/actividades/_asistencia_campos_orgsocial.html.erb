@@ -1,12 +1,12 @@
-<td>
+<div class="div-tabla-celda">
   <%= fasistencia.association :orgsocial,
     collection: Msip::Orgsocial.all,
     label_method: :presenta_nombre,
     value_method: :id,
     label: false,
     input_html: { style: 'width: 6em' } %>
-</td>
-<td>
+</div>
+<div class="div-tabla-celda">
   <%= fasistencia.association :perfilorgsocial,
     collection: Msip::Perfilorgsocial.habilitados,
     label_method: :nombre,
@@ -14,5 +14,5 @@
     input_html: { style: 'width: 6em' },
     label: false
   %>
-</td>
+</div>
 

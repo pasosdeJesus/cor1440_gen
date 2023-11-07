@@ -27,10 +27,10 @@ Cor1440Gen::Engine.routes.draw do
   get "/actividadespf/conancestros" => "actividadespf#conancestros",
     as: :actividadespf_conancestros
 
-  get "/asistencia/nueva" => "actividades#nueva_asistencia",
-    as: :nueva_asistencia
+  #get "/asistencia/nueva" => "actividades#nueva_asistencia",
+  #  as: :nueva_asistencia
 
-  resources :asistencias, only: [], param: :index do
+  resources :asistencia, only: [], param: :index do
     member do
       delete '(:id)', to: "asistencias#destroy", as: "eliminar"
       post '/' => "asistencias#create", as: "crear"

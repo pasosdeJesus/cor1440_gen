@@ -1,47 +1,47 @@
-<div id="asistencias_marco">
-  <datalist id='fuente-asistentes'/>
-
-  <div id="tabla-asistencia" 
-       class="panel-body table-responsive" 
-       data-controller="rapidobenefcaso">
-    <div class="div-tabla"> 
-      <div id="asistencias_marco" class="div-tabla-cuerpo">
-        <div class="div-tabla-fila"> 
-          <div class="div-tabla-celda"><%= t('Nombres') %></div>
-          <div class="div-tabla-celda"><%= t('Apellidos') %></div>
-          <div class="div-tabla-celda"><%= t('Tipo de documento') %></div>
-          <div class="div-tabla-celda"><%= t('Identificación') %></div>
-          <div class="div-tabla-celda"><%= t('Sexo') %></div>
-          <div class="div-tabla-celda"><%= t('añonac') %></div>
-          <div class="div-tabla-celda"><%= t('Mes') %></div>
-          <div class="div-tabla-celda"><%= t('Día') %></div>
-          <%= render partial: 'asistencia_cuerpo_panel_orgsocial',
-            locals: { fasistencia: f} %>
-          <%= render partial: 'asistencia_cuerpo_panel_if',
-            locals: { fasistencia: f} %>
-        </div>
-        <%= f.simple_fields_for :asistencia do |subf| %>
-          <%= render partial: 'asistencia_campos', locals: {f: subf} %>
-        <% end %>
+<datalist id='fuente-asistentes'></datalist>
+<div id="asistencia" 
+  class="panel-body table-responsive" 
+  data-controller="rapidobenefcaso">
+  <div class="div-tabla"> 
+    <div id="asistencias_marco" class="div-tabla-cuerpo">
+      <div class="div-tabla-fila"> 
+        <div class="div-tabla-celda" style="width: 10em;"><%= t('Nombres') %></div>
+        <div class="div-tabla-celda" style="width: 10em;"><%= t('Apellidos') %></div>
+        <div class="div-tabla-celda" style="width: 8em;"><%= t('Tipo de documento') %></div>
+        <div class="div-tabla-celda" style="width: 10em;"><%= t('Identificación') %></div>
+        <div class="div-tabla-celda" style="width: 6em;"><%= t('Sexo') %></div>
+        <div class="div-tabla-celda" style="width: 8em;"><%= t('añonac') %></div>
+        <div class="div-tabla-celda" style="width: 6em;"><%= t('Mes') %></div>
+        <div class="div-tabla-celda" style="width: 6em;"><%= t('Día') %></div>
+        <%= render partial: 'asistencia_cuerpo_panel_orgsocial',
+          locals: { fasistencia: f} %>
+        <%= render partial: 'asistencia_cuerpo_panel_if',
+          locals: { fasistencia: f} %>
+        <div class="div-tabla-celda"><%= t('Acciones') %></div>
       </div>
+      <%= f.simple_fields_for :asistencia do |subf| %>
+        <%= render partial: 'asistencia_campos', locals: {f: subf} %>
+      <% end %>
     </div>
   </div>
-
-  <div class="enlace-agregar-asistencia">
-    <%= f.submit "Agregar #{Msip::Solicitud.human_attribute_name(:Asistente)}",
-      formaction: cor1440_gen.crear_asistencia_path(
-        index: @actividad.asistencia.size
-      ),
-      formmethod: :post,
-      formnovalidate: true,
-      class: 'btn btn-sm btn-primary',
-      name: "agregar-asistencia",
-      id: "agregar-asistencia", 
-      data:  {
-        disable_with: false 
-      } %>
-  </div>
-
-  <%= render partial: 'asistencia_cuerpo_panel_pie', 
-    locals: { fasistencia: f} %>
 </div>
+
+<div class="enlace-agregar-asistencia">
+  <%= f.submit "Agregar #{Msip::Solicitud.human_attribute_name(:Asistente)}",
+    formaction: cor1440_gen.crear_asistencia_path(
+      index: @actividad.asistencia.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    class: 'btn btn-sm btn-primary',
+    name: "agregar-asistencia",
+    id: "agregar-asistencia", 
+    data:  {
+      disable_with: false,
+      'turbo-method': :post,
+      method: :post
+    } %>
+</div>
+<%= render partial: 'asistencia_cuerpo_panel_pie', 
+  locals: { fasistencia: f} %>
+

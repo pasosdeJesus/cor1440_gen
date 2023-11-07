@@ -2,9 +2,12 @@
 
 console.log('Hola Mundo desde ESM')
 
-import Rails from "@rails/ujs";
-Rails.start();
-window.Rails = Rails
+import Rails from "@rails/ujs"
+if (typeof window.Rails == 'undefined') {
+  Rails.start();
+  window.Rails = Rails
+}
+import {Turbo} from '@hotwired/turbo-rails';
 
 import './jquery'
 import '../../vendor/assets/javascripts/jquery-ui'
@@ -22,7 +25,6 @@ import 'gridstack'
 
 import {AutocompletaAjaxExpreg} from '@pasosdejesus/autocompleta_ajax'
 window.AutocompletaAjaxExpreg = AutocompletaAjaxExpreg
-
 
 let esperarRecursosSprocketsYDocumento = function (resolver) {
   if (typeof window.puntomontaje == 'undefined') {
@@ -59,16 +61,14 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
 })
 
 
-document.addEventListener('turbo:load', (e) => {
  /* Lo que debe ejecutarse cada vez que turbo cargue una página,
  * tener cuidado porque puede dispararse el evento turbo varias
  * veces consecutivas al cargar una página.
  */
-  
+document.addEventListener('turbo:load', (e) => {
   console.log('Escuchador turbo:load')
 
   msip_ejecutarAlCargarPagina(window)
 })
 
 import './controllers'
-import "./controllers"

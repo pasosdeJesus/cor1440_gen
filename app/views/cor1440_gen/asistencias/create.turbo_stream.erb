@@ -2,15 +2,16 @@
   <%= f.simple_fields_for :asistencia,
     child_index: params[:index] do |subf| %>
     <%= turbo_stream.replace "agregar-asistencia" do %>
-      <%= form.submit "Agregar otra asistencia",·
-      formaction: crear_asistencia_path(subf.index.to_i + 1),
+      <%= f.submit "Agregar asistente",
+        formaction: cor1440_gen.crear_asistencia_path(subf.index.to_i + 1),
         formmethod: :post,
         formnovalidate: true,
         class: 'btn btn-sm btn-primary',
         id: "agregar-asistencia" %>
     <% end %>
+
     <%= turbo_stream.append "asistencias_marco" do %>
-      <%= render "asistencia_campos", f: subf %>
+      <%= render "cor1440_gen/actividades/asistencia_campos", f: subf %>
     <% end %>
   <% end %>
 <% end %>
