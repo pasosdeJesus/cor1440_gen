@@ -528,19 +528,7 @@ module Cor1440Gen
                   # En caso de que se haya autocompletado una persona remplazamos
                   # nueva id en base antes de guardar de manera tipica
                   ab = Cor1440Gen::Asistencia.find(a[:id])
-                  if ab && a[:persona_attrbiutes] &&
-                      a[:persona_attributes][:id].to_i != ab.persona_id.to_i &&
-                      Msip::Persona.where(
-                        id: a[:persona_attributes][:id].to_i).count == 1
-                    # Persona autocompletada
-                    op = ab.persona
-                    ab.persona_id = a[:persona_attributes][:id].to_i
-                    ab.save(validate: false)
-                    if op.en_blanco?
-                      op.destroy
-                    end
-                  end
-                  if ab && a[:persona_attrbiutes] &&
+                  if ab && a[:persona_attributes] &&
                       a[:persona_attributes][:id].to_i == ab.persona_id.to_i &&
                       ab.persona.nombres == "N" &&
                       ab.persona.apellidos == "N" 
