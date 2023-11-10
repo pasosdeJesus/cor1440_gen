@@ -24,24 +24,24 @@
       <% end %>
     </div>
   </div>
-</div>
 
-<div class="enlace-agregar-asistencia">
-  <%= f.submit "Agregar #{Msip::Solicitud.human_attribute_name(:Asistente)}",
-    formaction: cor1440_gen.crear_asistencia_path(
-      index: @actividad.asistencia.size
-    ),
-    formmethod: :post,
-    formnovalidate: true,
-    class: 'btn btn-sm btn-primary',
-    name: "agregar-asistencia",
-    id: "agregar-asistencia", 
-    data:  {
-      disable_with: false,
-      'turbo-method': :post,
-      method: :post
-    } %>
-</div>
-<%= render partial: 'asistencia_cuerpo_panel_pie', 
-  locals: { fasistencia: f} %>
+  <div class="enlace-agregar-asistencia">
+    <%= f.submit "Agregar #{Msip::Solicitud.human_attribute_name(:Asistente)}",
+      formaction: cor1440_gen.crear_asistencia_path(
+        index: @actividad.asistencia.size
+      ),
+      formmethod: :post,
+      formnovalidate: true,
+      class: 'btn btn-sm btn-primary',
+      name: "agregar-asistencia",
+      id: "agregar-asistencia", 
+      data:  {
+        disable_with: false,
+        'turbo-method': :post,
+        method: :post
+      } %>
+  </div>
+  <%= render partial: 'asistencia_cuerpo_panel_pie', 
+    locals: { fasistencia: f} %>
 
+</div>
