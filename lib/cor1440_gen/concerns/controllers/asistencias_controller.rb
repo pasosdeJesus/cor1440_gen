@@ -19,7 +19,7 @@ module Cor1440Gen
           private
 
           def prepara_actividad
-            @actividad = Cor1440Gen::Actividad.new(
+            @registro = @actividad = Cor1440Gen::Actividad.new(
               asistencia: [Cor1440Gen::Asistencia.new]
             )
           end
