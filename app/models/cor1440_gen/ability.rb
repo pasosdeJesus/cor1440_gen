@@ -195,7 +195,7 @@ module Cor1440Gen
     # @usuario Usuario que hace petición
     def self.initialize_cor1440_gen(habilidad, usuario = nil)
       # Sin autenticación puede consultarse información geográfica
-      habilidad.can(:read, [Msip::Pais, Msip::Departamento, Msip::Municipio, Msip::Clase])
+      habilidad.can(:read, [Msip::Pais, Msip::Departamento, Msip::Municipio, Msip::Centropoblado])
       if !usuario || usuario.fechadeshabilitacion
         return
       end

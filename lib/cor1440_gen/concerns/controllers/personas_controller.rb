@@ -35,7 +35,7 @@ module Cor1440Gen
 
           def atributos_form_cor1440_gen
             a = atributos_form_msip - [:actividad_ids] + [:caracterizaciones]
-            a[a.index(:clase)] = :clase_id
+            a[a.index(:centropoblado)] = :centropoblado_id
             a[a.index(:departamento)] = :departamento_id
             a[a.index(:municipio)] = :municipio_id
             a[a.index(:pais)] = :pais_id

@@ -214,7 +214,7 @@ module Cor1440Gen
               self.pais_id.nil? &&
               self.departamento_id.nil? &&
               self.municipio_id.nil? &&
-              self.clase_id.nil?
+              self.centropoblado_id.nil?
           end
 
         end # included
