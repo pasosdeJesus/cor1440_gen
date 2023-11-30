@@ -193,7 +193,11 @@ module Cor1440Gen
           validate :asistentes_no_repetidos
           def asistentes_no_repetidos
             asistentes = []
-            self.asistencia.map { |as| asistentes.push(as.persona_id) }
+            self.asistencia.map do |as|
+              if !as.persona_id.nil?
+                asistentes.push(as.persona_id)
+              end
+            end
             if asistentes.length != asistentes.uniq.length
               asrepetidos = []
               asrepetidos.push(asistentes.detect { |e| asistentes.count(e) > 1 })
