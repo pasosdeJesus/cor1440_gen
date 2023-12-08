@@ -126,7 +126,10 @@
         <% end %>
 
         <td>
-          <% asistentes = consb.joins(:persona) %>
+          <% asistentes = consb.joins(:asistencia).joins(
+            "JOIN msip_persona ON msip_persona.id = "\
+            "cor1440_gen_asistencia.persona_id"
+          ) %>
           <% af = asistentes.where('msip_persona.sexo': sexof).select(
             'cor1440_gen_asistencia.persona_id') %>
           <%= af.count %>
@@ -149,9 +152,12 @@
           </td>
         <% end %>
         <td>
-          <% asistunicos = consb.joins(:persona).
-            select('distinct cor1440_gen_asistencia.persona_id').
-            pluck('cor1440_gen_asistencia.persona_id') %> 
+          <% asistunicos = consb.joins(:asistencia).joins(
+            "JOIN msip_persona ON msip_persona.id = "\
+            "cor1440_gen_asistencia.persona_id"
+             ).select('distinct cor1440_gen_asistencia.persona_id').pluck(
+            'cor1440_gen_asistencia.persona_id'
+             ) %> 
           <% uf = Msip::Persona.where(id: asistunicos).where(sexo: sexof) %>
           <% if uf.count > 0 %>
             <% ev = uf.pluck('id').join(",") %>
