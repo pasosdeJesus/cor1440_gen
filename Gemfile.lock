@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: 6ec5ba0c42a3a38b8530c2235bbbe905be73c965
+  revision: 44446bcafef7dac19ac2a47c807950b10dbfe21a
   branch: main
   specs:
     mr519_gen (2.2.0.beta4)
@@ -426,7 +426,7 @@ GEM
     tilt (2.3.0)
     timeout (0.4.1)
     ttfunk (1.7.0)
-    turbo-rails (1.5.0)
+    turbo-rails (2.0.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
