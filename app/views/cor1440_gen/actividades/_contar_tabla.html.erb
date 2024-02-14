@@ -68,7 +68,8 @@
     <% apfs = Cor1440Gen::Actividadpf.where(
       proyectofinanciero_id: @contar_pfid).
       joins('JOIN cor1440_gen_resultadopf as rpf ON cor1440_gen_actividadpf.resultadopf_id=rpf.id').
-      order('rpf.numero, nombrecorto')%>
+      joins('JOIN cor1440_gen_objetivopf as opf ON rpf.objetivopf_id=opf.id').
+      order('opf.numero', 'rpf.numero', 'nombrecorto')%>
     <% apfs.each do |a| %>
       <tr>
         <% # Una misma actividad puede tener varias actividades de convenio del
