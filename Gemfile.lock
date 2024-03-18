@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 54915abcbb7255f4399e44dcb76b05337dc0a212
+  revision: b6a704b8d17df5ed1994291590dbededa696ba96
   branch: main
   specs:
     heb412_gen (2.2.0.beta4)
@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: db9aa814bfffe7a1a4636c65bda68eda7a3e3ecd
+  revision: 88385b52cc70bd66a1f043e18f332017a3cb242f
   branch: main
   specs:
     mr519_gen (2.2.0.beta4)
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: 306d12415001b3626cace575bb6c9eed006e3fef
+  revision: b4916ff97261dd5790dd1efe5e471abc301460d3
   branch: main
   specs:
     msip (2.2.0.beta5)
@@ -238,7 +238,7 @@ GEM
       railties (>= 6.0.0)
     json (2.7.1)
     language_server-protocol (3.17.0.3)
-    libxml-ruby (5.0.2)
+    libxml-ruby (5.0.3)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -254,7 +254,7 @@ GEM
     mime-types-data (3.2024.0206)
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
-    minitest (5.22.2)
+    minitest (5.22.3)
     minitest-reporters (1.6.1)
       ansi
       builder
@@ -272,7 +272,7 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.2)
+    nokogiri (1.16.3)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     odf-report (0.7.3)
@@ -339,7 +339,7 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
-    rails-i18n (7.0.8)
+    rails-i18n (7.0.9)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
     railties (7.1.3)
@@ -426,7 +426,7 @@ GEM
     tilt (2.3.0)
     timeout (0.4.1)
     ttfunk (1.7.0)
-    turbo-rails (2.0.4)
+    turbo-rails (2.0.5)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
