@@ -58,6 +58,10 @@ module Cor1440Gen
             ]
           end
 
+          def con_boton_copiar?
+              true
+          end
+
           def vistas_manejadas
             ["Actividad"]
           end

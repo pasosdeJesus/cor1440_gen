@@ -233,6 +233,34 @@ module Cor1440Gen
             end
           end
 
+
+          # Usada por Msip::Modelo.copiar_y_guardar
+          def excepciones_al_copiar_asociaciones
+            [
+              :actividad_anexo, 
+              :respuestafor,
+            ]
+          end
+
+          # Usada por Msip::Modelo.copiar_y_guardar
+          def copiar_especifico(registro)
+            # De manera especial copiamos respuestafor asociado
+            arfs = Cor1440Gen::ActividadRespuestafor.where(actividad_id: self.id)
+            arfs.each do |arf|
+              nr = arf.respuestafor.dup
+              nr.save(validate: false)
+              narf = arf.dup
+              narf.respuestafor_id = nr.id
+              narf.actividad_id = registro.id
+              narf.save(validate: false)
+              arf.respuestafor.valorcampo.each do |v|
+                nv = v.dup
+                nv.respuestafor_id = nr.id
+                nv.save(validate: false)
+              end
+            end
+          end #copiar_especifico
+
           def recalcula_poblacion
             ConteosHelper.recalcula_poblacion(self)
           end

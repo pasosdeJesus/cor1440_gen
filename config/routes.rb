@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 Cor1440Gen::Engine.routes.draw do
-  get "/actividad/copia/:actividad_id" =>
-    "actividades#copia",
-    as: :copia_actividad
+  get "/actividad/copiar/:id" =>
+    "actividades#copiar",
+    as: :copiar_actividad
 
   # Poner antes de resources :actividads
   get "/actividades/contar" => "actividades#contar",
