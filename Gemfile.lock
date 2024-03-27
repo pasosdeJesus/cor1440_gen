@@ -18,10 +18,10 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: ea8e90ec9ff537affc7aade3ba5b33d5247dd439
-  branch: tomselect
+  revision: 7eea7af9fade94b84d2ea674eefdf24971815c47
+  branch: main
   specs:
-    heb412_gen (2.2.0.beta6)
+    heb412_gen (2.3.0.alfa2)
       mr519_gen
       msip
       redcarpet
@@ -29,19 +29,19 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: 2770039e3eb438ab92c69abc187aa147e52319de
-  branch: tomselect
+  revision: 2d58a40a419d5e8b27f0d12b61e72f4420625996
+  branch: main
   specs:
-    mr519_gen (2.2.0.beta6)
+    mr519_gen (2.3.0.alfa2)
       msip
       rails
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: 43e85f2a0415a379b743a433fcbb903ac7958eae
-  branch: tomselect
+  revision: 31bbedbafb0b8ce47e368f72adb50fb5ca5c413e
+  branch: main
   specs:
-    msip (2.2.0.beta6)
+    msip (2.3.0.alfa2)
       cancancan (~> 3)
       devise (~> 4)
       devise-i18n (~> 1)
@@ -218,6 +218,16 @@ GEM
       webrick (~> 1.7)
       websocket-driver (~> 0.7)
     ffi (1.17.0)
+    ffi (1.17.0-aarch64-linux-gnu)
+    ffi (1.17.0-aarch64-linux-musl)
+    ffi (1.17.0-arm-linux-gnu)
+    ffi (1.17.0-arm-linux-musl)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86-linux-gnu)
+    ffi (1.17.0-x86-linux-musl)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.0-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -269,6 +279,18 @@ GEM
     nio4r (2.7.3)
     nokogiri (1.16.7)
       mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.16.7-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.16.7-arm-linux)
+      racc (~> 1.4)
+    nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86-linux)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     odf-report (0.8.1)
       mime-types
@@ -454,6 +476,21 @@ GEM
     zeitwerk (2.6.17)
 
 PLATFORMS
+  aarch64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  ruby
+  x86-linux
+  x86-linux-gnu
+  x86-linux-musl
+  x86_64-darwin
+  x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
   x86_64-openbsd
 
 DEPENDENCIES

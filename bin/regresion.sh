@@ -86,7 +86,10 @@ if (test -d test/integration -a "$SALTAINTEGRACION" != "1") then {
   done;
 } fi;
 
-if (test -f $rutaap/bin/pruebasjs.sh -a -d $rutaap/test/puppeteer -a "x$NOPRUEBAJS" != "x1") then {
+# En adJ 7.5 no opera modo headless, ejecutar pruebasjs.sh manual y localmente
+# https://gitlab.com/pasosdeJesus/adJ/-/issues/15
+s=`uname`
+if (test "$s" != "OpenBSD" -a -f $rutaap/bin/pruebasjs.sh -a -d $rutaap/test/puppeteer -a "x$NOPRUEBAJS" != "x1") then {
   echo "== Con puppeteer"
   (cd $rutaap; ${RAILS} msip:stimulus_motores; bin/pruebasjs.sh)
   if (test "$?" != "0") then {
