@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: 88385b52cc70bd66a1f043e18f332017a3cb242f
+  revision: ca8b8e82313374119355a57e21e2bbdf615f9f34
   branch: main
   specs:
     mr519_gen (2.2.0.beta4)
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: 1f43ab095ac68a5e0bb233d4a55e8055ddaf6326
+  revision: cb6ca8fa674b97734e2c5bdf250f0c22461733da
   branch: main
   specs:
     msip (2.2.0.beta5)
@@ -197,10 +197,10 @@ GEM
       capybara (~> 3.0)
       ferrum (~> 0.14.0)
     date (3.3.4)
-    debug (1.9.1)
+    debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
-    devise (4.9.3)
+    devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -271,7 +271,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.1)
-    nokogiri (1.16.3)
+    nokogiri (1.16.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     odf-report (0.8.1)
@@ -516,4 +516,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.5.7
+   2.5.9
