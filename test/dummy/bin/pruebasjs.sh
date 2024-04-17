@@ -12,6 +12,9 @@ if (test "$IPDES" = "") then {
   export IPDES=127.0.0.1
 } fi;
 IPDESRES=$IPDES
+if (test "$PROTDES" = "") then {
+  export PROTDES=http 
+} fi;
 if (test "$RAILS_ENV" = "") then {
 # Si ejecutamos en RAILS_ENV=test RUTA_RELATIVA será / por
 # https://github.com/rails/rails/issues/49688
@@ -27,11 +30,6 @@ IPDES=$IPDESRES
 if (test "$PUERTOPRU" = "") then {
   export PUERTOPRU=33001;
 } fi;
-fstat | grep ":${PUERTOPRU}" 
-if (test "$?" = "0") then {
-  echo "Ya está corriendo un proceso en el puerto $PUERTOPRU, detengalo antes";
-  exit 1;
-} fi;
 if (test ! -f .env) then {
   echo "Falta .env"
   exit 1;
@@ -42,6 +40,12 @@ echo "IPDES=$IPDES"
 echo "PUERTODES=$PUERTODES"
 
 if (test "$IPDES" = "127.0.0.1") then {
+  fstat | grep ":${PUERTOPRU}" 
+  if (test "$?" = "0") then {
+    echo "Ya está corriendo un proceso en el puerto $PUERTOPRU, detengalo antes";
+    exit 1;
+  } fi;
+
   echo "=== Deteniendo"
   bin/detiene
 
@@ -80,7 +84,7 @@ if (test "$clrps" != "1") then {
 } fi;
 
 echo "***"
-w3m -dump http://${IPDES}:${PUERTODES}/${RUTA_RELATIVA} | tee /tmp/salw3m
+w3m -dump ${PROTDES}://${IPDES}:${PUERTODES}/${RUTA_RELATIVA} | tee /tmp/salw3m
 if (test "$?" != "0" -o  ! -s /tmp/salw3m) then {
   exit 1;
 } fi;
