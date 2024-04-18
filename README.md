@@ -11,8 +11,8 @@ cifrado como en adJ).
 La aplicación ```cor1440``` disponible en 
 <https://gitlab.com/pasosdeJesus/cor1440>
 utiliza este motor sin personalización alguna.  Puede ver ejemplos de 
-personalizaciones en <https://gitlab.com/pasosdeJesus/cor1440_cinep> y 
-<https://github.com/pasosdeJesus/cor1440_sjrlac>
+personalizaciones en <https://gitlab.com/pasosdeJesus/si_fasol> y 
+<https://github.com/pasosdeJesus/si_jrscol>
 
 
 ## Diseño, Uso, Pruebas y Desarrollo
