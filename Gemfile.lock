@@ -18,10 +18,10 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 14cb063c0370fbdb4df5400cd9ece8077750f404
+  revision: fedc0a8f17a2fec04b92a3c9b79e3e072d3af76e
   branch: main
   specs:
-    heb412_gen (2.2.0.beta4)
+    heb412_gen (2.2.0.beta5)
       mr519_gen
       msip
       redcarpet
@@ -29,16 +29,16 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: ca8b8e82313374119355a57e21e2bbdf615f9f34
+  revision: f76b136b5e131612dd555f511d553e37f784f629
   branch: main
   specs:
-    mr519_gen (2.2.0.beta4)
+    mr519_gen (2.2.0.beta5)
       msip
       rails
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: cb6ca8fa674b97734e2c5bdf250f0c22461733da
+  revision: 732e006f37c72d17f53cb00580d8ee8e592e6fed
   branch: main
   specs:
     msip (2.2.0.beta5)
@@ -59,7 +59,7 @@ GIT
 PATH
   remote: .
   specs:
-    cor1440_gen (2.2.0.beta4)
+    cor1440_gen (2.2.0.beta5)
       devise
       heb412_gen
       kt-paperclip
