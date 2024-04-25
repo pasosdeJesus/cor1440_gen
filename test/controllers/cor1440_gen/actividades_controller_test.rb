@@ -120,7 +120,7 @@ module Cor1440Gen
 
     test "crea copia de una actividad" do
       n1 = Cor1440Gen::Actividad.count
-      get copia_actividad_path(@actividad.id)
+      get copiar_actividad_path(@actividad.id)
       assert_response :success
       assert (n1+1), Cor1440Gen::Actividad.count
     end
