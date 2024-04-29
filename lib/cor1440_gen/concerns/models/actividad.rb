@@ -463,7 +463,7 @@ module Cor1440Gen
                 end
                 pn = ''
                 if a.resultadopf && a.resultadopf.objetivopf
-                  pn = pa.resultadopf.objetivopf.presenta_nombre
+                  pn = a.resultadopf.objetivopf.presenta_nombre
                 end
                 memo + sep + pn
               end
