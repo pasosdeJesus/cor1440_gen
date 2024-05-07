@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: 068cb46996a5235a40ee85f11d603d49aa65cea5
+  revision: 9cb92cb25f952f0d4d8a1694d86a934417d26a9d
   branch: main
   specs:
     msip (2.2.0.beta5)
@@ -516,4 +516,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.5.9
+   2.5.10
