@@ -628,6 +628,7 @@ cor1440_gen_rangoedadc_todos = () ->
     # (para evitar filas repetidas)
     $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
       $('.chosen-select').chosen()
+      window.Msip__Motor.configurarElementosTomSelect()
       params = {
         fecha: $('#actividad_fecha_localizada').val(),
       }
@@ -662,6 +663,8 @@ cor1440_gen_rangoedadc_todos = () ->
     # posibilidad de edición al mismo y en la celda de actividades
     # de convenio se permite elegir entre las del proyecto elegido
     $(document).on('change', 'select[id^=actividad_actividad_proyectofinanciero_attributes_][id$=proyectofinanciero_id]', (e, res) ->
+      #El parametro res sería enviado por chosen pero no por tom-select
+      
       # Deshabilitar edición y dejar disponibles actividades de convenio
       $(e.target).attr('disabled', true)
       # Como deshabilitamos un select, creamos un input con el mismo nombre y
@@ -673,9 +676,9 @@ cor1440_gen_rangoedadc_todos = () ->
       e.target.parentNode.append(el)
       $(e.target).trigger('chosen:updated')
       idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
-      params = { pfl: [+res.selected]}
+      params = { pfl: [+e.target.value]}
       msip_llena_select_con_AJAX2('actividadespf', params,
-        idac, 'con Actividades de convenio ' + res.selected, root,
+        idac, 'con Actividades de convenio ' + e.target.value, root,
         'id', 'nombre', null)
     )
 
