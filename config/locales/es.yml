@@ -276,6 +276,7 @@ es:
         sectorapc: Sector APC
         semestreformulacion: Semestre de formulación
         tasaej: Tasa de cambio
+        tipomoneda: Tipo de moneda
         titulo: Título largo del proyecto
       "cor1440_gen/rangoedadac":
         Rangoedadac: Rango de edad en actividades
