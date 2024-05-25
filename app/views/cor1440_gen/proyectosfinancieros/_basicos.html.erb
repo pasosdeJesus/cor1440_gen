@@ -17,7 +17,7 @@
       label_method: :nombre,
       value_method: :id,
       input_html: { 
-        class: 'chosen-select'
+        class: 'tom-select'
       }
     %>
   </div>
@@ -26,7 +26,7 @@
       collection: Cor1440Gen::Sectorapc.habilitados,
       label_method: :nombre,
       value_method: :id,
-      input_html: { class: 'chosen-select' }
+      input_html: { class: 'tom-select' }
     %>
 
   </div>
@@ -105,7 +105,7 @@
       include_blank: false,
       input_html: {
         value: f.object.estado ? f.object.estado : 'E',
-        class: 'chosen-select' 
+        class: 'tom-select' 
       } 
     %>
   </div>
@@ -115,7 +115,7 @@
       include_blank: false,
       input_html: {
         value: f.object.estado ? f.object.estado : 'N',
-        class: 'chosen-select' 
+        class: 'tom-select' 
       }
     %>
   </div>

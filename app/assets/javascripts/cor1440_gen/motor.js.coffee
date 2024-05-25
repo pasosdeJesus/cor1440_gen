@@ -293,7 +293,9 @@ cor1440_gen_rangoedadc_todos = () ->
     )
     $('#actividad_proyectofinanciero tr').not(':hidden').each(() ->
       $(this).find('select[id$=actividadpf_ids]').val(ac_relacionadas)
-      $(this).find('select[id$=actividadpf_ids]').trigger('chosen:updated')
+      $(this).find('select[id$=actividadpf_ids]').each((el) ->
+        Msip__Motor.configurarElementoTomSelect(el)
+      )
     )
 
 @cor1440_gen_actividad_actualiza_mismotipo = (root, res) ->
@@ -329,7 +331,7 @@ cor1440_gen_rangoedadc_todos = () ->
     )
     int = posibles.filter( (v) -> ac_conancestros.includes(v))
     $(this).val(int)
-    $(this).trigger('chosen:updated')
+    Msip__Motor.configurarElementoTomSelect(this)
     if int.length != actuales.length
       $(this).trigger('cor1440_gen:conancestros_actualizado')
   )
@@ -484,7 +486,8 @@ cor1440_gen_rangoedadc_todos = () ->
   )
   msip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', true)
   $('#' + idsel).val('')
-  $('#' + idsel).trigger('chosen:updated')
+  el = document.querySelector('#' + idsel)
+  Msip__Motor.configurarElementoTomSelect(el)
 
   return
 
@@ -627,7 +630,7 @@ cor1440_gen_rangoedadc_todos = () ->
     # entre los vigentes pero excluyendos los que ya estuvieran
     # (para evitar filas repetidas)
     $(document).on('cocoon:after-insert', '#actividad_proyectofinanciero', (e, objetivo) ->
-      $('.chosen-select').chosen()
+      Msip__Motor.configurarElementosTomSelect()
       window.Msip__Motor.configurarElementosTomSelect()
       params = {
         fecha: $('#actividad_fecha_localizada').val(),
@@ -650,7 +653,7 @@ cor1440_gen_rangoedadc_todos = () ->
 
     $(document).on('change', 'select[id^=actividad_actividad_rangoedadac_attributes_][id$=rangoedadac_id]', (e, res) ->
       $(e.target).attr('disabled', true)
-      $(e.target).trigger('chosen:updated')
+      Msip__Motor.configurarElementoTomSelect(e.target)
     )
 
     # Al eliminar una fila de la tabla
@@ -674,7 +677,7 @@ cor1440_gen_rangoedadc_todos = () ->
       el.setAttribute('type', 'hidden')
       el.setAttribute('value', e.target.value)
       e.target.parentNode.append(el)
-      $(e.target).trigger('chosen:updated')
+      Msip__Motor.configurarElementoTomSelect(e.target)
       idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
       params = { pfl: [+e.target.value]}
       msip_llena_select_con_AJAX2('actividadespf', params,
