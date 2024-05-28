@@ -81,8 +81,8 @@ gem "will_paginate" # Pagina listados
 # lógico y no alfabetico como las gemas anteriores)
 
 gem "msip", # Motor generico
-  #git: "https://gitlab.com/pasosdeJesus/msip.git", branch: 'tomselect'
-  path: '../msip-2.2'
+  git: "https://gitlab.com/pasosdeJesus/msip.git", branch: 'tomselect'
+  #path: '../msip-2.2'
 
 gem "mr519_gen", # Motor de gestion de formularios y encuestas
   git: "https://gitlab.com/pasosdeJesus/mr519_gen.git", branch: 'tomselect'
