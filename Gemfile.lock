@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 21984f53d06035bc8cc0293faca45d80af20f037
+  revision: 60dbf58b5d1646cc32028de3ecf7ac94f7cd96be
   branch: tomselect
   specs:
     heb412_gen (2.2.0.beta6)
@@ -29,15 +29,17 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: dcbc0b2d92b55c85e19e5a1f183077304c0acd34
+  revision: 5997a881b73529d007ac268bad0c2ef2d4f591d3
   branch: tomselect
   specs:
     mr519_gen (2.2.0.beta6)
       msip
       rails
 
-PATH
-  remote: ../msip-2.2
+GIT
+  remote: https://gitlab.com/pasosdeJesus/msip.git
+  revision: 876f63094344ae3b61e15136399b96a5f8251c6f
+  branch: tomselect
   specs:
     msip (2.2.0.beta6)
       cancancan (~> 3)
@@ -165,7 +167,7 @@ GEM
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
     camertron-eprun (1.1.1)
-    cancancan (3.5.0)
+    cancancan (3.6.1)
     capybara (3.40.0)
       addressable
       matrix
@@ -204,7 +206,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.12.0)
+    devise-i18n (1.12.1)
       devise (>= 4.9.0)
     docile (1.4.0)
     dotenv (3.1.0)
@@ -251,7 +253,7 @@ GEM
     mime-types-data (3.2024.0305)
     mini_mime (1.1.5)
     mini_portile2 (2.8.6)
-    minitest (5.22.3)
+    minitest (5.23.1)
     minitest-reporters (1.6.1)
       ansi
       builder
@@ -269,7 +271,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.1)
-    nokogiri (1.16.4)
+    nokogiri (1.16.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     odf-report (0.8.1)
@@ -379,7 +381,7 @@ GEM
     rubocop-minitest (0.35.0)
       rubocop (>= 1.61, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails (2.24.1)
+    rubocop-rails (2.25.0)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.33.0, < 2.0)
@@ -398,7 +400,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    simple_form (5.3.0)
+    simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     simplecov (0.22.0)
