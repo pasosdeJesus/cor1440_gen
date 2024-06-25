@@ -512,19 +512,27 @@ module Cor1440Gen
                   # Si no se debía eliminar persona sino sólo asistente
                   # lo maneja rails(?)
                 elsif a && a[:id] && a[:id] == "" &&
-                    a[:persona_attributes] &&
-                    a[:persona_attributes][:id] &&
-                    a[:persona_attributes][:id].to_i > 0 &&
-                    Msip::Persona.where(
-                      id: a[:persona_attributes][:id].to_i,
-                    ).count == 1
+                  a[:persona_attributes] &&
+                  a[:persona_attributes][:id] &&
+                  a[:persona_attributes][:id].to_i > 0 &&
+                  Msip::Persona.where(
+                    id: a[:persona_attributes][:id].to_i,
+                  ).count == 1
                   # Ubicamos los de autocompletacion y para esos creamos
                   # un registro si hace falta
-                  ac = Cor1440Gen::Asistencia.create({
-                    actividad_id: @actividad.id,
-                    persona_id: a[:persona_attributes][:id],
-                  })
-                  ac.save!(validate: false)
+                  if Cor1440Gen::Asistencia.where(actividad_id: @actividad.id,
+                      persona_id: a[:persona_attributes][:id]).count == 1
+                    ac = Cor1440Gen::Asistencia.where(
+                      actividad_id: @actividad.id,
+                      persona_id: a[:persona_attributes][:id]
+                    ).take
+                  else
+                    ac = Cor1440Gen::Asistencia.create({
+                      actividad_id: @actividad.id,
+                      persona_id: a[:persona_attributes][:id],
+                    })
+                    ac.save!(validate: false)
+                  end
                   params[:actividad][:asistencia_attributes][llavea.to_s][:id] = ac.id
                   actividades_en_tabla << ac.id
                 elsif a[:id].to_i > 0
