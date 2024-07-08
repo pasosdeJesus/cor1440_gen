@@ -8,7 +8,7 @@
   <% @registro.informeauditoria.each do |i| %>
     <tr>
       <td><%= i.detalle if i.detalle %></td>
-      <td><%= i.fecha_localizada %></td>
+      <td><%= i.fecha %></td>
       <td><%= i.devoluciones ? 'Si' : 'No' %></td>
       <td><%= i.seguimiento %></td>
     </tr>

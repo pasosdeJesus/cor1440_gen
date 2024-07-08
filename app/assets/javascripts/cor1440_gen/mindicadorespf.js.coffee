@@ -3,7 +3,7 @@
 
 @cor1440_gen_llena_medicion = (root, res) ->
   hid = res.hmindicadorpf_id
-  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_fecha_localizada]').val(res.fechaloc)
+  $('[id=mindicadorpf_pmindicadorpf_attributes_' + hid + '_fecha]').val(res.fechaloc)
   cont = 0
   res.datosint.forEach((v) ->
     $('[id$=_' + hid + '_datointermedioti_pmindicadorpf_attributes_' + cont + '_valor]').val(v.valor)
@@ -26,11 +26,11 @@
   event.preventDefault() 
   root =  window
   r = $(elem).closest('tr')
-  efinicio = r.find('[id$=finicio_localizada]')
-  hid = efinicio.attr('id').replace(/.*_attributes_([0-9]*)_finicio_localizada/, '$1');
+  efinicio = r.find('[id$=finicio]')
+  hid = efinicio.attr('id').replace(/.*_attributes_([0-9]*)_finicio/, '$1');
   datos = {
-    finicio_localizada: efinicio.val()
-    ffin_localizada: r.find('[id$=ffin_localizada]').val()
+    finicio: efinicio.val()
+    ffin: r.find('[id$=ffin]').val()
     indicadorpf_id: $(document).find('#mindicadorpf_indicadorpf_id').val()
     hmindicadorpf_id: hid
     mindicadorpf_id: $('form.edit_mindicadorpf')[0].id.split('_')[2]

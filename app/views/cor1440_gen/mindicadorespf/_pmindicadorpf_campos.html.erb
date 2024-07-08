@@ -1,25 +1,29 @@
 <tr class='nested-fields'>
   <td>
-    <%= f.input :fecha_localizada,
+    <%= f.input :fecha,
       label: false, 
       input_html: {
         readonly: 'readonly',
         class: 'em8'
       }, as: :string %>
   </td><td>
-    <%= f.input :finicio_localizada,
+    <%= f.input :finicio,
       label: false, 
       input_html: {
-        "data-behaviour" => "datepicker",
-        class: 'em8'
-      }, as: :string %>
+        class: "em8",
+        type: "date"
+      }, 
+      as: :string 
+    %>
   </td><td>
-    <%= f.input :ffin_localizada,
+    <%= f.input :ffin,
       label: false, 
       input_html: {
-        "data-behaviour" => "datepicker",
-        class: 'em8'
-      }, as: :string %>
+        class: 'em8',
+        type: "date"
+      },
+      as: :string 
+    %>
   </td><td>
     <%= f.input :restiempo,
       label: false,
@@ -39,7 +43,7 @@
         f.object.datointermedioti_pmindicadorpf.
         where(datointermedioti_id: di.id) do |di| %>
         <td>
-          <%= render 'datointermedioti_pmindicadorpf_campos', :f => di %>
+          <%= render 'datointermedioti_pmindicadorpf_campos', f: di %>
         </td>
       <% end %>
     <% end %>
@@ -75,7 +79,7 @@
                   class: 'btn btn-sm', 
                   onclick: 'cor1440_gen_calcula_pmindicadorpf(this, event)' %>
     <%= link_to_remove_association "Eliminar", f, 
-      :class => 'btn btn-sm btn-danger' %>
+      class: 'btn btn-sm btn-danger' %>
     <div><%= f.error_notification %></div>
   </td>
 </tr>

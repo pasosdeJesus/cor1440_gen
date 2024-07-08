@@ -9,10 +9,10 @@
 
 @cor1440_gen_recalcula_duracion = (root) ->
   datos = {
-    fechainicio_localizada: $('#proyectofinanciero_fechainicio_localizada').val(),
-    fechacierre_localizada: $('#proyectofinanciero_fechacierre_localizada').val()
+    fechainicio: $('#proyectofinanciero_fechainicio').val(),
+    fechacierre: $('#proyectofinanciero_fechacierre').val()
   }
-  if datos.fechainicio_localizada != '' && datos.fechacierre_localizada != ''
+  if datos.fechainicio!= '' && datos.fechacierre!= ''
     msip_ajax_recibe_json(window, 'api/cor1440gen/duracion',
       datos, cor1440_gen_establece_duracion)
   else
@@ -27,19 +27,19 @@
     $('#proyectofinanciero_semestreformulacion').val(s)
   )
 
-  $(document).on('change', '#proyectofinanciero_fechainicio_localizada', (e) ->
+  $(document).on('change', '#proyectofinanciero_fechainicio', (e) ->
     cor1440_gen_recalcula_duracion(window)
   )
 
-  $(document).on('change', '#proyectofinanciero_fechacierre_localizada', (e) ->
+  $(document).on('change', '#proyectofinanciero_fechacierre', (e) ->
     cor1440_gen_recalcula_duracion(window)
   )
 
-  $(document).on('change', '#proyectofinanciero_fechainicio_localizada', (e) ->
+  $(document).on('change', '#proyectofinanciero_fechainicio', (e) ->
     cor1440_gen_recalcula_duracion(window)
   )
 
-  $(document).on('change', '#proyectofinanciero_fechacierre_localizada', (e) ->
+  $(document).on('change', '#proyectofinanciero_fechacierre', (e) ->
     cor1440_gen_recalcula_duracion(window)
   )
 

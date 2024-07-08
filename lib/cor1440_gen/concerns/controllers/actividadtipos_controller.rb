@@ -29,6 +29,15 @@ module Cor1440Gen
             ]
           end
 
+          def atributos_form
+            atributos_index - [
+              :id,
+              :fechacreacion_localizada,
+            ] + [
+              :fechacreacion,
+            ]
+          end
+
           def new
             @registro = clase.constantize.new
             @registro.nombre = "A"

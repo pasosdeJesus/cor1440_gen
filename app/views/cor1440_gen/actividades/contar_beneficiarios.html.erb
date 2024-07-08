@@ -19,9 +19,10 @@
           size: 10,
           label: false,
           placeholder: Cor1440Gen::Actividad.human_attribute_name(
-            'Fecha Inicial'),
+            'Fecha Inicial'
+          ),
           input_html: {
-            "data-behaviour" => "datepicker",
+            type: "date",
             value: fecha_estandar_local(@contarb_fechaini)
           }
         %>
@@ -32,11 +33,13 @@
           size: 10,
           label: false,
           placeholder: Cor1440Gen::Actividad.human_attribute_name(
-            'Fecha Final'),
+            'Fecha Final'
+          ),
           input_html: {
-            "data-behaviour" => "datepicker",
+            type: "date",
             value: fecha_estandar_local(@contarb_fechafin)
-          } %>
+          } 
+        %>
       </div>
     </div> <!-- row -->
 
