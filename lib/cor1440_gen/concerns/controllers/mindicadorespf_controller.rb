@@ -536,22 +536,16 @@ module Cor1440Gen
           # Calcula medición de un indicador con parametros que vienen en param
           def medir_indicador
             prob = ""
-            if params[:finicio_localizada] &&
-                params[:finicio_localizada] != "" &&
-                params[:ffin_localizada] &&
-                params[:ffin_localizada] != "" &&
+            if params[:finicio] &&
+                params[:finicio] != "" &&
+                params[:ffin] &&
+                params[:ffin] != "" &&
                 params[:indicadorpf_id] &&
                 params[:indicadorpf_id] != "" &&
                 params[:hmindicadorpf_id] && params[:mindicadorpf_id] &&
                 params[:mindicadorpf_id].to_i > 0
-              fini = Msip::FormatoFechaHelper.fecha_local_estandar(
-                params[:finicio_localizada],
-              )
-              fini = Date.strptime(fini, "%Y-%m-%d")
-              ffin = Msip::FormatoFechaHelper.fecha_local_estandar(
-                params[:ffin_localizada],
-              )
-              ffin = Date.strptime(ffin, "%Y-%m-%d")
+              fini = Date.strptime(params[:finicio], "%Y-%m-%d")
+              ffin = Date.strptime(params[:ffin], "%Y-%m-%d")
               indid = params[:indicadorpf_id].to_i
               ind = Cor1440Gen::Indicadorpf.find(indid)
               hmi = params[:hmindicadorpf_id].to_i

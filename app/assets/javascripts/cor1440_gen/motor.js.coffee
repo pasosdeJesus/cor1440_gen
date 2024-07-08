@@ -118,7 +118,7 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_identifica_ids_rangoedad(resp, rangos, idrf)
 
   # Fecha de la actividad
-  arf = msip_partes_fecha_localizada($('#actividad_fecha_localizada').val(), window.formato_fecha)
+  arf = msip_partes_fecha($('#actividad_fecha').val(), window.formato_fecha)
   anioref  = arf[0]
   mesref  = arf[1]
   diaref  = arf[2]
@@ -401,7 +401,7 @@ cor1440_gen_rangoedadc_todos = () ->
 
 @cor1440_gen_actividad_actualiza_pf = (root) ->
   params = {
-    fecha: $('#actividad_fecha_localizada').val(),
+    fecha: $('#actividad_fecha').val(),
   }
   msip_llena_select_con_AJAX2('proyectosfinancieros', params,
     'actividad_proyectofinanciero_ids', 'con Convenios financiados',
@@ -457,7 +457,7 @@ cor1440_gen_rangoedadc_todos = () ->
 
 @cor1440_gen_actividad_actualiza_fecha2 = (root) ->
   params = {
-    fecha: $('#actividad_fecha_localizada').val(),
+    fecha: $('#actividad_fecha').val(),
   }
   msip_funcion_tras_AJAX('proyectosfinancieros', params,
     cor1440_gen_actividad_actualiza_pf2, 'con Convenios Financiados',
@@ -607,23 +607,9 @@ cor1440_gen_rangoedadc_todos = () ->
   )
 
   if (!opciones['sin_eventos_cambia_proyecto'])
-    $('#actividad_fecha_localizada').on('change', (ev) ->
+    $('#actividad_fecha').on('change', (ev) ->
       cor1440_gen_actividad_actualiza_fecha2(root)
     )
-    $('#actividad_fecha_localizada').datepicker({
-      format: root.formato_fecha,
-      autoclose: true,
-      todayHighlight: true,
-      language: 'es'
-    }).on('changeDate', (ev) ->
-      cor1440_gen_actividad_actualiza_fecha2(root)
-    )
-#    $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
-#      cor1440_gen_actividad_actualiza_actividadpf(root, null)
-#    )
-#    $('#actividad_actividadpf_ids').chosen().change( (e) ->
-#      cor1440_gen_actividad_actualiza_camposdinamicos(root)
-#    )
 
     # Tras añadir una fila a la tabla de proyectosfinancieros y sus
     # actividadespf, se deja proyecto en blanco y se permite elegir uno de
@@ -633,7 +619,7 @@ cor1440_gen_rangoedadc_todos = () ->
       Msip__Motor.configurarElementosTomSelect()
       window.Msip__Motor.configurarElementosTomSelect()
       params = {
-        fecha: $('#actividad_fecha_localizada').val(),
+        fecha: $('#actividad_fecha').val(),
       }
       if $('#actividad_grupo_ids').length > 0
         params['grupo_ids'] = $('#actividad_grupo_ids').val()

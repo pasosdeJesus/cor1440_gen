@@ -35,7 +35,9 @@ module Cor1440Gen
 
           def atributos_form
             a = atributos_show - [:id, :actividadpf, :poblacion]
-            return a
+            a.map do |e|
+              e == :fecha_localizada ? :fecha : e
+            end
           end
 
           def atributos_show
@@ -942,7 +944,7 @@ module Cor1440Gen
           def lista_params_cor1440_gen
             [
               :actividad,
-              :fecha_localizada,
+              :fecha,
               :lugar,
               :nombre,
               :objetivo,

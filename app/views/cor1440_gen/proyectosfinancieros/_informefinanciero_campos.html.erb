@@ -3,9 +3,9 @@
     <%= f.input :detalle, label: false, as: :text, input_html: { rows: 2 } %>
   </td>
   <td>
-    <%= f.input :fecha_localizada, label: false,
-      :input_html => { "data-behaviour" => "datepicker" },
-      :as => :string
+    <%= f.input :fecha, label: false,
+      input_html: { type: "date" },
+      as: :string
     %>
   </td>
   <td>
@@ -22,7 +22,7 @@
   <td>
     <%= f.input :id, as: :hidden %>
     <%= link_to_remove_association "Eliminar", f, 
-        :class => 'btn btn-sm btn-danger' 
+        class: 'btn btn-sm btn-danger'
     %>
     <div><%= f.error_notification %></div>
   </td>

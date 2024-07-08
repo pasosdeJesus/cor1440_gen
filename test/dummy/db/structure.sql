@@ -320,44 +320,6 @@ CREATE FUNCTION public.msip_nombre_vereda() RETURNS character varying
 
 
 --
--- Name: msip_ubicacionpre_actualiza_nombre(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION public.msip_ubicacionpre_actualiza_nombre() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-      DECLARE
-        temp TEXT[];
-        nompais TEXT;
-        nomdep TEXT;
-        nommun TEXT;
-        nomver TEXT;
-        nomcp TEXT;
-      BEGIN
-        RAISE NOTICE 'Al comienzo new.nombre=%', new.nombre;
-        nompais := COALESCE((SELECT nombre FROM public.msip_pais WHERE id=new.pais_id LIMIT 1), '');
-        RAISE NOTICE 'nompais=%', nompais;
-        nomdep := COALESCE((SELECT nombre FROM public.msip_departamento WHERE id=new.departamento_id LIMIT 1), '');
-        RAISE NOTICE 'nomdep=%', nomdep;
-        nommun := COALESCE((SELECT nombre FROM public.msip_municipio WHERE id=new.municipio_id LIMIT 1), '');
-        RAISE NOTICE 'nommun=%', nommun;
-        nomcp := COALESCE((SELECT nombre FROM public.msip_centropoblado WHERE id=new.centropoblado_id LIMIT 1), '');
-        RAISE NOTICE 'nomcp=%', nomcp;
-        nomver := COALESCE((SELECT nombre FROM public.msip_vereda WHERE id=new.vereda_id LIMIT 1), '');
-        RAISE NOTICE 'nomver=%', nomver;
-
-        temp = public.msip_ubicacionpre_nomenclatura(nompais,
-          nomdep, nommun, nomver, nomcp, new.lugar, new.sitio);
-        new.nombre := temp[1];
-        RAISE NOTICE 'new.nombre=%', new.nombre;
-        new.nombre_sin_pais := temp[2];
-        RAISE NOTICE 'new.nombre_sin_pais=%', new.nombre_sin_pais;
-        RETURN new;
-      END
-      $$;
-
-
---
 -- Name: msip_ubicacionpre_dpa_nomenclatura(character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -365,32 +327,29 @@ CREATE FUNCTION public.msip_ubicacionpre_dpa_nomenclatura(pais character varying
     LANGUAGE sql
     AS $$
         SELECT CASE
-        WHEN pais IS NULL OR TRIM(pais) = '' THEN
-          array['', '']
-        WHEN departamento IS NULL OR TRIM(departamento) = '' THEN
-          array[TRIM(pais), '']
-        WHEN municipio IS NULL OR TRIM(municipio) = '' THEN
-          array[TRIM(departamento) || ' / ' || TRIM(pais), TRIM(departamento)]
-        WHEN (vereda IS NULL OR TRIM(vereda) = '') AND
-        (centropoblado IS NULL OR TRIM(centropoblado) = '') THEN
+        WHEN pais IS NULL OR pais = '' THEN
+          array[NULL, NULL]
+        WHEN departamento IS NULL OR departamento = '' THEN
+          array[pais, NULL]
+        WHEN municipio IS NULL OR municipio = '' THEN
+          array[departamento || ' / ' || pais, departamento]
+        WHEN (vereda IS NULL OR vereda = '') AND
+        (centropoblado IS NULL OR centropoblado = '') THEN
           array[
-            TRIM(municipio) || ' / ' || TRIM(departamento) || ' / ' || 
-              TRIM(pais),
-            TRIM(municipio) || ' / ' || TRIM(departamento) ]
-        WHEN (vereda IS NOT NULL AND TRIM(vereda)<>'') THEN
+            municipio || ' / ' || departamento || ' / ' || pais,
+            municipio || ' / ' || departamento ]
+        WHEN vereda IS NOT NULL THEN
           array[
-            public.msip_nombre_vereda() || TRIM(vereda) || ' / ' ||
-              TRIM(municipio) || ' / ' || TRIM(departamento) || ' / ' || 
-              TRIM(pais),
-            public.msip_nombre_vereda() || TRIM(vereda) || ' / ' ||
-              TRIM(municipio) || ' / ' || TRIM(departamento) ]
+            msip_nombre_vereda() || vereda || ' / ' ||
+            municipio || ' / ' || departamento || ' / ' || pais,
+            msip_nombre_vereda() || vereda || ' / ' ||
+            municipio || ' / ' || departamento ]
         ELSE
           array[
-            TRIM(centropoblado) || ' / ' ||
-              TRIM(municipio) || ' / ' || TRIM(departamento) || ' / ' || 
-              TRIM(pais),
-            TRIM(centropoblado) || ' / ' ||
-            TRIM(municipio) || ' / ' || TRIM(departamento) ]
+            centropoblado || ' / ' ||
+            municipio || ' / ' || departamento || ' / ' || pais,
+            centropoblado || ' / ' ||
+            municipio || ' / ' || departamento ]
          END
       $$;
 
@@ -413,29 +372,27 @@ CREATE FUNCTION public.msip_ubicacionpre_id_rtablabasica() RETURNS integer
 --
 
 CREATE FUNCTION public.msip_ubicacionpre_nomenclatura(pais character varying, departamento character varying, municipio character varying, vereda character varying, centropoblado character varying, lugar character varying, sitio character varying) RETURNS text[]
-    LANGUAGE plpgsql
+    LANGUAGE sql
     AS $$
-      DECLARE
-        dpa TEXT[];
-      BEGIN
-        dpa := public.msip_ubicacionpre_dpa_nomenclatura(pais, departamento,
-            municipio, vereda, centropoblado);
-        --RAISE NOTICE 'dpa[1]=%', dpa[1];
-        --RAISE NOTICE 'dpa[2]=%', dpa[2];
-        IF (lugar IS NULL OR lugar = '') THEN
-          return dpa;
-        ELSEIF (sitio IS NULL OR sitio= '') THEN
-          return array[
-              lugar || ' / ' || dpa[1],
-              lugar || ' / ' || dpa[2]
-            ];
+        SELECT CASE
+        WHEN (lugar IS NULL OR lugar = '') THEN
+          msip_ubicacionpre_dpa_nomenclatura(pais, departamento,
+          municipio, vereda, centropoblado)
+        WHEN (sitio IS NULL OR sitio= '') THEN
+          array[lugar || ' / ' || 
+            (msip_ubicacionpre_dpa_nomenclatura(pais, departamento,
+              municipio, vereda, centropoblado))[0],
+          lugar || ' / ' || 
+            (msip_ubicacionpre_dpa_nomenclatura(pais, departamento,
+              municipio, vereda, centropoblado))[1] ]
         ELSE
-          return array[
-              sitio || ' / ' || lugar || ' / ' || dpa[1],
-              sitio || ' / ' || lugar || ' / ' || dpa[2] 
-          ];
-        END IF;
-      END
+          array[sitio || ' / ' || lugar || ' / ' || 
+            (msip_ubicacionpre_dpa_nomenclatura(pais, departamento,
+              municipio, vereda, centropoblado))[0],
+          sitio || ' / ' || lugar || ' / ' || 
+            (msip_ubicacionpre_dpa_nomenclatura(pais, departamento,
+              municipio, vereda, centropoblado))[1] ]
+        END
       $$;
 
 
@@ -3159,6 +3116,13 @@ CREATE TABLE public.msip_grupoper (
 
 
 --
+-- Name: TABLE msip_grupoper; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.msip_grupoper IS 'Creado por sip en cor1440_produccion';
+
+
+--
 -- Name: msip_grupoper_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4002,6 +3966,122 @@ ALTER SEQUENCE public.msip_vereda_id_seq OWNED BY public.msip_vereda.id;
 
 
 --
+-- Name: sal7711_gen_articulo; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sal7711_gen_articulo (
+    id integer NOT NULL,
+    departamento_id integer,
+    municipio_id integer,
+    fuenteprensa_id integer NOT NULL,
+    fecha date NOT NULL,
+    pagina character varying(20),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    anexo_id integer NOT NULL,
+    texto text,
+    url character varying(5000)
+);
+
+
+--
+-- Name: sal7711_gen_articulo_categoriaprensa; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sal7711_gen_articulo_categoriaprensa (
+    articulo_id integer NOT NULL,
+    categoriaprensa_id integer NOT NULL
+);
+
+
+--
+-- Name: sal7711_gen_articulo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sal7711_gen_articulo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_articulo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sal7711_gen_articulo_id_seq OWNED BY public.sal7711_gen_articulo.id;
+
+
+--
+-- Name: sal7711_gen_bitacora; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sal7711_gen_bitacora (
+    id integer NOT NULL,
+    fecha timestamp without time zone,
+    ip character varying(100),
+    usuario_id integer,
+    operacion character varying(50),
+    detalle character varying(5000)
+);
+
+
+--
+-- Name: sal7711_gen_bitacora_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sal7711_gen_bitacora_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_bitacora_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sal7711_gen_bitacora_id_seq OWNED BY public.sal7711_gen_bitacora.id;
+
+
+--
+-- Name: sal7711_gen_categoriaprensa; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sal7711_gen_categoriaprensa (
+    id integer NOT NULL,
+    codigo character varying(15),
+    nombre character varying(500),
+    observaciones character varying(5000),
+    fechacreacion date,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: sal7711_gen_categoriaprensa_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.sal7711_gen_categoriaprensa_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: sal7711_gen_categoriaprensa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.sal7711_gen_categoriaprensa_id_seq OWNED BY public.sal7711_gen_categoriaprensa.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4606,6 +4686,27 @@ ALTER TABLE ONLY public.msip_ubicacionpre ALTER COLUMN id SET DEFAULT nextval('p
 --
 
 ALTER TABLE ONLY public.msip_vereda ALTER COLUMN id SET DEFAULT nextval('public.msip_vereda_id_seq'::regclass);
+
+
+--
+-- Name: sal7711_gen_articulo id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo ALTER COLUMN id SET DEFAULT nextval('public.sal7711_gen_articulo_id_seq'::regclass);
+
+
+--
+-- Name: sal7711_gen_bitacora id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_bitacora ALTER COLUMN id SET DEFAULT nextval('public.sal7711_gen_bitacora_id_seq'::regclass);
+
+
+--
+-- Name: sal7711_gen_categoriaprensa id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_categoriaprensa ALTER COLUMN id SET DEFAULT nextval('public.sal7711_gen_categoriaprensa_id_seq'::regclass);
 
 
 --
@@ -5473,6 +5574,30 @@ ALTER TABLE ONLY public.cor1440_gen_rangoedadac
 
 
 --
+-- Name: sal7711_gen_articulo sal7711_gen_articulo_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo
+    ADD CONSTRAINT sal7711_gen_articulo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sal7711_gen_bitacora sal7711_gen_bitacora_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_bitacora
+    ADD CONSTRAINT sal7711_gen_bitacora_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sal7711_gen_categoriaprensa sal7711_gen_categoriaprensa_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_categoriaprensa
+    ADD CONSTRAINT sal7711_gen_categoriaprensa_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: usuario usuario_nusuario_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5836,13 +5961,6 @@ CREATE TRIGGER msip_eliminar_familiar AFTER DELETE ON public.msip_persona_trelac
 --
 
 CREATE TRIGGER msip_insertar_familiar AFTER INSERT OR UPDATE ON public.msip_persona_trelacion FOR EACH ROW EXECUTE FUNCTION public.msip_agregar_o_remplazar_familiar_inverso();
-
-
---
--- Name: msip_ubicacionpre tras_crear_o_actualizar_ubicacionpre; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER tras_crear_o_actualizar_ubicacionpre BEFORE INSERT OR UPDATE OF pais_id, departamento_id, municipio_id, centropoblado_id, vereda_id, lugar, sitio ON public.msip_ubicacionpre FOR EACH ROW EXECUTE FUNCTION public.msip_ubicacionpre_actualiza_nombre();
 
 
 --
@@ -6270,6 +6388,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_proyectofinanciero
 
 
 --
+-- Name: sal7711_gen_bitacora fk_rails_52d9d2f700; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_bitacora
+    ADD CONSTRAINT fk_rails_52d9d2f700 FOREIGN KEY (usuario_id) REFERENCES public.usuario(id);
+
+
+--
 -- Name: mr519_gen_encuestapersona fk_rails_54b3e0ed5c; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6347,6 +6473,14 @@ ALTER TABLE ONLY public.cor1440_gen_plantillahcm_proyectofinanciero
 
 ALTER TABLE ONLY public.mr519_gen_opcioncs
     ADD CONSTRAINT fk_rails_656b4a3ca7 FOREIGN KEY (campo_id) REFERENCES public.mr519_gen_campo(id);
+
+
+--
+-- Name: sal7711_gen_articulo fk_rails_65eae7449f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_65eae7449f FOREIGN KEY (departamento_id) REFERENCES public.msip_departamento(id);
 
 
 --
@@ -6438,6 +6572,14 @@ ALTER TABLE ONLY public.msip_orgsocial_persona
 
 
 --
+-- Name: sal7711_gen_articulo_categoriaprensa fk_rails_7d1213c35b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo_categoriaprensa
+    ADD CONSTRAINT fk_rails_7d1213c35b FOREIGN KEY (articulo_id) REFERENCES public.sal7711_gen_articulo(id);
+
+
+--
 -- Name: mr519_gen_respuestafor fk_rails_805efe6935; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6507,6 +6649,14 @@ ALTER TABLE ONLY public.cor1440_gen_informefinanciero
 
 ALTER TABLE ONLY public.msip_grupo_usuario
     ADD CONSTRAINT fk_rails_8d24f7c1c0 FOREIGN KEY (grupo_id) REFERENCES public.msip_grupo(id);
+
+
+--
+-- Name: sal7711_gen_articulo fk_rails_8e3e0703f9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_8e3e0703f9 FOREIGN KEY (municipio_id) REFERENCES public.msip_municipio(id);
 
 
 --
@@ -6619,6 +6769,14 @@ ALTER TABLE ONLY public.cor1440_gen_actividad_actividadpf
 
 ALTER TABLE ONLY public.cor1440_gen_anexo_efecto
     ADD CONSTRAINT fk_rails_bcd8d7b7ad FOREIGN KEY (anexo_id) REFERENCES public.msip_anexo(id);
+
+
+--
+-- Name: sal7711_gen_articulo fk_rails_bdb4c828f9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_bdb4c828f9 FOREIGN KEY (anexo_id) REFERENCES public.msip_anexo(id);
 
 
 --
@@ -6747,6 +6905,14 @@ ALTER TABLE ONLY public.cor1440_gen_proyectofinanciero
 
 ALTER TABLE ONLY public.cor1440_gen_indicadorpf
     ADD CONSTRAINT fk_rails_d264d408b0 FOREIGN KEY (resultadopf_id) REFERENCES public.cor1440_gen_resultadopf(id);
+
+
+--
+-- Name: sal7711_gen_articulo fk_rails_d3b628101f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo
+    ADD CONSTRAINT fk_rails_d3b628101f FOREIGN KEY (fuenteprensa_id) REFERENCES public.msip_fuenteprensa(id);
 
 
 --
@@ -6915,6 +7081,14 @@ ALTER TABLE ONLY public.msip_centropoblado
 
 ALTER TABLE ONLY public.heb412_gen_formulario_plantillahcm
     ADD CONSTRAINT fk_rails_fc3149fc44 FOREIGN KEY (plantillahcm_id) REFERENCES public.heb412_gen_plantillahcm(id);
+
+
+--
+-- Name: sal7711_gen_articulo_categoriaprensa fk_rails_fcf649bab3; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sal7711_gen_articulo_categoriaprensa
+    ADD CONSTRAINT fk_rails_fcf649bab3 FOREIGN KEY (categoriaprensa_id) REFERENCES public.sal7711_gen_categoriaprensa(id);
 
 
 --
@@ -7132,7 +7306,6 @@ ALTER TABLE ONLY public.usuario
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
-('20240424122935'),
 ('20240423143517'),
 ('20240221002426'),
 ('20240220164637'),

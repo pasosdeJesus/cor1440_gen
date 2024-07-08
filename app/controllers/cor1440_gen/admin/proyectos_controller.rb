@@ -17,14 +17,29 @@ module Cor1440Gen
 
       def atributos_index
         [
-          "id",
-          "nombre",
-          "fechainicio_localizada",
-          "fechacierre_localizada",
-          "resultados",
-          "observaciones",
-          "fechacreacion_localizada",
+          :id,
+          :nombre,
+          :fechainicio_localizada,
+          :fechacierre_localizada,
+          :resultados,
+          :observaciones,
+          :fechacreacion_localizada,
         ]
+      end
+
+      def atributos_form
+        atributos_index.map do |e|
+          case e 
+          when :fechacreacion_localizada
+            :fechacreacion
+          when :fechainicio_localizada
+            :fechainicio
+          when :fechacierre_localizada
+            :fechacierre
+          else
+            e
+          end
+        end
       end
 
       def genclase

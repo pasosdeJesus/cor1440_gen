@@ -55,8 +55,8 @@ module Cor1440Gen
             ] +
               [financiador_ids: []] +
               [
-                :fechainicio_localizada,
-                :fechacierre_localizada,
+                :fechainicio,
+                :fechacierre,
                 :responsable,
               ] +
               [proyecto_ids: []] +
@@ -347,20 +347,18 @@ module Cor1440Gen
             @validarpf = Cor1440Gen::Validarpf.new
             @registro = Cor1440Gen::Proyectofinanciero.all
             if params && params[:validarpf] &&
-                params[:validarpf][:fechaini_localizada] &&
-                params[:validarpf][:fechaini_localizada] != ""
-              @validarpf.fechaini_localizada =
-                params[:validarpf][:fechaini_localizada]
+                params[:validarpf][:fechaini] &&
+                params[:validarpf][:fechaini] != ""
+              @validarpf.fechaini = params[:validarpf][:fechaini]
               @registro = @registro.where(
                 "fechainicio >= ?",
                 @validarpf.fechaini,
               )
             end
             if params && params[:validarpf] &&
-                params[:validarpf][:fechafin_localizada] &&
-                params[:validarpf][:fechafin_localizada] != ""
-              @validarpf.fechafin_localizada =
-                params[:validarpf][:fechafin_localizada]
+                params[:validarpf][:fechafin] &&
+                params[:validarpf][:fechafin] != ""
+              @validarpf.fechafin = params[:validarpf][:fechafin]
               @registro = @registro.where(
                 "fechainicio <= ?",
                 @validarpf.fechafin,
@@ -419,15 +417,11 @@ module Cor1440Gen
           # Retorna cadena con duracion
           def duracion
             prob = ""
-            if params[:fechainicio_localizada] &&
-                params[:fechacierre_localizada]
-              fini = ::Msip::FormatoFechaHelper.fecha_local_estandar(
-                params[:fechainicio_localizada],
-              )
+            if params[:fechainicio] &&
+                params[:fechacierre]
+              fini = params[:fechainicio]
               fini = Date.strptime(fini, "%Y-%m-%d")
-              fcierre = ::Msip::FormatoFechaHelper.fecha_local_estandar(
-                params[:fechacierre_localizada],
-              )
+              fcierre = params[:fechacierre]
               fcierre = Date.strptime(fcierre, "%Y-%m-%d")
               if fini && fcierre
                 d = Msip::FormatoFechaHelper.dif_meses_dias(fini, fcierre)
@@ -441,7 +435,7 @@ module Cor1440Gen
                 prob = "No pudo convertirse una de las fechas"
               end
             else
-              prob = "Indispensables parametros fechaini_localizada y fechacierre_localizada"
+              prob = "Indispensables parametros fechaini y fechacierre"
             end
             respond_to do |format|
               format.html { render(action: "error") }
@@ -462,13 +456,13 @@ module Cor1440Gen
             ] +
               [financiador_ids: []] + [
                 :sectorapc,
-                :fechainicio_localizada,
-                :fechacierre_localizada,
+                :fechainicio,
+                :fechacierre,
                 :duracion,
                 :anioformulacion,
                 :mesformulacion,
-                :fechaaprobacion_localizada,
-                :fechaliquidacion_localizada,
+                :fechaaprobacion,
+                :fechaliquidacion,
                 :estado,
                 :dificultad,
                 :responsable,
@@ -490,12 +484,12 @@ module Cor1440Gen
                 :centrocosto,
                 :estado,
                 :dificultad,
-                :fechaaprobacion_localizada,
-                :fechacierre_localizada,
-                :fechaformulacion_localizada,
+                :fechaaprobacion,
+                :fechacierre,
+                :fechaformulacion,
                 :fechaformulacion_anio,
                 :fechaformulacion_mes,
-                :fechaliquidacion_localizada,
+                :fechaliquidacion,
                 :tasaej_localizado,
                 :montoej_localizado,
                 :aportepropioej_localizado,
@@ -537,7 +531,7 @@ module Cor1440Gen
                 desembolso_attributes: [
                   :id,
                   :detalle,
-                  :fecha_localizada,
+                  :fecha,
                   :valorpesos_localizado,
                   :_destroy,
                 ],
@@ -562,7 +556,7 @@ module Cor1440Gen
               ] + [
                 informeauditoria_attributes: [
                   :detalle,
-                  :fecha_localizada,
+                  :fecha,
                   :devoluciones,
                   :seguimiento,
                   :id,
@@ -571,7 +565,7 @@ module Cor1440Gen
               ] + [
                 informefinanciero_attributes: [
                   :detalle,
-                  :fecha_localizada,
+                  :fecha,
                   :devoluciones,
                   :seguimiento,
                   :id,
@@ -580,7 +574,7 @@ module Cor1440Gen
               ] + [
                 informenarrativo_attributes: [
                   :detalle,
-                  :fecha_localizada,
+                  :fecha,
                   :devoluciones,
                   :seguimiento,
                   :id,
