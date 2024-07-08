@@ -16,14 +16,20 @@ module Cor1440Gen
 
       def atributos_index
         [
-          "id",
-          "nombre",
-          "limiteinferior",
-          "limitesuperior",
-          "observaciones",
-          "fechacreacion_localizada",
-          "habilitado",
+          :id,
+          :nombre,
+          :limiteinferior,
+          :limitesuperior,
+          :observaciones,
+          :fechacreacion_localizada,
+          :habilitado,
         ]
+      end
+
+      def atributos_form
+        atributos_index.map do |e|
+          e == :fechacreacion_localizada ? :fechacreacion : e
+        end
       end
 
       def genclase

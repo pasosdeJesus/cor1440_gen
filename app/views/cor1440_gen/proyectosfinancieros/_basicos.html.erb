@@ -36,19 +36,21 @@
 
 <div class='row'>
   <div class="offset-sm-0 col-sm-4">
-    <%= f.input :fechainicio_localizada, 
-      :input_html => { 
-        "data-behaviour" => "datepicker",
-        'data-msip--cancelar-vacio-es-eliminar-target' => 'determinador'
+    <%= f.input :fechainicio, 
+      input_html: { 
+        "data-msip--cancelar-vacio-es-eliminar-target" => "determinador",
+        type: "date"
       },
-      :as => :string
+      as: :string
     %>
   </div>
 
   <div class="col-sm-4">
-    <%= f.input :fechacierre_localizada, :input_html => { 
-      "data-behaviour" => "datepicker" },
-      :as => :string
+    <%= f.input :fechacierre, 
+      input_html: { 
+        type: "date"
+      },
+      as: :string
     %>
   </div>
   <div class="col-sm-4">
@@ -83,15 +85,19 @@
 
 <div class='row'>
   <div class="col-sm-6">
-    <%= f.input :fechaaprobacion_localizada, :input_html => { 
-      "data-behaviour" => "datepicker" },
-      :as => :string
+    <%= f.input :fechaaprobacion, 
+      input_html: { 
+        type: "date"
+      },
+      as: :string
     %>
   </div>
   <div class="col-sm-6">
-    <%= f.input :fechaliquidacion_localizada, :input_html => { 
-      "data-behaviour" => "datepicker" },
-      :as => :string
+    <%= f.input :fechaliquidacion, 
+      input_html: { 
+        type: "date"
+      },
+      as: :string
     %>
   </div>
 </div>

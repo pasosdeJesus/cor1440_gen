@@ -15,7 +15,6 @@
     "@rails/ujs": "^7.1.1",
     "apexcharts": "^3.27.2",
     "bootstrap": "^5.0.0",
-    "bootstrap-datepicker": "^1.10.0",
     "esbuild": "^0.19.4",
     "gridstack": "^0.6.0",
     "is-svg": "^4.3.1",

@@ -1,6 +1,6 @@
 <%= simple_form_for @informe,
-  :url => cor1440_gen.informes_path(@informe).sub(/\./,"/"), 
-  :html => { :class => 'form-horizontal' } do |f| 
+  url: cor1440_gen.informes_path(@informe).sub(/\./,"/"), 
+  html: { class: 'form-horizontal' } do |f| 
 %>
 
   <%= render partial: 'msip/hogar/errores', locals: { f: f } %>
@@ -8,13 +8,13 @@
   <%= f.input :titulo %>
   <div class="panel panel-default">
     <div class="panel-heading">Filtro para el Listado de Actividades</div><div class="panel-body">
-      <%= f.input :filtrofechaini_localizada,
-        :input_html => { "data-behaviour" => "datepicker"},
-        :as => :string
+      <%= f.input :filtrofechaini,
+        input_html: { type: "date"},
+        as: :string
       %>
-      <%= f.input :filtrofechafin_localizada,
-        :input_html => { "data-behaviour" => "datepicker"},
-        :as => :string
+      <%= f.input :filtrofechafin,
+        input_html: { type: "date"},
+        as: :string
       %>
       <% ord = ::Usuario.column_names.include?('nombres') ? 
         'nombres' : 'nombre' %>
@@ -64,10 +64,10 @@
   </div> <!-- panel panel-default -->
 
   <div class="form-actions">
-    <%= f.button :submit, :class => 'btn btn-primary',
+    <%= f.button :submit, class: 'btn btn-primary',
       'data-turbo' => false %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-      cor1440_gen.actividades_path, :class => 'btn' 
+    <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+      cor1440_gen.actividades_path, class: 'btn' 
     %>
   </div>
 <% end %>

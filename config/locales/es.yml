@@ -45,6 +45,7 @@ es:
   "Fecha de inicio": Fecha de inicio
   "Fecha de finalización": Fecha de finalización
   fechamed: fechamed
+  fechacreacion_localizada: Fecha de creación
   "Filtrar por": Filtrar por
   "Final": Final
   Formulario: Formulario
@@ -225,6 +226,10 @@ es:
       "cor1440_gen/proyecto":
         Proyecto: Área
         Proyectos: Áreas
+        fechainicio_localizada: Fecha de inicio
+        fechainicio: Fecha de inicio
+        fechacierre_localizada: Fecha de cierre
+        fechacierre: Fecha de cierre
       "cor1440_gen/proyectofinanciero":
         actividadpf: Actividad del marco lógico
         anexo_proyectofinanciero: "Anexos"
@@ -236,6 +241,10 @@ es:
         centrocosto: Centro de costos
         fechaaprobacion: "Fecha de aprobación"
         fechaaprobacion_localizada: "Fecha de aprobación"
+        fechacierre: "Fecha de cierre"
+        fechacierre_localizada: "Fecha de cierre"
+        fechainicio: "Fecha de inicio"
+        fechainicio_localizada: "Fecha de inicio"
         fechaliquidacion: "Fecha de liquidación"
         fechaliquidacion_localizada: "Fecha de liquidación"
         fechaformulacion: "Fecha de formulación"
@@ -281,6 +290,7 @@ es:
       "cor1440_gen/rangoedadac":
         Rangoedadac: Rango de edad en actividades
         Rangosedadac: Rangos de edad en actividades
+        fechacreacion_localizada: Fecha de creación
       "cor1440_gen/resultadopf":
         resultadopf: Resultado
         numero: Número

@@ -6,7 +6,7 @@
 <%= simple_form_for @validarpf,
   url: cor1440_gen.validar_proyectosfinancieros_path,
   method: :get,
-  html: { :class => 'form-horizontal' } do |f| 
+  html: { class: "form-horizontal" } do |f|
 %>
   <div data-role="content" class="form-inputs">
     <div id="errores">
@@ -31,28 +31,28 @@
           <%= t('Rango para fecha de inicio') %>
         </div>
         <div class="offset-sm-0 col-sm-3">
-          <%= f.input :fechaini_localizada,
-            maxlength: 10, 
+          <%= f.input :fechaini,
+            maxlength: 10,
             size: 10,
             label: false,
             placeholder: t('Inicial'),
             input_html: {
-              "data-behaviour" => "datepicker",
-              value: @validarpf && @validarpf.fechaini_localizada ?  
-              @validarpf.fechaini_localizada : ''
+              type: "date",
+              value: @validarpf && @validarpf.fechaini ?
+                @validarpf.fechaini: ''
             }
           %>
         </div>
         <div class="offset-sm-1 col-sm-3">
-          <%= f.input :fechafin_localizada,
-            maxlength: 10, 
+          <%= f.input :fechafin,
+            maxlength: 10,
             size: 10,
             label: false,
             placeholder: t('Final'),
             input_html: {
-              "data-behaviour" => "datepicker",
-              value: @validarpf.fechafin_localizada ?  
-              @validarpf.fechafin_localizada : ''
+              type: "date",
+              value: @validarpf.fechafin ?
+                @validarpf.fechafin: ''
             }
           %>
         </div>
