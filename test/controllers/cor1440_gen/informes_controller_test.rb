@@ -8,8 +8,8 @@ module Cor1440Gen
     include Devise::Test::IntegrationHelpers
 
     def verifica_formulario
-      assert_select("input#informe_filtrofechaini_localizada[name=?]", "informe[filtrofechaini_localizada]")
-      assert_select("input#informe_filtrofechafin_localizada[name=?]", "informe[filtrofechafin_localizada]")
+      assert_select("input#informe_filtrofechaini[name=?]", "informe[filtrofechaini]")
+      assert_select("input#informe_filtrofechafin[name=?]", "informe[filtrofechafin]")
 
       assert_select("#informe_filtroproyecto[name=?]", "informe[filtroproyecto]")
 
