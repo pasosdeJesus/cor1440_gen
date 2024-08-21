@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 146a18e00f22f5b747639df564f9e3e6e5186a0f
+  revision: 3695771db89aee8864f4807ba32aedb4a9c762ab
   branch: main
   specs:
     heb412_gen (2.3.0.alfa1)
@@ -518,4 +518,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.5.6
+   2.5.17
