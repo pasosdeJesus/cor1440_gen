@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "../../test_helper"
-require "cor1440_gen/medicion_helper"
 
 module Cor1440Gen
   class MedicionHelperTest < ActionView::TestCase
