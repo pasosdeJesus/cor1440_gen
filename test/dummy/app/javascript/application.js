@@ -7,28 +7,26 @@ if (typeof window.Rails == 'undefined') {
   Rails.start();
   window.Rails = Rails
 }
-import {Turbo} from '@hotwired/turbo-rails';
-
-import './jquery'
-import '../../vendor/assets/javascripts/jquery-ui'
-
-import 'popper.js'              // Dialogos emergentes usados por bootstrap
-import * as bootstrap from 'bootstrap'              // Maquetacion y elementos de diseño
+import '@hotwired/turbo-rails';
 
 import Msip__Motor from "./controllers/msip/motor"
 window.Msip__Motor = Msip__Motor
-Msip__Motor.iniciar()  // Este se ejecuta una vez cuando se está cargando la aplicación tal vez antes que la página completa o los recursos
+Msip__Motor.iniciar()
 
 import TomSelect from 'tom-select';
 window.TomSelect = TomSelect;
 window.configuracionTomSelect = {
-    create: false,
-    diacritics: true, //no sensitivo a acentos
-    sortField: {
-          field: "text",
-          direction: "asc"
-        }
+  create: false,
+  diacritics: true, //no sensitivo a acentos
+  sortField: {
+    field: "text",
+    direction: "asc"
+  }
 }
+
+import './jquery'
+import 'popper.js'              // Dialogos emergentes usados por bootstrap
+import * as bootstrap from 'bootstrap'              // Maquetacion y elementos de diseño
 
 import ApexCharts from 'apexcharts'
 window.ApexCharts = ApexCharts
@@ -67,12 +65,7 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
   heb412_gen_prepara_eventos_comunes(root);
   mr519_gen_prepara_eventos_comunes(root);
   cor1440_gen_prepara_eventos_comunes(root);
-  $("input[data-behaviour='datepicker']").datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true,
-    todayHighlight: true,
-    language: 'es'
-  })
+  Msip__Motor.ejecutarAlCargarDocumentoYRecursos()
 })
 
 

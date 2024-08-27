@@ -221,6 +221,7 @@ module Cor1440Gen
 
           habilidad.can(:manage, Cor1440Gen::Actividadpf)
           habilidad.can :manage, Cor1440Gen::Asistencia
+          habilidad.can :manage, Cor1440Gen::Objetivopf
           presponsable = Cor1440Gen::Proyectofinanciero.where(
             responsable_id: usuario.id,
           ).map(&:id)
@@ -299,7 +300,10 @@ module Cor1440Gen
           habilidad.can(:manage, Cor1440Gen::Indicadorpf)
           habilidad.can(:manage, Cor1440Gen::Informe)
           habilidad.can(:manage, Cor1440Gen::Mindicadorpf)
-          habilidad.can(:manage, Cor1440Gen::Proyectofinanciero)
+          habilidad.can(:manage, [
+            Cor1440Gen::Proyectofinanciero,
+            Cor1440Gen::Objetivopf
+          ])
           habilidad.can(:manage, Cor1440Gen::Tipoindicador)
 
           habilidad.can(:manage, Heb412Gen::Doc)

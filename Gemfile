@@ -97,7 +97,7 @@ group :development do
 
   gem "thor" # Requerido por rake
 
-  gem "web-console" # ConSola irb en páginas
+  gem "web-console" # Consola irb en páginas
 end
 
 group :development, :test do
