@@ -5,7 +5,7 @@ require "cor1440_gen/concerns/controllers/objetivospf_proyectofinanciero_control
 module Cor1440Gen
   class ObjetivospfProyectofinancieroController < ApplicationController
     before_action :preparar_objetivopf_proyectofinanciero
-    load_and_authorize_resource class: Cor1440Gen::Proyectofinanciero
+    load_and_authorize_resource class: Cor1440Gen::Objetivopf
 
     include Cor1440Gen::Concerns::Controllers::ObjetivospfProyectofinancieroController
   end
