@@ -7,7 +7,6 @@ module Cor1440Gen
         included do
 
           def create
-            debugger
           end
 
           def destroy

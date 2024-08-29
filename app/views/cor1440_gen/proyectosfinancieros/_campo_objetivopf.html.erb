@@ -6,7 +6,7 @@
 
     <div class="div-objetivospf table-responsive">
       <div class='div-tabla'>
-        <div id="objetivospf_proyectofinanciero_marco" class="div-tabla-cuerpo">
+        <div id="objetivospf_marco" class="div-tabla-cuerpo">
           <div class="div-tabla-fila">
             <div class="div-tabla-celda-encabezado"><%= t('Código') %></div>
             <div class="div-tabla-celda-encabezado"><%= t('Descripción') %></div>
@@ -25,10 +25,11 @@
           formmethod: :post,
           formnovalidate: true,
           class: 'btn btn-sm btn-primary',
-          name: "agregar-objetivopf-proyectofinanciero",
-          id: "agregar-objetivopf-proyectofinanciero",
+          name: "agregar-objetivopf",
+          id: "agregar-objetivopf",
           data:  {
-            disable_with: false } %>
+            disable_with: false 
+          } %>
       </div> <!-- enlace-agregar-objetivopf -->
     </div> <!-- .div-objetivospf -->
   </div><!-- panel-body -->

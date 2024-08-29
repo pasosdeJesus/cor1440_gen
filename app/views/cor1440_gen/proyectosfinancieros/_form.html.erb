@@ -107,8 +107,12 @@
         <input class='bitacora_cambio' id='proyectofinanciero_bitacora_cambio' 
                name='proyectofinanciero[bitacora_cambio]' type='hidden'>
       <% end %>
-      <%= f.button :submit, t('Validar y Guardar'), :class => 'btn btn-primary',
-        'data-turbo' => false %>
+      <%= f.submit t('Validar y Guardar'),
+        class: 'btn btn-primary',
+        data: {
+          turbo: false,
+          disable_with: false
+        } %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
         proyectosfinancieros_path, :class => 'btn',
         'data-msip--cancelar-vacio-es-eliminar-target' => 'boton',
