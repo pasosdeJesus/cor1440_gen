@@ -15,6 +15,7 @@ Msip.setup do |config|
   config.codigofuente = "https://gitlab.com/pasosdeJesus/cor1440_gen"
   config.urlcontribuyentes = "https://gitlab.com/pasosdeJesus/cor1440_gen/graphs/contributors"
   config.urlcreditos = "https://gitlab.com/pasosdeJesus/cor1440_gen/blob/master/CREDITOS.md"
+  config.urllicencia= "https://gitlab.com/pasosdeJesus/cor1440_gen/blob/master/LICENCIA.md"
   config.agradecimientoDios = "<p>
 Agradecemos a Dios que es Dios de orden
 </p>
