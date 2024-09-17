@@ -13,7 +13,7 @@ Msip.setup do |config|
 
   config.descripcion = "Motor para proyectos y actividades con metodología de marco lógico"
   config.codigofuente = "https://gitlab.com/pasosdeJesus/cor1440_gen"
-  config.urlcontribuyentes = "https://gitlab.com/pasosdeJesus/cor1440_gen/graphs/contributors"
+  config.urlcontribuyentes = "https://gitlab.com/pasosdeJesus/cor1440_gen/-/graphs/main"
   config.urlcreditos = "https://gitlab.com/pasosdeJesus/cor1440_gen/blob/main/CREDITOS.md"
   config.urllicencia = "https://gitlab.com/pasosdeJesus/cor1440_gen/blob/main/LICENCIA.md"
   config.agradecimientoDios = "<p>
