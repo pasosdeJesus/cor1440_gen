@@ -18,6 +18,15 @@ import 'chosen-js/chosen.jquery';       // Cuadros de seleccion potenciados
 import 'bootstrap-datepicker'
 import 'bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js'
 
+import Msip__Motor from "./controllers/msip/motor"
+window.Msip__Motor = Msip__Motor
+import Mr519Gen__Motor from "./controllers/mr519_gen/motor"
+window.Mr519Gen__Motor = Mr519Gen__Motor
+import Heb412Gen__Motor from "./controllers/heb412_gen/motor"
+window.Heb412Gen__Motor = Heb412Gen__Motor
+import Cor1440Gen__Motor from "./controllers/cor1440_gen/motor"
+window.Cor1440Gen__Motor = Cor1440Gen__Motor
+
 import ApexCharts from 'apexcharts'
 window.ApexCharts = ApexCharts
 
@@ -68,7 +77,11 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
 document.addEventListener('turbo:load', (e) => {
   console.log('Escuchador turbo:load')
 
-  msip_ejecutarAlCargarPagina(window)
+  msip_ejecutarAlCargarPagina(window) // Establece root.puntomontaje
+  Msip__Motor.ejecutarAlCargarPagina()
+  Mr519Gen__Motor.ejecutarAlCargarPagina()
+  Heb412Gen__Motor.ejecutarAlCargarPagina()
+  Cor1440Gen__Motor.ejecutarAlCargarPagina()
 })
 
 import './controllers'

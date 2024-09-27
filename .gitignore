@@ -35,6 +35,8 @@ test/dummy/public/
 test/dummy/app/assets/builds
 test/dummy/.env
 test/dummy/app/javascript/controllers/msip
+test/dummy/app/javascript/controllers/heb412_gen
+test/dummy/app/javascript/controllers/mr519_gen
 test/dummy/app/javascript/controllers/cor1440_gen
 cobertura-unitarias
 test/dummy/cobertura-sistema
