@@ -36,7 +36,6 @@ window.Heb412Gen__Motor = Heb412Gen__Motor
 import Cor1440Gen__Motor from "./controllers/cor1440_gen/motor"
 window.Cor1440Gen__Motor = Cor1440Gen__Motor
 
-
 import ApexCharts from 'apexcharts'
 window.ApexCharts = ApexCharts
 
