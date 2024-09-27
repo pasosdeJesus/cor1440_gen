@@ -17,7 +17,14 @@ import * as bootstrap from 'bootstrap'              // Maquetacion y elementos d
 
 import Msip__Motor from "./controllers/msip/motor"
 window.Msip__Motor = Msip__Motor
-Msip__Motor.iniciar()  // Este se ejecuta una vez cuando se está cargando la aplicación tal vez antes que la página completa o los recursos
+Msip__Motor.iniciar()
+import Mr519Gen__Motor from "./controllers/mr519_gen/motor"
+window.Mr519Gen__Motor = Mr519Gen__Motor
+import Heb412Gen__Motor from "./controllers/heb412_gen/motor"
+window.Heb412Gen__Motor = Heb412Gen__Motor
+import Cor1440Gen__Motor from "./controllers/cor1440_gen/motor"
+window.Cor1440Gen__Motor = Cor1440Gen__Motor
+
 
 import TomSelect from 'tom-select';
 window.TomSelect = TomSelect;
@@ -83,8 +90,11 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
 document.addEventListener('turbo:load', (e) => {
   console.log('Escuchador turbo:load')
 
-  Msip__Motor.ejecutarAlCargarPagina()  // Este puede ejecutarse varias veces consecutivas cada vez que se termina de cargar una página que incluso pudiera estar en cache
-  msip_ejecutarAlCargarPagina(window)
+  msip_ejecutarAlCargarPagina(window) // Establece root.puntomontaje
+  Msip__Motor.ejecutarAlCargarPagina()
+  Mr519Gen__Motor.ejecutarAlCargarPagina()
+  Heb412Gen__Motor.ejecutarAlCargarPagina()
+  Cor1440Gen__Motor.ejecutarAlCargarPagina()
 })
 
 import './controllers'
