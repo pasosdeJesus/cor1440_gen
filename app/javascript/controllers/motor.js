@@ -26,6 +26,12 @@ export default class Cor1440Gen__Motor {
    */
 
 
+  // Se ejecuta cada vez que se carga una página que no está en cache
+  // y tipicamente después de que se ha cargado la página y los recursos.
+  static ejecutarAlCargarDocumentoYRecursos() {
+    console.log("* Corriendo Cor1440Gen__Motor::ejecutarAlCargarDocumentoYRecursos()")
+  }
+
   // Llamar cada vez que se cargue una página detectada con turbo:load
   // Tal vez en cache por lo que podría no haberse ejecutado iniciar 
   // nuevamente.
@@ -33,6 +39,12 @@ export default class Cor1440Gen__Motor {
   // para no ejecutar dos veces lo que no conviene.
   static ejecutarAlCargarPagina() {
     console.log("* Corriendo Cor1440Gen__Motor::ejecutarAlCargarPagina()")
+  }
+
+
+  // Se ejecuta desde app/javascript/application.js tras importar el motor
+  static iniciar() {
+    console.log("* Corriendo Cor1440Gen__Motor::iniciar()")
   }
 
 }
