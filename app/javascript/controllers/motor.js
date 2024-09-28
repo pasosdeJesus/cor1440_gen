@@ -614,4 +614,10 @@ export default class Cor1440Gen__Motor {
     )
   }
 
+
+  // Se ejecuta desde app/javascript/application.js tras importar el motor
+  static iniciar() {
+    console.log("* Corriendo Cor1440Gen__Motor::iniciar()")
+  }
+
 }
