@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Cor1440Gen
+  # Permisos
   class Ability < Msip::Ability
     ROLADMIN  = 1
     ROLDIR    = 3

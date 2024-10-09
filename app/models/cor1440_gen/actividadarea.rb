@@ -3,6 +3,7 @@
 require "cor1440_gen/concerns/models/actividadarea"
 
 module Cor1440Gen
+  # Tabla básica Area de Actividad
   class Actividadarea < ActiveRecord::Base
     include Cor1440Gen::Concerns::Models::Actividadarea
   end
