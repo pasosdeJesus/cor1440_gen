@@ -118,7 +118,7 @@ cor1440_gen_rangoedadc_todos = () ->
   cor1440_gen_identifica_ids_rangoedad(resp, rangos, idrf)
 
   # Fecha de la actividad
-  arf = msip_partes_fecha($('#actividad_fecha').val(), window.formato_fecha)
+  arf = msip_partes_fecha_localizada($('#actividad_fecha').val(), window.formato_fecha)
   anioref  = arf[0]
   mesref  = arf[1]
   diaref  = arf[2]
@@ -780,8 +780,8 @@ cor1440_gen_rangoedadc_todos = () ->
 #      cor1440_gen_actividad_actualiza_actividadpf(root, null)
 #    )
 
-  if (!opciones['sin_eventos_recalcular_poblacion'])
-    cor1440_gen_instala_recalcula_poblacion()
+  #if (!opciones['sin_eventos_recalcular_poblacion'])
+  #  cor1440_gen_instala_recalcula_poblacion()
   cor1440_gen_eventos_duracion()
   cor1440_gen_eventos_montospesos()
 
