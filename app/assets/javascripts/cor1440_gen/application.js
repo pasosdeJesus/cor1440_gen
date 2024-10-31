@@ -13,3 +13,4 @@
 //= require_tree .
 
 
+Msip__Motor.preparaEventosComunes(window)

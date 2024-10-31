@@ -72,8 +72,6 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
   Heb412Gen__Motor.ejecutarAlCargarDocumentoYRecursos()
   Cor1440Gen__Motor.ejecutarAlCargarDocumentoYRecursos()
 
-  window.cor1440_gen_activa_autocompleta_mismotipo = true
-
   $("input[data-behaviour='datepicker']").datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true,
