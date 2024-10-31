@@ -9,7 +9,7 @@ export default class Cor1440GenAutocompletaAjaxAsistentes {
   // Elije una persona en autocompletación
   static operarElegida (eorig, cadpersona, id, otrosop) {
     let root = window
-    msip_arregla_puntomontaje(root)
+    Msip__Motor.arreglarPuntomontaje(root)
     const cs = id.split(';')
     const idPersona = cs[0]
     if ([...document.querySelector('#asistencia').

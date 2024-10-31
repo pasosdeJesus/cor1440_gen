@@ -13,7 +13,7 @@
     fechacierre: $('#proyectofinanciero_fechacierre').val()
   }
   if datos.fechainicio!= '' && datos.fechacierre!= ''
-    msip_ajax_recibe_json(window, 'api/cor1440gen/duracion',
+    Msip__Motor.ajaxRecibeJson(window, 'api/cor1440gen/duracion',
       datos, cor1440_gen_establece_duracion)
   else
     $('#proyectofinanciero_duracion').val('')
@@ -49,7 +49,7 @@
 @cor1440_gen_recalcula_aemergente_pesos_localizado = (campo, tasa) ->
   vc = $('#' + campo).val()
   if typeof vc != 'undefined' && vc != '' && typeof tasa != 'undefined' && tasa > 0
-      vcp = msip_reconocer_decimal_locale_es_CO(vc)*tasa
+      vcp = Msip__Motor.reconocerDecimalLocaleEsCO(vc)*tasa
       vcpl = new Intl.NumberFormat('es-CO').format(vcp)
       $('#' + campo).attr('title', '$ ' + vcpl).tooltip('fixTitle').tooltip('show')
 
@@ -58,13 +58,13 @@
 
   if ($('#proyectofinanciero_tasa_localizado').length > 0)
     tfl = $('#proyectofinanciero_tasa_localizado').val()
-    tf = msip_reconocer_decimal_locale_es_CO(tfl)
+    tf = Msip__Motor.reconocerDecimalLocaleEsCO(tfl)
     sum = 0
     sump = 0
     $.each [['monto', 'montopesos'], ['aportepropio', 'aportepropiop'],
             ['aotrosfin', 'aporteotrosp'], ['saldo', 'saldop']], (i, c) ->
       vl = $('#proyectofinanciero_' + c[0] + '_localizado').val()
-      v = msip_reconocer_decimal_locale_es_CO(vl)
+      v = Msip__Motor.reconocerDecimalLocaleEsCO(vl)
       sum += v
       vp = v * tf 
       vpl = new Intl.NumberFormat('es-CO').format(vp)
@@ -79,13 +79,13 @@
   # Repetimos para datos en ejecucion
   if ($('#proyectofinanciero_tasaej_localizado').length > 0)
     tel = $('#proyectofinanciero_tasaej_localizado').val()
-    te = msip_reconocer_decimal_locale_es_CO(tel)
+    te = Msip__Motor.reconocerDecimalLocaleEsCO(tel)
     sum = 0
     sump = 0
     $.each [['montoej', 'montoejp'], ['aportepropioej', 'aportepropioejp'],
             ['aporteotrosej', 'aporteotrosejp']], (i, c) ->
       vl = $('#proyectofinanciero_' + c[0] + '_localizado').val()
-      v = msip_reconocer_decimal_locale_es_CO(vl)
+      v = Msip__Motor.reconocerDecimalLocaleEsCO(vl)
       sum += v
       vp = v * te
       vpl = new Intl.NumberFormat('es-CO').format(vp)
