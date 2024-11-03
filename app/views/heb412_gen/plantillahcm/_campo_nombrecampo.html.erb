@@ -12,7 +12,7 @@
       v, f.object.plantillahcm ?  f.object.plantillahcm.formulario :
       nil, false)
   end
-  if f.object.plantillahcm
+  if f.object.plantillahcm && f.object.plantillahcm.respond_to?(:proyectofinanciero)
     f.object.plantillahcm.proyectofinanciero.each do |pf|
       puts "pf=#{pf.nombre}"
       pf.caracterizacion.each do |fm|
