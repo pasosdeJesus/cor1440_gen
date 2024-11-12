@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Cor1440Gen
-  VERSION = "2.2.0.beta6"
+  VERSION = "2.3.0.alfa2"
 end
