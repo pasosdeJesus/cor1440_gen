@@ -292,7 +292,6 @@ module Cor1440Gen
           habilidad.can(:manage, Cor1440Gen::Actividad)
           habilidad.can :manage, Cor1440Gen::Asistencia
           habilidad.can(:manage, Cor1440Gen::Actividadpf)
-          habilidad.can(:manage, Cor1440Gen::Campotind)
           habilidad.can(:manage, Cor1440Gen::Efecto)
           habilidad.can(:manage, Cor1440Gen::Financiador)
           habilidad.can(:manage, Cor1440Gen::FormularioTipoindicador)
