@@ -3,7 +3,7 @@
 require "cor1440_gen/concerns/models/proyectofinanciero"
 
 module Cor1440Gen
-  # Convenio financiado
+  # Proyecto financiero
   class Proyectofinanciero < ActiveRecord::Base
     include Cor1440Gen::Concerns::Models::Proyectofinanciero
   end
