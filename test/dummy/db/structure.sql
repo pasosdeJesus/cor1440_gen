@@ -1317,7 +1317,6 @@ CREATE TABLE public.cor1440_gen_actividad (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     oficina_id integer NOT NULL,
-    rangoedadac_id integer,
     usuario_id integer NOT NULL,
     lugar character varying(500)
 );
@@ -6298,13 +6297,6 @@ CREATE INDEX index_msip_ubicacionpre_on_vereda_id ON public.msip_ubicacionpre US
 
 
 --
--- Name: index_sivel2_gen_actividad_on_rangoedadac_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_sivel2_gen_actividad_on_rangoedadac_id ON public.cor1440_gen_actividad USING btree (rangoedadac_id);
-
-
---
 -- Name: index_sivel2_gen_actividad_rangoedadac_on_actividad_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -7878,6 +7870,7 @@ ALTER TABLE ONLY public.usuario
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20241113150932'),
 ('20241106114858'),
 ('20241104072046'),
 ('20240723152453'),

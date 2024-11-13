@@ -14,6 +14,9 @@ module Cor1440Gen
           belongs_to :objetivopf,
             class_name: "Cor1440Gen::Objetivopf",
             optional: false
+          belongs_to :proyectofinanciero,
+            class_name: "Cor1440Gen::Proyectofinanciero",
+            optional: true
 
           has_many :actividadpf,
             dependent: :delete_all,

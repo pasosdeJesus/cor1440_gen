@@ -14,6 +14,9 @@ module Cor1440Gen
           belongs_to :objetivopf,
             class_name: "Cor1440Gen::Objetivopf",
             optional: true
+          belongs_to :proyectofinanciero,
+            class_name: "Cor1440Gen::Proyectofinanciero",
+            optional: true
           belongs_to :resultadopf,
             class_name: "Cor1440Gen::Resultadopf",
             optional: true
