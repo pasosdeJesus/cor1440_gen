@@ -132,7 +132,7 @@ cor1440_gen_rangoedadc_todos = () ->
       mesnac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_mesnac]').val()
       dianac = $('[id=actividad_asistencia_attributes_' + ida + '_persona_attributes_dianac]').val()
 
-      e = +msip_edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
+      e = +Msip__Motor.edadDeFechaNacFechaRef(anionac, mesnac, dianac, anioref, mesref, diaref)
       idran = -1  # id del rango en el que está e
       ransin = -1 # id del rango SIN INFORMACION
       #debugger
@@ -192,7 +192,7 @@ cor1440_gen_rangoedadc_todos = () ->
       $(this).prop('readonly', false);
     )
 
-  msip_funcion_1p_tras_AJAX('admin/rangosedadac.json?filtro[bushabilitado]=Si&filtrar=Filtrar', {}, cor1440_gen_recalcula_poblacion2, fsig, 'solicitando rangos de edad a servidor')
+  Msip__Motor.funcion1pTrasAJAX('admin/rangosedadac.json?filtro[bushabilitado]=Si&filtrar=Filtrar', {}, cor1440_gen_recalcula_poblacion2, fsig, 'solicitando rangos de edad a servidor')
 
 
 
@@ -252,15 +252,15 @@ cor1440_gen_rangoedadc_todos = () ->
    return et
 
 @cor1440_gen_actualiza_objetivos = (e, objetivo) ->
-  msip_actualiza_cuadros_seleccion_dependientes('objetivospf',
+  Msip__Motor.actualizaCuadrosSeleccionDependientes('objetivospf',
     '_id', '_numero', DEP_OBJETIVOPF, 'id', 'numero')
-  msip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
+  Msip__Motor.actualizaCuadrosSeleccionDependientesFunEtiqueta(
     'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
     DEP_RESULTADOPF, 'id', 'numero')
 
 
 @cor1440_gen_actualiza_resultados = (e, resultado) ->
-  msip_actualiza_cuadros_seleccion_dependientes_fun_etiqueta(
+  Msip__Motor.actualizaCuadrosSeleccionDependientesFunEtiqueta(
     'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
     DEP_RESULTADOPF, 'id', 'numero')
 
@@ -279,7 +279,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     actividadpf_ids: $('#actividad_actividadpf_ids').val()
   }
-  msip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+  Msip__Motor.enviaAjaxDatosRutaYPinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
 
 @cor1440_gen_llena_actividadpf_relacionadas = (root, res) ->
@@ -315,7 +315,7 @@ cor1440_gen_rangoedadc_todos = () ->
       actividadpf_ids: acids,
       proyectofinanciero_ids: prids
     }
-    msip_ajax_recibe_json(root, 'api/actividades/relacionadas',
+    Msip__Motor.ajaxRecibeJson(root, 'api/actividades/relacionadas',
       params, cor1440_gen_llena_actividadpf_relacionadas)
 
 
@@ -354,7 +354,7 @@ cor1440_gen_rangoedadc_todos = () ->
       actividadpf_ids: acids,
       proyectofinanciero_ids: prids
     }
-    msip_ajax_recibe_json(root, 'actividadespf/conancestros',
+    Msip__Motor.ajaxRecibeJson(root, 'actividadespf/conancestros',
       params, cor1440_gen_llena_actividadpf_conancestros)
 
 
@@ -378,14 +378,14 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     actividadpf_ids: acids
   }
-  msip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+  Msip__Motor.enviaAjaxDatosRutaYPinta(ruta, params,
     '#camposdinamicos', '#camposdinamicos')
 
 @cor1440_gen_actividad_actualiza_actividadpf_pf =  (root, proyectofinanciero_id) ->
   params = {
     pfl: [proyectofinanciero_id]
   }
-  msip_llena_select_con_AJAX2('actividadespf', params,
+  Msip__Motor.llenaSelectConAJAX2('actividadespf', params,
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
     'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
@@ -394,7 +394,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     pfl: $('#actividad_proyectofinanciero_ids').val(),
   }
-  msip_llena_select_con_AJAX2('actividadespf', params,
+  Msip__Motor.llenaSelectConAJAX2('actividadespf', params,
     'actividad_actividadpf_ids', 'con Actividades de convenio', root,
     'id', 'nombre', cor1440_gen_actividad_actualiza_camposdinamicos)
 
@@ -403,7 +403,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     fecha: $('#actividad_fecha').val(),
   }
-  msip_llena_select_con_AJAX2('proyectosfinancieros', params,
+  Msip__Motor.llenaSelectConAJAX2('proyectosfinancieros', params,
     'actividad_proyectofinanciero_ids', 'con Convenios financiados',
     root, 'id', 'nombre',
     cor1440_gen_actividad_actualiza_actividadpf)
@@ -438,7 +438,7 @@ cor1440_gen_rangoedadc_todos = () ->
 #    params = { pfl: [r.npf] }
 #    f = null
 #    if n == r.length -1
-#    msip_llena_select_con_AJAX2('actividadespf', params,
+#    Msip__Motor.llenaSelectConAJAX2('actividadespf', params,
 #        r.idac, 'con Actividades de convenio ' + r.npf, root,
 #        'id', 'nombre', f)
 #    n += 1
@@ -459,7 +459,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     fecha: $('#actividad_fecha').val(),
   }
-  msip_funcion_tras_AJAX('proyectosfinancieros', params,
+  Msip__Motor.funcionTrasAJAX('proyectosfinancieros', params,
     cor1440_gen_actividad_actualiza_pf2, 'con Convenios Financiados',
     root)
 
@@ -484,7 +484,7 @@ cor1440_gen_rangoedadc_todos = () ->
     if !otrospfid.includes(+r.id)
       nuevasop.push({'id': +r.id, 'nombre': r.nombre})
   )
-  msip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', true)
+  Msip__Motor.remplazaOpcionesSelect(idsel, nuevasop, true, 'id', 'nombre', true)
   $('#' + idsel).val('')
   el = document.querySelector('#' + idsel)
   Msip__Motor.configurarElementoTomSelect(el)
@@ -507,7 +507,7 @@ cor1440_gen_rangoedadc_todos = () ->
       if r.id == valac
         valsel = valac
   )
-  msip_remplaza_opciones_select(idsel, nuevasop, true, 'id', 'nombre', false)
+  Msip__Motor.remplazaOpcionesSelect(idsel, nuevasop, true, 'id', 'nombre', false)
   $('#' + idsel).val(valsel)
   $('#' + idsel).trigger('chosen:updated')
 
@@ -534,7 +534,7 @@ cor1440_gen_rangoedadc_todos = () ->
   params = {
     proyectofinanciero_ids: pfids
   }
-  msip_envia_ajax_datos_ruta_y_pinta(ruta, params,
+  Msip__Motor.enviaAjaxDatosRutaYPinta(ruta, params,
     '#acordeon-caracterizacion', '#acordeon-caracterizacion')
 
 
@@ -624,7 +624,7 @@ cor1440_gen_rangoedadc_todos = () ->
       if $('#actividad_grupo_ids').length > 0
         params['grupo_ids'] = $('#actividad_grupo_ids').val()
 
-      msip_funcion_1p_tras_AJAX('proyectosfinancieros', params,
+      Msip__Motor.funcion1pTrasAJAX('proyectosfinancieros', params,
         cor1440_gen_actividad_actualiza_pf_op, objetivo,
         'con Convenios Financiados', root)
     )
@@ -632,7 +632,7 @@ cor1440_gen_rangoedadc_todos = () ->
     $(document).on('cocoon:after-insert', '#actividad_rangoedadac', (e, objetivo) ->
       # Si se ha deshabilitado, no operar pero volver a habilitar
       params = {}
-      msip_funcion_1p_tras_AJAX('admin/rangosedadac', params,
+      Msip__Motor.funcion1pTrasAJAX('admin/rangosedadac', params,
         cor1440_gen_actividad_actualiza_sel_rango, objetivo,
         'con Rangos de edad', root)
     )
@@ -666,7 +666,7 @@ cor1440_gen_rangoedadc_todos = () ->
       Msip__Motor.configurarElementoTomSelect(e.target)
       idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
       params = { pfl: [+e.target.value]}
-      msip_llena_select_con_AJAX2('actividadespf', params,
+      Msip__Motor.llenaSelectConAJAX2('actividadespf', params,
         idac, 'con Actividades de convenio ' + e.target.value, root,
         'id', 'nombre', null)
     )
@@ -700,17 +700,17 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('cocoon:after-insert', '#objetivospf', cor1440_gen_actualiza_objetivos)
 
   $(document).on('cocoon:before-remove', '#objetivospf', (e, objetivo) ->
-    return msip_intenta_eliminar_fila(objetivo, '/objetivospf/', DEP_OBJETIVOPF)
+    return Msip__Motor.intentaEliminarFila(objetivo, '/objetivospf/', DEP_OBJETIVOPF)
   )
 
   $(document).on('cocoon:before-remove', '#indicadoresobjetivos', (e, indicador) ->
-    msip_intenta_eliminar_fila(indicador, '/indicadorespf/',
+    Msip__Motor.intentaEliminarFila(indicador, '/indicadorespf/',
         DEP_INDICADORPF
     )
   )
 
   $(document).on('change', '#indicadoresobjetivos [id$=_id]', (e, result) ->
-    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    Msip__Motor.enviarAutomaticoFormulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
   $(document).on('cocoon:after-insert', '#indicadoresobjetivos',
@@ -723,31 +723,31 @@ cor1440_gen_rangoedadc_todos = () ->
   $(document).on('cocoon:after-insert', '#resultadospf', cor1440_gen_actualiza_objetivos)
 
   $(document).on('cocoon:before-remove', '#resultadospf', (e, resultado) ->
-    msip_intenta_eliminar_fila(resultado, '/resultadospf/',
+    Msip__Motor.intentaEliminarFila(resultado, '/resultadospf/',
         DEP_RESULTADOPF
     )
   )
 
   $(document).on('change', '#resultadospf [id$=_id]', (e, result) ->
-    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    Msip__Motor.enviarAutomaticoFormulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
 
   $(document).on('cocoon:before-remove', '#indicadorespf', (e, indicador) ->
-    msip_intenta_eliminar_fila(indicador, '/indicadorespf/',
+    Msip__Motor.intentaEliminarFila(indicador, '/indicadorespf/',
         DEP_INDICADORPF
     )
   )
 
   $(document).on('change', '#indicadorespf [id$=_id]', (e, result) ->
-    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    Msip__Motor.enviarAutomaticoFormulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
   $(document).on('cocoon:after-insert', '#indicadorespf', cor1440_gen_actualiza_resultados)
 
   $(document).on('cocoon:after-insert', '#actividadespf', cor1440_gen_actualiza_resultados)
   $(document).on('change', '#actividadespf [id$=_id]', (e, result) ->
-    msip_enviarautomatico_formulario($('form'), 'POST', 'json', false, 'Enviar')
+    Msip__Motor.enviarAutomaticoFormulario($('form'), 'POST', 'json', false, 'Enviar')
   )
 
 

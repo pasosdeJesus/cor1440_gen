@@ -17,5 +17,5 @@
 //= require_tree .
 
 
-msip_prepara_eventos_comunes(window)
+Msip__Motor.preparaEventosComunes(window)
 
