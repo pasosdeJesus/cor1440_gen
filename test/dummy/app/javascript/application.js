@@ -48,7 +48,7 @@ import {AutocompletaAjaxExpreg} from '@pasosdejesus/autocompleta_ajax'
 window.AutocompletaAjaxExpreg = AutocompletaAjaxExpreg
 
 let esperarRecursosSprocketsYDocumento = function (resolver) {
-  if (typeof window.puntomontaje == 'undefined') {
+  if (typeof window.puntoMontaje == 'undefined') {
     setTimeout(esperarRecursosSprocketsYDocumento, 100, resolver)
     return false
   }
@@ -66,22 +66,14 @@ let promesaRecursosSprocketsYDocumento = new Promise((resolver, rechazar) => {
 
 promesaRecursosSprocketsYDocumento.then((mensaje) => {
   console.log('Cargando recursos sprockets')
-  var root;
-  root = window;
 
   Msip__Motor.ejecutarAlCargarDocumentoYRecursos()
   Mr519Gen__Motor.ejecutarAlCargarDocumentoYRecursos()
   Heb412Gen__Motor.ejecutarAlCargarDocumentoYRecursos()
   Cor1440Gen__Motor.ejecutarAlCargarDocumentoYRecursos()
 
+  window.cor1440_gen_activa_autocompleta_mismotipo = true
 
-  root.cor1440_gen_activa_autocompleta_mismotipo = true
-
-  //msip_prepara_eventos_comunes(root);
-  Msip__Motor.preparaEventosComunes(root);
-  heb412_gen_prepara_eventos_comunes(root);
-  mr519_gen_prepara_eventos_comunes(root);
-  cor1440_gen_prepara_eventos_comunes(root);
   $("input[data-behaviour='datepicker']").datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true,

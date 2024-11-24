@@ -10,12 +10,6 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require msip/motor
-//= require heb412_gen/motor
-//= require mr519_gen/motor
-//= require cor1440_gen/motor
 //= require_tree .
 
-
-Msip__Motor.preparaEventosComunes(window)
 

@@ -4,11 +4,8 @@ all: sintaxis-js sintaxis-ruby bundler-audit brakeman rubocop
 sins: bundler-audit brakeman rubocop
 
 sintaxis-js:
-	for i in `find app/assets/javascripts/ -name "*js" -or -name "*es6"`; do \
+	for i in `find app/assets/javascripts/ -name "*js"`; do \
 	node -c $$i; \
-	done
-	for i in `find app/assets/javascripts/ -name "*coffee"`; do \
-	coffee -o /tmp/ $$i; \
 	done
 
 sintaxis-ruby:
