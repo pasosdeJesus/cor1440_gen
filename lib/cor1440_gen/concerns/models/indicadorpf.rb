@@ -45,6 +45,14 @@ module Cor1440Gen
             }
           validates :indicador, presence: true, length: { maximum: 5000 }
 
+          validate :objetivo_xor_resultado
+          def objetivo_xor_resultado
+            if (objetivopf_id.nil? && resultadopf_id.nil?) ||
+              (!objetivopf_id.nil? && !resultadopf_id.nil?)
+              errors.add(:indicadorpf, "El indicador debe ser bien de resultado o bien de objetivo")
+            end
+          end
+
           def presenta_codigo
             r = ""
             if resultadopf && resultadopf.objetivopf
