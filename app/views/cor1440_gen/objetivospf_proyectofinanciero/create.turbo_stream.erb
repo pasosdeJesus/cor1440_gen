@@ -1,0 +1,28 @@
+<%= simple_form_for @proyectofinanciero do |f| %>
+  <%= f.simple_fields_for :objetivopf,
+    child_index: params[:index] do |subf| %>
+    <%= turbo_stream.replace "agregar-objetivopf" do %>
+      <%= f.submit "Agregar #{Cor1440Gen::Proyectofinanciero.human_attribute_name(:Objetivopf)}",
+        formaction: cor1440_gen.crear_objetivopf_proyectofinanciero_path(
+          subf.index.to_i + 1
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        class: 'btn btn-sm btn-primary',
+        id: "agregar-objetivopf",
+        data:  {
+          disable_with: false
+        } %>
+    <% end %>
+
+    <%= turbo_stream.append "objetivospf_marco" do %>
+      <%= render(
+        partial: "/cor1440_gen/proyectosfinancieros/objetivopf_campos",
+        locals: {
+          f: subf,
+          ruta_eliminar: cor1440_gen.eliminar_objetivopf_proyectofinanciero_path
+        }
+      ) %>
+    <% end %>
+  <% end %>
+<% end %>

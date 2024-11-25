@@ -289,34 +289,37 @@ module Cor1440Gen
           habilidad.can(:manage, Msip::Persona)
 
         when Ability::ROLADMIN, Ability::ROLDIR
-          habilidad.can(:manage, Cor1440Gen::Pmindicadorpf)
-          habilidad.can(:manage, Cor1440Gen::Actividad)
-          habilidad.can :manage, Cor1440Gen::Asistencia
-          habilidad.can(:manage, Cor1440Gen::Actividadpf)
-          habilidad.can(:manage, Cor1440Gen::Efecto)
-          habilidad.can(:manage, Cor1440Gen::Financiador)
-          habilidad.can(:manage, Cor1440Gen::FormularioTipoindicador)
-          habilidad.can(:manage, Cor1440Gen::Indicadorpf)
-          habilidad.can(:manage, Cor1440Gen::Informe)
-          habilidad.can(:manage, Cor1440Gen::Mindicadorpf)
-          habilidad.can(:manage, Cor1440Gen::Proyectofinanciero)
-          habilidad.can(:manage, Cor1440Gen::Tipoindicador)
+          habilidad.can(:manage, [
+            Cor1440Gen::Pmindicadorpf, 
+            Cor1440Gen::Actividad,
+            Cor1440Gen::Asistencia,
+            Cor1440Gen::Actividadpf,
+            Cor1440Gen::Efecto,
+            Cor1440Gen::Financiador,
+            Cor1440Gen::FormularioTipoindicador,
+            Cor1440Gen::Indicadorpf,
+            Cor1440Gen::Informe,
+            Cor1440Gen::Mindicadorpf,
+            Cor1440Gen::Objetivopf,
+            Cor1440Gen::Proyectofinanciero,
+            Cor1440Gen::Tipoindicador,
 
-          habilidad.can(:manage, Heb412Gen::Doc)
-          habilidad.can(:manage, Heb412Gen::Plantilladoc)
-          habilidad.can(:manage, Heb412Gen::Plantillahcm)
-          habilidad.can(:manage, Heb412Gen::Plantillahcr)
+            Heb412Gen::Doc,
+            Heb412Gen::Plantilladoc,
+            Heb412Gen::Plantillahcm,
+            Heb412Gen::Plantillahcr,
 
-          habilidad.can(:manage, Mr519Gen::Campo)
-          habilidad.can(:manage, Mr519Gen::Formulario)
-          habilidad.can(:manage, Mr519Gen::Encuestausuario)
+            Mr519Gen::Campo,
+            Mr519Gen::Formulario,
+            Mr519Gen::Encuestausuario,
 
-          habilidad.can(:manage, Msip::Orgsocial)
-          habilidad.can(:manage, Msip::Sectororgsocial)
-          habilidad.can(:manage, Msip::Persona)
+            Msip::Orgsocial,
+            Msip::Sectororgsocial,
+            Msip::Persona,
 
-          habilidad.can(:manage, Usuario)
-          habilidad.can(:manage, :tablasbasicas)
+            Usuario,
+            :tablasbasicas
+          ])
           habilidad.tablasbasicas.each do |t|
             c = Ability.tb_clase(t)
             habilidad.can(:manage, c)

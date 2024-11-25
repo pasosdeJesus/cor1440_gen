@@ -77,7 +77,21 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :resultadospf, only: [:new, :destroy]
 
-  # resources :tiposindicador, path_names: { new: 'nuevo', edit: 'edita' }
+  resources :indicadorpf_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "indicadorespf_proyectofinanciero#destroy", 
+        as: "eliminar"
+      post '/' => "indicadorespf_proyectofinanciero#create", as: "crear"
+    end
+  end
+
+  resources :objetivopf_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "objetivospf_proyectofinanciero#destroy", 
+        as: "eliminar"
+      post '/' => "objetivospf_proyectofinanciero#create", as: "crear"
+    end
+  end
 
   namespace :admin do
     ab = Ability.new

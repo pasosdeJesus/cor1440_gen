@@ -4,30 +4,33 @@
   <div class="panel-heading"><%= t('Objetivos / Efectos') %></div>
   <div class="panel-body">
 
-    <div class="div-objetivospf">
-      <table class='table table-bordered' border=1 width="100%">
-        <thead>
-          <tr>
-            <th width="25%"><%= t('Código') %></th>
-            <th><%= t('Descripción') %></th>
-            <th><%= t('Acciones') %></th>
-          </tr>
-        </thead>
-        <tbody id="objetivospf">
+    <div class="div-objetivospf table-responsive">
+      <div class='div-tabla'>
+        <div id="objetivospf_marco" class="div-tabla-cuerpo">
+          <div class="div-tabla-fila">
+            <div class="div-tabla-celda-encabezado"><%= t('Código') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Descripción') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
+          </div>
           <%= f.simple_fields_for :objetivopf, f.object.objetivopf.order(:id) do |o| %>
             <%= render 'objetivopf_campos', f:  o %>
           <% end %>
-        </tbody>
-      </table>
-      <div class="links">
-        <%= link_to_add_association t('Añadir objetivo / efecto'), f, :objetivopf, {
-          :"data-association-insertion-node" => "tbody#objetivospf", 
-          :"data-association-insertion-method" => "append", 
-          partial: 'objetivopf_campos',
-          class: 'btn btn-sm btn-primary', 
-          "data-ajax" => cor1440_gen.new_objetivospf_path,
-          "data-ajaxdata" => "proyectofinanciero_id" } %>
-      </div> <!-- links -->
+        </div>
+      </div>
+      <div class="enlace-agregar-objetivopf">
+        <%= f.submit "Agregar #{Cor1440Gen::Objetivopf.human_attribute_name(:objetivopf)}",
+          formaction: cor1440_gen.crear_objetivopf_proyectofinanciero_path(
+            index: @proyectofinanciero.objetivopf.size
+          ),
+          formmethod: :post,
+          formnovalidate: true,
+          class: 'btn btn-sm btn-primary',
+          name: "agregar-objetivopf",
+          id: "agregar-objetivopf",
+          data:  {
+            disable_with: false 
+          } %>
+      </div> <!-- enlace-agregar-objetivopf -->
     </div> <!-- .div-objetivospf -->
   </div><!-- panel-body -->
 </div><!-- panel -->
