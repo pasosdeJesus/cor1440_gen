@@ -547,10 +547,10 @@ module Cor1440Gen
               ] + [
                 indicadorpf_attributes: [
                   :id,
+                  :objetivopf_id,
                   :resultadopf_id,
                   :numero,
                   :indicador,
-                  :tipoindicador_id,
                   :_destroy,
                 ],
               ] + [
