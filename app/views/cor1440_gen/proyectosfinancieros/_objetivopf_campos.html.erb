@@ -1,17 +1,27 @@
-<% f.object = Cor1440Gen::Objetivopf.new() if !f.object  %>
-<tr class='nested-fields'>
-  <td>
+<%= turbo_frame_tag "objetivopf_#{f.index}", class: 'div-tabla-fila nested-fields' do %>
+  <% f.object = Cor1440Gen::Objetivopf.new() if !f.object  %>
+  <div class="div-tabla-celda">
     <%= f.input :numero, 
       label: false %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :objetivo, as: :text, input_html: {rows: 3}, label: false %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
-    <%= link_to_remove_association t("Eliminar"), f, 
-      :class => 'btn btn-sm btn-danger', "data-existing" => true %>
+
+    <%= f.submit "Eliminar", 
+      formaction: cor1440_gen.eliminar_objetivopf_proyectofinanciero_path(
+        id: f.object.id, index: f.index || params[:index]
+      ),
+      formmethod: :delete, 
+      formnovalidate: true, 
+      class: 'btn btn-sm btn-danger',
+      data: { 
+        turbo_frame: "objetivopf_#{f.index}",
+        disable_with: false
+      } %>
     <div><%= f.error_notification %></div>
-  </td>
-</tr>
+  </div>
+<% end %>
 

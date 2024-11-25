@@ -23,6 +23,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular("campotind", "campostind")
   inflect.irregular("informeauditoria", "informeauditorias")
   inflect.irregular("financiador", "financiadores")
+  inflect.irregular("indicadorpf", "indicadorespf")
   inflect.irregular("mindicadorpf", "mindicadorespf")
   inflect.irregular("orgsocial", "orgsociales")
   inflect.irregular("proyectofinanciero", "proyectosfinancieros")

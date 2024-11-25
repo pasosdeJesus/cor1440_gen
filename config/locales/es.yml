@@ -185,6 +185,7 @@ es:
         indicadorpf: Indicador
         numero: Número
         indicador: Descripción del indicador
+        indicadorobjetivo: Indicador de Objetivo
       "cor1440_gen/mindicadorpf":
         Mindicadorpf: Medición de un indicador
         Mindicadorespf: Mediciones de indicadores

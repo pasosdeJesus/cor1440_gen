@@ -2,33 +2,35 @@
 <div class="panel panel-default">
   <div class="panel-heading"><%= t('Indicadores de objetivo/efecto') %></div>
   <div class="panel-body">
-    <div class="div-indicadoresobjetivos">
-      <table class='table table-bordered' border=1 width="100%">
-        <thead>
-          <tr>
-            <th><%= t('refobjetivo') %></th>
-            <th width="10%"><%= t('Código') %></th>
-            <th><%= t('Indicador') %></th>
-            <th><%= t('Acciones') %></th>
-          </tr>
-        </thead>
-        <tbody id="indicadoresobjetivos">
+    <div class="div-indicadoresobjetivos table-responsive">
+      <div class="div-tabla">
+        <div id="indicadoresobjetivo_marco" class="div-tabla-cuerpo">
+          <div class="div-tabla-fila">
+            <div class="div-tabla-celda-encabezado"><%= t('refobjetivo') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Código') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Indicador') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
+          </div>
           <%= f.simple_fields_for :indicadorobjetivo, 
             f.object.indicadorpf.where('objetivopf_id IS NOT NULL').order(:id) do |o| %>
             <%= render 'indicadorobjetivo_campos', f:  o, p: f %>
           <% end %>
-        </tbody>
-      </table>
-      <div class="links">
-        <%= link_to_add_association t('Añadir indicador de objetivo/efecto'), 
-          f, :indicadorobjetivo, {
-          :"data-association-insertion-node" => "tbody#indicadoresobjetivos", 
-          :"data-association-insertion-method" => "append", 
-          partial: 'indicadorobjetivo_campos',
-          class: 'btn btn-sm btn-primary', 
-          "data-ajax" => cor1440_gen.new_indicadorespf_path,
-          "data-ajaxdata" => "proyectofinanciero_id" } %>
-      </div> <!-- link -->
-    </div> <!-- .div-indicadoresobjetivos -->
+        </div>
+      </div>
+    </div>
+    <div class="enlace-agregar-indicadorobjetivo">
+      <%= f.submit "Agregar #{Cor1440Gen::Indicadorpf.human_attribute_name(:indicadorobjetivo)}",
+        formaction: cor1440_gen.crear_indicadorpf_proyectofinanciero_path(
+          index: @proyectofinanciero.indicadorpf.size
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        class: 'btn btn-sm btn-primary',
+        name: "agregar-indicadorobjetivo",
+        id: "agregar-indicadorobjetivo",
+        data:  {
+          disable_with: false 
+        } %>
+    </div> <!-- .enlace -->
   </div> <!-- panel-body -->
 </div> <!-- panel -->

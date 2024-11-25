@@ -1,0 +1,29 @@
+<%= simple_form_for @proyectofinanciero do |f| %>
+  <%= f.simple_fields_for :indicadorpf,
+    child_index: params[:index] do |subf| %>
+    <% if params["agregar-indicadorobjetivo"] %>
+      <%= turbo_stream.replace "agregar-indicadorpf" do %>
+        <%= f.submit "Agregar #{Cor1440Gen::Proyectofinanciero.human_attribute_name(:indicadorobjetivo)}",
+          formaction: cor1440_gen.crear_indicadorpf_proyectofinanciero_path(
+            subf.index.to_i + 1
+          ),
+          formmethod: :post,
+          formnovalidate: true,
+          class: "btn btn-sm btn-primary",
+          id: "agregar-indicadorobjetivo",
+          data:  {
+            disable_with: false
+          } %>
+      <% end %>
+
+      <%= turbo_stream.append "indicadoresobjetivo_marco" do %>
+        <%= render(
+          partial: "/cor1440_gen/proyectosfinancieros/indicadorobjetivo_campos",
+          locals: {
+            f: subf,
+            ruta_eliminar: cor1440_gen.eliminar_indicadorpf_proyectofinanciero_path
+          }) %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
