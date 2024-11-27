@@ -133,12 +133,12 @@ module Cor1440Gen
               redirect_to(main_app.root_path)
               return
             end
-            super(c)
           end
 
 
           def index(c = nil)
             index_cor1440_gen(c)
+            super(c)
           end
 
 
