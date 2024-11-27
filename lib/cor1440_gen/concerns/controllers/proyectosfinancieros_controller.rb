@@ -121,7 +121,8 @@ module Cor1440Gen
             "M"
           end
 
-          def index(c = nil)
+
+          def index_cor1440_gen(c = nil)
             c = Cor1440Gen::ProyectosfinancierosController.disponibles(
               params, current_ability, c
             )
@@ -134,6 +135,12 @@ module Cor1440Gen
             end
             super(c)
           end
+
+
+          def index(c = nil)
+            index_cor1440_gen(c)
+          end
+
 
           # API JSON, dado un conjunto de proyectosfinancieros
           # responde con las actividadespf de sus marcos lógicos
@@ -194,6 +201,7 @@ module Cor1440Gen
               end
             end
           end
+
 
           def copia
             if !params || !params[:proyectofinanciero_id]
