@@ -93,6 +93,15 @@ Cor1440Gen::Engine.routes.draw do
     end
   end
 
+  resources :resultadopf_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "resultadospf_proyectofinanciero#destroy", 
+        as: "eliminar"
+      post '/' => "resultadospf_proyectofinanciero#create", as: "crear"
+    end
+  end
+
+
   namespace :admin do
     ab = Ability.new
     ab.tablasbasicas.each do |t|

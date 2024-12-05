@@ -302,6 +302,7 @@ module Cor1440Gen
             Cor1440Gen::Mindicadorpf,
             Cor1440Gen::Objetivopf,
             Cor1440Gen::Proyectofinanciero,
+            Cor1440Gen::Resultadopf,
             Cor1440Gen::Tipoindicador,
 
             Heb412Gen::Doc,

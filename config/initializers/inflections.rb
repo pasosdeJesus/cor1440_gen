@@ -29,6 +29,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular("proyectofinanciero", "proyectosfinancieros")
   inflect.irregular("pmindicadorpf", "pmsindicadorpf")
   inflect.irregular("rangoedadac", "rangosedadac")
+  inflect.irregular("resultadopf", "resultadospf")
   inflect.irregular("sectororgsocial", "sectoresorgsocial")
   inflect.irregular("sectorapc", "sectoresapc")
   inflect.irregular("tipoindicador", "tiposindicador")
