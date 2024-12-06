@@ -18,7 +18,7 @@
   <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
 
-    <%= f.submit "Eliminar", 
+    <%= f.submit "Eliminar I.O.", 
       formaction: cor1440_gen.eliminar_indicadorpf_proyectofinanciero_path(
         id: f.object.id, index: f.index || params[:index]
       ),
@@ -26,7 +26,7 @@
       formnovalidate: true, 
       class: 'btn btn-sm btn-danger',
       data: { 
-        turbo_frame: "inicadorobjetivo_#{f.index}",
+        turbo_frame: "indicadorobjetivo_#{f.index}",
         disable_with: false
       } %>
     <div><%= f.error_notification %></div>

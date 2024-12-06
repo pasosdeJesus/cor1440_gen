@@ -21,17 +21,17 @@
 
     <div class="enlace-agregar-indicadorpf">
       <%= f.submit "Agregar #{Cor1440Gen::Indicadorpf.human_attribute_name(:indicadorpf)}",
+        class: 'btn btn-sm btn-primary',
+        data:  {
+          disable_with: false 
+        },
         formaction: cor1440_gen.crear_indicadorpf_proyectofinanciero_path(
           index: @proyectofinanciero.indicadorpf.size
         ),
         formmethod: :post,
         formnovalidate: true,
-        class: 'btn btn-sm btn-primary',
-        name: "agregar-indicadorpf",
         id: "agregar-indicadorpf",
-        data:  {
-          disable_with: false 
-        } %>
+        name: "agregar-indicadorpf" %>
     </div> <!-- .enlace -->
 
   </div> <!-- panel-body -->
