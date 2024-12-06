@@ -19,6 +19,9 @@ module Cor1440Gen
               Cor1440Gen::Proyectofinanciero.new(
                 indicadorpf: [
                   Cor1440Gen::Indicadorpf.new
+                ],
+                indicadorobjetivo: [
+                  Cor1440Gen::Indicadorpf.new
                 ]
               )
           end
