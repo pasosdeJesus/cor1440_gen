@@ -1,38 +1,48 @@
-<tr class='nested-fields'>
-  <td>
+<%= turbo_frame_tag "actividadpf_#{f.index}", class: 'div-tabla-fila nested-fields' do %>
+  <% if !f.object %>
+    <% f.object = Cor1440Gen::Actividadpf.new() %>
+  <% end %>
+  <% if !f.object.proyectofinanciero_id %>
+    <% f.object.proyectofinanciero_id = params[:proyectofinanciero][:id] %>
+  <% end %>
+
+  <div class="div-tabla-celda">
     <%= f.association :resultadopf, 
       collection: Cor1440Gen::Resultadopf.joins(:objetivopf).
       where(proyectofinanciero_id: f.object.proyectofinanciero_id).
-      order(["cor1440_gen_objetivopf.numero", "cor1440_gen_resultadopf.numero"]),
+      order([
+        "cor1440_gen_objetivopf.numero", 
+        "cor1440_gen_resultadopf.numero"
+      ]),
       label: false,
       label_method: lambda {
         |t| (t.objetivopf ? t.objetivopf.numero : '') + t.numero} 
       %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :nombrecorto, label: false %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :titulo, 
       as: :text, 
       input_html: { rows: 3 }, 
       label: false %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :descripcion, 
       as: :text, 
       input_html: { rows: 3 }, 
       label: false %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.association :formulario, 
       collection: Mr519Gen::Formulario.all,
       label_method: :presenta_nombre,
       input_html: { class: 'tom-select' },
       wrapper_html: { style: 'width: 8rem' },
       label: false %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <% col = Cor1440Gen::Actividadpf.where(
       'proyectofinanciero_id IS NOT NULL') %>
     <% if f.object.proyectofinanciero_id %>
@@ -47,12 +57,20 @@
       input_html: { class: 'tom-select' },
       wrapper_html: { style: 'width: 12rem' },
       label: false %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
-    <%= link_to_remove_association t("Eliminar"), f, 
-      :class => 'btn btn-sm btn-danger', "data-existing" => true %>
+    <%= f.submit "Eliminar",
+      formaction: cor1440_gen.eliminar_actividadpf_proyectofinanciero_path(
+        id: f.object.id, index: f.index || params[:index]
+      ),
+      formmethod: :delete,
+      formnovalidate: true,
+      class: 'btn btn-sm btn-danger',
+      data: {
+        turbo_frame: "actividadpf_#{f.index}",
+        disable_with: false
+      } %>
     <div><%= f.error_notification %></div>
-  </td>
-</tr>
-
+  </div>
+<% end %>

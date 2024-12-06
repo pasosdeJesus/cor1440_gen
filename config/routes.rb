@@ -77,6 +77,14 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :resultadospf, only: [:new, :destroy]
 
+  resources :actividadpf_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "actividadespf_proyectofinanciero#destroy", 
+        as: "eliminar"
+      post '/' => "actividadespf_proyectofinanciero#create", as: "crear"
+    end
+  end
+
   resources :indicadorpf_proyectofinanciero, only: [], param: :index do
     member do
       delete '(:id)', to: "indicadorespf_proyectofinanciero#destroy", 
