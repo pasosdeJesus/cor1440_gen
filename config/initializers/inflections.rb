@@ -19,6 +19,7 @@
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular("asistencia", "asistencias")
   inflect.irregular("actividad", "actividades")
+  inflect.irregular("actividadpf", "actividadespf")
   inflect.irregular("actividadarea", "actividadareas")
   inflect.irregular("campotind", "campostind")
   inflect.irregular("informeauditoria", "informeauditorias")

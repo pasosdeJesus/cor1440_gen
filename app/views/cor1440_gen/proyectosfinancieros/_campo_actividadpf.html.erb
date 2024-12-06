@@ -1,36 +1,41 @@
 <p></p>
+<%= f.input :id, as: :hidden %>
 <div class="panel panel-default">
-  <div class="panel-heading"><%= t('Actividades del marco lógico') %></div>
-  <div class="panel-body table-responsive" style='overflow-x:scroll;'>
-    <div class="div-actividadespf">
-      <table class='table table-bordered' border=1 width="100%">
-        <thead>
-          <tr>
-            <th style='min-width: 8rem'><%= t('refresultado') %></th>
-            <th style='min-width: 4rem'><%= t('Código') %></th>
-            <th style='min-width: 18rem'><%= t('Actividad del marco lógico') %></th>
-            <th style='min-width: 18rem'><%= t('Detalle') %></th>
-            <th style='min-width: 8rem'><%= t('Formulario') %></th>
-            <th style='min-width: 14rem'><%= t('Hereda de') %></th>
-            <th style='min-width: 4rem'><%= t('Acciones') %></th>
-          </tr>
-        </thead>
-        <tbody id="actividadespf">
-          <%= f.simple_fields_for :actividadpf, 
+  <div class="panel-heading"><%= t('Actividades') %></div>
+  <div class="panel-body">
+
+    <div class="div-actividadespf table-responsive">
+      <div class='div-tabla'>
+        <div id="actividadespf_marco" class="div-tabla-cuerpo">
+          <div class="div-tabla-fila">
+            <div class="div-tabla-celda-encabezado"><%= t('refresultado') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Código') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Actividad del marco lógico') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Detalle') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Formulario') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Hereda de') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
+          </div>
+          <%= f.simple_fields_for :actividadpf,
             f.object.actividadpf.order(:id) do |o| %>
             <%= render 'actividadpf_campos', f:  o %>
           <% end %>
-        </tbody>
-      </table>
-      <div class="links">
-        <%= link_to_add_association t('Añadir actividad'), f, :actividadpf, {
-          :"data-association-insertion-node" => "tbody#actividadespf", 
-          :"data-association-insertion-method" => "append", 
-          partial: 'actividadpf_campos',
-          class: 'btn btn-sm btn-primary', 
-          "data-ajax" => cor1440_gen.new_actividadespf_path,
-          "data-ajaxdata" => "proyectofinanciero_id" } %>
-      </div> <!-- links -->
+        </div>
+      </div>
+      <div class="enlace-agregar-actividadpf">
+        <%= f.submit "Agregar #{Cor1440Gen::Actividadpf.human_attribute_name(:actividadpf)}",
+          formaction: cor1440_gen.crear_actividadpf_proyectofinanciero_path(
+            index: @proyectofinanciero.actividadpf.size
+          ),
+          formmethod: :post,
+          formnovalidate: true,
+          class: 'btn btn-sm btn-primary',
+          name: "agregar-actividadpf",
+          id: "agregar-actividadpf",
+          data:  {
+            disable_with: false 
+          } %>
+      </div> <!-- enlace-agregar-actividadpf -->
     </div> <!-- .div-actividadespf -->
-  </div> <!-- panel-body -->
-</div> <!-- panel -->
+  </div><!-- panel-body -->
+</div><!-- panel -->
