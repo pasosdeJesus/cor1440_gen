@@ -2,32 +2,37 @@
 <div class="panel panel-default">
   <div class="panel-heading"><%= t('Indicadores de resultado') %></div>
   <div class="panel-body">
-    <div class="div-indicadorespf">
-      <table class='table table-bordered' border=1 width="100%">
-        <thead>
-          <tr>
-            <th><%= t('refresultado') %></th>
-            <th width="10%"><%= t('Código') %></th>
-            <th><%= t('Indicador') %></th>
-            <th><%= t('Acciones') %></th>
-          </tr>
-        </thead>
-        <tbody id="indicadorespf">
+    <div class="div-indicadorespf table-responsive">
+      <div class="div-tabla"> 
+        <div id="indicadorespf_marco" class="div-tabla-cuerpo">
+          <div class="div-tabla-fila">
+            <div class="div-tabla-celda-encabezado"><%= t('refresultado') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Código') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Indicador') %></div>
+            <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
+          </div>
           <%= f.simple_fields_for :indicadorpf, 
             f.object.indicadorpf.where('resultadopf_id IS NOT NULL').order(:id) do |o| %>
             <%= render 'indicadorpf_campos', f:  o %>
           <% end %>
-        </tbody>
-      </table>
-      <div class="links">
-        <%= link_to_add_association t('Añadir indicador'), f, :indicadorpf, {
-          :"data-association-insertion-node" => "tbody#indicadorespf", 
-          :"data-association-insertion-method" => "append", 
-          partial: 'indicadorpf_campos',
-          class: 'btn btn-sm btn-primary', 
-          #"data-ajax" => cor1440_gen.new_indicadorespf_path,
-          "data-ajaxdata" => "proyectofinanciero_id" } %>
-      </div> <!-- link -->
-    </div> <!-- .div-indicadorespf -->
+        </div>
+      </div>
+    </div>
+
+    <div class="enlace-agregar-indicadorpf">
+      <%= f.submit "Agregar #{Cor1440Gen::Indicadorpf.human_attribute_name(:indicadorpf)}",
+        formaction: cor1440_gen.crear_indicadorpf_proyectofinanciero_path(
+          index: @proyectofinanciero.indicadorpf.size
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        class: 'btn btn-sm btn-primary',
+        name: "agregar-indicadorpf",
+        id: "agregar-indicadorpf",
+        data:  {
+          disable_with: false 
+        } %>
+    </div> <!-- .enlace -->
+
   </div> <!-- panel-body -->
 </div> <!-- panel -->
