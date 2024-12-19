@@ -49,7 +49,10 @@ module Cor1440Gen
           def objetivo_xor_resultado
             if (objetivopf_id.nil? && resultadopf_id.nil?) ||
               (!objetivopf_id.nil? && !resultadopf_id.nil?)
-              errors.add(:indicadorpf, "El indicador debe ser bien de resultado o bien de objetivo")
+              errors.add(
+                :numero, 
+                "El indicador debe ser bien de resultado o bien de objetivo"
+              )
             end
           end
 
