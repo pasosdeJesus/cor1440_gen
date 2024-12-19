@@ -13,26 +13,30 @@
             <div class="div-tabla-celda-encabezado"><%= t('Resultado') %></div>
             <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
           </div>
-          <%= f.simple_fields_for :resultadopf,
-            f.object.resultadopf.order(:id) do |o| %>
+          <%= f.simple_fields_for :resultadopf, 
+            f.object.resultadopf.records do |o| %>
             <%= render 'resultadopf_campos', f:  o %>
           <% end %>
         </div>
       </div>
-      <div class="enlace-agregar-resultadopf">
-        <%= f.submit "Agregar #{Cor1440Gen::Resultadopf.human_attribute_name(:resultadopf)}",
-          formaction: cor1440_gen.crear_resultadopf_proyectofinanciero_path(
-            index: @proyectofinanciero.resultadopf.size
-          ),
-          formmethod: :post,
-          formnovalidate: true,
-          class: 'btn btn-sm btn-primary',
-          name: "agregar-resultadopf",
-          id: "agregar-resultadopf",
-          data:  {
-            disable_with: false 
-          } %>
-      </div> <!-- enlace-agregar-resultadopf -->
+      <% if f.object.objetivopf.count == 0 %>
+        <div>Primero agregue objetivos</div>
+      <% else %>
+        <div class="enlace-agregar-resultadopf">
+          <%= f.submit "Agregar #{Cor1440Gen::Resultadopf.human_attribute_name(:resultadopf)}",
+            formaction: cor1440_gen.crear_resultadopf_proyectofinanciero_path(
+              index: @proyectofinanciero.resultadopf.size
+            ),
+            formmethod: :post,
+            formnovalidate: true,
+            class: 'btn btn-sm btn-primary',
+            name: "agregar-resultadopf",
+            id: "agregar-resultadopf",
+            data:  {
+              disable_with: false 
+            } %>
+        </div> <!-- enlace-agregar-resultadopf -->
+      <% end %>
     </div> <!-- .div-resultadospf -->
   </div><!-- panel-body -->
 </div><!-- panel -->

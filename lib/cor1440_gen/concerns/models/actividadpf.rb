@@ -29,7 +29,7 @@ module Cor1440Gen
 
           belongs_to :resultadopf,
             class_name: "Cor1440Gen::Resultadopf",
-            optional: true
+            optional: false
 
           has_one :objetivopf,
             class_name: "Cor1440Gen::Objetivopf",

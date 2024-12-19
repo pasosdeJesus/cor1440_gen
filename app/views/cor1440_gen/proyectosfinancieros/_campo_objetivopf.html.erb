@@ -12,7 +12,8 @@
             <div class="div-tabla-celda-encabezado"><%= t('Descripción') %></div>
             <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
           </div>
-          <%= f.simple_fields_for :objetivopf, f.object.objetivopf.order(:id) do |o| %>
+          <%= f.simple_fields_for :objetivopf, 
+            f.object.objetivopf.records do |o| %>
             <%= render 'objetivopf_campos', f:  o %>
           <% end %>
         </div>

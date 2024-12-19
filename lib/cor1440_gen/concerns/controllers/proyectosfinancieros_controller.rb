@@ -47,6 +47,10 @@ module Cor1440Gen
             super("", false)
           end
 
+          def update(registro = nil)
+            update_gen(registro)
+          end
+
           def atributos_index_cor1440
             [
               :id,

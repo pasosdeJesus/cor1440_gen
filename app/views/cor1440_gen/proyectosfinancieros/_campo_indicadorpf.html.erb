@@ -12,27 +12,31 @@
             <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
           </div>
           <%= f.simple_fields_for :indicadorpf, 
-            f.object.indicadorpf.where('resultadopf_id IS NOT NULL').order(:id) do |o| %>
+            f.object.indicadorpf.records.select {|i| !i.resultadopf_id.nil? } do |o| %>
             <%= render 'indicadorpf_campos', f:  o %>
           <% end %>
         </div>
       </div>
     </div>
 
-    <div class="enlace-agregar-indicadorpf">
-      <%= f.submit "Agregar #{Cor1440Gen::Indicadorpf.human_attribute_name(:indicadorpf)}",
-        class: 'btn btn-sm btn-primary',
-        data:  {
-          disable_with: false 
-        },
-        formaction: cor1440_gen.crear_indicadorpf_proyectofinanciero_path(
-          index: @proyectofinanciero.indicadorpf.size
-        ),
-        formmethod: :post,
-        formnovalidate: true,
-        id: "agregar-indicadorpf",
-        name: "agregar-indicadorpf" %>
-    </div> <!-- .enlace -->
+    <% if f.object.resultadopf.count == 0 %>
+      <div>Primero agregue resultados</div>
+    <% else %>
+      <div class="enlace-agregar-indicadorpf">
+        <%= f.submit "Agregar #{Cor1440Gen::Indicadorpf.human_attribute_name(:indicadorpf)}",
+          class: 'btn btn-sm btn-primary',
+          data:  {
+            disable_with: false 
+          },
+          formaction: cor1440_gen.crear_indicadorpf_proyectofinanciero_path(
+            index: @proyectofinanciero.indicadorpf.size
+          ),
+          formmethod: :post,
+          formnovalidate: true,
+          id: "agregar-indicadorpf",
+          name: "agregar-indicadorpf" %>
+      </div> <!-- .enlace -->
+    <% end %>
 
   </div> <!-- panel-body -->
 </div> <!-- panel -->

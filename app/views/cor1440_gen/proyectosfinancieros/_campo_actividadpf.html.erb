@@ -17,25 +17,29 @@
             <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
           </div>
           <%= f.simple_fields_for :actividadpf,
-            f.object.actividadpf.order(:id) do |o| %>
+            f.object.actividadpf.records do |o| %>
             <%= render 'actividadpf_campos', f:  o %>
           <% end %>
         </div>
       </div>
-      <div class="enlace-agregar-actividadpf">
-        <%= f.submit "Agregar #{Cor1440Gen::Actividadpf.human_attribute_name(:actividadpf)}",
-          formaction: cor1440_gen.crear_actividadpf_proyectofinanciero_path(
-            index: @proyectofinanciero.actividadpf.size
-          ),
-          formmethod: :post,
-          formnovalidate: true,
-          class: 'btn btn-sm btn-primary',
-          name: "agregar-actividadpf",
-          id: "agregar-actividadpf",
-          data:  {
-            disable_with: false 
-          } %>
-      </div> <!-- enlace-agregar-actividadpf -->
+      <% if f.object.resultadopf.count == 0 %>
+        <div>Primero agregue resultados</div>
+      <% else %>
+        <div class="enlace-agregar-actividadpf">
+          <%= f.submit "Agregar #{Cor1440Gen::Actividadpf.human_attribute_name(:actividadpf)}",
+            formaction: cor1440_gen.crear_actividadpf_proyectofinanciero_path(
+              index: @proyectofinanciero.actividadpf.size
+            ),
+            formmethod: :post,
+            formnovalidate: true,
+            class: 'btn btn-sm btn-primary',
+            name: "agregar-actividadpf",
+            id: "agregar-actividadpf",
+            data:  {
+              disable_with: false 
+            } %>
+        </div> <!-- enlace-agregar-actividadpf -->
+      <% end %>
     </div> <!-- .div-actividadespf -->
   </div><!-- panel-body -->
 </div><!-- panel -->
