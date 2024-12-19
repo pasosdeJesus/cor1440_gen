@@ -12,7 +12,6 @@ module Cor1440Gen
     include Cor1440Gen::Concerns::Controllers::ActividadesController
 
     def datos_boton_envio
-      debugger
       { 'disable_with': false }
     end
 
