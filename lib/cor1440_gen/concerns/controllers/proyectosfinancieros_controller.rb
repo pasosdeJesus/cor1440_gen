@@ -48,6 +48,56 @@ module Cor1440Gen
           end
 
           def update(registro = nil)
+            if proyectofinanciero_params[:objetivopf_attributes]
+              merr = "".dup
+              proyectofinanciero_params[:objetivopf_attributes].each do |i, o|
+                if o["_destroy"] == "true" && o[:id].to_i > 0
+                  indo = Cor1440Gen::Indicadorpf.where(
+                    objetivopf_id: o[:id].to_i)
+                  if indo.count > 0
+                    merr << "No se puede eliminar el objetivo "\
+                      "'#{o[:id]}' porque es usado en #{indo.count} "\
+                      "indicador(es) de objetivo. "
+                    params[:proyectofinanciero][:objetivopf_attributes][i]["_destroy"] = "false"
+                  end
+                  res = Cor1440Gen::Resultadopf.where(
+                    objetivopf_id: o[:id].to_i)
+                  if res.count > 0
+                    merr << "No se puede eliminar el objetivo "\
+                      "'#{o[:id]}' porque es usado en #{res.count} "\
+                      "resultado(s). "
+                    params[:proyectofinanciero][:objetivopf_attributes][i]["_destroy"] = "false"
+                  end
+                end
+              end
+            end
+            if proyectofinanciero_params[:resultadopf_attributes]
+              proyectofinanciero_params[:resultadopf_attributes].each do |i, r|
+                if r["_destroy"] == "true" && r[:id].to_i > 0
+                  indr = Cor1440Gen::Indicadorpf.where(
+                    resultadopf_id: r[:id].to_i)
+                  if indr.count > 0
+                    merr << "No se puede eliminar el resultado "\
+                      "'#{r[:id]}' porque es usado en #{indr.count} "\
+                      "indicador(es) de resultado. "
+                    params[:proyectofinanciero][:resultadopf_attributes][i]["_destroy"] = "false"
+                  end
+                  ac = Cor1440Gen::Actividadpf.where(
+                    resultadopf_id: r[:id].to_i)
+                  if ac.count > 0
+                    merr << "No se puede eliminar el resultado "\
+                      "'#{r[:id]}' porque es usado en #{ac.count} "\
+                      "actividad(es). "
+                    params[:proyectofinanciero][:resultadopf_attributes][i]["_destroy"] = "false"
+                  end
+                end
+              end
+
+              if merr.length > 0
+                flash[:error] = merr
+              end
+            end
+
             update_gen(registro)
           end
 
