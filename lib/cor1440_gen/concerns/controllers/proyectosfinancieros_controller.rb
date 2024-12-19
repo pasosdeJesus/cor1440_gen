@@ -48,8 +48,8 @@ module Cor1440Gen
           end
 
           def update(registro = nil)
+            merr = "".dup
             if proyectofinanciero_params[:objetivopf_attributes]
-              merr = "".dup
               proyectofinanciero_params[:objetivopf_attributes].each do |i, o|
                 if o["_destroy"] == "true" && o[:id].to_i > 0
                   indo = Cor1440Gen::Indicadorpf.where(
@@ -92,10 +92,9 @@ module Cor1440Gen
                   end
                 end
               end
-
-              if merr.length > 0
-                flash[:error] = merr
-              end
+            end
+            if merr.length > 0
+              flash[:error] = merr
             end
 
             update_gen(registro)
