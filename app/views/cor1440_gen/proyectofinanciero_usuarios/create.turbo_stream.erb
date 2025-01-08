@@ -1,0 +1,24 @@
+<%= simple_form_for @proyectofinanciero do |f| %>
+  <%= f.simple_fields_for :proyectofinanciero_usuario,
+    child_index: params[:index] do |subf| %>
+    <%= turbo_stream.replace "agregar-proyectofinanciero-usuario" do %>
+      <%= f.submit "Agregar funcionario",
+        class: 'btn btn-sm btn-primary',
+        data:  {
+          disable_with: false
+        },
+        formaction: cor1440_gen.crear_proyectofinanciero_usuario_path(
+          index: subf.index.to_i + 1
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        id: "agregar-proyectofinanciero-usuario",
+        name: "agregar-proyectofinanciero-usuario"
+      %>
+    <% end %>
+
+    <%= turbo_stream.append "proyectofinanciero_usuarios_marco" do %>
+      <%= render "/cor1440_gen/proyectosfinancieros/proyectofinanciero_usuario_campos", f: subf %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -17,6 +17,18 @@ module Cor1440Gen
           belongs_to :usuario,
             class_name: "::Usuario",
             optional: true
+
+          validates :usuario_id, uniqueness: {
+            allow_blank: true,
+            message: "Funcionario repetido",
+            scope: :proyectofinanciero_id
+          }
+
+          #validate :no_repite_funcionario
+          #def no_repite_funcionario
+          #  debugger
+          #end
+
         end # included
       end
     end

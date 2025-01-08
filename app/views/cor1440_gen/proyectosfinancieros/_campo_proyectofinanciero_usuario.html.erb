@@ -1,24 +1,27 @@
 <p>
 <%= t('Equipo de trabajo') %>:
-<table class='table table-bordered' border=1 width="100%">
-  <thead>
-    <tr>
-      <th><%= t('Persona') %></th>
-      <th><%= t('Acciones') %></th>
-    </tr>
-  </thead>
-  <tbody id="proyectofinanciero_usuario">
+<div class="div-tabla">
+  <div id="proyectofinanciero_usuarios_marco" class="div-tabla-cuerpo">
+    <div class="div-tabla-fila">
+      <div class="div-tabla-celda-encabezado"><%= t('Persona') %></div>
+      <div class="div-tabla-celda-encabezado"><%= t('Acciones') %></div>
+    </div>
     <%= f.simple_fields_for :proyectofinanciero_usuario do |pu| %>
-      <%= render 'proyectofinanciero_usuario_campos', :f => pu%>
+      <%= render 'proyectofinanciero_usuario_campos', :f => pu %>
     <% end %>
-  </tbody>
-</table>
-<div class="links">
-  <%= link_to_add_association t('Añadir funcionario'), f, 
-    :proyectofinanciero_usuario,
-    :"data-association-insertion-node" => "tbody#proyectofinanciero_usuario", 
-    :"data-association-insertion-method" => "append", 
-    partial: 'proyectofinanciero_usuario_campos',
-    :class => 'btn btn-sm btn-primary'
-  %>
+  </div>
 </div>
+<div class="enlace-agregar-usuarios">
+  <%= f.submit "Agregar funcionario",
+    class: 'btn btn-sm btn-primary',
+    data:  {
+      disable_with: false
+    },
+    formaction: cor1440_gen.crear_proyectofinanciero_usuario_path(
+      index: @registro.proyectofinanciero_usuario.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    id: "agregar-proyectofinanciero-usuario",
+    name: "agregar-proyectofinanciero-usuario"  %>
+</div> 
