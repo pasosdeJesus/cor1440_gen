@@ -41,8 +41,8 @@ module Cor1440Gen
             optional: true
 
           has_many :desembolso,
-            dependent: :delete_all,
             class_name: "Cor1440Gen::Desembolso",
+            dependent: :delete_all,
             foreign_key: "proyectofinanciero_id",
             validate: true
           accepts_nested_attributes_for :desembolso,
@@ -50,8 +50,8 @@ module Cor1440Gen
             reject_if: :all_blank
 
           has_many :informeauditoria,
-            dependent: :delete_all,
             class_name: "Cor1440Gen::Informeauditoria",
+            dependent: :delete_all,
             foreign_key: "proyectofinanciero_id",
             validate: true
           accepts_nested_attributes_for :informeauditoria,
@@ -59,8 +59,8 @@ module Cor1440Gen
             reject_if: :all_blank
 
           has_many :informefinanciero,
-            dependent: :delete_all,
             class_name: "Cor1440Gen::Informefinanciero",
+            dependent: :delete_all,
             foreign_key: "proyectofinanciero_id",
             validate: true
           accepts_nested_attributes_for :informefinanciero,
@@ -68,8 +68,8 @@ module Cor1440Gen
             reject_if: :all_blank
 
           has_many :informenarrativo,
-            dependent: :delete_all,
             class_name: "Cor1440Gen::Informenarrativo",
+            dependent: :delete_all,
             foreign_key: "proyectofinanciero_id",
             validate: true
           accepts_nested_attributes_for :informenarrativo,
@@ -78,134 +78,137 @@ module Cor1440Gen
 
           belongs_to :responsable,
             class_name: "::Usuario",
-            validate: true,
-            optional: true
+            optional: true,
+            validate: true
 
           belongs_to :sectorapc,
             class_name: "Cor1440Gen::Sectorapc",
-            validate: true,
-            optional: true
+            optional: true,
+            validate: true
 
           has_and_belongs_to_many :actividad,
+            association_foreign_key: "actividad_id",
             class_name: "Cor1440Gen::Actividad",
             foreign_key: "proyectofinanciero_id",
-            association_foreign_key: "actividad_id",
             join_table: "cor1440_gen_actividad_proyectofinanciero"
 
           has_and_belongs_to_many :beneficiario,
+            association_foreign_key: "persona_id",
             class_name: "Msip::Persona",
             foreign_key: "proyectofinanciero_id",
-            association_foreign_key: "persona_id",
             join_table: "cor1440_gen_beneficiariopf"
 
           has_and_belongs_to_many :caracterizacion,
+            association_foreign_key: "formulario_id",
             class_name: "::Mr519Gen::Formulario",
             foreign_key: "proyectofinanciero_id",
-            association_foreign_key: "formulario_id",
             join_table: "cor1440_gen_caracterizacionpf"
 
           has_and_belongs_to_many :financiador,
+            association_foreign_key: "financiador_id",
             class_name: "Cor1440Gen::Financiador",
             foreign_key: "proyectofinanciero_id",
-            association_foreign_key: "financiador_id",
             join_table: "cor1440_gen_financiador_proyectofinanciero"
 
           has_and_belongs_to_many :plantillahcm,
+            association_foreign_key: "plantillahcm_id",
             class_name: "::Heb412Gen::Plantillahcm",
             foreign_key: "proyectofinanciero_id",
-            association_foreign_key: "plantillahcm_id",
             join_table: "cor1440_gen_plantillahcm_proyectofinanciero"
 
           has_and_belongs_to_many :proyecto,
+            association_foreign_key: "proyecto_id",
             class_name: "Cor1440Gen::Proyecto",
             foreign_key: "proyectofinanciero_id",
-            association_foreign_key: "proyecto_id",
             join_table: "cor1440_gen_proyecto_proyectofinanciero"
 
           has_many :actividadpf,
-            foreign_key: "proyectofinanciero_id",
-            validate: true,
+            class_name: "Cor1440Gen::Actividadpf",
             dependent: :destroy,
-            class_name: "Cor1440Gen::Actividadpf"
+            foreign_key: "proyectofinanciero_id",
+            validate: true
+
           accepts_nested_attributes_for :actividadpf,
             allow_destroy: true,
             reject_if: :all_blank
 
           has_many :anexo_proyectofinanciero,
-            dependent: :delete_all,
             class_name: "::Cor1440Gen::AnexoProyectofinanciero",
+            dependent: :delete_all,
             foreign_key: "proyectofinanciero_id",
             validate: true
           accepts_nested_attributes_for :anexo_proyectofinanciero,
             allow_destroy: true,
             reject_if: :all_blank
           has_many :anexo,
-            through: :anexo_proyectofinanciero,
-            class_name: "::Msip::Anexo"
+            class_name: "::Msip::Anexo",
+            through: :anexo_proyectofinanciero
           accepts_nested_attributes_for :anexo, reject_if: :all_blank
 
           has_many :indicadorobjetivo,
-            foreign_key: "proyectofinanciero_id",
-            validate: true,
+            class_name: "Cor1440Gen::Indicadorpf",
             dependent: :destroy,
-            class_name: "Cor1440Gen::Indicadorpf"
+            foreign_key: "proyectofinanciero_id",
+            validate: true
           accepts_nested_attributes_for :indicadorobjetivo,
             allow_destroy: true,
             reject_if: :all_blank
 
           has_many :indicadorpf,
-            foreign_key: "proyectofinanciero_id",
-            validate: true,
+            class_name: "Cor1440Gen::Indicadorpf",
             dependent: :destroy,
-            class_name: "Cor1440Gen::Indicadorpf"
+            foreign_key: "proyectofinanciero_id",
+            validate: true
           accepts_nested_attributes_for :indicadorpf,
             allow_destroy: true,
             reject_if: :all_blank
 
           has_many :informe,
-            dependent: :delete_all,
             class_name: "Cor1440Gen::Informe",
+            dependent: :delete_all,
             foreign_key: "filtroproyectofinanciero"
 
           has_many :mindicadorpf,
-            dependent: :delete_all,
             class_name: "Cor1440Gen::Mindicadorpf",
+            dependent: :delete_all,
             foreign_key: "proyectofinanciero_id"
 
           has_many :objetivopf,
-            foreign_key: "proyectofinanciero_id",
-            validate: true,
+            class_name: "Cor1440Gen::Objetivopf",
             dependent: :destroy,
-            class_name: "Cor1440Gen::Objetivopf"
+            foreign_key: "proyectofinanciero_id",
+            validate: true
           accepts_nested_attributes_for :objetivopf,
             allow_destroy: true,
             reject_if: :all_blank
 
           has_many :proyectofinanciero_usuario,
-            dependent: :delete_all,
             class_name: "Cor1440Gen::ProyectofinancieroUsuario",
+            dependent: :delete_all,
             foreign_key: "proyectofinanciero_id",
             validate: true
           accepts_nested_attributes_for :proyectofinanciero_usuario,
-            allow_destroy: true # , reject_if: :all_blank
+            allow_destroy: true 
+            # se permiten en blanco para agregar POR CONTRATAR
           has_many :usuario,
             through: :proyectofinanciero_usuario,
             class_name: "::Usuario"
 
           has_many :resultadopf,
-            foreign_key: "proyectofinanciero_id",
-            validate: true,
+            class_name: "Cor1440Gen::Resultadopf",
             dependent: :destroy,
-            class_name: "Cor1440Gen::Resultadopf"
+            foreign_key: "proyectofinanciero_id",
+            validate: true
           accepts_nested_attributes_for :resultadopf,
             allow_destroy: true,
             reject_if: :all_blank
 
           validates :nombre,
-            presence: true,
             allow_blank: false,
-            length: { maximum: 1000 }
+            length: { maximum: 1000 },
+            presence: true
           validates :titulo, length: { maximum: 1000 }
+
           validates :compromisos,
             length: { maximum: 5000 },
             if: :hay_compromisos?
@@ -213,12 +216,14 @@ module Cor1440Gen
             respond_to?(:compromisos)
           end
 
+          validates_associated :proyectofinanciero_usuario
+
           validate :fechas_ordenadas
           def fechas_ordenadas
             if fechainicio && fechacierre && fechainicio > fechacierre
               errors.add(
                 :fechacierre,
-                "La fecha de cierre debe ser posterior a la de inicio",
+                "La fecha de cierre debe ser posterior a la de inicio"
               )
             end
           end

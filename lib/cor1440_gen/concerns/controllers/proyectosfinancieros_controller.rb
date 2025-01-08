@@ -369,12 +369,13 @@ module Cor1440Gen
           # (cuando había un usuario del equipo de trabajo 2 veces
           # y se eliminaba el segundo, seguía presentando error de validación).
           def validaciones(registro)
-            @validaciones_error = ""
+            return true
+            @validaciones_error = "".dup
             fus = []
             if params && params[:proyectofinanciero] && params[:proyectofinanciero][:proyectofinanciero_usuario_attributes]
               params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |_l, v|
                 if v[:_destroy] != "true" && v[:_destroy] != "1"
-                  if fus.include?(v[:usuario_id].to_i)
+                  if v[:usuario_id] != "" && fus.include?(v[:usuario_id].to_i)
                     @validaciones_error << "El usuario "\
                       "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
                       "está repetido en el equipo de trabajo"
@@ -383,6 +384,9 @@ module Cor1440Gen
                   end
                 end
               end
+            end
+            if @validaciones_error != ""
+              flash[:error] = @validaciones_error
             end
             @validaciones_error == ""
           end
