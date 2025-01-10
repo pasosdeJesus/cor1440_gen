@@ -9,11 +9,9 @@ if (typeof window.Rails == 'undefined') {
 }
 import {Turbo} from '@hotwired/turbo-rails';
 
-import './jquery'
-import '../../vendor/assets/javascripts/jquery-ui'
-
 import 'popper.js'              // Dialogos emergentes usados por bootstrap
 import * as bootstrap from 'bootstrap'              // Maquetacion y elementos de diseño
+window.bootstrap = bootstrap
 
 import Msip__Motor from "./controllers/msip/motor"
 window.Msip__Motor = Msip__Motor
@@ -41,6 +39,11 @@ window.configuracionTomSelect = {
 
 import ApexCharts from 'apexcharts'
 window.ApexCharts = ApexCharts
+import apexes from 'apexcharts/dist/locales/es.json'
+Apex.chart = {
+  locales: [apexes],
+  defaultLocale: 'es',
+}
 
 import 'gridstack'
 
