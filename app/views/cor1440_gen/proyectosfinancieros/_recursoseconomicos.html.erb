@@ -144,29 +144,29 @@
   </div>
 </div>
 
-
-<table border=1 width="100%">
-  <thead>
-    <tr>
-      <th><%= t('Detalle') %></th>
-      <th><%= t('Fecha') %></th>
-      <th><%= t('Valor en pesos') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="desembolso">
+<div class="div-tabla">
+  <div id="desembolsos_proyectofinanciero_marco" class="div-tabla-cuerpo">
+    <div class="div-tabla-fila">
+      <div class="div-tabla-celda-encabezado"><%= t('Detalle') %></div>
+      <div class="div-tabla-celda-encabezado"><%= t('Fecha') %></div>
+      <div class="div-tabla-celda-encabezado"><%= t('Valor en pesos') %></div>
+    </div>
     <%= f.simple_fields_for :desembolso do |d| %>
-      <%= render 'desembolso_campos', :f => d %>
+      <%= render partial: 'desembolso_campos', locals: {f: d} %>
     <% end %>
-  </tbody>
-</table>
-<div class="links">
-  <%= link_to_add_association t('Añadir desembolso'), f, 
-    :desembolso,
-    :"data-association-insertion-node" => "tbody#desembolso", 
-    :"data-association-insertion-method" => "append", 
-    partial: 'desembolso_campos',
-    :class => 'btn btn-sm btn-primary'
-  %>
+  </div>
 </div>
-
+<div class="enlace-agregar-desembolso">
+  <%= f.submit "Agregar Desembolso",
+    class: 'btn btn-sm btn-primary',
+    data:  {
+      disable_with: false 
+    },
+    formaction: cor1440_gen.crear_desembolso_proyectofinanciero_path(
+      index: @registro.desembolso.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    id: "agregar-desembolso-proyectofinanciero",
+    name: "agregar-desembolso-proyectofinanciero" %>
+</div> 

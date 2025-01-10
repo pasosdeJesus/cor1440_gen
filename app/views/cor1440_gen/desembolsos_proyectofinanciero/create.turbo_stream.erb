@@ -1,0 +1,22 @@
+<%= simple_form_for @proyectofinanciero do |f| %>
+  <%= f.simple_fields_for :desembolso, 
+    child_index: params[:index] do |subf| %>
+    <%= turbo_stream.replace "agregar-desembolso-proyectofinanciero" do %>
+      <%= f.submit "Agregar Desembolso",
+        class: "btn btn-sm btn-primary",
+        data:  {
+          disable_with: false 
+        },
+        formaction: cor1440_gen.crear_desembolso_proyectofinanciero_path(
+          subf.index.to_i + 1
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        id: "agregar-desembolso-proyectofinanciero",
+        name: "agregar-desembolso-proyectofinanciero" %>
+  <% end %>
+  <%= turbo_stream.append "desembolsos_proyectofinanciero_marco" do %>
+    <%= render "/cor1440_gen/proyectosfinancieros/desembolso_campos", f: subf %>
+  <% end %>
+<% end %>
+<% end %>

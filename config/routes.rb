@@ -103,11 +103,20 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :objetivopf_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "objetivospf_proyectofinanciero#destroy", 
+      delete '(:id)', to: "objetivospf_proyectofinanciero#destroy",
         as: "eliminar"
       post '/' => "objetivospf_proyectofinanciero#create", as: "crear"
     end
   end
+
+  resources :desembolso_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "desembolsos_proyectofinanciero#destroy",
+        as: "eliminar"
+      post '/' => "desembolsos_proyectofinanciero#create", as: "crear"
+    end
+  end
+
 
   resources :proyectofinanciero_usuario, only: [], param: :index do
     member do

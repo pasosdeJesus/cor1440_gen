@@ -220,9 +220,12 @@ module Cor1440Gen
         case usuario.rol
         when ROLOPERADOR
 
-          habilidad.can(:manage, Cor1440Gen::Actividadpf)
-          habilidad.can :manage, Cor1440Gen::Asistencia
-          habilidad.can(:manage, Cor1440Gen::ProyectofinancieroUsuario)
+          habilidad.can(:manage, [
+            Cor1440Gen::Actividadpf,
+            Cor1440Gen::Asistencia,
+            Cor1440Gen::DesembolosProyectofinanciero,
+            Cor1440Gen::ProyectofinancieroUsuario
+          ])
           presponsable = Cor1440Gen::Proyectofinanciero.where(
             responsable_id: usuario.id,
           ).map(&:id)
@@ -259,7 +262,10 @@ module Cor1440Gen
             id: penequipo,
           )
 
-          habilidad.can(:read, Cor1440Gen::ProyectofinancieroUsuario)
+          habilidad.can(:read, [
+            Cor1440Gen::Desembolso,
+            Cor1440Gen::ProyectofinancieroUsuario,
+          ])
           habilidad.can(
             :manage,
             Cor1440Gen::Actividad,
@@ -296,6 +302,7 @@ module Cor1440Gen
             Cor1440Gen::Actividad,
             Cor1440Gen::Asistencia,
             Cor1440Gen::Actividadpf,
+            Cor1440Gen::Desembolso,
             Cor1440Gen::Efecto,
             Cor1440Gen::Financiador,
             Cor1440Gen::FormularioTipoindicador,
