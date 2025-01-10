@@ -149,7 +149,6 @@ module Cor1440Gen
       get edit_actividad_url(@actividad)
       assert_response :success
 
-      np = Msip::Persona.count
       post cor1440_gen.crear_asistencia_path(0, format: :turbo_stream)
       assert_response :success
       #assert_equal (np+1), Msip::Persona.count
