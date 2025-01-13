@@ -10,13 +10,6 @@ GIT
       terrapin (>= 0.6.0, < 2.0)
 
 GIT
-  remote: https://github.com/vtamara/cocoon.git
-  revision: 9f1892403c3dbdb8f7d457a06f237ff58e7dfb07
-  branch: new_id_with_ajax
-  specs:
-    cocoon (1.2.11)
-
-GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
   revision: 1cbbac1df10e3579f5803aa3af76e8331e913668
   branch: main
@@ -147,10 +140,6 @@ GEM
     ansi (1.5.0)
     apexcharts (0.2.0)
     ast (2.4.2)
-    babel-source (5.8.35)
-    babel-transpiler (0.7.0)
-      babel-source (>= 4.0, < 6)
-      execjs (~> 2.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.4.0)
@@ -180,13 +169,6 @@ GEM
     climate_control (1.2.0)
     code-scanning-rubocop (0.6.1)
       rubocop (~> 1.0)
-    coffee-rails (5.0.0)
-      coffee-script (>= 2.2.0)
-      railties (>= 5.2.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     colorize (1.1.0)
     concurrent-ruby (1.3.4)
     connection_pool (2.5.0)
@@ -213,7 +195,6 @@ GEM
       railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.1)
-    execjs (2.10.0)
     ferrum (0.15)
       addressable (~> 2.5)
       concurrent-ruby (~> 1.1)
@@ -502,15 +483,12 @@ PLATFORMS
 
 DEPENDENCIES
   apexcharts
-  babel-transpiler
   bcrypt
   bootsnap
   brakeman
   bundler-audit
   cancancan
-  cocoon!
   code-scanning-rubocop
-  coffee-rails
   colorize
   connection_pool
   cor1440_gen!
