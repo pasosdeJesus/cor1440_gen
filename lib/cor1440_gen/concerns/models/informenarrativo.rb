@@ -14,7 +14,9 @@ module Cor1440Gen
             class_name: "Cor1440Gen::Proyectofinanciero",
             optional: false
 
-          validates :detalle, length: { maximum: 5000 }
+          validates :detalle, 
+            length: { maximum: 5000 },
+            presence: true
           validates :seguimiento, length: { maximum: 5000 }
 
           default_scope { order(:id) }
