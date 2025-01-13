@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "informenarrativo_proyectonarrativo_#{f.index}", class: 'div-tabla-fila nested-fields' do %>
+<%= turbo_frame_tag "informenarrativo_proyectofinanciero_#{f.index}", class: 'div-tabla-fila nested-fields' do %>
   <div class="div-tabla-celda">
     <%= f.input :detalle, label: false, as: :text, input_html: { rows: 2 } %>
   </div>
@@ -16,15 +16,23 @@
     %>
   </div>
   <div class="div-tabla-celda">
-    <%= f.input :seguimiento, 
-      label: false, 
-      as: :text, 
+    <%= f.input :seguimiento,
+      label: false,
+      as: :text,
       input_html: { rows: 2 } %>
   </div>
   <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
-    <%= link_to_remove_association "Eliminar", f, 
-      class: "btn btn-sm btn-danger"
-    %>
+    <%= f.submit "Eliminar",
+      class: 'btn btn-sm btn-danger',
+      data: {
+        turbo_frame: "informenarrativo_proyectofinanciero_#{f.index}",
+        disable_with: false
+      },
+      formaction: cor1440_gen.eliminar_informenarrativo_proyectofinanciero_path(
+        id: f.object.id, index: f.index
+      ),
+      formmethod: :delete,
+      formnovalidate: true   %>
   </div>
 <% end %>

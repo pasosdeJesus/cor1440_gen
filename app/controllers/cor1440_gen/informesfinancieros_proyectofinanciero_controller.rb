@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "cor1440_gen/concerns/controllers/Informesfinancieros_proyectofinanciero_controller"
+require "cor1440_gen/concerns/controllers/informesfinancieros_proyectofinanciero_controller"
 
 module Cor1440Gen
   class InformesfinancierosProyectofinancieroController < ApplicationController
