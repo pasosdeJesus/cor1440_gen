@@ -1,15 +1,22 @@
-<div class='control-group nested-fields'>
-  <div class="controls">
+<%= turbo_frame_tag "anexo_proyectofinanciero_#{f.index}" do %>
+  <div class='control-group nested-fields'>
+    <div class="controls">
+      <%  f.object.anexo = Msip::Anexo.new if !f.object.anexo %>
 
-    <%  f.object.anexo = Msip::Anexo.new if !f.object.anexo %>
+      <%= f.simple_fields_for :anexo, html: {multipart: true} do |a| %>
+        <%= render 'msip/anexos/anexo_campos', a: a %>
+      <% end %>
 
-    <%= f.simple_fields_for :anexo do |a| %>
-      <%= render 'msip/anexos/anexo_campos', a: a %>
-    <% end %>
-
-    <%= link_to_remove_association t("Eliminar anexo"), f, 
-      class: 'btn btn-sm btn-danger',
-      style: 'margin-bottom: 1em'
-    %> 
+      <%= f.submit "Eliminar", 
+        class: 'btn btn-sm btn-danger',
+        data: { 
+          disable_with: false
+        },
+        formaction: cor1440_gen.eliminar_anexo_proyectofinanciero_path(
+          id: f.object.id, index: f.index
+        ),
+        formmethod: :delete,
+        formnovalidate: true %>
+    </div>
   </div>
-</div>
+<% end %>

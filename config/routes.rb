@@ -85,6 +85,23 @@ Cor1440Gen::Engine.routes.draw do
     end
   end
 
+  resources :anexo_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "anexos_proyectofinanciero#destroy",
+        as: "eliminar"
+      post '/' => "anexos_proyectofinanciero#create", as: "crear"
+    end
+  end
+
+
+  resources :desembolso_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "desembolsos_proyectofinanciero#destroy",
+        as: "eliminar"
+      post '/' => "desembolsos_proyectofinanciero#create", as: "crear"
+    end
+  end
+
   resources :indicadorpf_proyectofinanciero, only: [], param: :index do
     member do
       delete '(:id)', to: "indicadorespf_proyectofinanciero#destroy", 
@@ -98,22 +115,6 @@ Cor1440Gen::Engine.routes.draw do
       delete '(:id)', to: "indicadoresobjetivo_proyectofinanciero#destroy", 
         as: "eliminar"
       post '/' => "indicadoresobjetivo_proyectofinanciero#create", as: "crear"
-    end
-  end
-
-  resources :objetivopf_proyectofinanciero, only: [], param: :index do
-    member do
-      delete '(:id)', to: "objetivospf_proyectofinanciero#destroy",
-        as: "eliminar"
-      post '/' => "objetivospf_proyectofinanciero#create", as: "crear"
-    end
-  end
-
-  resources :desembolso_proyectofinanciero, only: [], param: :index do
-    member do
-      delete '(:id)', to: "desembolsos_proyectofinanciero#destroy",
-        as: "eliminar"
-      post '/' => "desembolsos_proyectofinanciero#create", as: "crear"
     end
   end
 
@@ -138,6 +139,14 @@ Cor1440Gen::Engine.routes.draw do
       delete '(:id)', to: "informesnarrativos_proyectofinanciero#destroy",
         as: "eliminar"
       post '/' => "informesnarrativos_proyectofinanciero#create", as: "crear"
+    end
+  end
+
+  resources :objetivopf_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "objetivospf_proyectofinanciero#destroy",
+        as: "eliminar"
+      post '/' => "objetivospf_proyectofinanciero#create", as: "crear"
     end
   end
 

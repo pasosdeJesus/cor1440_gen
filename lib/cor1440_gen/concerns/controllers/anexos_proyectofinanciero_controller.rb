@@ -1,7 +1,7 @@
 module Cor1440Gen
   module Concerns
     module Controllers
-      module InformesnarrativosProyectofinancieroController
+      module AnexosProyectofinancieroController
         extend ActiveSupport::Concern
 
         included do
@@ -13,10 +13,10 @@ module Cor1440Gen
 
           private
 
-          def prepara_informenarrativo_proyectofinanciero
+          def prepara_anexo_proyectofinanciero
             @proyectofinanciero = Cor1440Gen::Proyectofinanciero.new(
-              informenarrativo: [
-                Cor1440Gen::Informenarrativo.new
+              anexo: [
+                Cor1440Gen::Anexo.new
               ]
             )
           end
