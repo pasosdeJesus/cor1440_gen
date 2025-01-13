@@ -263,7 +263,11 @@ module Cor1440Gen
           )
 
           habilidad.can(:read, [
+            Msip::Anexo,
             Cor1440Gen::Desembolso,
+            Cor1440Gen::Informeauditoria,
+            Cor1440Gen::Informefinanciero,
+            Cor1440Gen::Informenarrativo,
             Cor1440Gen::ProyectofinancieroUsuario,
           ])
           habilidad.can(
@@ -308,6 +312,9 @@ module Cor1440Gen
             Cor1440Gen::FormularioTipoindicador,
             Cor1440Gen::Indicadorpf,
             Cor1440Gen::Informe,
+            Cor1440Gen::Informeauditoria,
+            Cor1440Gen::Informefinanciero,
+            Cor1440Gen::Informenarrativo,
             Cor1440Gen::Mindicadorpf,
             Cor1440Gen::Objetivopf,
             Cor1440Gen::Proyectofinanciero,
@@ -324,6 +331,7 @@ module Cor1440Gen
             Mr519Gen::Formulario,
             Mr519Gen::Encuestausuario,
 
+            Msip::Anexo,
             Msip::Orgsocial,
             Msip::Sectororgsocial,
             Msip::Persona,
