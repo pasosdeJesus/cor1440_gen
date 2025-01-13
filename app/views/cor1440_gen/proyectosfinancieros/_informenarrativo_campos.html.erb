@@ -1,29 +1,30 @@
-<tr class='nested-fields'>
-  <td>
+<%= turbo_frame_tag "informenarrativo_proyectonarrativo_#{f.index}", class: 'div-tabla-fila nested-fields' do %>
+  <div class="div-tabla-celda">
     <%= f.input :detalle, label: false, as: :text, input_html: { rows: 2 } %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :fecha, label: false,
-      input_html: { type: "date" },
+      input_html: { 
+        type: "date" 
+      },
       as: :string
     %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :devoluciones,
       label: false
     %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :seguimiento, 
       label: false, 
       as: :text, 
       input_html: { rows: 2 } %>
-  </td>
-  <td>
+  </div>
+  <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
     <%= link_to_remove_association "Eliminar", f, 
-        class: "btn btn-sm btn-danger"
+      class: "btn btn-sm btn-danger"
     %>
-    <div><%= f.error_notification %></div>
-  </td>
-</tr>
+  </div>
+<% end %>

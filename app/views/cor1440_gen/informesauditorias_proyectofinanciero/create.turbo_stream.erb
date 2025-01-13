@@ -1,0 +1,22 @@
+<%= simple_form_for @proyectofinanciero do |f| %>
+  <%= f.simple_fields_for :informeauditoria, 
+    child_index: params[:index] do |subf| %>
+    <%= turbo_stream.replace "agregar-informeauditoria-proyectofinanciero" do %>
+      <%= f.submit "Agregar Informe de Auditoria",
+        class: "btn btn-sm btn-primary",
+        data:  {
+          disable_with: false 
+        },
+        formaction: cor1440_gen.crear_informeauditoria_proyectofinanciero_path(
+          subf.index.to_i + 1
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        id: "agregar-informeauditoria-proyectofinanciero",
+        name: "agregar-informeauditoria-proyectofinanciero" %>
+  <% end %>
+  <%= turbo_stream.append "informesauditorias_proyectofinanciero_marco" do %>
+    <%= render "/cor1440_gen/proyectosfinancieros/informeauditoria_campos", f: subf %>
+  <% end %>
+<% end %>
+<% end %>

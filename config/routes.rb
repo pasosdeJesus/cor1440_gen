@@ -117,6 +117,29 @@ Cor1440Gen::Engine.routes.draw do
     end
   end
 
+  resources :informeauditoria_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "informesauditorias_proyectofinanciero#destroy",
+        as: "eliminar"
+      post '/' => "informesauditorias_proyectofinanciero#create", as: "crear"
+    end
+  end
+
+  resources :informefinanciero_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "informesfinancieros_proyectofinanciero#destroy",
+        as: "eliminar"
+      post '/' => "informesfinancieros_proyectofinanciero#create", as: "crear"
+    end
+  end
+
+  resources :informenarrativo_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "informesnarrativos_proyectofinanciero#destroy",
+        as: "eliminar"
+      post '/' => "informesnarrativos_proyectofinanciero#create", as: "crear"
+    end
+  end
 
   resources :proyectofinanciero_usuario, only: [], param: :index do
     member do
