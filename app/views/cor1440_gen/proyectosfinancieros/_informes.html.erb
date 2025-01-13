@@ -1,83 +1,116 @@
 <p>
-<table class='table table-bordered' border=1 width="100%">
-  <thead>
-    <tr>
-      <th><%= t('Informe narrativo / Planificación / POA') %></th>
-      <th><%= t('Fecha') %></th>
-      <th><%= t('Devoluciones') %></th>
-      <th><%= t('Seguimiento') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="informenarrativo">
+<div class="div-tabla">
+  <div id="informesnarrativos_proyectofinanciero_marco" class="div-tabla-cuerpo">
+    <div class="div-tabla-fila">
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Informe narrativo / Planificación / POA') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Fecha') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Devoluciones') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">>
+        <%= t('Seguimiento') %>
+      </div>
+      <div class="div-tabla-celda-encabezado"></div>
+    </div>
     <%= f.simple_fields_for :informenarrativo do |d| %>
-      <%= render 'informenarrativo_campos', :f => d %>
+      <%= render partial: 'informenarrativo_campos', locals: {f: d} %>
     <% end %>
-  </tbody>
-</table>
-<div class="links">
-  <%= link_to_add_association t('Añadir informe narrativo'), f, 
-    :informenarrativo,
-    :"data-association-insertion-node" => "tbody#informenarrativo", 
-    :"data-association-insertion-method" => "append", 
-    partial: 'informenarrativo_campos',
-    :class => 'btn btn-sm btn-primary'
-  %>
+  </div>
 </div>
+<div class="enlace-agregar-informenarrativo">
+  <%= f.submit "Agregar Informe Narrativo",
+    class: 'btn btn-sm btn-primary',
+    data:  {
+      disable_with: false 
+    },
+    formaction: cor1440_gen.crear_informenarrativo_proyectofinanciero_path(
+      index: @registro.informenarrativo.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    id: "agregar-informenarrativo-proyectofinanciero",
+    name: "agregar-informenarrativo-proyectofinanciero" %>
+</div> 
 </p>
 
 <p>
-<table class='table table-bordered' border=1 width="100%">
-  <thead>
-    <tr>
-      <th><%= t('Informe financiero') %></th>
-      <th><%= t('Fecha') %></th>
-      <th><%= t('Devoluciones') %></th>
-      <th><%= t('Seguimiento') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="informefinanciero">
+<div class="div-tabla">
+  <div id="informesfinancieros_proyectofinanciero_marco" class="div-tabla-cuerpo">
+    <div class="div-tabla-fila">
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Informe financiero') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Fecha') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Devoluciones') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">>
+        <%= t('Seguimiento') %>
+      </div>
+      <div class="div-tabla-celda-encabezado"></div>
+    </div>
     <%= f.simple_fields_for :informefinanciero do |d| %>
-      <%= render 'informefinanciero_campos', :f => d %>
+      <%= render partial: 'informefinanciero_campos', locals: {f: d} %>
     <% end %>
-  </tbody>
-</table>
-<div class="links">
-  <%= link_to_add_association t('Añadir informe financiero'), f, 
-    :informefinanciero,
-    :"data-association-insertion-node" => "tbody#informefinanciero", 
-    :"data-association-insertion-method" => "append", 
-    partial: 'informefinanciero_campos',
-    :class => 'btn btn-sm btn-primary'
-  %>
+  </div>
 </div>
+<div class="enlace-agregar-informefinanciero">
+  <%= f.submit "Agregar Informe Financiero",
+    class: 'btn btn-sm btn-primary',
+    data:  {
+      disable_with: false 
+    },
+    formaction: cor1440_gen.crear_informefinanciero_proyectofinanciero_path(
+      index: @registro.informefinanciero.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    id: "agregar-informefinanciero-proyectofinanciero",
+    name: "agregar-informefinanciero-proyectofinanciero" %>
+</div> 
 </p>
 
 <p>
-<table class='table table-bordered' border=1 width="100%">
-  <thead>
-    <tr>
-      <th><%= t('Informe de auditoría') %></th>
-      <th><%= t('Fecha') %></th>
-      <th><%= t('Devoluciones') %></th>
-      <th><%= t('Seguimiento') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="informeauditoria">
+<div class="div-tabla">
+  <div id="informesauditorias_proyectofinanciero_marco" class="div-tabla-cuerpo">
+    <div class="div-tabla-fila">
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Informe auditoria') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Fecha') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">
+        <%= t('Devoluciones') %>
+      </div>
+      <div class="div-tabla-celda-encabezado">>
+        <%= t('Seguimiento') %>
+      </div>
+      <div class="div-tabla-celda-encabezado"></div>
+    </div>
     <%= f.simple_fields_for :informeauditoria do |d| %>
-      <%= render 'informeauditoria_campos', :f => d %>
+      <%= render partial: 'informeauditoria_campos', locals: {f: d} %>
     <% end %>
-  </tbody>
-</table>
-<div class="links">
-  <%= link_to_add_association t('Añadir informe de auditoría'), f, 
-    :informeauditoria,
-    :"data-association-insertion-node" => "tbody#informeauditoria", 
-    :"data-association-insertion-method" => "append", 
-    partial: 'informeauditoria_campos',
-    :class => 'btn btn-sm btn-primary'
-  %>
+  </div>
 </div>
+<div class="enlace-agregar-informeauditoria">
+  <%= f.submit "Agregar Informe de Auditoria",
+    class: 'btn btn-sm btn-primary',
+    data:  {
+      disable_with: false 
+    },
+    formaction: cor1440_gen.crear_informeauditoria_proyectofinanciero_path(
+      index: @registro.informeauditoria.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    id: "agregar-informeauditoria-proyectofinanciero",
+    name: "agregar-informeauditoria-proyectofinanciero" %>
+</div> 
 </p>

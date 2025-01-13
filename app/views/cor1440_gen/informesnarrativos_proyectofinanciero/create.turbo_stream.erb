@@ -1,0 +1,22 @@
+<%= simple_form_for @proyectofinanciero do |f| %>
+  <%= f.simple_fields_for :informenarrativo, 
+    child_index: params[:index] do |subf| %>
+    <%= turbo_stream.replace "agregar-informenarrativo-proyectofinanciero" do %>
+      <%= f.submit "Agregar Informe Narrativo",
+        class: "btn btn-sm btn-primary",
+        data:  {
+          disable_with: false 
+        },
+        formaction: cor1440_gen.crear_informenarrativo_proyectofinanciero_path(
+          subf.index.to_i + 1
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        id: "agregar-informenarrativo-proyectofinanciero",
+        name: "agregar-informenarrativo-proyectofinanciero" %>
+    <% end %>
+    <%= turbo_stream.append "informesnarrativos_proyectofinanciero_marco" do %>
+      <%= render "/cor1440_gen/proyectosfinancieros/informenarrativo_campos", f: subf %>
+    <% end %>
+  <% end %>
+<% end %>
