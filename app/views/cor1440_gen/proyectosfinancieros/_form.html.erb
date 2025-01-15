@@ -4,8 +4,9 @@
   <article>
   <%= simple_form_for @registro, 
     url: modelo_path(@registro),
+    multipart: true,
     html: { 
-      'data-controller' => 'msip--cancelar-vacio-es-eliminar'
+      'data-controller': 'msip--cancelar-vacio-es-eliminar'
     } do |f| 
   %>
     <div data-role="content" class="form-inputs">
