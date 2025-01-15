@@ -1,1 +1,21 @@
-<%= render 'campo_anexo_proyectofinanciero', f: f %>
+<div id="anexos_proyectofinanciero_marco">
+  <%= f.simple_fields_for :anexo_proyectofinanciero, 
+    child_index: params[:index] do |a| %>
+    <%= render partial: 'anexo_proyectofinanciero_campos', 
+      locals: {f: a} %>
+  <% end %>
+</div>
+<div class="enlace-agregar-anexo">
+  <%= f.submit "Agregar anexo",
+    class: 'btn btn-sm btn-primary',
+    data:  {
+      disable_with: false 
+    },
+    formaction: cor1440_gen.crear_anexo_proyectofinanciero_path(
+      index: @proyectofinanciero.anexo.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    id: "agregar-anexo-proyectofinanciero",
+    name: "agregar-anexo-proyectofinanciero" %>
+</div>

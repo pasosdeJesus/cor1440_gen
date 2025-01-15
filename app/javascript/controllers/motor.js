@@ -43,6 +43,7 @@ export default class Cor1440Gen__Motor {
 
     Cor1440Gen__Mindicadorespf.preparar()
 
+    return true
     $(document).on('click', '.envia_filtrar', e => {
       let f = e.target.form
       let a = f.action

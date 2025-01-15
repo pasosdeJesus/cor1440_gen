@@ -222,8 +222,10 @@ module Cor1440Gen
 
           habilidad.can(:manage, [
             Cor1440Gen::Actividadpf,
+            Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Asistencia,
-            Cor1440Gen::DesembolosProyectofinanciero,
+            Cor1440Gen::Desembolso,
+            Cor1440Gen::DesembolsoProyectofinanciero,
             Cor1440Gen::ProyectofinancieroUsuario
           ])
           presponsable = Cor1440Gen::Proyectofinanciero.where(
@@ -264,6 +266,7 @@ module Cor1440Gen
 
           habilidad.can(:read, [
             Msip::Anexo,
+            Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Desembolso,
             Cor1440Gen::Informeauditoria,
             Cor1440Gen::Informefinanciero,
@@ -304,6 +307,7 @@ module Cor1440Gen
           habilidad.can(:manage, [
             Cor1440Gen::Pmindicadorpf, 
             Cor1440Gen::Actividad,
+            Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Asistencia,
             Cor1440Gen::Actividadpf,
             Cor1440Gen::Desembolso,

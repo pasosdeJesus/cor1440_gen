@@ -48,6 +48,7 @@ export default class Cor1440Gen__Mindicadorespf {
 
 
   static preparar() {
+    return true
     $("#cor1440_gen_mfun").hide();
     $(".cor1440_gen_funcion").bind("contextmenu", (e) => {
       window.cor1440_gen_mfun_enlace = e.target

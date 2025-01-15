@@ -5,6 +5,8 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
+          before_action :prepara_proyectofinanciero
+
           def destroy
           end
 
@@ -13,10 +15,10 @@ module Cor1440Gen
 
           private
 
-          def prepara_anexo_proyectofinanciero
+          def prepara_proyectofinanciero
             @proyectofinanciero = Cor1440Gen::Proyectofinanciero.new(
               anexo: [
-                Cor1440Gen::Anexo.new
+                Msip::Anexo.new
               ]
             )
           end
