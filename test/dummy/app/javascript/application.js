@@ -9,6 +9,8 @@ if (typeof window.Rails == 'undefined') {
 }
 import {Turbo} from '@hotwired/turbo-rails';
 
+import './jquery'
+
 import 'popper.js'              // Dialogos emergentes usados por bootstrap
 import * as bootstrap from 'bootstrap'              // Maquetacion y elementos de diseño
 window.bootstrap = bootstrap
@@ -76,12 +78,6 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
   heb412_gen_prepara_eventos_comunes(root);
   mr519_gen_prepara_eventos_comunes(root);
   cor1440_gen_prepara_eventos_comunes(root);
-  $("input[data-behaviour='datepicker']").datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true,
-    todayHighlight: true,
-    language: 'es'
-  })
 })
 
 
