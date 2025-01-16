@@ -77,12 +77,6 @@ promesaRecursosSprocketsYDocumento.then((mensaje) => {
 
   window.cor1440_gen_activa_autocompleta_mismotipo = true
 
-  $("input[data-behaviour='datepicker']").datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true,
-    todayHighlight: true,
-    language: 'es'
-  })
 })
 
 
