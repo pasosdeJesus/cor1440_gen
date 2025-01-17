@@ -85,6 +85,14 @@ Cor1440Gen::Engine.routes.draw do
     end
   end
 
+  resources :actividad_proyectofinanciero, only: [], param: :index do
+    member do
+      delete '(:id)', to: "actividad_proyectosfinancieros#destroy",
+        as: "eliminar"
+      post '/' => "actividad_proyectosfinancieros#create", as: "crear"
+    end
+  end
+
   resources :anexo_proyectofinanciero, only: [], param: :index do
     member do
       delete '(:id)', to: "anexos_proyectofinanciero#destroy",

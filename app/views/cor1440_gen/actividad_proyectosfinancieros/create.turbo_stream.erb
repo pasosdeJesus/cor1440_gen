@@ -1,0 +1,25 @@
+<%= simple_form_for @actividad do |f| %>
+  <%= f.simple_fields_for :actividad_proyectofinanciero,
+    child_index: params[:index] do |subf| %>
+    <%= turbo_stream.replace "agregar-actividad-proyectofinanciero" do %>
+      <%= f.submit "#{t('Agregar')} " +
+        "#{@actividad.class.human_attribute_name(:proyectofinanciero)}", 
+        class: 'btn btn-sm btn-primary',
+        data:  {
+          disable_with: false 
+        },
+        formaction: cor1440_gen.crear_actividad_proyectofinanciero_path(
+          index: subf.index.to_i + 1
+        ),
+        formmethod: :post,
+        formnovalidate: true,
+        id: "agregar-actividad-proyectofinanciero"
+      %>
+    <% end %>
+
+    <%= turbo_stream.append "actividad_proyectosfinancieros_marco" do %>
+      <%= render "/cor1440_gen/actividades/actividad_proyectofinanciero_campos",
+        f: subf, ac: f %>
+    <% end %>
+  <% end %>
+<% end %>

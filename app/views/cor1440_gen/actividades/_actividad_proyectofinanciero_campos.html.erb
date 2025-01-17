@@ -1,19 +1,29 @@
-<tr class='nested-fields'>
-  <% if ac.object.fecha %>
-    <% fr = ac.object.fecha %>
+<%= turbo_frame_tag "actividad_proyectofinanciero_#{f.index}", 
+  class: 'div-tabla-fila nested-fields' do %>
+  <% if f.object.proyectofinanciero.nil? %>
+    <% f.object.proyectofinanciero = Cor1440Gen::Proyectofinanciero.new %>
+  <% end %>
+  <% if params && params[:actividad] && params[:actividad][:fecha] %>
+    <% fr = params[:actividad][:fecha] %>
   <% else %>
     <% fr = Time.now.strftime('%Y-%m-%d') %>
   <% end %>
   <% lp1 = Cor1440Gen::ProyectosfinancierosController::disponibles(
     {fecha: fr}, current_ability) %>
   <% ids1 = lp1.pluck(:id) %>
-  <% ids2 = ac.object.proyectofinanciero.pluck(:id) %>
+  <% ids2 = [] %>
+  <% if params && params[:actividad] %>
+    <% params[:actividad][:actividad_proyectofinanciero_attributes].each do |l, v| %>
+      <% ids2 << v[:id] %>
+    <% end %>
+  <% else %>
+    <% ids2 = ac.object.proyectofinanciero.pluck(:id) %>
+  <% end %>
   <% # Si es uno nuevo excluimos los ya elegidos %>
   <% ids = ids1 | ids2 %>
   <% col = Cor1440Gen::Proyectofinanciero.where(id: ids).
     reorder('lower(nombre)') %>
-  <td>
-    <% # Inexcplicable que no opere coccoon:after-insert si se agrega: f.input :actividad_id, as: :hidden %> 
+  <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
     <% vdis = false %>
     <% if f.object.proyectofinanciero_id %>
@@ -21,32 +31,38 @@
     <% end %>
     <%= f.input :proyectofinanciero_id,
       collection: col,
+      disabled: vdis,
+      input_html: { 
+        title: t(
+          "Los proyectos presentados son los vigentes en la fecha "\
+          "de la actividad (cambie la fecha para actualizar estas opciones)"
+        ),
+        class: 'tom-select' 
+      },
       label: false,
       label_method: :nombre, 
-      disabled: vdis,
-      value_method: :id,
       selected: f.object.proyectofinanciero_id,
-      input_html: { 
-        title: t("Los proyectos presentados son los vigentes en la fecha "\
-        "de la actividad (cambie la fecha para actualizar estas opciones)"),
-        class: 'tom-select' 
-      }
-    %>
-  </td>
-  <td>
-    <%= render partial: 'campo_actividad_proyectofinanciero_actividadpf', 
+      value_method: :id %>
+  </div>
+  <div class="div-tabla-celda">
+    <%= render partial: '/cor1440_gen/actividades/campo_actividad_proyectofinanciero_actividadpf', 
       locals: {f: f} %>
-  </td>
-  <% if Cor1440Gen::Proyectofinanciero::en_toda_actividad_id && 
-      f.object.proyectofinanciero_id == 
-      Cor1440Gen::Proyectofinanciero::en_toda_actividad_id %>
-    <% elestilo = "display: none" %>
-  <% else%>
-    <% elestilo = "display: block" %>
-  <% end%>
-  <td style="<%= elestilo %>">
-    <%= link_to_remove_association t("Eliminar"), f, 
-      :class => 'btn btn-sm btn-danger' 
-    %>
-  </td>
-</tr>
+  </div>
+  <div class="div-tabla-celda">
+    <% if !Cor1440Gen::Proyectofinanciero::en_toda_actividad_id || 
+        f.object.proyectofinanciero_id !=
+        Cor1440Gen::Proyectofinanciero::en_toda_actividad_id %>
+      <%= f.submit "Eliminar",
+        class: 'btn btn-sm btn-danger',
+        data: {
+          turbo_frame: "actividad_proyectofinanciero_#{f.index}",
+          disable_with: false
+        },
+        formaction: cor1440_gen.eliminar_actividad_proyectofinanciero_path(
+          id: f.object.id, index: f.index
+        ),
+        formmethod: :delete,
+        formnovalidate: true   %>
+    <% end%>
+  </div>
+<% end %>

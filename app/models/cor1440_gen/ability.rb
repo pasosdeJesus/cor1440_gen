@@ -202,6 +202,7 @@ module Cor1440Gen
       end
 
       habilidad.can([:nuevo, :new], Cor1440Gen::Actividad)
+      habilidad.can(:manage, Cor1440Gen::ActividadProyectofinanciero)
       habilidad.can([:nuevo, :new], Cor1440Gen::Actividadpf)
       habilidad.can(:read, Cor1440Gen::Rangoedadac)
 
@@ -222,6 +223,7 @@ module Cor1440Gen
 
           habilidad.can(:manage, [
             Cor1440Gen::Actividadpf,
+            Cor1440Gen::ActividadpfProoyectofinanciero,
             Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Asistencia,
             Cor1440Gen::Desembolso,
@@ -283,7 +285,10 @@ module Cor1440Gen
             Cor1440Gen::Actividad,
             actividad_proyectofinanciero: { proyectofinanciero_id: penequipo },
           )
-          habilidad.can :manage, Cor1440Gen::Asistencia
+          habilidad.can :manage, [
+            Cor1440Gen::ActividadProyectofinanciero,
+            Cor1440Gen::Asistencia,
+          ]
 
           # Responsable de un proyecto puede eliminar  y editar actividades
           # del mismo
@@ -292,6 +297,7 @@ module Cor1440Gen
             Cor1440Gen::Actividad,
             actividad_proyectofinanciero: { proyectofinanciero_id: presponsable },
           )
+          habilidad.can(:manage, Cor1440Gen::ActividadProyectofinanciero)
 
           habilidad.can(:read, Cor1440Gen::Efecto)
           habilidad.can(:read, Cor1440Gen::FormularioTipoindicador)
@@ -307,6 +313,7 @@ module Cor1440Gen
           habilidad.can(:manage, [
             Cor1440Gen::Pmindicadorpf, 
             Cor1440Gen::Actividad,
+            Cor1440Gen::ActividadProyectofinanciero,
             Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Asistencia,
             Cor1440Gen::Actividadpf,

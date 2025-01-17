@@ -1,35 +1,37 @@
-<div class='div_actividad_proyectofinanciero'>
-  <table class="tablapfac table-sm table-striped">
-    <thead>
-      <tr>
-        <th scope='col'>
-          <%= @actividad.class.human_attribute_name(:proyectofinanciero) %>
-        </th>
-        <th scope='col' style='width-min: 30rem'>
+<%= f.input :id, type: :hidden %>
+<div class="div-tabla">
+  <div id="actividad_proyectosfinancieros_marco" class="div-tabla-cuerpo">
+    <div class="div-tabla-fila">
+      <div class="div-tabla-celda-encabezado">
+        <%= @actividad.class.human_attribute_name(:proyectofinanciero) %>
+      </div>
+      <div class="div-tabla-celda-encabezado">
           <%= @actividad.class.human_attribute_name(:actividadespf) %>
-        </th>
-      </tr>
-    </thead>
-    <tbody id="actividad_proyectofinanciero">
-      <%= f.simple_fields_for(
-        :actividad_proyectofinanciero, 
-        f.object.actividad_proyectofinanciero.order(:id)) do |ap| %>
-        <%= render partial: 'actividad_proyectofinanciero_campos',
-          locals: {f: ap, ac: f} %>
-      <% end %>
-      <%= render partial: 'complemento_filas_proyectofinanciero',
-        locals: {f: f} %>
-    </tbody>
-  </table>
-  <div class="agregar-proyectofinanciero">
-    <%= link_to_add_association(
-      "#{t('Añadir')} #{@actividad.class.human_attribute_name(:proyectofinanciero)}", 
-      f, :actividad_proyectofinanciero,
-      render_options: {locals: { ac: f }},
-      "data-association-insertion-node": "tbody#actividad_proyectofinanciero", 
-      "data-association-insertion-method": "append", 
-      partial: "actividad_proyectofinanciero_campos", 
-      class: "btn btn-sm btn-primary" 
-    ) %>
+      </div>
+    </div>
+    <%= f.simple_fields_for(
+      :actividad_proyectofinanciero, 
+      f.object.actividad_proyectofinanciero.order(:id)) do |ap| %>
+      <%= render partial: 
+        '/cor1440_gen/actividades/actividad_proyectofinanciero_campos',
+        locals: {f: ap, ac: f} %>
+    <% end %>
+    <%= render partial: '/cor1440_gen/actividades/complemento_filas_proyectofinanciero',
+      locals: {f: f} %>
   </div>
 </div>
+<div class="enlace-agregar-proyectofinanciero">
+  <%= f.submit "#{t('Agregar')} " +
+    "#{@actividad.class.human_attribute_name(:proyectofinanciero)}", 
+    class: 'btn btn-sm btn-primary',
+    data:  {
+      disable_with: false 
+    },
+    formaction: cor1440_gen.crear_actividad_proyectofinanciero_path(
+      index: @actividad.actividad_proyectofinanciero.size
+    ),
+    formmethod: :post,
+    formnovalidate: true,
+    id: "agregar-actividad-proyectofinanciero"
+  %>
+</div> 
