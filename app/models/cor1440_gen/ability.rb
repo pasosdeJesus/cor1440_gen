@@ -227,7 +227,6 @@ module Cor1440Gen
             Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Asistencia,
             Cor1440Gen::Desembolso,
-            Cor1440Gen::DesembolsoProyectofinanciero,
             Cor1440Gen::ProyectofinancieroUsuario
           ])
           presponsable = Cor1440Gen::Proyectofinanciero.where(
