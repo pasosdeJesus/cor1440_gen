@@ -223,7 +223,7 @@ module Cor1440Gen
 
           habilidad.can(:manage, [
             Cor1440Gen::Actividadpf,
-            Cor1440Gen::ActividadpfProoyectofinanciero,
+            Cor1440Gen::ActividadProyectofinanciero,
             Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Asistencia,
             Cor1440Gen::Desembolso,
