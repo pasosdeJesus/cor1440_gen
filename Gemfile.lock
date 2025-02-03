@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/kreeti/kt-paperclip.git
-  revision: 26139d89d34bcfefae0e9c724c4573a8fae089ab
+  revision: 83dc8d92e63e4c360bb9f45af1cf3b63d99bed54
   specs:
     kt-paperclip (7.2.2)
       activemodel (>= 4.2.0)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 952112e6b6507eb37bf3b3a1374ee3f4b58119d1
+  revision: c4826417476e02b2c07d757077d045effe2c1c24
   branch: v2.2
   specs:
     heb412_gen (2.2.0.beta7)
@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: e992705130df6f91fb166dfcc71d9dea55b23d9d
+  revision: 12b21d135cb274f16ceb26c88632ec2c75ebdf8c
   branch: v2.2
   specs:
     mr519_gen (2.2.0.beta7)
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: b4936a465ada1d74d5acef9c2ec4a0932732dd03
+  revision: 283a1302c18228292ffe35543e87a4c2a3cdee4a
   branch: v2.2
   specs:
     msip (2.2.0.beta7)
@@ -324,7 +324,7 @@ GEM
       date
       stringio
     public_suffix (6.0.1)
-    puma (6.5.0)
+    puma (6.6.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.1.8)
@@ -406,7 +406,7 @@ GEM
     rubocop-minitest (0.36.0)
       rubocop (>= 1.61, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails (2.29.0)
+    rubocop-rails (2.29.1)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.52.0, < 2.0)
