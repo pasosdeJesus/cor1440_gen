@@ -14,7 +14,7 @@ export default class Cor1440Gen__ProyectoFinanciero {
       fechacierre: $('#proyectofinanciero_fechacierre').val()
     }
     if (datos.fechainicio!= '' && datos.fechacierre!= '') {
-      Msip__Motor.ajaxRecibeJson('api/cor1440gen/duracion',
+      Msip__Motor.recibirJsonAjax('api/cor1440gen/duracion',
         datos, Cor1440Gen__Proyectofinanciero.establecerDuracion)
     } else {
       $('#proyectofinanciero_duracion').val('')

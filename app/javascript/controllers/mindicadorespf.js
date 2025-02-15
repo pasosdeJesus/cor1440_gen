@@ -42,7 +42,7 @@ export default class Cor1440Gen__Mindicadorespf {
       hmindicadorpf_id: hid,
       mindicadorpf_id: $('form.edit_mindicadorpf')[0].id.split('_')[2]
     }
-    Msip__Motor.ajaxRecibeJson('api/cor1440gen/medir_indicador', 
+    Msip__Motor.recibirJsonAjax('api/cor1440gen/medir_indicador', 
       datos, Cor1440Gen__Mindicadorespf.llenarMedicion)  
   }
 

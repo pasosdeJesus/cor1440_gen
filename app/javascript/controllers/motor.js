@@ -369,7 +369,7 @@ export default class Cor1440Gen__Motor {
         actividadpf_ids: acids,
         proyectofinanciero_ids: prids
       }
-      Msip__Motor.ajaxRecibeJson(
+      Msip__Motor.recibirJsonAjax(
         'api/actividades/relacionadas',
         params, cor1440_gen_llenarActividadpf_relacionadas
       )
@@ -414,7 +414,7 @@ export default class Cor1440Gen__Motor {
         actividadpf_ids: acids,
         proyectofinanciero_ids: prids
       }
-      Msip__Motor.ajaxRecibeJson(
+      Msip__Motor.recibirJsonAjax(
         'actividadespf/conancestros', params, 
         Cor1440Gen__Motor.llenarActividadpfConAncestros
       )
