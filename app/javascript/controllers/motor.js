@@ -112,7 +112,7 @@ export default class Cor1440Gen__Motor {
           Msip__Motor.configurarElementoTomSelect(e.target)
           idac = $(e.target).parent().parent().parent().find('select[id$=actividadpf_ids]').attr('id')
           let params = { pfl: [+e.target.value]}
-          Msip__Motor.llenarSelectConAjax2('actividadespf', params,
+          Msip__Motor.llenarSelectConAjax('actividadespf', params,
             idac, 'con Actividades de convenio ' + e.target.value,
             'id', 'nombre', null)
         })
@@ -455,7 +455,7 @@ export default class Cor1440Gen__Motor {
     let params = {
       pfl: [proyectofinanciero_id]
     }
-    Msip__Motor.llenarSelectConAjax2(
+    Msip__Motor.llenarSelectConAjax(
       'actividadespf', params,
       'actividad_actividadpf_ids', 'con Actividades de convenio', 
       'id', 'nombre', Cor1440Gen__Motor.actualizarActividadmicos
@@ -467,7 +467,7 @@ export default class Cor1440Gen__Motor {
     let params = {
       pfl: $('#actividad_proyectofinanciero_ids').val(),
     }
-    Msip__Motor.llenarSelectConAjax2(
+    Msip__Motor.llenarSelectConAjax(
       'actividadespf', params,
       'actividad_actividadpf_ids', 'con Actividades de convenio',
       'id', 'nombre', Cor1440Gen__Motor.actualizarActividadmicos
@@ -479,7 +479,7 @@ export default class Cor1440Gen__Motor {
     let params = {
       fecha: $('#actividad_fecha').val(),
     }
-    Msip__Motor.llenarSelectConAjax2(
+    Msip__Motor.llenarSelectConAjax(
       'proyectosfinancieros', params,
       'actividad_proyectofinanciero_ids', 'con Convenios financiados',
       'id', 'nombre',
