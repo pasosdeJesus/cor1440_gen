@@ -292,18 +292,18 @@ export default class Cor1440Gen__Motor {
   }
 
   static actualizarObjetivos(e, objetivo) {
-    Msip__Motor.actualizaCuadrosSeleccionDependientes(
+    Msip__Motor.actualizarCuadrosSeleccionDependientes(
       'objetivospf', '_id', '_numero', 
       Cor1440Gen__Motor.DEP_OBJETIVOPF, 'id', 'numero'
     )
-    Msip__Motor.actualizaCuadrosSeleccionDependientesFunEtiqueta(
+    Msip__Motor.actualizarCuadrosSeleccionDependientesFunEtiqueta(
       'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
       Cor1440Gen__Motor.DEP_RESULTADOPF, 'id', 'numero'
     )
   }
 
   static actualizarResultados(e, resultado) {
-    Msip__Motor.actualizaCuadrosSeleccionDependientesFunEtiqueta(
+    Msip__Motor.actualizarCuadrosSeleccionDependientesFunEtiqueta(
       'resultadospf', '_id', cor1440_gen_fun_etiqueta_resultadopf,
       Cor1440Gen__Motor.DEP_RESULTADOPF, 'id', 'numero'
     )
