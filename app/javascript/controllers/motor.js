@@ -552,7 +552,7 @@ export default class Cor1440Gen__Motor {
         nuevasop.push({'id': +r.id, 'nombre': r.nombre})
       }
     })
-    Msip__Motor.remplazaOpcionesSelect(
+    Msip__Motor.remplazarOpcionesSelect(
       idsel, nuevasop, true, 'id', 'nombre', true
     )
     $('#' + idsel).val('')
@@ -578,7 +578,7 @@ export default class Cor1440Gen__Motor {
         }
       }
     })
-    Msip__Motor.remplazaOpcionesSelect(
+    Msip__Motor.remplazarOpcionesSelect(
       idsel, nuevasop, true, 'id', 'nombre', false
     )
     $('#' + idsel).val(valsel)
