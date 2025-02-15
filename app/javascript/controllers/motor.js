@@ -148,13 +148,13 @@ export default class Cor1440Gen__Motor {
     $(document).on('cocoon:after-insert', '#objetivospf', Cor1440Gen__Motor.actualizarObjetivos)
 
     $(document).on('cocoon:before-remove', '#objetivospf', (e, objetivo) => {
-      Msip__Motor.intentaEliminarFila(
+      Msip__Motor.intentarEliminarFila(
         objetivo, '/objetivospf/', Cor1440Gen__Motor.DEP_OBJETIVOPF
       )
     })
 
     $(document).on('cocoon:before-remove', '#indicadoresobjetivos', (e, indicador) => {
-      Msip__Motor.intentaEliminarFila(
+      Msip__Motor.intentarEliminarFila(
         indicador, '/indicadorespf/', Cor1440Gen__Motor.DEP_INDICADORPF
       )
     })
@@ -180,7 +180,7 @@ export default class Cor1440Gen__Motor {
     )
     $(document).on(
       'cocoon:before-remove', '#resultadospf', (e, resultado) => {
-        Msip__Motor.intentaEliminarFila(
+        Msip__Motor.intentarEliminarFila(
           resultado, '/resultadospf/', Cor1440Gen__Motor.DEP_RESULTADOPF
         )
       })
@@ -193,7 +193,7 @@ export default class Cor1440Gen__Motor {
 
 
     $(document).on('cocoon:before-remove', '#indicadorespf', (e, indicador) => {
-      Msip__Motor.intentaEliminarFila(
+      Msip__Motor.intentarEliminarFila(
         indicador, '/indicadorespf/', Cor1440Gen__Motor.DEP_INDICADORPF
       )
     })
