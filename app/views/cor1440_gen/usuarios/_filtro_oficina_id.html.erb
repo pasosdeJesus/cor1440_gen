@@ -1,12 +1,12 @@
 <%= f.input :busoficina_id,
   collection: Msip::Oficina.habilitados,
-  label: false,
-  label_method: :nombre,
-  value_method: :id,
-  selected: Msip::ModeloHelper.poromision(params, :busoficina_id),
+  include_blank: true,
   input_html: {
     class: 'tom-select',
-    'data-enviarautomatico' => ''
+    'data-action': 'change->msip--enviarautomatico#enviar'
   },
-  include_blank: true
+  label: false,
+  label_method: :nombre,
+  selected: Msip::ModeloHelper.poromision(params, :busoficina_id),
+  value_method: :id
 %>

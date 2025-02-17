@@ -39,11 +39,13 @@
           :first,
           {
             include_blank: true,
-            selected: Msip::ModeloHelper.poromision(params, :buspersona_id) },
+            selected: Msip::ModeloHelper.poromision(params, :buspersona_id) 
+          },
           {
-              class: 'tom-select',
-              name: 'filtro[buspersona_id]',
-              'data-enviarautomatico' => '' }
+            class: 'tom-select',
+            name: 'filtro[buspersona_id]',
+            'data-action': 'change->msip--enviarautomatico#enviar'
+          }
         ) %>
 
       </th>
@@ -56,11 +58,13 @@
           :first, 
           {
             include_blank: true,
-            selected: Msip::ModeloHelper.poromision(params, :bussexo) },
+            selected: Msip::ModeloHelper.poromision(params, :bussexo) 
+          },
           {
               class: 'tom-select',
               name: 'filtro[bussexo]',
-              'data-enviarautomatico' => '' }
+              'data-action': 'change->msip--enviarautomatico#enviar'
+          }
         ) %>
       </th>
       <th>
@@ -72,11 +76,13 @@
           :nombre, 
           {
             include_blank: true,
-            selected: Msip::ModeloHelper.poromision(params, :busrangoedadac_id)},
+            selected: Msip::ModeloHelper.poromision(params, :busrangoedadac_id)
+          },
           {
               class: 'tom-select',
               name: 'filtro[busrangoedadac_id]',
-              'data-enviarautomatico' => '' }
+              'data-action': 'change->msip--enviarautomatico#enviar'
+          }
         ) %>
       </th>
       <% @contarb_listaac.each do |a| %>

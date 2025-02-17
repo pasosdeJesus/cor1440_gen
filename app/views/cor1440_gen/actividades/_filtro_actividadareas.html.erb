@@ -2,12 +2,12 @@
 <%= f.input :busactividadareas,
   collection: col.order(:nombre),
   include_blank: true,
-  label_method: :nombre,
-  value_method: :id,
-  label: false,
-  selected: Msip::ModeloHelper.poromision(params, :busactividadareas),
   input_html: {
     class: 'tom-select',
-    'data-enviarautomatico' => ''
-  }
+    'data-action': 'change->msip--enviarautomatico#enviar'
+  },
+  label: false,
+  label_method: :nombre,
+  selected: Msip::ModeloHelper.poromision(params, :busactividadareas),
+  value_method: :id
 %>

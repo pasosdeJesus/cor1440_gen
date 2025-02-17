@@ -1,13 +1,13 @@
 <%= f.input :busindicadorpf_id,
-  collection: Cor1440Gen::Indicadorpf.
-  where(proyectofinanciero_id: @contar_pfid),
+  collection: Cor1440Gen::Indicadorpf.where(
+    proyectofinanciero_id: @contar_pfid
+  ),
   include_blank: true,
-  label_method: :presenta_nombre,
-  value_method: :id,
-  label: false,
-  selected: Msip::ModeloHelper.poromision(params, :busindicadorpf_id),
   input_html: { 
     class: 'tom-select',
-    'data-enviarautomatico' => ''
-  }
+    'data-action': 'change->msip--enviarautomatico#enviar'
+  },
+  label: false,
+  label_method: :presenta_nombre,
+  selected: Msip::ModeloHelper.poromision(params, :busindicadorpf_id)
 %>

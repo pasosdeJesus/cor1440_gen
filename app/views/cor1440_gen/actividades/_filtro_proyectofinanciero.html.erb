@@ -25,16 +25,16 @@
 <% end %>
 <%= f.input :busproyectofinanciero,
   collection: col.order('fechacierre DESC'),
-  label_method: :nombre,
-  value_method: :id,
   include_hidden: false,
-  selected: sel,
-  label: false,
   input_html: { 
     class: "tom-select", 
     multiple: multiple, 
-    'data-enviarautomatico' => ''
+    'data-action': 'change->msip--enviarautomatico#enviar'
   },
+  label: false,
+  label_method: :nombre,
+  selected: sel,
+  value_method: :id,
   wrapper_html: {
     style: 'width: 10em'
   }

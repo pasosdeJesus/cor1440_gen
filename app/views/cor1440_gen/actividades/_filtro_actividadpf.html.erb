@@ -17,15 +17,15 @@
 <%= f.input :busactividadpf,
   collection: col.order(:titulo),
   include_blank: true,
-  label_method: :presenta_nombre,
-  value_method: :id,
-  label: false,
-  selected: sel,
   input_html: {
     class: 'tom-select',
     multiple: multiple,
-    'data-enviarautomatico' => ''
+    'data-action': 'change->msip--enviarautomatico#enviar'
   },
+  label: false,
+  label_method: :presenta_nombre,
+  selected: sel,
+  value_method: :id,
   wrapper_html: {
     style: 'width: 12em'
   }
