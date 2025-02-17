@@ -52,7 +52,7 @@ GIT
 PATH
   remote: .
   specs:
-    cor1440_gen (2.3.0.alfa3)
+    cor1440_gen (2.3.0.alfa4)
       devise
       heb412_gen
       kt-paperclip
