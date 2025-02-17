@@ -10,7 +10,7 @@ module Cor1440Gen
       only: [:show, :edit, :update, :destroy]
     skip_before_action :set_proyectofinanciero, only: [:validar]
 
-    load_and_authorize_resource  class: Cor1440Gen::Proyectofinanciero,
+    load_and_authorize_resource class: Cor1440Gen::Proyectofinanciero,
       only: [
         :new,
         :create,

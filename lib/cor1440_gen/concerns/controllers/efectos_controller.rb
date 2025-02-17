@@ -83,10 +83,10 @@ module Cor1440Gen
                 )
               else # aw.count == 1
                 r = aw.take
-                er = Cor1440Gen::EfectoRespuestafor.where(
+                er = Cor1440Gen::EfectoRespuestafor.find_by(
                   efecto_id: efecto.id,
                   respuestafor_id: r.id,
-                ).take
+                )
               end
               Mr519Gen::ApplicationHelper.asegura_camposdinamicos(
                 er, current_usuario_id

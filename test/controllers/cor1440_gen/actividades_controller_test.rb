@@ -28,8 +28,9 @@ module Cor1440Gen
 
     test "debe presentar formulario para nueva con proyecto por omisión" do
       pf = Proyectofinanciero.create(PRUEBA_PROYECTOFINANCIERO.merge(
-        poromision: true
+        poromision: true,
       ))
+
       assert_predicate pf, :valid?
 
       assert_equal 0, Cor1440Gen::ActividadProyectofinanciero.count
@@ -38,7 +39,6 @@ module Cor1440Gen
       assert_response :redirect
       assert_equal 1, Cor1440Gen::ActividadProyectofinanciero.count
     end
-
 
     test "debe crear una actividad" do
       a = PRUEBA_ACTIVIDAD
@@ -81,7 +81,7 @@ module Cor1440Gen
         "listado_de_actividades.ods",
       ]
       nombres_plantilla.each do |np|
-        ruta = "#{ENV.fetch("RUTA_RELATIVA", "/cor1440/")}"\
+        ruta = "#{ENV.fetch("RUTA_RELATIVA", "/cor1440/")}" \
           "sis/arch/plantillas?descarga=#{np}"
         get ruta
 
@@ -90,8 +90,8 @@ module Cor1440Gen
     end
 
     test "deberia exportar una actividad a hoja de calculo" do
-      ruta = "#{actividad_path(@actividad)}"\
-        "/fichaimp.xlsx?genera[plantilla_id]=5.ods&"\
+      ruta = "#{actividad_path(@actividad)}" \
+        "/fichaimp.xlsx?genera[plantilla_id]=5.ods&" \
         "idplantilla=5&formato=ods&formatosalida=xlsx&commit=Enviar"
       get ruta
 
@@ -101,12 +101,12 @@ module Cor1440Gen
     end
 
     test "deberia exportar un listado  a hoja de calculo" do
-      get "#{actividades_path}.xlsx?"\
-        "filtro[disgenera]=5&idplantilla=5&formato=xlsx&"\
+      get "#{actividades_path}.xlsx?" \
+        "filtro[disgenera]=5&idplantilla=5&formato=xlsx&" \
         "formatosalida=xlsx&commit=Enviar"
 
       assert_redirected_to(
-        "#{ENV.fetch("RUTA_RELATIVA", "/cor1440/")}sis/arch/generados"
+        "#{ENV.fetch("RUTA_RELATIVA", "/cor1440/")}sis/arch/generados",
       )
     end
 
@@ -121,52 +121,60 @@ module Cor1440Gen
     test "crea copia de una actividad" do
       n1 = Cor1440Gen::Actividad.count
       get copiar_actividad_path(@actividad.id)
+
       assert_response :success
-      assert (n1+1), Cor1440Gen::Actividad.count
+      assert (n1 + 1), Cor1440Gen::Actividad.count
     end
 
     test "procesa actividad compleja y reporta" do
       pf = Proyectofinanciero.create(PRUEBA_PROYECTOFINANCIERO.merge(
-        poromision: true
+        poromision: true,
       ))
+
       assert_predicate pf, :valid?
 
       @actividad.proyectofinanciero_ids = [pf.id]
       @actividad.save
+
       assert_predicate @actividad, :valid?
 
       f = ::Mr519Gen::Formulario.create(PRUEBA_FORMULARIO)
+
       assert_predicate f, :valid?
       r = ::Mr519Gen::Respuestafor.create(PRUEBA_RESPUESTAFOR.merge(
         formulario_id: f.id,
       ))
+
       assert_predicate r, :valid?
 
       @actividad.respuestafor_ids = [r.id]
       @actividad.save
+
       assert_predicate @actividad, :valid?
 
       get edit_actividad_url(@actividad)
+
       assert_response :success
 
       post cor1440_gen.crear_asistencia_path(0, format: :turbo_stream)
+
       assert_response :success
-      #assert_equal (np+1), Msip::Persona.count
+      # assert_equal (np+1), Msip::Persona.count
 
       get contar_actividades_beneficiarios_path
+
       assert_response :success
 
       get contar_actividades_path
+
       assert_response :success
 
-      skip  # Arreglar con https://github.com/pasosdeJesus/cor1440_gen/issues/118
+      skip # Arreglar con https://github.com/pasosdeJesus/cor1440_gen/issues/118
       assert_difference("Cor1440Gen::Actividad.count", -1) do
         delete actividad_url(@actividad)
       end
 
       assert_redirected_to actividades_url
     end
-
-
   end
 end

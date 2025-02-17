@@ -188,8 +188,8 @@ module Cor1440Gen
             foreign_key: "proyectofinanciero_id",
             validate: true
           accepts_nested_attributes_for :proyectofinanciero_usuario,
-            allow_destroy: true 
-            # se permiten en blanco para agregar POR CONTRATAR
+            allow_destroy: true
+          # se permiten en blanco para agregar POR CONTRATAR
           has_many :usuario,
             through: :proyectofinanciero_usuario,
             class_name: "::Usuario"
@@ -223,7 +223,7 @@ module Cor1440Gen
             if fechainicio && fechacierre && fechainicio > fechacierre
               errors.add(
                 :fechacierre,
-                "La fecha de cierre debe ser posterior a la de inicio"
+                "La fecha de cierre debe ser posterior a la de inicio",
               )
             end
           end
@@ -310,7 +310,7 @@ module Cor1440Gen
 
           scope :filtro_compromisos, lambda { |compromisos|
             where(
-              "unaccent(cor1440_gen_proyectofinanciero.compromisos) "\
+              "unaccent(cor1440_gen_proyectofinanciero.compromisos) " \
                 "ILIKE '%' || unaccent(?) || '%'",
               compromisos.strip,
             )
@@ -339,7 +339,7 @@ module Cor1440Gen
 
           scope :filtro_nombre, lambda { |nombre|
             where(
-              "unaccent(cor1440_gen_proyectofinanciero.nombre) "\
+              "unaccent(cor1440_gen_proyectofinanciero.nombre) " \
                 "ILIKE '%' || unaccent(?) || '%'",
               nombre.strip,
             )
@@ -347,7 +347,7 @@ module Cor1440Gen
 
           scope :filtro_observaciones, lambda { |observaciones|
             where(
-              "unaccent(cor1440_gen_proyectofinanciero.observaciones) "\
+              "unaccent(cor1440_gen_proyectofinanciero.observaciones) " \
                 "ILIKE '%' || unaccent(?) || '%'",
               observaciones.strip,
             )
@@ -364,7 +364,7 @@ module Cor1440Gen
 
           scope :filtro_titulo, lambda { |titulo|
             where(
-              "unaccent(cor1440_gen_proyectofinanciero.titulo) ILIKE '%' "\
+              "unaccent(cor1440_gen_proyectofinanciero.titulo) ILIKE '%' " \
                 "|| unaccent(?) || '%'",
               titulo.strip,
             )
@@ -540,7 +540,7 @@ module Cor1440Gen
                 :descripcion,
                 :indicadorgifmm_id,
               )
-              actividades = acts.map do |act|
+              acts.map do |act|
                 (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).objetivopf.numero : "") + (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).numero : "") + ": " + (act[1] ? act[1] : "") + ", " + (act[2] ? Cor1440Gen::Actividadtipo.find(act[2]).nombre : "") + ", " + (act[3] ? act[3] : "") + ", " + (act[4] ? act[4] : "") + ", " + (act[5] ? Indicadorgifmm.find(act[5]).nombre : "")
               end.join(". ")
             else

@@ -19,10 +19,10 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENCIA.md", "Rakefile", "README.md"]
 
-  s.add_runtime_dependency("devise")
-  s.add_runtime_dependency("heb412_gen")
-  s.add_runtime_dependency("kt-paperclip")
-  s.add_runtime_dependency("mr519_gen")
-  s.add_runtime_dependency("msip")
-  s.add_runtime_dependency("rails")
+  s.add_dependency("devise")
+  s.add_dependency("heb412_gen")
+  s.add_dependency("kt-paperclip")
+  s.add_dependency("mr519_gen")
+  s.add_dependency("msip")
+  s.add_dependency("rails")
 end

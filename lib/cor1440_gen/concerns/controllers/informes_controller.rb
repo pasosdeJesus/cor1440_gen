@@ -48,7 +48,7 @@ module Cor1440Gen
             @actividades = filtra_actividades
 
             # Ejemplo de https://github.com/sandrods/odf-report
-            report = ::ODFReport::Report.new("#{Rails.root}/app/reportes/Plantilla-InformeActividades.odt") do |r|
+            report = ::ODFReport::Report.new("#{Rails.root.join("app/reportes/Plantilla-InformeActividades.odt")}") do |r|
               r.add_field(:titulo, @informe.titulo)
               r.add_field(:fecha, Date.today)
               r.add_field(
@@ -87,7 +87,7 @@ module Cor1440Gen
               r.add_field(:avances, @informe.avances)
               r.add_field(:logros, @informe.logros)
               r.add_field(:dificultades, @informe.dificultades)
-              r = impreso_extra(r, @informe, @actividades)
+              impreso_extra(r, @informe, @actividades)
             end
 
             send_data(

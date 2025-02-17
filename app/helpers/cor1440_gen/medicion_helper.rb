@@ -101,11 +101,11 @@ module Cor1440Gen
       def eval(contexto, menserror = "".dup)
         unless contexto
           STDERR.puts "** No se definió contexto"
-          return nil
+          return
         end
         if !contexto[id.to_s] && !contexto[id.to_s.to_sym]
           STDERR.puts "** No se definió #{id} en contexto"
-          return nil
+          return
         end
         contexto[id.to_s] || contexto[id.to_s.to_sym]
       end
@@ -122,40 +122,40 @@ module Cor1440Gen
         when "aplana"
           if args.count != 1
             STDERR.puts "** Función #{fun} requiere un parámetro"
-            return nil
+            return
           end
           argsev[0] = args[0].eval(contexto, menserror)
           unless argsev[0].respond_to?(:count)
             STDERR.puts "** Parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
           argsev[0].flatten
 
         when "cuenta"
           if args.count != 1
             STDERR.puts "** Función #{fun} requiere un parámetro"
-            return nil
+            return
           end
           argsev[0] = args[0].eval(contexto, menserror)
           unless argsev[0].respond_to?(:count)
             STDERR.puts "** Parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
           argsev[0].count
 
         when "interseccion", "intersección"
           if args.count != 2
             STDERR.puts "** Función #{fun} requiere dos parámetros"
-            return nil
+            return
           end
           argsev = args.map { |a| a.eval(contexto, menserror) }
           unless argsev[0].respond_to?(:count)
             STDERR.puts "** Primer parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
           unless argsev[0].respond_to?(:count)
             STDERR.puts "** Segundo parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
 
           argsev[0] && argsev[1] ? argsev[0] & argsev[1] : nil
@@ -163,16 +163,16 @@ module Cor1440Gen
         when "mapeaproy"
           if args.count != 2
             STDERR.puts "** Función #{fun} requiere dos parámetro"
-            return nil
+            return
           end
           argsev[0] = args[0].eval(contexto, menserror)
           unless argsev[0].respond_to?(:count)
             STDERR.puts "** Primer parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
           if args[1].class != Ident
             STDERR.puts "** Segundo parámetro de función #{fun} debe ser identificador"
-            return nil
+            return
           end
           argsev[1] = args[1].id.to_s
           menserror = "".dup
@@ -182,7 +182,7 @@ module Cor1440Gen
             elsif e[argsev[1]]
               e[argsev[1]]
             elsif !e.respond_to?(:evalua_campo)
-              STDERR.puts "** La clase #{e.class} no tiene función "\
+              STDERR.puts "** La clase #{e.class} no tiene función " \
                 "evalua_campo"
               nil
             else
@@ -194,28 +194,28 @@ module Cor1440Gen
         when "primera", "primer", "primero"
           if args.count != 1
             STDERR.puts "** Función #{fun} requiere un parámetro"
-            return nil
+            return
           end
           argsev[0] = args[0].eval(contexto, menserror)
           unless argsev[0].respond_to?(:count)
             STDERR.puts "** Parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
           if !argsev[0].count == 0
             STDERR.puts "** Parámetro de función #{fun} es vector vacío"
-            return nil
+            return
           end
           argsev[0][0]
 
         when "suma"
           if args.count != 1
             STDERR.puts "** Función #{fun} requiere un parámetro"
-            return nil
+            return
           end
           argsev[0] = args[0].eval(contexto, menserror)
           unless argsev[0].respond_to?(:count)
             STDERR.puts "** Primer parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
           argsev[0].inject(0) do |memo, e|
             memo + e.to_f
@@ -224,12 +224,12 @@ module Cor1440Gen
         when "únicos", "unicos", "únicas", "unicas"
           if args.count != 1
             STDERR.puts "** Función #{fun} requiere un parámetro"
-            return nil
+            return
           end
           argsev[0] = args[0].eval(contexto, menserror)
           unless argsev[0].respond_to?(:uniq)
             STDERR.puts "** Parámetro de función #{fun} no es vector"
-            return nil
+            return
           end
           argsev[0].uniq
           # {|e|
@@ -252,7 +252,7 @@ module Cor1440Gen
         c = campo.to_s
         if r.nil?
           STDERR.puts "** Evaluacion de registro dió nil"
-          return nil
+          return
         end
         menserror = "".dup
         if r[c]
@@ -260,7 +260,7 @@ module Cor1440Gen
         elsif r[c.to_sym]
           r[c.to_sym]
         elsif !r.respond_to?(:evalua_campo)
-          STDERR.puts "** La clase #{e.class} no tiene función "\
+          STDERR.puts "** La clase #{e.class} no tiene función " \
             "evalua_atributo"
           nil
         else
@@ -290,7 +290,7 @@ module Cor1440Gen
         when "/"
           if eder == 0
             STDERR.puts "** División entre 0"
-            return nil
+            return
           end
           eizq / eder
         else

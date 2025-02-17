@@ -20,11 +20,12 @@ module Cor1440Gen
             class_name: "Cor1440Gen::Actividadpf",
             through: :actividad
 
-          validates :proyectofinanciero_id, presence: true,
-            uniqueness: { 
+          validates :proyectofinanciero_id,
+            presence: true,
+            uniqueness: {
               scope: :actividad_id,
-              message: "Una actividad puede relacionarse "\
-                "máximo una vez con un proyecto"
+              message: "Una actividad puede relacionarse " \
+                "máximo una vez con un proyecto",
             }
 
           after_destroy do
@@ -76,13 +77,11 @@ module Cor1440Gen
                 aa.save!
               end
             end
-            res = []
             if actividad.actividadpf
-              res = actividad.actividadpf.where(
+              actividad.actividadpf.where(
                 proyectofinanciero_id: proyectofinanciero_id,
               ).pluck(:id)
             end
-            res
           end
         end
       end

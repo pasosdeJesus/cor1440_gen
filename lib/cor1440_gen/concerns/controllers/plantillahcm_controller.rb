@@ -43,7 +43,7 @@ module Cor1440Gen
           def plantillahcm_params
             params.require(:plantillahcm).permit(lista_params_cor1440)
           end
-        end  # included
+        end # included
       end
     end
   end

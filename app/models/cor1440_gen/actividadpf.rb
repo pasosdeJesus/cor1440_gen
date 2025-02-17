@@ -3,7 +3,7 @@
 require "cor1440_gen/concerns/models/actividadpf"
 
 module Cor1440Gen
-  # Actividad de marco lógico, asociada a un resultado de un 
+  # Actividad de marco lógico, asociada a un resultado de un
   # proyecto financiero.
   class Actividadpf < ActiveRecord::Base
     include Cor1440Gen::Concerns::Models::Actividadpf

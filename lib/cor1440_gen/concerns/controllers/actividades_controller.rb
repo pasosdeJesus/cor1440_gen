@@ -34,7 +34,7 @@ module Cor1440Gen
           end
 
           def atributos_form
-            a = atributos_show - [:id, :actividadpf, :poblacion] - 
+            a = atributos_show - [:id, :actividadpf, :poblacion] -
               [:anexos]
             a.map do |e|
               e == :fecha_localizada ? :fecha : e
@@ -62,7 +62,7 @@ module Cor1440Gen
           end
 
           def con_boton_copiar?
-              true
+            true
           end
 
           def vistas_manejadas
@@ -248,10 +248,10 @@ module Cor1440Gen
                     )
                   else # aw.count == 1
                     r = aw.take
-                    ar = Cor1440Gen::ActividadRespuestafor.where(
+                    ar = Cor1440Gen::ActividadRespuestafor.find_by(
                       actividad_id: actividad.id,
                       respuestafor_id: r.id,
-                    ).take
+                    )
                   end
                   Mr519Gen::ApplicationHelper.asegura_camposdinamicos(
                     ar, current_usuario_id
@@ -282,10 +282,10 @@ module Cor1440Gen
                 )
               else # aw.count == 1
                 r = aw.take
-                ar = Cor1440Gen::ActividadRespuestafor.where(
+                ar = Cor1440Gen::ActividadRespuestafor.find_by(
                   actividad_id: actividad.id,
                   respuestafor_id: r.id,
-                ).take
+                )
               end
               Mr519Gen::ApplicationHelper.asegura_camposdinamicos(
                 ar, current_usuario_id
@@ -361,10 +361,10 @@ module Cor1440Gen
             # Eliminar de tabla persona (esto eliminará de asistente también)
             if Msip::Persona.where(id: a.persona_id).count > 0
               Msip::Persona.find(a.persona_id).destroy
-            elsif Cor1440Gen::Asistencia.where(persona_id: a.persona_id).
-              where(actividad_id: @registro.id).count > 0
-              Cor1440Gen::Asistencia.where(persona_id: a.persona_id).
-                where(actividad_id: @registro.id).destroy_all
+            elsif Cor1440Gen::Asistencia.where(persona_id: a.persona_id)
+                .where(actividad_id: @registro.id).count > 0
+              Cor1440Gen::Asistencia.where(persona_id: a.persona_id)
+                .where(actividad_id: @registro.id).destroy_all
             end
             true
           end
@@ -405,7 +405,6 @@ module Cor1440Gen
           def nueva_asistencia_completa_persona
           end
 
-
           # Completa nuevo registro asistencia de @asistencia
           def nueva_asistencia_completa_asistencia
           end
@@ -432,15 +431,15 @@ module Cor1440Gen
             end
             act = Cor1440Gen::Actividad.find(params[:actividad_id].to_i)
             menserror = "".dup
-            @persona = Msip::PersonasController.
-              nueva_persona_valores_predeterminados(menserror)
+            @persona = Msip::PersonasController
+              .nueva_persona_valores_predeterminados(menserror)
             # Asigna incluso numerodocumento que no falla
             if menserror != ""
               resp_error("No pudo crear persona")
               return
             end
             nueva_asistencia_completa_persona
-            #@persona.save(validate: false)
+            # @persona.save(validate: false)
             unless @persona.save(validate: false)
               resp_error("No pudo crear persona")
               return
@@ -472,7 +471,6 @@ module Cor1440Gen
             end
           end # def nueva_asistencia
 
-
           def nuevo_asistente_antes_de_actualizar(asistente, atr_asistente)
           end
 
@@ -486,7 +484,7 @@ module Cor1440Gen
                 if v[:id].to_s == ""
                   pap = Cor1440Gen::ActividadProyectofinanciero.where(
                     actividad_id: @registro.id,
-                    proyectofinanciero_id: v[:proyectofinanciero_id].to_i
+                    proyectofinanciero_id: v[:proyectofinanciero_id].to_i,
                   )
                   if pap.count >= 1
                     upap = pap.take
@@ -500,13 +498,12 @@ module Cor1440Gen
               end
             end
 
-
             actividades_en_tabla = []
             if actividad_params[:asistencia_attributes]
               actividad_params[:asistencia_attributes].each do |llavea, a|
                 if a["_destroy"].to_i == 1
                   if intentar_eliminar_asistente_de_params(a)
-                    puts "** Eliminando parametro de asistencia #{llavea} "\
+                    puts "** Eliminando parametro de asistencia #{llavea} " \
                       "porque ya se debió eliminar asistencia de base"
                     flash[:notice] ||= "".dup
                     flash[:notice] << "Se eliminó beneficiario(a) #{a[:persona_id]}"
@@ -515,20 +512,22 @@ module Cor1440Gen
                   # Si no se debía eliminar persona sino sólo asistente
                   # lo maneja rails(?)
                 elsif a && a[:id] && a[:id] == "" &&
-                  a[:persona_attributes] &&
-                  a[:persona_attributes][:id] &&
-                  a[:persona_attributes][:id].to_i > 0 &&
-                  Msip::Persona.where(
-                    id: a[:persona_attributes][:id].to_i,
-                  ).count == 1
+                    a[:persona_attributes] &&
+                    a[:persona_attributes][:id] &&
+                    a[:persona_attributes][:id].to_i > 0 &&
+                    Msip::Persona.where(
+                      id: a[:persona_attributes][:id].to_i,
+                    ).count == 1
                   # Ubicamos los de autocompletacion y para esos creamos
                   # un registro si hace falta
-                  if Cor1440Gen::Asistencia.where(actividad_id: @actividad.id,
-                      persona_id: a[:persona_attributes][:id]).count == 1
-                    ac = Cor1440Gen::Asistencia.where(
+                  if Cor1440Gen::Asistencia.where(
+                    actividad_id: @actividad.id,
+                    persona_id: a[:persona_attributes][:id],
+                  ).count == 1
+                    ac = Cor1440Gen::Asistencia.find_by(
                       actividad_id: @actividad.id,
-                      persona_id: a[:persona_attributes][:id]
-                    ).take
+                      persona_id: a[:persona_attributes][:id],
+                    )
                   else
                     ac = Cor1440Gen::Asistencia.create({
                       actividad_id: @actividad.id,
@@ -546,7 +545,7 @@ module Cor1440Gen
                   if ab && a[:persona_attributes] &&
                       a[:persona_attributes][:id].to_i == ab.persona_id.to_i &&
                       ab.persona.nombres == "N" &&
-                      ab.persona.apellidos == "N" 
+                      ab.persona.apellidos == "N"
                     nuevo_asistente_antes_de_actualizar(ab, a)
                   end
 
@@ -567,8 +566,8 @@ module Cor1440Gen
             update_gen
 
             if @registro.valid?
-              # Tras arreglar proyecto financiero que no tenía actividad de 
-              # marco lógico y que no esté en base suele no almacenar la 
+              # Tras arreglar proyecto financiero que no tenía actividad de
+              # marco lógico y que no esté en base suele no almacenar la
               # actividad así que la agregamos
               ar = @pf_respaldo.values.flatten.select { |x| x != "" }
                 .map(&:to_i).uniq.sort

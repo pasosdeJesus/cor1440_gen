@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -16,20 +18,17 @@ module Cor1440Gen
           private
 
           def prepara_actividad
-            @actividad = Cor1440Gen::Actividad.where(
-              id: params[:actividad][:id].to_i
-            ).take
+            @actividad = Cor1440Gen::Actividad.find_by(
+              id: params[:actividad][:id].to_i,
+            )
             if @actividad.actividad_proyectofinanciero.length == 0
-              @actividad.actividad_proyectofinanciero =  [
-                Cor1440Gen::ActividadProyectofinanciero.new
+              @actividad.actividad_proyectofinanciero = [
+                Cor1440Gen::ActividadProyectofinanciero.new,
               ]
             end
           end
-
         end # included
-
       end
     end
   end
 end
-

@@ -26,7 +26,7 @@ module Cor1440Gen
               [caracterizacion_ids: []] +
               [actividadtipo_ids: []]
           end
-        end  # included
+        end # included
       end
     end
   end

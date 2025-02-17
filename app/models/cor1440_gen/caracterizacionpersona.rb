@@ -10,15 +10,15 @@ module Cor1440Gen
   # un formulario de caracterización.
   #
   # Junto con cor1440_gen_beneficiariopf y cor1440_gen_caracterizacionpf
-  # permite asociar un formulario de caracterización a una beneficiario de un 
-  # proyecto financiero para ampliar el formulario del beneficiario y 
+  # permite asociar un formulario de caracterización a una beneficiario de un
+  # proyecto financiero para ampliar el formulario del beneficiario y
   # sistematizar lo especifico que requiera el proyecto para
   # sus beneficiarios.
   #
-  # Para que sea posible diligenciar un formulario (de caracterización) como 
+  # Para que sea posible diligenciar un formulario (de caracterización) como
   # subformulario al editar un beneficiario b es necesario que:
   # 1. Exista el formulario digamos f
-  # 2. El formulario de caracterizacion f aparezca como tal en 
+  # 2. El formulario de caracterizacion f aparezca como tal en
   #    cor1440_gen_caracterizacionpf para un proyecto financiero p
   # 3. El beneficiario aparezca como beneficiario del proyecto p en
   #    cor1440_gen_beneficiariopf

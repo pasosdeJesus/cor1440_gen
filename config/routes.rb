@@ -27,13 +27,13 @@ Cor1440Gen::Engine.routes.draw do
   get "/actividadespf/conancestros" => "actividadespf#conancestros",
     as: :actividadespf_conancestros
 
-  #get "/asistencia/nueva" => "actividades#nueva_asistencia",
+  # get "/asistencia/nueva" => "actividades#nueva_asistencia",
   #  as: :nueva_asistencia
 
   resources :asistencia, only: [], param: :index do
     member do
-      delete '(:id)', to: "asistencias#destroy", as: "eliminar"
-      post '/' => "asistencias#create", as: "crear"
+      delete "(:id)", to: "asistencias#destroy", as: "eliminar"
+      post "/" => "asistencias#create", as: "crear"
     end
   end
 
@@ -79,101 +79,111 @@ Cor1440Gen::Engine.routes.draw do
 
   resources :actividadpf_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "actividadespf_proyectofinanciero#destroy", 
+      delete "(:id)",
+        to: "actividadespf_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "actividadespf_proyectofinanciero#create", as: "crear"
+      post "/" => "actividadespf_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :actividad_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "actividad_proyectosfinancieros#destroy",
+      delete "(:id)",
+        to: "actividad_proyectosfinancieros#destroy",
         as: "eliminar"
-      post '/' => "actividad_proyectosfinancieros#create", as: "crear"
+      post "/" => "actividad_proyectosfinancieros#create", as: "crear"
     end
   end
 
   resources :anexo_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "anexos_proyectofinanciero#destroy",
+      delete "(:id)",
+        to: "anexos_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "anexos_proyectofinanciero#create", as: "crear"
+      post "/" => "anexos_proyectofinanciero#create", as: "crear"
     end
   end
 
-
   resources :desembolso_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "desembolsos_proyectofinanciero#destroy",
+      delete "(:id)",
+        to: "desembolsos_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "desembolsos_proyectofinanciero#create", as: "crear"
+      post "/" => "desembolsos_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :indicadorpf_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "indicadorespf_proyectofinanciero#destroy", 
+      delete "(:id)",
+        to: "indicadorespf_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "indicadorespf_proyectofinanciero#create", as: "crear"
+      post "/" => "indicadorespf_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :indicadorobjetivo_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "indicadoresobjetivo_proyectofinanciero#destroy", 
+      delete "(:id)",
+        to: "indicadoresobjetivo_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "indicadoresobjetivo_proyectofinanciero#create", as: "crear"
+      post "/" => "indicadoresobjetivo_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :informeauditoria_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "informesauditorias_proyectofinanciero#destroy",
+      delete "(:id)",
+        to: "informesauditorias_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "informesauditorias_proyectofinanciero#create", as: "crear"
+      post "/" => "informesauditorias_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :informefinanciero_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "informesfinancieros_proyectofinanciero#destroy",
+      delete "(:id)",
+        to: "informesfinancieros_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "informesfinancieros_proyectofinanciero#create", as: "crear"
+      post "/" => "informesfinancieros_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :informenarrativo_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "informesnarrativos_proyectofinanciero#destroy",
+      delete "(:id)",
+        to: "informesnarrativos_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "informesnarrativos_proyectofinanciero#create", as: "crear"
+      post "/" => "informesnarrativos_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :objetivopf_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "objetivospf_proyectofinanciero#destroy",
+      delete "(:id)",
+        to: "objetivospf_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "objetivospf_proyectofinanciero#create", as: "crear"
+      post "/" => "objetivospf_proyectofinanciero#create", as: "crear"
     end
   end
 
   resources :proyectofinanciero_usuario, only: [], param: :index do
     member do
-      delete '(:id)', to: "proyectofinanciero_usuarios#destroy", 
+      delete "(:id)",
+        to: "proyectofinanciero_usuarios#destroy",
         as: "eliminar"
-      post '/' => "proyectofinanciero_usuarios#create", as: "crear"
+      post "/" => "proyectofinanciero_usuarios#create", as: "crear"
     end
   end
 
   resources :resultadopf_proyectofinanciero, only: [], param: :index do
     member do
-      delete '(:id)', to: "resultadospf_proyectofinanciero#destroy", 
+      delete "(:id)",
+        to: "resultadospf_proyectofinanciero#destroy",
         as: "eliminar"
-      post '/' => "resultadospf_proyectofinanciero#create", as: "crear"
+      post "/" => "resultadospf_proyectofinanciero#create", as: "crear"
     end
   end
-
 
   namespace :admin do
     ab = Ability.new

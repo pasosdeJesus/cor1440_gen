@@ -227,7 +227,7 @@ module Cor1440Gen
             Cor1440Gen::AnexoProyectofinanciero,
             Cor1440Gen::Asistencia,
             Cor1440Gen::Desembolso,
-            Cor1440Gen::ProyectofinancieroUsuario
+            Cor1440Gen::ProyectofinancieroUsuario,
           ])
           presponsable = Cor1440Gen::Proyectofinanciero.where(
             responsable_id: usuario.id,
@@ -284,10 +284,10 @@ module Cor1440Gen
             Cor1440Gen::Actividad,
             actividad_proyectofinanciero: { proyectofinanciero_id: penequipo },
           )
-          habilidad.can :manage, [
+          habilidad.can(:manage, [
             Cor1440Gen::ActividadProyectofinanciero,
             Cor1440Gen::Asistencia,
-          ]
+          ])
 
           # Responsable de un proyecto puede eliminar  y editar actividades
           # del mismo
@@ -310,7 +310,7 @@ module Cor1440Gen
 
         when Ability::ROLADMIN, Ability::ROLDIR
           habilidad.can(:manage, [
-            Cor1440Gen::Pmindicadorpf, 
+            Cor1440Gen::Pmindicadorpf,
             Cor1440Gen::Actividad,
             Cor1440Gen::ActividadProyectofinanciero,
             Cor1440Gen::AnexoProyectofinanciero,
@@ -347,7 +347,7 @@ module Cor1440Gen
             Msip::Persona,
 
             Usuario,
-            :tablasbasicas
+            :tablasbasicas,
           ])
           habilidad.tablasbasicas.each do |t|
             c = Ability.tb_clase(t)

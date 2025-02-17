@@ -29,7 +29,7 @@ module Cor1440Gen
 
       def atributos_form
         atributos_index.map do |e|
-          case e 
+          case e
           when :fechacreacion_localizada
             :fechacreacion
           when :fechainicio_localizada

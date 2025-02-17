@@ -22,7 +22,7 @@ Bundler.require(*Rails.groups)
 
 module Dummy
   class Application < Rails::Application
-    config.load_defaults Rails::VERSION::STRING.to_f
+    config.load_defaults(Rails::VERSION::STRING.to_f)
 
     # Las configuraciones en config/environments/* tiene precedencia sobre
     # las especificadas aquí.
@@ -55,7 +55,7 @@ module Dummy
 
     # config.web_console.whitelisted_ips = ['186.154.35.237']
 
-    config.relative_url_root = ENV.fetch('RUTA_RELATIVA', '/cor1440')
+    config.relative_url_root = ENV.fetch("RUTA_RELATIVA", "/cor1440")
 
     # msip
     config.x.formato_fecha = ENV.fetch("MSIP_FORMATO_FECHA", "dd/M/yyyy")

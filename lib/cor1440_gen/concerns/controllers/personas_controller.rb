@@ -72,7 +72,7 @@ module Cor1440Gen
                     )
                   elsif cp.count > 1
                     flash.now[:notice] =
-"Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
+                      "Hay #{cp.count} caracterizaciones repetidas de esta persona y el proyecto #{pf.id}  (#{pf.nombre})"
                     car = cp.take
                   else # cp.count == 1
                     car = cp.take
@@ -131,7 +131,7 @@ module Cor1440Gen
               return "No se encontró formulario con nombreinterno #{p[0]}"
             end
 
-            f = Mr519Gen::Formulario.where(nombreinterno: p[0]).take
+            f = Mr519Gen::Formulario.find_by(nombreinterno: p[0])
 
             car = Cor1440Gen::Caracterizacionpersona.where(
               persona_id: registro.id,
@@ -161,7 +161,7 @@ module Cor1440Gen
               return "En formulario #{f.id} no se encontró campo con nombre interno #{p[2]}"
             end
 
-            campo = f.campo.where(nombreinterno: p[1]).take
+            campo = f.campo.find_by(nombreinterno: p[1])
             op = []
             ope = nil
             if campo.tipo == Mr519Gen::ApplicationHelper::SELECCIONMULTIPLE
@@ -173,14 +173,14 @@ module Cor1440Gen
                   return "En formulario #{f.id}, el campo con nombre interno #{p[1]} tiene más de una opción con valor #{p[2]}"
                 end
 
-                ope = op.where(valor: p[2]).take
+                ope = op.find_by(valor: p[2])
               end
             end
             if rf.valorcampo.where(campo_id: campo.id).count == 0
               return "En respuesta a formularoi #{rf.id} no se encontró valor para el campo #{campo.id}"
             end
 
-            vc = rf.valorcampo.where(campo_id: campo.id).take
+            vc = rf.valorcampo.find_by(campo_id: campo.id)
             unless ope.nil?
               return vc.valorjson.include?(ope.id.to_s) ? 1 : 0
             end
@@ -229,7 +229,7 @@ module Cor1440Gen
             p = p.permit(lista_params)
             p
           end
-        end  # included
+        end # included
 
         class_methods do
         end

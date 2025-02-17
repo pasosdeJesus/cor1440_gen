@@ -3,8 +3,8 @@
 require "cor1440_gen/version"
 
 Msip.setup do |config|
-  config.ruta_anexos = "#{Rails.root}/archivos/anexos"
-  config.ruta_volcados = "#{Rails.root}/archivos/bd"
+  config.ruta_anexos = "#{Rails.root.join("archivos/anexos")}"
+  config.ruta_volcados = "#{Rails.root.join("archivos/bd")}"
   config.titulo = "Cor1440Gen " + Cor1440Gen::VERSION
 
   config.descripcion = "Motor para proyectos y actividades con metodología de marco lógico"

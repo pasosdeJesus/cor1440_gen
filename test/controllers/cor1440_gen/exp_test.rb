@@ -15,8 +15,8 @@ module Cor1440Gen
     end
 
     test "deberia exportar una actividad a hoja de calculo" do
-      ruta = "#{actividad_path(@actividad)}"\
-        "/fichaimp.xlsx?genera[plantilla_id]=5.ods&"\
+      ruta = "#{actividad_path(@actividad)}" \
+        "/fichaimp.xlsx?genera[plantilla_id]=5.ods&" \
         "idplantilla=5&formato=ods&formatosalida=xlsx&commit=Enviar"
       get ruta
 
@@ -24,7 +24,5 @@ module Cor1440Gen
       FileUtils.rm("/tmp/reporte_una_actividad.ods")
       FileUtils.rm("/tmp/reporte_una_actividad.xlsx")
     end
-
-
   end
 end

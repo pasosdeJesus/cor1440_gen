@@ -23,7 +23,7 @@ module Cor1440Gen
     end
 
     test "existente" do
-      sectorapc = Cor1440Gen::Sectorapc.where(id: 1).take
+      sectorapc = Cor1440Gen::Sectorapc.find_by(id: 1)
 
       assert_equal "SIN INFORMACIÓN", sectorapc.nombre
     end

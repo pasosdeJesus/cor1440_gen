@@ -58,7 +58,7 @@ module Cor1440Gen
             p = params.require(:usuario).permit(lista_params)
             p
           end
-        end  # included
+        end # included
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -16,15 +18,12 @@ module Cor1440Gen
           def prepara_informenarrativo_proyectofinanciero
             @proyectofinanciero = Cor1440Gen::Proyectofinanciero.new(
               informenarrativo: [
-                Cor1440Gen::Informenarrativo.new
-              ]
+                Cor1440Gen::Informenarrativo.new,
+              ],
             )
           end
-
         end # included
-
       end
     end
   end
 end
-

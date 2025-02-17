@@ -51,46 +51,50 @@ module Cor1440Gen
             merr = "".dup
             if proyectofinanciero_params[:objetivopf_attributes]
               proyectofinanciero_params[:objetivopf_attributes].each do |i, o|
-                if o["_destroy"] == "true" && o[:id].to_i > 0
-                  indo = Cor1440Gen::Indicadorpf.where(
-                    objetivopf_id: o[:id].to_i)
-                  if indo.count > 0
-                    merr << "No se puede eliminar el objetivo "\
-                      "'#{o[:id]}' porque es usado en #{indo.count} "\
-                      "indicador(es) de objetivo. "
-                    params[:proyectofinanciero][:objetivopf_attributes][i]["_destroy"] = "false"
-                  end
-                  res = Cor1440Gen::Resultadopf.where(
-                    objetivopf_id: o[:id].to_i)
-                  if res.count > 0
-                    merr << "No se puede eliminar el objetivo "\
-                      "'#{o[:id]}' porque es usado en #{res.count} "\
-                      "resultado(s). "
-                    params[:proyectofinanciero][:objetivopf_attributes][i]["_destroy"] = "false"
-                  end
+                next unless o["_destroy"] == "true" && o[:id].to_i > 0
+
+                indo = Cor1440Gen::Indicadorpf.where(
+                  objetivopf_id: o[:id].to_i,
+                )
+                if indo.count > 0
+                  merr << "No se puede eliminar el objetivo " \
+                    "'#{o[:id]}' porque es usado en #{indo.count} " \
+                    "indicador(es) de objetivo. "
+                  params[:proyectofinanciero][:objetivopf_attributes][i]["_destroy"] = "false"
                 end
+                res = Cor1440Gen::Resultadopf.where(
+                  objetivopf_id: o[:id].to_i,
+                )
+                next unless res.count > 0
+
+                merr << "No se puede eliminar el objetivo " \
+                  "'#{o[:id]}' porque es usado en #{res.count} " \
+                  "resultado(s). "
+                params[:proyectofinanciero][:objetivopf_attributes][i]["_destroy"] = "false"
               end
             end
             if proyectofinanciero_params[:resultadopf_attributes]
               proyectofinanciero_params[:resultadopf_attributes].each do |i, r|
-                if r["_destroy"] == "true" && r[:id].to_i > 0
-                  indr = Cor1440Gen::Indicadorpf.where(
-                    resultadopf_id: r[:id].to_i)
-                  if indr.count > 0
-                    merr << "No se puede eliminar el resultado "\
-                      "'#{r[:id]}' porque es usado en #{indr.count} "\
-                      "indicador(es) de resultado. "
-                    params[:proyectofinanciero][:resultadopf_attributes][i]["_destroy"] = "false"
-                  end
-                  ac = Cor1440Gen::Actividadpf.where(
-                    resultadopf_id: r[:id].to_i)
-                  if ac.count > 0
-                    merr << "No se puede eliminar el resultado "\
-                      "'#{r[:id]}' porque es usado en #{ac.count} "\
-                      "actividad(es). "
-                    params[:proyectofinanciero][:resultadopf_attributes][i]["_destroy"] = "false"
-                  end
+                next unless r["_destroy"] == "true" && r[:id].to_i > 0
+
+                indr = Cor1440Gen::Indicadorpf.where(
+                  resultadopf_id: r[:id].to_i,
+                )
+                if indr.count > 0
+                  merr << "No se puede eliminar el resultado " \
+                    "'#{r[:id]}' porque es usado en #{indr.count} " \
+                    "indicador(es) de resultado. "
+                  params[:proyectofinanciero][:resultadopf_attributes][i]["_destroy"] = "false"
                 end
+                ac = Cor1440Gen::Actividadpf.where(
+                  resultadopf_id: r[:id].to_i,
+                )
+                next unless ac.count > 0
+
+                merr << "No se puede eliminar el resultado " \
+                  "'#{r[:id]}' porque es usado en #{ac.count} " \
+                  "actividad(es). "
+                params[:proyectofinanciero][:resultadopf_attributes][i]["_destroy"] = "false"
               end
             end
             if merr.length > 0
@@ -174,7 +178,6 @@ module Cor1440Gen
             "M"
           end
 
-
           def index_cor1440_gen(c = nil)
             c = Cor1440Gen::ProyectosfinancierosController.disponibles(
               params, current_ability, c
@@ -184,16 +187,14 @@ module Cor1440Gen
                 cannot?(:index, Cor1440Gen::Proyectofinanciero)
               flash[:error] = "No se puede acceder a #{clase}"
               redirect_to(main_app.root_path)
-              return
+              nil
             end
           end
 
-
           def index(c = nil)
             index_cor1440_gen(c)
-            super(c)
+            super
           end
-
 
           # API JSON, dado un conjunto de proyectosfinancieros
           # responde con las actividadespf de sus marcos lógicos
@@ -254,7 +255,6 @@ module Cor1440Gen
               end
             end
           end
-
 
           def copia
             if !params || !params[:proyectofinanciero_id]
@@ -369,26 +369,26 @@ module Cor1440Gen
           # (cuando había un usuario del equipo de trabajo 2 veces
           # y se eliminaba el segundo, seguía presentando error de validación).
           def validaciones(registro)
-            return true
-#            @validaciones_error = "".dup
-#            fus = []
-#            if params && params[:proyectofinanciero] && params[:proyectofinanciero][:proyectofinanciero_usuario_attributes]
-#              params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |_l, v|
-#                if v[:_destroy] != "true" && v[:_destroy] != "1"
-#                  if v[:usuario_id] != "" && fus.include?(v[:usuario_id].to_i)
-#                    @validaciones_error << "El usuario "\
-#                      "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
-#                      "está repetido en el equipo de trabajo"
-#                  else
-#                    fus << v[:usuario_id].to_i
-#                  end
-#                end
-#              end
-#            end
-#            if @validaciones_error != ""
-#              flash[:error] = @validaciones_error
-#            end
-#            @validaciones_error == ""
+            true
+            #            @validaciones_error = "".dup
+            #            fus = []
+            #            if params && params[:proyectofinanciero] && params[:proyectofinanciero][:proyectofinanciero_usuario_attributes]
+            #              params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |_l, v|
+            #                if v[:_destroy] != "true" && v[:_destroy] != "1"
+            #                  if v[:usuario_id] != "" && fus.include?(v[:usuario_id].to_i)
+            #                    @validaciones_error << "El usuario "\
+            #                      "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
+            #                      "está repetido en el equipo de trabajo"
+            #                  else
+            #                    fus << v[:usuario_id].to_i
+            #                  end
+            #                end
+            #              end
+            #            end
+            #            if @validaciones_error != ""
+            #              flash[:error] = @validaciones_error
+            #            end
+            #            @validaciones_error == ""
           end
 
           def new_cor1440_gen
