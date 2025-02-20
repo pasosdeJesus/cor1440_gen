@@ -4,9 +4,6 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import Msip__BitacoraapController from "./msip/bitacoraap_controller"
 application.register("msip--bitacoraap", Msip__BitacoraapController)
 
