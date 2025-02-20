@@ -9,6 +9,7 @@ module Cor1440Gen
 
     def test_verifica_formulario
       skip
+
       assert_select("input#informe_filtrofechaini[name=?]", "informe[filtrofechaini]")
       assert_select("input#informe_filtrofechafin[name=?]", "informe[filtrofechafin]")
 
@@ -73,8 +74,8 @@ module Cor1440Gen
 
       assert_response :success
       # puts @response.body
-      assert_select "h2", text: "Recomendaciones".to_s
-      assert_select "pre", text: "Recomendaciones".to_s
+      assert_select "h2", text: "Recomendaciones"
+      assert_select "pre", text: "Recomendaciones"
     end
 
     test "should get edit" do
