@@ -16,7 +16,6 @@
         id: "agregar-actividad-proyectofinanciero"
       %>
     <% end %>
-
     <%= turbo_stream.append "actividad_proyectosfinancieros_marco" do %>
       <%= render "/cor1440_gen/actividades/actividad_proyectofinanciero_campos",
         f: subf, ac: f %>

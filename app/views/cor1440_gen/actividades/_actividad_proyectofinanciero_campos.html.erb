@@ -1,5 +1,8 @@
 <%= turbo_frame_tag "actividad_proyectofinanciero_#{f.index}", 
-  class: 'div-tabla-fila nested-fields' do %>
+  class: 'div-tabla-fila nested-fields',
+  data: {
+    "cor1440-gen--acfechapf-target": "pf"
+  } do %>
   <% if f.object.proyectofinanciero.nil? %>
     <% f.object.proyectofinanciero = Cor1440Gen::Proyectofinanciero.new %>
   <% end %>
@@ -12,7 +15,7 @@
     {fecha: fr}, current_ability) %>
   <% ids1 = lp1.pluck(:id) %>
   <% ids2 = [] %>
-  <% if params && params[:actividad] %>
+  <% if params && params[:actividad] && params[:actividad][:actividad_proyectofinanciero_attributes] %>
     <% params[:actividad][:actividad_proyectofinanciero_attributes].each do |l, v| %>
       <% ids2 << v[:id] %>
     <% end %>

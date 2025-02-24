@@ -22,9 +22,8 @@ module Cor1440Gen
               id: params[:actividad][:id].to_i,
             )
             if @actividad.actividad_proyectofinanciero.length == 0
-              @actividad.actividad_proyectofinanciero = [
-                Cor1440Gen::ActividadProyectofinanciero.new,
-              ]
+              ap = Cor1440Gen::ActividadProyectofinanciero.new
+              @actividad.actividad_proyectofinanciero << ap
             end
           end
         end # included

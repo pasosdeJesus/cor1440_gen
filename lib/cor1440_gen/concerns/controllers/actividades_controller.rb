@@ -109,7 +109,7 @@ module Cor1440Gen
           end
 
           def atributos_html_encabezado_formulario
-            { "data-controller": "msip--cancelar-vacio-es-eliminar" }
+            { "data-controller": "msip--cancelar-vacio-es-eliminar cor1440-gen--acfechapf" }
           end
 
           # Responde a GET /actividades/new
