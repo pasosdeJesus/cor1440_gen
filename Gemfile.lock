@@ -18,10 +18,10 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 0e9932f40ee78bcc3fbd0e4f2a80fe82c5014b22
+  revision: 6e27d9f1be410f75de2fbf3e13ee8adfa4317b42
   branch: v2.2
   specs:
-    heb412_gen (2.2.0.beta7)
+    heb412_gen (2.2.0.beta8)
       mr519_gen
       msip
       redcarpet
@@ -29,19 +29,19 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: 209505491a65c878c9ad6cc8742f39fdab2a815b
+  revision: 57b38baf475a470dc4007209a732ad047ca33020
   branch: v2.2
   specs:
-    mr519_gen (2.2.0.beta7)
+    mr519_gen (2.2.0.beta8)
       msip
       rails
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: 3dbae72aa3ba928dcefd67b49fee715f82e68389
+  revision: 3557b3821081df9f6de79db1825bdcd5351b655c
   branch: v2.2
   specs:
-    msip (2.2.0.beta7)
+    msip (2.2.0.beta8)
       cancancan (~> 3)
       devise (~> 4)
       devise-i18n (~> 1)
@@ -59,7 +59,7 @@ GIT
 PATH
   remote: .
   specs:
-    cor1440_gen (2.2.0.beta7)
+    cor1440_gen (2.2.0.beta8)
       devise
       heb412_gen
       kt-paperclip
@@ -204,8 +204,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-i18n (1.12.1)
+    devise-i18n (1.13.0)
       devise (>= 4.9.0)
+      rails-i18n
     docile (1.4.1)
     dotenv (3.1.7)
     dotenv-rails (3.1.7)
@@ -265,7 +266,7 @@ GEM
     mime-types-data (3.2025.0204)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    minitest (5.25.4)
+    minitest (5.25.5)
     minitest-reporters (1.7.1)
       ansi
       builder
@@ -282,24 +283,24 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.3)
+    nokogiri (1.18.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.18.3-aarch64-linux-gnu)
+    nokogiri (1.18.4-aarch64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.3-aarch64-linux-musl)
+    nokogiri (1.18.4-aarch64-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.3-arm-linux-gnu)
+    nokogiri (1.18.4-arm-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.3-arm-linux-musl)
+    nokogiri (1.18.4-arm-linux-musl)
       racc (~> 1.4)
-    nokogiri (1.18.3-arm64-darwin)
+    nokogiri (1.18.4-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.3-x86_64-darwin)
+    nokogiri (1.18.4-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.18.3-x86_64-linux-gnu)
+    nokogiri (1.18.4-x86_64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.18.3-x86_64-linux-musl)
+    nokogiri (1.18.4-x86_64-linux-musl)
       racc (~> 1.4)
     odf-report (0.8.1)
       mime-types
@@ -413,14 +414,14 @@ GEM
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1, < 2.0)
       rubocop-ast (>= 1.38.0, < 2.0)
-    rubocop-rails (2.30.2)
+    rubocop-rails (2.30.3)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
       rack (>= 1.1)
       rubocop (>= 1.72.1, < 2.0)
       rubocop-ast (>= 1.38.0, < 2.0)
-    rubocop-shopify (2.15.1)
-      rubocop (~> 1.51)
+    rubocop-shopify (2.16.0)
+      rubocop (~> 1.62)
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.13.0)
@@ -460,9 +461,9 @@ GEM
     timeout (0.4.3)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
-    turbo-rails (2.0.11)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
+    turbo-rails (2.0.13)
+      actionpack (>= 7.1.0)
+      railties (>= 7.1.0)
     twitter_cldr (6.14.0)
       base64
       camertron-eprun
@@ -565,4 +566,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.6.5
+   2.6.6
