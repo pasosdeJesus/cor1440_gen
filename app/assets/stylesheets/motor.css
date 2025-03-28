@@ -14,6 +14,9 @@
  *= require_tree .
  */
 
+@import 'mindicadorespf.css'
+@import 'varios.css'
+
 .pagination {
 	text-align: center;
 }
