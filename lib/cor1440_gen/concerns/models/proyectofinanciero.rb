@@ -462,8 +462,8 @@ module Cor1440Gen
                   case campo
                   when "refresultado"
                     ref = actividad.resultadopf
-                    return ref && ref.numero && ref.objetivo && 
-                      ref.objetivo.numero ? 
+                    return ref && ref.numero && ref.objetivopf && 
+                      ref.objetivopf.numero ? 
                       ref.numero + ref.objetivopf.numero : ""
                   when "codigo"
                     return actividad.nombrecorto ? actividad.nombrecorto : ""
