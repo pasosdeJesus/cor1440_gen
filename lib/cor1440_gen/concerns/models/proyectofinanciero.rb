@@ -462,7 +462,9 @@ module Cor1440Gen
                   case campo
                   when "refresultado"
                     ref = actividad.resultadopf
-                    return ref ? ref.numero + ref.objetivopf.numero : ""
+                    return ref && ref.numero && ref.objetivo && 
+                      ref.objetivo.numero ? 
+                      ref.numero + ref.objetivopf.numero : ""
                   when "codigo"
                     return actividad.nombrecorto ? actividad.nombrecorto : ""
                   when "tipo"
@@ -541,7 +543,23 @@ module Cor1440Gen
                 :indicadorgifmm_id,
               )
               actividades = acts.map do |act|
-                (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).objetivopf.numero : "") + (act[0] ? Cor1440Gen::Resultadopf.find(act[0]).numero : "") + ": " + (act[1] ? act[1] : "") + ", " + (act[2] ? Cor1440Gen::Actividadtipo.find(act[2]).nombre : "") + ", " + (act[3] ? act[3] : "") + ", " + (act[4] ? act[4] : "") + ", " + (act[5] ? Indicadorgifmm.find(act[5]).nombre : "")
+                rpf = act[0] ? Cor1440Gen::Resultadopf.find(act[0]) : nil
+                res = rpf && rpf.objetivopf && rpf.objetivopf.numero ? 
+                  rpf.objetivopf.numero : ""
+                res += rpf && rpf.numero ? 
+                  rpf.numero : ""
+                res += ": " 
+                res += act[1] ? act[1] : ""
+                res += ", " 
+                res += act[2] ? 
+                  Cor1440Gen::Actividadtipo.find(act[2]).nombre : ""
+                res += ", "
+                res += act[3] ? act[3] : ""
+                res += ", "
+                res += act[4] ? act[4] : ""
+                res += ", "
+                res += act[5] ? Indicadorgifmm.find(act[5]).nombre : ""
+                res
               end.join(". ")
             else
               presenta_gen(atr)
