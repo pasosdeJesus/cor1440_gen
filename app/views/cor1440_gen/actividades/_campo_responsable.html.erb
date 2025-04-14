@@ -1,5 +1,5 @@
 <% # Usuarios activos en el tiempo de la actividad %>
-<% condr = "" %>
+<% condr = "".dup %>
 <% if f.object && f.object.fecha && f.object.fecha.to_s != '' %>
   <% condr << "(fechacreacion <= '#{f.object.fecha}'" %>
   <% condr << " AND (fechadeshabilitacion IS NULL OR " +

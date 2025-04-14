@@ -37,6 +37,7 @@ module Cor1440Gen
     end
 
     setup do
+      Rails.application.try(:reload_routes_unless_loaded)
       Rails.application.config.x.formato_fecha = "yyyy-mm-dd"
       @informe = Informe.create(PRUEBA_INFORME)
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO)

@@ -9,6 +9,7 @@ module Cor1440Gen
     include Devise::Test::IntegrationHelpers
 
     setup do
+      Rails.application.try(:reload_routes_unless_loaded)
       Rails.application.config.x.formato_fecha = "yyyy-mm-dd"
       @proyectofinanciero = Proyectofinanciero.create(PRUEBA_PROYECTOFINANCIERO)
       @current_usuario = ::Usuario.create(PRUEBA_USUARIO)
