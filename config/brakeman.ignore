@@ -3,21 +3,44 @@
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
-      "fingerprint": "06150a8496df4effe2501b02cb13e451cd13730775c1db6515b37a6f23581249",
+      "fingerprint": "085404aa080db3fc1f3196f723a51d8520a34240dde4c84383ea6150371caa5e",
       "check_name": "SQL",
       "message": "Possible SQL injection",
-      "file": "app/controllers/cor1440_gen/efectos_controller.rb",
-      "line": 108,
+      "file": "lib/cor1440_gen/concerns/controllers/actividades_controller.rb",
+      "line": 878,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::EfectoRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_efecto_respuestafor\\n                        WHERE efecto_id=#{efecto.id} \\n                        AND respuestafor_id IN (#{(Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}\"})\") or Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id)).map(&:respuestafor_id).join(\", \")})\")",
+      "code": "Cor1440Gen::Asistencia.connection.execute(\"              #{ini_asistencia_ram((filtra_contarb_actividad_por_parametros(Cor1440Gen::Actividad.all.where(\"cor1440_gen_actividad.id IN\\n                (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero\\n                  WHERE proyectofinanciero_id=?)\", (params[:filtro][:proyectofinanciero_id].to_i or nil)).where(\"cor1440_gen_actividad.id IN\\n                (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)\").where(\"cor1440_gen_actividad.fecha >= ?\", (Msip::FormatoFechaHelper.inicio_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechaini\"]))).where(\"cor1440_gen_actividad.fecha <= ?\", (Msip::FormatoFechaHelper.fin_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechafin\"])))).pluck(:id).join(\",\") or \"0\"))}\\n              #{(((\"\" + (\" AND \" + \"persona_id = #{params[:filtro][\"buspersona_id\"].to_i}\")) + (\" AND \" + \"persona_sexo = '#{params[:filtro][\"bussexo\"].to_sym}'\")) + (\" AND \" + \"rangoedadac_id = '#{params[:filtro][\"busrangoedadac_id\"].to_i}'\"))}\\n\")",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Cor1440Gen::EfectosController",
-        "method": "asegura_camposdinamicos"
+        "class": "Cor1440Gen::Concerns::Controllers::ActividadesController",
+        "method": "contar_beneficiarios"
       },
-      "user_input": "Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor)",
+      "user_input": "params[:filtro][\"fechafin\"]",
       "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "11a5c66d3bbee81760223b916fdbffe62132504bba429be6fac898bfe354a317",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/cor1440_gen/actividades_controller.rb",
+      "line": 136,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"                DELETE FROM cor1440_gen_actividad_respuestafor \\n                WHERE actividad_id=#{@registro.id};\\n                DELETE FROM mr519_gen_valorcampo \\n                WHERE respuestafor_id IN (#{@registro.respuestafor_ids.join(\",\")});\\n                DELETE FROM mr519_gen_respuestafor \\n                WHERE id IN (#{@registro.respuestafor_ids.join(\",\")});\\n\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Cor1440Gen::ActividadesController",
+        "method": "destroy_cor1440_gen"
+      },
+      "user_input": "@registro.respuestafor_ids.join(\",\")",
+      "confidence": "Medium",
       "cwe_id": [
         89
       ],
@@ -30,7 +53,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "lib/cor1440_gen/concerns/controllers/mindicadorespf_controller.rb",
-      "line": 315,
+      "line": 329,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "Cor1440Gen::Actividad.connection.execute(\"SELECT COUNT(DISTINCT orgsocial_id) FROM cor1440_gen_actividad_orgsocial WHERE actividad_id IN (#{idacs.join(\",\")})\")",
       "render_path": null,
@@ -49,105 +72,13 @@
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
-      "fingerprint": "33e13fadd58cc04608533f2c87759a3a445f22aedd6a70d44bf9c69e971c6138",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/controllers/cor1440_gen/actividades_controller.rb",
-      "line": 291,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_actividad_respuestafor\\n                        WHERE actividad_id=#{actividad.id} \\n                        AND respuestafor_id IN (#{(Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}, #{apf.heredade.formulario.id}\"})\") or Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id)).map(&:respuestafor_id).join(\", \")})\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Cor1440Gen::ActividadesController",
-        "method": "asegura_camposdinamicos"
-      },
-      "user_input": "Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id).joins(:respuestafor)",
-      "confidence": "High",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "4dc22fbed9aa6726b509c0b8d137c66819ff05e945057263f2005c02f9284ebd",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/controllers/cor1440_gen/mindicadorespf_controller.rb",
-      "line": 315,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::Actividad.connection.execute(\"SELECT COUNT(DISTINCT orgsocial_id) FROM cor1440_gen_actividad_orgsocial WHERE actividad_id IN (#{idacs.join(\",\")})\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Cor1440Gen::MindicadorespfController",
-        "method": "medir_indicador_res_tipo_6"
-      },
-      "user_input": "idacs.join(\",\")",
-      "confidence": "Medium",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "4dc22fbed9aa6726b509c0b8d137c66819ff05e945057263f2005c02f9284ebd",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/controllers/cor1440_gen/mindicadorespf_controller.rb",
-      "line": 317,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::Actividad.connection.execute(\"SELECT COUNT(DISTINCT orgsocial_id) FROM cor1440_gen_actividad_orgsocial WHERE actividad_id IN (#{idacs.join(\",\")})\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Cor1440Gen::MindicadorespfController",
-        "method": "medir_indicador_res_tipo_6"
-      },
-      "user_input": "idacs.join(\",\")",
-      "confidence": "Medium",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "52bea6f5baf8ecb371bbc6b0c92efcc6c09d80b8cfd35a00957c54615534264b",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/controllers/cor1440_gen/actividades_controller.rb",
-      "line": 794,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::Asistencia.connection.execute(\"              #{ini_asistencia_ram((filtra_contarb_actividad_por_parametros(Cor1440Gen::Actividad.all.where(\"cor1440_gen_actividad.id IN \\n                (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero\\n                  WHERE proyectofinanciero_id=?)\", (params[:filtro][:proyectofinanciero_id].to_i or nil)).where(\"cor1440_gen_actividad.id IN \\n                (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)\").where(\"cor1440_gen_actividad.fecha >= ?\", (Msip::FormatoFechaHelper.inicio_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechaini\"]))).where(\"cor1440_gen_actividad.fecha <= ?\", (Msip::FormatoFechaHelper.fin_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechafin\"])))).pluck(:id).join(\",\") or \"0\"))}\\n              #{(((\"\" + (\" AND \" + \"persona_id = #{params[:filtro][\"buspersona_id\"].to_i}\")) + (\" AND \" + \"persona_sexo = '#{params[:filtro][\"bussexo\"]}'\")) + (\" AND \" + \"rangoedadac_id = '#{params[:filtro][\"busrangoedadac_id\"]}'\"))}\\n\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Cor1440Gen::ActividadesController",
-        "method": "contar_beneficiarios"
-      },
-      "user_input": "params[:filtro][\"fechafin\"]",
-      "confidence": "High",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "56a3960f75def5ca92b76bb06a0af0b6c792eabdfc3edb7d10d7801ad1f5e596",
+      "fingerprint": "15bcac4270cff9e5c71ab51e14ccee10de4b8160e4eee6988addb68eec758ab6",
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "lib/cor1440_gen/concerns/controllers/actividades_controller.rb",
-      "line": 291,
+      "line": 307,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_actividad_respuestafor\\n                        WHERE actividad_id=#{actividad.id} \\n                        AND respuestafor_id IN (#{(Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}, #{apf.heredade.formulario.id}\"})\") or Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id)).map(&:respuestafor_id).join(\", \")})\")",
+      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_actividad_respuestafor\\n                        WHERE actividad_id=#{actividad.id}\\n                        AND respuestafor_id IN (#{(Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}, #{apf.heredade.formulario.id}\"})\") or Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id)).map(&:respuestafor_id).join(\", \")})\")",
       "render_path": null,
       "location": {
         "type": "method",
@@ -162,13 +93,128 @@
       "note": ""
     },
     {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "280a363ac5740cb81f07626cc38b7089d45ce275cd3064686231d0ae978b93bb",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "lib/cor1440_gen/concerns/controllers/efectos_controller.rb",
+      "line": 110,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Cor1440Gen::EfectoRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_efecto_respuestafor\\n                        WHERE efecto_id=#{efecto.id}\\n                        AND respuestafor_id IN (#{(Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}\"})\") or Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id)).map(&:respuestafor_id).join(\", \")})\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Cor1440Gen::Concerns::Controllers::EfectosController",
+        "method": "asegura_camposdinamicos"
+      },
+      "user_input": "Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor)",
+      "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "4dc22fbed9aa6726b509c0b8d137c66819ff05e945057263f2005c02f9284ebd",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/cor1440_gen/mindicadorespf_controller.rb",
+      "line": 329,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Cor1440Gen::Actividad.connection.execute(\"SELECT COUNT(DISTINCT orgsocial_id) FROM cor1440_gen_actividad_orgsocial WHERE actividad_id IN (#{idacs.join(\",\")})\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Cor1440Gen::MindicadorespfController",
+        "method": "medir_indicador_res_tipo_6"
+      },
+      "user_input": "idacs.join(\",\")",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "4dc22fbed9aa6726b509c0b8d137c66819ff05e945057263f2005c02f9284ebd",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/cor1440_gen/mindicadorespf_controller.rb",
+      "line": 332,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Cor1440Gen::Actividad.connection.execute(\"SELECT COUNT(DISTINCT orgsocial_id) FROM cor1440_gen_actividad_orgsocial WHERE actividad_id IN (#{idacs.join(\",\")})\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Cor1440Gen::MindicadorespfController",
+        "method": "medir_indicador_res_tipo_6"
+      },
+      "user_input": "idacs.join(\",\")",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "568cbb41368bf623ac4fb0bd1bbc89808adc5da62eecc6a42b5b2cb623600ca8",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/cor1440_gen/efectos_controller.rb",
+      "line": 110,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Cor1440Gen::EfectoRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_efecto_respuestafor\\n                        WHERE efecto_id=#{efecto.id}\\n                        AND respuestafor_id IN (#{(Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}\"})\") or Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id)).map(&:respuestafor_id).join(\", \")})\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Cor1440Gen::EfectosController",
+        "method": "asegura_camposdinamicos"
+      },
+      "user_input": "Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor)",
+      "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "64ea7e17418a6bc5510c1bd6bbaea7fb29208db33f378cc84577f2466df3ba99",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "lib/cor1440_gen/concerns/controllers/actividades_controller.rb",
+      "line": 136,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"                DELETE FROM cor1440_gen_actividad_respuestafor \\n                WHERE actividad_id=#{@registro.id};\\n                DELETE FROM mr519_gen_valorcampo \\n                WHERE respuestafor_id IN (#{@registro.respuestafor_ids.join(\",\")});\\n                DELETE FROM mr519_gen_respuestafor \\n                WHERE id IN (#{@registro.respuestafor_ids.join(\",\")});\\n\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Cor1440Gen::Concerns::Controllers::ActividadesController",
+        "method": "destroy_cor1440_gen"
+      },
+      "user_input": "@registro.respuestafor_ids.join(\",\")",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Cross-Site Scripting",
       "warning_code": 84,
       "fingerprint": "694e496d375792ef7447771de7a5b0c433a3172c6d06cf5ec37881a7fc42f4f5",
       "check_name": "RenderInline",
       "message": "Unescaped model attribute rendered inline",
       "file": "app/controllers/cor1440_gen/proyectosfinancieros_controller.rb",
-      "line": 183,
+      "line": 251,
       "link": "https://brakemanscanner.org/docs/warning_types/cross-site_scripting/",
       "code": "render(inline => Cor1440Gen::Objetivopf.where(:proyectofinanciero_id => ([pf.to_i])).all.errors, { :status => :unprocessable_entity })",
       "render_path": null,
@@ -181,6 +227,29 @@
       "confidence": "Medium",
       "cwe_id": [
         79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "6ee144e402f701baef3ebad607c0f62589ab1a08343bccb4f8fcdd5ea0860327",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/controllers/cor1440_gen/actividades_controller.rb",
+      "line": 307,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_actividad_respuestafor\\n                        WHERE actividad_id=#{actividad.id}\\n                        AND respuestafor_id IN (#{(Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}, #{apf.heredade.formulario.id}\"})\") or Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id)).map(&:respuestafor_id).join(\", \")})\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Cor1440Gen::ActividadesController",
+        "method": "asegura_camposdinamicos"
+      },
+      "user_input": "Cor1440Gen::ActividadRespuestafor.where(:actividad_id => actividad.id).joins(:respuestafor)",
+      "confidence": "High",
+      "cwe_id": [
+        89
       ],
       "note": ""
     },
@@ -213,7 +282,7 @@
       "check_name": "RenderInline",
       "message": "Unescaped model attribute rendered inline",
       "file": "app/controllers/cor1440_gen/proyectosfinancieros_controller.rb",
-      "line": 155,
+      "line": 221,
       "link": "https://brakemanscanner.org/docs/warning_types/cross-site_scripting/",
       "code": "render(inline => Cor1440Gen::Actividadpf.where(:proyectofinanciero_id => ([pf.to_i])).all.errors, { :status => :unprocessable_entity })",
       "render_path": null,
@@ -252,88 +321,43 @@
       "note": ""
     },
     {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "aeb6a3cc5035a561ac09b7258fd0f29dcda1e332f0edc587e9e3808f0ba4d2cf",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "lib/cor1440_gen/concerns/controllers/actividades_controller.rb",
-      "line": 122,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"                DELETE FROM cor1440_gen_actividad_respuestafor \\n                WHERE actividad_id=#{@registro.id};\\n                DELETE FROM mr519_gen_valorcampo \\n                WHERE respuestafor_id IN (#{@registro.respuestafor_ids.join(\",\")});\\n                DELETE FROM mr519_gen_respuestafor \\n                WHERE id IN (#{@registro.respuestafor_ids.join(\",\")});\\n\")",
+      "warning_type": "Dangerous Eval",
+      "warning_code": 13,
+      "fingerprint": "a50c9291612608118284fd713c30f708b5bc448947ef9db2f0a74771c4400057",
+      "check_name": "Evaluation",
+      "message": "Dynamic code evaluation",
+      "file": "app/helpers/cor1440_gen/medicion_helper.rb",
+      "line": 352,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_eval/",
+      "code": "ExpMedT.new.apply(ExpMed.new.parse(e)).eval(contexto, menserror)",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Cor1440Gen::Concerns::Controllers::ActividadesController",
-        "method": "destroy_cor1440_gen"
+        "class": "Cor1440Gen::MedicionHelper",
+        "method": "evalua_expresion_medicion"
       },
-      "user_input": "@registro.respuestafor_ids.join(\",\")",
-      "confidence": "Medium",
+      "user_input": null,
+      "confidence": "Weak",
       "cwe_id": [
-        89
+        913,
+        95
       ],
       "note": ""
     },
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
-      "fingerprint": "bad5aa3c7ebe1fa854525b9cc5ed507bdfe5afff5a25d18eb26a1613d5f2633a",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "lib/cor1440_gen/concerns/controllers/efectos_controller.rb",
-      "line": 108,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::EfectoRespuestafor.connection.execute(\"DELETE FROM cor1440_gen_efecto_respuestafor\\n                        WHERE efecto_id=#{efecto.id} \\n                        AND respuestafor_id IN (#{(Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor).where(\"formulario_id NOT IN (#{\"#{f.id}\"})\") or Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id)).map(&:respuestafor_id).join(\", \")})\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Cor1440Gen::Concerns::Controllers::EfectosController",
-        "method": "asegura_camposdinamicos"
-      },
-      "user_input": "Cor1440Gen::EfectoRespuestafor.where(:efecto_id => efecto.id).joins(:respuestafor)",
-      "confidence": "High",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "e15f289cbf639d25abb4793e39e66ded085d458882a04c3bce5b01d87cf73561",
+      "fingerprint": "ce7a075b380c473e4a6ada71e738bf9eb8487389cd1a6ea1dffea52f2b1f4853",
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/controllers/cor1440_gen/actividades_controller.rb",
-      "line": 122,
+      "line": 878,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::ActividadRespuestafor.connection.execute(\"                DELETE FROM cor1440_gen_actividad_respuestafor \\n                WHERE actividad_id=#{@registro.id};\\n                DELETE FROM mr519_gen_valorcampo \\n                WHERE respuestafor_id IN (#{@registro.respuestafor_ids.join(\",\")});\\n                DELETE FROM mr519_gen_respuestafor \\n                WHERE id IN (#{@registro.respuestafor_ids.join(\",\")});\\n\")",
+      "code": "Cor1440Gen::Asistencia.connection.execute(\"              #{ini_asistencia_ram((filtra_contarb_actividad_por_parametros(Cor1440Gen::Actividad.all.where(\"cor1440_gen_actividad.id IN\\n                (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero\\n                  WHERE proyectofinanciero_id=?)\", (params[:filtro][:proyectofinanciero_id].to_i or nil)).where(\"cor1440_gen_actividad.id IN\\n                (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)\").where(\"cor1440_gen_actividad.fecha >= ?\", (Msip::FormatoFechaHelper.inicio_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechaini\"]))).where(\"cor1440_gen_actividad.fecha <= ?\", (Msip::FormatoFechaHelper.fin_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechafin\"])))).pluck(:id).join(\",\") or \"0\"))}\\n              #{(((\"\" + (\" AND \" + \"persona_id = #{params[:filtro][\"buspersona_id\"].to_i}\")) + (\" AND \" + \"persona_sexo = '#{params[:filtro][\"bussexo\"].to_sym}'\")) + (\" AND \" + \"rangoedadac_id = '#{params[:filtro][\"busrangoedadac_id\"].to_i}'\"))}\\n\")",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "Cor1440Gen::ActividadesController",
-        "method": "destroy_cor1440_gen"
-      },
-      "user_input": "@registro.respuestafor_ids.join(\",\")",
-      "confidence": "Medium",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "f8b5eac6671f78d3e0871306adfb2c61f9df88f7b6c37715a7a068c5674e5cef",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "lib/cor1440_gen/concerns/controllers/actividades_controller.rb",
-      "line": 794,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Cor1440Gen::Asistencia.connection.execute(\"              #{ini_asistencia_ram((filtra_contarb_actividad_por_parametros(Cor1440Gen::Actividad.all.where(\"cor1440_gen_actividad.id IN \\n                (SELECT actividad_id FROM cor1440_gen_actividad_proyectofinanciero\\n                  WHERE proyectofinanciero_id=?)\", (params[:filtro][:proyectofinanciero_id].to_i or nil)).where(\"cor1440_gen_actividad.id IN \\n                (SELECT actividad_id FROM cor1440_gen_actividad_actividadpf)\").where(\"cor1440_gen_actividad.fecha >= ?\", (Msip::FormatoFechaHelper.inicio_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechaini\"]))).where(\"cor1440_gen_actividad.fecha <= ?\", (Msip::FormatoFechaHelper.fin_semestre_ant or Msip::FormatoFechaHelper.fecha_local_estandar(params[:filtro][\"fechafin\"])))).pluck(:id).join(\",\") or \"0\"))}\\n              #{(((\"\" + (\" AND \" + \"persona_id = #{params[:filtro][\"buspersona_id\"].to_i}\")) + (\" AND \" + \"persona_sexo = '#{params[:filtro][\"bussexo\"]}'\")) + (\" AND \" + \"rangoedadac_id = '#{params[:filtro][\"busrangoedadac_id\"]}'\"))}\\n\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Cor1440Gen::Concerns::Controllers::ActividadesController",
         "method": "contar_beneficiarios"
       },
       "user_input": "params[:filtro][\"fechafin\"]",
@@ -344,6 +368,5 @@
       "note": ""
     }
   ],
-  "updated": "2023-01-10 09:33:33 -0500",
-  "brakeman_version": "5.4.0"
+  "brakeman_version": "7.0.2"
 }

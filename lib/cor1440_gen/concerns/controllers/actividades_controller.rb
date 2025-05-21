@@ -860,12 +860,12 @@ module Cor1440Gen
                   params[:filtro]["bussexo"].to_sym,
                 )
               mas_where_asistencia_ram += " AND " +
-                "persona_sexo = '#{params[:filtro]["bussexo"]}'"
+                "persona_sexo = '#{params[:filtro]["bussexo"].to_sym}'"
             end
             if params[:filtro] && params[:filtro]["busrangoedadac_id"] &&
                 params[:filtro]["busrangoedadac_id"] != ""
               mas_where_asistencia_ram += " AND " +
-                "rangoedadac_id = '#{params[:filtro]["busrangoedadac_id"]}'"
+                "rangoedadac_id = '#{params[:filtro]["busrangoedadac_id"].to_i}'"
             end
 
             lids = if @contarb_actividad.count > 0

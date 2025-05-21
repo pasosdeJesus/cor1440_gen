@@ -370,25 +370,25 @@ module Cor1440Gen
           # y se eliminaba el segundo, seguía presentando error de validación).
           def validaciones(registro)
             return true
-            @validaciones_error = "".dup
-            fus = []
-            if params && params[:proyectofinanciero] && params[:proyectofinanciero][:proyectofinanciero_usuario_attributes]
-              params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |_l, v|
-                if v[:_destroy] != "true" && v[:_destroy] != "1"
-                  if v[:usuario_id] != "" && fus.include?(v[:usuario_id].to_i)
-                    @validaciones_error << "El usuario "\
-                      "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
-                      "está repetido en el equipo de trabajo"
-                  else
-                    fus << v[:usuario_id].to_i
-                  end
-                end
-              end
-            end
-            if @validaciones_error != ""
-              flash[:error] = @validaciones_error
-            end
-            @validaciones_error == ""
+            #@validaciones_error = "".dup
+#            fus = []
+#            if params && params[:proyectofinanciero] && params[:proyectofinanciero][:proyectofinanciero_usuario_attributes]
+#              params[:proyectofinanciero][:proyectofinanciero_usuario_attributes].each do |_l, v|
+#                if v[:_destroy] != "true" && v[:_destroy] != "1"
+#                  if v[:usuario_id] != "" && fus.include?(v[:usuario_id].to_i)
+#                    @validaciones_error << "El usuario "\
+#                      "#{::Usuario.find(v[:usuario_id].to_i).nusuario} "\
+#                      "está repetido en el equipo de trabajo"
+#                  else
+#                    fus << v[:usuario_id].to_i
+#                  end
+#                end
+#              end
+#            end
+#            if @validaciones_error != ""
+#              flash[:error] = @validaciones_error
+#            end
+#            @validaciones_error == ""
           end
 
           def new_cor1440_gen
