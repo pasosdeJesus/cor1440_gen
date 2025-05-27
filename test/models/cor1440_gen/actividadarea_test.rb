@@ -24,7 +24,7 @@ module Cor1440Gen
     end
 
     test "existente" do
-      a = Cor1440Gen::Actividadarea.where(id: 9).take
+      a = Cor1440Gen::Actividadarea.find_by(id: 9)
 
       assert_equal "VOLUNTARIADO", a.nombre
     end

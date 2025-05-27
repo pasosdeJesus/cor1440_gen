@@ -54,7 +54,7 @@ module Cor1440Gen
                 menserror << "  No se encontró formulario con " +
                   "nombreinterno #{p[0]}."
               end
-              f = Mr519Gen::Formulario.where(nombreinterno: p[0]).take
+              f = Mr519Gen::Formulario.find_by(nombreinterno: p[0])
               # Imaginamos que por ahora no actualizamos sino sólo
               # creamos nuevos
               unless respuestafor[f.id]
@@ -87,7 +87,7 @@ module Cor1440Gen
                   menserror << "  En formulario #{f.id} no se encontró campo con nombre interno #{p[1]}."
                   next
                 end
-                campo = f.campo.where(nombreinterno: p[1]).take
+                campo = f.campo.find_by(nombreinterno: p[1])
 
                 unless valorcampo[f.id][campo.id]
                   valorcampo[f.id][campo.id] = Mr519Gen::Valorcampo.new(
@@ -105,7 +105,7 @@ module Cor1440Gen
                     elsif op.where(valor: p[2]).count > 1
                       menserror << "  En formulario #{f.id}, el campo con nombre interno #{p[1]} tiene más de una opción con valor #{p[2]}."
                     end
-                    ope = op.where(valor: p[2]).take
+                    ope = op.find_by(valor: p[2])
                     if datosent[ll].to_i != 1 && datosent[ll].to_i != 0
                       menserror << "  El valor #{datosent[ll]} para opcion " +
                         " #{p[1]} del formulario #{p[0]} (#{f.id}) debe ser " +
@@ -198,25 +198,22 @@ module Cor1440Gen
             end
           end
 
-
           scope :filtro_proyectofinanciero_ids, lambda { |p|
             joins(:proyectofinanciero)
               .where("cor1440_gen_proyectofinanciero.id=?", p)
           }
 
-
           def en_blanco?
-            self.nombres == 'N' &&
-              self.apellidos == 'N' &&
-              self.anionac.nil? &&
-              self.mesnac.nil? &&
-              self.dianac.nil? &&
-              self.pais_id.nil? &&
-              self.departamento_id.nil? &&
-              self.municipio_id.nil? &&
-              self.centropoblado_id.nil?
+            nombres == "N" &&
+              apellidos == "N" &&
+              anionac.nil? &&
+              mesnac.nil? &&
+              dianac.nil? &&
+              pais_id.nil? &&
+              departamento_id.nil? &&
+              municipio_id.nil? &&
+              centropoblado_id.nil?
           end
-
         end # included
       end
     end

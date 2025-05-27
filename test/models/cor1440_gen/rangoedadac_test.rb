@@ -24,7 +24,7 @@ module Cor1440Gen
     end
 
     test "existente" do
-      rangoedadac = Cor1440Gen::Rangoedadac.where(id: 6).take
+      rangoedadac = Cor1440Gen::Rangoedadac.find_by(id: 6)
 
       assert_equal "De 61 en adelante", rangoedadac.nombre
     end

@@ -7,7 +7,6 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-
           before_action :prepara_actividad
 
           def destroy
@@ -20,10 +19,9 @@ module Cor1440Gen
 
           def prepara_actividad
             @registro = @actividad = Cor1440Gen::Actividad.new(
-              asistencia: [Cor1440Gen::Asistencia.new]
+              asistencia: [Cor1440Gen::Asistencia.new],
             )
           end
-
         end # included
       end
     end

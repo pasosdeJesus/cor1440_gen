@@ -11,12 +11,12 @@ module Cor1440Gen
       personas = {}
       a.asistencia.each do |asist|
         if !asist.persona
-          merr = "Persona en NULL en asistencia #{asist.id} "\
+          merr = "Persona en NULL en asistencia #{asist.id} " \
             "de actividad #{a.id}"
           puts merr
           STDERR.puts merr
         elsif personas[asist.persona.id]
-          merr = "Persona #{asist.persona.id} repetida en "\
+          merr = "Persona #{asist.persona.id} repetida en " \
             "listado de asistencia de la actividad #{a.id}"
           puts merr
           STDERR.puts merr
@@ -74,7 +74,7 @@ module Cor1440Gen
         ts = 0
         if a.actividad_rangoedadac &&
             a.actividad_rangoedadac.where(rangoedadac_id: re.id).count > 0
-          are = a.actividad_rangoedadac.where(rangoedadac_id: re.id).take
+          are = a.actividad_rangoedadac.find_by(rangoedadac_id: re.id)
           tm = are.mr
           tf = are.fr
           ts = are.s
@@ -89,21 +89,21 @@ module Cor1440Gen
         end
 
         if tf != df
-          STDERR.puts "** Diferencia en actividad #{a.id}, "\
-            "rango de edad #{re.id}, sexo #{convF}. "\
+          STDERR.puts "** Diferencia en actividad #{a.id}, " \
+            "rango de edad #{re.id}, sexo #{convF}. " \
             "Tabla dice #{tf} y cuenta de asistentes da #{df}."
           numdif += 1
         end
         if tm != dm
-          STDERR.puts "** Diferencia en actividad #{a.id}, "\
-            "rango de edad #{re.id}, sexo #{convM}. "\
+          STDERR.puts "** Diferencia en actividad #{a.id}, " \
+            "rango de edad #{re.id}, sexo #{convM}. " \
             "Tabla dice #{tm} y cuenta de asistentes da #{dm}."
           numdif += 1
         end
         next unless ts != ds
 
-        STDERR.puts "** Diferencia en actividad #{a.id}, "\
-          "rango de edad #{re.id}, sexo #{convS}. "\
+        STDERR.puts "** Diferencia en actividad #{a.id}, " \
+          "rango de edad #{re.id}, sexo #{convS}. " \
           "Tabla dice #{ts} y cuenta de asistentes da #{ds}."
         numdif += 1
       end
@@ -121,7 +121,7 @@ module Cor1440Gen
     def cambia_actividad_rangoedadac(actividad, rangoedadac, f, m, s)
       acrs = Cor1440Gen::ActividadRangoedadac.where(actividad_id: actividad.id)
         .where(rangoedadac_id: rangoedadac.id)
-      STDERR.puts "Cambiando actividad_id: #{actividad.id}, "\
+      STDERR.puts "Cambiando actividad_id: #{actividad.id}, " \
         "rangoedadac_id: #{rangoedadac.id}, f: #{f}, m: #{m}, s: #{s}"
       if acrs.count > 0
         acr = acrs.take
@@ -164,7 +164,7 @@ module Cor1440Gen
         ts = 0
         if a.actividad_rangoedadac &&
             a.actividad_rangoedadac.where(rangoedadac_id: re.id).count > 0
-          are = a.actividad_rangoedadac.where(rangoedadac_id: re.id).take
+          are = a.actividad_rangoedadac.find_by(rangoedadac_id: re.id)
           tm = are.mr
           tf = are.fr
           ts = are.s
@@ -178,7 +178,7 @@ module Cor1440Gen
           ds = d[re.id][convS]
         end
 
-        pref = "* Cambiando tabla de población de actividad '#{a.id}', "\
+        pref = "* Cambiando tabla de población de actividad '#{a.id}', " \
           "fila con rango de edad '#{re.nombre}': "
 
         numdifpre = numdif
@@ -195,7 +195,7 @@ module Cor1440Gen
         if ts != ds
           numdif += 1
           resultado << "#{pref} #{convS} #{ts}->#{ds}"
-          pref = ", "
+          ", "
         end
         if (numdif - numdifpre) > 0
           cambia_actividad_rangoedadac(a, re, df, dm, ds)
@@ -206,7 +206,7 @@ module Cor1440Gen
         next unless a.actividad_rangoedadac &&
           a.actividad_rangoedadac.where(rangoedadac_id: re.id).count > 0
 
-        are = a.actividad_rangoedadac.where(rangoedadac_id: re.id).take
+        are = a.actividad_rangoedadac.find_by(rangoedadac_id: re.id)
         tm = are.mr
         tf = are.fr
         ts = are.s
@@ -395,7 +395,6 @@ module Cor1440Gen
     end
     module_function :recalcula_poblacion
 
-
     def instala_calculo_poblacion_pg
       ActiveRecord::Base.connection.execute(<<-SQL)
         -- Suponemos que cor1440_gen_rangoedadac es consistente
@@ -449,7 +448,7 @@ module Cor1440Gen
             RAISE NOTICE 'edad es %', edad;
             SELECT id INTO rango_id FROM cor1440_gen_rangoedadac WHERE
               fechadeshabilitacion IS NULL AND
-              limiteinferior <= edad AND 
+              limiteinferior <= edad AND#{" "}
                 (limitesuperior IS NULL OR edad <= limitesuperior) LIMIT 1;
             IF rango_id IS NULL THEN
               rango_id := 7;
@@ -514,8 +513,8 @@ module Cor1440Gen
         BEGIN
           ASSERT(TG_OP = 'UPDATE');
           ASSERT(NEW.id = OLD.id);
-          FOR aid IN 
-            SELECT actividad_id FROM cor1440_gen_asistencia 
+          FOR aid IN#{" "}
+            SELECT actividad_id FROM cor1440_gen_asistencia#{" "}
               WHERE persona_id=NEW.id
           LOOP
             CALL cor1440_gen_recalcular_poblacion_actividad(aid);
@@ -549,7 +548,7 @@ module Cor1440Gen
         ;
 
 
-       
+
       SQL
     end
     module_function :instala_calculo_poblacion_pg
@@ -564,15 +563,14 @@ module Cor1440Gen
           ON cor1440_gen_asistencia;
         DROP TRIGGER IF EXISTS cor1440_gen_recalcular_tras_cambiar_actividad
           ON cor1440_gen_tras_cambiar_actividad;
-        DROP FUNCTION IF EXISTS 
+        DROP FUNCTION IF EXISTS#{" "}
           cor1440_gen_asistencia_cambiada_creada_eliminada CASCADE;
         DROP FUNCTION IF EXISTS cor1440_gen_persona_cambiada CASCADE;
         DROP FUNCTION IF EXISTS cor1440_gen_actividad_cambiada CASCADE;
-        DROP PROCEDURE IF EXISTS cor1440_gen_recalcular_poblacion_actividad 
+        DROP PROCEDURE IF EXISTS cor1440_gen_recalcular_poblacion_actividad#{" "}
           CASCADE;
       SQL
     end
     module_function :desinstala_calculo_poblacion_pg
- 
   end
 end

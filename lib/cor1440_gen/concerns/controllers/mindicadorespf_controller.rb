@@ -249,12 +249,15 @@ module Cor1440Gen
           def medir_indicador_res_tipo_3(idacs, mind, fini, ffin)
             datosint = []
             mujeres = asistencia_por_sexo(
-              idacs, Msip::Persona::convecion_sexo[:sexo_femenino], false)
+              idacs, Msip::Persona.convecion_sexo[:sexo_femenino], false
+            )
             hombres = asistencia_por_sexo(
-              idacs, Msip::Persona::convecion_sexo[:sexo_masculino], false)
+              idacs, Msip::Persona.convecion_sexo[:sexo_masculino], false
+            )
             sinsexo = asistencia_por_sexo(
-              idacs, Msip::Persona::convecion_sexo[:sexo_sininformacion], false)
-            resind =  mujeres.count + hombres.count + sinsexo.count
+              idacs, Msip::Persona.convecion_sexo[:sexo_sininformacion], false
+            )
+            resind = mujeres.count + hombres.count + sinsexo.count
             datosint << { valor: mujeres.count, rutaevidencia: "#" }
             datosint << { valor: hombres.count, rutaevidencia: "#" }
             datosint << { valor: sinsexo.count, rutaevidencia: "#" }
@@ -283,12 +286,15 @@ module Cor1440Gen
           def medir_indicador_res_tipo_4(idacs, mind, fini, ffin)
             datosint = []
             mujeres = asistencia_por_sexo(
-              idacs, Msip::Persona::convecion_sexo[:sexo_femenino], true)
+              idacs, Msip::Persona.convecion_sexo[:sexo_femenino], true
+            )
             hombres = asistencia_por_sexo(
-              idacs, Msip::Persona::convecion_sexo[:sexo_masculino], true)
+              idacs, Msip::Persona.convecion_sexo[:sexo_masculino], true
+            )
             sinsexo = asistencia_por_sexo(
-              idacs, Msip::Persona::convecion_sexo[:sexo_sininformacion], true)
-            resind =  mujeres.count + hombres.count + sinsexo.count
+              idacs, Msip::Persona.convecion_sexo[:sexo_sininformacion], true
+            )
+            resind = mujeres.count + hombres.count + sinsexo.count
             datosint << { valor: mujeres.count, rutaevidencia: "#" }
             datosint << { valor: hombres.count, rutaevidencia: "#" }
             datosint << { valor: sinsexo.count, rutaevidencia: "#" }
@@ -324,8 +330,8 @@ module Cor1440Gen
             if idacs && idacs.count > 0
               puts "idacs=#{idacs.inspect}"
               r = Cor1440Gen::Actividad.connection.execute(
-                "SELECT COUNT(DISTINCT orgsocial_id) "\
-                  "FROM cor1440_gen_actividad_orgsocial "\
+                "SELECT COUNT(DISTINCT orgsocial_id) " \
+                  "FROM cor1440_gen_actividad_orgsocial " \
                   "WHERE actividad_id IN (#{idacs.join(",")})",
               ).count
             end
@@ -338,7 +344,6 @@ module Cor1440Gen
 
           # Mide indicador de resultado
           def medir_indicador_resultado(mind, ind, fini, ffin, resf)
-            idacs = []
             idacs = calcula_listado_ac(mind.actividadpf_ids, fini, ffin)
             if mind.funcionresultado.to_s != "" # Medir con esp de medicionindicadorpf
               contexto = {
@@ -404,7 +409,6 @@ module Cor1440Gen
 
           # Mide indicador de efecto
           def medir_indicador_efecto(mind, ind, fini, ffin, resf)
-            idefs = []
             idefs = Cor1440Gen::MindicadorespfController.calcula_listado_ef(
               mind.indicadorpf_id, fini, ffin
             )
@@ -418,13 +422,13 @@ module Cor1440Gen
 
               mind.datointermedioti.order(:id).each do |di|
                 if di.nombreinterno.nil?
-                  resf[:prob] = "Error: Falta nombre interno de dato "\
+                  resf[:prob] = "Error: Falta nombre interno de dato " \
                     "intermedio #{di.id}"
                   puts resf[:prob]
                   return resf
                 end
                 if di.nombreinterno.nil?
-                  resf[:prob] = "Error: Falta función de dato "\
+                  resf[:prob] = "Error: Falta función de dato " \
                     "intermedio #{di.id}"
                   puts resf[:prob]
                   return resf

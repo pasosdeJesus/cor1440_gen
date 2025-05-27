@@ -81,16 +81,19 @@ gem "will_paginate" # Pagina listados
 # lógico y no alfabetico como las gemas anteriores)
 
 gem "msip", # Motor generico
-  git: "https://gitlab.com/pasosdeJesus/msip.git", branch: 'v2.2'
-  # path: '../msip-2.2'
+  git: "https://gitlab.com/pasosdeJesus/msip.git",
+  branch: "v2.2"
+# path: '../msip-2.2'
 
 gem "mr519_gen", # Motor de gestion de formularios y encuestas
-  git: "https://gitlab.com/pasosdeJesus/mr519_gen.git", branch: 'v2.2'
-  # path: '../mr519_gen-2.2'
+  git: "https://gitlab.com/pasosdeJesus/mr519_gen.git",
+  branch: "v2.2"
+# path: '../mr519_gen-2.2'
 
 gem "heb412_gen", # Motor de nube y llenado de plantillas
-  git: "https://gitlab.com/pasosdeJesus/heb412_gen.git", branch: 'v2.2'
-  # path: '../heb412_gen-2.2'
+  git: "https://gitlab.com/pasosdeJesus/heb412_gen.git",
+  branch: "v2.2"
+# path: '../heb412_gen-2.2'
 
 group :development do
   gem "puma"

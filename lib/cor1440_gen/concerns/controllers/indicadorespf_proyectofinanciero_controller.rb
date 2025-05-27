@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cor1440Gen
   module Concerns
     module Controllers
@@ -5,7 +7,6 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-
           def create
           end
 
@@ -18,16 +19,14 @@ module Cor1440Gen
             @registro = @proyectofinanciero =
               Cor1440Gen::Proyectofinanciero.new(
                 indicadorpf: [
-                  Cor1440Gen::Indicadorpf.new
+                  Cor1440Gen::Indicadorpf.new,
                 ],
                 indicadorobjetivo: [
-                  Cor1440Gen::Indicadorpf.new
-                ]
+                  Cor1440Gen::Indicadorpf.new,
+                ],
               )
           end
-
         end # included
-
       end
     end
   end

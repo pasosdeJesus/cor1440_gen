@@ -3,11 +3,11 @@
 require "cor1440_gen/version"
 
 Msip.setup do |config|
-  config.ruta_anexos = "#{Rails.root}/archivos/anexos"
-  config.ruta_volcados = "#{Rails.root}/archivos/bd"
+  config.ruta_anexos = "#{Rails.root.join("archivos/anexos")}"
+  config.ruta_volcados = "#{Rails.root.join("archivos/bd")}"
   # En heroku los anexos son super-temporales
   unless ENV["HEROKU_POSTGRESQL_GREEN_URL"].nil?
-    config.ruta_anexos = "#{Rails.root}/tmp/"
+    config.ruta_anexos = "#{Rails.root.join("tmp/")}"
   end
   config.titulo = "Cor1440Gen " + Cor1440Gen::VERSION
 
@@ -15,7 +15,7 @@ Msip.setup do |config|
   config.codigofuente = "https://gitlab.com/pasosdeJesus/cor1440_gen"
   config.urlcontribuyentes = "https://gitlab.com/pasosdeJesus/cor1440_gen/graphs/contributors"
   config.urlcreditos = "https://gitlab.com/pasosdeJesus/cor1440_gen/blob/main/CREDITOS.md"
-  config.urllicencia= "https://gitlab.com/pasosdeJesus/cor1440_gen/blob/main/LICENCIA.md"
+  config.urllicencia = "https://gitlab.com/pasosdeJesus/cor1440_gen/blob/main/LICENCIA.md"
   config.agradecimientoDios = "<p>
 Agradecemos a Dios que es Dios de orden
 </p>

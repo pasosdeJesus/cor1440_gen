@@ -53,11 +53,13 @@ module Cor1440Gen
         efecto_id: e.id,
         orgsocial_id: orgsocial.id,
       )
+
       assert_predicate eo, :valid?
       ea = AnexoEfecto.create(
         efecto_id: e.id,
         anexo_id: anexo.id,
       )
+
       assert_predicate ea, :valid?
       e.destroy
       u.destroy

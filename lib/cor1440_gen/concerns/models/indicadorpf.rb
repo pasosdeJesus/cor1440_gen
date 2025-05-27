@@ -48,10 +48,10 @@ module Cor1440Gen
           validate :objetivo_xor_resultado
           def objetivo_xor_resultado
             if (objetivopf_id.nil? && resultadopf_id.nil?) ||
-              (!objetivopf_id.nil? && !resultadopf_id.nil?)
+                (!objetivopf_id.nil? && !resultadopf_id.nil?)
               errors.add(
-                :numero, 
-                "El indicador debe ser bien de resultado o bien de objetivo"
+                :numero,
+                "El indicador debe ser bien de resultado o bien de objetivo",
               )
             end
           end

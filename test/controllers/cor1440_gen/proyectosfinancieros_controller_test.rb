@@ -24,7 +24,7 @@ module Cor1440Gen
     test "debe presentar formulario para nuevo" do
       get new_proyectofinanciero_url
 
-      assert_response 302
+      assert_response :found
     end
 
     test "debe crear proyectofinanciero" do

@@ -7,7 +7,7 @@ module Cor1440Gen
     include Engine.routes.url_helpers
     include Devise::Test::IntegrationHelpers
 
-    def verifica_formulario
+    def test_verifica_formulario
       assert_select("input#informe_filtrofechaini[name=?]", "informe[filtrofechaini]")
       assert_select("input#informe_filtrofechafin[name=?]", "informe[filtrofechafin]")
 
@@ -33,7 +33,6 @@ module Cor1440Gen
 
       assert_select("#informe_dificultades[name=?]", "informe[dificultades]")
     end
-
 
     setup do
       Rails.application.config.x.formato_fecha = "yyyy-mm-dd"

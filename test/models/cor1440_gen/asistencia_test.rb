@@ -15,6 +15,7 @@ module Cor1440Gen
       assert_empty(actividad.rangoedadac_ids)
 
       persona = Msip::Persona.create(PRUEBA_PERSONA)
+
       assert persona.valid?
 
       asistencia = Asistencia.create(PRUEBA_ASISTENCIA.merge(
