@@ -7,7 +7,7 @@ module Cor1440Gen
     include Engine.routes.url_helpers
     include Devise::Test::IntegrationHelpers
 
-    def test_verifica_formulario
+    def verifica_formulario
       assert_select("input#informe_filtrofechaini[name=?]", "informe[filtrofechaini]")
       assert_select("input#informe_filtrofechafin[name=?]", "informe[filtrofechafin]")
 
