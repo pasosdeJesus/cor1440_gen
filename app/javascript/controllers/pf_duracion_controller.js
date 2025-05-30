@@ -3,25 +3,25 @@ import { Controller } from "@hotwired/stimulus"
 // de terminacion
 
 export default class extends Controller {
-  // Conecta con data-controller="cor1440_gen--pf-duracion"
+  // Conecta con data-controller="cor1440-gen--pf-duracion"
   //
   // En el campo de fecha duracion agregar: 
-  // data-cor1440_gen--pf-duracion-target='duracion'
+  // data-cor1440-gen--pf-duracion-target='duracion'
   //
   // En el campo `fechainicio` agregar: 
-  // data-action='change->cor1440_gen--pf-duracion#recalcularDuracion
-  // data-cor1440_gen--pf-duracion-target='fechainicio'
+  // data-action='change->cor1440-gen--pf-duracion#recalcularDuracion
+  // data-cor1440-gen--pf-duracion-target='fechainicio'
   //
   // En el campo `fechafin` agregar: 
-  // data-action='change->cor1440_gen--pf-duracion#recalcularDuracion
-  // data-cor1440_gen--pf-duracion-target='fechacierre'
+  // data-action='change->cor1440-gen--pf-duracion#recalcularDuracion
+  // data-cor1440-gen--pf-duracion-target='fechacierre'
   //
   // En el campo de semestreformulacion agregar: 
-  // data-cor1440_gen--pf-duracion-target='semestreformulacion'
+  // data-cor1440-gen--pf-duracion-target='semestreformulacion'
   //
   // En el campo `fechaformulacion_mes` agregar: 
-  // data-action='change->cor1440_gen--pf-duracion#recalcularSemestre
-  // data-cor1440_gen--pf-duracion-target='fechaformulacionMes'
+  // data-action='change->cor1440-gen--pf-duracion#recalcularSemestre
+  // data-cor1440-gen--pf-duracion-target='fechaformulacionMes'
  
   static targets = [ 
     "fechainicio", 
@@ -76,7 +76,7 @@ export default class extends Controller {
       if (+this.fechaformulacionMesTarget.value <= 6) {
         semestre = 1
       }
-      semestreformulacionTarget.value = semestre
+      this.semestreformulacionTarget.value = semestre
     }
   }
 
