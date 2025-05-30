@@ -1,49 +1,6 @@
 
 # PROYECTOS
 
-# DURACIÓN AUTOMÁTICA
-
-@cor1440_gen_establece_duracion = (root, obdur) ->
-  $('#proyectofinanciero_duracion').val(obdur.duracion)
-
-
-@cor1440_gen_recalcula_duracion = (root) ->
-  datos = {
-    fechainicio: $('#proyectofinanciero_fechainicio').val(),
-    fechacierre: $('#proyectofinanciero_fechacierre').val()
-  }
-  if datos.fechainicio!= '' && datos.fechacierre!= ''
-    msip_ajax_recibe_json(window, 'api/cor1440gen/duracion',
-      datos, cor1440_gen_establece_duracion)
-  else
-    $('#proyectofinanciero_duracion').val('')
-
-
-@cor1440_gen_eventos_duracion = (root) ->
-  $(document).on('change', '#proyectofinanciero_fechaformulacion_mes', (e) ->
-    s = 2
-    if $('#proyectofinanciero_fechaformulacion_mes').val() <= 6
-      s = 1
-    $('#proyectofinanciero_semestreformulacion').val(s)
-  )
-
-  $(document).on('change', '#proyectofinanciero_fechainicio', (e) ->
-    cor1440_gen_recalcula_duracion(window)
-  )
-
-  $(document).on('change', '#proyectofinanciero_fechacierre', (e) ->
-    cor1440_gen_recalcula_duracion(window)
-  )
-
-  $(document).on('change', '#proyectofinanciero_fechainicio', (e) ->
-    cor1440_gen_recalcula_duracion(window)
-  )
-
-  $(document).on('change', '#proyectofinanciero_fechacierre', (e) ->
-    cor1440_gen_recalcula_duracion(window)
-  )
-
-
 # MONTOS EN PESOS AUTOMÁTICOS
 
 @cor1440_gen_recalcula_aemergente_pesos_localizado = (campo, tasa) ->

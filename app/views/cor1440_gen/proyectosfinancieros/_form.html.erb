@@ -2,13 +2,12 @@
   <li><a href="usuarios/sign_in"><%= t('Iniciar Sesión') %></a>
 <%- else  %>
   <article>
-  <%= simple_form_for @registro, 
-    url: modelo_path(@registro),
-    multipart: true,
-    html: { 
-      'data-controller': 'msip--cancelar-vacio-es-eliminar'
-    } do |f| 
-  %>
+    <%= simple_form_for(
+      @registro, 
+      url: modelo_path(@registro),
+      multipart: true,
+      html: controller.atributos_html_encabezado_formulario()
+    ) do |f| %>
     <div data-role="content" class="form-inputs">
       <div id="errores">
         <% if f.object.errors.any? %>

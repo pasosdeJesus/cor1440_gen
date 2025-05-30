@@ -782,7 +782,6 @@ cor1440_gen_rangoedadc_todos = () ->
 
   #if (!opciones['sin_eventos_recalcular_poblacion'])
   #  cor1440_gen_instala_recalcula_poblacion()
-  cor1440_gen_eventos_duracion()
   cor1440_gen_eventos_montospesos()
 
   return
