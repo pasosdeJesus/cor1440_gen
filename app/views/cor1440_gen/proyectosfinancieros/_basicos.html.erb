@@ -33,12 +33,13 @@
 
 </div>
 
-
 <div class='row'>
   <div class="offset-sm-0 col-sm-4">
     <%= f.input :fechainicio, 
       input_html: { 
-        "data-msip--cancelar-vacio-es-eliminar-target" => "determinador",
+        "data-action": "change->cor1440-gen--pf-duracion#recalcularDuracion",
+        "data-cor1440-gen--pf-duracion-target": "fechainicio",
+        "data-msip--cancelar-vacio-es-eliminar-target": "determinador",
         type: "date"
       },
       as: :string
@@ -48,6 +49,8 @@
   <div class="col-sm-4">
     <%= f.input :fechacierre, 
       input_html: { 
+        "data-action": "change->cor1440-gen--pf-duracion#recalcularDuracion",
+        "data-cor1440-gen--pf-duracion-target": "fechacierre",
         type: "date"
       },
       as: :string
@@ -63,7 +66,10 @@
       end
     %>
     <%= f.input :duracion,
-      :input_html => { 'readonly' => 'readonly' }
+      input_html: { 
+        'data-cor1440-gen--pf-duracion-target': 'duracion',
+        readonly: 'readonly' 
+      }
     %>
   </div>
 </div>
@@ -74,14 +80,22 @@
   </div>
   <div class="offset-sm-0 col-sm-4">
     <%= f.input :fechaformulacion_mes,
-      collection: Msip::ModeloHelper::MESES
+      collection: Msip::ModeloHelper::MESES,
+      input_html: {
+        "data-action": "change->cor1440_gen--pf-duracion#recalcularSemestre",
+        "data-cor1440_gen--pf-duracion-target": "fechaformulacionMes"
+      }
     %>
   </div>
   <div class="offset-sm-0 col-sm-4">
     <%= f.input :semestreformulacion, 
-      :input_html => { 'readonly' => 'readonly' } %>
+      :input_html => {
+        "data-cor1440_gen--pf-duracion-target": "semestreformulacion",
+        "readonly" => "readonly"
+      } %>
   </div>
 </div>
+
 
 <div class='row'>
   <div class="col-sm-6">

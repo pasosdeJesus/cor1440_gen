@@ -14,6 +14,11 @@ module Cor1440Gen
             "Cor1440Gen::Proyectofinanciero"
           end
 
+          def atributos_html_encabezado_formulario
+            {
+              "data-controller": "msip--cancelar-vacio-es-eliminar cor1440-gen--pf-duracion",
+            }
+          end
           def registrar_en_bitacora
             false
           end
