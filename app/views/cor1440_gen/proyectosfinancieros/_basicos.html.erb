@@ -82,15 +82,15 @@
     <%= f.input :fechaformulacion_mes,
       collection: Msip::ModeloHelper::MESES,
       input_html: {
-        "data-action": "change->cor1440_gen--pf-duracion#recalcularSemestre",
-        "data-cor1440_gen--pf-duracion-target": "fechaformulacionMes"
+        "data-action": "change->cor1440-gen--pf-duracion#recalcularSemestre",
+        "data-cor1440-gen--pf-duracion-target": "fechaformulacionMes"
       }
     %>
   </div>
   <div class="offset-sm-0 col-sm-4">
     <%= f.input :semestreformulacion, 
       :input_html => {
-        "data-cor1440_gen--pf-duracion-target": "semestreformulacion",
+        "data-cor1440-gen--pf-duracion-target": "semestreformulacion",
         "readonly" => "readonly"
       } %>
   </div>
