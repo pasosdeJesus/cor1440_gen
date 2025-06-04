@@ -10,6 +10,9 @@ application.register("cor1440-gen--acfechapf", Cor1440Gen__AcfechapfController)
 import Cor1440Gen__PfDuracionController from "./cor1440_gen/pf_duracion_controller"
 application.register("cor1440-gen--pf-duracion", Cor1440Gen__PfDuracionController)
 
+import Cor1440Gen__PfMontospesosController from "./cor1440_gen/pf_montospesos_controller"
+application.register("cor1440-gen--pf-montospesos", Cor1440Gen__PfMontospesosController)
+
 import Msip__BitacoraapController from "./msip/bitacoraap_controller"
 application.register("msip--bitacoraap", Msip__BitacoraapController)
 
