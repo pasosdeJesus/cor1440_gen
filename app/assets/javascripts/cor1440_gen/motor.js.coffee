@@ -5,7 +5,6 @@
 #//= require msip/motor
 #//= require heb412_gen/motor
 #//= require cocoon
-#//= require cor1440_gen/proyectofinanciero
 #//= require cor1440_gen/mindicadorespf
 #//= require cor1440_gen/AutocompletaAjaxAsistentes
 
