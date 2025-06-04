@@ -6,9 +6,9 @@
   <div class='col-sm-4'>
     <%= f.association :tipomoneda,
       collection: Cor1440Gen::Tipomoneda.habilitados,
+      label: false,
       label_method: :nombre,
-      value_method: :id,
-      label: false
+      value_method: :id
     %>
   </div>
 </div>
@@ -19,7 +19,11 @@
   </div>
   <div class='col-sm-4'>
     <%= f.input :tasaej_localizado,
-      input_html: { value: tasaej.a_decimal_localizado },
+      input_html: { 
+        "data-action": "change->cor1440-gen--pf-montospesos#recalcular",
+        "data-cor1440-gen--pf-montospesos-target": "tasaej",
+        value: tasaej.a_decimal_localizado,
+      },
       label: false
     %>
   </div>
@@ -45,15 +49,20 @@
         <td>
           <%= f.input :montoej_localizado,
             as: :string,
-            input_html: { value: f.object.montoej_localizado || '0,0' },
+            input_html: {
+              "data-action": "change->cor1440-gen--pf-montospesos#recalcular",
+              "data-cor1440-gen--pf-montospesos-target": "montoej",
+              value: f.object.montoej_localizado || '0,0',
+            },
             label: false
           %>
         </td>
         <td>
           <%= f.input :montoejp_localizado, 
             input_html: {
+              "data-cor1440-gen--pf-montospesos-target": "montoejp",
               readonly: 'readonly',
-              value: f.object.montoejp_localizado || '0,0' 
+              value: f.object.montoejp_localizado || '0,0',
             },
             label: false
           %>
@@ -63,17 +72,22 @@
         <th><%= f.label :aportepropioej %></th>
         <td>
           <%= f.input :aportepropioej_localizado, 
-            input_html: { value: f.object.aportepropioej_localizado || '0,0' },
+            input_html: { 
+              "data-action": "change->cor1440-gen--pf-montospesos#recalcular",
+              "data-cor1440-gen--pf-montospesos-target": "aportepropioej",
+              value: f.object.aportepropioej_localizado || '0,0',
+            },
             label: false 
           %>
         </td>
         <td>
           <%= f.input :aportepropioejp_localizado, 
-            label: false ,
             input_html: {
+              "data-cor1440-gen--pf-montospesos-target": "aportepropioejp",
               readonly: 'readonly',
-              value: f.object.aportepropioejp_localizado || '0,0' 
-            }
+              value: f.object.aportepropioejp_localizado || '0,0' ,
+            },
+            label: false
           %>
         </td>
       </tr>
@@ -81,16 +95,21 @@
         <th><%= f.label :aporteotrosej %></th>
         <td>
           <%= f.input :aporteotrosej_localizado, 
-            input_html: { value: f.object.aporteotrosej_localizado || '0,0' },
+            input_html: { 
+              "data-action": "change->cor1440-gen--pf-montospesos#recalcular",
+              "data-cor1440-gen--pf-montospesos-target": "aporteotrosej",
+              value: f.object.aporteotrosej_localizado || '0,0',
+            },
             label: false %>
         </td>
         <td>
           <%= f.input :aporteotrosejp_localizado, 
-            label: false,
             input_html: { 
+              "data-cor1440-gen--pf-montospesos-target": "aporteotrosejp",
               readonly: 'readonly',
               value: f.object.aporteotrosejp_localizado || '0,0' 
-            }
+            },
+            label: false
           %>
         </td>
       </tr>
@@ -101,19 +120,21 @@
           <%= f.input :presupuestototalej_localizado,
             as: :string,
             input_html: {
+              "data-cor1440-gen--pf-montospesos-target": "presupuestototalej",
+              readonly: 'readonly',
               value: f.object.presupuestototalej_localizado || '0,0',
-              readonly: 'readonly'
             },
             label: false
           %>
         </td>
         <td>
           <%= f.input :presupuestototalejp_localizado,
-            label: false,
             input_html: { 
+              "data-cor1440-gen--pf-montospesos-target": "presupuestototalejp",
               readonly: 'readonly',
               value: f.object.presupuestototalejp_localizado || '0,0' 
-            }
+            },
+            label: false
           %>
         </td>
       </tr>

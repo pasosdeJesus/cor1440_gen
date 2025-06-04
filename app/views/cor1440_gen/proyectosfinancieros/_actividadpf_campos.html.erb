@@ -8,17 +8,12 @@
 
   <div class="div-tabla-celda">
     <%= f.association :resultadopf, 
-      collection: Cor1440Gen::Resultadopf.joins(:objetivopf).
-      where(proyectofinanciero_id: f.object.proyectofinanciero_id).
-      order([
-        "cor1440_gen_objetivopf.numero", 
-        "cor1440_gen_resultadopf.numero"
-      ]),
+      collection: @col_resultados,
       include_blank: false,
       label: false,
       label_method: lambda {
-        |t| (t.objetivopf ? t.objetivopf.numero : '') + t.numero} 
-      %>
+        |t| (t.objetivopf ? t.objetivopf.numero : '') + t.numero
+      } %>
   </div>
   <div class="div-tabla-celda">
     <%= f.input :nombrecorto, label: false %>
@@ -44,20 +39,22 @@
       label: false %>
   </div>
   <div class="div-tabla-celda">
-    <% col = Cor1440Gen::Actividadpf.where(
-      'proyectofinanciero_id IS NOT NULL') %>
-    <% if f.object.proyectofinanciero_id %>
-      <% col = col.where('proyectofinanciero_id<>?', 
-                         f.object.proyectofinanciero_id) %>
-    <% end %>
-    <%= f.association :heredade, 
-      collection: col.order(:proyectofinanciero_id),
+    <!--% col = Cor1440Gen::Actividadpf.where(
+      'proyectofinanciero_id IS NOT NULL') %-->
+    <!--% if f.object.proyectofinanciero_id %-->
+      <!-- % col = col.where('proyectofinanciero_id<>?', 
+                         f.object.proyectofinanciero_id) %-- >
+    <!--% end %-->
+    <%= f.input :heredade,
+      wrapper_html: { style: 'width: 12rem' }
+    %>
+ <!--      collection: col.order(:proyectofinanciero_id),
       label_method: lambda {|r| 
         r.proyectofinanciero_id.to_s + ' ' + r.presenta_nombre 
       },
       input_html: { class: 'tom-select' },
       wrapper_html: { style: 'width: 12rem' },
-      label: false %>
+      label: false % -->
   </div>
   <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
