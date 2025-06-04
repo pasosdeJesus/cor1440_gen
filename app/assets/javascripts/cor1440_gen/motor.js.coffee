@@ -776,13 +776,5 @@ cor1440_gen_rangoedadc_todos = () ->
     cor1440_gen_persona_actualiza_camposdinamicos(root)
   )
 
-#    $("#actividad_proyectofinanciero_ids").chosen().change( (e) ->
-#      cor1440_gen_actividad_actualiza_actividadpf(root, null)
-#    )
-
-  #if (!opciones['sin_eventos_recalcular_poblacion'])
-  #  cor1440_gen_instala_recalcula_poblacion()
-  cor1440_gen_eventos_montospesos()
-
   return
 
