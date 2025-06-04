@@ -257,7 +257,8 @@ es:
         fechaliquidacion_localizada: "Fecha de liquidación"
         financiador_ids: Financiadores
         financiador: Financiador
-        "{:financiador_ids=>[]}": Funders
+        "{:financiador_ids=>[]}": Financiadores
+        "{financiador_ids: []}": Financiadores
         indicador: Indicator
         indicador: Indicador
         marcologico: Marco lógico

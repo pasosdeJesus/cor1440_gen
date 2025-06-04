@@ -9,8 +9,7 @@
   <div class="div-tabla-celda">
     <%= f.association :objetivopf,
       collection: Cor1440Gen::Objetivopf.where(
-        proyectofinanciero_id:
-        f.object.proyectofinanciero_id
+        proyectofinanciero_id: f.object.proyectofinanciero_id
       ),
       include_blank: false,
       label: false,
