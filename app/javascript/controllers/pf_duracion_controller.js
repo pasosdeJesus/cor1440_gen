@@ -46,7 +46,7 @@ export default class extends Controller {
 
     if (this.fechainicioTarget.value != '' && 
       this.fechacierreTarget.value != '') {
-      var purl = window.puntomontaje;
+      var purl = window.puntoMontaje;
       if (purl == "/") {
         purl = "";
       }
