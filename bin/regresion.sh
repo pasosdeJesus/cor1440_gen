@@ -99,6 +99,7 @@ echo "== Unificando resultados de pruebas en directorio clásico coverage"
 mkdir -p coverage/
 rm -rf coverage/{*,.*}
 
+echo "${RAILS} ${MSIP_REPORTEREGRESION}"
 ${RAILS} ${MSIP_REPORTEREGRESION}
 r=$?
 if (test "$r" != "0") then {
