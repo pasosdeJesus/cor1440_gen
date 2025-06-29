@@ -94,6 +94,8 @@ module Cor1440Gen
       puts `pwd`
       puts "OJO ls -l"
       puts `ls -l`
+      puts "OJO git status -s"
+      puts `git status -s`
       ruta = "#{actividad_path(@actividad)}" \
         "/fichaimp.xlsx?genera[plantilla_id]=5.ods&" \
         "idplantilla=5&formato=ods&formatosalida=xlsx&commit=Enviar"

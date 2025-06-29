@@ -33,6 +33,8 @@ test:
     - whoami
     - echo "HOME=${HOME}"
     - pwd
+    - ls -l
+    - git remote -v
     - which ruby
     - ruby -v
     - export APT_CACHE_DIR=`pwd`/apt-cache && mkdir -pv $APT_CACHE_DIR
