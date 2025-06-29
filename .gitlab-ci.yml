@@ -34,6 +34,7 @@ test:
     - echo "HOME=${HOME}"
     - pwd
     - ls -l
+    - ls -l test/dummy/
     - git remote -v
     - which ruby
     - ruby -v
