@@ -14,15 +14,11 @@ gem "bootsnap", require: false
 
 gem "cancancan"
 
-gem "cssbundling-rails"
-
 gem "devise" # Autenticación
 
 gem "devise-i18n"
 
 gem "jbuilder"
-
-gem "jsbundling-rails"
 
 gem "kt-paperclip", # Anexos
   git: "https://github.com/kreeti/kt-paperclip.git"
@@ -45,8 +41,6 @@ gem "prawnto_2", require: "prawnto"
 
 gem "prawn-table"
 
-gem "propshaft"
-
 gem "rails", "~> 8.0"
 # git: 'https://github.com/rails/rails.git', branch: '6-1-stable'
 
@@ -59,6 +53,8 @@ gem "rspreadsheet"
 gem "rubyzip"
 
 gem "simple_form" # Formularios simples
+
+gem "sprockets-rails"
 
 gem "stimulus-rails"
 
