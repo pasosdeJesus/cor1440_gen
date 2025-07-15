@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 36a57c306b1debb27bb4a9ddb47d10648c9e5e60
+  revision: 1b78bea6a7b9478f0ad2b87b6f06844cfa91a5f0
   branch: sintema
   specs:
     heb412_gen (2.3.0.alfa4)
@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: 5095a7edcaacb9b48b3686a3e3d77ec685ee0eb4
+  revision: dbb6862a627c58bbd57e0949df267d6efc3c9220
   branch: sintema
   specs:
     mr519_gen (2.3.0.alfa4)
@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: d918593336b1fa2fc939b21c52075b99027e6508
+  revision: a23c746bf06cbf4957aabf1e5596b5f06d46660b
   branch: sintema
   specs:
     msip (2.3.0.alfa4)
