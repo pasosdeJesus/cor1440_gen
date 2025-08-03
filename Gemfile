@@ -58,7 +58,7 @@ gem "redcarpet"
 
 gem "rspreadsheet"
 
-gem "rubyzip"
+gem "rubyzip", "<= 2.4.1"
 
 gem "sassc-rails" # CSS
 
