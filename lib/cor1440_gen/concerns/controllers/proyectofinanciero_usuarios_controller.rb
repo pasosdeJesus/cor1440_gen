@@ -7,7 +7,6 @@ module Cor1440Gen
         extend ActiveSupport::Concern
 
         included do
-
           def destroy
           end
 

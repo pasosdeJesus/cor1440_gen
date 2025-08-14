@@ -91,11 +91,11 @@ module Cor1440Gen
 
     test "deberia exportar una actividad a hoja de calculo" do
       puts "OJO pwd"
-      puts `pwd`
+      puts %x(pwd)
       puts "OJO ls -l"
-      puts `ls -l`
+      puts %x(ls -l)
       puts "OJO git status -s"
-      puts `git status -s`
+      puts %x(git status -s)
       ruta = "#{actividad_path(@actividad)}" \
         "/fichaimp.xlsx?genera[plantilla_id]=5.ods&" \
         "idplantilla=5&formato=ods&formatosalida=xlsx&commit=Enviar"

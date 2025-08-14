@@ -16,11 +16,12 @@ module Cor1440Gen
 
           def atributos_html_encabezado_formulario
             {
-              "data-controller": "cor1440-gen--pf-duracion "\
-                "cor1440-gen--pf-montospesos "\
-                "msip--cancelar-vacio-es-eliminar "
+              "data-controller": "cor1440-gen--pf-duracion " \
+                "cor1440-gen--pf-montospesos " \
+                "msip--cancelar-vacio-es-eliminar ",
             }
           end
+
           def registrar_en_bitacora
             false
           end
@@ -470,9 +471,9 @@ module Cor1440Gen
           end
 
           def edit_cor1440_gen
-            @col_resultados = 
+            @col_resultados =
               Cor1440Gen::ProyectosfinancierosController.ini_resultados(
-                @registro.id
+                @registro.id,
               )
             edit_gen
           end
@@ -735,17 +736,16 @@ module Cor1440Gen
 
           # Initialize instance variables
           def ini_resultados(pf_id)
-            return Cor1440Gen::Resultadopf.joins(
-              "JOIN cor1440_gen_objetivopf ON cor1440_gen_objetivopf.id="\
-              "cor1440_gen_resultadopf.objetivopf_id"
+            Cor1440Gen::Resultadopf.joins(
+              "JOIN cor1440_gen_objetivopf ON cor1440_gen_objetivopf.id=" \
+                "cor1440_gen_resultadopf.objetivopf_id",
             ).where(
-              proyectofinanciero_id: pf_id
+              proyectofinanciero_id: pf_id,
             ).order([
-              "cor1440_gen_objetivopf.numero", 
-              "cor1440_gen_resultadopf.numero"
+              "cor1440_gen_objetivopf.numero",
+              "cor1440_gen_resultadopf.numero",
             ])
           end
-
         end # class_methods
       end
     end

@@ -22,11 +22,10 @@ module Cor1440Gen
               Cor1440Gen::Proyectofinanciero.new(
                 actividadpf: [r],
               )
-            @col_resultados = Cor1440Gen::ProyectosfinancierosController.
-              ini_resultados(+params[:proyectofinanciero][:id])
+            @col_resultados = Cor1440Gen::ProyectosfinancierosController
+              .ini_resultados(+params[:proyectofinanciero][:id])
           end
         end # included
-
       end
     end
   end
