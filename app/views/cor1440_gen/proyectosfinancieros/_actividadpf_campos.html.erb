@@ -39,22 +39,9 @@
       label: false %>
   </div>
   <div class="div-tabla-celda">
-    <!--% col = Cor1440Gen::Actividadpf.where(
-      'proyectofinanciero_id IS NOT NULL') %-->
-    <!--% if f.object.proyectofinanciero_id %-->
-      <!-- % col = col.where('proyectofinanciero_id<>?', 
-                         f.object.proyectofinanciero_id) %-- >
-    <!--% end %-->
     <%= f.input :heredade,
       wrapper_html: { style: 'width: 12rem' }
     %>
- <!--      collection: col.order(:proyectofinanciero_id),
-      label_method: lambda {|r| 
-        r.proyectofinanciero_id.to_s + ' ' + r.presenta_nombre 
-      },
-      input_html: { class: 'tom-select' },
-      wrapper_html: { style: 'width: 12rem' },
-      label: false % -->
   </div>
   <div class="div-tabla-celda">
     <%= f.input :id, as: :hidden %>
