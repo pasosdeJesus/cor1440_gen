@@ -40,7 +40,7 @@ jobs:
           ruby-version: '3.4.5'
           bundler-cache: true
       - name: Instalar paquetes adicionales
-        run: ( sudo apt install poppler-utils)
+        run: ( sudo apt install -y poppler-utils libreoffice zip)
        #run: ( echo "es_CO.UTF-8 es_CO.utf8" | sudo tee -a /etc/locale.alias; echo "::::/etc/locale.alias::::" ;  cat /etc/locale.alias; echo "::::/etc/locale.gen::::"; cat /etc/locale.gen; sudo locale-gen es_CO.UTF-8 ;   sudo update-locale; echo "****locale -a****"; sudo dpkg-reconfigure locales; sudo locale -a; sudo apt install poppler-utils postgis postgresql-16-postgis)
       - name: Reiniciar PostgreSQL
         run: ( sudo service postgresql restart; sudo systemctl restart postgresql.service)
