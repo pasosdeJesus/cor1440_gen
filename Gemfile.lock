@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: 9ad83d2629f3d6031e5fb78681cd8602d66b5fc5
+  revision: 14510617db04fd217ae1f0be3d751e645a27c488
   branch: v2.2
   specs:
     heb412_gen (2.2.0)
@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: 8ab52affa17c1ef79164936bad0ea840138d9ebd
+  revision: cdfdc7e10c2a9704289fea3f37ca35b25516d86a
   branch: v2.2
   specs:
     mr519_gen (2.2.0)
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: 8a75ae9cbd7eaf6b1327c9ec1a3690f1e2dc0440
+  revision: 3cd85bb2cf4804f60b5d20e96b7e8f97718a25c6
   branch: v2.2
   specs:
     msip (2.2.0)
@@ -189,7 +189,7 @@ GEM
     coffee-script-source (1.12.2)
     colorize (1.1.0)
     concurrent-ruby (1.3.5)
-    connection_pool (2.5.5)
+    connection_pool (3.0.2)
     crass (1.0.6)
     cuprite (0.17)
       capybara (~> 3.0)
@@ -268,7 +268,7 @@ GEM
     mime-types-data (3.2025.0603)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (5.26.2)
+    minitest (5.27.0)
     minitest-reporters (1.7.1)
       ansi
       builder
@@ -502,7 +502,7 @@ GEM
     will_paginate (4.0.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    yard (0.9.37)
+    yard (0.9.38)
     zeitwerk (2.7.3)
 
 PLATFORMS
@@ -580,4 +580,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-  4.0.0
+  4.0.1
