@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/heb412_gen.git
-  revision: cbebef9756e723046e619f1b473d67fea7ddd784
+  revision: 37cb57dc64a859a862e2b8d3493ea221a2c4a999
   branch: v2.2
   specs:
     heb412_gen (2.2.0)
@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/mr519_gen.git
-  revision: efce7ac9c6eb2df9b5ecf31e8f6be01fae8b252f
+  revision: 755fbb980247d90a92c32e9b6c295e57c722cf66
   branch: v2.2
   specs:
     mr519_gen (2.2.0)
@@ -38,7 +38,7 @@ GIT
 
 GIT
   remote: https://gitlab.com/pasosdeJesus/msip.git
-  revision: e3ce718b18a3446865ece61f96a4dc51cda5c9ac
+  revision: 1237907ef0720451fa170c9fd57217dab96e45e3
   branch: v2.2
   specs:
     msip (2.2.0)
@@ -195,7 +195,7 @@ GEM
       capybara (~> 3.0)
       ferrum (~> 0.17.0)
     date (3.4.1)
-    debug (1.11.0)
+    debug (1.11.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
     devise (4.9.4)
@@ -334,7 +334,7 @@ GEM
       prawn (>= 1.0.0)
       rails (>= 3.2)
     prettyprint (0.2.0)
-    prism (1.4.0)
+    prism (1.7.0)
     psych (5.2.6)
       date
       stringio
@@ -543,7 +543,7 @@ DEPENDENCIES
   jsbundling-rails
   kt-paperclip!
   libxml-ruby
-  minitest
+  minitest (~> 5)
   minitest-reporters
   mr519_gen!
   msip!

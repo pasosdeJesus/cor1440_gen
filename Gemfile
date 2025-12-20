@@ -132,7 +132,7 @@ group :test do
 
   gem "connection_pool"
 
-  gem "minitest"
+  gem "minitest", "~> 5"
 
   gem "minitest-reporters"
 
