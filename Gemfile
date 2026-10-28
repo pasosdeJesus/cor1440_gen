@@ -28,6 +28,8 @@ gem "jbuilder"
 
 gem "jsbundling-rails"
 
+gem "json", "<3"              # Por rails  7
+
 gem "kt-paperclip" # Anexos
 
 gem "libxml-ruby", "< 6.0"
